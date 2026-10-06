@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mccases:item/trade/selected/dual_berettas_black_limba"
+  }
+}

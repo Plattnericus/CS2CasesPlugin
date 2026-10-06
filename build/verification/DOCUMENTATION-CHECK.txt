@@ -1,0 +1,5 @@
+Documentation check passed.
+22 admin subcommands; player commands and aliases; 5 permissions; 19 config defaults; 45 languages; 21 case IDs.
+Local links and anchors checked. Language values unchanged by header cleanup.
+Source and release archives scanned for provenance markers.
+Build and development cleanup checks passed.

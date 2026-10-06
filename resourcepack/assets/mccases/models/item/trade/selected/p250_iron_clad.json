@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mccases:item/trade/selected/p250_iron_clad"
+  }
+}

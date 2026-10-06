@@ -1,0 +1,28 @@
+# Glove Case (2016)
+
+case:
+  name: "Glove Case"
+  key: case_key
+  color: "#8a6a3a"
+  stattrak-chance: 0.10
+  description:
+    - "2016"
+
+skins:
+  cz75_polymer: {weapon: cz75, rarity: mil_spec, name: "Polymer", style: digital, palette: ["#1a1a1a", "#5a5a5a", "#c8c8c8"]}
+  galil_black_sand: {weapon: galil, rarity: mil_spec, name: "Black Sand", style: camo, palette: ["#1a1a1a", "#3a3a3a", "#8a7a5a"]}
+  glock18_ironwork: {weapon: glock18, rarity: mil_spec, name: "Ironwork", style: hex, palette: ["#3a3a3a", "#7a7a7a", "#c8c8c8"]}
+  mag7_sonar: {weapon: mag7, rarity: mil_spec, name: "Sonar", style: waves, palette: ["#0a1a2a", "#2a5a8a", "#5ab0e8"]}
+  mp7_cirrus: {weapon: mp7, rarity: mil_spec, name: "Cirrus", style: swirl, palette: ["#e8e8e8", "#5ab0e8", "#2a2a2a"]}
+  mp9_sand_scale: {weapon: mp9, rarity: mil_spec, name: "Sand Scale", style: scales, palette: ["#c8a878", "#8a6a4a", "#4a3a2a"]}
+  p2000_turf: {weapon: p2000, rarity: mil_spec, name: "Turf", style: camo, palette: ["#3a5a2a", "#6a8a3a", "#a0b06a"]}
+  dual_berettas_royal_consorts: {weapon: dual_berettas, rarity: restricted, name: "Royal Consorts", style: floral, palette: ["#1a1a1a", "#c8a040", "#5a1a8a"]}
+  g3sg1_stinger: {weapon: g3sg1, rarity: restricted, name: "Stinger", style: chevron, palette: ["#1a1a1a", "#f0c020", "#e8e8e8"]}
+  m4a1s_flashback: {weapon: m4a1s, rarity: restricted, name: "Flashback", style: stripes, palette: ["#e8e8e8", "#5ab0e8", "#e83a5a"]}
+  nova_gila: {weapon: nova, rarity: restricted, name: "Gila", style: scales, palette: ["#3a1a1a", "#c84a1a", "#f0c020"]}
+  usps_cyrex: {weapon: usps, rarity: restricted, name: "Cyrex", style: shards, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+  famas_mecha_industries: {weapon: famas, rarity: classified, name: "Mecha Industries", style: hex, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+  p90_shallow_grave: {weapon: p90, rarity: classified, name: "Shallow Grave", style: graffiti, palette: ["#5a3a2a", "#c8a070", "#1a1a1a"]}
+  sawedoff_wasteland_princess: {weapon: sawedoff, rarity: classified, name: "Wasteland Princess", style: graffiti, palette: ["#e8e8e8", "#c8a040", "#c81a1a", "#1a1a1a"]}
+  m4a4_buzz_kill: {weapon: m4a4, rarity: covert, name: "Buzz Kill", style: hex, palette: ["#1a1a1a", "#f0c020", "#e8e8e8"]}
+  ssg08_dragonfire: {weapon: ssg08, rarity: covert, name: "Dragonfire", style: flames, palette: ["#1a0a0a", "#c81a1a", "#f0a020", "#f0e060"]}

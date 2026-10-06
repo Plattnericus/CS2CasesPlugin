@@ -1,0 +1,32 @@
+# Gamma 2 Case (2016)
+
+case:
+  name: "Gamma 2 Case"
+  key: case_key
+  color: "#1a8a8a"
+  stattrak-chance: 0.10
+  description:
+    - "2016"
+
+skins:
+  cz75_imprint: {weapon: cz75, rarity: mil_spec, name: "Imprint", style: halftone, palette: ["#1a1a1a", "#e8e8e8"]}
+  fiveseven_scumbria: {weapon: fiveseven, rarity: mil_spec, name: "Scumbria", style: graffiti, palette: ["#2a6a8a", "#e8e8e8", "#1a1a1a"]}
+  g3sg1_ventilator: {weapon: g3sg1, rarity: mil_spec, name: "Ventilator", style: hex, palette: ["#2a2a2a", "#5a8ab0", "#e8e8e8"]}
+  negev_dazzle: {weapon: negev, rarity: mil_spec, name: "Dazzle", style: chevron, palette: ["#1a1a1a", "#e8e8e8", "#5a5a5a"]}
+  p90_grim: {weapon: p90, rarity: mil_spec, name: "Grim", style: graffiti, palette: ["#1a1a1a", "#5a5a5a", "#c81a1a"]}
+  ump45_briefing: {weapon: ump45, rarity: mil_spec, name: "Briefing", style: stripes, palette: ["#1a1a1a", "#c8a040", "#e8e8e8"]}
+  xm1014_slipstream: {weapon: xm1014, rarity: mil_spec, name: "Slipstream", style: waves, palette: ["#0a1a3a", "#2a5ad0", "#5ae0f0"]}
+  deagle_directive: {weapon: deagle, rarity: restricted, name: "Directive", style: shards, palette: ["#1a1a1a", "#c81a1a", "#e8e8e8"]}
+  glock18_weasel: {weapon: glock18, rarity: restricted, name: "Weasel", style: graffiti, palette: ["#5a3a1a", "#c8a040", "#1a1a1a"]}
+  mag7_petroglyph: {weapon: mag7, rarity: restricted, name: "Petroglyph", style: tribal, palette: ["#5a3a2a", "#c8a070", "#1a1a1a"]}
+  scar20_powercore: {weapon: scar20, rarity: restricted, name: "Powercore", style: hex, palette: ["#1a1a1a", "#2ad0f0", "#e8e8e8"]}
+  sg553_triarch: {weapon: sg553, rarity: restricted, name: "Triarch", style: shards, palette: ["#1a1a1a", "#c8a040", "#5a8ab0"]}
+  aug_syd_mead: {weapon: aug, rarity: classified, name: "Syd Mead", style: circuit, palette: ["#1a1a2a", "#c8a040", "#5ab0e8"]}
+  mp9_airlock: {weapon: mp9, rarity: classified, name: "Airlock", style: circuit, palette: ["#1a1a1a", "#f07a1a", "#e8e8e8"]}
+  tec9_fuel_injector: {weapon: tec9, rarity: classified, name: "Fuel Injector", style: hex, palette: ["#1a1a1a", "#c81a1a", "#f0c020"]}
+  ak47_neon_revolution: {weapon: ak47, rarity: covert, name: "Neon Revolution", style: graffiti, palette: ["#1a0a2a", "#e83ab0", "#2ad0f0", "#f0e020"]}
+  famas_roll_cage: {weapon: famas, rarity: covert, name: "Roll Cage", style: hex, palette: ["#1a1a1a", "#5ad01a", "#e8e8e8"]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: gamma

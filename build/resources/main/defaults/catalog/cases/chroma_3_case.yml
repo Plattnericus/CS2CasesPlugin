@@ -1,0 +1,32 @@
+# Chroma 3 Case (2016)
+
+case:
+  name: "Chroma 3 Case"
+  key: case_key
+  color: "#3a8ab0"
+  stattrak-chance: 0.10
+  description:
+    - "2016"
+
+skins:
+  dual_berettas_ventilators: {weapon: dual_berettas, rarity: mil_spec, name: "Ventilators", style: hex, palette: ["#2a2a2a", "#5a8ab0", "#e8e8e8"]}
+  g3sg1_orange_crash: {weapon: g3sg1, rarity: mil_spec, name: "Orange Crash", style: graffiti, palette: ["#f07a1a", "#1a1a1a", "#e8e8e8"]}
+  m249_spectre: {weapon: m249, rarity: mil_spec, name: "Spectre", style: swirl, palette: ["#1a1a2a", "#5a5a8a", "#c8c8e8"]}
+  mp9_bioleak: {weapon: mp9, rarity: mil_spec, name: "Bioleak", style: splatter, palette: ["#1a1a1a", "#5ac81a", "#c8e81a"]}
+  p2000_oceanic: {weapon: p2000, rarity: mil_spec, name: "Oceanic", style: waves, palette: ["#0a3a6a", "#2a8ab0", "#e8f4f8"]}
+  sawedoff_fubar: {weapon: sawedoff, rarity: mil_spec, name: "Fubar", style: graffiti, palette: ["#5a4a3a", "#8a7a5a", "#1a1a1a"]}
+  sg553_atlas: {weapon: sg553, rarity: mil_spec, name: "Atlas", style: topo, palette: ["#1a2a3a", "#3a5a7a", "#c8d0d8"]}
+  cz75_red_astor: {weapon: cz75, rarity: restricted, name: "Red Astor", style: graffiti, palette: ["#1a1a1a", "#c81a1a", "#e8e8e8"]}
+  galil_firefight: {weapon: galil, rarity: restricted, name: "Firefight", style: flames, palette: ["#1a1a1a", "#c84a1a", "#f0c020"]}
+  ssg08_ghost_crusader: {weapon: ssg08, rarity: restricted, name: "Ghost Crusader", style: tribal, palette: ["#e8e8e8", "#c8a040", "#2a2a2a"]}
+  tec9_re_entry: {weapon: tec9, rarity: restricted, name: "Re-Entry", style: chevron, palette: ["#1a1a1a", "#f07a1a", "#e8e8e8"]}
+  xm1014_black_tie: {weapon: xm1014, rarity: restricted, name: "Black Tie", style: stripes, palette: ["#1a1a1a", "#e8e8e8", "#2a2a2a"]}
+  aug_fleet_flock: {weapon: aug, rarity: classified, name: "Fleet Flock", style: floral, palette: ["#e8e8e8", "#c81a1a", "#1a1a1a"]}
+  p250_asiimov: {weapon: p250, rarity: classified, name: "Asiimov", style: shards, palette: ["#f2f2f2", "#1a1a1a", "#f07a1a"]}
+  ump45_primal_saber: {weapon: ump45, rarity: classified, name: "Primal Saber", style: scales, palette: ["#1a1a1a", "#5a8ab0", "#e8e8e8"]}
+  m4a1s_chanticos_fire: {weapon: m4a1s, rarity: covert, name: "Chantico's Fire", style: tribal, palette: ["#1a1a1a", "#c81a1a", "#f0a020", "#e8e8e8"]}
+  ppbizon_judgement_of_anubis: {weapon: ppbizon, rarity: covert, name: "Judgement of Anubis", style: tribal, palette: ["#1a1a1a", "#c8a040", "#2a5ad0"]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: chroma

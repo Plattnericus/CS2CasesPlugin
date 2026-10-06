@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Kea</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Karekau he whakaaetanga ki te mahi i tera.
+  player-only: <prefix><red>Nga kaitakaro anake.
+profile:
+  loading: <prefix><gray>Kei te uta tonu to rarangi kiri...
+  load-failed: <prefix><red>Kaore i taea te uta i to rarangi kiri. Tena koa korero ki tetahi kaiwhakahaere.
+  recovered: '<prefix><gray>Kua mutu te whakatuwheratanga: <skin>'
+category:
+  pistol: Pitara
+  smg: SMG
+  rifle: Raiwhara
+  sniper: Raiwhara Kaipupuhi
+  heavy: Te taumaha
+  equipment: Taputapu
+  knife: Naihi
+items:
+  test-marker: <red>⚠ Tuemi whakamatautau (kaiwhakahaere)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> nga mea ka taea
+    - ''
+    - '<gray>Patohia matau: <white>tirohia nga ihirangi'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Kua pau i te wa e whakatuwhera ana i tetahi keehi.
+    use-hint: <prefix><gray>Pāwhiri matau i te <white>case</white> ki te whakatuwhera me tenei ki.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>waho: <white><wear>'
+    float: '<gray>Manu: <white><float>'
+    float-range: '<gray>Manu: <white><min_float> - <max_float>'
+    pattern: '<gray>Tauira: <white><pattern>'
+    variant: '<gray>Waahanga: <class_color><variant>'
+    classification: '<gray>Momo tauira: <class_color><classification>'
+    fade: '<gray>Muhani: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Ka mate: <white><kills>'
+    has-variants: <dark_gray>He maha nga waahanga ka taea
+    source: '<gray>Putake: <white><case>'
+    date: '<gray>I whiwhi: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Mukua: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Muhani'
+gui:
+  loading:
+    name: <gray>Uta ana...
+    lore: []
+  back:
+    name: <gray>Hoki
+    lore: []
+  close:
+    name: <red>Katia
+    lore: []
+  previous:
+    name: <gray>Wharangi o mua
+    lore:
+    - <dark_gray>Wharangi <page> / <pages>
+  next:
+    name: <gray>Whairangi panuku
+    lore:
+    - <dark_gray>Wharangi <page> / <pages>
+  cases:
+    title: Nga keehi
+    header:
+      name: <#e4ae39>Kēhi
+      lore:
+      - <gray>Tikina nga keehi mai i te <white>kaihoko keehi</white>.
+      - <gray>Kei te hiahia koe ki tetahi taviri taurite hei whakatuwhera i tetahi.
+    entry:
+    - ''
+    - '<gray>Kei roto i te pukapuka: <white><owned> <dark_gray>· <gray>Kī: <white><keys>'
+    - '<gray>Pawhiri mauī: <white>tirohia nga ihirangi'
+    can-open: '<green>Patohia matau: tuwhera'
+    to-skins:
+      name: <#e4ae39>Rarangi kiri
+      lore:
+      - <gray>O hiako me o maripi
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Patohia mo te arokite
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>He maripi onge.
+      - <dark_gray><count> momo rereke · pawhiria kia kite
+      - ''
+    open:
+      name: <green>Tuwhera te pouaka
+      lore:
+      - '<gray>Keehi: <white><owned> <dark_gray>· <gray>Kī: <white><keys>'
+      - <dark_gray>Whakamahia 1 take me 1 <key>
+    cannot-open:
+      name: <gray>Kare e taea te whakatuwhera
+      lore:
+      - '<gray>Keehi: <white><owned> <dark_gray>· <gray>Kī: <white><keys>'
+      - <dark_gray>Kei te hiahia koe ki te keehi me te <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Kei te tino mohio koe?
+    'yes':
+      name: <green>Ae, muku
+      lore:
+      - <dark_gray>Kaore e taea te whakakore.
+    'no':
+      name: <red>Whakakore
+      lore: []
+  skins:
+    title: Rarangi kiri
+    title-other: Hiako o <player>
+    tab:
+      all:
+        name: <white>Nga hiako katoa
+        lore: []
+      weapons:
+        name: <white>Hiako patu
+        lore: []
+      knives:
+        name: <white>Na maripi
+        lore:
+        - '<dark_gray>Patohia matau te maripi: taputapu'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Nga Makau
+        lore: []
+      recent:
+        name: <white>I whiwhi tata nei
+        lore: []
+    empty:
+      name: <gray>Kahore ano i konei
+      lore:
+      - <dark_gray>Whakatuwherahia nga keehi ki te tiki hiako.
+    equipped: <green>✔ Kua oti
+    favorite: <yellow>★ Makau
+    hint:
+    - ''
+    - '<dark_gray>Pawhiria mauī: tirohia · Pāwhiri matau: hoatu ki runga i te kopere'
+    - '<dark_gray>Shift click: tino pai'
+    hint-knife:
+    - ''
+    - '<dark_gray>Pawhiri mauī: tirohia · Pāwhiri matau: taputapu'
+    - '<dark_gray>Shift click: tino pai'
+    to-cases:
+      name: <#e4ae39>Kēhi
+      lore:
+      - <gray>Ki o keehi
+    sort:
+      name: '<white>Kmaka: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Maui: muri · Matau: mua'
+    sorts:
+      rarity: Rarity
+      float: Mānu
+      name: Ingoa
+      wear: Waho
+      pattern: Tauira
+      newest: Hou
+      oldest: Tawhito rawa
+    info:
+      name: <white><count> <gray>kiri kua whakaatuhia
+      lore:
+      - <dark_gray><total> katoa · pawhiria kia kati
+    filter:
+      name: <white>Tatari
+      lore:
+      - '<dark_gray>Maui: whiriwhiria nga whiriwhiringa · Matau: tautuhi'
+    active-knife:
+    - <green>✔ Naihi hohe
+    - <dark_gray>Patohia mo nga taipitopito
+  filter:
+    title: Tātari
+    header:
+      name: <white>Tatari
+      lore:
+      - <gray>He maha nga whiriwhiringa o te ahua ano kua honoa.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ anake
+    'on':
+    - <green>✔ Hohe
+    'off':
+    - <dark_gray>Karekau
+    reset:
+      name: <gray>Tautuhi i nga whiriwhiringa katoa
+      lore: []
+  inspect:
+    title: Tirotiro
+    missing:
+      name: <red>Karekau te kiri i te waatea
+      lore: []
+    preview:
+      name: <#e4ae39>Tirohia te kiri
+      lore:
+      - '<gray>Whakaatuhia to kape tika:'
+      - <gray>tauira, tae me te kakahu.
+      - ''
+      - <dark_gray>Tiki ki te kati i te arokite.
+    data: <white>Taipitopito
+    favorite:
+      name: <white>Maria hei tino pai
+      lore: []
+    unfavorite:
+      name: <yellow>★ Tango tino pai
+      lore: []
+    equip:
+      name: <green>Whakaahua
+      lore:
+      - <gray>Ko o hoari te whakaatu i tenei maripi.
+      - <dark_gray>Ka noho tonu te kino me te makutu.
+    unequip:
+      name: <green>✔ Kua oti
+      lore:
+      - <gray>Patohia ki te whakakore.
+    inspect3d:
+      name: <white>3D tirotirohia
+      lore:
+      - '<gray>Whakaatuhia to kape tika:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>No tetahi atu kaitakaro
+      lore:
+      - <dark_gray>Tirohia anake
+    equip-bow:
+      name: <green>Kua kopere
+      lore:
+      - <gray>Ka whakaatu to kopere i tenei kiri.
+    unequip-bow:
+      name: <green>✔ Kei te kopere
+      lore:
+      - <gray>Patohia ki te tango.
+    equip-crossbow:
+      name: <green>Kua kopere
+      lore:
+      - <gray>Ka whakaatuhia e ou kopere tenei kiri.
+    unequip-crossbow:
+      name: <green>✔ I runga i te kopere
+      lore:
+      - <gray>Patohia ki te tango.
+    not-equippable:
+      name: <gray>Kare e taea te whakauru
+      lore:
+      - <dark_gray>Kaore e taea te whakauru i tenei kiri.
+    delete:
+      name: <red>Muku kiri
+      lore:
+      - <gray>Tangohia tenei kiri mai i to pukapuka.
+      - <dark_gray>Patai mo te whakau.
+view:
+  unknown: <prefix><red>Kaikoro <white><player></white> kaore i kitea.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>'s inventory <dark_gray>· <gray><category> <dark_gray>· <gray><count> hiako <dark_gray>· <gray>Whārangi
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Pawhiria matau: tirotiro · Sneak + pawhiri matau: tino pai'
+  hint-knife:
+  - ''
+  - '<dark_gray>Paamatau: tirohia · Pāwhiri mauī: taputapu'
+  - '<dark_gray>Sneak + pāwhiri matau: tino pai'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Paamatau: tirohia · Pawhiria maui: ka mau ki te kopere'
+  - '<dark_gray>Sneak + pawhiria maui: hoatu ki runga kopere'
+  - '<dark_gray>Sneak + pāwhiri matau: tino pai'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> hiako <dark_gray>· <gray>Whārangi <page>/<pages>
+  empty: <gray>Kahore ano i konei
+  button:
+    previous: <gray>Wharangi o mua
+    next: <gray>Whairangi panuku
+    category: <white>Huri kāwai
+    sort: '<white>Kmaka: <#e4ae39><sort>'
+    filter: <white>Tatari
+    list: <white>Whakaatu hei rarangi
+    close: <red>Katia
+preview:
+  loading: <gray>Rendering arokite...
+  hint: <gray>Tiki ki te kati
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>koura koura koura
+  world:
+    title: <white><player></white> <gray>tuwhera <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Kei te whakatuwhera koe i tetahi keehi.
+  case-disabled: <prefix><red>Karekau tenei keehi i te waatea.
+  missing: <prefix><gray>Me <white><case></white> koe me te <white><key></white>.
+  missing-now: <prefix><red>Karekau te keehi, te kii ranei i roto i to rarangi ingoa.
+  storage-error: <prefix><red>I rahua te tiaki. I whakahokia mai to keehi me to taviri.
+  command-blocked: <prefix><gray>Tatari kia mutu te whakatuwheratanga.
+  result: '<prefix><gray>I whiwhi koe <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Whakamātautau]</red> <gray>Huatanga: <skin> <dark_gray>(<float>, #<pattern>) - kaore i tiakina'
+  broadcast: <prefix><white><player></white> <gray>tango pouaka <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>TAMA MOHUTOHU ORERE</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Tirotiro
+      lore:
+      - <gray>Nga korero katoa mo to kiri hou
+    again:
+      name: <green>Whakatuwheratia tetahi atu
+      lore:
+      - '<gray>Keehi: <white><cases> <dark_gray>· <gray>Kī: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Kaore tenei kiri e uru ki tenei patu.
+  equipped:
+    knife: '<prefix><gray>Naipi rite rawa: <skin>'
+    bow: '<prefix><gray>I runga i to kopere: <skin>'
+    crossbow: '<prefix><gray>I runga i to kopere: <skin>'
+  unequipped:
+    knife: <prefix><gray>Naipi kore rawa.
+    bow: <prefix><gray>Kua tangohia te kiri kopere.
+    crossbow: <prefix><gray>Kua tangohia te kiri ripeka.
+knife:
+  not-owned: <prefix><red>Ehara i a koe tenei kiri.
+  equipped: '<prefix><gray>Whakaritea: <skin>'
+  unequipped: <prefix><gray>Naipi kore rawa.
+  sword-footer: '<dark_gray>Tuhinga: <base>'
+inspect:
+  running: <prefix><gray>Kei te haere kee te tirotiro.
+  no-knife: <red>Karekau te kiri i te waatea <white>/skins
+shop:
+  title: Kaihoko Take
+  npc-name: <gradient:#e4ae39:#f6d27a>Kaihoko keehi</gradient>
+  npc-description: <gray>Patohia matau ki te hokohoko
+  balance:
+    name: '<white>To toenga: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Ko nga taonga kaore i whakarereketia te tatau.
+  offer:
+  - ''
+  - '<gray>Utu: <aqua><price> <currency>'
+  - '<dark_gray>5 nga waahanga: <price5> <currency>'
+  affordable: <green>✔ He utu utu
+  not-affordable: <red>✘ <missing> <currency> kei te ngaro
+  affordable-five: '<dark_gray>Shift click: hoko 5'
+  hint-case:
+  - '<dark_gray>Pawhiri mauī: hoko · Pāwhiri matau: ihirangi'
+  hint-key:
+  - '<dark_gray>Pawhiria maui: hoko'
+  bought: '<prefix><gray>Hokona: <white><amount>× <name></white> mo <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Kare e taea e koe te utu tena.
+  inventory-full: <prefix><red>Kua ki tonu to pukapuka.
+slot:
+  name: <#e4ae39>Rarangi kiri
+  lore:
+  - '<gray>Paamatau: hiako, maripi me nga kete'
+  - <dark_gray>Kua maukati tenei mea ki tenei mokamoka.
+  blocked: <prefix><gray>Whakakorea he mokamoka pukapuka kia puta mai te taonga kiri.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Kua oti.
+  unknown: <prefix><red>Kaore e mohiotia <what>.
+  instance-unknown: <prefix><red>Karekau i kitea he kiri taurite. <gray>/rārangi csadmin <player>
+  given: <prefix><gray>I hoatu <amount>× <white><name></white> ki <white><player></white>.
+  skin-given: <prefix><gray>I hoatu <skin> <gray>ki <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Hiako o <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Nga whakatuwheratanga tata o <white><player>
+  scan-start: <prefix><gray>Ka kakano katoa o <white><skin></white> mo <white><metric></white>...
+  export-start: <prefix><gray>Panga rauemi rauemi...
+  export-done: '<prefix><green><skins> hiako i kaweake: <white><file>'
+  shop-spawned: <prefix><green>I hangaia te kaihoko putea.
+  shop-removed: <prefix><green>I tangohia te kaihoko putea.
+  shop-none: <prefix><gray>Karekau he kaihoko kete tata.
+  reload-busy: <prefix><gray>Kei te haere kee te utaina.
+  reload-start: <prefix><gray>Ka Uta Anō...
+  reload-failed: <prefix><red>I rahua te uta ano, ka noho hohe te whirihoranga o mua. Tirohia te papatohu.
+  reload-done: '<prefix><green>Ka utaina ano i roto i te <ms> ms: <skins> hiako, <cases> pouaka, <warnings> whakatupato (tirohia te papatohu).'
+  browser:
+    title: 'Tauira: <skin>'
+  manage:
+    title: 'Whakahaere: <player>'
+    skin-title: Kiri o <player>
+    give-title: 'Hoatu kiri: <player>'
+    give:
+      name: <green>Hoatu kiri
+      lore:
+      - <gray>Tikihia he kete, katahi he kiri.
+    give-hint:
+    - ''
+    - '<dark_gray>Pawhiria mauī: hoatu · Pāwhiri matau: hoatu StatTrak™'
+    clear:
+      name: <red>Mukua nga hiako katoa
+      lore:
+      - <gray><count> hiako ka tangohia.
+      - <dark_gray>Patai mo te whakau.
+    cleared: <prefix><gray>I mukua <count> hiako o <white><player></white>.
+    removed: <prefix><gray>Mukua <skin> <gray>o <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Patohia ki te takahuri.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Tautuhi i te rewa ki <white><float>
+    pattern-step:
+      name: <white>Tauira <step>
+      lore:
+      - '<gray>Naianei: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Tauira tupurangi
+      lore:
+      - '<gray>Naianei: <white><pattern>'
+    equip:
+      name: <green>Whakaahua mo te kaitakaro
+      lore: []
+    unequip:
+      name: <green>✔ Kua oti
+      lore:
+      - <gray>Patohia ki te whakakore.
+    remove:
+      name: <red>Muku kiri
+      lore:
+      - <dark_gray>Patai mo te whakau.
+  labels:
+    case: take
+    key: kī
+    skin: kiri
+    manual: pātengi raraunga ā-ringa
+    automatic: aunoa
+    none: karekau (karekau he tohu tātaritanga)
+    'off': atu
+  debug:
+    seed: '<gray>Tauira: <white><seed>'
+    analysing: <dark_gray>Tatari...
+    variant: '<gray>Taupe: <white><variant>'
+    classification: '<gray>Whakaraupapa: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Muhani: <white><fade>%'
+    preview:
+      name: <yellow>Taira Arokite <seed>
+      lore:
+      - <gray>Whakaatuhia te mapi i mahia ki o ringaringa.
+    random:
+      name: <light_purple>Tauira tupurangi
+      lore: []
+    title: <gold>Tauira patuiro <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>I rahua te tuku: <error>'
+    metrics: '<gray>Inenga: <white><metrics>'
+    scan-failed: <prefix><red>I rahua te matawai.
+    no-metric: <gray>Karekau he tauira ine <white><metric>
+    export-failed: '<prefix><red>I rahua te kaweake: <error>'
+  odds: <gray><case> <dark_gray>(<count> tuemi, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Hiako: <white><skins> <gray>Kea: <white><cases> <gray>Nga patu: <white><weapons>'
+    cache: '<gray>Arokite keteroki: <white><previews> <gray>Aratau kete rauemi: <white><pack>'
+    web: '<gray>Tumau tukutuku kete: <white><url>'
+wear:
+  factory_new: wheketere Hou
+  minimal_wear: Te Wea Moiti
+  field_tested: I whakamatauria te mara
+  well_worn: Pai-mau
+  battle_scarred: Pakanga-Marekau
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Kua herea
+  classified: Kua whakarōpūtia
+  covert: huna
+  rare_special: Tuemi Motuhake onge
+catalog:
+  key:
+    case_key: Kī Take

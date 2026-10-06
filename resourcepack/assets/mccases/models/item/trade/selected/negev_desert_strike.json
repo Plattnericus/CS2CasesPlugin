@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mccases:item/trade/selected/negev_desert_strike"
+  }
+}

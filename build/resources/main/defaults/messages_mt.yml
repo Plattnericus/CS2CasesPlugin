@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Każijiet</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>M'għandekx permess biex tagħmel dan.
+  player-only: <prefix><red>Players biss.
+profile:
+  loading: <prefix><gray>L-inventarju tal-ġilda tiegħek għadu qed jgħabbi...
+  load-failed: <prefix><red>L-inventarju tal-ġilda tiegħek ma setax jitgħabba. Jekk jogħġbok għid lil admin.
+  recovered: '<prefix><gray>Ftuħ interrott tlesta: <skin>'
+category:
+  pistol: Pistola
+  smg: SMG
+  rifle: Xkubetta
+  sniper: Sniper Rifle
+  heavy: Tqil
+  equipment: Tagħmir
+  knife: Sikkina
+items:
+  test-marker: <red>⚠ Oġġett tat-test (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> oġġetti possibbli
+    - ''
+    - '<gray>Kklikkja bil-lemin: <white>ara l-kontenut'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Intuża meta tiftaħ każ.
+    use-hint: <prefix><gray>Kklikkja bil-lemin fuq <white>każ</white> biex tiftaħha b'din iċ-ċavetta.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Estern: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Mudell: <white><pattern>'
+    variant: '<gray>Fażi: <class_color><variant>'
+    classification: '<gray>Tip tal-mudell: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Joqtol: <white><kills>'
+    has-variants: <dark_gray>Diversi fażijiet possibbli
+    source: '<gray>Sors: <white><case>'
+    date: '<gray>Mikseb: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Imħassar: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Tagħbija...
+    lore: []
+  back:
+    name: <gray>Lura
+    lore: []
+  close:
+    name: <red>Agħlaq
+    lore: []
+  previous:
+    name: <gray>Pagna ta' qabel
+    lore:
+    - <dark_gray>Pagna <page> / <pages>
+  next:
+    name: <gray>Pagna li jmiss
+    lore:
+    - <dark_gray>Pagna <page> / <pages>
+  cases:
+    title: Każijiet
+    header:
+      name: <#e4ae39>Każijiet
+      lore:
+      - <gray>Ikseb każijiet mingħand il-<white>negozjant tal-każ</white>.
+      - <gray>Għandek bżonn ċavetta li tqabbel biex tiftaħ waħda.
+    entry:
+    - ''
+    - '<gray>Fl-inventarju: <white><owned> <dark_gray>· <gray>Ċwievet: <white><keys>'
+    - '<gray>Ikklikkja mix-xellug: <white>ara l-kontenut'
+    can-open: '<green>Kklikkja dritt: tiftaħ'
+    to-skins:
+      name: <#e4ae39>Inventarju tal-ġilda
+      lore:
+      - <gray>Ġlud u skieken tiegħek
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Ikklikkja għal preview
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Sikkina rari.
+      - <dark_gray><count> varjanti · ikklikkja biex tara
+      - ''
+    open:
+      name: <green>Każ miftuħ
+      lore:
+      - '<gray>Każijiet: <white><owned> <dark_gray>· <gray>Ċwievet: <white><keys>'
+      - <dark_gray>Juża każ 1 u <key>
+    cannot-open:
+      name: <gray>Ma tistax tiftaħ
+      lore:
+      - '<gray>Każijiet: <white><owned> <dark_gray>· <gray>Ċwievet: <white><keys>'
+      - <dark_gray>Għandek bżonn il-każ u <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Int żgur?
+    'yes':
+      name: <green>Iva, ħassar
+      lore:
+      - <dark_gray>Dan ma jistax jitneħħa.
+    'no':
+      name: <red>Ikkanċella
+      lore: []
+  skins:
+    title: Inventarju tal-ġilda
+    title-other: Ġlud ta' <player>
+    tab:
+      all:
+        name: <white>Il-ġlud kollha
+        lore: []
+      weapons:
+        name: <white>Ġlud tal-armi
+        lore: []
+      knives:
+        name: <white>skieken
+        lore:
+        - '<dark_gray>Kklikkja bil-lemin fuq sikkina: arm'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoriti
+        lore: []
+      recent:
+        name: <white>Inkiseb dan l-aħħar
+        lore: []
+    empty:
+      name: <gray>Għadu xejn hawn
+      lore:
+      - <dark_gray>Ftaħ kaxex biex tikseb ġlud.
+    equipped: <green>✔ Mgħammar
+    favorite: <yellow>★ Favorit
+    hint:
+    - ''
+    - '<dark_gray>Klikk tax-xellug: spezzjona · Ikklikkja tal-lemin: poġġi fuq il-pruwa'
+    - '<dark_gray>Shift click: favorit'
+    hint-knife:
+    - ''
+    - '<dark_gray>Ikklikkja tax-xellug: spezzjona · Ikklikkja tal-lemin: tgħammar'
+    - '<dark_gray>Shift click: favorit'
+    to-cases:
+      name: <#e4ae39>Każijiet
+      lore:
+      - <gray>Għall-każijiet tiegħek
+    sort:
+      name: '<white>Isortja: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Xellug: li jmiss · Lemin: preċedenti'
+    sorts:
+      rarity: Rarità
+      float: Float
+      name: Isem
+      wear: Esterni
+      pattern: Mudell
+      newest: L-aktar ġodda
+      oldest: L-eqdem
+    info:
+      name: <white><count> <gray>ġlud murija
+      lore:
+      - <dark_gray><total> b'kollox · ikklikkja biex tagħlaq
+    filter:
+      name: <white>Filtru
+      lore:
+      - '<dark_gray>Xellug: agħżel filtri · Lemin: reset'
+    active-knife:
+    - <green>✔ Sikkina attiva
+    - <dark_gray>Ikklikkja għad-dettalji
+  filter:
+    title: Iffiltra
+    header:
+      name: <white>Filtru
+      lore:
+      - <gray>Diverse filtri tal-istess tip huma kkombinati.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ biss
+    'on':
+    - <green>✔ Attiva
+    'off':
+    - <dark_gray>Inattiv
+    reset:
+      name: <gray>Irrisettja l-filtri kollha
+      lore: []
+  inspect:
+    title: Spezzjona
+    missing:
+      name: <red>Ġilda mhux disponibbli
+      lore: []
+    preview:
+      name: <#e4ae39>Ara l-ġilda
+      lore:
+      - '<gray>Juri l-kopja eżatta tiegħek:'
+      - <gray>mudell, kuluri u xedd.
+      - ''
+      - <dark_gray>Sneak biex tagħlaq il-preview.
+    data: <white>Dettalji
+    favorite:
+      name: <white>Immarka bħala favorit
+      lore: []
+    unfavorite:
+      name: <yellow>★ Neħħi favoriti
+      lore: []
+    equip:
+      name: <green>Tgħammar
+      lore:
+      - <gray>Ix-xwabel tiegħek juru din is-sikkina.
+      - <dark_gray>Il-ħsara u l-incantamenti jibqgħu l-istess.
+    unequip:
+      name: <green>✔ Mgħammar
+      lore:
+      - <gray>Ikklikkja biex tneħħi t-tagħmir.
+    inspect3d:
+      name: <white>3D spezzjona
+      lore:
+      - '<gray>Juri l-kopja eżatta tiegħek:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Jappartjeni għal plejer ieħor
+      lore:
+      - <dark_gray>Ara biss
+    equip-bow:
+      name: <green>Illi l-pruwa
+      lore:
+      - <gray>Il-pruwi tiegħek juru din il-ġilda.
+    unequip-bow:
+      name: <green>✔ Fuq il-pruwa
+      lore:
+      - <gray>Ikklikkja biex tneħħi.
+    equip-crossbow:
+      name: <green>Lbes il-balesla
+      lore:
+      - <gray>Il-balalevi tiegħek juru din il-ġilda.
+    unequip-crossbow:
+      name: <green>✔ Fuq crossbow
+      lore:
+      - <gray>Ikklikkja biex tneħħi.
+    not-equippable:
+      name: <gray>Mhux mgħammra
+      lore:
+      - <dark_gray>Din il-ġilda ma tistax tkun mgħammra.
+    delete:
+      name: <red>Ħassar il-ġilda
+      lore:
+      - <gray>Tneħħi din il-ġilda mill-inventarju tiegħek.
+      - <dark_gray>Jitlob konferma.
+view:
+  unknown: <prefix><red>Player <white><player></white> ma nstabx.
+gallery:
+  header-other: L-inventarju ta' <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> ġlud <dark_gray>· <gray>Paġna
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Klikk tal-lemin: spezzjona · Sneak + ikklikkja tal-lemin: favorit'
+  hint-knife:
+  - ''
+  - '<dark_gray>Klikk tal-lemin: spezzjona · Ikklikkja tax-xellug: għammar'
+  - '<dark_gray>Sneak + ikklikkja bil-lemin: favorit'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Klikk tal-lemin: spezzjona · Ikklikkja tax-xellug: poġġi fuq il-pruwa'
+  - '<dark_gray>Sneak + ikklikkja fuq ix-xellug: poġġi fuq il-balesla'
+  - '<dark_gray>Sneak + ikklikkja bil-lemin: favorit'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> ġlud <dark_gray>· <gray>Paġna <page>/<pages>
+  empty: <gray>Għadu xejn hawn
+  button:
+    previous: <gray>Pagna ta' qabel
+    next: <gray>Pagna li jmiss
+    category: <white>Ibdel il-kategorija
+    sort: '<white>Isortja: <#e4ae39><sort>'
+    filter: <white>Filtru
+    list: <white>Uri bħala lista
+    close: <red>Agħlaq
+preview:
+  loading: <gray>Preview qed tirrendi...
+  hint: <gray>Sneak biex tagħlaq
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>deheb deheb deheb
+  world:
+    title: <white><player></white> <gray>tiftaħ <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Int diġà qed tiftaħ każ.
+  case-disabled: <prefix><red>Dan il-każ mhux disponibbli.
+  missing: <prefix><gray>Ikollok bżonn <white><case></white> u <white><key></white>.
+  missing-now: <prefix><red>Il-każ jew iċ-ċavetta m'għadhomx fl-inventarju tiegħek.
+  storage-error: <prefix><red>L-iffrankar falla. Il-każ u ċ-ċavetta tiegħek ġew ritornati.
+  command-blocked: <prefix><gray>Stenna sakemm jintemm il-ftuħ.
+  result: '<prefix><gray>Int irċevejt <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Riżultat: <skin> <dark_gray>(<float>, #<pattern>) - mhux salvat'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>OĠĠETT SPEĊJALI RARI</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Spezzjona
+      lore:
+      - <gray>Id-dettalji kollha tal-ġilda l-ġdida tiegħek
+    again:
+      name: <green>Ftaħ ieħor
+      lore:
+      - '<gray>Każijiet: <white><cases> <dark_gray>· <gray>Ċwievet: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Din il-ġilda ma tiffittjax għal din l-arma.
+  equipped:
+    knife: '<prefix><gray>Sikkina mgħammra: <skin>'
+    bow: '<prefix><gray>Fuq il-pruwa tiegħek: <skin>'
+    crossbow: '<prefix><gray>Fuq il-balesla tiegħek: <skin>'
+  unequipped:
+    knife: <prefix><gray>Sikkina mhux mgħammra.
+    bow: <prefix><gray>Ġilda tal-pruwa mneħħija.
+    crossbow: <prefix><gray>Ġilda tal-Crossbow imneħħija.
+knife:
+  not-owned: <prefix><red>Din il-ġilda ma tappartjenix lilek.
+  equipped: '<prefix><gray>Mgħammar: <skin>'
+  unequipped: <prefix><gray>Sikkina mhux mgħammra.
+  sword-footer: '<dark_gray>Bażi: <base>'
+inspect:
+  running: <prefix><gray>Diġà għaddej ispezzjoni.
+  no-knife: <red>Ġilda mhux disponibbli <white>/skins
+shop:
+  title: Negozjant tal-Każ
+  npc-name: <gradient:#e4ae39:#f6d27a>Negozjant tal-Każ</gradient>
+  npc-description: <gray>Ikklikkja bil-lemin għall-kummerċ
+  balance:
+    name: '<white>Il-bilanċ tiegħek: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Oġġetti mhux modifikati biss jgħoddu.
+  offer:
+  - ''
+  - '<gray>Prezz: <aqua><price> <currency>'
+  - '<dark_gray>5 biċċiet: <price5> <currency>'
+  affordable: <green>✔ Affordabbli
+  not-affordable: <red>✘ <missing> <currency> nieqsa
+  affordable-five: '<dark_gray>Shift ikklikkja: tixtri 5'
+  hint-case:
+  - '<dark_gray>Ikklikkja tax-xellug: tixtri · Ikklikkja tal-lemin: kontenut'
+  hint-key:
+  - '<dark_gray>Kklikkja tax-xellug: tixtri'
+  bought: '<prefix><gray>Xtraw: <white><amount>× <name></white> għal <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Dan ma tistax taffordja.
+  inventory-full: <prefix><red>L-inventarju tiegħek huwa mimli.
+slot:
+  name: <#e4ae39>Inventarju tal-ġilda
+  lore:
+  - '<gray>Kklikkja dritt: ġlud, skieken u kaxxi'
+  - <dark_gray>Dan l-oġġett huwa msakkra f'dan is-slot.
+  blocked: <prefix><gray>Ħieles slot tal-inventarju sabiex l-oġġett tal-inventarju tal-ġilda jista 'jidher.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Amministratur
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Magħmul.
+  unknown: <prefix><red>Mhux magħruf <what>.
+  instance-unknown: <prefix><red>Ma nstabet l-ebda id tal-ġilda li taqbel. <gray>/csadmin lista <player>
+  given: <prefix><gray>Ta <amount>× <white><name></white> lil <white><player></white>.
+  skin-given: <prefix><gray>Ta <skin> <gray> lil <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Ġlud ta' <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Ftuħ riċenti ta' <white><player>
+  scan-start: <prefix><gray>Skennjar ta' kull żerriegħa ta' <white><skin></white> għal <white><metric></white>...
+  export-start: <prefix><gray>Nibni pakkett tar-riżorsi...
+  export-done: '<prefix><green><skins> ġlud esportati: <white><file>'
+  shop-spawned: <prefix><green>Negozjant tal-każ maħluq.
+  shop-removed: <prefix><green>Negozjant tal-każ imneħħi.
+  shop-none: <prefix><gray>Ebda negozjant każ fil-qrib.
+  reload-busy: <prefix><gray>Reload diġà qed taħdem.
+  reload-start: <prefix><gray>Reloading...
+  reload-failed: <prefix><red>Reload falliet, il-konfigurazzjoni preċedenti tibqa' attiva. Ara console.
+  reload-done: '<prefix><green>Reloaded in <ms> ms: <skins> ġlud, <cases> każi, <warnings> twissijiet (ara console).'
+  browser:
+    title: 'Mudell: <skin>'
+  manage:
+    title: 'Immaniġġja: <player>'
+    skin-title: Ġilda ta' <player>
+    give-title: 'Agħti l-ġilda: <player>'
+    give:
+      name: <green>Agħti l-ġilda
+      lore:
+      - <gray>Agħżel każ, imbagħad ġilda.
+    give-hint:
+    - ''
+    - '<dark_gray>Ikklikkja tax-xellug: agħti · Ikklikkja tal-lemin: agħti StatTrak™'
+    clear:
+      name: <red>Ħassar il-ġlud kollha
+      lore:
+      - <gray><count> ġlud se jitneħħew.
+      - <dark_gray>Jitlob konferma.
+    cleared: <prefix><gray>Imħassra <count> ġlud ta' <white><player></white>.
+    removed: <prefix><gray>Imħassar <skin> <gray>ta' <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Ikklikkja biex taqleb.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Jissettja l-float għal <white><float>
+    pattern-step:
+      name: <white>Mudell <step>
+      lore:
+      - '<gray>Kurrenti: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Mudell każwali
+      lore:
+      - '<gray>Kurrenti: <white><pattern>'
+    equip:
+      name: <green>Tagħmir għall-plejer
+      lore: []
+    unequip:
+      name: <green>✔ Mgħammar
+      lore:
+      - <gray>Ikklikkja biex tneħħi t-tagħmir.
+    remove:
+      name: <red>Ħassar il-ġilda
+      lore:
+      - <dark_gray>Jitlob konferma.
+  labels:
+    case: każ
+    key: ċavetta
+    skin: ġilda
+    manual: database manwali
+    automatic: awtomatiku
+    none: xejn (il-finitura m'għandha l-ebda profil ta' analiżi)
+    'off': mitfi
+  debug:
+    seed: '<gray>Mudell: <white><seed>'
+    analysing: <dark_gray>Qed janalizza...
+    variant: '<gray>Varjant: <white><variant>'
+    classification: '<gray>Klassifikazzjoni: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Preview pattern <seed>
+      lore:
+      - <gray>Juri l-mappa mogħtija f'idejk.
+    random:
+      name: <light_purple>Mudell każwali
+      lore: []
+    title: <gold>Debugger tal-mudelli <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Radd fallut: <error>'
+    metrics: '<gray>Metriċi: <white><metrics>'
+    scan-failed: <prefix><red>Scan fallut.
+    no-metric: <gray>L-ebda mudell m'għandu metrika <white><metric>
+    export-failed: '<prefix><red>L-esportazzjoni falliet: <error>'
+  odds: <gray><case> <dark_gray>(<count> oġġetti, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Ġlud: <white><skins> <gray>Każijiet: <white><cases> <gray>Armi: <white><weapons>'
+    cache: '<gray>Previews fil-cache: <white><previews> <gray>Modalità tal-pakkett tar-riżorsi: <white><pack>'
+    web: '<gray>Pack web server: <white><url>'
+wear:
+  factory_new: Fabbrika Ġdida
+  minimal_wear: Ilbes Minimi
+  field_tested: Ittestjat fil-Qasam
+  well_worn: Jintlibsu sew
+  battle_scarred: Battalja-Scartered
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Ristrett
+  classified: Ikklassifikati
+  covert: Moħbi
+  rare_special: Oġġett Speċjali Rari
+catalog:
+  key:
+    case_key: Kawża Ċavetta

@@ -1,0 +1,42 @@
+# Sound cues. 'sound' is any sound key (vanilla or from a resource pack).
+# A cue can be a single sound or a list of layered sounds.
+master-volume: 1.0
+
+sounds:
+  gui:
+    click: {sound: "minecraft:ui.button.click", volume: 0.22, pitch: 1.7}
+    error: {sound: "minecraft:block.note_block.bass", volume: 0.4, pitch: 0.7}
+    hover: {sound: "minecraft:block.note_block.hat", volume: 0.12, pitch: 2.0}
+    page: {sound: "minecraft:item.book.page_turn", volume: 0.4, pitch: 1.2}
+  opening:
+    start: {sound: "minecraft:block.chest.open", volume: 0.3, pitch: 1.25}
+    # pitch is raised slightly while the reel is fast
+    tick: {sound: "minecraft:block.note_block.hat", volume: 0.28, pitch: 1.0}
+  reveal:
+    mil_spec: {sound: "minecraft:entity.experience_orb.pickup", volume: 0.3, pitch: 0.9}
+    restricted:
+      - {sound: "minecraft:entity.experience_orb.pickup", volume: 0.35, pitch: 1.1}
+      - {sound: "minecraft:block.note_block.chime", volume: 0.25, pitch: 1.2}
+    classified:
+      - {sound: "minecraft:block.amethyst_block.chime", volume: 0.8, pitch: 1.0}
+      - {sound: "minecraft:block.note_block.chime", volume: 0.4, pitch: 1.4}
+    covert:
+      - {sound: "minecraft:entity.player.levelup", volume: 0.5, pitch: 0.85}
+      - {sound: "minecraft:block.amethyst_block.resonate", volume: 0.7, pitch: 1.0}
+    rare_special:
+      - {sound: "minecraft:ui.toast.challenge_complete", volume: 0.55, pitch: 1.0}
+      - {sound: "minecraft:block.beacon.power_select", volume: 0.45, pitch: 1.3}
+  preview:
+    open: {sound: "minecraft:item.book.page_turn", volume: 0.5, pitch: 1.0}
+  knife:
+    equip: {sound: "minecraft:item.armor.equip_iron", volume: 0.45, pitch: 1.25}
+    unequip: {sound: "minecraft:item.armor.equip_generic", volume: 0.35, pitch: 0.9}
+  inspect:
+    swipe: {sound: "minecraft:entity.player.attack.sweep", volume: 0.15, pitch: 1.7}
+    metal: {sound: "minecraft:item.armor.equip_chain", volume: 0.3, pitch: 1.8}
+    spin: {sound: "minecraft:item.trident.return", volume: 0.2, pitch: 1.8}
+    mech: {sound: "minecraft:block.tripwire.click_on", volume: 0.32, pitch: 1.9}
+    end: {sound: "minecraft:item.armor.equip_iron", volume: 0.18, pitch: 1.6}
+  shop:
+    buy: {sound: "minecraft:entity.villager.yes", volume: 0.5, pitch: 1.0}
+    deny: {sound: "minecraft:entity.villager.no", volume: 0.5, pitch: 1.0}

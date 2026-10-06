@@ -1,0 +1,8 @@
+name: MCCasesDevChecks
+version: 1.0
+main: dev.plattnericus.cases.tools.RuntimeChecksPlugin
+api-version: '26.2'
+depend: [MCCases]
+commands:
+  mccasesdevcheck:
+    permission: mccases.admin

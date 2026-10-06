@@ -1,0 +1,577 @@
+# MiniMessage messages. The plugin uses English by default for every player.
+prefix: '<dark_gray>[<#e4ae39>Cases</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>You don't have permission to do that.
+  player-only: <prefix><red>Players only.
+profile:
+  loading: <prefix><gray>Your skin inventory is still loading...
+  load-failed: <prefix><red>Your skin inventory could not be loaded. Please tell an admin.
+  recovered: '<prefix><gray>Interrupted opening completed: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Rifle
+  sniper: Sniper Rifle
+  heavy: Heavy
+  equipment: Equipment
+  knife: Knife
+items:
+  test-marker: <red>⚠ Test item (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> possible items
+    - ''
+    - '<gray>Right click: <white>view contents'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Used up when opening a case.
+    use-hint: <prefix><gray>Right click a <white>case</white> to open it with this key.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Exterior: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Pattern: <white><pattern>'
+    variant: '<gray>Phase: <class_color><variant>'
+    classification: '<gray>Pattern type: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Kills: <white><kills>'
+    has-variants: <dark_gray>Several phases possible
+    source: '<gray>Source: <white><case>'
+    date: '<gray>Obtained: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Deleted: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Loading...
+    lore: []
+  back:
+    name: <gray>Back
+    lore: []
+  close:
+    name: <red>Close
+    lore: []
+  previous:
+    name: <gray>Previous page
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  next:
+    name: <gray>Next page
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  cases:
+    title: Cases
+    header:
+      name: <#e4ae39>Cases
+      lore:
+      - <gray>Get cases from the <white>case dealer</white>.
+      - <gray>You need a matching key to open one.
+    entry:
+    - ''
+    - '<gray>In inventory: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+    - '<gray>Left click: <white>view contents'
+    can-open: '<green>Right click: open'
+    to-skins:
+      name: <#e4ae39>Skin inventory
+      lore:
+      - <gray>Your skins and knives
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Click for a preview
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>A rare knife.
+      - <dark_gray><count> variants · click to view
+      - ''
+    open:
+      name: <green>Open case
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+      - <dark_gray>Uses 1 case and 1 <key>
+    cannot-open:
+      name: <gray>Cannot open
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+      - <dark_gray>You need the case and a <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Are you sure?
+    'yes':
+      name: <green>Yes, delete
+      lore:
+      - <dark_gray>This cannot be undone.
+    'no':
+      name: <red>Cancel
+      lore: []
+  skins:
+    title: Skin inventory
+    title-other: Skins of <player>
+    tab:
+      all:
+        name: <white>All skins
+        lore: []
+      weapons:
+        name: <white>Weapon skins
+        lore: []
+      knives:
+        name: <white>Knives
+        lore:
+        - '<dark_gray>Right click a knife: equip'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favorites
+        lore: []
+      recent:
+        name: <white>Recently obtained
+        lore: []
+    empty:
+      name: <gray>Nothing here yet
+      lore:
+      - <dark_gray>Open cases to get skins.
+    equipped: <green>✔ Equipped
+    favorite: <yellow>★ Favorite
+    hint:
+    - ''
+    - '<dark_gray>Left click: inspect · Right click: put on bow'
+    - '<dark_gray>Shift click: favorite'
+    hint-knife:
+    - ''
+    - '<dark_gray>Left click: inspect · Right click: equip'
+    - '<dark_gray>Shift click: favorite'
+    to-cases:
+      name: <#e4ae39>Cases
+      lore:
+      - <gray>To your cases
+    sort:
+      name: '<white>Sort: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Left: next · Right: previous'
+    sorts:
+      rarity: Rarity
+      float: Float
+      name: Name
+      wear: Exterior
+      pattern: Pattern
+      newest: Newest
+      oldest: Oldest
+    info:
+      name: <white><count> <gray>skins shown
+      lore:
+      - <dark_gray><total> in total · click to close
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Left: choose filters · Right: reset'
+    active-knife:
+    - <green>✔ Active knife
+    - <dark_gray>Click for details
+  filter:
+    title: Filter
+    header:
+      name: <white>Filter
+      lore:
+      - <gray>Several filters of the same kind are combined.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ only
+    'on':
+    - <green>✔ Active
+    'off':
+    - <dark_gray>Inactive
+    reset:
+      name: <gray>Reset all filters
+      lore: []
+  inspect:
+    title: Inspect
+    missing:
+      name: <red>Skin not available
+      lore: []
+    preview:
+      name: <#e4ae39>View skin
+      lore:
+      - '<gray>Shows your exact copy:'
+      - <gray>pattern, colors and wear.
+      - ''
+      - <dark_gray>Sneak to close the preview.
+    data: <white>Details
+    favorite:
+      name: <white>Mark as favorite
+      lore: []
+    unfavorite:
+      name: <yellow>★ Remove favorite
+      lore: []
+    equip:
+      name: <green>Equip
+      lore:
+      - <gray>Your swords show this knife.
+      - <dark_gray>Damage and enchantments stay the same.
+    unequip:
+      name: <green>✔ Equipped
+      lore:
+      - <gray>Click to unequip.
+    inspect3d:
+      name: <white>3D inspect
+      lore:
+      - <gray>Inspect this weapon or knife in front of you.
+      - '<dark_gray>F: inspect · Sneak + F: swap hands'
+      - '<dark_gray>Also: /inspect or sneak + right click'
+    foreign:
+      name: <gray>Belongs to another player
+      lore:
+      - <dark_gray>View only
+    equip-bow:
+      name: <green>Put on bow
+      lore:
+      - <gray>Your bows show this skin.
+    unequip-bow:
+      name: <green>✔ On bow
+      lore:
+      - <gray>Click to remove.
+    equip-crossbow:
+      name: <green>Put on crossbow
+      lore:
+      - <gray>Your crossbows show this skin.
+    unequip-crossbow:
+      name: <green>✔ On crossbow
+      lore:
+      - <gray>Click to remove.
+    not-equippable:
+      name: <gray>Not equippable
+      lore:
+      - <dark_gray>This skin cannot be equipped.
+    delete:
+      name: <red>Delete skin
+      lore:
+      - <gray>Removes this skin from your inventory.
+      - <dark_gray>Asks for confirmation.
+view:
+  unknown: <prefix><red>Player <white><player></white> was not found.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>'s inventory <dark_gray>· <gray><category> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Page <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Right click: inspect · Sneak + right click: favorite'
+  hint-knife:
+  - ''
+  - '<dark_gray>Right click: inspect · Left click: equip'
+  - '<dark_gray>Sneak + right click: favorite'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Right click: inspect · Left click: put on bow'
+  - '<dark_gray>Sneak + left click: put on crossbow'
+  - '<dark_gray>Sneak + right click: favorite'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Page <page>/<pages>
+  empty: <gray>Nothing here yet
+  button:
+    previous: <gray>Previous page
+    next: <gray>Next page
+    category: <white>Change category
+    sort: '<white>Sort: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Show as list
+    close: <red>Close
+preview:
+  loading: <gray>Rendering preview...
+  hint: <gray>Sneak to close
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>gold gold gold
+  world:
+    title: <white><player></white> <gray>opens <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>You are already opening a case.
+  case-disabled: <prefix><red>This case is not available.
+  missing: <prefix><gray>You need <white><case></white> and a <white><key></white>.
+  missing-now: <prefix><red>The case or key is no longer in your inventory.
+  storage-error: <prefix><red>Saving failed. Your case and key were returned.
+  command-blocked: <prefix><gray>Wait until the opening has finished.
+  result: '<prefix><gray>You received <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Result: <skin> <dark_gray>(<float>, #<pattern>) - not saved'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>RARE SPECIAL ITEM</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspect
+      lore:
+      - <gray>All details of your new skin
+    again:
+      name: <green>Open another
+      lore:
+      - '<gray>Cases: <white><cases> <dark_gray>· <gray>Keys: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>This skin does not fit this weapon.
+  equipped:
+    knife: '<prefix><gray>Knife equipped: <skin>'
+    bow: '<prefix><gray>On your bow: <skin>'
+    crossbow: '<prefix><gray>On your crossbow: <skin>'
+  unequipped:
+    knife: <prefix><gray>Knife unequipped.
+    bow: <prefix><gray>Bow skin removed.
+    crossbow: <prefix><gray>Crossbow skin removed.
+knife:
+  not-owned: <prefix><red>This skin does not belong to you.
+  equipped: '<prefix><gray>Equipped: <skin>'
+  unequipped: <prefix><gray>Knife unequipped.
+  sword-footer: '<dark_gray>Base: <base>'
+inspect:
+  running: <prefix><gray>An inspect is already running.
+  no-knife: <red>Skin not available <white>/skins
+shop:
+  title: Case Dealer
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Right click to trade
+  balance:
+    name: '<white>Your balance: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Only unmodified items count.
+  offer:
+  - ''
+  - '<gray>Price: <aqua><price> <currency>'
+  - '<dark_gray>5 pieces: <price5> <currency>'
+  affordable: <green>✔ Affordable
+  not-affordable: <red>✘ <missing> <currency> missing
+  affordable-five: '<dark_gray>Shift click: buy 5'
+  hint-case:
+  - '<dark_gray>Left click: buy · Right click: contents'
+  hint-key:
+  - '<dark_gray>Left click: buy'
+  bought: '<prefix><gray>Bought: <white><amount>× <name></white> for <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>You can't afford that.
+  inventory-full: <prefix><red>Your inventory is full.
+slot:
+  name: <#e4ae39>Skin inventory
+  lore:
+  - '<gray>Right click: skins, knives and cases'
+  - <dark_gray>This item is locked to this slot.
+  blocked: <prefix><gray>Free an inventory slot so the skin inventory item can appear.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Done.
+  unknown: <prefix><red>Unknown <what>.
+  instance-unknown: <prefix><red>No matching skin id found. <gray>/csadmin list <player>
+  given: <prefix><gray>Gave <amount>× <white><name></white> to <white><player></white>.
+  skin-given: <prefix><gray>Gave <skin> <gray>to <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins of <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Recent openings of <white><player>
+  scan-start: <prefix><gray>Scanning every seed of <white><skin></white> for <white><metric></white>...
+  export-start: <prefix><gray>Building resource pack...
+  export-done: '<prefix><green><skins> skins exported: <white><file>'
+  shop-spawned: <prefix><green>Case dealer created.
+  shop-removed: <prefix><green>Case dealer removed.
+  shop-none: <prefix><gray>No case dealer nearby.
+  reload-busy: <prefix><gray>A reload is already running.
+  reload-start: <prefix><gray>Reloading...
+  reload-failed: <prefix><red>Reload failed, the previous configuration stays active. See console.
+  reload-done: '<prefix><green>Reloaded in <ms> ms: <skins> skins, <cases> cases, <warnings> warnings (see console).'
+  browser:
+    title: 'Pattern: <skin>'
+  manage:
+    title: 'Manage: <player>'
+    skin-title: Skin of <player>
+    give-title: 'Give skin: <player>'
+    give:
+      name: <green>Give skin
+      lore:
+      - <gray>Pick a case, then a skin.
+    give-hint:
+    - ''
+    - '<dark_gray>Left click: give · Right click: give StatTrak™'
+    clear:
+      name: <red>Delete all skins
+      lore:
+      - <gray><count> skins will be removed.
+      - <dark_gray>Asks for confirmation.
+    cleared: <prefix><gray>Deleted <count> skins of <white><player></white>.
+    removed: <prefix><gray>Deleted <skin> <gray>of <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Click to toggle.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Sets the float to <white><float>
+    pattern-step:
+      name: <white>Pattern <step>
+      lore:
+      - '<gray>Current: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Random pattern
+      lore:
+      - '<gray>Current: <white><pattern>'
+    equip:
+      name: <green>Equip for player
+      lore: []
+    unequip:
+      name: <green>✔ Equipped
+      lore:
+      - <gray>Click to unequip.
+    remove:
+      name: <red>Delete skin
+      lore:
+      - <dark_gray>Asks for confirmation.
+  labels:
+    case: case
+    key: key
+    skin: skin
+    manual: manual database
+    automatic: automatic
+    none: none (finish has no analysis profile)
+    'off': 'off'
+  debug:
+    seed: '<gray>Pattern: <white><seed>'
+    analysing: <dark_gray>Analysing...
+    variant: '<gray>Variant: <white><variant>'
+    classification: '<gray>Classification: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Preview pattern <seed>
+      lore:
+      - <gray>Shows the rendered map in your hands.
+    random:
+      name: <light_purple>Random pattern
+      lore: []
+    title: <gold>Pattern debugger <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Render failed: <error>'
+    metrics: '<gray>Metrics: <white><metrics>'
+    scan-failed: <prefix><red>Scan failed.
+    no-metric: <gray>No pattern has metric <white><metric>
+    export-failed: '<prefix><red>Export failed: <error>'
+  odds: <gray><case> <dark_gray>(<count> items, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Cases: <white><cases> <gray>Weapons: <white><weapons>'
+    cache: '<gray>Cached previews: <white><previews> <gray>Resource pack mode: <white><pack>'
+    web: '<gray>Pack web server: <white><url>'
+wear:
+  factory_new: Factory New
+  minimal_wear: Minimal Wear
+  field_tested: Field-Tested
+  well_worn: Well-Worn
+  battle_scarred: Battle-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Restricted
+  classified: Classified
+  covert: Covert
+  rare_special: Rare Special Item
+catalog:
+  key:
+    case_key: Case Key
+commerce:
+  locked: '<prefix><red>This skin is reserved or no longer belongs to you. Finish the current offer first.'
+  storage-error: '<prefix><red>The transaction could not be saved. Your skins and balance have not changed.'
+inventory:
+  usage: '<prefix><gray>/inventory [vanilla|player] · /knife [vanilla|player]'
+trade:
+  title: 'Choose skins → Accept'
+  players-title: 'Choose a trade partner'
+  usage: '<prefix><gray>/trade <player> · /trade accept [player] · /trade decline · /trade cancel'
+  unavailable: '<prefix><red>That player cannot trade right now.'
+  busy: '<prefix><yellow>A trade or request is already in progress.'
+  sent: '<prefix><gray>Trade request sent to <white><player></white>. It expires in <seconds> seconds.'
+  received: '<prefix><white><player></white><gray> would like to trade skins with you.'
+  accept-link: '<green>[Accept]'
+  decline-link: '<red>[Decline]'
+  no-request: '<prefix><gray>No matching trade request is waiting.'
+  declined: '<prefix><gray>Trade request declined.'
+  expired: '<prefix><gray>The trade or request expired. You keep all your skins.'
+  cancelled: '<prefix><gray>Trade cancelled. You keep all your skins.'
+  completed: '<prefix><green>Trade completed. The skins are in their new collections.'
+  failed: '<prefix><red>Trade could not be completed. You keep all your skins.'
+  limit: '<prefix><yellow>You can offer up to 12 skins.'
+  wait: '<prefix><yellow>Add a skin and wait two seconds after the last change before confirming.'
+  changed: '<prefix><yellow>The offer changed. Review both sides and confirm again.'
+  selected: '<green>In your offer · Click to remove'
+  add: '<yellow>Click to add to your offer'
+  remove: '<yellow>Click to remove from your offer'
+  offered: '<gray>Offered by your trade partner'
+  your-head: {name: '<aqua><player> · Your skins', lore: ['<gray>Click a skin on the left to offer it.', '<gray>✓ = selected.', '<gray>Click again to remove.', '<aqua>Selected: <white><count>/<max>']}
+  your-offer-head: {name: '<aqua><player> · Your accepted offer', lore: ['<gray>You give these <white><count> skins<gray>.', '<gray>Waiting for your trade partner.']}
+  partner-head: {name: '<green><player> · You receive <count> skins', lore: ['<gray>Their current offer is on the right.', '<gray>Changes appear immediately for both players.']}
+  own-empty: {name: '<aqua>You do not give any skins', lore: ['<gray>You receive a gift.']}
+  other-empty: {name: '<green>You do not receive anything yet', lore: ['<white><player> <gray>has not chosen any skins.']}
+  no-offer: {name: '<gray>Choose a skin first', lore: ['<gray>Click skins on the left, then Accept.']}
+  review-wait: {name: '<yellow>Accept in <seconds> s', lore: ['<gray>The offer has changed.', '<gray>Check the skins on the right.']}
+  accept-offer: {name: '<green><bold>Accept', lore: ['<aqua>You give: <white><own> skins', '<green>You receive: <white><other> skins', '', '<yellow>Click to accept this offer.', '<gray>You can also use /trade accept']}
+  accept-gift: {name: '<yellow><bold>Accept · Give away skins', lore: ['<aqua>You give: <white><own> skins', '<red>You do not receive any skins.', '', '<yellow>Click if you want to give them away.']}
+  accepted: {name: '<green><bold>Accepted · Waiting…', lore: ['<gray>The other player still needs to accept.', '<yellow>Click to withdraw your acceptance.']}
+  partner-accepted: {name: '<green><player> accepted', lore: ['<gray>Skins are exchanged once you both accept.']}
+  partner-waiting: {name: '<red><player> has not accepted yet', lore: ['<gray>Wait until you are happy with their offer.']}
+  page: {name: '<aqua>Your skins · Page <page>/<pages>', lore: ['<gray>Use the arrows to browse your skins.', '<gray>Selected skins stay in your offer.']}
+  choose-partner: {name: '<white>Trade skins', lore: ['<gray>Choose an online player.']}
+  player: {name: '<white><player>', lore: ['<yellow>Click to send a trade request.']}
+  no-players: {name: '<gray>No trade partners online', lore: ['<gray>Try again when another player joins.']}
+  empty: {name: '<gray>No skins available', lore: ['<gray>Reserved and test skins cannot be offered.']}
+  saving: {name: '<yellow>Completing transaction…', lore: ['<gray>Please wait a moment.']}
+  cancel: {name: '<red>Cancel trade', lore: ['<gray>Keep your skins and close both menus.']}
+market:
+  title: 'Skin marketplace'
+  own-title: 'Your listings'
+  choose-title: 'Choose a skin to sell'
+  sell-title: 'Set your asking price'
+  purchase-title: 'Review listing'
+  usage: '<prefix><gray>/market · /market sell <skin ID> <price> · /market own · /market search <name> · /market balance'
+  credit-usage: '<prefix><gray>/market credit <player> <amount>'
+  balance: '<prefix><gray>Your balance: <gold><balance> <currency>'
+  credited: '<prefix><gray>Added <gold><amount> <currency></gold>. New balance: <white><balance>'
+  listed: '<prefix><green>Skin listed for <price> <currency>. You can withdraw it under Your listings.'
+  cancelled: '<prefix><gray>Listing withdrawn. The skin is back in your collection.'
+  bought: '<prefix><green>Skin purchased for <price> <currency> and added to your collection.'
+  sold: '<prefix><green>Your skin sold. The proceeds are in your marketplace wallet.'
+  unavailable: '<prefix><yellow>This listing is unavailable or the marketplace is not ready. Open /market to refresh.'
+  not-enough: '<prefix><red>Your marketplace balance is too low. No payment was made.'
+  limit: '<prefix><yellow>The listing limit or wallet limit has been reached.'
+  invalid: '<prefix><red>Enter a positive whole-number amount within the configured limit. Test skins cannot be sold.'
+  select-skin: '<yellow>Click to set a price'
+  manage-hint: '<yellow>Click to review or withdraw your listing'
+  buy-hint: '<yellow>Click to review before buying'
+  offer: ['', '<gray>Seller: <white><seller>', '<gray>Price: <gold><price> <currency>']
+  browse: {name: '<white>Marketplace', lore: ['<gray>Browse skins offered by other players.']}
+  own: {name: '<white>Your listings', lore: ['<gray>Review your offers or take a skin back.']}
+  sell: {name: '<green>Sell a skin', lore: ['<gray>Choose a skin and set a fixed price.']}
+  wallet: {name: '<gold><balance> <currency>', lore: ['<gray>Your saved marketplace balance.', '<yellow>Click to refresh.']}
+  empty: {name: '<gray>No matching listings', lore: ['<gray>Try another category or search.']}
+  own-empty: {name: '<gray>You have no active listings', lore: ['<gray>Choose Sell a skin to create an offer.']}
+  no-skins: {name: '<gray>No skins available to sell', lore: ['<gray>Reserved and test skins are excluded.']}
+  price: {name: '<gold><price> <currency>', lore: ['<gray>This is the total asking price.']}
+  change-price: {name: '<white><change>', lore: ['<gray>Adjust the asking price.']}
+  sell-info: {name: '<white>Before you list', lore: ['<gray>Your skin stays reserved while listed.', '<gray>You can withdraw it until someone buys it.', '<gray>No listing fee. You receive the full price.', '<gray>For an exact price: /market sell <ID> <price>']}
+  publish: {name: '<green>List for <price> <currency>', lore: ['<gray>Confirm and publish this offer.']}
+  withdraw: {name: '<yellow>Withdraw listing', lore: ['<gray>Return this skin to your collection.', '<gray>No charge.']}
+  buy: {name: '<green>Buy for <price> <currency>', lore: ['<gray>Confirm this purchase.', '<gray>The skin is added to your collection.']}
+  sort: {name: '<white>Sort: <sort>', lore: ['<gray>Click to switch · Right click to go back.']}
+  filter: {name: '<white>Category: <category>', lore: ['<gray>Click to change category.']}
+  search: {name: '<white>Search: <query>', lore: ['<gray>/market search <name or seller>', '<yellow>Click to clear your search.']}
+  sorts: {'0': 'Newest first', '1': 'Lowest price', '2': 'Highest price', '3': 'Lowest float'}
+  categories: {'0': 'All skins', '1': 'Knives', '2': 'Weapons'}

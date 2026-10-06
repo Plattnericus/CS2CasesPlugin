@@ -1,0 +1,32 @@
+# Horizon Case (2018)
+
+case:
+  name: "Horizon Case"
+  key: case_key
+  color: "#e07a3a"
+  stattrak-chance: 0.10
+  description:
+    - "2018"
+
+skins:
+  awp_paw: {weapon: awp, rarity: mil_spec, name: "PAW", style: graffiti, palette: ["#e8c880", "#c84a1a", "#1a1a1a"]}
+  glock18_warhawk: {weapon: glock18, rarity: mil_spec, name: "Warhawk", style: shards, palette: ["#5a5a5a", "#c8c8c8", "#1a1a1a"]}
+  mp9_capillary: {weapon: mp9, rarity: mil_spec, name: "Capillary", style: circuit, palette: ["#1a1a1a", "#c81a1a", "#e8e8e8"]}
+  p90_traction: {weapon: p90, rarity: mil_spec, name: "Traction", style: stripes, palette: ["#1a1a1a", "#f0c020", "#e8e8e8"]}
+  r8_revolver_survivalist: {weapon: r8_revolver, rarity: mil_spec, name: "Survivalist", style: camo, palette: ["#5a4a2a", "#8a7a4a", "#2a2a1a"]}
+  tec9_snek9: {weapon: tec9, rarity: mil_spec, name: "Snek-9", style: scales, palette: ["#1a1a1a", "#5ad01a", "#f0e020"]}
+  dual_berettas_shred: {weapon: dual_berettas, rarity: mil_spec, name: "Shred", style: graffiti, palette: ["#1a1a1a", "#e8e8e8", "#c81a1a"]}
+  aug_amber_slipstream: {weapon: aug, rarity: restricted, name: "Amber Slipstream", style: waves, palette: ["#3a1a0a", "#c86a1a", "#f0c060"]}
+  cz75_eco: {weapon: cz75, rarity: restricted, name: "Eco", style: floral, palette: ["#1a3a1a", "#5a8a2a", "#c8e0a0"]}
+  g3sg1_high_seas: {weapon: g3sg1, rarity: restricted, name: "High Seas", style: waves, palette: ["#0a2a5a", "#2a6ab0", "#e8e8e8"]}
+  nova_toy_soldier: {weapon: nova, rarity: restricted, name: "Toy Soldier", style: graffiti, palette: ["#3a5a2a", "#c8a040", "#c81a1a"]}
+  mp7_powercore: {weapon: mp7, rarity: restricted, name: "Powercore", style: hex, palette: ["#1a1a1a", "#2ad0f0", "#e8e8e8"]}
+  famas_eye_of_athena: {weapon: famas, rarity: classified, name: "Eye of Athena", style: tribal, palette: ["#1a1a1a", "#c8a040", "#2ab0b0"]}
+  m4a1s_nightmare: {weapon: m4a1s, rarity: classified, name: "Nightmare", style: graffiti, palette: ["#1a1a1a", "#5a1a8a", "#e8e8e8"]}
+  sawedoff_devourer: {weapon: sawedoff, rarity: classified, name: "Devourer", style: scales, palette: ["#1a1a1a", "#c81a1a", "#5ad01a"]}
+  ak47_neon_rider: {weapon: ak47, rarity: covert, name: "Neon Rider", style: graffiti, palette: ["#1a0a2a", "#e83ab0", "#2ad0f0", "#f0e020"]}
+  deagle_code_red: {weapon: deagle, rarity: covert, name: "Code Red", style: shards, palette: ["#1a1a1a", "#c81a1a", "#e8e8e8"]}
+
+rare-special:
+  knives: [navaja, stiletto, talon, ursus]
+  finishes: original

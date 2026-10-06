@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>מקרים</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>אין לך הרשאה לעשות זאת.
+  player-only: <prefix><red>שחקנים בלבד.
+profile:
+  loading: <prefix><gray>מלאי העור שלך עדיין נטען...
+  load-failed: <prefix><red>לא ניתן לטעון את מלאי העור שלך. אנא ספר למנהל.
+  recovered: '<prefix><gray>פתיחה מופרעת הושלמה: <skin>'
+category:
+  pistol: אקדח
+  smg: SMG
+  rifle: רובה
+  sniper: רובה צלפים
+  heavy: כבד
+  equipment: ציוד
+  knife: סכין
+items:
+  test-marker: <red>⚠ פריט בדיקה (מנהל מערכת)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> פריטים אפשריים
+    - ''
+    - '<gray>קליק ימני: <white>הצג את התוכן'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>מנוצל בעת פתיחת תיק.
+    use-hint: <prefix><gray>לחץ לחיצה ימנית על <white>מקרה</white> כדי לפתוח אותו עם מפתח זה.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>חיצוני: <white><wear>'
+    float: '<gray>צף: <white><float>'
+    float-range: '<gray>צף: <white><min_float> - <max_float>'
+    pattern: '<gray>דפוס: <white><pattern>'
+    variant: '<gray>שלב: <class_color><variant>'
+    classification: '<gray>סוג תבנית: <class_color><classification>'
+    fade: '<gray>דהייה: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>הרג: <white><kills>'
+    has-variants: <dark_gray>אפשרויות מספר שלבים
+    source: '<gray>מקור: <white><case>'
+    date: '<gray>הושג: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>נמחק: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% דהייה'
+gui:
+  loading:
+    name: <gray>טוען...
+    lore: []
+  back:
+    name: <gray>חזרה
+    lore: []
+  close:
+    name: <red>סגור
+    lore: []
+  previous:
+    name: <gray>העמוד הקודם
+    lore:
+    - <dark_gray>עמוד <page> / <pages>
+  next:
+    name: <gray>העמוד הבא
+    lore:
+    - <dark_gray>עמוד <page> / <pages>
+  cases:
+    title: מקרים
+    header:
+      name: <#e4ae39>מקרים
+      lore:
+      - <gray>קבל תיקים מסוחר <white>case</white>.
+      - <gray>אתה צריך מפתח תואם כדי לפתוח אחד.
+    entry:
+    - ''
+    - '<gray>במלאי: <white><owned> <dark_gray>· <gray>מפתחות: <white><keys>'
+    - '<gray>לחץ שמאלי: <white>הצג את התוכן'
+    can-open: '<green>קליק ימני: פתח'
+    to-skins:
+      name: <#e4ae39>מלאי עור
+      lore:
+      - <gray>העורות והסכינים שלך
+  preview:
+    title: <case>
+    click-preview: <dark_gray>לחץ לתצוגה מקדימה
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>סכין נדירה.
+      - <dark_gray><count> גרסאות · לחץ כדי להציג
+      - ''
+    open:
+      name: <green>תיק פתוח
+      lore:
+      - '<gray>מקרים: <white><owned> <dark_gray>· <gray>מפתחות: <white><keys>'
+      - <dark_gray>משתמש במארז אחד וב-1<key>
+    cannot-open:
+      name: <gray>לא ניתן לפתוח
+      lore:
+      - '<gray>מקרים: <white><owned> <dark_gray>· <gray>מפתחות: <white><keys>'
+      - <dark_gray>אתה צריך את המארז ו<key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: אתה בטוח?
+    'yes':
+      name: <green>כן, מחק
+      lore:
+      - <dark_gray>לא ניתן לבטל זאת.
+    'no':
+      name: <red>בטל
+      lore: []
+  skins:
+    title: מלאי עור
+    title-other: סקינים של <player>
+    tab:
+      all:
+        name: <white>כל העינים
+        lore: []
+      weapons:
+        name: <white>עורות לנשק
+        lore: []
+      knives:
+        name: <white>סכינים
+        lore:
+        - '<dark_gray>לחץ לחיצה ימנית על סכין: הצטיידו'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>מועדפים
+        lore: []
+      recent:
+        name: <white>הושג לאחרונה
+        lore: []
+    empty:
+      name: <gray>שום דבר כאן עדיין
+      lore:
+      - <dark_gray>פתח מארזים כדי לקבל סקינים.
+    equipped: <green>✔ מצויד
+    favorite: <yellow>★ מועדף
+    hint:
+    - ''
+    - '<dark_gray>קליק שמאלי: בדוק · קליק ימני: שים על קשת'
+    - '<dark_gray>לחיצה על Shift: מועדף'
+    hint-knife:
+    - ''
+    - '<dark_gray>קליק שמאלי: בדוק · קליק ימני: לצייד'
+    - '<dark_gray>לחיצה על Shift: מועדף'
+    to-cases:
+      name: <#e4ae39>מקרים
+      lore:
+      - <gray>למקרים שלך
+    sort:
+      name: '<white>מיין: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>שמאל: הבא · ימין: הקודם'
+    sorts:
+      rarity: נדירות
+      float: לצוף
+      name: שם
+      wear: חיצוני
+      pattern: דפוס
+      newest: הכי חדש
+      oldest: הכי ותיק
+    info:
+      name: <white><count> <gray>skins מוצגים
+      lore:
+      - <dark_gray><total> בסך הכל · לחץ כדי לסגור
+    filter:
+      name: <white>מסנן
+      lore:
+      - '<dark_gray>שמאל: בחר מסננים · ימין: איפוס'
+    active-knife:
+    - <green>✔ סכין פעילה
+    - <dark_gray>לחץ לפרטים
+  filter:
+    title: מסנן
+    header:
+      name: <white>מסנן
+      lore:
+      - <gray>משולבים מספר מסננים מאותו סוג.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ בלבד
+    'on':
+    - <green>✔ פעיל
+    'off':
+    - <dark_gray>לא פעיל
+    reset:
+      name: <gray>אפס את כל המסננים
+      lore: []
+  inspect:
+    title: בדוק
+    missing:
+      name: <red>העור אינו זמין
+      lore: []
+    preview:
+      name: <#e4ae39>הצג עור
+      lore:
+      - '<gray>מציג את העותק המדויק שלך:'
+      - <gray>דפוס, צבעים ובלאי.
+      - ''
+      - <dark_gray>התגנב כדי לסגור את התצוגה המקדימה.
+    data: <white>פרטים
+    favorite:
+      name: <white>סמן כמועדף
+      lore: []
+    unfavorite:
+      name: <yellow>★ הסר מועדף
+      lore: []
+    equip:
+      name: <green>הצטייד
+      lore:
+      - <gray>החרבות שלך מציגות את הסכין הזה.
+      - <dark_gray>הנזק והקסמים נשארים זהים.
+    unequip:
+      name: <green>✔ מצויד
+      lore:
+      - <gray>לחץ כדי להתנתק.
+    inspect3d:
+      name: <white>3D בדיקה
+      lore:
+      - '<gray>מציג את העותק המדויק שלך:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>שייך לשחקן אחר
+      lore:
+      - <dark_gray>תצוגה בלבד
+    equip-bow:
+      name: <green>שים על קשת
+      lore:
+      - <gray>הקשתות שלך מציגות את העור הזה.
+    unequip-bow:
+      name: <green>✔ על חרטום
+      lore:
+      - <gray>לחץ כדי להסיר.
+    equip-crossbow:
+      name: <green>שים על קשת
+      lore:
+      - <gray>הקשתות שלך מציגות את העור הזה.
+    unequip-crossbow:
+      name: <green>✔ על קשת
+      lore:
+      - <gray>לחץ כדי להסיר.
+    not-equippable:
+      name: <gray>לא ניתן לצייד
+      lore:
+      - <dark_gray>לא ניתן לצייד את העור הזה.
+    delete:
+      name: <red>מחק עור
+      lore:
+      - <gray>מסיר את העור הזה מהמלאי שלך.
+      - <dark_gray>מבקש אישור.
+view:
+  unknown: <prefix><red>נגן <white><player></white> לא נמצא.
+gallery:
+  header-other: המלאי של <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> סקינים <dark_gray>· <gray>עמוד <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>קליק ימני: בדוק · Sneak + קליק ימני: מועדף'
+  hint-knife:
+  - ''
+  - '<dark_gray>קליק ימני: בדוק · קליק שמאלי: לצייד'
+  - '<dark_gray>התגנב + קליק ימני: מועדף'
+  hint-weapon:
+  - ''
+  - '<dark_gray> קליק ימני: בדוק · קליק שמאלי: שים על קשת'
+  - '<dark_gray>התגנב + קליק שמאלי: לשים קשת'
+  - '<dark_gray>התגנב + קליק ימני: מועדף'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> סקינים <dark_gray>· <gray>עמוד <page>/<pages>
+  empty: <gray>שום דבר כאן עדיין
+  button:
+    previous: <gray>העמוד הקודם
+    next: <gray>העמוד הבא
+    category: <white>שנה קטגוריה
+    sort: '<white>מיין: <#e4ae39><sort>'
+    filter: <white>מסנן
+    list: <white>הצג כרשימה
+    close: <red>סגור
+preview:
+  loading: <gray>מעבד תצוגה מקדימה...
+  hint: <gray>התגנב לסגירה
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>זהב זהב
+  world:
+    title: <white><player></white> <gray>נפתח <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>אתה כבר פותח תיק.
+  case-disabled: <prefix><red>מקרה זה אינו זמין.
+  missing: <prefix><gray>אתה צריך <white><case></white> ו<white><key></white>.
+  missing-now: <prefix><red>המארז או המפתח כבר אינם במלאי שלך.
+  storage-error: <prefix><red>השמירה נכשלה. התיק והמפתח שלך הוחזרו.
+  command-blocked: <prefix><gray>חכה עד שהפתיחה תסתיים.
+  result: '<prefix><gray>קיבלת <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[בדיקה]</red> <gray>תוצאה: <skin> <dark_gray>(<float>, #<pattern>) - לא נשמר'
+  broadcast: <prefix><white><player></white> <gray>לא בארגז <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>פריט מיוחד נדיר</b></gradient>
+  buttons:
+    inspect:
+      name: <white>בדוק
+      lore:
+      - <gray>כל הפרטים של העור החדש שלך
+    again:
+      name: <green>פתח אחר
+      lore:
+      - '<gray>מקרים: <white><cases> <dark_gray>· <gray>מפתחות: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>העור הזה לא מתאים לנשק הזה.
+  equipped:
+    knife: '<prefix><gray>סכין מצוידת: <skin>'
+    bow: '<prefix><gray>על הקשת שלך: <skin>'
+    crossbow: '<prefix><gray>על הקשת שלך: <skin>'
+  unequipped:
+    knife: <prefix><gray>סכין לא מצוידת.
+    bow: <prefix><gray>עור הקשת הוסר.
+    crossbow: <prefix><gray>עור קרוסבו הוסר.
+knife:
+  not-owned: <prefix><red>העור הזה לא שייך לך.
+  equipped: '<prefix><gray>מצויד: <skin>'
+  unequipped: <prefix><gray>סכין לא מצוידת.
+  sword-footer: '<dark_gray>בסיס: <base>'
+inspect:
+  running: <prefix><gray>בדיקה כבר פועלת.
+  no-knife: <red>העור אינו זמין <white>/skins
+shop:
+  title: סוחר קייס
+  npc-name: <gradient:#e4ae39:#f6d27a>סוחר תיקים</gradient>
+  npc-description: <gray>לחץ ימני כדי לסחור
+  balance:
+    name: '<white>היתרה שלך: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>רק פריטים ללא שינוי נחשבים.
+  offer:
+  - ''
+  - '<gray>מחיר: <aqua><price> <currency>'
+  - '<dark_gray>5 חתיכות: <price5> <currency>'
+  affordable: <green>✔ במחיר סביר
+  not-affordable: <red>✘ <missing> <currency> חסר
+  affordable-five: '<dark_gray>לחיצה על Shift: קנה 5'
+  hint-case:
+  - '<dark_gray>קליק שמאלי: קנה · קליק ימני: תוכן'
+  hint-key:
+  - '<dark_gray>קליק שמאלי: קנה'
+  bought: '<prefix><gray>נקנו: <white><amount>× <name></white> עבור <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>אתה לא יכול להרשות זאת לעצמך.
+  inventory-full: <prefix><red>המלאי שלך מלא.
+slot:
+  name: <#e4ae39>מלאי עור
+  lore:
+  - '<gray>קליק ימני: עורות, סכינים ונרתיקים'
+  - <dark_gray>פריט זה נעול למשבצת זו.
+  blocked: <prefix><gray>שחרר משבצת מלאי כדי שפריט מלאי העור יוכל להופיע.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>אדמין
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>בוצע.
+  unknown: <prefix><red>לא ידוע <what>.
+  instance-unknown: <prefix><red>לא נמצא מזהה עור תואם. <gray>/csadmin רשימת <player>
+  given: <prefix><gray>נתן <amount>× <white><name></white> ל<white><player></white>.
+  skin-given: <prefix><gray>נתן <skin> <gray>ל<white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>עורות של <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>פתיחות אחרונות של <white><player>
+  scan-start: <prefix><gray>סורק כל זרע של <white><skin></white> עבור <white><metric></white>...
+  export-start: <prefix><gray>בניית חבילת משאבים...
+  export-done: '<prefix><green><skins> עורות מיוצאים: <white><file>'
+  shop-spawned: <prefix><green> סוחר תיקים נוצר.
+  shop-removed: <prefix><green>סוחר תיקים הוסר.
+  shop-none: <prefix><gray>אין סוחר תיקים בקרבת מקום.
+  reload-busy: <prefix><gray>טעינה מחדש כבר פועלת.
+  reload-start: <prefix><gray>טוען מחדש...
+  reload-failed: <prefix><red>טעינה מחדש נכשלה, התצורה הקודמת נשארת פעילה. ראה קונסולה.
+  reload-done: '<prefix><green> נטען מחדש בעוד <ms> אלפיות השנייה: <skins> סקינים, <cases> מקרים, אזהרות <warnings> (ראה מסוף).'
+  browser:
+    title: 'דפוס: <skin>'
+  manage:
+    title: 'נהל: <player>'
+    skin-title: העור של <player>
+    give-title: 'תן עור: <player>'
+    give:
+      name: <green>תן עור
+      lore:
+      - <gray>בחר מארז ולאחר מכן סקין.
+    give-hint:
+    - ''
+    - '<dark_gray>קליק שמאלי: תן · קליק ימני: תן StatTrak™'
+    clear:
+      name: <red>מחק את כל העינים
+      lore:
+      - <gray><count> סקינים יוסרו.
+      - <dark_gray>מבקש אישור.
+    cleared: <prefix><gray>מחק <count> סקינים של <white><player></white>.
+    removed: <prefix><gray>נמחק <skin> <gray>מתוך <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>לחץ כדי להחליף.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>מגדיר את הצף ל-<white><float>
+    pattern-step:
+      name: <white>דפוס <step>
+      lore:
+      - '<gray>נוכחי: <white><pattern>'
+    pattern-random:
+      name: <light_purple>דפוס אקראי
+      lore:
+      - '<gray>נוכחי: <white><pattern>'
+    equip:
+      name: <green>הצטייד לשחקן
+      lore: []
+    unequip:
+      name: <green>✔ מצויד
+      lore:
+      - <gray>לחץ כדי להתנתק.
+    remove:
+      name: <red>מחק עור
+      lore:
+      - <dark_gray>מבקש אישור.
+  labels:
+    case: מקרה
+    key: מפתח
+    skin: עור
+    manual: מסד נתונים ידני
+    automatic: אוטומטי
+    none: אין (לסיים אין פרופיל ניתוח)
+    'off': כבוי
+  debug:
+    seed: '<gray>דפוס: <white><seed>'
+    analysing: <dark_gray>מנתח...
+    variant: '<gray>גרסה: <white><variant>'
+    classification: '<gray>סיווג: <white><classification> <dark_gray><mode>'
+    fade: '<gray>דהייה: <white><fade>%'
+    preview:
+      name: <yellow>דפוס תצוגה מקדימה <seed>
+      lore:
+      - <gray>מציג את המפה המעובדת בידיים שלך.
+    random:
+      name: <light_purple>דפוס אקראי
+      lore: []
+    title: <gold>מאתר באגים דפוסים <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>העיבוד נכשל: <error>'
+    metrics: '<gray>מדדים: <white><metrics>'
+    scan-failed: <prefix><red>הסריקה נכשלה.
+    no-metric: <gray>אין דפוס בעל מדד <white><metric>
+    export-failed: '<prefix><red>ייצוא נכשל: <error>'
+  odds: <gray><case> <dark_gray>(<count> פריטים, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>עורות: <white><skins> <gray>מקרים: <white><cases> <gray>נשק: <white><weapons>'
+    cache: '<gray>תצוגות מקדימות במטמון: <white><previews> <gray>מצב ערכת משאבים: <white><pack>'
+    web: '<gray>Pack שרת אינטרנט: <white><url>'
+wear:
+  factory_new: חדש במפעל
+  minimal_wear: בלאי מינימלי
+  field_tested: נבדק בשטח
+  well_worn: שחוק היטב
+  battle_scarred: מצולק קרב
+rarity:
+  mil_spec: Mil-Spec
+  restricted: מוגבל
+  classified: מסווג
+  covert: סמוי
+  rare_special: פריט מיוחד נדיר
+catalog:
+  key:
+    case_key: קייס מפתח

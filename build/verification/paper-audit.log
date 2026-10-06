@@ -1,0 +1,14 @@
+[11:56:39] [Server thread/INFO]: PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.
+[11:56:39] [Server thread/INFO]: PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.
+[11:56:39] [Server thread/INFO]: PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.
+[11:56:39] [Server thread/INFO]: PASS: journal mutations and malformed-entry recovery; case/shop/skin/list menus render and protect icons; dealer interaction and damage protection.
+[11:56:40] [Server thread/INFO]: PASS: gallery and inspect allow crossbow -> bow; item type and selected slot preserved.
+[11:56:41] [Server thread/INFO]: PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.
+[11:56:41] [Server thread/INFO]: PASS: resource-pack item and map previews, asynchronous cancellation, callback and real inventory preserved.
+[11:56:41] [Server thread/INFO]: PASS: SQLite opening transaction/idempotency, PENDING recovery, favorite, concurrent StatTrak increments, equip persistence and offline profile snapshot.
+[11:56:50] [Server thread/INFO]: PASS FULL AUDIT: actual case reel/reveal, duplicate request guard, exact item consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.
+[11:57:23] [Server thread/INFO]: Server tick times (avg/min/max) from last 5s, 10s, 1m:
+[11:57:23] [Server thread/INFO]: ◴ 1.4/1.0/2.2, 1.4/1.0/3.6, 2.7/0.4/416.7
+[11:57:38] [Server thread/INFO]: Skins: 713 Cases: 21 Weapons: 55
+[11:57:38] [Server thread/INFO]: Pack web server: http://127.0.0.1:8165/MCCases-ResourcePack.zip?v=91187119bfff0c413884ac3b0dd59819b5d7ae9e
+[11:57:39] [Server thread/INFO]: PASS TWO CLIENTS: actual locales de_DE -> de / fr_FR -> fr; French menu/token and signed key refresh; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup.

@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>मामले</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>आपको ऐसा करने की अनुमति नहीं है।
+  player-only: <prefix><red>केवल खिलाड़ी।
+profile:
+  loading: <prefix><gray>आपकी त्वचा सूची अभी भी लोड हो रही है...
+  load-failed: <prefix><red>आपकी त्वचा सूची लोड नहीं की जा सकी। कृपया किसी व्यवस्थापक को बताएं.
+  recovered: '<prefix><gray>बाधित उद्घाटन पूरा हुआ: <skin>'
+category:
+  pistol: पिस्तौल
+  smg: एसएमजी
+  rifle: राइफल
+  sniper: स्नाइपर राइफल
+  heavy: भारी
+  equipment: उपकरण
+  knife: चाकू
+items:
+  test-marker: <red>⚠ परीक्षण आइटम (व्यवस्थापक)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> संभावित आइटम
+    - ''
+    - '<gray>राइट क्लिक करें: <white>सामग्री देखें'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>किसी केस को खोलते समय उपयोग किया जाता है।
+    use-hint: <prefix><gray>इस कुंजी से खोलने के लिए <white>केस</white> पर राइट क्लिक करें।
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>बाहरी: <white><wear>'
+    float: '<gray>फ्लोट: <white><float>'
+    float-range: '<gray>फ्लोट: <white><min_float> - <max_float>'
+    pattern: '<gray>पैटर्न: <white><pattern>'
+    variant: '<gray>चरण: <class_color><variant>'
+    classification: '<gray>पैटर्न प्रकार: <class_color><classification>'
+    fade: '<gray>फीका: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>मारता है: <white><kills>'
+    has-variants: <dark_gray>कई चरण संभव
+    source: '<gray>स्रोत: <white><case>'
+    date: '<gray>प्राप्त: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>हटाया गया: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% फीका'
+gui:
+  loading:
+    name: <gray>लोड हो रहा है...
+    lore: []
+  back:
+    name: <gray>वापस
+    lore: []
+  close:
+    name: <red>बंद करें
+    lore: []
+  previous:
+    name: <gray>पिछला पृष्ठ
+    lore:
+    - <dark_gray>पेज <page> / <pages>
+  next:
+    name: <gray>अगला पृष्ठ
+    lore:
+    - <dark_gray>पेज <page> / <pages>
+  cases:
+    title: मामले
+    header:
+      name: <#e4ae39>मामले
+      lore:
+      - <gray><white>केस डीलर</white> से मामले प्राप्त करें।
+      - <gray>आपको इसे खोलने के लिए एक मिलान कुंजी की आवश्यकता है।
+    entry:
+    - ''
+    - '<gray>इन्वेंट्री में: <white><owned> <dark_gray>· <gray>कुंजियाँ: <white><keys>'
+    - '<gray>बायाँ क्लिक करें: <white>सामग्री देखें'
+    can-open: '<green>राइट क्लिक करें: खोलें'
+    to-skins:
+      name: <#e4ae39>त्वचा सूची
+      lore:
+      - <gray>आपकी खालें और चाकू
+  preview:
+    title: <case>
+    click-preview: <dark_gray> पूर्वावलोकन के लिए क्लिक करें
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>एक दुर्लभ चाकू।
+      - <dark_gray><count> वैरिएंट · देखने के लिए क्लिक करें
+      - ''
+    open:
+      name: <green>खुला मामला
+      lore:
+      - '<gray>मामले: <white><owned> <dark_gray>· <gray>कुंजी: <white><keys>'
+      - <dark_gray>1 केस और 1 <key> का उपयोग करता है
+    cannot-open:
+      name: <gray>खुल नहीं सकता
+      lore:
+      - '<gray>मामले: <white><owned> <dark_gray>· <gray>कुंजी: <white><keys>'
+      - <dark_gray>आपको केस और <key> की आवश्यकता है।
+  rare:
+    title: ★ <case>
+  confirm:
+    title: क्या आपको यकीन है?
+    'yes':
+      name: <green>हां, हटाएं
+      lore:
+      - <dark_gray>इसे पूर्ववत नहीं किया जा सकता.
+    'no':
+      name: <red>रद्द करें
+      lore: []
+  skins:
+    title: त्वचा सूची
+    title-other: <player> की खाल
+    tab:
+      all:
+        name: <white>सभी खालें
+        lore: []
+      weapons:
+        name: <white>हथियार की खालें
+        lore: []
+      knives:
+        name: <white>चाकू
+        lore:
+        - '<dark_gray> चाकू पर राइट क्लिक करें: सुसज्जित'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>पसंदीदा
+        lore: []
+      recent:
+        name: <white>हाल ही में प्राप्त किया गया
+        lore: []
+    empty:
+      name: <gray>यहाँ अभी तक कुछ नहीं
+      lore:
+      - <dark_gray>खाल पाने के लिए खुले डिब्बे।
+    equipped: <green>✔ सुसज्जित
+    favorite: <yellow>★ पसंदीदा
+    hint:
+    - ''
+    - '<dark_gray>बायां क्लिक करें: निरीक्षण करें · दायां क्लिक करें: धनुष लगाएं'
+    - '<dark_gray>Shift क्लिक: पसंदीदा'
+    hint-knife:
+    - ''
+    - '<dark_gray>बायाँ क्लिक: निरीक्षण करें · दायाँ क्लिक: सुसज्जित'
+    - '<dark_gray>Shift क्लिक: पसंदीदा'
+    to-cases:
+      name: <#e4ae39>मामले
+      lore:
+      - <gray>आपके मामलों के लिए
+    sort:
+      name: '<white>क्रमबद्ध: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>बाएं: अगला · दायां: पिछला'
+    sorts:
+      rarity: दुर्लभता
+      float: तैरना
+      name: नाम
+      wear: बाहरी
+      pattern: पैटर्न
+      newest: नवीनतम
+      oldest: सबसे पुराना
+    info:
+      name: <white><count> <gray>खालें दिखाई गईं
+      lore:
+      - कुल <dark_gray><total> · बंद करने के लिए क्लिक करें
+    filter:
+      name: <white>फ़िल्टर
+      lore:
+      - '<dark_gray>बाएं: फ़िल्टर चुनें · दाएं: रीसेट करें'
+    active-knife:
+    - <green>✔ सक्रिय चाकू
+    - <dark_gray>विवरण के लिए क्लिक करें
+  filter:
+    title: फ़िल्टर करें
+    header:
+      name: <white>फ़िल्टर
+      lore:
+      - <gray>एक ही तरह के कई फिल्टर संयुक्त हैं।
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: केवल <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ सक्रिय
+    'off':
+    - <dark_gray>निष्क्रिय
+    reset:
+      name: <gray>सभी फ़िल्टर रीसेट करें
+      lore: []
+  inspect:
+    title: निरीक्षण करें
+    missing:
+      name: <red>त्वचा उपलब्ध नहीं है
+      lore: []
+    preview:
+      name: <#e4ae39>त्वचा देखें
+      lore:
+      - '<gray>आपकी सटीक प्रतिलिपि दिखाता है:'
+      - <gray>पैटर्न, रंग और पहनावा।
+      - ''
+      - <dark_gray>पूर्वावलोकन बंद करने के लिए चुपके से।
+    data: <white>विवरण
+    favorite:
+      name: <white>पसंदीदा के रूप में चिह्नित करें
+      lore: []
+    unfavorite:
+      name: <yellow>★ पसंदीदा हटाएं
+      lore: []
+    equip:
+      name: <green>सुसज्जित
+      lore:
+      - <gray>तुम्हारी तलवारें यह चाकू दिखाती हैं।
+      - <dark_gray>नुकसान और जादू-टोना वही रहते हैं।
+    unequip:
+      name: <green>✔ सुसज्जित
+      lore:
+      - <gray>असुसज्जित करने के लिए क्लिक करें।
+    inspect3d:
+      name: <white>3D निरीक्षण करें
+      lore:
+      - '<gray>आपकी सटीक प्रतिलिपि दिखाता है:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>किसी अन्य खिलाड़ी का है
+      lore:
+      - <dark_gray>केवल देखें
+    equip-bow:
+      name: <green>धनुष धारण करो
+      lore:
+      - <gray>तुम्हारे धनुष इस त्वचा को दिखाते हैं।
+    unequip-bow:
+      name: <green>✔ धनुष पर
+      lore:
+      - <gray>हटाने के लिए क्लिक करें।
+    equip-crossbow:
+      name: <green>क्रॉसबो लगाएं
+      lore:
+      - <gray>आपके क्रॉसबो इस त्वचा को दिखाते हैं।
+    unequip-crossbow:
+      name: <green>✔ क्रॉसबो पर
+      lore:
+      - <gray>हटाने के लिए क्लिक करें।
+    not-equippable:
+      name: <gray>सुसज्जित नहीं
+      lore:
+      - <dark_gray>यह त्वचा सुसज्जित नहीं की जा सकती।
+    delete:
+      name: <red>त्वचा हटाएँ
+      lore:
+      - <gray>इस त्वचा को आपकी सूची से हटा देता है।
+      - <dark_gray>पुष्टि के लिए पूछता है।
+view:
+  unknown: <prefix><red>प्लेयर <white><player></white> नहीं मिला।
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> की सूची <dark_gray>· <gray><category> <dark_gray>· <gray><count> खाल <dark_gray>· <gray>पेज <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>राइट क्लिक: निरीक्षण करें · चुपके से + राइट क्लिक करें: पसंदीदा'
+  hint-knife:
+  - ''
+  - '<dark_gray>राइट क्लिक: निरीक्षण · बायाँ क्लिक: सुसज्जित'
+  - '<dark_gray>चुपके + राइट क्लिक करें: पसंदीदा'
+  hint-weapon:
+  - ''
+  - '<dark_gray> दायां क्लिक करें: निरीक्षण करें · बायां क्लिक करें: धनुष लगाएं'
+  - '<dark_gray>चुपके + बायां क्लिक: क्रॉसबो लगाएं'
+  - '<dark_gray>चुपके + राइट क्लिक करें: पसंदीदा'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> त्वचा <dark_gray>· <gray>पेज <page>/<pages>
+  empty: <gray>यहाँ अभी तक कुछ नहीं
+  button:
+    previous: <gray>पिछला पृष्ठ
+    next: <gray>अगला पृष्ठ
+    category: <white>श्रेणी बदलें
+    sort: '<white>क्रमबद्ध: <#e4ae39><sort>'
+    filter: <white>फ़िल्टर
+    list: <white>सूची के रूप में दिखाएँ
+    close: <red>बंद करें
+preview:
+  loading: <gray>पूर्वावलोकन प्रस्तुत किया जा रहा है...
+  hint: <gray>बंद करने के लिए चुपके से
+opening:
+  title: <case>
+  title-test: <red>परीक्षण</red> <case>
+  bubble: <black>सोना सोना सोना
+  world:
+    title: <white><player></white> <gray>खुलता है <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>आप पहले से ही एक मामला खोल रहे हैं।
+  case-disabled: <prefix><red>यह मामला उपलब्ध नहीं है।
+  missing: <prefix><gray>आपको <white><case></white> और <white><key></white> की आवश्यकता है।
+  missing-now: <prefix><red>केस या कुंजी अब आपकी सूची में नहीं है।
+  storage-error: <prefix><red>सहेजना विफल. आपका केस और चाबी वापस कर दी गई।
+  command-blocked: <prefix><gray>उद्घाटन समाप्त होने तक प्रतीक्षा करें।
+  result: '<prefix><gray>आपको <skin> <dark_gray>(<float>, #<pattern>) प्राप्त हुआ'
+  result-test: '<prefix><red>[परीक्षण]</red> <gray>परिणाम: <skin> <dark_gray>(<float>, #<pattern>) - सहेजा नहीं गया'
+  broadcast: <prefix><white><player></white> <gray>अनबॉक्स्ड <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>दुर्लभ विशेष वस्तु</b></gradient>
+  buttons:
+    inspect:
+      name: <white>निरीक्षण करें
+      lore:
+      - <gray>आपकी नई त्वचा के सभी विवरण
+    again:
+      name: <green>दूसरा खोलें
+      lore:
+      - '<gray>मामले: <white><cases> <dark_gray>· <gray>कुंजी: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>यह त्वचा इस हथियार में फिट नहीं होती।
+  equipped:
+    knife: '<prefix><gray>चाकू से सुसज्जित: <skin>'
+    bow: '<prefix><gray>आपके धनुष पर: <skin>'
+    crossbow: '<prefix><gray>आपके क्रॉसबो पर: <skin>'
+  unequipped:
+    knife: <prefix><gray>चाकू सुसज्जित नहीं।
+    bow: <prefix><gray>धनुष की त्वचा हटा दी गई।
+    crossbow: <prefix><gray>क्रॉसबो त्वचा हटा दी गई।
+knife:
+  not-owned: <prefix><red>यह त्वचा आपकी नहीं है।
+  equipped: '<prefix><gray>सुसज्जित: <skin>'
+  unequipped: <prefix><gray>चाकू सुसज्जित नहीं।
+  sword-footer: '<dark_gray>आधार: <base>'
+inspect:
+  running: <prefix><gray>एक निरीक्षण पहले से ही चल रहा है।
+  no-knife: <red>त्वचा उपलब्ध नहीं है <white>/skins
+shop:
+  title: केस डीलर
+  npc-name: <gradient:#e4ae39:#f6d27a>केस डीलर</gradient>
+  npc-description: <gray>व्यापार करने के लिए राइट क्लिक करें
+  balance:
+    name: '<white>आपका शेष: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>केवल असंशोधित आइटम ही गिने जाते हैं।
+  offer:
+  - ''
+  - '<gray>मूल्य: <aqua><price> <currency>'
+  - '<dark_gray>5 टुकड़े: <price5> <currency>'
+  affordable: <green>✔ किफायती
+  not-affordable: <red>✘ <missing> <currency> गायब
+  affordable-five: '<dark_gray>Shift क्लिक: 5 खरीदें'
+  hint-case:
+  - '<dark_gray>बायाँ क्लिक: खरीदें · दायाँ क्लिक करें: सामग्री'
+  hint-key:
+  - '<dark_gray>बायाँ क्लिक करें: खरीदें'
+  bought: '<prefix><gray>खरीदा: <white><amount>× <name></white> <aqua><price> <currency></aqua> के लिए।'
+  not-enough: <prefix><red>आप इसे वहन नहीं कर सकते।
+  inventory-full: <prefix><red>आपकी सूची पूरी है.
+slot:
+  name: <#e4ae39>त्वचा सूची
+  lore:
+  - '<gray>राइट क्लिक करें: खाल, चाकू और केस'
+  - <dark_gray>यह आइटम इस स्लॉट पर लॉक है।
+  blocked: <prefix><gray>एक इन्वेंट्री स्लॉट निःशुल्क करें ताकि स्किन इन्वेंट्री आइटम प्रदर्शित हो सके।
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>एडमिन
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>हो गया.
+  unknown: <prefix><red>अज्ञात <what>.
+  instance-unknown: <prefix><red>कोई मेल खाती त्वचा आईडी नहीं मिली। <gray>/csadmin सूची <player>
+  given: <prefix><gray>ने <amount>× <white><name></white> को <white><player></white> दिया।
+  skin-given: <prefix><gray>ने <skin> <gray>को <white><player></white> <dark_gray>(#<id>) दिया
+  list-header: <prefix><gray><white><player></white> <dark_gray>(<count>) की खाल
+  history-header: <prefix><gray><white><player> के हालिया उद्घाटन
+  scan-start: <prefix><gray><white><skin></white> के प्रत्येक बीज को <white><metric></white> के लिए स्कैन करना...
+  export-start: <prefix><gray>बिल्डिंग संसाधन पैक...
+  export-done: '<prefix><green><skins> खालें निर्यात की गईं: <white><file>'
+  shop-spawned: <prefix><green>केस डीलर बनाया गया।
+  shop-removed: <prefix><green>केस डीलर को हटा दिया गया।
+  shop-none: <prefix><gray>आस-पास कोई केस डीलर नहीं।
+  reload-busy: <prefix><gray>A पुनः लोड पहले से ही चल रहा है।
+  reload-start: <prefix><gray>पुनः लोड हो रहा है...
+  reload-failed: <prefix><red>पुनः लोड विफल, पिछला कॉन्फ़िगरेशन सक्रिय रहता है। कंसोल देखें.
+  reload-done: '<prefix><green><ms> एमएस में रीलोडेड: <skins> स्किन्स, <cases> केस, <warnings> चेतावनियां (कंसोल देखें)।'
+  browser:
+    title: 'पैटर्न: <skin>'
+  manage:
+    title: 'प्रबंधित करें: <player>'
+    skin-title: <player> की त्वचा
+    give-title: 'त्वचा दें: <player>'
+    give:
+      name: <green>त्वचा दो
+      lore:
+      - <gray>एक केस चुनें, फिर एक स्किन।
+    give-hint:
+    - ''
+    - '<dark_gray>बायाँ क्लिक करें: दें · दायाँ क्लिक करें: दें StatTrak™'
+    clear:
+      name: <red>सभी खाल हटाएं
+      lore:
+      - <gray><count> खाल हटा दी जाएगी।
+      - <dark_gray>पुष्टि के लिए पूछता है।
+    cleared: <prefix><gray><white><player></white> की <count> खालें हटा दी गईं।
+    removed: <prefix><gray>हटाया गया <skin> <gray><white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>टॉगल करने के लिए क्लिक करें।
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>फ्लोट को <white><float> पर सेट करता है
+    pattern-step:
+      name: <white>पैटर्न <step>
+      lore:
+      - '<gray>वर्तमान: <white><pattern>'
+    pattern-random:
+      name: <light_purple>यादृच्छिक पैटर्न
+      lore:
+      - '<gray>वर्तमान: <white><pattern>'
+    equip:
+      name: <green>खिलाड़ी के लिए उपकरण
+      lore: []
+    unequip:
+      name: <green>✔ सुसज्जित
+      lore:
+      - <gray>असुसज्जित करने के लिए क्लिक करें।
+    remove:
+      name: <red>त्वचा हटाएँ
+      lore:
+      - <dark_gray>पुष्टि के लिए पूछता है।
+  labels:
+    case: मामला
+    key: कुंजी
+    skin: त्वचा
+    manual: मैन्युअल डेटाबेस
+    automatic: स्वचालित
+    none: कोई नहीं (समाप्ति का कोई विश्लेषण प्रोफ़ाइल नहीं है)
+    'off': बंद
+  debug:
+    seed: '<gray>पैटर्न: <white><seed>'
+    analysing: <dark_gray>विश्लेषण...
+    variant: '<gray>प्रकार: <white><variant>'
+    classification: '<gray>वर्गीकरण: <white><classification> <dark_gray><mode>'
+    fade: '<gray>फीका: <white><fade>%'
+    preview:
+      name: <yellow>पूर्वावलोकन पैटर्न<seed>
+      lore:
+      - <gray>आपके हाथ में प्रस्तुत मानचित्र दिखाता है।
+    random:
+      name: <light_purple>यादृच्छिक पैटर्न
+      lore: []
+    title: <gold>पैटर्न डिबगर <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>रेंडर विफल: <error>'
+    metrics: '<gray>मेट्रिक्स: <white><metrics>'
+    scan-failed: <prefix><red>स्कैन विफल।
+    no-metric: <gray>किसी पैटर्न में मीट्रिक नहीं है <white><metric>
+    export-failed: '<prefix><red>निर्यात विफल: <error>'
+  odds: <gray><case> <dark_gray>(<count> आइटम, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>खाल: <white><skins> <gray>मामले: <white><cases> <gray>हथियार: <white><weapons>'
+    cache: '<gray>कैश्ड पूर्वावलोकन: <white><previews> <gray>संसाधन पैक मोड: <white><pack>'
+    web: '<gray>पैक वेब सर्वर: <white><url>'
+wear:
+  factory_new: फैक्टरी नई
+  minimal_wear: न्यूनतम पहनावा
+  field_tested: फ़ील्ड-परीक्षण किया गया
+  well_worn: अच्छी तरह पहना हुआ
+  battle_scarred: लड़ाई में जख्मी
+rarity:
+  mil_spec: मिल-स्पेक
+  restricted: प्रतिबंधित
+  classified: वर्गीकृत
+  covert: गुप्त
+  rare_special: दुर्लभ विशेष वस्तु
+catalog:
+  key:
+    case_key: केस कुंजी

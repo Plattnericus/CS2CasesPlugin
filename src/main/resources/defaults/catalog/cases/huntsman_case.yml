@@ -1,0 +1,30 @@
+# Huntsman Weapon Case (2014)
+
+case:
+  name: "Huntsman Weapon Case"
+  key: case_key
+  color: "#6a4a2a"
+  stattrak-chance: 0.10
+  description:
+    - "2014"
+
+skins:
+  tec9_isaac: {weapon: tec9, rarity: mil_spec, name: "Isaac", style: graffiti, palette: ["#e8e8e8", "#2a2a2a", "#8a8a8a"]}
+  ssg08_slashed: {weapon: ssg08, rarity: mil_spec, name: "Slashed", style: splatter, palette: ["#1a1a1a", "#c8c8c8", "#5a5a5a"]}
+  galil_kami: {weapon: galil, rarity: mil_spec, name: "Kami", style: graffiti, palette: ["#e8e8e8", "#1a1a1a", "#a01a1a"]}
+  cz75_twist: {weapon: cz75, rarity: mil_spec, name: "Twist", style: swirl, palette: ["#3a2a5a", "#7a5ab0", "#c8b0e8"]}
+  p90_module: {weapon: p90, rarity: mil_spec, name: "Module", style: hex, palette: ["#1a3a2a", "#3a8a5a", "#a0e0b0"]}
+  p2000_pulse: {weapon: p2000, rarity: mil_spec, name: "Pulse", style: stripes, palette: ["#1a1a1a", "#e83a1a", "#e8e8e8"]}
+  aug_torque: {weapon: aug, rarity: restricted, name: "Torque", style: glitch, palette: ["#1a2a4a", "#3a8ad0", "#e8e8e8"]}
+  ppbizon_antique: {weapon: ppbizon, rarity: restricted, name: "Antique", style: tribal, palette: ["#3a2a1a", "#8a6a3a", "#c8a060"]}
+  xm1014_heaven_guard: {weapon: xm1014, rarity: restricted, name: "Heaven Guard", style: floral, palette: ["#e8e8e8", "#c8a040", "#5a8ab0"]}
+  mac10_tatter: {weapon: mac10, rarity: restricted, name: "Tatter", style: splatter, palette: ["#2a1a3a", "#7a3a8a", "#e8a0d0"]}
+  m4a1s_atomic_alloy: {weapon: m4a1s, rarity: classified, name: "Atomic Alloy", style: hex, palette: ["#2a2a2e", "#f0a020", "#5a5a62"]}
+  scar20_cyrex: {weapon: scar20, rarity: classified, name: "Cyrex", style: shards, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+  usps_caiman: {weapon: usps, rarity: classified, name: "Caiman", style: scales, palette: ["#2a3a1a", "#6a8a3a", "#c8c8a0"]}
+  ak47_vulcan: {weapon: ak47, rarity: covert, name: "Vulcan", style: shards, palette: ["#f2f2f2", "#1a3a8a", "#1a1a1a", "#e8a020"], float: [0.00, 0.90]}
+  m4a4_desert_strike: {weapon: m4a4, rarity: covert, name: "Desert-Strike", style: digital, palette: ["#c8a070", "#3a5a8a", "#1a1a1a"]}
+
+rare-special:
+  knives: [huntsman]
+  finishes: original

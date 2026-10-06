@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Cazuri</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Nu aveți permisiunea să faceți asta.
+  player-only: <prefix><red>Numai jucători.
+profile:
+  loading: <prefix><gray>Inventarul de piele încă se încarcă...
+  load-failed: <prefix><red>Inventarul dvs. de skin nu a putut fi încărcat. Vă rugăm să spuneți unui administrator.
+  recovered: '<prefix><gray>Deschidere întreruptă finalizată: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: pușcă
+  sniper: Pușcă de lunetist
+  heavy: Grele
+  equipment: Echipamente
+  knife: cuțit
+items:
+  test-marker: <red>⚠ Element de testare (administrator)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> elemente posibile
+    - ''
+    - '<gray>Clic dreapta: <white>vezi conținutul'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Epuizat la deschiderea unui caz.
+    use-hint: <prefix><gray>Clic dreapta pe un <white>caz</white> pentru a-l deschide cu această cheie.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Exterior: <white><wear>'
+    float: '<gray>Plutitor: <white><float>'
+    float-range: '<gray>Pluțitor: <white><min_float> - <max_float>'
+    pattern: '<gray>Model: <white><pattern>'
+    variant: '<gray>Fază: <class_color><variant>'
+    classification: '<gray>Tip de model: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Ucide: <white><kills>'
+    has-variants: <dark_gray>Pose mai multe faze
+    source: '<gray>Sursa: <white><case>'
+    date: '<gray>Obținut: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Șters: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Se încarcă...
+    lore: []
+  back:
+    name: <gray>Înapoi
+    lore: []
+  close:
+    name: <red>Închide
+    lore: []
+  previous:
+    name: <gray>Pagina anterioară
+    lore:
+    - <dark_gray>Pagina <page> / <pages>
+  next:
+    name: <gray>Pagina următoare
+    lore:
+    - <dark_gray>Pagina <page> / <pages>
+  cases:
+    title: Cazuri
+    header:
+      name: <#e4ae39>Cazuri
+      lore:
+      - <gray>Obțineți cazuri de la <white>dealerul de cazuri</white>.
+      - <gray>Ai nevoie de o cheie potrivită pentru a deschide una.
+    entry:
+    - ''
+    - '<gray>În inventar: <white><owned> <dark_gray>· <gray>Chei: <white><keys>'
+    - '<gray>Clic stânga: <white>vezi conținutul'
+    can-open: '<green>Clic dreapta: deschide'
+    to-skins:
+      name: <#e4ae39>Inventarul pielii
+      lore:
+      - <gray>Piele și cuțitele tale
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Clic pentru o previzualizare
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Un cuțit rar.
+      - <dark_gray><count> variante · faceți clic pentru a vizualiza
+      - ''
+    open:
+      name: <green>Deschide cazul
+      lore:
+      - '<gray>Cazuri: <white><owned> <dark_gray>· <gray>Taste: <white><keys>'
+      - <dark_gray>Folosește 1 carcasă și 1 <key>
+    cannot-open:
+      name: <gray>Nu se poate deschide
+      lore:
+      - '<gray>Cazuri: <white><owned> <dark_gray>· <gray>Taste: <white><keys>'
+      - <dark_gray>Ai nevoie de husă și de un <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: esti sigur?
+    'yes':
+      name: <green>Da, șterge
+      lore:
+      - <dark_gray>Acest lucru nu poate fi anulat.
+    'no':
+      name: <red>Anulează
+      lore: []
+  skins:
+    title: Inventarul pielii
+    title-other: Piele de <player>
+    tab:
+      all:
+        name: <white>Toate skin-urile
+        lore: []
+      weapons:
+        name: <white>Aspecte de arme
+        lore: []
+      knives:
+        name: <white>Cuțite
+        lore:
+        - '<dark_gray>Clic dreapta pe un cuțit: echipați'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Preferate
+        lore: []
+      recent:
+        name: <white>Obținut recent
+        lore: []
+    empty:
+      name: <gray>Nimic aici încă
+      lore:
+      - <dark_gray>Deschide carcase pentru a obține skinuri.
+    equipped: <green>✔ Echipat
+    favorite: <yellow>★ Favorit
+    hint:
+    - ''
+    - '<dark_gray>Clic stânga: inspectați · Clic dreapta: puneți pe arc'
+    - '<dark_gray>Shift clic: favorit'
+    hint-knife:
+    - ''
+    - '<dark_gray>Clic stânga: inspectați · Clic dreapta: echipare'
+    - '<dark_gray>Shift clic: favorit'
+    to-cases:
+      name: <#e4ae39>Cazuri
+      lore:
+      - <gray>Pentru cazurile dvs
+    sort:
+      name: '<white>Sortează: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Stânga: următorul · Dreapta: anterior'
+    sorts:
+      rarity: Raritate
+      float: Plutește
+      name: Nume
+      wear: Exterior
+      pattern: Model
+      newest: Cel mai nou
+      oldest: Cel mai vechi
+    info:
+      name: <white><count> <gray>skins afișate
+      lore:
+      - <dark_gray><total> în total · dați clic pentru a închide
+    filter:
+      name: <white>Filtru
+      lore:
+      - '<dark_gray>Stânga: alegeți filtre · Dreapta: resetați'
+    active-knife:
+    - <green>✔ Cuțit activ
+    - <dark_gray>Clic pentru detalii
+  filter:
+    title: Filtru
+    header:
+      name: <white>Filtru
+      lore:
+      - <gray>Sunt combinate mai multe filtre de același fel.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Numai <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Activ
+    'off':
+    - <dark_gray>Inactiv
+    reset:
+      name: <gray>Resetați toate filtrele
+      lore: []
+  inspect:
+    title: Inspectați
+    missing:
+      name: <red>Aspectul nu este disponibil
+      lore: []
+    preview:
+      name: <#e4ae39>Vizualizați pielea
+      lore:
+      - '<gray>Afișează copia dvs. exactă:'
+      - <gray>model, culori și uzură.
+      - ''
+      - <dark_gray>Mai furișează pentru a închide previzualizarea.
+    data: <white>Detalii
+    favorite:
+      name: <white>Marcați ca favorit
+      lore: []
+    unfavorite:
+      name: <yellow>★ Eliminați preferatul
+      lore: []
+    equip:
+      name: <green>Echip
+      lore:
+      - <gray>Săbiile tale arată acest cuțit.
+      - <dark_gray>Daunele și descântecele rămân aceleași.
+    unequip:
+      name: <green>✔ Echipat
+      lore:
+      - <gray>Faceți clic pentru a dezechipa.
+    inspect3d:
+      name: <white>Inspectare 3D
+      lore:
+      - '<gray>Afișează copia dvs. exactă:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Aparține altui jucător
+      lore:
+      - <dark_gray>Numai vizualizare
+    equip-bow:
+      name: <green>Pune arcul
+      lore:
+      - <gray>Funcile tale arată această piele.
+    unequip-bow:
+      name: <green>✔ La prova
+      lore:
+      - <gray>Clic pentru a elimina.
+    equip-crossbow:
+      name: <green>Pune-ți arbaleta
+      lore:
+      - <gray>Arbaletele tale arată această piele.
+    unequip-crossbow:
+      name: <green>✔ Pe arbaletă
+      lore:
+      - <gray>Clic pentru a elimina.
+    not-equippable:
+      name: <gray>Nu este echipat
+      lore:
+      - <dark_gray>Acest skin nu poate fi echipat.
+    delete:
+      name: <red>Șterge pielea
+      lore:
+      - <gray>Elimină acest skin din inventarul tău.
+      - <dark_gray>Cere confirmare.
+view:
+  unknown: <prefix><red>Player <white><player></white> nu a fost găsit.
+gallery:
+  header-other: Inventarul lui <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Pagina
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Click dreapta: inspectați · Sneak + clic dreapta: favorit'
+  hint-knife:
+  - ''
+  - '<dark_gray>Clic dreapta: inspectați · Clic stânga: echipare'
+  - '<dark_gray>Sneak + clic dreapta: favorit'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Clic dreapta: inspectați · Clic stânga: puneți pe fundă'
+  - '<dark_gray>Sneak + clic stânga: puneți pe arbaletă'
+  - '<dark_gray>Sneak + clic dreapta: favorit'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Pagina <page>/<pages>
+  empty: <gray>Nimic aici încă
+  button:
+    previous: <gray>Pagina anterioară
+    next: <gray>Pagina următoare
+    category: <white>Schimbați categoria
+    sort: '<white>Sortează: <#e4ae39><sort>'
+    filter: <white>Filtru
+    list: <white>Afișați ca listă
+    close: <red>Închide
+preview:
+  loading: <gray>Se redă previzualizarea...
+  hint: <gray>Mai furișează pentru a închide
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>aur aur aur
+  world:
+    title: <white><player></white> <gray>se deschide <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Deschideți deja un caz.
+  case-disabled: <prefix><red>Acest caz nu este disponibil.
+  missing: <prefix><gray>Ai nevoie de <white><case></white> și de <white><key></white>.
+  missing-now: <prefix><red>Carcasa sau cheia nu se mai află în inventarul dvs.
+  storage-error: <prefix><red>Salvarea nu a reușit. Carcasa și cheia dvs. au fost returnate.
+  command-blocked: <prefix><gray>Așteptați până când deschiderea s-a terminat.
+  result: '<prefix><gray>Ați primit <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Rezultat: <skin> <dark_gray>(<float>, #<pattern>) - nu a fost salvat'
+  broadcast: <prefix><white><player></white> <gray>deschis <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>ARTICOL SPECIAL RAR</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspectați
+      lore:
+      - <gray>Toate detaliile noului tău skin
+    again:
+      name: <green>Deschide altul
+      lore:
+      - '<gray>Cazuri: <white><cases> <dark_gray>· <gray>Taste: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Această piele nu se potrivește cu această armă.
+  equipped:
+    knife: '<prefix><gray>Cuțit echipat: <skin>'
+    bow: '<prefix><gray>Pe arcul tău: <skin>'
+    crossbow: '<prefix><gray>Pe arbaleta ta: <skin>'
+  unequipped:
+    knife: <prefix><gray>Cuțit neechipat.
+    bow: <prefix><gray>Piele arcului a fost îndepărtată.
+    crossbow: <prefix><gray>S-a îndepărtat pielea cu arbaletă.
+knife:
+  not-owned: <prefix><red>Această piele nu vă aparține.
+  equipped: '<prefix><gray>Echipată: <skin>'
+  unequipped: <prefix><gray>Cuțit neechipat.
+  sword-footer: '<dark_gray>Baza: <base>'
+inspect:
+  running: <prefix><gray>Se desfășoară deja o inspecție.
+  no-knife: <red>Aspectul nu este disponibil <white>/skins
+shop:
+  title: Dealer Case
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Clic dreapta pentru a tranzacționa
+  balance:
+    name: '<white>Soldul dvs.: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Contează numai articolele nemodificate.
+  offer:
+  - ''
+  - '<gray>Preț: <aqua><price> <currency>'
+  - '<dark_gray>5 bucăți: <price5> <currency>'
+  affordable: <green>✔ Accesibil
+  not-affordable: <red>✘ <missing> <currency> lipsește
+  affordable-five: '<dark_gray>Shift clic: cumpărați 5'
+  hint-case:
+  - '<dark_gray>Clic stânga: cumpărare · Clic dreapta: conținut'
+  hint-key:
+  - '<dark_gray>Clic stânga: cumpărați'
+  bought: '<prefix><gray>Achizitionat: <white><amount>× <name></white> pentru <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Nu vă puteți permite asta.
+  inventory-full: <prefix><red>Inventarul dvs. este plin.
+slot:
+  name: <#e4ae39>Inventarul pielii
+  lore:
+  - '<gray>Clic dreapta: piei, cuțite și carcase'
+  - <dark_gray>Acest articol este blocat în acest slot.
+  blocked: <prefix><gray>Eliberați un spațiu de inventar, astfel încât elementul de inventar al skinului să poată apărea.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Terminat.
+  unknown: <prefix><red>Necunoscut <what>.
+  instance-unknown: <prefix><red>Nu s-a găsit niciun ID de skin care se potrivește. <gray>/csadmin list <player>
+  given: <prefix><gray>A dat <amount>× <white><name></white> lui <white><player></white>.
+  skin-given: <prefix><gray>A dat <skin> <gray>lui <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins de <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Deschideri recente ale <white><player>
+  scan-start: <prefix><gray>Se scanează fiecare sămânță de <white><skin></white> pentru <white><metric></white>...
+  export-start: <prefix><gray>Se creează pachetul de resurse...
+  export-done: '<prefix><green><skins> skin-uri exportate: <white><file>'
+  shop-spawned: <prefix><green>Case dealer creat.
+  shop-removed: <prefix><green>Dealerul de caz a fost eliminat.
+  shop-none: <prefix><gray>Niciun dealer de case în apropiere.
+  reload-busy: <prefix><gray>Se rulează deja o reîncărcare.
+  reload-start: <prefix><gray>Se reîncarcă...
+  reload-failed: <prefix><red>Reîncărcarea eșuată, configurația anterioară rămâne activă. Vezi consola.
+  reload-done: '<prefix><green>Reîncărcat în <ms> ms: <skins> skin, <cases> carcase, <warnings> avertismente (vezi consola).'
+  browser:
+    title: 'Model: <skin>'
+  manage:
+    title: 'Gestionați: <player>'
+    skin-title: Pielea <player>
+    give-title: 'Dă piele: <player>'
+    give:
+      name: <green>Dă piele
+      lore:
+      - <gray>Alege o carcasă, apoi o piele.
+    give-hint:
+    - ''
+    - '<dark_gray>Clic stânga: dați · Clic dreapta: dați StatTrak™'
+    clear:
+      name: <red>Ștergeți toate skinurile
+      lore:
+      - <gray><count> skin-urile vor fi eliminate.
+      - <dark_gray>Cere confirmare.
+    cleared: <prefix><gray>S-au șters <count> skin-uri din <white><player></white>.
+    removed: <prefix><gray>Șters <skin> <gray>din <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Clic pentru a comuta.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Setează plutitorul la <white><float>
+    pattern-step:
+      name: <white>Model <step>
+      lore:
+      - '<gray>Actual: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Model aleatoriu
+      lore:
+      - '<gray>Actual: <white><pattern>'
+    equip:
+      name: <green>Echipament pentru jucător
+      lore: []
+    unequip:
+      name: <green>✔ Echipat
+      lore:
+      - <gray>Faceți clic pentru a dezechipa.
+    remove:
+      name: <red>Șterge pielea
+      lore:
+      - <dark_gray>Cere confirmare.
+  labels:
+    case: caz
+    key: cheie
+    skin: pielea
+    manual: baza de date manuală
+    automatic: automată
+    none: niciunul (finișarea nu are profil de analiză)
+    'off': oprit
+  debug:
+    seed: '<gray>Model: <white><seed>'
+    analysing: <dark_gray>Se analizează...
+    variant: '<gray>Varianta: <white><variant>'
+    classification: '<gray>Clasificare: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Previzualizare model <seed>
+      lore:
+      - <gray>Afișează harta redată în mâinile tale.
+    random:
+      name: <light_purple>Model aleatoriu
+      lore: []
+    title: <gold>Depanator de modele <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Rarea eșuată: <error>'
+    metrics: '<gray>Metrici: <white><metrics>'
+    scan-failed: <prefix><red>Scanarea a eșuat.
+    no-metric: <gray>Niciun model nu are valoare <white><metric>
+    export-failed: '<prefix><red>Exportul eșuat: <error>'
+  odds: <gray><case> <dark_gray>(<count> articole, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Cazuri: <white><cases> <gray>Arme: <white><weapons>'
+    cache: '<gray>Previzualizări în cache: <white><previews> <gray>Mod pachet de resurse: <white><pack>'
+    web: '<gray>Pack server web: <white><url>'
+wear:
+  factory_new: Nou din fabrică
+  minimal_wear: Uzură minimă
+  field_tested: Testat pe teren
+  well_worn: Bine purtat
+  battle_scarred: Urcat de luptă
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Restricţionat
+  classified: Clasificat
+  covert: Ascuns
+  rare_special: Articol special rar
+catalog:
+  key:
+    case_key: Cheia cazului

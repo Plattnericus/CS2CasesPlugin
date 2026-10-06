@@ -1,0 +1,24 @@
+# CS:GO Weapon Case (2013)
+
+case:
+  name: "CS:GO Weapon Case"
+  key: case_key
+  color: "#c8a040"
+  stattrak-chance: 0.10
+  description:
+    - "2013"
+
+skins:
+  mp7_skulls: {weapon: mp7, rarity: mil_spec, name: "Skulls", style: halftone, palette: ["#1a1a1a", "#8a1a1a", "#d8d8d8"], float: [0.10, 0.26]}
+  aug_wings: {weapon: aug, rarity: mil_spec, name: "Wings", style: stripes, palette: ["#c8c8c8", "#3a3a3a", "#7a8a9a"], float: [0.00, 0.14]}
+  sg553_ultraviolet: {weapon: sg553, rarity: mil_spec, name: "Ultraviolet", style: solid, palette: ["#2a1a4a", "#3d2a66"], float: [0.06, 0.80]}
+  glock18_dragon_tattoo: {weapon: glock18, rarity: restricted, name: "Dragon Tattoo", style: tribal, palette: ["#1a1a1a", "#2a2a2a", "#c4a24a"], float: [0.00, 0.08]}
+  m4a1s_dark_water: {weapon: m4a1s, rarity: restricted, name: "Dark Water", style: waves, palette: ["#0a1a2a", "#1a3a5a", "#3a6a8a"], float: [0.10, 0.26]}
+  usps_dark_water: {weapon: usps, rarity: restricted, name: "Dark Water", style: waves, palette: ["#0a1a2a", "#1a3a5a", "#3a6a8a"], float: [0.10, 0.26]}
+  deagle_hypnotic: {weapon: deagle, rarity: classified, name: "Hypnotic", style: swirl, palette: ["#d8d8d8", "#5a5a5a", "#a0a0a0"], float: [0.00, 0.08]}
+  ak47_case_hardened: {weapon: ak47, rarity: classified, finish: case_hardened}
+  awp_lightning_strike: {weapon: awp, rarity: covert, name: "Lightning Strike", style: lightning, palette: ["#1a0a2a", "#5a1a8a", "#e8d8ff"], float: [0.00, 0.08]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: original

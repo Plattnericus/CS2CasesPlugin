@@ -1,0 +1,50 @@
+import json, subprocess, sys, tempfile, unittest
+from pathlib import Path
+from unittest import mock
+import dev
+
+class CleanupTests(unittest.TestCase):
+ def test_app_exit_kills_unresponsive_server_and_finishes_cleanup(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   runtime=Path(temporary)/'runtime';agent=Path(temporary)/'cleanup.plist'
+   agent.write_text('temporary cleanup job')
+   server=mock.Mock();server.pid=4242;server.poll.return_value=None
+   server.wait.side_effect=[subprocess.TimeoutExpired('paper',25),subprocess.TimeoutExpired('paper',10),0]
+   control=mock.Mock()
+   with mock.patch.multiple(dev,RUNTIME=runtime,SERVER=runtime/'server',STATE=runtime/'session.json',CONTROL=runtime/'control.sock',AGENT=agent), \
+     mock.patch.object(dev,'fingerprint',side_effect=lambda pid:'gone' if pid==1234 else 'owned'), \
+     mock.patch.object(dev.subprocess,'Popen',return_value=server), \
+     mock.patch.object(dev.socket,'socket',return_value=control), \
+     mock.patch.object(dev.os,'chmod'), \
+     mock.patch.object(dev.signal,'signal'):
+    dev.supervise(1234,'running app')
+   server.stdin.write.assert_called_once_with('stop\n')
+   server.terminate.assert_called_once_with();server.kill.assert_called_once_with()
+   self.assertEqual(server.wait.call_args_list,[mock.call(timeout=25),mock.call(timeout=10),mock.call()])
+   control.close.assert_called_once_with()
+   self.assertFalse(runtime.exists());self.assertFalse(agent.exists())
+
+ def test_cleanup_stale_owns_only_its_runtime_and_processes(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   old=dev.RUNTIME,dev.STATE,dev.AGENT
+   dev.RUNTIME=Path(temporary)/'runtime';dev.STATE=dev.RUNTIME/'session.json';dev.AGENT=Path(temporary)/'cleanup.plist'
+   dev.RUNTIME.mkdir();dev.AGENT.write_text('temporary cleanup job')
+   owned=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'])
+   observer=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'])
+   unrelated=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'])
+   try:
+    state={'supervisor':owned.pid,'fingerprint':dev.fingerprint(owned.pid),'server':owned.pid,'serverFingerprint':dev.fingerprint(owned.pid),
+     'observer':observer.pid,'observerFingerprint':dev.fingerprint(observer.pid),'client':unrelated.pid,'clientFingerprint':'reused PID'}
+    dev.STATE.write_text(json.dumps(state));dev.cleanup_stale()
+    self.assertTrue(dev.RUNTIME.exists());self.assertIsNone(owned.poll())
+    state['fingerprint']='previous boot';dev.STATE.write_text(json.dumps(state));dev.cleanup_stale()
+    owned.wait(timeout=5)
+    observer.wait(timeout=5)
+    self.assertFalse(dev.RUNTIME.exists());self.assertFalse(dev.AGENT.exists());self.assertIsNone(unrelated.poll())
+   finally:
+    for process in [owned,observer,unrelated]:
+     if process.poll() is None:process.terminate()
+     process.wait()
+    dev.RUNTIME,dev.STATE,dev.AGENT=old
+
+if __name__=='__main__':unittest.main()

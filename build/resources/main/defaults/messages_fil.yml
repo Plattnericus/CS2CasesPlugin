@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Mga Kaso</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Wala kang pahintulot na gawin iyon.
+  player-only: <prefix><red>Mga manlalaro lang.
+profile:
+  loading: <prefix><gray>Naglo-load pa rin ang iyong imbentaryo ng balat...
+  load-failed: <prefix><red>Hindi ma-load ang iyong imbentaryo ng balat. Mangyaring sabihin sa isang admin.
+  recovered: '<prefix><gray>Nakumpleto ang naantala na pagbubukas: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Rifle
+  sniper: Sniper Rifle
+  heavy: Mabigat
+  equipment: Kagamitan
+  knife: kutsilyo
+items:
+  test-marker: <red>⚠ Test item (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> posibleng mga item
+    - ''
+    - '<gray>Right click: <white>tingnan ang mga nilalaman'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Naubos kapag nagbubukas ng case.
+    use-hint: <prefix><gray>I-right click ang isang <white>case</white> upang buksan ito gamit ang key na ito.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Labas: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Pattern: <white><pattern>'
+    variant: '<gray>Phase: <class_color><variant>'
+    classification: '<gray>Uri ng pattern: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Pumatay: <white><kills>'
+    has-variants: <dark_gray>Posible ang ilang phase
+    source: '<gray>Pinagmulan: <white><case>'
+    date: '<gray>Nakuha: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Tinanggal: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Naglo-load...
+    lore: []
+  back:
+    name: <gray>Bumalik
+    lore: []
+  close:
+    name: <red>Isara
+    lore: []
+  previous:
+    name: <gray>Nakaraang pahina
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  next:
+    name: <gray>Susunod na pahina
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  cases:
+    title: Mga kaso
+    header:
+      name: <#e4ae39>Mga kaso
+      lore:
+      - <gray>Kumuha ng mga case mula sa <white>case dealer</white>.
+      - <gray>Kailangan mo ng katugmang susi upang mabuksan ang isa.
+    entry:
+    - ''
+    - '<gray>Sa imbentaryo: <white><owned> <dark_gray>· <gray>Mga Susi: <white><keys>'
+    - '<gray>Left click: <white>tingnan ang mga nilalaman'
+    can-open: '<green>I-right click: buksan'
+    to-skins:
+      name: <#e4ae39>Imbentaryo ng balat
+      lore:
+      - <gray>Ang iyong mga balat at kutsilyo
+  preview:
+    title: <case>
+    click-preview: <dark_gray>I-click para sa isang preview
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Isang bihirang kutsilyo.
+      - <dark_gray><count> variant · i-click para makita
+      - ''
+    open:
+      name: <green>Buksan ang case
+      lore:
+      - '<gray>Mga Kaso: <white><owned> <dark_gray>· <gray>Mga Susi: <white><keys>'
+      - <dark_gray>Gumagamit ng 1 case at 1 <key>
+    cannot-open:
+      name: <gray>Hindi mabuksan
+      lore:
+      - '<gray>Mga Kaso: <white><owned> <dark_gray>· <gray>Mga Susi: <white><keys>'
+      - <dark_gray>Kailangan mo ang case at isang <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Sigurado ka ba?
+    'yes':
+      name: <green>Oo, tanggalin
+      lore:
+      - <dark_gray>Hindi na ito maa-undo.
+    'no':
+      name: <red>Kanselahin
+      lore: []
+  skins:
+    title: Imbentaryo ng balat
+    title-other: Mga balat ng <player>
+    tab:
+      all:
+        name: <white>Lahat ng balat
+        lore: []
+      weapons:
+        name: <white>Mga balat ng sandata
+        lore: []
+      knives:
+        name: <white>Mga kutsilyo
+        lore:
+        - '<dark_gray>I-right click ang kutsilyo: equip'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Mga Paborito
+        lore: []
+      recent:
+        name: <white>Nakuha kamakailan
+        lore: []
+    empty:
+      name: <gray>Wala pa dito
+      lore:
+      - <dark_gray>Buksan ang mga case para makakuha ng mga skin.
+    equipped: <green>✔ Nilagyan
+    favorite: <yellow>★ Paborito
+    hint:
+    - ''
+    - '<dark_gray>Left click: siyasatin · Right click: ilagay sa bow'
+    - '<dark_gray>Shift click: paborito'
+    hint-knife:
+    - ''
+    - '<dark_gray>Left click: inspect · Right click: equip'
+    - '<dark_gray>Shift click: paborito'
+    to-cases:
+      name: <#e4ae39>Mga kaso
+      lore:
+      - <gray>Sa iyong mga kaso
+    sort:
+      name: '<white>Pagbukud-bukurin: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Kaliwa: susunod · Kanan: nakaraan'
+    sorts:
+      rarity: Pambihira
+      float: Lutang
+      name: Pangalan
+      wear: Panlabas
+      pattern: Pattern
+      newest: Pinakabago
+      oldest: Pinakamatanda
+    info:
+      name: <white><count> <gray>mga balat ang ipinakita
+      lore:
+      - <dark_gray><total> sa kabuuan · i-click upang isara
+    filter:
+      name: <white>I-filter
+      lore:
+      - '<dark_gray>kaliwa: pumili ng mga filter · Kanan: i-reset'
+    active-knife:
+    - <green>✔ Aktibong kutsilyo
+    - <dark_gray>I-click para sa mga detalye
+  filter:
+    title: Salain
+    header:
+      name: <white>I-filter
+      lore:
+      - <gray>Ang ilang mga filter ng parehong uri ay pinagsama.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ lang
+    'on':
+    - <green>✔ Aktibo
+    'off':
+    - <dark_gray>Hindi aktibo
+    reset:
+      name: <gray>I-reset ang lahat ng filter
+      lore: []
+  inspect:
+    title: Siyasatin
+    missing:
+      name: <red>Hindi available ang balat
+      lore: []
+    preview:
+      name: <#e4ae39>Tingnan ang balat
+      lore:
+      - '<gray>Ipinapakita ang iyong eksaktong kopya:'
+      - <gray>pattern, kulay at suot.
+      - ''
+      - <dark_gray>Sneak para isara ang preview.
+    data: <white>Mga Detalye
+    favorite:
+      name: <white>Markahan bilang paborito
+      lore: []
+    unfavorite:
+      name: <yellow>★ Alisin ang paborito
+      lore: []
+    equip:
+      name: <green>Kagamitan
+      lore:
+      - <gray>Ang iyong mga espada ay nagpapakita ng kutsilyong ito.
+      - <dark_gray>Ang pinsala at mga enchantment ay nananatiling pareho.
+    unequip:
+      name: <green>✔ Nilagyan
+      lore:
+      - <gray>I-click upang i-unquip.
+    inspect3d:
+      name: <white>3D siyasatin
+      lore:
+      - '<gray>Ipinapakita ang iyong eksaktong kopya:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Pag-aari ng isa pang manlalaro
+      lore:
+      - <dark_gray>Tingnan lamang
+    equip-bow:
+      name: <green>Ilagay sa busog
+      lore:
+      - <gray>Ang iyong mga busog ay nagpapakita ng balat na ito.
+    unequip-bow:
+      name: <green>✔ Naka-bow
+      lore:
+      - <gray>I-click upang alisin.
+    equip-crossbow:
+      name: <green>Ilagay sa crossbow
+      lore:
+      - <gray>Ang iyong mga crossbow ay nagpapakita ng balat na ito.
+    unequip-crossbow:
+      name: <green>✔ Sa crossbow
+      lore:
+      - <gray>I-click upang alisin.
+    not-equippable:
+      name: <gray>Hindi equippable
+      lore:
+      - <dark_gray>Hindi maaaring gamit ang balat na ito.
+    delete:
+      name: <red>Tanggalin ang balat
+      lore:
+      - <gray>Aalis ang balat na ito mula sa iyong imbentaryo.
+      - <dark_gray>Humihingi ng kumpirmasyon.
+view:
+  unknown: <prefix><red>Manlalaro <white><player></white> ay hindi nahanap.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>'s imbentaryo <dark_gray>· <gray><category> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Page <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Right click: siyasatin · Sneak + right click: paborito'
+  hint-knife:
+  - ''
+  - '<dark_gray>Right click: siyasatin · Kaliwang click: equip'
+  - '<dark_gray>Sneak + right click: paborito'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Right click: siyasatin · Left click: ilagay sa bow'
+  - '<dark_gray>Sneak + left click: ilagay sa crossbow'
+  - '<dark_gray>Sneak + right click: paborito'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Page <page>/<pages>
+  empty: <gray>Wala pa dito
+  button:
+    previous: <gray>Nakaraang pahina
+    next: <gray>Susunod na pahina
+    category: <white>Baguhin ang kategorya
+    sort: '<white>Pagbukud-bukurin: <#e4ae39><sort>'
+    filter: <white>I-filter
+    list: <white>Ipakita bilang listahan
+    close: <red>Isara
+preview:
+  loading: <gray>Preview ng pagre-render...
+  hint: <gray>Sneak para isara
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>gintong ginto ginto
+  world:
+    title: <white><player></white> <gray>bubukas <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Nagbubukas ka na ng kaso.
+  case-disabled: <prefix><red>Hindi available ang case na ito.
+  missing: <prefix><gray>Kailangan mo ng <white><case></white> at isang <white><key></white>.
+  missing-now: <prefix><red>Wala na sa iyong imbentaryo ang case o susi.
+  storage-error: <prefix><red>Nabigo ang pag-save. Ibinalik ang iyong case at susi.
+  command-blocked: <prefix><gray>Maghintay hanggang matapos ang pagbubukas.
+  result: '<prefix><gray>Nakatanggap ka ng <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Pagsusulit]</red> <gray>Resulta: <skin> <dark_gray>(<float>, #<pattern>) - hindi na-save'
+  broadcast: <prefix><white><player></white> <gray>na-unbox <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>BIHIRA ESPESYAL NA ITEM</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Suriin
+      lore:
+      - <gray>Lahat ng mga detalye ng iyong bagong balat
+    again:
+      name: <green>Magbukas ng isa pa
+      lore:
+      - '<gray>Mga Kaso: <white><cases> <dark_gray>· <gray>Mga Susi: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Ang balat na ito ay hindi kasya sa sandata na ito.
+  equipped:
+    knife: '<prefix><gray>Nilagyan ng kutsilyo: <skin>'
+    bow: '<prefix><gray>Sa iyong busog: <skin>'
+    crossbow: '<prefix><gray>Sa iyong crossbow: <skin>'
+  unequipped:
+    knife: <prefix><gray>Knife na walang gamit.
+    bow: <prefix><gray>Inalis ang balat ng bow.
+    crossbow: <prefix><gray>Natanggal ang balat ng crossbow.
+knife:
+  not-owned: <prefix><red>Hindi sa iyo ang balat na ito.
+  equipped: '<prefix><gray>Nilagyan: <skin>'
+  unequipped: <prefix><gray>Knife na walang gamit.
+  sword-footer: '<dark_gray>Base: <base>'
+inspect:
+  running: <prefix><gray>Tumatakbo na ang isang inspeksyon.
+  no-knife: <red>Hindi available ang balat <white>/skins
+shop:
+  title: Dealer ng Kaso
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>I-right click para mag-trade
+  balance:
+    name: '<white>Ang iyong balanse: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Tanging hindi binagong mga item ang bilang.
+  offer:
+  - ''
+  - '<gray>Presyo: <aqua><price> <currency>'
+  - '<dark_gray>5 piraso: <price5> <currency>'
+  affordable: <green>✔ Abot-kaya
+  not-affordable: <red>✘ <missing> <currency> nawawala
+  affordable-five: '<dark_gray>Shift click: bumili 5'
+  hint-case:
+  - '<dark_gray>Kaliwang pag-click: bumili · I-right click: mga nilalaman'
+  hint-key:
+  - '<dark_gray>Left click: bumili'
+  bought: '<prefix><gray>Binili: <white><amount>× <name></white> para sa <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Hindi mo kayang bayaran iyon.
+  inventory-full: <prefix><red>Puno na ang iyong imbentaryo.
+slot:
+  name: <#e4ae39>Imbentaryo ng balat
+  lore:
+  - '<gray>Right click: mga skin, kutsilyo at case'
+  - <dark_gray>Ang item na ito ay naka-lock sa slot na ito.
+  blocked: <prefix><gray>Magbakante ng puwang ng imbentaryo upang lumitaw ang item ng imbentaryo ng balat.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Tapos na.
+  unknown: <prefix><red>Hindi alam <what>.
+  instance-unknown: <prefix><red>Walang nakitang katugmang skin id. <gray>/listahan ng csadmin <player>
+  given: <prefix><gray>Nagbigay ng <amount>× <white><name></white> sa <white><player></white>.
+  skin-given: <prefix><gray>Nagbigay ng <skin> <gray>sa <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Mga balat ng <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Mga kamakailang pagbubukas ng <white><player>
+  scan-start: <prefix><gray>Sina-scan ang bawat buto ng <white><skin></white> para sa <white><metric></white>...
+  export-start: <prefix><gray>Building resource pack...
+  export-done: '<prefix><green><skins> skin ang na-export: <white><file>'
+  shop-spawned: <prefix><green>Nagawa ang dealer ng case.
+  shop-removed: <prefix><green>Inalis ang dealer ng case.
+  shop-none: <prefix><gray>Walang nagbebenta ng case sa malapit.
+  reload-busy: <prefix><gray>A reload ay tumatakbo na.
+  reload-start: <prefix><gray>Nire-reload...
+  reload-failed: <prefix><red>Nabigo ang pag-reload, mananatiling aktibo ang nakaraang configuration. Tingnan ang console.
+  reload-done: '<prefix><green>Na-reload sa <ms> ms: <skins> skin, <cases> case, <warnings> na babala (tingnan ang console).'
+  browser:
+    title: 'Pattern: <skin>'
+  manage:
+    title: 'Pamahalaan: <player>'
+    skin-title: Balat ng <player>
+    give-title: 'Magbigay ng balat: <player>'
+    give:
+      name: <green>Magbigay ng balat
+      lore:
+      - <gray>Pumili ng case, pagkatapos ay isang skin.
+    give-hint:
+    - ''
+    - '<dark_gray>Left click: give · Right click: give StatTrak™'
+    clear:
+      name: <red>Tanggalin ang lahat ng skin
+      lore:
+      - <gray><count> na balat ang aalisin.
+      - <dark_gray>Humihingi ng kumpirmasyon.
+    cleared: <prefix><gray>Tinanggal ang <count> skin ng <white><player></white>.
+    removed: <prefix><gray>Tinanggal <skin> <gray>ng <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>I-click upang i-toggle.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Itinakda ang float sa <white><float>
+    pattern-step:
+      name: <white>Pattern <step>
+      lore:
+      - '<gray>Kasalukuyan: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Random na pattern
+      lore:
+      - '<gray>Kasalukuyan: <white><pattern>'
+    equip:
+      name: <green>Equip para sa player
+      lore: []
+    unequip:
+      name: <green>✔ Nilagyan
+      lore:
+      - <gray>I-click upang i-unquip.
+    remove:
+      name: <red>Tanggalin ang balat
+      lore:
+      - <dark_gray>Humihingi ng kumpirmasyon.
+  labels:
+    case: kaso
+    key: susi
+    skin: balat
+    manual: manu-manong database
+    automatic: awtomatiko
+    none: wala (walang analysis profile ang finish)
+    'off': 'off'
+  debug:
+    seed: '<gray>Pattern: <white><seed>'
+    analysing: <dark_gray>Pagsusuri...
+    variant: '<gray>Variant: <white><variant>'
+    classification: '<gray>Pag-uuri: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Preview pattern <seed>
+      lore:
+      - <gray>Ipinapakita ang nai-render na mapa sa iyong mga kamay.
+    random:
+      name: <light_purple>Random na pattern
+      lore: []
+    title: <gold>Debug ng pattern <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Nabigo ang pag-render: <error>'
+    metrics: '<gray>Mga Sukatan: <white><metrics>'
+    scan-failed: <prefix><red>Nabigo ang pag-scan.
+    no-metric: <gray>Walang pattern na may sukatan <white><metric>
+    export-failed: '<prefix><red>Nabigo ang pag-export: <error>'
+  odds: <gray><case> <dark_gray>(<count> item, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Mga Balat: <white><skins> <gray>Mga Kaso: <white><cases> <gray>Mga Armas: <white><weapons>'
+    cache: '<gray>Mga naka-cache na preview: <white><previews> <gray>Resource pack mode: <white><pack>'
+    web: '<gray>Pack web server: <white><url>'
+wear:
+  factory_new: Pabrika Bago
+  minimal_wear: Minimal na Kasuotan
+  field_tested: Field-Tested
+  well_worn: Nakasuot ng maayos
+  battle_scarred: Battle-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Pinaghihigpitan
+  classified: Classified
+  covert: tago
+  rare_special: Rare Special Item
+catalog:
+  key:
+    case_key: Case Key

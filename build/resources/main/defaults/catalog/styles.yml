@@ -1,0 +1,42 @@
+# Styles bind a pattern texture (textures/patterns/<texture>) to default palette mapping and to the
+# transformations a pattern seed may apply.
+#   mapping:   smooth | steps | none (texture already colored, palette ignored)
+#   transform: offset-x / offset-y [min, max] as fraction of the texture size,
+#              rotation [min, max] degrees, scale [min, max], mirror, clamp (no tiling),
+#              base-scale = pattern pixels per canvas pixel
+#   metallic:  strength of specular highlights on the paint (0..1)
+#   wear-strength: multiplier for float based paint loss
+styles:
+  solid:         {texture: solid.png,         mapping: smooth, metallic: 0.55, transform: {rotation: [0, 360], scale: [0.9, 1.1]}}
+  camo:          {texture: camo.png,          mapping: steps,  metallic: 0.10, transform: {rotation: [0, 360], scale: [0.32, 0.45]}}
+  digital:       {texture: digital.png,       mapping: steps,  metallic: 0.10, transform: {rotation: [0, 0], scale: [0.40, 0.50], mirror: true}}
+  stripes:       {texture: stripes.png,       mapping: steps,  metallic: 0.25, transform: {rotation: [0, 360], scale: [0.55, 0.75]}}
+  carbon:        {texture: carbon.png,        mapping: smooth, metallic: 0.35, transform: {rotation: [0, 0], scale: [0.34, 0.40], mirror: false}}
+  hex:           {texture: hex.png,           mapping: steps,  metallic: 0.35, transform: {rotation: [0, 60], scale: [0.36, 0.46]}}
+  cells:         {texture: cells.png,         mapping: steps,  metallic: 0.20, transform: {rotation: [0, 360], scale: [0.34, 0.46]}}
+  shards:        {texture: shards.png,        mapping: steps,  metallic: 0.25, transform: {rotation: [0, 360], scale: [0.26, 0.36]}}
+  splatter:      {texture: splatter.png,      mapping: steps,  metallic: 0.15, transform: {rotation: [0, 360], scale: [0.32, 0.45]}}
+  tiger:         {texture: tiger.png,         mapping: smooth, metallic: 0.70, transform: {rotation: [-12, 12], scale: [0.55, 0.75]}}
+  marble:        {texture: marble.png,        mapping: smooth, metallic: 0.70, transform: {rotation: [0, 360], scale: [0.42, 0.58]}}
+  case_hardened: {texture: case_hardened.png, mapping: smooth, metallic: 0.80, transform: {rotation: [0, 360], scale: [0.55, 0.75]}}
+  fade:          {texture: fade.png,          mapping: smooth, metallic: 0.75, transform: {translate: true, offset-x: [0.36, 0.64], offset-y: [0.5, 0.5], rotation: [0, 0], scale: [1, 1], mirror: false, clamp: true, base-scale: 1.6}}
+  fade_knife:    {texture: fade.png,          mapping: smooth, metallic: 0.75, transform: {translate: true, offset-x: [0.06, 0.36], offset-y: [0.5, 0.5], rotation: [0, 0], scale: [1, 1], mirror: false, clamp: true, base-scale: 1.6}}
+  doppler:       {texture: doppler.png,       mapping: smooth, metallic: 0.75, transform: {rotation: [0, 360], scale: [0.50, 0.70]}}
+  damascus:      {texture: damascus.png,      mapping: smooth, metallic: 0.85, transform: {rotation: [-25, 25], scale: [0.60, 0.80]}}
+  web:           {texture: web.png,           mapping: steps,  metallic: 0.20, transform: {rotation: [0, 360], scale: [0.45, 0.62]}}
+  scales:        {texture: scales.png,        mapping: smooth, metallic: 0.40, transform: {rotation: [-20, 20], scale: [0.30, 0.40]}}
+  circuit:       {texture: circuit.png,       mapping: steps,  metallic: 0.30, transform: {rotation: [0, 0], scale: [0.36, 0.46]}}
+  floral:        {texture: floral.png,        mapping: smooth, metallic: 0.20, transform: {rotation: [0, 360], scale: [0.38, 0.52]}}
+  waves:         {texture: waves.png,         mapping: smooth, metallic: 0.40, transform: {rotation: [-30, 30], scale: [0.55, 0.75]}}
+  topo:          {texture: topo.png,          mapping: smooth, metallic: 0.25, transform: {rotation: [0, 360], scale: [0.45, 0.65]}}
+  flames:        {texture: flames.png,        mapping: smooth, metallic: 0.30, transform: {rotation: [80, 100], scale: [0.50, 0.70]}}
+  halftone:      {texture: halftone.png,      mapping: steps,  metallic: 0.20, transform: {rotation: [0, 0], scale: [0.38, 0.48]}}
+  brushed:       {texture: brushed.png,       mapping: smooth, metallic: 0.95, transform: {rotation: [-4, 4], scale: [0.9, 1.1]}}
+  plaid:         {texture: plaid.png,         mapping: smooth, metallic: 0.10, transform: {rotation: [0, 0], scale: [0.40, 0.50]}}
+  mesh:          {texture: mesh.png,          mapping: steps,  metallic: 0.10, transform: {rotation: [0, 360], scale: [0.42, 0.58]}}
+  lightning:     {texture: lightning.png,     mapping: smooth, metallic: 0.50, transform: {rotation: [0, 360], scale: [0.32, 0.45]}}
+  glitch:        {texture: glitch.png,        mapping: smooth, metallic: 0.30, transform: {rotation: [0, 0], scale: [0.45, 0.65]}}
+  graffiti:      {texture: graffiti.png,      mapping: steps,  metallic: 0.20, transform: {rotation: [0, 360], scale: [0.30, 0.42]}}
+  swirl:         {texture: swirl.png,         mapping: smooth, metallic: 0.50, transform: {rotation: [0, 360], scale: [0.42, 0.60]}}
+  tribal:        {texture: tribal.png,        mapping: smooth, metallic: 0.45, transform: {rotation: [0, 360], scale: [0.36, 0.50]}}
+  chevron:       {texture: chevron.png,       mapping: steps,  metallic: 0.20, transform: {rotation: [0, 0], scale: [0.40, 0.50]}}

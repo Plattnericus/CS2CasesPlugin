@@ -1,0 +1,1866 @@
+# CS2-inspired inspect motions. Units are blocks; XYZ rotations are degrees.
+# Random pools avoid immediate repeats. Swap Hands (F) inspects; sneak + F swaps normally.
+anchor:
+  forward: 1.25
+  right: 0.57
+  up: -0.07
+model-scale: 1.24
+# /inspect hand: physical skin hand in F5; follows body yaw independently of head pitch.
+hand-anchor:
+  forward: 0.26
+  right: 0.34
+  up: -0.8
+hand-model-scale: 1.3
+reveal-anchor:
+  forward: 1.35
+  right: 0.0
+  up: -0.05
+view-range: 0.5
+brightness: 15
+follow-threshold: 0.015
+max-parts: 16
+pack-model: true
+pack-model-scale: 0.75
+aliases:
+  metal: IRON_BLOCK
+  dark: BLACK_CONCRETE
+  handle: POLISHED_BLACKSTONE
+  edge: QUARTZ_BLOCK
+block-palette:
+  WHITE_CONCRETE: '#cfd5d6'
+  ORANGE_CONCRETE: '#e06101'
+  MAGENTA_CONCRETE: '#a9309f'
+  LIGHT_BLUE_CONCRETE: '#2389c7'
+  YELLOW_CONCRETE: '#f1af15'
+  LIME_CONCRETE: '#5ea918'
+  PINK_CONCRETE: '#d5658e'
+  GRAY_CONCRETE: '#373a3e'
+  LIGHT_GRAY_CONCRETE: '#7d7d73'
+  CYAN_CONCRETE: '#157788'
+  PURPLE_CONCRETE: '#64209c'
+  BLUE_CONCRETE: '#2c2e8f'
+  BROWN_CONCRETE: '#603b1f'
+  GREEN_CONCRETE: '#495b24'
+  RED_CONCRETE: '#8e2121'
+  BLACK_CONCRETE: '#080a0f'
+  IRON_BLOCK: '#dcdcdc'
+  GOLD_BLOCK: '#f6d03d'
+  DIAMOND_BLOCK: '#62ede4'
+  EMERALD_BLOCK: '#2acb57'
+  LAPIS_BLOCK: '#1f43a3'
+  REDSTONE_BLOCK: '#af1a05'
+  NETHERITE_BLOCK: '#423d3f'
+  AMETHYST_BLOCK: '#8561bf'
+  COPPER_BLOCK: '#c06b4f'
+  QUARTZ_BLOCK: '#ece6df'
+  RAW_GOLD_BLOCK: '#dda92e'
+  POLISHED_BLACKSTONE: '#353036'
+  CRYING_OBSIDIAN: '#200a3c'
+  PRISMARINE_BRICKS: '#63aba0'
+models:
+  karambit:
+    animation: karambit
+    parts:
+      ring_top:
+        material: $metal
+        position: [-0.33, 0.045, 0]
+        size: [0.085, 0.016, 0.02]
+      ring_bottom:
+        material: $metal
+        position: [-0.33, -0.045, 0]
+        size: [0.085, 0.016, 0.02]
+      ring_left:
+        material: $metal
+        position: [-0.375, 0, 0]
+        size: [0.016, 0.105, 0.02]
+      ring_right:
+        material: $metal
+        position: [-0.285, 0, 0]
+        size: [0.016, 0.105, 0.02]
+      handle:
+        material: $handle
+        position: [-0.16, -0.005, 0]
+        size: [0.23, 0.058, 0.032]
+        rotation: [0, 0, -4]
+      inlay:
+        material: $accent
+        position: [-0.16, -0.005, 0.017]
+        size: [0.18, 0.022, 0.002]
+        rotation: [0, 0, -4]
+      bolster:
+        material: $metal
+        position: [-0.04, -0.006, 0]
+        size: [0.02, 0.064, 0.036]
+      blade_base:
+        material: $primary
+        position: [0.05, -0.002, 0]
+        size: [0.15, 0.052, 0.012]
+        rotation: [0, 0, -6]
+      blade_mid:
+        material: $primary
+        position: [0.155, -0.035, 0]
+        size: [0.11, 0.046, 0.012]
+        rotation: [0, 0, -30]
+      blade_tip:
+        material: $secondary
+        position: [0.215, -0.095, 0]
+        size: [0.075, 0.034, 0.012]
+        rotation: [0, 0, -58]
+      edge:
+        material: $edge
+        position: [0.12, -0.045, 0.0065]
+        size: [0.17, 0.006, 0.002]
+        rotation: [0, 0, -22]
+  talon:
+    copy: karambit
+  butterfly:
+    animation: butterfly
+    parts:
+      blade:
+        group: body
+        material: $primary
+        position: [0.15, 0, 0]
+        size: [0.26, 0.05, 0.012]
+      tip:
+        group: body
+        material: $secondary
+        position: [0.3, 0.006, 0]
+        size: [0.06, 0.036, 0.012]
+        rotation: [0, 0, 14]
+      tang:
+        group: body
+        material: $metal
+        position: [0.012, 0, 0]
+        size: [0.03, 0.04, 0.03]
+      handle_a:
+        group: handle_a
+        material: $metal
+        position: [-0.14, 0.016, 0]
+        size: [0.27, 0.026, 0.028]
+      slot_a:
+        group: handle_a
+        material: $dark
+        position: [-0.14, 0.016, 0.0145]
+        size: [0.2, 0.01, 0.002]
+      latch:
+        group: handle_a
+        material: $accent
+        position: [-0.285, 0.0, 0]
+        size: [0.022, 0.05, 0.03]
+      handle_b:
+        group: handle_b
+        material: $metal
+        position: [-0.14, -0.016, 0]
+        size: [0.27, 0.026, 0.028]
+      slot_b:
+        group: handle_b
+        material: $dark
+        position: [-0.14, -0.016, 0.0145]
+        size: [0.2, 0.01, 0.002]
+  m9_bayonet:
+    animation: m9
+    parts:
+      blade:
+        material: $primary
+        position: [0.15, 0, 0]
+        size: [0.3, 0.062, 0.012]
+      tip:
+        material: $secondary
+        position: [0.325, -0.006, 0]
+        size: [0.06, 0.042, 0.012]
+        rotation: [0, 0, -22]
+      saw:
+        material: $metal
+        position: [0.11, 0.036, 0]
+        size: [0.15, 0.012, 0.012]
+      fuller:
+        material: $accent
+        position: [0.13, 0.004, 0.0065]
+        size: [0.18, 0.012, 0.002]
+      guard:
+        material: $metal
+        position: [-0.008, 0, 0]
+        size: [0.022, 0.13, 0.04]
+      handle:
+        material: $handle
+        position: [-0.14, 0, 0]
+        size: [0.24, 0.064, 0.042]
+      rib_1:
+        material: $dark
+        position: [-0.09, 0, 0.0215]
+        size: [0.012, 0.06, 0.002]
+      rib_2:
+        material: $dark
+        position: [-0.14, 0, 0.0215]
+        size: [0.012, 0.06, 0.002]
+      rib_3:
+        material: $dark
+        position: [-0.19, 0, 0.0215]
+        size: [0.012, 0.06, 0.002]
+      pommel:
+        material: $metal
+        position: [-0.275, 0, 0]
+        size: [0.03, 0.07, 0.046]
+      ring:
+        material: $metal
+        position: [-0.29, 0.05, 0]
+        size: [0.03, 0.03, 0.01]
+  bayonet:
+    animation: m9
+    parts:
+      blade:
+        material: $primary
+        position: [0.16, 0, 0]
+        size: [0.32, 0.05, 0.012]
+      tip:
+        material: $secondary
+        position: [0.34, 0, 0]
+        size: [0.05, 0.034, 0.012]
+        rotation: [0, 0, 12]
+      fuller:
+        material: $edge
+        position: [0.15, 0.004, 0.0065]
+        size: [0.24, 0.008, 0.002]
+      guard:
+        material: $metal
+        position: [-0.008, 0, 0]
+        size: [0.02, 0.1, 0.04]
+      muzzle:
+        material: $metal
+        position: [-0.008, 0.07, 0]
+        size: [0.034, 0.034, 0.044]
+      handle:
+        material: $handle
+        position: [-0.13, 0, 0]
+        size: [0.22, 0.056, 0.04]
+      rib_1:
+        material: $dark
+        position: [-0.08, 0, 0.0205]
+        size: [0.012, 0.05, 0.002]
+      rib_2:
+        material: $dark
+        position: [-0.13, 0, 0.0205]
+        size: [0.012, 0.05, 0.002]
+      rib_3:
+        material: $dark
+        position: [-0.18, 0, 0.0205]
+        size: [0.012, 0.05, 0.002]
+      pommel:
+        material: $metal
+        position: [-0.25, 0, 0]
+        size: [0.028, 0.06, 0.044]
+  skeleton:
+    animation: skeleton
+    parts:
+      blade:
+        material: $primary
+        position: [0.13, 0, 0]
+        size: [0.24, 0.054, 0.012]
+      tip:
+        material: $secondary
+        position: [0.275, -0.004, 0]
+        size: [0.06, 0.036, 0.012]
+        rotation: [0, 0, -18]
+      edge:
+        material: $edge
+        position: [0.12, -0.026, 0.0065]
+        size: [0.2, 0.005, 0.002]
+      frame_top:
+        material: $primary
+        position: [-0.13, 0.028, 0]
+        size: [0.23, 0.014, 0.022]
+      frame_bottom:
+        material: $primary
+        position: [-0.13, -0.028, 0]
+        size: [0.23, 0.014, 0.022]
+      frame_mid:
+        material: $primary
+        position: [-0.13, 0, 0]
+        size: [0.014, 0.07, 0.022]
+      frame_end:
+        material: $primary
+        position: [-0.24, 0, 0]
+        size: [0.014, 0.07, 0.022]
+      ring_top:
+        material: $metal
+        position: [-0.29, 0.03, 0]
+        size: [0.06, 0.012, 0.016]
+      ring_bottom:
+        material: $metal
+        position: [-0.29, -0.03, 0]
+        size: [0.06, 0.012, 0.016]
+      ring_end:
+        material: $metal
+        position: [-0.32, 0, 0]
+        size: [0.012, 0.07, 0.016]
+  folding:
+    animation: default
+    parts:
+      blade:
+        material: $primary
+        position: [0.13, 0.004, 0]
+        size: [0.24, 0.058, 0.012]
+      tip:
+        material: $secondary
+        position: [0.27, -0.004, 0]
+        size: [0.06, 0.04, 0.012]
+        rotation: [0, 0, -20]
+      edge:
+        material: $edge
+        position: [0.12, -0.023, 0.0065]
+        size: [0.2, 0.005, 0.002]
+      pivot:
+        material: $metal
+        position: [0.0, 0, 0]
+        size: [0.03, 0.03, 0.038]
+      handle:
+        material: $handle
+        position: [-0.13, -0.002, 0]
+        size: [0.24, 0.06, 0.034]
+      scale:
+        material: $dark
+        position: [-0.13, -0.002, 0.0175]
+        size: [0.2, 0.04, 0.002]
+      butt:
+        material: $metal
+        position: [-0.255, -0.002, 0]
+        size: [0.02, 0.05, 0.036]
+  flip:
+    copy: folding
+  navaja:
+    copy: folding
+  stiletto:
+    copy: folding
+  ursus:
+    copy: folding
+  fixed_blade:
+    animation: m9
+    parts:
+      blade:
+        material: $primary
+        position: [0.15, 0.004, 0]
+        size: [0.28, 0.07, 0.012]
+      clip:
+        material: $secondary
+        position: [0.31, 0.01, 0]
+        size: [0.07, 0.046, 0.012]
+        rotation: [0, 0, 16]
+      spine:
+        material: $metal
+        position: [0.12, 0.04, 0]
+        size: [0.18, 0.01, 0.012]
+      edge:
+        material: $edge
+        position: [0.15, -0.03, 0.0065]
+        size: [0.24, 0.006, 0.002]
+      guard:
+        material: $metal
+        position: [-0.008, 0, 0]
+        size: [0.024, 0.12, 0.044]
+      handle:
+        material: $handle
+        position: [-0.13, 0, 0]
+        size: [0.22, 0.066, 0.044]
+      wrap:
+        material: $accent
+        position: [-0.13, 0, 0.0225]
+        size: [0.18, 0.02, 0.002]
+      pommel:
+        material: $metal
+        position: [-0.255, 0, 0]
+        size: [0.03, 0.072, 0.048]
+  bowie:
+    copy: fixed_blade
+  huntsman:
+    copy: fixed_blade
+  survival:
+    copy: fixed_blade
+  nomad:
+    copy: fixed_blade
+  paracord:
+    copy: fixed_blade
+  classic:
+    copy: fixed_blade
+  curved:
+    animation: default
+    parts:
+      blade_base:
+        material: $primary
+        position: [0.06, 0, 0]
+        size: [0.14, 0.06, 0.012]
+        rotation: [0, 0, 4]
+      blade_mid:
+        material: $primary
+        position: [0.18, 0.012, 0]
+        size: [0.12, 0.056, 0.012]
+        rotation: [0, 0, 12]
+      blade_tip:
+        material: $secondary
+        position: [0.28, 0.04, 0]
+        size: [0.09, 0.04, 0.012]
+        rotation: [0, 0, 26]
+      edge:
+        material: $edge
+        position: [0.17, -0.016, 0.0065]
+        size: [0.22, 0.005, 0.002]
+        rotation: [0, 0, 10]
+      guard:
+        material: $metal
+        position: [-0.015, 0, 0]
+        size: [0.02, 0.085, 0.04]
+      handle:
+        material: $handle
+        position: [-0.13, -0.004, 0]
+        size: [0.21, 0.06, 0.04]
+        rotation: [0, 0, -4]
+      pommel:
+        material: $metal
+        position: [-0.245, -0.012, 0]
+        size: [0.03, 0.07, 0.044]
+  falchion:
+    copy: curved
+  kukri:
+    copy: curved
+  gut:
+    copy: curved
+  shadow_daggers:
+    animation: default
+    parts:
+      grip:
+        material: $handle
+        position: [-0.12, 0, 0]
+        size: [0.05, 0.17, 0.045]
+      grip_cap:
+        material: $metal
+        position: [-0.12, 0.09, 0]
+        size: [0.056, 0.014, 0.05]
+      connector:
+        material: $metal
+        position: [-0.075, 0, 0]
+        size: [0.05, 0.05, 0.03]
+      blade:
+        material: $primary
+        position: [0.05, 0, 0]
+        size: [0.2, 0.06, 0.012]
+      tip:
+        material: $secondary
+        position: [0.17, 0, 0]
+        size: [0.05, 0.04, 0.012]
+      edge:
+        material: $edge
+        position: [0.06, 0, 0.0065]
+        size: [0.18, 0.006, 0.002]
+  default:
+    copy: folding
+  rifle:
+    animation: rifle
+    parts:
+      receiver:
+        material: $primary
+        position: [0, 0, 0]
+        size: [0.34, 0.1, 0.052]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.29, 0.01, 0]
+        size: [0.28, 0.024, 0.024]
+        group: body
+      muzzle:
+        material: $dark
+        position: [0.445, 0.01, 0]
+        size: [0.04, 0.038, 0.038]
+        group: body
+      stock:
+        material: $handle
+        position: [-0.27, -0.01, 0]
+        size: [0.21, 0.09, 0.043]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.055, -0.1, 0]
+        size: [0.05, 0.15, 0.038]
+        group: body
+        rotation: [0, 0, -15]
+      magazine:
+        material: $secondary
+        position: [0.095, -0.12, 0]
+        size: [0.078, 0.18, 0.04]
+        group: body
+        rotation: [0, 0, 12]
+      handguard:
+        material: $secondary
+        position: [0.215, 0.006, 0]
+        size: [0.13, 0.075, 0.047]
+        group: body
+      rail:
+        material: $dark
+        position: [0, 0.065, 0]
+        size: [0.29, 0.025, 0.028]
+        group: body
+      sight:
+        material: $metal
+        position: [0.115, 0.093, 0]
+        size: [0.028, 0.037, 0.035]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.045, 0.01, 0.027]
+        size: [0.18, 0.04, 0.002]
+        group: body
+  pistol:
+    animation: pistol
+    parts:
+      slide:
+        material: $primary
+        position: [0.02, 0.06, 0]
+        size: [0.32, 0.065, 0.048]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.19, 0.06, 0]
+        size: [0.045, 0.04, 0.03]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.072, -0.053, 0]
+        size: [0.075, 0.165, 0.048]
+        group: body
+        rotation: [0, 0, -16]
+      frame:
+        material: $secondary
+        position: [0.01, 0.009, 0]
+        size: [0.25, 0.032, 0.04]
+        group: body
+      trigger_guard:
+        material: $dark
+        position: [0.037, -0.053, 0]
+        size: [0.075, 0.014, 0.024]
+        group: body
+      sight:
+        material: $metal
+        position: [-0.115, 0.105, 0]
+        size: [0.025, 0.024, 0.016]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.072, -0.053, 0.025]
+        size: [0.047, 0.09, 0.002]
+        group: body
+        rotation: [0, 0, -16]
+  smg:
+    animation: smg
+    parts:
+      receiver:
+        material: $primary
+        position: [0, 0, 0]
+        size: [0.34, 0.1, 0.052]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.29, 0.01, 0]
+        size: [0.16, 0.028, 0.028]
+        group: body
+      muzzle:
+        material: $dark
+        position: [0.445, 0.01, 0]
+        size: [0.04, 0.038, 0.038]
+        group: body
+      stock:
+        material: $handle
+        position: [-0.27, -0.01, 0]
+        size: [0.12, 0.07, 0.04]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.055, -0.1, 0]
+        size: [0.05, 0.15, 0.038]
+        group: body
+        rotation: [0, 0, -15]
+      magazine:
+        material: $secondary
+        position: [0.095, -0.12, 0]
+        size: [0.078, 0.18, 0.04]
+        group: body
+        rotation: [0, 0, 12]
+      handguard:
+        material: $secondary
+        position: [0.215, 0.006, 0]
+        size: [0.13, 0.075, 0.047]
+        group: body
+      rail:
+        material: $dark
+        position: [0, 0.065, 0]
+        size: [0.29, 0.025, 0.028]
+        group: body
+      sight:
+        material: $metal
+        position: [0.115, 0.093, 0]
+        size: [0.028, 0.037, 0.035]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.045, 0.01, 0.027]
+        size: [0.18, 0.04, 0.002]
+        group: body
+  sniper:
+    animation: sniper
+    parts:
+      receiver:
+        material: $primary
+        position: [0, 0, 0]
+        size: [0.34, 0.1, 0.052]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.29, 0.01, 0]
+        size: [0.34, 0.026, 0.026]
+        group: body
+      muzzle:
+        material: $dark
+        position: [0.445, 0.01, 0]
+        size: [0.04, 0.038, 0.038]
+        group: body
+      stock:
+        material: $handle
+        position: [-0.27, -0.01, 0]
+        size: [0.21, 0.09, 0.043]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.055, -0.1, 0]
+        size: [0.05, 0.15, 0.038]
+        group: body
+        rotation: [0, 0, -15]
+      magazine:
+        material: $secondary
+        position: [0.095, -0.12, 0]
+        size: [0.078, 0.18, 0.04]
+        group: body
+        rotation: [0, 0, 12]
+      handguard:
+        material: $secondary
+        position: [0.215, 0.006, 0]
+        size: [0.13, 0.075, 0.047]
+        group: body
+      rail:
+        material: $dark
+        position: [0, 0.065, 0]
+        size: [0.29, 0.025, 0.028]
+        group: body
+      sight:
+        material: $metal
+        position: [0.115, 0.093, 0]
+        size: [0.028, 0.037, 0.035]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.045, 0.01, 0.027]
+        size: [0.18, 0.04, 0.002]
+        group: body
+      scope:
+        material: $dark
+        position: [-0.04, 0.135, 0]
+        size: [0.25, 0.075, 0.07]
+        group: body
+      scope_mount:
+        material: $metal
+        position: [-0.04, 0.09, 0]
+        size: [0.12, 0.07, 0.022]
+        group: body
+  heavy:
+    animation: heavy
+    parts:
+      receiver:
+        material: $primary
+        position: [0, 0, 0]
+        size: [0.34, 0.1, 0.052]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.29, 0.01, 0]
+        size: [0.28, 0.024, 0.024]
+        group: body
+      muzzle:
+        material: $dark
+        position: [0.445, 0.01, 0]
+        size: [0.04, 0.038, 0.038]
+        group: body
+      stock:
+        material: $handle
+        position: [-0.27, -0.01, 0]
+        size: [0.21, 0.09, 0.043]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.055, -0.1, 0]
+        size: [0.05, 0.15, 0.038]
+        group: body
+        rotation: [0, 0, -15]
+      handguard:
+        material: $secondary
+        position: [0.215, 0.006, 0]
+        size: [0.13, 0.075, 0.047]
+        group: pump
+      rail:
+        material: $dark
+        position: [0, 0.065, 0]
+        size: [0.29, 0.025, 0.028]
+        group: body
+      sight:
+        material: $metal
+        position: [0.115, 0.093, 0]
+        size: [0.028, 0.037, 0.035]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.045, 0.01, 0.027]
+        size: [0.18, 0.04, 0.002]
+        group: body
+      tube:
+        material: $secondary
+        position: [0.17, -0.032, 0]
+        size: [0.33, 0.026, 0.027]
+        group: body
+  equipment:
+    animation: equipment
+    parts:
+      slide:
+        material: $primary
+        position: [0.02, 0.06, 0]
+        size: [0.32, 0.065, 0.048]
+        group: body
+      barrel:
+        material: $metal
+        position: [0.19, 0.06, 0]
+        size: [0.045, 0.04, 0.03]
+        group: body
+      grip:
+        material: $handle
+        position: [-0.072, -0.053, 0]
+        size: [0.075, 0.165, 0.048]
+        group: body
+        rotation: [0, 0, -16]
+      frame:
+        material: $secondary
+        position: [0.01, 0.009, 0]
+        size: [0.25, 0.032, 0.04]
+        group: body
+      trigger_guard:
+        material: $dark
+        position: [0.037, -0.053, 0]
+        size: [0.075, 0.014, 0.024]
+        group: body
+      sight:
+        material: $metal
+        position: [-0.115, 0.105, 0]
+        size: [0.025, 0.024, 0.016]
+        group: body
+      inlay:
+        material: $accent
+        position: [-0.072, -0.053, 0.025]
+        size: [0.047, 0.09, 0.002]
+        group: body
+        rotation: [0, 0, -16]
+animations:
+  default:
+    sounds:
+      0: inspect.swipe
+      30: inspect.metal
+      58: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 20, 140]}
+        - {ticks: 6, rotate: [0, 0, 145]}
+        - {ticks: 14, rotate: [0, -6, 148]}
+        - {ticks: 18, rotate: [0, 0, 145]}
+        - {ticks: 12, rotate: [0, 6, 142]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  karambit:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      40: inspect.metal
+      68: inspect.end
+    groups:
+      body:
+        pivot: [-0.33, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 6, ease: out, move: [-0.08, 0.2, 0.0], rotate: [0, 30, 60]}
+        - {ticks: 12, ease: linear, rotate: [0, 30, 420]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 0, 505]}
+        - {ticks: 12, rotate: [0, -6, 508]}
+        - {ticks: 16, rotate: [0, 0, 505]}
+        - {ticks: 10, rotate: [0, 6, 502]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 385]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 38}
+        - {ticks: 16, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  butterfly:
+    sounds:
+      0: inspect.swipe
+      4: inspect.mech
+      8: inspect.mech
+      12: inspect.mech
+      30: inspect.spin
+      62: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 20, 140]}
+        - {ticks: 6, rotate: [0, 0, 145]}
+        - {ticks: 12, rotate: [0, -6, 148]}
+        - {ticks: 16, rotate: [0, 0, 145]}
+        - {ticks: 10, rotate: [0, 6, 142]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 26}
+        - {ticks: 16, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+      handle_a:
+        parent: roll
+        pivot: [0, 0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 180]}
+        - {ticks: 3}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+      handle_b:
+        parent: roll
+        pivot: [0, -0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, -180]}
+        - {ticks: 7}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+  m9:
+    sounds:
+      0: inspect.swipe
+      30: inspect.metal
+      62: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.18, 0.09, 0.16], rotate: [0, 25, 160]}
+        - {ticks: 6, rotate: [0, 0, 168]}
+        - {ticks: 14, rotate: [0, -10, 160]}
+        - {ticks: 18, rotate: [0, 0, 168]}
+        - {ticks: 12, rotate: [0, 10, 172]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  skeleton:
+    sounds:
+      0: inspect.swipe
+      6: inspect.spin
+      36: inspect.metal
+      62: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 6, ease: out, move: [-0.08, 0.16, 0.04], rotate: [0, 30, 120]}
+        - {ticks: 10, ease: inout, rotate: [0, 30, 480]}
+        - {ticks: 6, rotate: [0, 0, 505]}
+        - {ticks: 10, rotate: [0, -6, 508]}
+        - {ticks: 14, rotate: [0, 0, 505]}
+        - {ticks: 8, rotate: [0, 6, 502]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 385]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 32}
+        - {ticks: 14, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 8}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  reveal:
+    sounds:
+      0: inspect.swipe
+      20: inspect.spin
+    groups:
+      body:
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, scale: 0.05, rotate: [0, 0, 0]}
+        - {ticks: 8, ease: out, scale: 1.4}
+        - {ticks: 26, ease: inout, rotate: [0, 360, 0]}
+        - {ticks: 10}
+        - {ticks: 6, ease: in, scale: 0.05}
+  rifle:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 44, -8]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [362, 44, -8]}
+  rifle_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 44, -8]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-358, 44, -8]}
+  rifle_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 44, -8]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [362, 44, -8]}
+  pistol:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [364, 62, -14]}
+  pistol_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-356, 62, -14]}
+  pistol_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [364, 62, -14]}
+  smg:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [3, 50, -9]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [363, 50, -9]}
+  smg_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [3, 50, -9]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-357, 50, -9]}
+  smg_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [3, 50, -9]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [363, 50, -9]}
+  sniper:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 38, -5]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [362, 38, -5]}
+  sniper_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 38, -5]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-358, 38, -5]}
+  sniper_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 38, -5]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [362, 38, -5]}
+  heavy:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 40, -7]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [364, 40, -7]}
+      pump:
+        parent: body
+        pivot: [0.17, 0, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, 0, 0]}
+        - {ticks: 22, ease: inout}
+        - {ticks: 6, ease: inout, move: [-0.04, 0, 0]}
+        - {ticks: 6, ease: inout, move: [0, 0, 0]}
+  heavy_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 40, -7]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-356, 40, -7]}
+      pump:
+        parent: body
+        pivot: [0.17, 0, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, 0, 0]}
+        - {ticks: 22, ease: inout}
+        - {ticks: 6, ease: inout, move: [-0.04, 0, 0]}
+        - {ticks: 6, ease: inout, move: [0, 0, 0]}
+  heavy_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 40, -7]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [364, 40, -7]}
+      pump:
+        parent: body
+        pivot: [0.17, 0, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, 0, 0]}
+        - {ticks: 22, ease: inout}
+        - {ticks: 6, ease: inout, move: [-0.04, 0, 0]}
+        - {ticks: 6, ease: inout, move: [0, 0, 0]}
+  equipment:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [0, 60, -12]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [8, 18, 12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, 6, 18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [155, -8, 8]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [360, 60, -12]}
+  equipment_reverse:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [0, 60, -12]}
+        - {ticks: 10, ease: out, move: [-0.14, 0.02, 0.03], rotate: [-24, -28, -12]}
+        - {ticks: 12, ease: inout, move: [-0.16, 0.045, 0.05], rotate: [-8, -6, -18]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 16, ease: inout, move: [-0.12, 0.035, 0.025], rotate: [-170, 12, -6]}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [-360, 60, -12]}
+  equipment_flourish:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [0, 60, -12]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.08, 0], rotate: [10, 18, -18]}
+        - {ticks: 10, ease: inout, move: [-0.16, 0.03, 0.04], rotate: [35, -12, 28]}
+        - {ticks: 12, ease: inout, move: [-0.12, 0.04, 0.04], rotate: [165, 12, 8]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 10, ease: inout, move: [-0.14, 0.03, 0.02], rotate: [205, -8, -12]}
+        - {ticks: 16, ease: inout, move: [0, -0.13, -0.03], rotate: [360, 60, -12]}
+  default_reverse:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      60: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, -20, -140]}
+        - {ticks: 6, rotate: [0, 0, -145]}
+        - {ticks: 14, rotate: [0, 6, -148]}
+        - {ticks: 18, rotate: [0, 0, -145]}
+        - {ticks: 12, rotate: [0, -6, -142]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [-180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [-360, 0, 0]}
+  default_flourish:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      67: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 7, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 20, 140]}
+        - {ticks: 10, ease: inout, move: [-0.12, 0.14, 0.02], rotate: [12, 10, 220]}
+        - {ticks: 8, ease: inout, move: [-0.16, 0.08, 0.08], rotate: [0, 0, 145]}
+        - {ticks: 5, rotate: [0, 0, 145]}
+        - {ticks: 12, rotate: [0, -6, 148]}
+        - {ticks: 15, rotate: [0, 0, 145]}
+        - {ticks: 10, rotate: [0, 6, 142]}
+        - {ticks: 8, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  karambit_reverse:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      66: inspect.end
+    groups:
+      body:
+        pivot: [-0.33, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 6, ease: out, move: [-0.08, 0.2, 0.0], rotate: [0, -30, -60]}
+        - {ticks: 12, ease: linear, rotate: [0, -30, -420]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 0, -505]}
+        - {ticks: 12, rotate: [0, 6, -508]}
+        - {ticks: 16, rotate: [0, 0, -505]}
+        - {ticks: 10, rotate: [0, -6, -502]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, -335]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 38}
+        - {ticks: 16, ease: inout, rotate: [-180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [-360, 0, 0]}
+  karambit_flourish:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      54: inspect.end
+    groups:
+      body:
+        pivot: [-0.33, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 5, ease: out, move: [-0.08, 0.2, 0.0], rotate: [0, 30, 60]}
+        - {ticks: 10, ease: linear, rotate: [0, 30, 780]}
+        - {ticks: 7, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 0, 865]}
+        - {ticks: 10, rotate: [0, -6, 868]}
+        - {ticks: 14, rotate: [0, 0, 865]}
+        - {ticks: 8, rotate: [0, 6, 862]}
+        - {ticks: 8, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 745]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 38}
+        - {ticks: 16, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  butterfly_reverse:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      54: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, -20, -140]}
+        - {ticks: 6, rotate: [0, 0, -145]}
+        - {ticks: 12, rotate: [0, 6, -148]}
+        - {ticks: 16, rotate: [0, 0, -145]}
+        - {ticks: 10, rotate: [0, -6, -142]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 26}
+        - {ticks: 16, ease: inout, rotate: [-180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [-360, 0, 0]}
+      handle_a:
+        parent: roll
+        pivot: [0, 0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 180]}
+        - {ticks: 3}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+      handle_b:
+        parent: roll
+        pivot: [0, -0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, -180]}
+        - {ticks: 7}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+  butterfly_flourish:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      44: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 7, ease: out, move: [-0.16, 0.1, 0.16], rotate: [0, 20, 140]}
+        - {ticks: 5, rotate: [0, 0, 145]}
+        - {ticks: 10, rotate: [0, -6, 148]}
+        - {ticks: 14, rotate: [0, 0, 145]}
+        - {ticks: 8, rotate: [0, 6, 142]}
+        - {ticks: 8, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 26}
+        - {ticks: 16, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+      handle_a:
+        parent: roll
+        pivot: [0, 0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 180]}
+        - {ticks: 3}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 5, ease: out, rotate: [0, 0, 140]}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+      handle_b:
+        parent: roll
+        pivot: [0, -0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, -180]}
+        - {ticks: 7}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+        - {ticks: 12, ease: inout}
+        - {ticks: 5, ease: out, rotate: [0, 0, -140]}
+        - {ticks: 6, ease: out, rotate: [0, 0, 0]}
+  m9_reverse:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      60: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.18, 0.09, 0.16], rotate: [0, -25, -160]}
+        - {ticks: 6, rotate: [0, 0, -168]}
+        - {ticks: 14, rotate: [0, 10, -160]}
+        - {ticks: 18, rotate: [0, 0, -168]}
+        - {ticks: 12, rotate: [0, -10, -172]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [-180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [-360, 0, 0]}
+  m9_flourish:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      67: inspect.end
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 7, ease: out, move: [-0.18, 0.09, 0.16], rotate: [0, 25, 160]}
+        - {ticks: 10, ease: inout, move: [-0.12, 0.14, 0.02], rotate: [12, 10, 220]}
+        - {ticks: 8, ease: inout, move: [-0.16, 0.08, 0.08], rotate: [0, 0, 145]}
+        - {ticks: 5, rotate: [0, 0, 168]}
+        - {ticks: 12, rotate: [0, -10, 160]}
+        - {ticks: 15, rotate: [0, 0, 168]}
+        - {ticks: 10, rotate: [0, 10, 172]}
+        - {ticks: 8, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 28}
+        - {ticks: 18, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  skeleton_reverse:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      56: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 6, ease: out, move: [-0.08, 0.16, 0.04], rotate: [0, -30, -120]}
+        - {ticks: 10, ease: inout, rotate: [0, -30, -480]}
+        - {ticks: 6, rotate: [0, 0, -505]}
+        - {ticks: 10, rotate: [0, 6, -508]}
+        - {ticks: 14, rotate: [0, 0, -505]}
+        - {ticks: 8, rotate: [0, -6, -502]}
+        - {ticks: 10, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, -335]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 32}
+        - {ticks: 14, ease: inout, rotate: [-180, 0, 0]}
+        - {ticks: 8}
+        - {ticks: 10, ease: inout, rotate: [-360, 0, 0]}
+  skeleton_flourish:
+    sounds:
+      0: inspect.swipe
+      8: inspect.spin
+      45: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 5, ease: out, move: [-0.08, 0.16, 0.04], rotate: [0, 30, 120]}
+        - {ticks: 8, ease: inout, rotate: [0, 30, 840]}
+        - {ticks: 5, rotate: [0, 0, 865]}
+        - {ticks: 8, rotate: [0, -6, 868]}
+        - {ticks: 12, rotate: [0, 0, 865]}
+        - {ticks: 7, rotate: [0, 6, 862]}
+        - {ticks: 8, ease: inout, move: [0, -0.12, 0], rotate: [0, 100, 745]}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 32}
+        - {ticks: 14, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 8}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  deagle_twirl:
+    sounds:
+      0: inspect.swipe
+      32: inspect.metal
+      66: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.055, -0.055, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+        - {ticks: 8, ease: out, move: [-0.1, 0.09, 0], rotate: [0, 20, 0]}
+        - {ticks: 14, ease: linear, rotate: [0, 20, 360]}
+        - {ticks: 12, ease: inout, move: [-0.14, 0.03, 0.04], rotate: [8, 5, 378]}
+        - {ticks: 14, ease: inout}
+        - {ticks: 14, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, 346]}
+  rifle_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 44, -8]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 44, -8]}
+  pistol_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 62, -14]}
+  smg_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [3, 50, -9]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [3, 50, -9]}
+  sniper_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 38, -5]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [2, 38, -5]}
+  heavy_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 40, -7]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [4, 40, -7]}
+  equipment_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.08, -0.025, 0]
+        keyframes:
+        - {ticks: 0, ease: inout, move: [0, -0.13, -0.03], rotate: [0, 60, -12]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [8, 16, 4]}
+        - {ticks: 8, ease: inout, rotate: [-12, -10, 8]}
+        - {ticks: 6}
+        - {ticks: 8, ease: inout, move: [0, -0.13, -0.03], rotate: [0, 60, -12]}
+  default_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [0, 8, 145]}
+        - {ticks: 8, ease: inout, rotate: [5, -8, 148]}
+        - {ticks: 6}
+        - {ticks: 8, move: [0, -0.12, 0], rotate: [0, 100, 25], ease: inout}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  karambit_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.33, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [0, 8, 145]}
+        - {ticks: 8, ease: inout, rotate: [5, -8, 148]}
+        - {ticks: 6}
+        - {ticks: 8, move: [0, -0.12, 0], rotate: [0, 100, 25], ease: inout}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  butterfly_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [0, 8, 145]}
+        - {ticks: 8, ease: inout, rotate: [5, -8, 148]}
+        - {ticks: 6}
+        - {ticks: 8, move: [0, -0.12, 0], rotate: [0, 100, 25], ease: inout}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+      handle_a:
+        parent: roll
+        pivot: [0, 0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 180]}
+        - {ticks: 5, ease: out, rotate: [0, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 13, ease: inout, rotate: [0, 0, 180]}
+      handle_b:
+        parent: roll
+        pivot: [0, -0.016, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, -180]}
+        - {ticks: 5, ease: out, rotate: [0, 0, 0]}
+        - {ticks: 12}
+        - {ticks: 13, ease: inout, rotate: [0, 0, -180]}
+  m9_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [0, 8, 145]}
+        - {ticks: 8, ease: inout, rotate: [5, -8, 148]}
+        - {ticks: 6}
+        - {ticks: 8, move: [0, -0.12, 0], rotate: [0, 100, 25], ease: inout}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+  skeleton_quick:
+    sounds:
+      0: inspect.swipe
+      12: inspect.metal
+      26: inspect.end
+    substeps: 4
+    groups:
+      body:
+        pivot: [-0.15, 0, 0]
+        keyframes:
+        - {ticks: 0, move: [0, -0.12, 0], rotate: [0, 100, 25]}
+        - {ticks: 8, ease: out, move: [-0.07, 0.035, 0.02], rotate: [0, 8, 145]}
+        - {ticks: 8, ease: inout, rotate: [5, -8, 148]}
+        - {ticks: 6}
+        - {ticks: 8, move: [0, -0.12, 0], rotate: [0, 100, 25], ease: inout}
+      roll:
+        parent: body
+        pivot: [0, 0, 0]
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0]}
+        - {ticks: 10}
+        - {ticks: 10, ease: inout, rotate: [180, 0, 0]}
+        - {ticks: 10, ease: inout, rotate: [360, 0, 0]}
+animation-pools:
+  rifle:
+  - rifle
+  - rifle_reverse
+  - rifle_flourish
+  - rifle_quick
+  pistol:
+  - pistol
+  - pistol_reverse
+  - pistol_flourish
+  - pistol_quick
+  smg:
+  - smg
+  - smg_reverse
+  - smg_flourish
+  - smg_quick
+  sniper:
+  - sniper
+  - sniper_reverse
+  - sniper_flourish
+  - sniper_quick
+  heavy:
+  - heavy
+  - heavy_reverse
+  - heavy_flourish
+  - heavy_quick
+  equipment:
+  - equipment
+  - equipment_reverse
+  - equipment_flourish
+  - equipment_quick
+  knife:
+  - default
+  - default_reverse
+  - default_flourish
+  - default_quick
+  default:
+  - default
+  - default_reverse
+  - default_flourish
+  - default_quick
+  karambit:
+  - karambit
+  - karambit_reverse
+  - karambit_flourish
+  - karambit_quick
+  talon:
+  - karambit
+  - karambit_reverse
+  - karambit_flourish
+  - karambit_quick
+  butterfly:
+  - butterfly
+  - butterfly_reverse
+  - butterfly_flourish
+  - butterfly_quick
+  m9:
+  - m9
+  - m9_reverse
+  - m9_flourish
+  - m9_quick
+  m9_bayonet:
+  - m9
+  - m9_reverse
+  - m9_flourish
+  - m9_quick
+  skeleton:
+  - skeleton
+  - skeleton_reverse
+  - skeleton_flourish
+  - skeleton_quick
+  folding:
+  - default
+  - default_reverse
+  - default_flourish
+  - default_quick
+  deagle:
+  - pistol
+  - pistol_reverse
+  - deagle_twirl
+  - pistol_quick

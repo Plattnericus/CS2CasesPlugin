@@ -1,0 +1,193 @@
+# ---------------------------------------------------------------------------------------------
+#  MCCases - by Plattnericus (plattnericus.dev)
+#  Server-side CS2-style cases. No client mods, no required resource pack.
+# ---------------------------------------------------------------------------------------------
+
+# Plugin menus, chat and console language (files: messages_<language>.yml).
+language: en
+# Keep the plugin in English even when Minecraft uses another language.
+client-language: false
+
+# Extra log output (catalog notes, timings).
+debug: false
+
+storage:
+  # sqlite (default) or mysql / mariadb. The drivers ship with Paper.
+  type: sqlite
+  sqlite-file: data.db
+  table-prefix: pc_
+  mysql:
+    host: localhost
+    port: 3306
+    database: mccases
+    user: root
+    password: ""
+
+rendering:
+  # Background threads for PNG rendering and pattern analysis. Never the server thread.
+  threads: 2
+  # Finished map previews kept in memory (each ~16 KB).
+  preview-cache: 384
+  # Pattern analysis results kept in memory (tiny).
+  report-cache: 4096
+  # Floats closer than this share a cached preview.
+  float-bucket: 0.0025
+  # Float -> visible wear. amount = max * float^exponent; damage = edge map + scratch texture.
+  wear:
+    exponent: 0.9
+    max: 0.72
+    edge-weight: 0.62
+    scratch-weight: 0.58
+    grime: 0.22
+  map:
+    background-top: "#2b2f36"
+    background-bottom: "#121418"
+    padding: 6
+    glow: 0.22
+    accent-bar: 3
+    contrast: 1.08
+    saturation: 1.12
+    # 1.0 = classic Floyd-Steinberg, lower = calmer image
+    dither-strength: 0.85
+
+opening:
+  # Reel duration (20 ticks = 1 s). The strip decelerates along an ease-out curve.
+  duration-ticks: 120
+  # cubic, quart, quint or expo
+  easing: cinematic
+  reel-length: 64
+  # How long the result stays before the result buttons appear.
+  reveal-hold-ticks: 50
+  # Silence before a rare special item is revealed.
+  gold-pause-ticks: 16
+  # Short 3D showcase after unboxing a knife.
+  knife-auto-preview: true
+  marker-top: HOPPER
+  marker-bottom: HOPPER
+  filler: BLACK_STAINED_GLASS_PANE
+  # Block commands while an opening is in progress.
+  block-commands: true
+  # Announce rare special drops to everyone.
+  broadcast-rare: true
+  # Clicking the floating reel of a running opening makes the clicking player say something in a
+  # speech bubble above their head (text: messages.yml opening.bubble). Works any number of times.
+  speech-bubble:
+    enabled: true
+    duration-ticks: 60
+  # world = the reel floats in front of the player as item displays, visible to everyone nearby
+  # gui   = CS2-style roulette in an inventory (only the opener sees it)
+  display: world
+  world:
+    distance: 3.0
+    height: 0.35
+    visible-items: 7
+    spacing: 0.62
+    item-scale: 0.5
+    # how long the result stays visible
+    hold-ticks: 80
+    # display view range multiplier (1.0 = about 64 blocks)
+    view-range: 1.0
+
+items:
+  # Base items plus a vanilla item model, so cases look like chests and keys like keys
+  # without a resource pack. Identification is done with signed data, never by name.
+  case:
+    material: PAPER
+    model: "minecraft:chest"
+  key:
+    material: PAPER
+    model: "minecraft:trial_key"
+
+# Open your skins with /inventory or /skins. An optional shortcut reserves one inventory slot.
+skin-inventory-item:
+  enabled: false
+  slot: 17
+  material: NETHER_STAR
+  model: ""
+
+knives:
+  # Swords that show the equipped knife. Gameplay values of the sword never change.
+  sword-materials: [WOODEN_SWORD, STONE_SWORD, COPPER_SWORD, IRON_SWORD, GOLDEN_SWORD, DIAMOND_SWORD, NETHERITE_SWORD]
+  glint: true
+  # Dropped swords lose the knife look (the knife itself stays in the skin inventory).
+  strip-on-drop: true
+  # Weapon skins (all guns) can be equipped on bows and crossbows, one skin per slot.
+  bow-skins: true
+  crossbow-skins: true
+
+inspect:
+  cooldown-ticks: 8
+  sneak-right-click: true
+  # Swap Hands action (default F, rebindable in Minecraft). Sneak + F still swaps hands.
+  swap-hand-key: true
+  # Hides the real sword in first person while the 3D knife is shown (client side only).
+  hide-held-item: true
+  actionbar: true
+  # Allows the automatic showcase after a knife drop.
+  reveal-preview: true
+
+preview:
+  duration-seconds: 30
+  # Walking further than this ends the map preview.
+  max-move: 1.5
+  # Seed and float used for case content previews.
+  showcase-seed: 0
+  showcase-float: 0.05
+  # item      = the skin item (resource-pack sprite) floats in front of you and turns slowly.
+  #             Needs the pack (resource-pack.enabled or distribution); otherwise "map" is used.
+  # map       = your exact copy (pattern, float, wear) rendered onto a map in both hands
+  # hologram  = the exact copy as a floating text-display image (full color, LED-grid look)
+  mode: item
+  item:
+    size: 0.9
+    distance: 1.3
+  hologram:
+    # pixels per side (16-96); higher = sharper but a bigger packet
+    resolution: 64
+    # size in blocks
+    size: 1.1
+    distance: 1.6
+
+# How /skins, /knife and the inventory item open the skin inventory.
+skin-inventory:
+  # world = floating wall of item displays in front of you (look at a skin for details;
+  #         right click: inspect, left click: equip knife, sneak + right click: favorite)
+  # gui   = inventory menu
+  display: world
+  columns: 6
+  rows: 3
+  distance: 2.3
+  spacing: 0.55
+  item-scale: 0.36
+  # closes when you look away from it for this long
+  timeout-seconds: 120
+
+stattrak:
+  # Count mob kills in addition to player kills.
+  count-mobs: false
+
+display:
+  float-decimals: 6
+  inspect-decimals: 12
+  date-format: "dd.MM.yyyy HH:mm"
+  # One short console line per opening (the database audit log is always written).
+  log-openings: true
+
+resource-pack:
+  # Use the pack's models for items. Only enable if every player has the MCCases pack
+  # (merged into your server pack, or sent by the distribution below); otherwise items show
+  # the missing-texture model.
+  enabled: false
+  namespace: mccases
+  # The pack is bundled in the plugin and extracted to plugins/MCCases/resourcepack/.
+  # Optionally the plugin can host it itself and send it to every player on join.
+  # Turning this on also turns on the item models above.
+  distribution:
+    enabled: false
+    bind-address: 0.0.0.0
+    port: 8165
+    # Address players can reach (your server's public IP or domain + the port above)
+    public-url: "http://127.0.0.1:8165"
+    # true = players who decline are disconnected
+    required: false
+    prompt: "<gray>MCCases skin textures"

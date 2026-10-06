@@ -1,0 +1,8 @@
+# Marketplace uses a persistent wallet. Payments and skin ownership share one transaction.
+enabled: true
+currency-name: Coins
+starting-balance: 1000
+max-price: 1000000000
+max-listings-per-player: 20
+trade-request-seconds: 60
+trade-idle-seconds: 300

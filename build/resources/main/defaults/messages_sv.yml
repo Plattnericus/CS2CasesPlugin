@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Fall</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Du har inte behörighet att göra det.
+  player-only: <prefix><red>Endast spelare.
+profile:
+  loading: <prefix><gray>Ditt hudlager laddas fortfarande...
+  load-failed: <prefix><red>Ditt hudlager kunde inte laddas. Berätta för en administratör.
+  recovered: '<prefix><gray>Avbruten öppning slutförd: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Gevär
+  sniper: Prickskyttegevär
+  heavy: Tung
+  equipment: Utrustning
+  knife: Kniv
+items:
+  test-marker: <red>⚠ Testobjekt (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> möjliga objekt
+    - ''
+    - '<gray>Högerklicka: <white>visa innehåll'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Används när ett fodral öppnas.
+    use-hint: <prefix><gray>Högerklicka på ett <white>fall</white> för att öppna det med denna nyckel.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Exteriör: <white><wear>'
+    float: '<gray>Flytande: <white><float>'
+    float-range: '<gray>Flytande: <white><min_float> - <max_float>'
+    pattern: '<gray>Mönster: <white><pattern>'
+    variant: '<gray>Fas: <class_color><variant>'
+    classification: '<gray>Mönstertyp: <class_color><classification>'
+    fade: '<gray>Tona: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Dödar: <white><kills>'
+    has-variants: <dark_gray>Flera faser möjliga
+    source: '<gray>Källa: <white><case>'
+    date: '<gray>Erhållen: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Raderad: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Tona ut'
+gui:
+  loading:
+    name: <gray>Laster...
+    lore: []
+  back:
+    name: <gray>Tillbaka
+    lore: []
+  close:
+    name: <red>Stäng
+    lore: []
+  previous:
+    name: <gray>Föregående sida
+    lore:
+    - <dark_gray>Sida <page> / <pages>
+  next:
+    name: <gray>Nästa sida
+    lore:
+    - <dark_gray>Sida <page> / <pages>
+  cases:
+    title: Fall
+    header:
+      name: <#e4ae39>Fall
+      lore:
+      - <gray>Hämta fall från <white>case-återförsäljaren</white>.
+      - <gray>Du behöver en matchande nyckel för att öppna en.
+    entry:
+    - ''
+    - '<gray>I lager: <white><owned> <dark_gray>· <gray>Nycklar: <white><keys>'
+    - '<gray>Vänsterklick: <white>visa innehåll'
+    can-open: '<green>Högerklicka: öppna'
+    to-skins:
+      name: <#e4ae39>Hudinventering
+      lore:
+      - <gray>Dina skinn och knivar
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Klicka för en förhandsvisning
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>En sällsynt kniv.
+      - <dark_gray><count> varianter · klicka för att visa
+      - ''
+    open:
+      name: <green>Öppna fodral
+      lore:
+      - '<gray>Fall: <white><owned> <dark_gray>· <gray>Nycklar: <white><keys>'
+      - <dark_gray>Använder 1 fall och 1 <key>
+    cannot-open:
+      name: <gray>Kan inte öppna
+      lore:
+      - '<gray>Fall: <white><owned> <dark_gray>· <gray>Nycklar: <white><keys>'
+      - <dark_gray>Du behöver fodralet och en <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Är du säker?
+    'yes':
+      name: <green>Ja, radera
+      lore:
+      - <dark_gray>Detta kan inte ångras.
+    'no':
+      name: <red>Avbryt
+      lore: []
+  skins:
+    title: Hudinventering
+    title-other: Skins av <player>
+    tab:
+      all:
+        name: <white>Alla skinn
+        lore: []
+      weapons:
+        name: <white>Vapenskinn
+        lore: []
+      knives:
+        name: <white>Kniv
+        lore:
+        - '<dark_gray>Högerklicka på en kniv: utrusta'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoriter
+        lore: []
+      recent:
+        name: <white>Nyligen erhållen
+        lore: []
+    empty:
+      name: <gray>Inget här ännu
+      lore:
+      - <dark_gray>Öppna fodral för att få skinn.
+    equipped: <green>✔ Utrustad
+    favorite: <yellow>★ Favorit
+    hint:
+    - ''
+    - '<dark_gray>Vänsterklick: inspektera · Högerklick: sätt på bågen'
+    - '<dark_gray>Skiftklick: favorit'
+    hint-knife:
+    - ''
+    - '<dark_gray>Vänsterklick: inspektera · Högerklick: utrusta'
+    - '<dark_gray>Skiftklick: favorit'
+    to-cases:
+      name: <#e4ae39>Fall
+      lore:
+      - <gray>Till dina ärenden
+    sort:
+      name: '<white>Sortera: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Vänster: nästa · Höger: föregående'
+    sorts:
+      rarity: Raritet
+      float: Flyta
+      name: Namn
+      wear: Exteriör
+      pattern: Mönster
+      newest: Nyaste
+      oldest: Äldst
+    info:
+      name: <white><count> <gray>skins visas
+      lore:
+      - <dark_gray><total> totalt · klicka för att stänga
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Vänster: välj filter · Höger: återställ'
+    active-knife:
+    - <green>✔ Aktiv kniv
+    - <dark_gray>Klicka för mer information
+  filter:
+    title: Filtrera
+    header:
+      name: <white>Filter
+      lore:
+      - <gray>Flera filter av samma slag kombineras.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Endast <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Aktiv
+    'off':
+    - <dark_gray>Inaktiv
+    reset:
+      name: <gray>Återställ alla filter
+      lore: []
+  inspect:
+    title: Inspektera
+    missing:
+      name: <red>Skin ej tillgängligt
+      lore: []
+    preview:
+      name: <#e4ae39>Visa skal
+      lore:
+      - '<gray>Visar din exakta kopia:'
+      - <gray>mönster, färger och slitage.
+      - ''
+      - <dark_gray>Smyg för att stänga förhandsgranskningen.
+    data: <white>Detaljer
+    favorite:
+      name: <white>Markera som favorit
+      lore: []
+    unfavorite:
+      name: <yellow>★ Ta bort favorit
+      lore: []
+    equip:
+      name: <green>Utrusta
+      lore:
+      - <gray>Dina svärd visar den här kniven.
+      - <dark_gray>Skada och förtrollningar förblir desamma.
+    unequip:
+      name: <green>✔ Utrustad
+      lore:
+      - <gray>Klicka för att ta bort utrustningen.
+    inspect3d:
+      name: <white>3D inspektera
+      lore:
+      - '<gray>Visar din exakta kopia:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Tillhör en annan spelare
+      lore:
+      - <dark_gray>Endast visning
+    equip-bow:
+      name: <green>Sätt på bågen
+      lore:
+      - <gray>Dina rosetter visar detta skinn.
+    unequip-bow:
+      name: <green>✔ På fören
+      lore:
+      - <gray>Klicka för att ta bort.
+    equip-crossbow:
+      name: <green>Sätt på armborst
+      lore:
+      - <gray>Dina armborst visar denna hud.
+    unequip-crossbow:
+      name: <green>✔ På armborst
+      lore:
+      - <gray>Klicka för att ta bort.
+    not-equippable:
+      name: <gray>Inte utrustning
+      lore:
+      - <dark_gray>Detta skal kan inte utrustas.
+    delete:
+      name: <red>Ta bort skal
+      lore:
+      - <gray>Tar bort detta skal från ditt lager.
+      - <dark_gray>Be om bekräftelse.
+view:
+  unknown: <prefix><red>Spelare <white><player></white> hittades inte.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>s inventering <dark_gray>· <gray><category> <dark_gray>· <gray><count> skinn <dark_gray>· <gray>Sida <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Högerklicka: inspektera · Smyg + högerklick: favorit'
+  hint-knife:
+  - ''
+  - '<dark_gray>Högerklicka: inspektera · Vänsterklick: utrusta'
+  - '<dark_gray>Smyg + högerklick: favorit'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Högerklick: inspektera · Vänsterklick: sätt på bågen'
+  - '<dark_gray>Smyg + vänsterklick: sätt på armborst'
+  - '<dark_gray>Smyg + högerklick: favorit'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skal <dark_gray>· <gray>Sida <page>/<pages>
+  empty: <gray>Inget här ännu
+  button:
+    previous: <gray>Föregående sida
+    next: <gray>Nästa sida
+    category: <white>Ändra kategori
+    sort: '<white>Sortera: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Visa som lista
+    close: <red>Stäng
+preview:
+  loading: <gray>Renderar förhandsgranskning...
+  hint: <gray>Smyg för att stänga
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>guld guld guld
+  world:
+    title: <white><player></white> <gray>öppnar <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Du öppnar redan ett ärende.
+  case-disabled: <prefix><red>Det här fallet är inte tillgängligt.
+  missing: <prefix><gray>Du behöver <white><case></white> och en <white><key></white>.
+  missing-now: <prefix><red>Följet eller nyckeln finns inte längre i ditt lager.
+  storage-error: <prefix><red>Spara misslyckades. Ditt fodral och nyckel returnerades.
+  command-blocked: <prefix><gray>Vänta tills öppningen är klar.
+  result: '<prefix><gray>Du fick <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Resultat: <skin> <dark_gray>(<float>, #<pattern>) - inte sparat'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>SÄLLSAMT SPECIELL ARTIKEL</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspektera
+      lore:
+      - <gray>Alla detaljer om ditt nya skal
+    again:
+      name: <green>Öppna en annan
+      lore:
+      - '<gray>Fall: <white><cases> <dark_gray>· <gray>Nycklar: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Detta skal passar inte till det här vapnet.
+  equipped:
+    knife: '<prefix><gray>Kniv utrustad: <skin>'
+    bow: '<prefix><gray>På din båge: <skin>'
+    crossbow: '<prefix><gray>På ditt armborst: <skin>'
+  unequipped:
+    knife: <prefix><gray>Outrustad kniv.
+    bow: <prefix><gray>Bågskinn borttagen.
+    crossbow: <prefix><gray>Korsborsthud borttagen.
+knife:
+  not-owned: <prefix><red>Detta skal tillhör inte dig.
+  equipped: '<prefix><gray>Utrustad: <skin>'
+  unequipped: <prefix><gray>Outrustad kniv.
+  sword-footer: '<dark_gray>Bas: <base>'
+inspect:
+  running: <prefix><gray>En inspektion pågår redan.
+  no-knife: <red>Skin ej tillgängligt <white>/skins
+shop:
+  title: Case återförsäljare
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Högerklicka för att handla
+  balance:
+    name: '<white>Ditt saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Endast omodifierade objekt räknas.
+  offer:
+  - ''
+  - '<gray>Pris: <aqua><price> <currency>'
+  - '<dark_gray>5 stycken: <price5> <currency>'
+  affordable: <green>✔ Prisvärt
+  not-affordable: <red>✘ <missing> <currency> saknas
+  affordable-five: '<dark_gray>Skiftklick: köp 5'
+  hint-case:
+  - '<dark_gray>Vänsterklicka: köp · Högerklicka: innehåll'
+  hint-key:
+  - '<dark_gray>Vänsterklick: köp'
+  bought: '<prefix><gray>Köpt: <white><amount>× <name></white> för <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Du har inte råd med det.
+  inventory-full: <prefix><red>Ditt lager är fullt.
+slot:
+  name: <#e4ae39>Hudinventering
+  lore:
+  - '<gray>Högerklicka: skinn, knivar och fodral'
+  - <dark_gray>Detta objekt är låst till denna plats.
+  blocked: <prefix><gray>Frigör en inventeringsplats så att skalinventeringsobjektet kan visas.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Klar.
+  unknown: <prefix><red>Okänd <what>.
+  instance-unknown: <prefix><red> Inget matchande skal-id hittades. <gray>/csadmin lista <player>
+  given: <prefix><gray>Gav <amount>× <white><name></white> till <white><player></white>.
+  skin-given: <prefix><gray>Gav <skin> <gray>till <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins av <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>De senaste öppningarna av <white><player>
+  scan-start: <prefix><gray>Scannar varje frö av <white><skin></white> efter <white><metric></white>...
+  export-start: <prefix><gray>Bygger resurspaket...
+  export-done: '<prefix><green><skins> skal exporterade: <white><file>'
+  shop-spawned: <prefix><green>Case återförsäljare skapad.
+  shop-removed: <prefix><green>Case återförsäljare borttagen.
+  shop-none: <prefix><gray>Ingen fodralhandlare i närheten.
+  reload-busy: <prefix><gray>En omladdning körs redan.
+  reload-start: <prefix><gray>Laster in igen...
+  reload-failed: <prefix><red>Omladdning misslyckades, den tidigare konfigurationen förblir aktiv. Se konsolen.
+  reload-done: '<prefix><green>Laddas om på <ms> ms: <skins> skinn, <cases> fall, <warnings> varningar (se konsolen).'
+  browser:
+    title: 'Mönster: <skin>'
+  manage:
+    title: 'Hantera: <player>'
+    skin-title: Hud på <player>
+    give-title: 'Ge hud: <player>'
+    give:
+      name: <green>Ge hud
+      lore:
+      - <gray>Välj ett fodral och sedan ett skal.
+    give-hint:
+    - ''
+    - '<dark_gray>Vänsterklicka: ge · Högerklicka: ge StatTrak™'
+    clear:
+      name: <red>Ta bort alla skal
+      lore:
+      - <gray><count> skal tas bort.
+      - <dark_gray>Be om bekräftelse.
+    cleared: <prefix><gray>Tade bort <count> skal av <white><player></white>.
+    removed: <prefix><gray>Raderad <skin> <gray>av <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Klicka för att växla.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Ställer in flottören till <white><float>
+    pattern-step:
+      name: <white>Mönster <step>
+      lore:
+      - '<gray>Aktuell: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Slumpmässigt mönster
+      lore:
+      - '<gray>Aktuell: <white><pattern>'
+    equip:
+      name: <green>Utrusta för spelare
+      lore: []
+    unequip:
+      name: <green>✔ Utrustad
+      lore:
+      - <gray>Klicka för att ta bort utrustningen.
+    remove:
+      name: <red>Ta bort skal
+      lore:
+      - <dark_gray>Be om bekräftelse.
+  labels:
+    case: fall
+    key: nyckel
+    skin: hud
+    manual: manuell databas
+    automatic: automatiskt
+    none: ingen (finish har ingen analysprofil)
+    'off': av
+  debug:
+    seed: '<gray>Mönster: <white><seed>'
+    analysing: <dark_gray> Analyserar...
+    variant: '<gray>Variant: <white><variant>'
+    classification: '<gray>Klassificering: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Tona: <white><fade>%'
+    preview:
+      name: <yellow>Förhandsgranska mönster <seed>
+      lore:
+      - <gray>Visar den renderade kartan i dina händer.
+    random:
+      name: <light_purple>Slumpmässigt mönster
+      lore: []
+    title: <gold>Mönsterfelsökning <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Render misslyckades: <error>'
+    metrics: '<gray>Mätvärden: <white><metrics>'
+    scan-failed: <prefix><red>Skanningen misslyckades.
+    no-metric: <gray>Inget mönster har måttenhet <white><metric>
+    export-failed: '<prefix><red>Export misslyckades: <error>'
+  odds: <gray><case> <dark_gray>(<count> objekt, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Cases: <white><cases> <gray>Vapen: <white><weapons>'
+    cache: '<gray>Cachade förhandsvisningar: <white><previews> <gray>Resurspaketläge: <white><pack>'
+    web: '<gray>Pack webbserver: <white><url>'
+wear:
+  factory_new: Fabriksny
+  minimal_wear: Minimalt slitage
+  field_tested: Fälttestad
+  well_worn: Välsliten
+  battle_scarred: Strid-ärrad
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Begränsad
+  classified: Klassificerad
+  covert: Hemlig
+  rare_special: Sällsynt specialartikel
+catalog:
+  key:
+    case_key: Case Key

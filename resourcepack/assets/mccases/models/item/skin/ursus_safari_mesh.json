@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mccases:item/skin/ursus_safari_mesh"
+  }
+}

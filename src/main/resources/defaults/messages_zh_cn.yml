@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>案例</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>您无权这样做。
+  player-only: <prefix><red>仅限玩家。
+profile:
+  loading: <prefix><gray>您的皮肤库存仍在加载中...
+  load-failed: <prefix><red>无法加载您的皮肤库存。请告诉管理员。
+  recovered: <prefix><gray>中断开放完成：<skin>
+category:
+  pistol: 手枪
+  smg: 冲锋枪
+  rifle: 步枪
+  sniper: 狙击步枪
+  heavy: 重型
+  equipment: 设备
+  knife: 刀
+items:
+  test-marker: <red>⚠ 测试项目（管理员）
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> 可能的项目
+    - ''
+    - <gray>右键：<white>查看内容
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>开箱时用完。
+    use-hint: <prefix><gray> 右键单击​​ <white>case</white> 用此键将其打开。
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: <gray>外部：<white><wear>
+    float: <gray>浮点：<white><float>
+    float-range: <gray>浮点：<white><min_float> - <max_float>
+    pattern: <gray>模式：<white><pattern>
+    variant: <gray>相：<class_color><variant>
+    classification: <gray>图案类型：<class_color><classification>
+    fade: <gray>褪色：<white><fade>%
+    stattrak: <#cf6a32>StatTrak™ <gray>杀死：<white><kills>
+    has-variants: <dark_gray>可能的几个阶段
+    source: <gray>来源：<white><case>
+    date: <gray>获得：<white><date>
+    id: <dark_gray>#<id>
+  deleted: <prefix><gray> 已删除： <skin>
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% 褪色'
+gui:
+  loading:
+    name: <gray>加载中...
+    lore: []
+  back:
+    name: <gray>返回
+    lore: []
+  close:
+    name: <red>关闭
+    lore: []
+  previous:
+    name: <gray>上一页
+    lore:
+    - <dark_gray>页 <page> / <pages>
+  next:
+    name: <gray>下一页
+    lore:
+    - <dark_gray>页 <page> / <pages>
+  cases:
+    title: 案例
+    header:
+      name: <#e4ae39>案例
+      lore:
+      - <gray>从<white>箱体经销商</white>处获取箱体。
+      - <gray>您需要一把匹配的钥匙才能打开它。
+    entry:
+    - ''
+    - <gray>库存中：<white><owned> <dark_gray>· <gray>钥匙：<white><keys>
+    - <gray>左键单击：<white>查看内容
+    can-open: <green>右键：打开
+    to-skins:
+      name: <#e4ae39>皮肤库存
+      lore:
+      - <gray>你的皮肤和刀子
+  preview:
+    title: <case>
+    click-preview: <dark_gray>点击预览
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>一把稀有的刀。
+      - <dark_gray><count>变体·点击查看
+      - ''
+    open:
+      name: <green>打开案例
+      lore:
+      - <gray> 案例： <white><owned> <dark_gray>· <gray> 键： <white><keys>
+      - <dark_gray>使用 1 个案例和 1 个 <key>
+    cannot-open:
+      name: <gray>无法打开
+      lore:
+      - <gray> 案例： <white><owned> <dark_gray>· <gray> 键： <white><keys>
+      - <dark_gray>您需要箱子和 <key>。
+  rare:
+    title: ★ <case>
+  confirm:
+    title: 你确定吗？
+    'yes':
+      name: <green>是，删除
+      lore:
+      - <dark_gray>此操作无法撤消。
+    'no':
+      name: <red>取消
+      lore: []
+  skins:
+    title: 皮肤盘点
+    title-other: <player> 的皮肤
+    tab:
+      all:
+        name: <white>所有皮肤
+        lore: []
+      weapons:
+        name: <white>武器皮肤
+        lore: []
+      knives:
+        name: <white>刀具
+        lore:
+        - <dark_gray>右键刀：装备
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>收藏夹
+        lore: []
+      recent:
+        name: <white>最近获得
+        lore: []
+    empty:
+      name: <gray>这里还没有任何内容
+      lore:
+      - <dark_gray>打开箱子获得皮肤。
+    equipped: <green>✔ 已配备
+    favorite: <yellow>★ 最爱
+    hint:
+    - ''
+    - <dark_gray>左键：检查·右键：戴上弓
+    - <dark_gray>Shift 单击：收藏夹
+    hint-knife:
+    - ''
+    - <dark_gray>左键单击：检查·右键单击：装备
+    - <dark_gray>Shift 单击：收藏夹
+    to-cases:
+      name: <#e4ae39>案例
+      lore:
+      - <gray>您的案例
+    sort:
+      name: <white>排序：<#e4ae39><sort>
+      lore:
+      - <dark_gray>左：下一个 · 右：上一个
+    sorts:
+      rarity: 稀有度
+      float: 浮动
+      name: 名称
+      wear: 外观
+      pattern: 图案
+      newest: 最新
+      oldest: 最古老的
+    info:
+      name: 显示 <white><count> <gray> 皮肤
+      lore:
+      - 共 <dark_gray><total> · 点击关闭
+    filter:
+      name: <white>过滤器
+      lore:
+      - <dark_gray>左：选择过滤器 · 右：重置
+    active-knife:
+    - <green>✔ 主动刀
+    - <dark_gray>点击查看详情
+  filter:
+    title: 过滤器
+    header:
+      name: <white>过滤器
+      lore:
+      - <gray>多个同类过滤器组合在一起。
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: 仅 <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ 活跃
+    'off':
+    - <dark_gray>不活动
+    reset:
+      name: <gray>重置所有过滤器
+      lore: []
+  inspect:
+    title: 检查
+    missing:
+      name: <red>皮肤不可用
+      lore: []
+    preview:
+      name: <#e4ae39>查看皮肤
+      lore:
+      - <gray>显示您的确切副本：
+      - <gray>图案、颜色和磨损。
+      - ''
+      - <dark_gray>潜行关闭预览。
+    data: <white>详情
+    favorite:
+      name: <white>标记为最爱
+      lore: []
+    unfavorite:
+      name: <yellow>★ 删除收藏夹
+      lore: []
+    equip:
+      name: <green>装备
+      lore:
+      - <gray>你的剑展示了这把刀。
+      - <dark_gray>伤害和结界保持不变。
+    unequip:
+      name: <green>✔ 已配备
+      lore:
+      - <gray>单击以取消装备。
+    inspect3d:
+      name: <white>3D检查
+      lore:
+      - <gray>显示您的确切副本：
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>属于另一个玩家
+      lore:
+      - <dark_gray> 仅供查看
+    equip-bow:
+      name: <green>戴上弓
+      lore:
+      - <gray>你的弓显示出这种皮肤。
+    unequip-bow:
+      name: <green>✔ 在弓上
+      lore:
+      - <gray>单击以删除。
+    equip-crossbow:
+      name: <green>戴上弩
+      lore:
+      - <gray>你的弩显示出这种皮肤。
+    unequip-crossbow:
+      name: <green>✔ 在十字弓上
+      lore:
+      - <gray>单击以删除。
+    not-equippable:
+      name: <gray>不可装备
+      lore:
+      - <dark_gray>该皮肤无法装备。
+    delete:
+      name: <red>删除皮肤
+      lore:
+      - <gray> 从您的库存中移除此皮肤。
+      - <dark_gray> 要求确认。
+view:
+  unknown: 未找到 <prefix><red> 玩家 <white><player></white>。
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> 的库存 <dark_gray>· <gray><category> <dark_gray>· <gray><count> 皮肤 <dark_gray>· <gray> 页 <page>/<pages>
+  hint:
+  - ''
+  - <dark_gray>右键：检查·潜行+右键：收藏
+  hint-knife:
+  - ''
+  - <dark_gray>右键：检查 · 左键：装备
+  - <dark_gray>潜行+右键：收藏夹
+  hint-weapon:
+  - ''
+  - <dark_gray>右键：检查·左键：戴上弓
+  - <dark_gray>潜行+左键单击：戴上十字弓
+  - <dark_gray>潜行+右键：收藏夹
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> 皮肤 <dark_gray>· <gray> 页 <page>/<pages>
+  empty: <gray>这里还没有任何内容
+  button:
+    previous: <gray>上一页
+    next: <gray>下一页
+    category: <white>更改类别
+    sort: <white>排序：<#e4ae39><sort>
+    filter: <white>过滤器
+    list: <white>显示为列表
+    close: <red>关闭
+preview:
+  loading: <gray>渲染预览...
+  hint: <gray>潜行关闭
+opening:
+  title: <case>
+  title-test: <red>测试</red> <case>
+  bubble: <black>金 金 金
+  world:
+    title: <white><player></white> <gray> 打开 <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>您已经在立案。
+  case-disabled: <prefix><red>此案例不可用。
+  missing: <prefix><gray>您需要 <white><case></white> 和 <white><key></white>。
+  missing-now: <prefix><red>箱子或钥匙不再在您的库存中。
+  storage-error: <prefix><red>保存失败。您的箱子和钥匙已归还。
+  command-blocked: <prefix><gray>等待打开完成。
+  result: '<prefix><gray>您收到 <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[测试]</red> <gray>结果：<skin> <dark_gray>(<float>, #<pattern>) - 未保存'
+  broadcast: <prefix><white><player></white> <gray>未装箱 <skin><gray>！
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>稀有特殊物品</b></gradient>
+  buttons:
+    inspect:
+      name: <white>检查
+      lore:
+      - <gray>您的新皮肤的所有详细信息
+    again:
+      name: <green>打开另一个
+      lore:
+      - <gray> 案例： <white><cases> <dark_gray>· <gray> 键： <white><keys>
+equip:
+  wrong-slot: <prefix><red>该皮肤不适合该武器。
+  equipped:
+    knife: <prefix><gray>装备刀：<skin>
+    bow: <prefix><gray>在你的弓上：<skin>
+    crossbow: <prefix><gray>在你的弩上：<skin>
+  unequipped:
+    knife: <prefix><gray>刀未装备。
+    bow: <prefix><gray>弓皮已移除。
+    crossbow: <prefix><gray>十字弓皮肤被移除。
+knife:
+  not-owned: <prefix><red>这个皮肤不属于你。
+  equipped: <prefix><gray>装备：<skin>
+  unequipped: <prefix><gray>刀未装备。
+  sword-footer: <dark_gray> 基数： <base>
+inspect:
+  running: <prefix><gray> 检查已在运行。
+  no-knife: <red>皮肤不可用 <white>/skins
+shop:
+  title: 案例经销商
+  npc-name: <gradient:#e4ae39:#f6d27a>案例经销商</gradient>
+  npc-description: <gray>右键交易
+  balance:
+    name: <white>您的余额： <aqua><balance> <currency>
+    lore:
+    - <dark_gray>仅计算未修改的项目。
+  offer:
+  - ''
+  - <gray>价格： <aqua><price> <currency>
+  - <dark_gray>5 件： <price5> <currency>
+  affordable: <green>✔ 经济实惠
+  not-affordable: <red>✘ <missing> <currency> 缺失
+  affordable-five: <dark_gray>Shift点击：买5
+  hint-case:
+  - <dark_gray>左键：购买·右键：内容
+  hint-key:
+  - <dark_gray>左键单击：购买
+  bought: <prefix><gray> 购买：<white><amount>× <name></white> 用于 <aqua><price> <currency></aqua>。
+  not-enough: <prefix><red>你买不起。
+  inventory-full: <prefix><red>您的库存已满。
+slot:
+  name: <#e4ae39>皮肤库存
+  lore:
+  - <gray>右键单击：皮肤、刀具和箱子
+  - <dark_gray>此项目已锁定到此插槽。
+  blocked: <prefix><gray>释放库存槽位，以便皮肤库存项目可以出现。
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>管理员
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green> 完成。
+  unknown: <prefix><red>未知 <what>。
+  instance-unknown: <prefix><red>未找到匹配的皮肤 ID。 <gray>/csadmin 列表 <player>
+  given: <prefix><gray>将 <amount>× <white><name></white> 给予 <white><player></white>。
+  skin-given: <prefix><gray>给予 <skin> <gray> 至 <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray> <white><player></white> <dark_gray>(<count>) 的皮肤
+  history-header: <prefix><gray><white><player> 最近空缺
+  scan-start: <prefix><gray>扫描 <white><skin></white> 的每颗种子以查找 <white><metric></white>...
+  export-start: <prefix><gray>构建资源包...
+  export-done: <prefix><green><skins> 导出皮肤：<white><file>
+  shop-spawned: <prefix><green>案例经销商已创建。
+  shop-removed: <prefix><green>案例经销商已移除。
+  shop-none: <prefix><gray>附近没有箱子经销商。
+  reload-busy: <prefix><gray>重新加载已在运行。
+  reload-start: <prefix><gray>正在重新加载...
+  reload-failed: <prefix><red>重新加载失败，之前的配置保持活动状态。请参阅控制台。
+  reload-done: <prefix><green> 在 <ms> 毫秒内重新加载：<skins> 皮肤、<cases> 箱子、<warnings> 警告（参见控制台）。
+  browser:
+    title: 模式：<skin>
+  manage:
+    title: 管理：<player>
+    skin-title: <player> 的皮肤
+    give-title: 给予皮肤：<player>
+    give:
+      name: <green>给予皮肤
+      lore:
+      - <gray>选择一个箱子，然后选择一个皮肤。
+    give-hint:
+    - ''
+    - <dark_gray>左键单击：给出·右键单击：给出StatTrak™
+    clear:
+      name: <red>删除所有皮肤
+      lore:
+      - <gray><count> 皮肤将被移除。
+      - <dark_gray> 要求确认。
+    cleared: <prefix><gray>删除了<white><player></white>的<count>皮肤。
+    removed: <prefix><gray> 已删除 <white><player> 的 <skin> <gray>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>单击进行切换。
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray> 将浮点数设置为 <white><float>
+    pattern-step:
+      name: <white> 模式 <step>
+      lore:
+      - <gray>当前：<white><pattern>
+    pattern-random:
+      name: <light_purple>随机模式
+      lore:
+      - <gray>当前：<white><pattern>
+    equip:
+      name: <green>玩家装备
+      lore: []
+    unequip:
+      name: <green>✔ 已配备
+      lore:
+      - <gray>单击以取消装备。
+    remove:
+      name: <red>删除皮肤
+      lore:
+      - <dark_gray> 要求确认。
+  labels:
+    case: 案例
+    key: 钥匙
+    skin: 皮肤
+    manual: 手册数据库
+    automatic: 自动
+    none: 无（完成后没有分析配置文件）
+    'off': 关闭
+  debug:
+    seed: <gray>模式：<white><seed>
+    analysing: <dark_gray>正在分析...
+    variant: <gray>变体：<white><variant>
+    classification: <gray>分类： <white><classification> <dark_gray><mode>
+    fade: <gray>褪色：<white><fade>%
+    preview:
+      name: <yellow>预览图案 <seed>
+      lore:
+      - <gray>显示您手中的渲染地图。
+    random:
+      name: <light_purple>随机模式
+      lore: []
+    title: <gold>模式调试器 <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: <prefix><red>渲染失败：<error>
+    metrics: <gray>指标：<white><metrics>
+    scan-failed: <prefix><red>扫描失败。
+    no-metric: <gray>没有图案具有公制 <white><metric>
+    export-failed: <prefix><red>导出失败：<error>
+  odds: <gray><case> <dark_gray>(<count> 项目, StatTrak™ <chance>%)
+  info:
+    catalog: <gray> 皮肤： <white><skins> <gray> 箱子： <white><cases> <gray> 武器： <white><weapons>
+    cache: <gray>缓存预览：<white><previews> <gray>资源包模式：<white><pack>
+    web: <gray>Pack Web 服务器：<white><url>
+wear:
+  factory_new: 全新出厂
+  minimal_wear: 轻微磨损
+  field_tested: 经过现场测试
+  well_worn: 破旧的
+  battle_scarred: 战痕累累
+rarity:
+  mil_spec: 军用规格
+  restricted: 受限
+  classified: 分类
+  covert: 隐蔽
+  rare_special: 稀有特殊物品
+catalog:
+  key:
+    case_key: 案例钥匙

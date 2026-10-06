@@ -1,0 +1,32 @@
+# Gamma Case (2016)
+
+case:
+  name: "Gamma Case"
+  key: case_key
+  color: "#2ab07a"
+  stattrak-chance: 0.10
+  description:
+    - "2016"
+
+skins:
+  fiveseven_violent_daimyo: {weapon: fiveseven, rarity: mil_spec, name: "Violent Daimyo", style: tribal, palette: ["#1a1a1a", "#c81a1a", "#e8e8e8"]}
+  mac10_carnivore: {weapon: mac10, rarity: mil_spec, name: "Carnivore", style: graffiti, palette: ["#5a1a1a", "#c81a1a", "#e8e8e8"]}
+  nova_exo: {weapon: nova, rarity: mil_spec, name: "Exo", style: hex, palette: ["#2a2a2a", "#5a5a5a", "#c8c8c8"]}
+  p250_iron_clad: {weapon: p250, rarity: mil_spec, name: "Iron Clad", style: hex, palette: ["#3a3a3a", "#7a7a7a", "#a0a0a0"]}
+  ppbizon_harvester: {weapon: ppbizon, rarity: mil_spec, name: "Harvester", style: tribal, palette: ["#2a2a1a", "#6a6a3a", "#c8c88a"]}
+  sg553_aerial: {weapon: sg553, rarity: mil_spec, name: "Aerial", style: shards, palette: ["#e8e8e8", "#5ab0e8", "#1a3a5a"]}
+  tec9_ice_cap: {weapon: tec9, rarity: mil_spec, name: "Ice Cap", style: shards, palette: ["#e8f4f8", "#5ab0e8", "#1a3a5a"]}
+  aug_aristocrat: {weapon: aug, rarity: restricted, name: "Aristocrat", style: floral, palette: ["#1a1a1a", "#c8a040", "#e8e8e8"]}
+  awp_phobos: {weapon: awp, rarity: restricted, name: "Phobos", style: circuit, palette: ["#0a1a3a", "#1a5ad0", "#e8e8e8"]}
+  p90_chopper: {weapon: p90, rarity: restricted, name: "Chopper", style: graffiti, palette: ["#1a1a1a", "#c8c8c8", "#c81a1a"]}
+  r8_revolver_reboot: {weapon: r8_revolver, rarity: restricted, name: "Reboot", style: circuit, palette: ["#1a1a1a", "#f0c020", "#5a5a5a"]}
+  sawedoff_limelight: {weapon: sawedoff, rarity: restricted, name: "Limelight", style: stripes, palette: ["#1a1a1a", "#5ae01a", "#e8e8e8"]}
+  m4a4_desolate_space: {weapon: m4a4, rarity: classified, name: "Desolate Space", style: swirl, palette: ["#0a0a2a", "#5a2a8a", "#e8a0e0", "#f0c020"]}
+  p2000_imperial_dragon: {weapon: p2000, rarity: classified, name: "Imperial Dragon", style: scales, palette: ["#1a1a1a", "#c81a1a", "#c8a040"]}
+  scar20_bloodsport: {weapon: scar20, rarity: classified, name: "Bloodsport", style: graffiti, palette: ["#e8e8e8", "#c81a1a", "#1a1a1a"]}
+  glock18_wasteland_rebel: {weapon: glock18, rarity: covert, name: "Wasteland Rebel", style: graffiti, palette: ["#3a3a2a", "#c8a040", "#c81a1a", "#1a1a1a"]}
+  m4a1s_mecha_industries: {weapon: m4a1s, rarity: covert, name: "Mecha Industries", style: hex, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: gamma

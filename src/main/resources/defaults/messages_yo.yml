@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Awọn ọran</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>O ko ni igbanilaaye lati ṣe bẹ.
+  player-only: <prefix><red>Awọn oṣere nikan.
+profile:
+  loading: <prefix><gray>Akojo awọ ara rẹ ṣi n kojọpọ...
+  load-failed: <prefix><red>Oja awọ rẹ ko le ṣe kojọpọ. Jọwọ sọ fun abojuto kan.
+  recovered: '<prefix><gray>Iṣii idilọwọ ti pari: <skin>'
+category:
+  pistol: ibon
+  smg: SMG
+  rifle: Ibọn
+  sniper: Sniper ibọn
+  heavy: Eru
+  equipment: Ohun elo
+  knife: Ọbẹ
+items:
+  test-marker: <red>⚠ Ohun idanwo (abojuto)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> ṣee ṣe awọn ohun kan
+    - ''
+    - '<gray>Tẹ-ọtun: <white>wo awọn akoonu'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Ti a lo nigbati o ba ṣii apoti kan.
+    use-hint: <prefix><gray>Ọtun tẹ <white>ọran</white> lati ṣii pẹlu bọtini yii.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Ide: <white><wear>'
+    float: '<gray>Lofo: <white><float>'
+    float-range: '<gray>Lofo: <white><min_float> - <max_float>'
+    pattern: '<gray>Àpẹrẹ: <white><pattern>'
+    variant: '<gray>Ipele: <class_color><variant>'
+    classification: '<gray>Iru Àpẹẹrẹ: <class_color><classification>'
+    fade: '<gray>Pare: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Pa: <white><kills>'
+    has-variants: <dark_gray>Ọpọlọpọ awọn ipele ṣee ṣe
+    source: '<gray> Orisun: <white><case>'
+    date: '<gray>Ti gba: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Parẹ: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% ipare'
+gui:
+  loading:
+    name: <gray>Nkojọpọ...
+    lore: []
+  back:
+    name: <gray>Pada
+    lore: []
+  close:
+    name: <red>Pade
+    lore: []
+  previous:
+    name: <gray>oju-iwe iṣaaju
+    lore:
+    - <dark_gray>Oju-iwe <page> / <pages>
+  next:
+    name: <gray>Oju-iwe ti o tẹle
+    lore:
+    - <dark_gray>Oju-iwe <page> / <pages>
+  cases:
+    title: Awọn ọran
+    header:
+      name: <#e4ae39>Awọn ọran
+      lore:
+      - <gray>Gba awọn ọran lati ọdọ oniṣowo <white></white>.
+      - <gray>O nilo bọtini ti o baamu lati ṣii ọkan.
+    entry:
+    - ''
+    - '<gray>Ninu akojo oja: <white><owned> <dark_gray>· <gray>Awọn bọtini: <white><keys>'
+    - '<gray>Tẹ osi: <white>wo awọn akoonu'
+    can-open: '<green>Ọtun tẹ: ṣii'
+    to-skins:
+      name: <#e4ae39>Oja awọ
+      lore:
+      - <gray>Awọ ati ọbẹ rẹ
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Tẹ fun awotẹlẹ
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>A toje ọbẹ.
+      - <dark_gray><count> iyatọ · tẹ lati wo
+      - ''
+    open:
+      name: <green>Apo ṣiṣi silẹ
+      lore:
+      - '<gray>Awọn ọran: <white><owned> <dark_gray>· <gray>Awọn bọtini: <white><keys>'
+      - <dark_gray>Nlo ọran 1 ati 1 <key>
+    cannot-open:
+      name: <gray>Ko le ṣii
+      lore:
+      - '<gray>Awọn ọran: <white><owned> <dark_gray>· <gray>Awọn bọtini: <white><keys>'
+      - <dark_gray>O nilo ọran naa ati <key> kan.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Ṣe o da ọ loju?
+    'yes':
+      name: <green>Bẹẹni, paarẹ
+      lore:
+      - <dark_gray>Eyi ko le ṣe atunṣe.
+    'no':
+      name: <red>Fagilee
+      lore: []
+  skins:
+    title: Oja awọ
+    title-other: Awọn awọ ara ti <player>
+    tab:
+      all:
+        name: <white>Gbogbo awọ ara
+        lore: []
+      weapons:
+        name: <white>Awọ ohun ija
+        lore: []
+      knives:
+        name: <white>Ọbẹ
+        lore:
+        - '<dark_gray>Ọtun tẹ ọbẹ kan: pese'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Awọn ayanfẹ
+        lore: []
+      recent:
+        name: <white>Laipe ti gba
+        lore: []
+    empty:
+      name: <gray>Ko si nkankan nibi sibẹsibẹ
+      lore:
+      - <dark_gray>Ṣi awọn apoti lati gba awọn awọ ara.
+    equipped: <green>✔ Ti pese
+    favorite: <yellow>★ Ayanfẹ
+    hint:
+    - ''
+    - '<dark_gray>Tẹ osi: ṣayẹwo · Ọtun tẹ: fi ọrun si'
+    - '<dark_gray>Tẹ tẹ: ayanfẹ'
+    hint-knife:
+    - ''
+    - '<dark_gray>Tẹ osi: ṣayẹwo · Titẹ-ọtun: pese'
+    - '<dark_gray>Tẹ tẹ: ayanfẹ'
+    to-cases:
+      name: <#e4ae39>Awọn ọran
+      lore:
+      - <gray>Si awọn ọran rẹ
+    sort:
+      name: '<white>Tọ: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Osi: tókàn · Ọtun: ti tẹlẹ'
+    sorts:
+      rarity: Rarity
+      float: Leefofo
+      name: Oruko
+      wear: Ode
+      pattern: Àpẹẹrẹ
+      newest: Titun julọ
+      oldest: Atijọ julọ
+    info:
+      name: <white><count> <gray>awọn awọ ara han
+      lore:
+      - <dark_gray><total> lapapọ · tẹ lati tii
+    filter:
+      name: <white>Àlẹmọ
+      lore:
+      - '<dark_gray>Osi: yan awọn asẹ · Ọtun: tunto'
+    active-knife:
+    - <green>✔ Ọbẹ ti nṣiṣe lọwọ
+    - <dark_gray>Tẹ fun awọn alaye
+  filter:
+    title: Àlẹmọ
+    header:
+      name: <white>Àlẹmọ
+      lore:
+      - <gray>Ọpọlọpọ awọn asẹ ti iru kanna ni a ṣe idapo.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ nikan
+    'on':
+    - <green>✔ Nṣiṣẹ
+    'off':
+    - <dark_gray>Aláìṣiṣẹ́
+    reset:
+      name: <gray>Tun gbogbo awọn asẹ
+      lore: []
+  inspect:
+    title: Ayewo
+    missing:
+      name: <red>Awọ ko si
+      lore: []
+    preview:
+      name: <#e4ae39>Wo awọ ara
+      lore:
+      - '<gray>Ṣifihan ẹda gangan rẹ:'
+      - <gray>apẹẹrẹ, awọn awọ ati wọ.
+      - ''
+      - <dark_gray>Yọ lati pa awotẹlẹ naa.
+    data: <white>Awọn alaye
+    favorite:
+      name: <white>Samisi bi ayanfẹ
+      lore: []
+    unfavorite:
+      name: <yellow>★ Yọ ayanfẹ kuro
+      lore: []
+    equip:
+      name: <green>Ẹrọ
+      lore:
+      - <gray>Ida re fi obe yi han.
+      - <dark_gray>Ibajẹ ati awọn ohun-ọṣọ duro kanna.
+    unequip:
+      name: <green>✔ Ti pese
+      lore:
+      - <gray>Tẹ lati unequip.
+    inspect3d:
+      name: <white>3D ayewo
+      lore:
+      - '<gray>Ṣifihan ẹda gangan rẹ:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Jẹ ti ẹrọ orin miiran
+      lore:
+      - <dark_gray>Wo nikan
+    equip-bow:
+      name: <green>Fi sori ọrun
+      lore:
+      - <gray>Awọn ọrun rẹ fihan awọ ara yii.
+    unequip-bow:
+      name: <green>✔ Lori ọrun
+      lore:
+      - <gray>Tẹ lati yọkuro.
+    equip-crossbow:
+      name: <green>Fi sori agbelebu
+      lore:
+      - <gray>Awọn ọrun agbekọja rẹ fihan awọ ara yii.
+    unequip-crossbow:
+      name: <green>✔ Lori agbelebu
+      lore:
+      - <gray>Tẹ lati yọkuro.
+    not-equippable:
+      name: <gray>Ko ṣe ohun elo
+      lore:
+      - <dark_gray>Awọ yii ko le ni ipese.
+    delete:
+      name: <red>Paarẹ awọ ara
+      lore:
+      - <gray>Yọ awọ ara yii kuro ninu akojo oja rẹ.
+      - <dark_gray>Beere fun ìmúdájú.
+view:
+  unknown: <prefix><red>Ere <white><player></white> ko ri.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>Okoja <dark_gray>· <gray><category> <dark_gray>· <gray><count> awọ ara <dark_gray>· <gray>Oju-iwe <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Ọtun tẹ: ṣayẹwo · Sneak + ọtun tẹ: ayanfẹ'
+  hint-knife:
+  - ''
+  - '<dark_gray>Ọtun tẹ: ṣayẹwo · Titẹ si osi: pese'
+  - '<dark_gray>Sneak + ọtun tẹ: ayanfẹ'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Ọtun tẹ: ṣayẹwo · Titẹ osi: fi ọrun si'
+  - '<dark_gray>Sneak + osi tẹ: fi sori crossbow'
+  - '<dark_gray>Sneak + ọtun tẹ: ayanfẹ'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> awọ ara <dark_gray>· <gray>Oju-iwe <page>/<pages>
+  empty: <gray>Ko si nkankan nibi sibẹsibẹ
+  button:
+    previous: <gray>oju-iwe iṣaaju
+    next: <gray>Oju-iwe ti o tẹle
+    category: <white>Yipada ẹka
+    sort: '<white>Tọ: <#e4ae39><sort>'
+    filter: <white>Àlẹmọ
+    list: <white>Fihan bi atokọ
+    close: <red>Pade
+preview:
+  loading: <gray>Ṣiṣe awotẹlẹ...
+  hint: <gray>Yọ lati tii
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black> wura goolu
+  world:
+    title: <white><player></white> <gray>ṣii <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>O ti nsii apoti kan tẹlẹ.
+  case-disabled: <prefix><red>Iran yii ko si.
+  missing: <prefix><gray>O nilo <white><case></white> ati <white><key></white> kan.
+  missing-now: <prefix><red>Ọran tabi bọtini ko si ninu akojo oja rẹ mọ.
+  storage-error: <prefix><red>Fifipamọ kuna. A ti da ẹjọ rẹ ati bọtini pada.
+  command-blocked: <prefix><gray>Duro titi ti ṣiṣi yoo ti pari.
+  result: '<prefix><gray>O gba <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[idanwo]</red> <gray> Abajade: <skin> <dark_gray>(<float>, #<pattern>) - ko ṣe fipamọ'
+  broadcast: <prefix><white><player></white> <gray>ti ko si apoti <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>NKAN PATAKI TOJE</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Ayẹwo
+      lore:
+      - <gray>Gbogbo alaye ti awọ rẹ tuntun
+    again:
+      name: <green>Ṣi omiran
+      lore:
+      - '<gray>Awọn ọran: <white><cases> <dark_gray>· <gray>Awọn bọtini: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Awọ yii ko baamu ohun ija yii.
+  equipped:
+    knife: '<prefix><gray>Ọbẹ ti o ni ipese: <skin>'
+    bow: '<prefix><gray>Lori ọrun rẹ: <skin>'
+    crossbow: '<prefix><gray>Lori agbelebu rẹ: <skin>'
+  unequipped:
+    knife: <prefix><gray>Ọbẹ ti ko ni ipese.
+    bow: <prefix><gray>Awọ awọ ọrun kuro.
+    crossbow: <prefix><gray>Apa ara Crossbow kuro.
+knife:
+  not-owned: <prefix><red>Awọ yii kii ṣe ti ẹ.
+  equipped: '<prefix><gray>Ni ipese: <skin>'
+  unequipped: <prefix><gray>Ọbẹ ti ko ni ipese.
+  sword-footer: '<dark_gray>Ipilẹ: <base>'
+inspect:
+  running: <prefix><gray>Ayẹwo ti nṣiṣẹ tẹlẹ.
+  no-knife: <red>Awọ ko si <white>/skins
+shop:
+  title: Onisowo nla
+  npc-name: <gradient:#e4ae39:#f6d27a>Olujaja ọran</gradient>
+  npc-description: <gray>Ọtun tẹ lati ṣowo
+  balance:
+    name: '<white>Iwọntunwọnsi rẹ: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Awọn nkan ti a ko yipada nikan ni o ka.
+  offer:
+  - ''
+  - '<gray>Iye: <aqua><price> <currency>'
+  - 'Awọn ege <dark_gray>5: <price5> <currency>'
+  affordable: <green>✔ Ti ifarada
+  not-affordable: <red>✘ <missing> <currency> sonu
+  affordable-five: '<dark_gray>Tẹ tẹ: ra 5'
+  hint-case:
+  - '<dark_gray>Tẹ osi: ra · Titẹ-ọtun: akoonu'
+  hint-key:
+  - '<dark_gray>Tẹ osi: ra'
+  bought: '<prefix><gray>Ti ra: <white><amount>× <name></white> fun <aqua><price><currency></aqua>.'
+  not-enough: <prefix><red>O ko le gba iyẹn.
+  inventory-full: <prefix><red>Oja rẹ ti kun.
+slot:
+  name: <#e4ae39>Oja awọ
+  lore:
+  - '<gray>Ọtun tẹ: awọn awọ ara, awọn ọbẹ ati awọn apoti'
+  - <dark_gray>Nkan yii wa ni titiipa si Iho yii.
+  blocked: <prefix><gray>Fe iho akojo oja ọfẹ ki ohun elo ọja awọ le han.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Abojuto
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Ti ṣe.
+  unknown: <prefix><red>Aimọ <what>.
+  instance-unknown: <prefix><red>Ko ri id ara ti o baamu. <gray>/akojọ csadmin <player>
+  given: <prefix><gray>Fifun <amount>× <white><name></white> si <white><player></white>.
+  skin-given: <prefix><gray>Fifun <skin> <gray>si <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Awọ <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Awọn ṣiṣi aipẹ ti <white><player>
+  scan-start: <prefix><gray>Ṣayẹwo gbogbo irugbin <white><skin></white> fun <white><metric></white>...
+  export-start: <prefix><gray>Idi ohun elo ile...
+  export-done: '<prefix><green><skins> awọ ara okeere: <white><file>'
+  shop-spawned: <prefix><green>Ṣẹda oniṣòwo ọran.
+  shop-removed: <prefix><green>A yọkuro oniṣòwo ẹjọ.
+  shop-none: <prefix><gray>Ko si oniṣowo ọran wa nitosi.
+  reload-busy: <prefix><gray>Atunsilẹ ti nṣiṣẹ tẹlẹ.
+  reload-start: <prefix><gray>Ṣatunkọ...
+  reload-failed: <prefix><red> Tun gbejade kuna, iṣeto ti iṣaaju duro lọwọ. Wo console.
+  reload-done: '<prefix><green>Tun kojọpọ ni <ms> ms: <skins> awọ ara, awọn ọran <cases>, awọn ikilọ <warnings> (wo console).'
+  browser:
+    title: 'Àpẹẹrẹ: <skin>'
+  manage:
+    title: 'Ṣakoso: <player>'
+    skin-title: Awọ ti <player>
+    give-title: 'Fun awọ ara: <player>'
+    give:
+      name: <green>Fun awọ
+      lore:
+      - <gray>Yan apoti kan, lẹhinna awọ kan.
+    give-hint:
+    - ''
+    - '<dark_gray>Tẹ osi: fi fun · Ọtun tẹ: fun StatTrak™'
+    clear:
+      name: <red>Pa gbogbo awọ ara rẹ
+      lore:
+      - <gray><count> awọ ara yoo yọ kuro.
+      - <dark_gray>Beere fun ìmúdájú.
+    cleared: <prefix><gray>Paarẹ <count> awọn awọ <white><player></white>.
+    removed: <prefix><gray>Parẹ <skin> <gray>ti <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Tẹ lati yi pada.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Ṣeto leefofo loju omi si <white><float>
+    pattern-step:
+      name: <white>Àpẹrẹ <step>
+      lore:
+      - '<gray>Lọwọlọwọ: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Apẹrẹ laileto
+      lore:
+      - '<gray>Lọwọlọwọ: <white><pattern>'
+    equip:
+      name: <green>Ipese fun ẹrọ orin
+      lore: []
+    unequip:
+      name: <green>✔ Ti pese
+      lore:
+      - <gray>Tẹ lati unequip.
+    remove:
+      name: <red>Paarẹ awọ ara
+      lore:
+      - <dark_gray>Beere fun ìmúdájú.
+  labels:
+    case: irú
+    key: bọtini
+    skin: awọ ara
+    manual: Afowoyi database
+    automatic: laifọwọyi
+    none: ko si (pari ko ni profaili onínọmbà)
+    'off': kuro
+  debug:
+    seed: '<gray>Àpẹrẹ: <white><seed>'
+    analysing: <dark_gray>Itupalẹ...
+    variant: '<gray>Iyatọ: <white><variant>'
+    classification: '<gray>Isọtọ: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Pare: <white><fade>%'
+    preview:
+      name: <yellow>Apẹrẹ awotẹlẹ <seed>
+      lore:
+      - <gray> Ṣe afihan maapu ti a ṣe ni ọwọ rẹ.
+    random:
+      name: <light_purple>Apẹrẹ laileto
+      lore: []
+    title: <gold>Ayipada Awoṣe <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Iṣe ti kuna: <error>'
+    metrics: '<gray>Metiriki: <white><metrics>'
+    scan-failed: <prefix><red>Ayẹwo kuna.
+    no-metric: <gray>Ko si apẹrẹ ti o ni metiriki <white><metric>
+    export-failed: '<prefix><red>Ikuna lati okeere: <error>'
+  odds: <gray><case> <dark_gray>(<count> awọn nkan, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Awọ: <white><skins> <gray>Awọn ọran: <white><cases> <gray>Awọn ohun ija: <white><weapons>'
+    cache: '<gray>Awọn awotẹlẹ ti a fipamọ: <white><previews> <gray>Ipo idii orisun: <white><pack>'
+    web: '<gray>Pack olupin ayelujara: <white><url>'
+wear:
+  factory_new: Factory New
+  minimal_wear: Aṣọ ti o kere julọ
+  field_tested: Aaye-Idanwo
+  well_worn: Wọ daradara
+  battle_scarred: Ogun-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Ni ihamọ
+  classified: Isọsọtọ
+  covert: Ibori
+  rare_special: Toje Special Ohun kan
+catalog:
+  key:
+    case_key: Bọtini ọran

@@ -1,0 +1,30 @@
+# Operation Bravo Case (2013)
+
+case:
+  name: "Operation Bravo Case"
+  key: case_key
+  color: "#5a7a3a"
+  stattrak-chance: 0.10
+  description:
+    - "2013"
+
+skins:
+  sg553_wave_spray: {weapon: sg553, rarity: mil_spec, name: "Wave Spray", style: waves, palette: ["#1a4a6a", "#3a8ab0", "#e8e8e8"]}
+  nova_tempest: {weapon: nova, rarity: mil_spec, name: "Tempest", style: swirl, palette: ["#2a2a3a", "#4a5a7a", "#a0b0c8"]}
+  galil_shattered: {weapon: galil, rarity: mil_spec, name: "Shattered", style: shards, palette: ["#1a1a1a", "#e8e8e8", "#7a7a7a"]}
+  ump45_bone_pile: {weapon: ump45, rarity: mil_spec, name: "Bone Pile", style: halftone, palette: ["#2a2a2a", "#d8d0c0"]}
+  g3sg1_demeter: {weapon: g3sg1, rarity: mil_spec, name: "Demeter", style: floral, palette: ["#3a4a2a", "#8a9a5a", "#c8c8a0"]}
+  usps_overgrowth: {weapon: usps, rarity: restricted, name: "Overgrowth", style: floral, palette: ["#1a3a1a", "#3a6a2a", "#8ab05a"]}
+  m4a1s_bright_water: {weapon: m4a1s, rarity: restricted, name: "Bright Water", style: waves, palette: ["#0a3a6a", "#1a6ab0", "#5ab0e0", "#c8e8f8"]}
+  m4a4_zirka: {weapon: m4a4, rarity: restricted, name: "Zirka", style: tribal, palette: ["#2a2a2a", "#c8a060", "#6a4a2a"]}
+  mac10_graven: {weapon: mac10, rarity: restricted, name: "Graven", style: tribal, palette: ["#2a2018", "#8a7a5a", "#c8b890"]}
+  dual_berettas_black_limba: {weapon: dual_berettas, rarity: restricted, name: "Black Limba", style: damascus, palette: ["#1a1410", "#3a2a1e", "#5a4030"]}
+  awp_graphite: {weapon: awp, rarity: classified, name: "Graphite", style: carbon, palette: ["#1a1a1c", "#3a3a3e", "#5a5a62"], float: [0.00, 0.12]}
+  p90_emerald_dragon: {weapon: p90, rarity: classified, name: "Emerald Dragon", style: tribal, palette: ["#0a2a1a", "#1a8a4a", "#c8b070"]}
+  p2000_ocean_foam: {weapon: p2000, rarity: classified, name: "Ocean Foam", style: waves, palette: ["#0a4a6a", "#2a8ab0", "#e8f4f8"], float: [0.00, 0.08]}
+  ak47_fire_serpent: {weapon: ak47, rarity: covert, name: "Fire Serpent", style: scales, palette: ["#1a2a1a", "#4a6a2a", "#c8a040", "#a02a1a"], float: [0.06, 0.76]}
+  deagle_golden_koi: {weapon: deagle, rarity: covert, name: "Golden Koi", style: scales, palette: ["#c89a2a", "#e8c860", "#1a1a1a"], float: [0.00, 0.12]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: original

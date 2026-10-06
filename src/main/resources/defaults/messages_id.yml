@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Kasus</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Anda tidak memiliki izin untuk melakukan itu.
+  player-only: <prefix><red>Hanya pemain.
+profile:
+  loading: <prefix><gray>Inventaris kulit Anda masih dimuat...
+  load-failed: <prefix><red>Inventaris kulit Anda tidak dapat dimuat. Tolong beritahu admin.
+  recovered: '<prefix><gray>Pembukaan terputus selesai: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Senapan
+  sniper: Senapan Penembak Jitu
+  heavy: Berat
+  equipment: Peralatan
+  knife: Pisau
+items:
+  test-marker: <red>⚠ Soal ujian (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> item yang mungkin
+    - ''
+    - '<gray>Klik kanan: <white>lihat isinya'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray> Habis saat membuka kasing.
+    use-hint: <prefix><gray>Klik kanan <white>case</white> untuk membukanya dengan kunci ini.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Eksterior: <white><wear>'
+    float: '<gray>Mengambang: <white><float>'
+    float-range: '<gray>Mengambang: <white><min_float> - <max_float>'
+    pattern: '<gray>Pola: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Jenis pola: <class_color><classification>'
+    fade: '<gray>Pudar: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Pembunuhan: <white><kills>'
+    has-variants: <dark_gray>Beberapa fase mungkin
+    source: '<gray>Sumber: <white><case>'
+    date: '<gray>Diperoleh: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Dihapus: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Memudar'
+gui:
+  loading:
+    name: <gray>Memuat...
+    lore: []
+  back:
+    name: <gray>Kembali
+    lore: []
+  close:
+    name: <red>Tutup
+    lore: []
+  previous:
+    name: <gray>Halaman sebelumnya
+    lore:
+    - <dark_gray>Halaman <page> / <pages>
+  next:
+    name: <gray>Halaman berikutnya
+    lore:
+    - <dark_gray>Halaman <page> / <pages>
+  cases:
+    title: Kasus
+    header:
+      name: <#e4ae39>Kasus
+      lore:
+      - <gray>Dapatkan kasing dari <white>dealer kasing</white>.
+      - <gray>Anda memerlukan kunci yang cocok untuk membukanya.
+    entry:
+    - ''
+    - '<gray>Dalam inventaris: <white><owned> <dark_gray>· <gray>Kunci: <white><keys>'
+    - '<gray>Klik kiri: <white>lihat isinya'
+    can-open: '<green>Klik kanan: buka'
+    to-skins:
+      name: <#e4ae39>Inventaris kulit
+      lore:
+      - <gray>Kulit dan pisaumu
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Klik untuk melihat pratinjau
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Pisau langka.
+      - <dark_gray><count> varian · klik untuk melihat
+      - ''
+    open:
+      name: <green>Buka kasing
+      lore:
+      - '<gray>Kasus: <white><owned> <dark_gray>· <gray>Kunci: <white><keys>'
+      - <dark_gray>Menggunakan 1 case dan 1 <key>
+    cannot-open:
+      name: <gray>Tidak dapat dibuka
+      lore:
+      - '<gray>Kasus: <white><owned> <dark_gray>· <gray>Kunci: <white><keys>'
+      - <dark_gray>Anda memerlukan kasing dan <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Apa kamu yakin?
+    'yes':
+      name: <green>Ya, hapus
+      lore:
+      - <dark_gray>Ini tidak dapat dibatalkan.
+    'no':
+      name: <red>Batal
+      lore: []
+  skins:
+    title: Persediaan kulit
+    title-other: Kulit <player>
+    tab:
+      all:
+        name: <white>Semua kulit
+        lore: []
+      weapons:
+        name: <white>Kulit senjata
+        lore: []
+      knives:
+        name: <white>Pisau
+        lore:
+        - '<dark_gray>Klik kanan pisau: lengkapi'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favorit
+        lore: []
+      recent:
+        name: <white>Baru diperoleh
+        lore: []
+    empty:
+      name: <gray>Belum ada apa pun di sini
+      lore:
+      - <dark_gray>Buka casing untuk mendapatkan skin.
+    equipped: <green> ✔ Dilengkapi
+    favorite: <yellow>★ Favorit
+    hint:
+    - ''
+    - '<dark_gray>Klik kiri: periksa · Klik kanan: pasang busur'
+    - '<dark_gray>Shift klik: favorit'
+    hint-knife:
+    - ''
+    - '<dark_gray>Klik kiri: periksa · Klik kanan: lengkapi'
+    - '<dark_gray>Shift klik: favorit'
+    to-cases:
+      name: <#e4ae39>Kasus
+      lore:
+      - <gray>Untuk kasus Anda
+    sort:
+      name: '<white>Urutkan: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Kiri: berikutnya · Kanan: sebelumnya'
+    sorts:
+      rarity: Kelangkaan
+      float: Mengapung
+      name: Nama
+      wear: Eksterior
+      pattern: Pola
+      newest: Terbaru
+      oldest: Tertua
+    info:
+      name: <white><count> <gray>kulit ditampilkan
+      lore:
+      - Total <dark_gray><total> · klik untuk menutup
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Kiri: pilih filter · Kanan: atur ulang'
+    active-knife:
+    - <green> ✔ Pisau aktif
+    - <dark_gray>Klik untuk detailnya
+  filter:
+    title: Menyaring
+    header:
+      name: <white>Filter
+      lore:
+      - <gray>Beberapa filter dari jenis yang sama digabungkan.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ saja
+    'on':
+    - <green> ✔ Aktif
+    'off':
+    - <dark_gray>Tidak aktif
+    reset:
+      name: <gray>Setel ulang semua filter
+      lore: []
+  inspect:
+    title: Periksa
+    missing:
+      name: <red>Kulit tidak tersedia
+      lore: []
+    preview:
+      name: <#e4ae39>Lihat kulit
+      lore:
+      - '<gray>Menampilkan salinan persis Anda:'
+      - <gray>pola, warna dan keausan.
+      - ''
+      - <dark_gray>Menyelinap untuk menutup pratinjau.
+    data: <white>Detail
+    favorite:
+      name: <white>Tandai sebagai favorit
+      lore: []
+    unfavorite:
+      name: <yellow>★ Hapus favorit
+      lore: []
+    equip:
+      name: <green>Peralatan
+      lore:
+      - <gray>Pedangmu menunjukkan pisau ini.
+      - <dark_gray>Damage dan enchant tetap sama.
+    unequip:
+      name: <green> ✔ Dilengkapi
+      lore:
+      - <gray>Klik untuk melepas perlengkapan.
+    inspect3d:
+      name: <white>3D memeriksa
+      lore:
+      - '<gray>Menampilkan salinan persis Anda:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Milik pemain lain
+      lore:
+      - <dark_gray>Hanya lihat
+    equip-bow:
+      name: <green>Pakai busur
+      lore:
+      - <gray>Busurmu menunjukkan kulit ini.
+    unequip-bow:
+      name: <green> ✔ Di haluan
+      lore:
+      - <gray>Klik untuk menghapus.
+    equip-crossbow:
+      name: <green>Pakai panah otomatis
+      lore:
+      - <gray>Busur panah Anda menunjukkan kulit ini.
+    unequip-crossbow:
+      name: <green> ✔ Pada panah otomatis
+      lore:
+      - <gray>Klik untuk menghapus.
+    not-equippable:
+      name: <gray>Tidak dapat dipasang
+      lore:
+      - <dark_gray>Kulit ini tidak dapat dipasang.
+    delete:
+      name: <red>Hapus kulit
+      lore:
+      - <gray>Hapus skin ini dari inventaris Anda.
+      - <dark_gray>Meminta konfirmasi.
+view:
+  unknown: <prefix><red>Pemain <white><player></white> tidak ditemukan.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> inventaris <dark_gray>· <gray><category> <dark_gray>· <gray><count> kulit <dark_gray>· <gray>Halaman <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Klik kanan: periksa · Menyelinap + klik kanan: favorit'
+  hint-knife:
+  - ''
+  - '<dark_gray>Klik kanan: periksa · Klik kiri: lengkapi'
+  - '<dark_gray>Menyelinap + klik kanan: favorit'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Klik kanan: periksa · Klik kiri: pasang busur'
+  - '<dark_gray>Menyelinap + klik kiri: pasang panah otomatis'
+  - '<dark_gray>Menyelinap + klik kanan: favorit'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> kulit <dark_gray>· <gray>Halaman <page>/<pages>
+  empty: <gray>Belum ada apa pun di sini
+  button:
+    previous: <gray>Halaman sebelumnya
+    next: <gray>Halaman berikutnya
+    category: <white>Ubah kategori
+    sort: '<white>Urutkan: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Tampilkan sebagai daftar
+    close: <red>Tutup
+preview:
+  loading: <gray>Membuat pratinjau...
+  hint: <gray>Menyelinap untuk menutup
+opening:
+  title: <case>
+  title-test: <red>UJI</red> <case>
+  bubble: <black>emas emas emas
+  world:
+    title: <white><player></white> <gray>terbuka <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Anda sedang membuka kasing.
+  case-disabled: <prefix><red>Kasing ini tidak tersedia.
+  missing: <prefix><gray>Anda memerlukan <white><case></white> dan <white><key></white>.
+  missing-now: <prefix><red>Kasing atau kunci tidak ada lagi di inventaris Anda.
+  storage-error: <prefix><red>Penyimpanan gagal. Kasing dan kunci Anda telah dikembalikan.
+  command-blocked: <prefix><gray>Tunggu hingga pembukaan selesai.
+  result: '<prefix><gray>Anda menerima <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Tes]</red> <gray>Hasil: <skin> <dark_gray>(<float>, #<pattern>) - tidak disimpan'
+  broadcast: <prefix><white><player></white> <gray>tanpa kotak <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>BARANG KHUSUS LANGKA</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Periksa
+      lore:
+      - <gray>Semua detail kulit baru Anda
+    again:
+      name: <green>Buka yang lain
+      lore:
+      - '<gray>Kasus: <white><cases> <dark_gray>· <gray>Kunci: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Kulit ini tidak cocok dengan senjata ini.
+  equipped:
+    knife: '<prefix><gray>Dilengkapi pisau: <skin>'
+    bow: '<prefix><gray>Di haluan Anda: <skin>'
+    crossbow: '<prefix><gray>Pada panah Anda: <skin>'
+  unequipped:
+    knife: <prefix><gray>Pisau tidak dilengkapi.
+    bow: <prefix><gray>Kulit busur dihilangkan.
+    crossbow: <prefix><gray>Kulit panah dihilangkan.
+knife:
+  not-owned: <prefix><red>Kulit ini bukan milik Anda.
+  equipped: '<prefix><gray>Dilengkapi: <skin>'
+  unequipped: <prefix><gray>Pisau tidak dilengkapi.
+  sword-footer: '<dark_gray>Dasar: <base>'
+inspect:
+  running: <prefix><gray>Pemeriksaan sudah berjalan.
+  no-knife: <red>Kulit tidak tersedia <white>/skins
+shop:
+  title: Dealer Kasus
+  npc-name: <gradient:#e4ae39:#f6d27a>Dealer Kasus</gradient>
+  npc-description: <gray>Klik kanan untuk berdagang
+  balance:
+    name: '<white>Saldo Anda: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Hanya item yang tidak dimodifikasi yang dihitung.
+  offer:
+  - ''
+  - '<gray>Harga: <aqua><price> <currency>'
+  - '<dark_gray>5 buah: <price5> <currency>'
+  affordable: <green> ✔ Terjangkau
+  not-affordable: <red>✘ <missing> <currency> hilang
+  affordable-five: '<dark_gray>Shift klik: beli 5'
+  hint-case:
+  - '<dark_gray>Klik kiri: beli · Klik kanan: isi'
+  hint-key:
+  - '<dark_gray>Klik kiri: beli'
+  bought: '<prefix><gray>Membeli: <white><amount>× <name></white> untuk <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Anda tidak mampu membelinya.
+  inventory-full: <prefix><red>Inventaris Anda sudah penuh.
+slot:
+  name: <#e4ae39>Inventaris kulit
+  lore:
+  - '<gray>Klik kanan: kulit, pisau dan kotak'
+  - <dark_gray>Item ini terkunci pada slot ini.
+  blocked: <prefix><gray>Kosongkan slot inventaris agar item inventaris skin dapat muncul.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Selesai.
+  unknown: <prefix><red>Tidak diketahui <what>.
+  instance-unknown: <prefix><red>Tidak ditemukan ID kulit yang cocok. <gray>/daftar csadmin <player>
+  given: <prefix><gray>Berikan <amount>× <white><name></white> kepada <white><player></white>.
+  skin-given: <prefix><gray>Memberikan <skin> <gray>kepada <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Kulit <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Pembukaan terbaru <white><player>
+  scan-start: <prefix><gray>Memindai setiap benih <white><skin></white> untuk <white><metric></white>...
+  export-start: <prefix><gray>Membangun paket sumber daya...
+  export-done: '<prefix><green><skins> kulit yang diekspor: <white><file>'
+  shop-spawned: <prefix><green>Dealer kasus telah dibuat.
+  shop-removed: <prefix><green>Dealer kasus dihapus.
+  shop-none: <prefix><gray>Tidak ada dealer kasus di sekitar.
+  reload-busy: <prefix><gray>Reload sudah berjalan.
+  reload-start: <prefix><gray>Memuat ulang...
+  reload-failed: <prefix><red>Muat ulang gagal, konfigurasi sebelumnya tetap aktif. Lihat konsol.
+  reload-done: '<prefix><green>Dimuat ulang dalam <ms> ms: <skins> skin, <cases> case, <warnings> peringatan (lihat konsol).'
+  browser:
+    title: 'Pola: <skin>'
+  manage:
+    title: 'Kelola: <player>'
+    skin-title: Kulit <player>
+    give-title: 'Berikan kulit: <player>'
+    give:
+      name: <green>Beri kulit
+      lore:
+      - <gray>Pilih casing, lalu kulit.
+    give-hint:
+    - ''
+    - '<dark_gray>Klik kiri: berikan · Klik kanan: berikan StatTrak™'
+    clear:
+      name: <red>Hapus semua kulit
+      lore:
+      - <gray><count> kulit akan dihilangkan.
+      - <dark_gray>Meminta konfirmasi.
+    cleared: <prefix><gray>Menghapus <count> kulit <white><player></white>.
+    removed: <prefix><gray>Dihapus <skin> <gray>dari <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Klik untuk beralih.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Setel pelampung ke <white><float>
+    pattern-step:
+      name: <white>Pola <step>
+      lore:
+      - '<gray>Saat ini: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Pola acak
+      lore:
+      - '<gray>Saat ini: <white><pattern>'
+    equip:
+      name: <green>Peralatan untuk pemain
+      lore: []
+    unequip:
+      name: <green> ✔ Dilengkapi
+      lore:
+      - <gray>Klik untuk melepas perlengkapan.
+    remove:
+      name: <red>Hapus kulit
+      lore:
+      - <dark_gray>Meminta konfirmasi.
+  labels:
+    case: kasus
+    key: kunci
+    skin: kulit
+    manual: basis data manual
+    automatic: otomatis
+    none: tidak ada (selesai tidak memiliki profil analisis)
+    'off': mati
+  debug:
+    seed: '<gray>Pola: <white><seed>'
+    analysing: <dark_gray>Menganalisis...
+    variant: '<gray>Varian: <white><variant>'
+    classification: '<gray>Klasifikasi: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Pudar: <white><fade>%'
+    preview:
+      name: <yellow>Pratinjau pola <seed>
+      lore:
+      - <gray>Menampilkan peta yang dirender di tangan Anda.
+    random:
+      name: <light_purple>Pola acak
+      lore: []
+    title: <gold>Debugger pola <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Gagal merender: <error>'
+    metrics: '<gray>Metrik: <white><metrics>'
+    scan-failed: <prefix><red>Pemindaian gagal.
+    no-metric: <gray>Tidak ada pola yang memiliki metrik <white><metric>
+    export-failed: '<prefix><red>Ekspor gagal: <error>'
+  odds: <gray><case> <dark_gray>(<count> item, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Kulit: <white><skins> <gray>Kasus: <white><cases> <gray>Senjata: <white><weapons>'
+    cache: '<gray>Pratinjau cache: <white><previews> <gray>Mode paket sumber daya: <white><pack>'
+    web: '<gray>Paket server web: <white><url>'
+wear:
+  factory_new: Pabrik Baru
+  minimal_wear: Keausan Minimal
+  field_tested: Diuji di Lapangan
+  well_worn: Sudah usang
+  battle_scarred: Bekas Luka Pertempuran
+rarity:
+  mil_spec: Mil-Spesifikasi
+  restricted: Terbatas
+  classified: Diklasifikasikan
+  covert: Terselubung
+  rare_special: Barang Spesial Langka
+catalog:
+  key:
+    case_key: Kunci Kasus

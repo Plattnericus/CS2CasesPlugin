@@ -1,0 +1,32 @@
+# Danger Zone Case (2019)
+
+case:
+  name: "Danger Zone Case"
+  key: case_key
+  color: "#c8a020"
+  stattrak-chance: 0.10
+  description:
+    - "2019"
+
+skins:
+  glock18_oxide_blaze: {weapon: glock18, rarity: mil_spec, name: "Oxide Blaze", style: graffiti, palette: ["#3a3a3a", "#c84a1a", "#1a1a1a"]}
+  nova_wood_fired: {weapon: nova, rarity: mil_spec, name: "Wood Fired", style: flames, palette: ["#3a1a0a", "#8a4a1a", "#e8a040"]}
+  m4a4_magnesium: {weapon: m4a4, rarity: mil_spec, name: "Magnesium", style: brushed, palette: ["#5a5a62", "#a0a0aa", "#e8e8f0"]}
+  sawedoff_black_sand: {weapon: sawedoff, rarity: mil_spec, name: "Black Sand", style: camo, palette: ["#1a1a1a", "#3a3a3a", "#8a7a5a"]}
+  sg553_danger_close: {weapon: sg553, rarity: mil_spec, name: "Danger Close", style: stripes, palette: ["#1a1a1a", "#f0c020", "#e8e8e8"]}
+  tec9_fubar: {weapon: tec9, rarity: mil_spec, name: "Fubar", style: graffiti, palette: ["#5a4a3a", "#8a7a5a", "#1a1a1a"]}
+  mp9_modest_threat: {weapon: mp9, rarity: mil_spec, name: "Modest Threat", style: graffiti, palette: ["#e8e8e8", "#2a5ad0", "#1a1a1a"]}
+  usps_flashback: {weapon: usps, rarity: restricted, name: "Flashback", style: stripes, palette: ["#e8e8e8", "#5ab0e8", "#e83a5a"]}
+  p250_nevermore: {weapon: p250, rarity: restricted, name: "Nevermore", style: graffiti, palette: ["#1a1a1a", "#5a1a8a", "#e8e8e8"]}
+  galil_signal: {weapon: galil, rarity: restricted, name: "Signal", style: circuit, palette: ["#1a1a1a", "#f07a1a", "#e8e8e8"]}
+  mac10_pipe_down: {weapon: mac10, rarity: restricted, name: "Pipe Down", style: graffiti, palette: ["#2a2a2a", "#c8c8c8", "#c84a1a"]}
+  g3sg1_scavenger: {weapon: g3sg1, rarity: restricted, name: "Scavenger", style: camo, palette: ["#5a4a3a", "#8a7a5a", "#1a1a1a"]}
+  deagle_mecha_industries: {weapon: deagle, rarity: classified, name: "Mecha Industries", style: hex, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+  mp5sd_phosphor: {weapon: mp5sd, rarity: classified, name: "Phosphor", style: swirl, palette: ["#0a1a0a", "#2ae05a", "#e8e8e8"]}
+  ump45_momentum: {weapon: ump45, rarity: classified, name: "Momentum", style: stripes, palette: ["#e8e8e8", "#5ab0e8", "#f07a1a"]}
+  ak47_asiimov: {weapon: ak47, rarity: covert, name: "Asiimov", style: shards, palette: ["#f2f2f2", "#1a1a1a", "#f07a1a"], float: [0.05, 0.70]}
+  awp_neo_noir: {weapon: awp, rarity: covert, name: "Neo-Noir", style: graffiti, palette: ["#1a1a1a", "#e8e8e8", "#c81a1a", "#2a5ad0"]}
+
+rare-special:
+  knives: [navaja, stiletto, talon, ursus]
+  finishes: original

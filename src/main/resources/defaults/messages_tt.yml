@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray> [<#e4ae39>Cases</#e4ae39>] </dark_gray> '
+general:
+  no-permission: <prefix><red> Сезнең моны эшләргә рөхсәтегез юк.
+  player-only: <prefix><red> Уенчылар гына.
+profile:
+  loading: <prefix><gray> Сезнең тире инвентаризациясе әле дә йөкләнә ...
+  load-failed: <prefix><red> Сезнең тире инвентаризациясен йөкләп булмый. Зинһар, администраторга әйтегез.
+  recovered: '<prefix><gray> өзек ачылу тәмамланды: <skin>'
+category:
+  pistol: Пистолет
+  smg: SMG
+  rifle: Мылтык
+  sniper: Снайпер мылтыгы
+  heavy: Авыр
+  equipment: Equipmentиһазлау
+  knife: Пычак
+items:
+  test-marker: <red>⚠ Тест пункты (админ)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> мөмкин булган әйберләр
+    - ''
+    - '<gray> Дөрес басыгыз: <white> карау эчтәлеге'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray> Эш ачканда кулланыла.
+    use-hint: <prefix><gray> Бу ачкыч белән ачу өчен <white>case</white> төймәсенә басыгыз.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray> Тышкы: <white><wear>'
+    float: '<gray> Йөзү: <white><float>'
+    float-range: '<gray> Йөзү: <white><min_float> - <max_float>'
+    pattern: '<gray> ternрнәк: <white><pattern>'
+    variant: '<gray> Фаза: <class_color><variant>'
+    classification: '<gray> ternрнәк төре: <class_color><classification>'
+    fade: '<gray> Сүндерү: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray> үтерү: <white><kills>'
+    has-variants: <dark_gray> Төрле этаплар мөмкин
+    source: '<gray> Чыганак: <white><case>'
+    date: '<gray> Алынган: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray> бетерелгән: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray> · <white><fade>% сүнде'
+gui:
+  loading:
+    name: <gray> Йөкләү ...
+    lore: []
+  back:
+    name: <gray> Кире
+    lore: []
+  close:
+    name: <red> Ябу
+    lore: []
+  previous:
+    name: <gray> Алдагы бит
+    lore:
+    - <dark_gray> бит <page> / <pages>
+  next:
+    name: <gray> Киләсе бит
+    lore:
+    - <dark_gray> бит <page> / <pages>
+  cases:
+    title: Эшләр
+    header:
+      name: <#e4ae39> Эшләр
+      lore:
+      - <gray> <white> очрак сатучыдан</white> очракларын алыгыз.
+      - <gray> Сезгә ачкыч ачу өчен туры ачкыч кирәк.
+    entry:
+    - ''
+    - '<gray> Инвентаризациядә: <white><owned> <dark_gray> · <gray> Ачкычлар: <white><keys>'
+    - '<gray> Сулга басыгыз: <white> карау эчтәлеге'
+    can-open: '<green> Дөрес басыгыз: ачык'
+    to-skins:
+      name: <#e4ae39> тире инвентаризациясе
+      lore:
+      - <gray> Сезнең тире һәм пычак
+  preview:
+    title: <case>
+    click-preview: <dark_gray> Алдан карау өчен басыгыз
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Сирәк пычак.
+      - <dark_gray><count> вариантлары · карау өчен басыгыз
+      - ''
+    open:
+      name: <green> Ачык эш
+      lore:
+      - '<gray> Эшләр: <white><owned> <dark_gray> · <gray> Ачкычлар: <white><keys>'
+      - <dark_gray> 1 очрак һәм 1 <key> куллану
+    cannot-open:
+      name: <gray> Ачып булмый
+      lore:
+      - '<gray> Эшләр: <white><owned> <dark_gray> · <gray> Ачкычлар: <white><keys>'
+      - <dark_gray> Сезгә эш һәм <key> кирәк.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Сез ышанасызмы?
+    'yes':
+      name: <green> Әйе, бетерегез
+      lore:
+      - <dark_gray>Бу кире кайтарылмый.
+    'no':
+      name: <red>Cancel
+      lore: []
+  skins:
+    title: Тере инвентаризациясе
+    title-other: <player> тиреләре
+    tab:
+      all:
+        name: <white>Бары тире
+        lore: []
+      weapons:
+        name: <white> Корал тиреләре
+        lore: []
+      knives:
+        name: <white>Кайваннар
+        lore:
+        - '<dark_gray> Пычакка дөрес басыгыз: җиһазландырыгыз'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Фаворитлар
+        lore: []
+      recent:
+        name: <white> Соңгы вакытта
+        lore: []
+    empty:
+      name: <gray> Монда әле бернәрсә дә юк
+      lore:
+      - <dark_gray> Тере алу өчен очраклар ачыгыз.
+    equipped: <green>✔ җиһазландырылган
+    favorite: <yellow> ★ Яраткан
+    hint:
+    - ''
+    - '<dark_gray> Сулга басыгыз: тикшерегез · Уң төймәгә басыгыз: җәягә куегыз'
+    - '<dark_gray> Сменага басыгыз: яраткан'
+    hint-knife:
+    - ''
+    - '<dark_gray> Сулга басыгыз: тикшерегез · Уң басу: җиһазлау'
+    - '<dark_gray> Сменага басыгыз: яраткан'
+    to-cases:
+      name: <#e4ae39> Эшләр
+      lore:
+      - <gray> Сезнең очракларга
+    sort:
+      name: '<white>Сорт: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray> Сул: киләсе · Уң: алдагы'
+    sorts:
+      rarity: Сирәк
+      float: Йөзү
+      name: Исем
+      wear: Тышкы
+      pattern: Ternрнәк
+      newest: Иң яңасы
+      oldest: Иң олы
+    info:
+      name: <white><count> <gray> тире күрсәтелгән
+      lore:
+      - <dark_gray><total> барлыгы · ябу өчен басыгыз
+    filter:
+      name: <white> Фильтр
+      lore:
+      - '<dark_gray> Сулда: фильтрларны сайлагыз · Уң: яңарту'
+    active-knife:
+    - <green>✔ Актив пычак
+    - <dark_gray> Детальләр өчен басыгыз
+  filter:
+    title: Фильтр
+    header:
+      name: <white> Фильтр
+      lore:
+      - <gray> Шул ук төрдәге төрле фильтрлар берләштерелгән.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ гына
+    'on':
+    - <green>✔ Актив
+    'off':
+    - <dark_gray> Актив түгел
+    reset:
+      name: <gray> Барлык фильтрларны яңадан урнаштырыгыз
+      lore: []
+  inspect:
+    title: Тикшерегез
+    missing:
+      name: <red> Тере юк
+      lore: []
+    preview:
+      name: <#e4ae39> Терене карау
+      lore:
+      - '<gray> Сезнең төгәл күчермәгезне күрсәтә:'
+      - <gray> үрнәк, төсләр һәм кием.
+      - ''
+      - <dark_gray> Алдан карау ябу өчен.
+    data: <white> Детальләр
+    favorite:
+      name: <white> Марк яраткан
+      lore: []
+    unfavorite:
+      name: <yellow> favorite Фаворитны бетерегез
+      lore: []
+    equip:
+      name: <green> җиһаз
+      lore:
+      - <gray>Син кылычлар бу пычакны күрсәтәләр.
+      - <dark_gray> Зыян һәм сихерләр бер үк булып кала.
+    unequip:
+      name: <green>✔ җиһазландырылган
+      lore:
+      - <gray> ipиһазлау өчен басыгыз.
+    inspect3d:
+      name: <white>3D тикшерү
+      lore:
+      - '<gray> Сезнең төгәл күчермәгезне күрсәтә:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray> Башка уенчыга
+      lore:
+      - <dark_gray>Керегез
+    equip-bow:
+      name: <green> җәягә куегыз
+      lore:
+      - <gray> Сезнең җәяләр бу тирене күрсәтәләр.
+    unequip-bow:
+      name: <green>✔ җәядә
+      lore:
+      - <gray> Бетерү өчен басыгыз.
+    equip-crossbow:
+      name: <green> Кроссовкага куегыз
+      lore:
+      - <gray>Сезнең кроссовкалар бу тирене күрсәтәләр.
+    unequip-crossbow:
+      name: <green>✔ Кроссовкада
+      lore:
+      - <gray> Бетерү өчен басыгыз.
+    not-equippable:
+      name: <gray> җиһазландырылмый
+      lore:
+      - <dark_gray> Бу тире җиһазландырылмый.
+    delete:
+      name: <red> Терене бетерегез
+      lore:
+      - <gray> Бу тирене инвентаризациядән чыгарып җибәрә.
+      - <dark_gray> раслау өчен сораулар.
+view:
+  unknown: <prefix><red> Уенчы <white><player></white> табылмады.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> инвентаризация <dark_gray> · <gray><category> <dark_gray> · <gray><count> тире <dark_gray> · <gray> бит
+    <page> / <pages>
+  hint:
+  - ''
+  - '<dark_gray> Дөрес басу: тикшерү · Ябу + уң басу: яраткан'
+  hint-knife:
+  - ''
+  - '<dark_gray> Дөрес басу: тикшерү · Сулга басу: җиһазлау'
+  - '<dark_gray>Снак + уң басу: яраткан'
+  hint-weapon:
+  - ''
+  - '<dark_gray> Дөрес басыгыз: тикшерегез · Сулга басыгыз: җәягә куегыз'
+  - '<dark_gray>Снак + сул басу: кроссовкага куегыз'
+  - '<dark_gray>Снак + уң басу: яраткан'
+  header: <#e4ae39><category></#e4ae39> <dark_gray> · <gray><count> тире <dark_gray> · <gray> бит <page> / <pages>
+  empty: <gray> Монда әле бернәрсә дә юк
+  button:
+    previous: <gray> Алдагы бит
+    next: <gray> Киләсе бит
+    category: <white> категорияне үзгәртү
+    sort: '<white>Сорт: <#e4ae39><sort>'
+    filter: <white> Фильтр
+    list: <white>Система итеп күрсәт
+    close: <red> Ябу
+preview:
+  loading: <gray> Алдан карау ...
+  hint: <gray> Ябу өчен
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black> алтын алтын
+  world:
+    title: <white><player></white> <gray> ачыла <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray> Сез инде эш ачасыз.
+  case-disabled: <prefix><red> Бу очрак мөмкин түгел.
+  missing: <prefix><gray> Сезгә <white><case></white> һәм <white><key></white> кирәк.
+  missing-now: <prefix><red> Эш яки ачкыч сезнең инвентаризациядә юк.
+  storage-error: <prefix><red> Саклау уңышсыз. Сезнең эшегез һәм ачкычыгыз кайтарылды.
+  command-blocked: <prefix><gray> Ачылганчы көтегез.
+  result: '<prefix><gray> Сез <skin> <dark_gray> алдыгыз (<float>, #<pattern>)'
+  result-test: '<prefix><red> [Тест] </red> <gray> Нәтиҗә: <skin> <dark_gray> (<float>, #<pattern>) - сакланмаган'
+  broadcast: <prefix><white><player></white> <gray> сандыклы <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b> РЕСПУБЛИКА ИТЕМ</b></gradient>
+  buttons:
+    inspect:
+      name: <white>
+      lore:
+      - <gray> Яңа тирегезнең барлык детальләре
+    again:
+      name: <green> Башка ач
+      lore:
+      - '<gray> Эшләр: <white><cases> <dark_gray> · <gray> Ачкычлар: <white><keys>'
+equip:
+  wrong-slot: <prefix><red> Бу тире бу коралга туры килми.
+  equipped:
+    knife: '<prefix><gray>Кайна җиһазландырылган: <skin>'
+    bow: '<prefix><gray> Сезнең җәягездә: <skin>'
+    crossbow: '<prefix><gray> Сезнең кроссовкада: <skin>'
+  unequipped:
+    knife: <prefix><gray>Кнайф җиһазсыз.
+    bow: <prefix><gray>Бер тире алынды.
+    crossbow: <prefix><gray> Кроссовка тире алынды.
+knife:
+  not-owned: <prefix><red> Бу тире сезнеке түгел.
+  equipped: '<prefix><gray> eиһазландырылган: <skin>'
+  unequipped: <prefix><gray>Кнайф җиһазсыз.
+  sword-footer: '<dark_gray>База: <base>'
+inspect:
+  running: <prefix><gray>Бер инспекция эшли.
+  no-knife: <red> Тере юк <white>/skins
+shop:
+  title: Эш дилеры
+  npc-name: <gradient:#e4ae39:#f6d27a> Эш дилеры</gradient>
+  npc-description: <gray> Сәүдә өчен дөрес басыгыз
+  balance:
+    name: '<white>Сезнең баланс: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray> Бары тик үзгәртелмәгән әйберләр санала.
+  offer:
+  - ''
+  - '<gray> бәясе: <aqua><price> <currency>'
+  - '<dark_gray>5 кисәкләр: <price5> <currency>'
+  affordable: <green>✔ Уңайлы
+  not-affordable: <red>✘ <missing> <currency> югалган
+  affordable-five: '<dark_gray>Сменаны басыгыз: 5 сатып алыгыз'
+  hint-case:
+  - '<dark_gray> Сул басу: сатып алу · Уң басу: эчтәлек'
+  hint-key:
+  - '<dark_gray> Сулга басыгыз: сатып алыгыз'
+  bought: '<prefix><gray> Сатылган: <white><amount> × <name></white> <aqua><price> <currency></aqua> өчен.'
+  not-enough: <prefix><red> Сез моны эшли алмыйсыз.
+  inventory-full: <prefix><red>Сезнең инвентаризация тулы.
+slot:
+  name: <#e4ae39> тире инвентаризациясе
+  lore:
+  - '<gray> Дөрес басыгыз: тире, пычак һәм корпус'
+  - <dark_gray>Бу әйбер бу урында бикләнгән.
+  blocked: <prefix><gray> Тере инвентаризация пункты барлыкка килсен өчен, бушлай инвентаризация урыны.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray> »<gray>Админ
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green> эшләнде.
+  unknown: <prefix><red> Билгесез <what>.
+  instance-unknown: <prefix><red> Бер-берсенә туры килгән тире идентификаторы табылмады. <gray> / csadmin исемлеге <player>
+  given: <prefix><gray> бирегез <amount> × <white><name></white> - <white><player></white>.
+  skin-given: <prefix><gray> бирегез <skin> <gray>to <white><player></white> <dark_gray> (#<id>)
+  list-header: <prefix><gray> <white><player></white> тиреләре <dark_gray> (<count>)
+  history-header: <prefix><gray> <white><player>ның соңгы ачылышы
+  scan-start: <prefix><gray> <white><metric></white>.. өчен һәр орлыкны <white><skin></white> сканерлау.
+  export-start: <prefix><gray> Ресурс пакеты төзү ...
+  export-done: '<prefix><green><skins> экспортланган тиреләр: <white><file>'
+  shop-spawned: <prefix><green> Эш дилеры булдырылды.
+  shop-removed: <prefix><green> Эш дилеры алынды.
+  shop-none: <prefix><gray> Якында очрак сатучы юк.
+  reload-busy: <prefix><gray>A йөкләү инде эшли.
+  reload-start: <prefix><gray> Йөкләү ...
+  reload-failed: <prefix><red> Йөкләү уңышсыз булды, алдагы конфигурация актив булып кала. Консолны кара.
+  reload-done: '<prefix><green> <ms> мс белән йөкләнде: <skins> тиреләр, <cases> очраклары, <warnings> кисәтүләре (консолны карагыз).'
+  browser:
+    title: 'Ternрнәк: <skin>'
+  manage:
+    title: 'Идарә итү: <player>'
+    skin-title: Тере <player>
+    give-title: 'Тере бирегез: <player>'
+    give:
+      name: <green> Тере бирегез
+      lore:
+      - <gray> Касса, аннары тире.
+    give-hint:
+    - ''
+    - '<dark_gray> Сулга басыгыз: бирегез · Уң төймәгә басыгыз: StatTrak™ бирегез'
+    clear:
+      name: <red> Барлык тиреләрне бетерегез
+      lore:
+      - <gray><count> тиреләр чыгарылачак.
+      - <dark_gray> раслау өчен сораулар.
+    cleared: <prefix><gray> бетерелгән <count> тиреләре <white><player></white>.
+    removed: <prefix><gray> бетерелгән <skin> <gray>of <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray> Күчерү өчен басыгыз.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray> Йөзүне <white><float> итеп куя
+    pattern-step:
+      name: <white>Pattern <step>
+      lore:
+      - '<gray> Хәзерге вакытта: <white><pattern>'
+    pattern-random:
+      name: <light_purple> очраклы үрнәк
+      lore:
+      - '<gray> Хәзерге вакытта: <white><pattern>'
+    equip:
+      name: <green> Плеер өчен җиһаз
+      lore: []
+    unequip:
+      name: <green>✔ җиһазландырылган
+      lore:
+      - <gray> ipиһазлау өчен басыгыз.
+    remove:
+      name: <red> Терене бетерегез
+      lore:
+      - <dark_gray> раслау өчен сораулар.
+  labels:
+    case: очрак
+    key: ачкыч
+    skin: тире
+    manual: кул белән мәгълүмат базасы
+    automatic: автоматик
+    none: юк (ахырда анализ профиле юк)
+    'off': сүндерелгән
+  debug:
+    seed: '<gray> ternрнәк: <white><seed>'
+    analysing: <dark_gray> Анализ ...
+    variant: '<gray> Вариант: <white><variant>'
+    classification: '<gray>Классификация: <white><classification> <dark_gray><mode>'
+    fade: '<gray> Сүндерү: <white><fade>%'
+    preview:
+      name: <yellow>Керү үрнәге <seed>
+      lore:
+      - <gray> Кулыгызда күрсәтелгән картаны күрсәтә.
+    random:
+      name: <light_purple> очраклы үрнәк
+      lore: []
+    title: '<gold>Pattern debugger <dark_gray> »<white><skin> <gray> # <seed>'
+    render-failed: '<prefix><red> Рендер уңышсыз: <error>'
+    metrics: '<gray>Метрика: <white><metrics>'
+    scan-failed: <prefix><red>Скан уңышсыз.
+    no-metric: <gray> Бер үрнәкнең дә <white><metric> метрикасы юк
+    export-failed: '<prefix><red> Экспорт уңышсыз: <error>'
+  odds: <gray><case> <dark_gray> (<count> әйберләр, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray> тире: <white><skins> <gray> Эшләр: <white><cases> <gray> Кораллар: <white><weapons>'
+    cache: '<gray>Cache алдан карау: <white><previews> <gray> Ресурс пакет режимы: <white><pack>'
+    web: '<gray> Веб-серверны каплагыз: <white><url>'
+wear:
+  factory_new: Завод Яңа
+  minimal_wear: Минималь кием
+  field_tested: Кыр-сынау
+  well_worn: Яхшы тузган
+  battle_scarred: Сугыш
+rarity:
+  mil_spec: Мил-спек
+  restricted: Чикләнгән
+  classified: Классификацияләнгән
+  covert: Ябык
+  rare_special: Сирәк махсус пункт
+catalog:
+  key:
+    case_key: Эш ачкычы

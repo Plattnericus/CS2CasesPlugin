@@ -1,0 +1,29 @@
+# Chroma Case (2015)
+
+case:
+  name: "Chroma Case"
+  key: case_key
+  color: "#7a3ab0"
+  stattrak-chance: 0.10
+  description:
+    - "2015"
+
+skins:
+  glock18_catacombs: {weapon: glock18, rarity: mil_spec, name: "Catacombs", style: halftone, palette: ["#1a1a1a", "#5a5a5a", "#c8c8c8"]}
+  m249_system_lock: {weapon: m249, rarity: mil_spec, name: "System Lock", style: circuit, palette: ["#1a1a1a", "#3a3a3a", "#c81a1a"]}
+  mp9_deadly_poison: {weapon: mp9, rarity: mil_spec, name: "Deadly Poison", style: splatter, palette: ["#1a1a1a", "#5ac81a", "#e8e8e8"]}
+  scar20_grotto: {weapon: scar20, rarity: mil_spec, name: "Grotto", style: camo, palette: ["#2a2a2a", "#5a5a5a", "#8ab0a0"]}
+  xm1014_quicksilver: {weapon: xm1014, rarity: mil_spec, name: "Quicksilver", style: brushed, palette: ["#5a5a62", "#a0a0aa", "#e8e8f0"]}
+  dual_berettas_urban_shock: {weapon: dual_berettas, rarity: restricted, name: "Urban Shock", style: graffiti, palette: ["#1a1a1a", "#e8e8e8", "#c81a1a"]}
+  deagle_naga: {weapon: deagle, rarity: restricted, name: "Naga", style: tribal, palette: ["#2a2a2a", "#c8a040", "#5a3a1a"]}
+  mac10_malachite: {weapon: mac10, rarity: restricted, name: "Malachite", style: swirl, palette: ["#0a3a2a", "#1a8a5a", "#5ae0a0"]}
+  sawedoff_serenity: {weapon: sawedoff, rarity: restricted, name: "Serenity", style: floral, palette: ["#e8e8e8", "#5a8ab0", "#1a3a5a"]}
+  ak47_cartel: {weapon: ak47, rarity: classified, name: "Cartel", style: tribal, palette: ["#3a2a1a", "#c8a040", "#1a1a1a"]}
+  m4a4_dragon_king: {weapon: m4a4, rarity: classified, name: "龍王 (Dragon King)", style: scales, palette: ["#1a1a1a", "#c81a1a", "#c8a040"]}
+  p250_muertos: {weapon: p250, rarity: classified, name: "Muertos", style: floral, palette: ["#1a5ad0", "#e83a5a", "#f0c020", "#e8e8e8"]}
+  awp_man_o_war: {weapon: awp, rarity: covert, name: "Man-o'-war", style: swirl, palette: ["#2a1a4a", "#6a3a9a", "#2ab0b0"]}
+  galil_chatterbox: {weapon: galil, rarity: covert, name: "Chatterbox", style: graffiti, palette: ["#e8e8e8", "#c81a1a", "#1a1a1a", "#f0c020"]}
+
+rare-special:
+  knives: [bayonet, flip, gut, karambit, m9_bayonet]
+  finishes: chroma

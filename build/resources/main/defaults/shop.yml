@@ -1,0 +1,42 @@
+# Case dealer. Spawn one with /csadmin shop spawn, remove with /csadmin shop remove.
+currency: DIAMOND
+
+villager:
+  # empty = name from the language file (shop.npc-name)
+  name: ""
+  profession: cartographer
+
+# Look of the dealer spawned with /csadmin shop spawn.
+npc:
+  # mannequin (a real player model with a skin) or villager
+  type: mannequin
+  # second line under the name of a mannequin
+  # empty = text from the language file (shop.npc-description)
+  description: ""
+  # Skins: player names, or {texture: "...", signature: "..."} for skins without an account.
+  # The mannequin switches to the next skin every skin-interval-seconds.
+  skins:
+    - Notch
+    - jeb_
+  skin-interval-seconds: 300
+  # Looks at the nearest player, waves at players who walk up, and nods or waves now and then.
+  animations: true
+  look-range: 8
+  gesture-interval-ticks:
+    min: 100
+    max: 240
+  # holds a case in its hand
+  hold-case: true
+
+cases:
+  default-price: 3
+  prices:
+    kilowatt_case: 5
+    dreams_and_nightmares_case: 4
+    snakebite_case: 4
+    fracture_case: 4
+  # Cases that are not sold at the dealer
+  exclude: []
+
+keys:
+  case_key: 1

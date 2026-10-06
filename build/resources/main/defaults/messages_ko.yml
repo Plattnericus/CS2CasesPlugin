@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>사례</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>그러한 작업을 수행할 권한이 없습니다.
+  player-only: <prefix><red>플레이어 전용.
+profile:
+  loading: <prefix><gray>스킨 인벤토리가 아직 로드 중입니다...
+  load-failed: <prefix><red>스킨 인벤토리를 로드할 수 없습니다. 관리자에게 말씀해주세요.
+  recovered: '<prefix><gray>중단된 열기 완료: <skin>'
+category:
+  pistol: 권총
+  smg: 기관단총
+  rifle: 소총
+  sniper: 저격소총
+  heavy: 헤비
+  equipment: 장비
+  knife: 칼
+items:
+  test-marker: <red>⚠ 테스트 항목(관리자)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> 가능한 항목
+    - ''
+    - '<gray>오른쪽 클릭: <white>내용 보기'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>케이스를 열 때 사용됩니다.
+    use-hint: <prefix><gray><white>케이스</white>을 마우스 오른쪽 버튼으로 클릭하여 이 키로 엽니다.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>외부: <white><wear>'
+    float: '<gray>플로트: <white><float>'
+    float-range: '<gray>플로트: <white><min_float> - <max_float>'
+    pattern: '<gray>패턴: <white><pattern>'
+    variant: '<gray>단계: <class_color><variant>'
+    classification: '<gray>패턴 유형: <class_color><classification>'
+    fade: '<gray>페이드: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>킬 수: <white><kills>'
+    has-variants: <dark_gray>여러 단계 가능
+    source: '<gray>출처: <white><case>'
+    date: '<gray>얻음: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>삭제됨: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% 페이드'
+gui:
+  loading:
+    name: <gray>로드 중...
+    lore: []
+  back:
+    name: <gray>뒤로
+    lore: []
+  close:
+    name: <red>닫기
+    lore: []
+  previous:
+    name: <gray>이전 페이지
+    lore:
+    - <dark_gray>페이지 <page> / <pages>
+  next:
+    name: <gray>다음 페이지
+    lore:
+    - <dark_gray>페이지 <page> / <pages>
+  cases:
+    title: 사례
+    header:
+      name: <#e4ae39>사례
+      lore:
+      - <gray><white>케이스 대리점</white>에게서 케이스를 받으세요.
+      - <gray>열려면 일치하는 키가 필요합니다.
+    entry:
+    - ''
+    - '<gray>인벤토리: <white><owned> <dark_gray>· <gray>키: <white><keys>'
+    - '<gray>왼쪽 클릭: <white>내용 보기'
+    can-open: '<green>오른쪽 클릭: 열기'
+    to-skins:
+      name: <#e4ae39>스킨 인벤토리
+      lore:
+      - <gray>스킨과 칼
+  preview:
+    title: <case>
+    click-preview: <dark_gray>미리보기를 보려면 클릭하세요.
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>희귀한 칼이군요.
+      - <dark_gray><count> 변형 · 보려면 클릭하세요
+      - ''
+    open:
+      name: <green>케이스 열기
+      lore:
+      - '<gray>사례: <white><owned> <dark_gray>· <gray>키: <white><keys>'
+      - <dark_gray>1개의 케이스와 1개의 <key>을 사용합니다.
+    cannot-open:
+      name: <gray>열 수 없습니다.
+      lore:
+      - '<gray>사례: <white><owned> <dark_gray>· <gray>키: <white><keys>'
+      - <dark_gray>케이스와 <key>이 필요합니다.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: 확실합니까?
+    'yes':
+      name: <green>예, 삭제합니다
+      lore:
+      - <dark_gray>이 작업은 취소할 수 없습니다.
+    'no':
+      name: <red>취소
+      lore: []
+  skins:
+    title: 스킨 인벤토리
+    title-other: <player>의 스킨
+    tab:
+      all:
+        name: <white>모든 스킨
+        lore: []
+      weapons:
+        name: <white>무기 스킨
+        lore: []
+      knives:
+        name: <white>칼
+        lore:
+        - '<dark_gray>칼을 마우스 오른쪽 버튼으로 클릭: 장착'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>즐겨찾기
+        lore: []
+      recent:
+        name: <white>최근 획득
+        lore: []
+    empty:
+      name: <gray>아직 아무것도 없습니다
+      lore:
+      - <dark_gray>케이스를 열어 스킨을 받으세요.
+    equipped: <green>✔ 장착됨
+    favorite: <yellow>★ 즐겨찾기
+    hint:
+    - ''
+    - '<dark_gray>왼쪽 클릭: 검사 · 오른쪽 클릭: 활 착용'
+    - '<dark_gray>Shift 클릭: 즐겨찾기'
+    hint-knife:
+    - ''
+    - '<dark_gray>왼쪽 클릭: 검사 · 오른쪽 클릭: 장비'
+    - '<dark_gray>Shift 클릭: 즐겨찾기'
+    to-cases:
+      name: <#e4ae39>사례
+      lore:
+      - <gray>귀하의 사례에
+    sort:
+      name: '<white>정렬: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>왼쪽: 다음 · 오른쪽: 이전'
+    sorts:
+      rarity: 희귀성
+      float: 플로트
+      name: 이름
+      wear: 외관
+      pattern: 패턴
+      newest: 최신
+      oldest: 가장 오래된
+    info:
+      name: <white><count> <gray>스킨 표시됨
+      lore:
+      - 총 <dark_gray><total> · 닫으려면 클릭하세요.
+    filter:
+      name: <white>필터
+      lore:
+      - '<dark_gray>왼쪽: 필터 선택 · 오른쪽: 재설정'
+    active-knife:
+    - <green>✔ 활성 칼
+    - <dark_gray>자세한 내용을 보려면 클릭하세요.
+  filter:
+    title: 필터
+    header:
+      name: <white>필터
+      lore:
+      - <gray>같은 종류의 여러 필터가 결합됩니다.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™만
+    'on':
+    - <green>✔ 활성
+    'off':
+    - <dark_gray>비활성
+    reset:
+      name: <gray>모든 필터 재설정
+      lore: []
+  inspect:
+    title: 검사
+    missing:
+      name: <red>스킨을 사용할 수 없습니다.
+      lore: []
+    preview:
+      name: <#e4ae39>스킨 보기
+      lore:
+      - <gray>정확한 사본을 표시합니다.
+      - <gray>패턴, 색상 및 착용.
+      - ''
+      - <dark_gray>미리보기를 닫으려면 몰래 보세요.
+    data: <white>세부정보
+    favorite:
+      name: <white>즐겨찾기로 표시
+      lore: []
+    unfavorite:
+      name: <yellow>★ 즐겨찾기 제거
+      lore: []
+    equip:
+      name: <green>장비
+      lore:
+      - <gray>당신의 칼은 이 칼을 보여줍니다.
+      - <dark_gray>데미지와 마법 부여는 동일하게 유지됩니다.
+    unequip:
+      name: <green>✔ 장착됨
+      lore:
+      - <gray>장비를 해제하려면 클릭하세요.
+    inspect3d:
+      name: <white>3D 검사
+      lore:
+      - <gray>정확한 사본을 표시합니다.
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>다른 플레이어에 속합니다
+      lore:
+      - <dark_gray>보기 전용
+    equip-bow:
+      name: <green>활을 달다
+      lore:
+      - <gray>당신의 활은 이 피부를 보여줍니다.
+    unequip-bow:
+      name: <green>✔ 활에
+      lore:
+      - <gray>제거하려면 클릭하세요.
+    equip-crossbow:
+      name: <green>석궁을 착용하세요
+      lore:
+      - <gray>석궁에 이 피부가 보입니다.
+    unequip-crossbow:
+      name: <green>✔ 석궁에
+      lore:
+      - <gray>제거하려면 클릭하세요.
+    not-equippable:
+      name: <gray>장착할 수 없음
+      lore:
+      - <dark_gray>이 스킨은 장착할 수 없습니다.
+    delete:
+      name: <red>스킨 삭제
+      lore:
+      - <gray>인벤토리에서 이 스킨을 제거합니다.
+      - <dark_gray>확인을 요청합니다.
+view:
+  unknown: <prefix><red>Player <white><player></white>을(를) 찾을 수 없습니다.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>의 인벤토리 <dark_gray>· <gray><category> <dark_gray>· <gray><count> 스킨 <dark_gray>· <gray>페이지 <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>오른쪽 클릭: 검사 · 몰래 + 오른쪽 클릭: 즐겨찾기'
+  hint-knife:
+  - ''
+  - '<dark_gray>오른쪽 클릭: 검사 · 왼쪽 클릭: 장비'
+  - '<dark_gray>Sneak + 마우스 오른쪽 버튼 클릭: 즐겨찾기'
+  hint-weapon:
+  - ''
+  - '<dark_gray>오른쪽 클릭: 검사 · 왼쪽 클릭: 활 착용'
+  - '<dark_gray>살금살금 + 왼쪽 클릭: 석궁 착용'
+  - '<dark_gray>Sneak + 마우스 오른쪽 버튼 클릭: 즐겨찾기'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> 스킨 <dark_gray>· <gray>페이지 <page>/<pages>
+  empty: <gray>아직 아무것도 없습니다
+  button:
+    previous: <gray>이전 페이지
+    next: <gray>다음 페이지
+    category: <white>카테고리 변경
+    sort: '<white>정렬: <#e4ae39><sort>'
+    filter: <white>필터
+    list: <white>목록으로 표시
+    close: <red>닫기
+preview:
+  loading: <gray>렌더링 미리보기 중...
+  hint: <gray>살금살금 다가가서 닫으세요
+opening:
+  title: <case>
+  title-test: <red>테스트</red> <case>
+  bubble: <black>골드 골드 골드
+  world:
+    title: <white><player></white> <gray>열림 <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>이미 케이스를 개설하고 있습니다.
+  case-disabled: <prefix><red>이 케이스는 제공되지 않습니다.
+  missing: <prefix><gray><white><case></white> 및 <white><key></white>이 필요합니다.
+  missing-now: <prefix><red>케이스나 열쇠가 더 이상 인벤토리에 없습니다.
+  storage-error: <prefix><red>저장에 실패했습니다. 케이스와 열쇠가 반환되었습니다.
+  command-blocked: <prefix><gray>개방이 완료될 때까지 기다리세요.
+  result: '<prefix><gray>귀하는 <skin> <dark_gray>(<float>, #<pattern>)을 받았습니다.'
+  result-test: '<prefix><red>[테스트]</red> <gray>결과: <skin> <dark_gray>(<float>, #<pattern>) - 저장되지 않음'
+  broadcast: <prefix><white><player></white> <gray>포장되지 않은 <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>희귀 특별 아이템</b></gradient>
+  buttons:
+    inspect:
+      name: <white>검사
+      lore:
+      - <gray>새 피부의 모든 세부사항
+    again:
+      name: <green>다른 항목 열기
+      lore:
+      - '<gray>사례: <white><cases> <dark_gray>· <gray>키: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>이 스킨은 이 무기에 맞지 않습니다.
+  equipped:
+    knife: '<prefix><gray>나이프 장착: <skin>'
+    bow: '<prefix><gray>활에: <skin>'
+    crossbow: '<prefix><gray>석궁에서: <skin>'
+  unequipped:
+    knife: <prefix><gray>칼이 장착되지 않았습니다.
+    bow: <prefix><gray>활 피부가 제거되었습니다.
+    crossbow: <prefix><gray>석궁 스킨이 제거되었습니다.
+knife:
+  not-owned: <prefix><red>이 스킨은 귀하의 것이 아닙니다.
+  equipped: '<prefix><gray>장비: <skin>'
+  unequipped: <prefix><gray>칼이 장착되지 않았습니다.
+  sword-footer: '<dark_gray>기본: <base>'
+inspect:
+  running: <prefix><gray>검사가 이미 실행 중입니다.
+  no-knife: <red>스킨을 사용할 수 없습니다. <white>/skins
+shop:
+  title: 케이스 대리점
+  npc-name: <gradient:#e4ae39:#f6d27a>케이스 대리점</gradient>
+  npc-description: <gray>거래하려면 마우스 오른쪽 버튼을 클릭하세요.
+  balance:
+    name: '<white>잔액: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>수정되지 않은 항목만 계산됩니다.
+  offer:
+  - ''
+  - '<gray>가격: <aqua><price> <currency>'
+  - '<dark_gray>5개: <price5> <currency>'
+  affordable: <green>✔ 저렴함
+  not-affordable: <red>✘ <missing> <currency> 누락
+  affordable-five: '<dark_gray>Shift 클릭: 5 구매'
+  hint-case:
+  - '<dark_gray>왼쪽 클릭: 구매 · 오른쪽 클릭: 콘텐츠'
+  hint-key:
+  - '<dark_gray>왼쪽 클릭: 구매'
+  bought: '<prefix><gray>구매: <aqua><price> <currency></aqua>에 대해 <white><amount>× <name></white>.'
+  not-enough: <prefix><red>당신은 그럴 여유가 없습니다.
+  inventory-full: <prefix><red>인벤토리가 가득 찼습니다.
+slot:
+  name: <#e4ae39>스킨 인벤토리
+  lore:
+  - '<gray>오른쪽 클릭: 스킨, 칼, 케이스'
+  - <dark_gray>이 항목은 이 슬롯에 잠겨 있습니다.
+  blocked: <prefix><gray>스킨 인벤토리 아이템이 나타날 수 있도록 인벤토리 슬롯을 확보하세요.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>관리자
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>완료되었습니다.
+  unknown: <prefix><red>알 수 없음 <what>.
+  instance-unknown: <prefix><red>일치하는 스킨 ID를 찾을 수 없습니다. <gray>/csadmin 목록 <player>
+  given: <prefix><gray> <amount>× <white><name></white>을(를) <white><player></white>에게 제공했습니다.
+  skin-given: <prefix><gray>은(는) <skin> <gray>을(를) <white><player></white> <dark_gray>(#<id>)에게 제공했습니다.
+  list-header: <prefix><gray><white><player></white> <dark_gray>(<count>)의 스킨
+  history-header: <prefix><gray>최근 <white><player> 개점
+  scan-start: <prefix><gray><white><metric></white>에 대한 <white><skin></white>의 모든 시드를 스캔하는 중...
+  export-start: <prefix><gray>리소스 팩을 만드는 중...
+  export-done: '<prefix><green><skins> 스킨 내보냄: <white><file>'
+  shop-spawned: <prefix><green>케이스 대리점이 생성되었습니다.
+  shop-removed: <prefix><green>케이스 대리점이 제거되었습니다.
+  shop-none: <prefix><gray>주변에 케이스 대리점이 없습니다.
+  reload-busy: <prefix><gray>A 다시 로드가 이미 실행 중입니다.
+  reload-start: <prefix><gray>새로고침 중...
+  reload-failed: <prefix><red>다시 로드에 실패했습니다. 이전 구성이 활성 상태로 유지됩니다. 콘솔을 참조하세요.
+  reload-done: '<prefix><green><ms> ms 후에 다시 로드됨: <skins> 스킨, <cases> 케이스, <warnings> 경고(콘솔 참조).'
+  browser:
+    title: '패턴: <skin>'
+  manage:
+    title: '관리: <player>'
+    skin-title: <player>의 스킨
+    give-title: '스킨 제공: <player>'
+    give:
+      name: <green>기브 스킨
+      lore:
+      - <gray>케이스를 선택한 다음 스킨을 선택하세요.
+    give-hint:
+    - ''
+    - '<dark_gray>왼쪽 클릭: 주기 · 오른쪽 클릭: StatTrak™ 주기'
+    clear:
+      name: <red>모든 스킨 삭제
+      lore:
+      - <gray><count> 스킨이 제거됩니다.
+      - <dark_gray>확인을 요청합니다.
+    cleared: <prefix><gray><white><player></white>의 <count> 스킨을 삭제했습니다.
+    removed: <prefix><gray>삭제됨 <skin> <gray>/<white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>전환하려면 클릭하세요.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>플로트를 <white><float>로 설정합니다.
+    pattern-step:
+      name: <white>패턴 <step>
+      lore:
+      - '<gray>현재: <white><pattern>'
+    pattern-random:
+      name: <light_purple>임의의 패턴
+      lore:
+      - '<gray>현재: <white><pattern>'
+    equip:
+      name: <green>플레이어용 장비
+      lore: []
+    unequip:
+      name: <green>✔ 장착됨
+      lore:
+      - <gray>장비를 해제하려면 클릭하세요.
+    remove:
+      name: <red>스킨 삭제
+      lore:
+      - <dark_gray>확인을 요청합니다.
+  labels:
+    case: 케이스
+    key: 열쇠
+    skin: 피부
+    manual: 수동 데이터베이스
+    automatic: 자동
+    none: 없음(마감에는 분석 프로필이 없음)
+    'off': 떨어져서
+  debug:
+    seed: '<gray>패턴: <white><seed>'
+    analysing: <dark_gray>분석 중...
+    variant: '<gray>변형: <white><variant>'
+    classification: '<gray>분류: <white><classification> <dark_gray><mode>'
+    fade: '<gray>페이드: <white><fade>%'
+    preview:
+      name: <yellow>미리보기 패턴 <seed>
+      lore:
+      - <gray>렌더링된 지도를 당신의 손에 보여줍니다.
+    random:
+      name: <light_purple>임의의 패턴
+      lore: []
+    title: <gold>패턴 디버거 <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>렌더링 실패: <error>'
+    metrics: '<gray>측정항목: <white><metrics>'
+    scan-failed: <prefix><red>스캔에 실패했습니다.
+    no-metric: <gray>측정항목이 있는 패턴이 없습니다. <white><metric>
+    export-failed: '<prefix><red>내보내기 실패: <error>'
+  odds: <gray><case> <dark_gray>(<count> 품목, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>스킨: <white><skins> <gray>케이스: <white><cases> <gray>무기: <white><weapons>'
+    cache: '<gray>캐시된 미리보기: <white><previews> <gray>리소스 팩 모드: <white><pack>'
+    web: '<gray>Pack 웹 서버: <white><url>'
+wear:
+  factory_new: 공장 새 제품
+  minimal_wear: 최소한의 마모
+  field_tested: 현장 테스트됨
+  well_worn: 낡은
+  battle_scarred: 전투의 상처를 입은
+rarity:
+  mil_spec: 밀 스펙
+  restricted: 제한됨
+  classified: 기밀
+  covert: 비밀
+  rare_special: 희귀 특별 아이템
+catalog:
+  key:
+    case_key: 케이스 키

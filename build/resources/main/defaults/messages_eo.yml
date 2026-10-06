@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Kazoj</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Vi ne havas permeson fari tion.
+  player-only: <prefix><red>Nur ludantoj.
+profile:
+  loading: <prefix><gray>Via haŭta inventaro ankoraŭ ŝarĝas...
+  load-failed: <prefix><red>Via haŭta inventaro ne povis esti ŝargita. Bonvolu diri al administranto.
+  recovered: '<prefix><gray>Interrompita malfermo finita: <skin>'
+category:
+  pistol: Pistolo
+  smg: SMG
+  rifle: Fusilo
+  sniper: Kaŝfusilo
+  heavy: Peza
+  equipment: Ekipaĵo
+  knife: Tranĉilo
+items:
+  test-marker: <red>⚠ Testero (administranto)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> eblaj eroj
+    - ''
+    - '<gray>Dekstra klako: <white>vidi enhavon'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Uzita dum malfermado de kazo.
+    use-hint: <prefix><gray>Dekstre alklaku <white>kazon</white> por malfermi ĝin per ĉi tiu ŝlosilo.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Ekstero: <white><wear>'
+    float: '<gray>Flosi: <white><float>'
+    float-range: '<gray>Flosi: <white><min_float> - <max_float>'
+    pattern: '<gray>Ŝablono: <white><pattern>'
+    variant: '<gray>Fazo: <class_color><variant>'
+    classification: '<gray>Tipo de ŝablono: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Mortigoj: <white><kills>'
+    has-variants: <dark_gray>Pluraj fazoj eblas
+    source: '<gray>Fonto: <white><case>'
+    date: '<gray>Akirite: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Forigita: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Ŝargante...
+    lore: []
+  back:
+    name: <gray>Reen
+    lore: []
+  close:
+    name: <red>Fermu
+    lore: []
+  previous:
+    name: <gray>Antaŭa paĝo
+    lore:
+    - <dark_gray>Paĝo <page> / <pages>
+  next:
+    name: <gray>Sekva paĝo
+    lore:
+    - <dark_gray>Paĝo <page> / <pages>
+  cases:
+    title: Kazoj
+    header:
+      name: <#e4ae39>Kazoj
+      lore:
+      - <gray>Prenu kazojn de la <white>kaza komercisto</white>.
+      - <gray>Vi bezonas kongruan ŝlosilon por malfermi unu.
+    entry:
+    - ''
+    - '<gray>En stokregistro: <white><owned> <dark_gray>· <gray>Ŝlosiloj: <white><keys>'
+    - '<gray>Maldekstra klako: <white>vidi enhavon'
+    can-open: '<green>Dekstra klako: malfermi'
+    to-skins:
+      name: <#e4ae39>Haŭto-inventaro
+      lore:
+      - <gray>Viaj haŭtoj kaj tranĉiloj
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Alklaku por antaŭrigardo
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Malofta tranĉilo.
+      - <dark_gray><count> variantoj · klaku por vidi
+      - ''
+    open:
+      name: <green>Malfermu kazon
+      lore:
+      - '<gray>Kazoj: <white><owned> <dark_gray>· <gray>Ŝlosiloj: <white><keys>'
+      - <dark_gray>Uzas 1 kazon kaj 1 <key>
+    cannot-open:
+      name: <gray>Ne povas malfermi
+      lore:
+      - '<gray>Kazoj: <white><owned> <dark_gray>· <gray>Ŝlosiloj: <white><keys>'
+      - <dark_gray>Vi bezonas la kazon kaj <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Ĉu vi certas?
+    'yes':
+      name: <green>Jes, forigu
+      lore:
+      - <dark_gray>Ĉi tio ne povas esti malfarita.
+    'no':
+      name: <red>Nuligi
+      lore: []
+  skins:
+    title: Haŭta inventaro
+    title-other: Haŭtoj de <player>
+    tab:
+      all:
+        name: <white>Ĉiuj haŭtoj
+        lore: []
+      weapons:
+        name: <white>Armelhaŭtoj
+        lore: []
+      knives:
+        name: <white>Tranĉiloj
+        lore:
+        - '<dark_gray>Dekstre alklaku tranĉilon: ekipi'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoratoj
+        lore: []
+      recent:
+        name: <white>Lastatempe akirita
+        lore: []
+    empty:
+      name: <gray>Ankoraŭ nenio ĉi tie
+      lore:
+      - <dark_gray>Malfermu kazojn por akiri haŭtojn.
+    equipped: <green>✔ Ekipita
+    favorite: <yellow>★ Plej ŝatata
+    hint:
+    - ''
+    - '<dark_gray>Maldekstra klako: inspekti · Dekstra klako: metu pafarkon'
+    - '<dark_gray>Shift-klako: plej ŝatata'
+    hint-knife:
+    - ''
+    - '<dark_gray>Maldekstra klako: inspekti · Dekstra klako: ekipi'
+    - '<dark_gray>Shift-klako: plej ŝatata'
+    to-cases:
+      name: <#e4ae39>Kazoj
+      lore:
+      - <gray>Al viaj kazoj
+    sort:
+      name: '<white>Ordigi: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Maldekstre: sekva · Dekstre: antaŭa'
+    sorts:
+      rarity: Malofteco
+      float: Flosilo
+      name: Nomo
+      wear: Ekstero
+      pattern: Ŝablono
+      newest: Plej nova
+      oldest: Plej malnova
+    info:
+      name: <white><count> <gray>haŭtoj montritaj
+      lore:
+      - <dark_gray><total> entute · klaku por fermi
+    filter:
+      name: <white>Filtrilo
+      lore:
+      - '<dark_gray>Maldekstre: elektu filtrilojn · Dekstre: restarigi'
+    active-knife:
+    - <green>✔ Aktiva tranĉilo
+    - <dark_gray>Alklaku por detaloj
+  filter:
+    title: Filtrilo
+    header:
+      name: <white>Filtrilo
+      lore:
+      - <gray>Pluraj samspecaj filtriloj estas kombinitaj.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ nur
+    'on':
+    - <green>✔ Aktiva
+    'off':
+    - <dark_gray>Neaktiva
+    reset:
+      name: <gray>Restarigi ĉiujn filtrilojn
+      lore: []
+  inspect:
+    title: Inspekti
+    missing:
+      name: <red>Haŭto ne havebla
+      lore: []
+    preview:
+      name: <#e4ae39>Vidi haŭton
+      lore:
+      - '<gray>Montras vian precizan kopion:'
+      - <gray>ŝablono, koloroj kaj eluziĝo.
+      - ''
+      - <dark_gray>Sxteliru por fermi la antaŭrigardon.
+    data: <white>Detaloj
+    favorite:
+      name: <white>Marki kiel ŝatata
+      lore: []
+    unfavorite:
+      name: <yellow>★ Forigi favoraton
+      lore: []
+    equip:
+      name: <green>Ekipi
+      lore:
+      - <gray>Viaj glavoj montras ĉi tiun tranĉilon.
+      - <dark_gray>Difekto kaj sorĉaĵoj restas la samaj.
+    unequip:
+      name: <green>✔ Ekipita
+      lore:
+      - <gray>Alklaku por malekipi.
+    inspect3d:
+      name: <white>3D inspekti
+      lore:
+      - '<gray>Montras vian precizan kopion:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Apartenas al alia ludanto
+      lore:
+      - <dark_gray>Vidi nur
+    equip-bow:
+      name: <green>Metu pafarkon
+      lore:
+      - <gray>Viaj pafarkoj montras ĉi tiun haŭton.
+    unequip-bow:
+      name: <green>✔ Sur la pruo
+      lore:
+      - <gray>Alklaku por forigi.
+    equip-crossbow:
+      name: <green>Surmetu arbaleston
+      lore:
+      - <gray>Viaj arbalestoj montras ĉi tiun haŭton.
+    unequip-crossbow:
+      name: <green>✔ Sur arbalesto
+      lore:
+      - <gray>Alklaku por forigi.
+    not-equippable:
+      name: <gray>Ne ekipebla
+      lore:
+      - <dark_gray>Tiu ĉi haŭto ne povas esti ekipita.
+    delete:
+      name: <red>Forigi haŭton
+      lore:
+      - <gray>Forigas ĉi tiun haŭton el via inventaro.
+      - <dark_gray>Petas konfirmon.
+view:
+  unknown: <prefix><red>Ludanto <white><player></white> ne estis trovita.
+gallery:
+  header-other: La stokregistro de <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> haŭtoj <dark_gray>· <gray>Paĝo
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Dekstra klako: inspekti · Sneak + dekstra klako: plej ŝatata'
+  hint-knife:
+  - ''
+  - '<dark_gray>Dekstra klako: inspekti · Maldekstra klako: ekipi'
+  - '<dark_gray>Sneak + dekstra klako: plej ŝatata'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Dekstra klako: inspekti · Maldekstra klako: surmetu pafarkon'
+  - '<dark_gray>Sneak + maldekstra klako: surmetu arbaleston'
+  - '<dark_gray>Sneak + dekstra klako: plej ŝatata'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> haŭtoj <dark_gray>· <gray>Paĝo <page>/<pages>
+  empty: <gray>Ankoraŭ nenio ĉi tie
+  button:
+    previous: <gray>Antaŭa paĝo
+    next: <gray>Sekva paĝo
+    category: <white>Ŝanĝi kategorion
+    sort: '<white>Ordigi: <#e4ae39><sort>'
+    filter: <white>Filtrilo
+    list: <white>Montri kiel listo
+    close: <red>Fermu
+preview:
+  loading: <gray>Reprezentanta antaŭrigardon...
+  hint: <gray>Sneak por fermi
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>oro oro oro
+  world:
+    title: <white><player></white> <gray>malfermiĝas <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Vi jam malfermas kazon.
+  case-disabled: <prefix><red>Ĉi tiu kazo ne haveblas.
+  missing: <prefix><gray>Vi bezonas <white><case></white> kaj <white><key></white>.
+  missing-now: <prefix><red>La kazo aŭ ŝlosilo ne plu estas en via inventaro.
+  storage-error: <prefix><red>Konservado malsukcesis. Via kazo kaj ŝlosilo estis resenditaj.
+  command-blocked: <prefix><gray>Atendu ĝis la malfermo finiĝos.
+  result: '<prefix><gray>Vi ricevis <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Testo]</red> <gray>Rezulto: <skin> <dark_gray>(<float>, #<pattern>) - ne konservita'
+  broadcast: <prefix><white><player></white> <gray>malskatolita <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>RARA SPECIALA ERO</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspekti
+      lore:
+      - <gray>Ĉiuj detaloj de via nova haŭto
+    again:
+      name: <green>Malfermu alian
+      lore:
+      - '<gray>Kazoj: <white><cases> <dark_gray>· <gray>Ŝlosiloj: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Ĉi tiu haŭto ne taŭgas por ĉi tiu armilo.
+  equipped:
+    knife: '<prefix><gray>Tranĉilo ekipita: <skin>'
+    bow: '<prefix><gray>Sur via pafarko: <skin>'
+    crossbow: '<prefix><gray>Sur via arbalesto: <skin>'
+  unequipped:
+    knife: <prefix><gray>Tranĉilo ne ekipita.
+    bow: <prefix><gray>Arka haŭto forigita.
+    crossbow: <prefix><gray>Arbalesta haŭto forigita.
+knife:
+  not-owned: <prefix><red>Ĉi tiu haŭto ne apartenas al vi.
+  equipped: '<prefix><gray>Ekipata: <skin>'
+  unequipped: <prefix><gray>Tranĉilo ne ekipita.
+  sword-footer: '<dark_gray>Bazo: <base>'
+inspect:
+  running: <prefix><gray>Inspekto jam funkcias.
+  no-knife: <red>Haŭto ne havebla <white>/skins
+shop:
+  title: Kazo Komercisto
+  npc-name: <gradient:#e4ae39:#f6d27a>Kazkomercisto</gradient>
+  npc-description: <gray>Dekstre alklaku por komerci
+  balance:
+    name: '<white>Via bilanco: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Nur nemodifitaj eroj kalkulas.
+  offer:
+  - ''
+  - '<gray>Prezo: <aqua><price> <currency>'
+  - '<dark_gray>5 pecoj: <price5> <currency>'
+  affordable: <green>✔ Pageblaj
+  not-affordable: <red>✘ <missing> <currency> mankas
+  affordable-five: '<dark_gray>Shift klako: aĉeti 5'
+  hint-case:
+  - '<dark_gray>Maldekstra klako: aĉeti · Dekstra klako: enhavo'
+  hint-key:
+  - '<dark_gray>Maldekstre alklaku: aĉeti'
+  bought: '<prefix><gray>Aĉetis: <white><amount>× <name></white> por <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Vi ne povas pagi tion.
+  inventory-full: <prefix><red>Via inventaro estas plena.
+slot:
+  name: <#e4ae39>Haŭto-inventaro
+  lore:
+  - '<gray>Dekstra klako: feloj, tranĉiloj kaj uzoj'
+  - <dark_gray>Ĉi tiu objekto estas ŝlosita al ĉi tiu fendo.
+  blocked: <prefix><gray>Liberigu inventaron por ke la haŭta inventaro aperu.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Farita.
+  unknown: <prefix><red>Nekonata <what>.
+  instance-unknown: <prefix><red>Neniu kongrua haŭtidentigilo trovita. <gray>/csadmin listo <player>
+  given: <prefix><gray>Donis <amount>× <white><name></white> al <white><player></white>.
+  skin-given: <prefix><gray>Donis <skin> <gray>al <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Heltoj de <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Lastatempaj malfermoj de <white><player>
+  scan-start: <prefix><gray>Skanante ĉiun semon de <white><skin></white> por <white><metric></white>...
+  export-start: <prefix><gray>Konstruanta rimedan pakon...
+  export-done: '<prefix><green><skins> haŭtoj eksportitaj: <white><file>'
+  shop-spawned: <prefix><green>Kazkomercisto kreita.
+  shop-removed: <prefix><green>Kazo-komercisto forigita.
+  shop-none: <prefix><gray>Neniu kazo-komercisto proksime.
+  reload-busy: <prefix><gray>Reŝargi jam funkcias.
+  reload-start: <prefix><gray>Reŝargi...
+  reload-failed: <prefix><red>Reŝargi malsukcesis, la antaŭa agordo restas aktiva. Vidu konzolon.
+  reload-done: '<prefix><green>Reŝargita en <ms> ms: <skins> haŭtoj, <cases> kazoj, <warnings> avertoj (vidu konzolon).'
+  browser:
+    title: 'Skemo: <skin>'
+  manage:
+    title: 'Administri: <player>'
+    skin-title: Haŭto de <player>
+    give-title: 'Donu haŭton: <player>'
+    give:
+      name: <green>Donu haŭton
+      lore:
+      - <gray>Elektu kazon, poste haŭton.
+    give-hint:
+    - ''
+    - '<dark_gray>Maldekstre alklaku: doni · Dekstre alklaku: doni StatTrak™'
+    clear:
+      name: <red>Forigi ĉiujn haŭtojn
+      lore:
+      - <gray><count> haŭtoj estos forigitaj.
+      - <dark_gray>Petas konfirmon.
+    cleared: <prefix><gray>Forigitaj <count> feloj de <white><player></white>.
+    removed: <prefix><gray>Forigita <skin> <gray>de <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Alklaku por ŝanĝi.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Filas la flosilon al <white><float>
+    pattern-step:
+      name: <white>Ŝablono <step>
+      lore:
+      - '<gray>Nuna: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Hazarda ŝablono
+      lore:
+      - '<gray>Nuna: <white><pattern>'
+    equip:
+      name: <green>Ekipo por ludanto
+      lore: []
+    unequip:
+      name: <green>✔ Ekipita
+      lore:
+      - <gray>Alklaku por malekipi.
+    remove:
+      name: <red>Forigi haŭton
+      lore:
+      - <dark_gray>Petas konfirmon.
+  labels:
+    case: kazo
+    key: ŝlosilo
+    skin: haŭto
+    manual: mana datumbazo
+    automatic: aŭtomata
+    none: neniu (fino havas neniun analizprofilon)
+    'off': for
+  debug:
+    seed: '<gray>Ŝablono: <white><seed>'
+    analysing: <dark_gray>Analizante...
+    variant: '<gray>Varianto: <white><variant>'
+    classification: '<gray>Klasifiko: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Antaŭrigardu ŝablonon <seed>
+      lore:
+      - <gray>Montras la bilditan mapon en viaj manoj.
+    random:
+      name: <light_purple>Hazarda ŝablono
+      lore: []
+    title: <gold>Modelĉimilo <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Redo malsukcesis: <error>'
+    metrics: '<gray>Metriko: <white><metrics>'
+    scan-failed: <prefix><red>Skanado malsukcesis.
+    no-metric: <gray>Neniu ŝablono havas metrikon <white><metric>
+    export-failed: '<prefix><red>Eksporto malsukcesis: <error>'
+  odds: <gray><case> <dark_gray>(<count> eroj, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Haŭtoj: <white><skins> <gray>Kazoj: <white><cases> <gray>Armiloj: <white><weapons>'
+    cache: '<gray>Antaŭrigardoj konservitaj en kaŝmemoro: <white><previews> <gray>Reĝimo de pako de rimedoj: <white><pack>'
+    web: '<gray>Paki retservilon: <white><url>'
+wear:
+  factory_new: Fabriko Nova
+  minimal_wear: Minimuma Eluziĝo
+  field_tested: Kampo-Testita
+  well_worn: Bone Eluzita
+  battle_scarred: Batalo-Skribita
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Restriktita
+  classified: Klasifikita
+  covert: Kaŝita
+  rare_special: Malofta Speciala Ero
+catalog:
+  key:
+    case_key: Kaza Ŝlosilo

@@ -1,0 +1,29 @@
+# Operation Breakout Weapon Case (2014)
+
+case:
+  name: "Operation Breakout Weapon Case"
+  key: case_key
+  color: "#3a5a8a"
+  stattrak-chance: 0.10
+  description:
+    - "2014"
+
+skins:
+  mp7_urban_hazard: {weapon: mp7, rarity: mil_spec, name: "Urban Hazard", style: camo, palette: ["#3a3a3a", "#e8c020", "#1a1a1a"]}
+  negev_desert_strike: {weapon: negev, rarity: mil_spec, name: "Desert-Strike", style: digital, palette: ["#c8a878", "#8a6a4a", "#4a3a2a"]}
+  p2000_ivory: {weapon: p2000, rarity: mil_spec, name: "Ivory", style: solid, palette: ["#e8e0d0", "#c8c0b0"]}
+  ssg08_abyss: {weapon: ssg08, rarity: mil_spec, name: "Abyss", style: waves, palette: ["#0a1a2a", "#1a3a5a", "#2a6a8a"]}
+  ump45_labyrinth: {weapon: ump45, rarity: mil_spec, name: "Labyrinth", style: chevron, palette: ["#2a2a2a", "#8a8a8a"]}
+  nova_koi: {weapon: nova, rarity: restricted, name: "Koi", style: scales, palette: ["#e8e8e8", "#e86a1a", "#1a1a1a"]}
+  p250_supernova: {weapon: p250, rarity: restricted, name: "Supernova", style: swirl, palette: ["#0a0a2a", "#3a2a8a", "#e8a0e0"]}
+  cz75_tigris: {weapon: cz75, rarity: restricted, name: "Tigris", style: tiger, palette: ["#1a1a1a", "#c8c8c8", "#5a5a5a"]}
+  ppbizon_osiris: {weapon: ppbizon, rarity: restricted, name: "Osiris", style: tribal, palette: ["#1a1a1a", "#c8a040", "#3a6a8a"]}
+  deagle_conspiracy: {weapon: deagle, rarity: classified, name: "Conspiracy", style: carbon, palette: ["#1a1a1a", "#4a4a4a", "#8a8a8a"]}
+  fiveseven_fowl_play: {weapon: fiveseven, rarity: classified, name: "Fowl Play", style: graffiti, palette: ["#e8e8e8", "#c81a1a", "#1a1a1a", "#f0c020"]}
+  glock18_water_elemental: {weapon: glock18, rarity: classified, name: "Water Elemental", style: swirl, palette: ["#0a2a6a", "#2a8ad0", "#e84a1a"]}
+  m4a1s_cyrex: {weapon: m4a1s, rarity: covert, name: "Cyrex", style: shards, palette: ["#e8e8e8", "#c81a1a", "#2a2a2a"]}
+  p90_asiimov: {weapon: p90, rarity: covert, name: "Asiimov", style: shards, palette: ["#f2f2f2", "#1a1a1a", "#f07a1a"]}
+
+rare-special:
+  knives: [butterfly]
+  finishes: original
