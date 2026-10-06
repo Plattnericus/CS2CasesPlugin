@@ -1,0 +1,491 @@
+# Italian MiniMessage messages; follows the Minecraft client locale.
+prefix: '<dark_gray>[<#e4ae39>Cases</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Non hai il permesso per farlo.
+  player-only: <prefix><red>Solo per giocatori.
+profile:
+  loading: <prefix><gray>Il tuo inventario skin si sta ancora caricando...
+  load-failed: <prefix><red>Impossibile caricare il tuo inventario skin. Avvisa un admin.
+  recovered: '<prefix><gray>Apertura interrotta completata: <skin>'
+category:
+  pistol: Pistola
+  smg: SMG
+  rifle: Fucile
+  sniper: Fucile di precisione
+  heavy: Arma pesante
+  equipment: Equipaggiamento
+  knife: Coltello
+items:
+  test-marker: <red>⚠ Oggetto di test (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> oggetti possibili
+    - ''
+    - '<gray>Clic destro: <white>vedi contenuto'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Viene consumata all'apertura di una cassa.
+    use-hint: <prefix><gray>Fai clic destro su una <white>cassa</white> per aprirla con questa chiave.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Esterno: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Pattern: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Tipo di pattern: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Uccisioni: <white><kills>'
+    has-variants: <dark_gray>Più fasi possibili
+    source: '<gray>Provenienza: <white><case>'
+    date: '<gray>Ottenuto: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Eliminato: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Caricamento...
+    lore: []
+  back:
+    name: <gray>Indietro
+    lore: []
+  close:
+    name: <red>Chiudi
+    lore: []
+  previous:
+    name: <gray>Pagina precedente
+    lore:
+    - <dark_gray>Pagina <page> / <pages>
+  next:
+    name: <gray>Pagina successiva
+    lore:
+    - <dark_gray>Pagina <page> / <pages>
+  cases:
+    title: Casse
+    header:
+      name: <#e4ae39>Casse
+      lore:
+      - <gray>Le casse si comprano dal <white>mercante di casse</white>.
+      - <gray>Per aprirne una serve la chiave giusta.
+    entry:
+    - ''
+    - '<gray>Nell''inventario: <white><owned> <dark_gray>· <gray>Chiavi: <white><keys>'
+    - '<gray>Clic sinistro: <white>vedi contenuto'
+    can-open: '<green>Clic destro: apri'
+    to-skins:
+      name: <#e4ae39>Inventario skin
+      lore:
+      - <gray>Le tue skin e i coltelli
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Clicca per un'anteprima
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Un coltello raro.
+      - <dark_gray><count> varianti · clicca per vederle
+      - ''
+    open:
+      name: <green>Apri cassa
+      lore:
+      - '<gray>Casse: <white><owned> <dark_gray>· <gray>Chiavi: <white><keys>'
+      - <dark_gray>Consuma 1 cassa e 1 <key>
+    cannot-open:
+      name: <gray>Impossibile aprire
+      lore:
+      - '<gray>Casse: <white><owned> <dark_gray>· <gray>Chiavi: <white><keys>'
+      - <dark_gray>Ti servono la cassa e una <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Sei sicuro?
+    'yes':
+      name: <green>Sì, elimina
+      lore:
+      - <dark_gray>L'operazione non può essere annullata.
+    'no':
+      name: <red>Annulla
+      lore: []
+  skins:
+    title: Inventario skin
+    title-other: Skin di <player>
+    tab:
+      all:
+        name: <white>Tutte le skin
+        lore: []
+      weapons:
+        name: <white>Skin delle armi
+        lore: []
+      knives:
+        name: <white>Coltelli
+        lore:
+        - '<dark_gray>Clic destro su un coltello: equipaggia'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Preferiti
+        lore: []
+      recent:
+        name: <white>Ottenuti di recente
+        lore: []
+    empty:
+      name: <gray>Ancora niente qui
+      lore:
+      - <dark_gray>Apri delle casse per ottenere skin.
+    equipped: <green>✔ Equipaggiato
+    favorite: <yellow>★ Preferito
+    hint:
+    - ''
+    - '<dark_gray>Clic sinistro: ispeziona · Clic destro: sull''arco'
+    - '<dark_gray>Shift-clic: preferito'
+    hint-knife:
+    - ''
+    - '<dark_gray>Clic sinistro: ispeziona · Clic destro: equipaggia'
+    - '<dark_gray>Shift-clic: preferito'
+    to-cases:
+      name: <#e4ae39>Casse
+      lore:
+      - <gray>Alle tue casse
+    sort:
+      name: '<white>Ordina: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Sinistro: avanti · Destro: indietro'
+    sorts:
+      rarity: Rarità
+      float: Float
+      name: Nome
+      wear: Esterno
+      pattern: Pattern
+      newest: Più recenti
+      oldest: Meno recenti
+    info:
+      name: <white><count> <gray>skin mostrate
+      lore:
+      - <dark_gray><total> in totale · clicca per chiudere
+    filter:
+      name: <white>Filtro
+      lore:
+      - '<dark_gray>Sinistro: scegli filtri · Destro: azzera'
+    active-knife:
+    - <green>✔ Coltello attivo
+    - <dark_gray>Clicca per i dettagli
+  filter:
+    title: Filtro
+    header:
+      name: <white>Filtro
+      lore:
+      - <gray>Più filtri dello stesso tipo vengono combinati.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>Solo StatTrak™
+    'on':
+    - <green>✔ Attivo
+    'off':
+    - <dark_gray>Inattivo
+    reset:
+      name: <gray>Azzera tutti i filtri
+      lore: []
+  inspect:
+    title: Ispeziona
+    missing:
+      name: <red>Skin non disponibile
+      lore: []
+    preview:
+      name: <#e4ae39>Guarda la skin
+      lore:
+      - '<gray>Mostra la tua copia esatta:'
+      - <gray>pattern, colori e usura.
+      - ''
+      - <dark_gray>Accovacciati per chiudere l'anteprima.
+    data: <white>Dettagli
+    favorite:
+      name: <white>Segna come preferito
+      lore: []
+    unfavorite:
+      name: <yellow>★ Rimuovi dai preferiti
+      lore: []
+    equip:
+      name: <green>Equipaggia
+      lore:
+      - <gray>Le tue spade mostrano questo coltello.
+      - <dark_gray>Danno e incantesimi restano invariati.
+    unequip:
+      name: <green>✔ Equipaggiato
+      lore:
+      - <gray>Clicca per togliere.
+    inspect3d:
+      name: <white>Ispezione 3D
+      lore:
+      - <gray>Ispeziona questa arma o questo coltello.
+      - '<dark_gray>F: ispeziona · Accovacciati + F: scambia mani'
+      - '<dark_gray>Anche: /inspect o accovacciati + clic destro'
+    foreign:
+      name: <gray>Appartiene a un altro giocatore
+      lore:
+      - <dark_gray>Solo visualizzazione
+    equip-bow:
+      name: <green>Metti sull'arco
+      lore:
+      - <gray>I tuoi archi mostrano questa skin.
+    unequip-bow:
+      name: <green>✔ Sull'arco
+      lore:
+      - <gray>Clicca per rimuovere.
+    equip-crossbow:
+      name: <green>Metti sulla balestra
+      lore:
+      - <gray>Le tue balestre mostrano questa skin.
+    unequip-crossbow:
+      name: <green>✔ Sulla balestra
+      lore:
+      - <gray>Clicca per rimuovere.
+    not-equippable:
+      name: <gray>Non equipaggiabile
+      lore:
+      - <dark_gray>Questa skin non può essere equipaggiata.
+    delete:
+      name: <red>Elimina skin
+      lore:
+      - <gray>Rimuove questa skin dal tuo inventario.
+      - <dark_gray>Con conferma.
+view:
+  unknown: <prefix><red>Giocatore <white><player></white> non trovato.
+gallery:
+  header-other: <gray>Inventario di <#e4ae39><player></#e4ae39> <dark_gray>· <gray><category> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Pagina
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Clic destro: ispeziona · Accovacciato + clic destro: preferito'
+  hint-knife:
+  - ''
+  - '<dark_gray>Clic destro: ispeziona · Clic sinistro: equipaggia'
+  - '<dark_gray>Accovacciato + clic destro: preferito'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Clic destro: ispeziona · Clic sinistro: sull''arco'
+  - '<dark_gray>Accovacciato + clic sinistro: sulla balestra'
+  - '<dark_gray>Accovacciato + clic destro: preferito'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skin <dark_gray>· <gray>Pagina <page>/<pages>
+  empty: <gray>Ancora niente qui
+  button:
+    previous: <gray>Pagina precedente
+    next: <gray>Pagina successiva
+    category: <white>Cambia categoria
+    sort: '<white>Ordina: <#e4ae39><sort>'
+    filter: <white>Filtro
+    list: <white>Mostra come elenco
+    close: <red>Chiudi
+preview:
+  loading: <gray>Creazione anteprima...
+  hint: <gray>Accovacciati per chiudere
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>gold gold gold
+  world:
+    title: <white><player></white> <gray>apre <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Stai già aprendo una cassa.
+  case-disabled: <prefix><red>Questa cassa non è disponibile.
+  missing: <prefix><gray>Ti servono <white><case></white> e una <white><key></white>.
+  missing-now: <prefix><red>La cassa o la chiave non è più nel tuo inventario.
+  storage-error: <prefix><red>Salvataggio non riuscito. Cassa e chiave ti sono state restituite.
+  command-blocked: <prefix><gray>Attendi la fine dell'apertura.
+  result: '<prefix><gray>Hai ottenuto <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Risultato: <skin> <dark_gray>(<float>, #<pattern>) - non salvato'
+  broadcast: <prefix><white><player></white> <gray>ha trovato <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>OGGETTO SPECIALE RARO</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Ispeziona
+      lore:
+      - <gray>Tutti i dettagli della tua nuova skin
+    again:
+      name: <green>Aprine un'altra
+      lore:
+      - '<gray>Casse: <white><cases> <dark_gray>· <gray>Chiavi: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Questa skin non va su quest'arma.
+  equipped:
+    knife: '<prefix><gray>Coltello equipaggiato: <skin>'
+    bow: '<prefix><gray>Sul tuo arco: <skin>'
+    crossbow: '<prefix><gray>Sulla tua balestra: <skin>'
+  unequipped:
+    knife: <prefix><gray>Coltello tolto.
+    bow: <prefix><gray>Skin dell'arco rimossa.
+    crossbow: <prefix><gray>Skin della balestra rimossa.
+knife:
+  not-owned: <prefix><red>Questa skin non ti appartiene.
+  equipped: '<prefix><gray>Equipaggiato: <skin>'
+  unequipped: <prefix><gray>Coltello tolto.
+  sword-footer: '<dark_gray>Base: <base>'
+inspect:
+  running: <prefix><gray>Un'ispezione è già in corso.
+  no-knife: <prefix><gray>Impugna un’arma con una skin o equipaggia un coltello. <white>/skins
+shop:
+  title: Mercante di casse
+  npc-name: <gradient:#e4ae39:#f6d27a>Mercante di casse</gradient>
+  npc-description: <gray>Clic destro per commerciare
+  balance:
+    name: '<white>Il tuo saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Contano solo oggetti non modificati.
+  offer:
+  - ''
+  - '<gray>Prezzo: <aqua><price> <currency>'
+  - '<dark_gray>5 pezzi: <price5> <currency>'
+  affordable: <green>✔ Acquistabile
+  not-affordable: <red>✘ Mancano <missing> <currency>
+  affordable-five: '<dark_gray>Shift-clic: compra 5'
+  hint-case:
+  - '<dark_gray>Clic sinistro: compra · Clic destro: contenuto'
+  hint-key:
+  - '<dark_gray>Clic sinistro: compra'
+  bought: '<prefix><gray>Acquistato: <white><amount>× <name></white> per <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Non hai abbastanza.
+  inventory-full: <prefix><red>Il tuo inventario è pieno.
+slot:
+  name: <#e4ae39>Inventario skin
+  lore:
+  - '<gray>Clic destro: skin, coltelli e casse'
+  - <dark_gray>Questo oggetto è bloccato in questo slot.
+  blocked: <prefix><gray>Libera uno slot perché possa apparire l'oggetto dell'inventario skin.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: dai, modifica, elimina)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Fatto.
+  unknown: <prefix><red><what> sconosciuto.
+  instance-unknown: <prefix><red>Nessun ID skin corrispondente. <gray>/csadmin list <player>
+  given: <prefix><gray>Dati <amount>× <white><name></white> a <white><player></white>.
+  skin-given: <prefix><gray>Data <skin> <gray>a <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skin di <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Ultime aperture di <white><player>
+  scan-start: <prefix><gray>Analisi di tutti i seed di <white><skin></white> per <white><metric></white>...
+  export-start: <prefix><gray>Creazione del resource pack...
+  export-done: '<prefix><green><skins> skin esportate: <white><file>'
+  shop-spawned: <prefix><green>Mercante di casse creato.
+  shop-removed: <prefix><green>Mercante di casse rimosso.
+  shop-none: <prefix><gray>Nessun mercante di casse nelle vicinanze.
+  reload-busy: <prefix><gray>Un ricaricamento è già in corso.
+  reload-start: <prefix><gray>Ricaricamento...
+  reload-failed: <prefix><red>Ricaricamento fallito, resta attiva la configurazione precedente. Vedi console.
+  reload-done: '<prefix><green>Ricaricato in <ms> ms: <skins> skin, <cases> casse, <warnings> avvisi (vedi console).'
+  browser:
+    title: 'Pattern: <skin>'
+  manage:
+    title: 'Gestisci: <player>'
+    skin-title: Skin di <player>
+    give-title: 'Dai skin: <player>'
+    give:
+      name: <green>Dai skin
+      lore:
+      - <gray>Scegli una cassa, poi una skin.
+    give-hint:
+    - ''
+    - '<dark_gray>Clic sinistro: dai · Clic destro: dai StatTrak™'
+    clear:
+      name: <red>Elimina tutte le skin
+      lore:
+      - <gray>Verranno rimosse <count> skin.
+      - <dark_gray>Con conferma.
+    cleared: <prefix><gray>Eliminate <count> skin di <white><player></white>.
+    removed: <prefix><gray>Eliminata <skin> <gray>di <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Clicca per cambiare.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Imposta il float a <white><float>
+    pattern-step:
+      name: <white>Pattern <step>
+      lore:
+      - '<gray>Attuale: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Pattern casuale
+      lore:
+      - '<gray>Attuale: <white><pattern>'
+    equip:
+      name: <green>Equipaggia per il giocatore
+      lore: []
+    unequip:
+      name: <green>✔ Equipaggiato
+      lore:
+      - <gray>Clicca per togliere.
+    remove:
+      name: <red>Elimina skin
+      lore:
+      - <dark_gray>Con conferma.
+  labels:
+    case: cassa
+    key: chiave
+    skin: skin
+    manual: database manuale
+    automatic: automatico
+    none: nessuna (la finitura non ha un profilo di analisi)
+    'off': disattivato
+  debug:
+    seed: '<gray>Motivo: <white><seed>'
+    analysing: <dark_gray>Analisi in corso...
+    variant: '<gray>Variante: <white><variant>'
+    classification: '<gray>Classificazione: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Anteprima del motivo <seed>
+      lore:
+      - <gray>Mostra la mappa generata tra le tue mani.
+    random:
+      name: <light_purple>Motivo casuale
+      lore: []
+    title: <gold>Analisi del motivo <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Rendering non riuscito: <error>'
+    metrics: '<gray>Metriche: <white><metrics>'
+    scan-failed: <prefix><red>Scansione non riuscita.
+    no-metric: <gray>Nessun motivo ha la metrica <white><metric>
+    export-failed: '<prefix><red>Esportazione non riuscita: <error>'
+  odds: <gray><case> <dark_gray>(<count> oggetti, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skin: <white><skins> <gray>Casse: <white><cases> <gray>Armi: <white><weapons>'
+    cache: '<gray>Anteprime in cache: <white><previews> <gray>Pacchetto risorse: <white><pack>'
+    web: '<gray>Server del pacchetto: <white><url>'
+wear:
+  factory_new: Nuovo di fabbrica
+  minimal_wear: Usura minima
+  field_tested: Testato sul campo
+  well_worn: Molto usurato
+  battle_scarred: Segnato dalle battaglie
+rarity:
+  mil_spec: Militare
+  restricted: Limitato
+  classified: Classificato
+  covert: Segreto
+  rare_special: Oggetto speciale raro
+catalog:
+  key:
+    case_key: Chiave della cassa

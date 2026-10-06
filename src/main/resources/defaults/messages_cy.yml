@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Achosion</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Nid oes gennych ganiatâd i wneud hynny.
+  player-only: <prefix><red>Chwaraewyr yn unig.
+profile:
+  loading: <prefix><gray>Mae rhestr eiddo eich croen yn dal i lwytho...
+  load-failed: <prefix><red>Ni ellid llwytho rhestr eiddo eich croen. Dywedwch wrth weinyddwr.
+  recovered: '<prefix><gray>Cwblhau agoriad amhariad: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Reiffl
+  sniper: Reiffl Sniper
+  heavy: Trwm
+  equipment: Offer
+  knife: Cyllell
+items:
+  test-marker: <red>⚠ Eitem brawf (gweinyddol)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> eitemau posib
+    - ''
+    - '<gray>Cliciwch ar y dde: <white>gweld y cynnwys'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Yn cael ei ddefnyddio wrth agor cas.
+    use-hint: <prefix><gray>Cliciwch ar y dde ar <white>case</white> i'w agor gyda'r allwedd hon.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Tu allan: <white><wear>'
+    float: '<gray>Arnofio: <white><float>'
+    float-range: '<gray>Arnofio: <white><min_float> - <max_float>'
+    pattern: '<gray>patrwm: <white><pattern>'
+    variant: '<gray>Cyfnod: <class_color><variant>'
+    classification: '<gray>Math o batrwm: <class_color><classification>'
+    fade: '<gray>Pylu: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Lladd: <white><kills>'
+    has-variants: <dark_gray>Sawl cam posib
+    source: '<gray>Ffynhonnell: <white><case>'
+    date: '<gray>Cafwyd: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Dilëwyd: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Pylu'
+gui:
+  loading:
+    name: <gray>Yn llwytho...
+    lore: []
+  back:
+    name: <gray>Nôl
+    lore: []
+  close:
+    name: <red>Cau
+    lore: []
+  previous:
+    name: <gray>Tudalen flaenorol
+    lore:
+    - <dark_gray>Tudalen <page> / <pages>
+  next:
+    name: <gray>Tudalen nesaf
+    lore:
+    - <dark_gray>Tudalen <page> / <pages>
+  cases:
+    title: Achosion
+    header:
+      name: <#e4ae39>Achosion
+      lore:
+      - <gray>Cael achosion gan y deliwr achosion <white></white>.
+      - <gray>Mae angen allwedd gyfatebol i agor un.
+    entry:
+    - ''
+    - '<gray>Yn y rhestr eiddo: <white><owned> <dark_gray>· <gray>Allweddi: <white><keys>'
+    - '<gray>Cliciwch chwith: <white>gweld y cynnwys'
+    can-open: '<green>Cliciwch ar y dde: agor'
+    to-skins:
+      name: <#e4ae39> Stocrestr croen
+      lore:
+      - <gray>Eich crwyn a'ch cyllyll
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Cliciwch am ragolwg
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Cyllell brin.
+      - <dark_gray><count> amrywiadau · cliciwch i weld
+      - ''
+    open:
+      name: <green>Câs agored
+      lore:
+      - '<gray>Achosion: <white><owned> <dark_gray>· <gray>Allweddi: <white><keys>'
+      - <dark_gray>Yn defnyddio 1 cas ac 1 <key>
+    cannot-open:
+      name: <gray>Methu agor
+      lore:
+      - '<gray>Achosion: <white><owned> <dark_gray>· <gray>Allweddi: <white><keys>'
+      - <dark_gray>Mae angen yr achos a <key> arnoch chi.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Ydych chi'n siŵr?
+    'yes':
+      name: <green>Ie, dileu
+      lore:
+      - <dark_gray>Ni ellir dadwneud hyn.
+    'no':
+      name: <red>Canslo
+      lore: []
+  skins:
+    title: Rhestr croen
+    title-other: Crwyn o <player>
+    tab:
+      all:
+        name: <white>Pob crwyn
+        lore: []
+      weapons:
+        name: <white>Crwyn arfau
+        lore: []
+      knives:
+        name: <white>Cyllyll
+        lore:
+        - '<dark_gray>De-gliciwch ar gyllell: arfogi'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Ffefrynnau
+        lore: []
+      recent:
+        name: <white>Cafwyd yn ddiweddar
+        lore: []
+    empty:
+      name: <gray>Dim byd yma eto
+      lore:
+      - <dark_gray>Agorwch gasys i gael crwyn.
+    equipped: <green>✔ Offer
+    favorite: <yellow>★ Hoff
+    hint:
+    - ''
+    - '<dark_gray>Cliciwch ar y chwith: archwilio · Cliciwch ar y dde: rhoi bwa ymlaen'
+    - '<dark_gray>Cliciwch Shift: ffefryn'
+    hint-knife:
+    - ''
+    - '<dark_gray>Cliciwch ar y chwith: archwilio · De-gliciwch: arfogi'
+    - '<dark_gray>Cliciwch Shift: ffefryn'
+    to-cases:
+      name: <#e4ae39>Achosion
+      lore:
+      - <gray>I'ch achosion
+    sort:
+      name: '<white>Sort: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Chwith: nesaf · Dde: blaenorol'
+    sorts:
+      rarity: Prinder
+      float: Arnofio
+      name: Enw
+      wear: Tu allan
+      pattern: Patrwm
+      newest: mwyaf newydd
+      oldest: Hynaf
+    info:
+      name: <white><count> <gray>crwyn yn cael ei ddangos
+      lore:
+      - <dark_gray><total> i gyd · cliciwch i gau
+    filter:
+      name: <white>Hidlo
+      lore:
+      - '<dark_gray>Chwith: dewiswch hidlwyr · Dde: ailosod'
+    active-knife:
+    - <green>✔ Cyllell actif
+    - <dark_gray>Cliciwch am fanylion
+  filter:
+    title: Hidlo
+    header:
+      name: <white>Hidlo
+      lore:
+      - <gray>Cyfunir sawl hidlydd o'r un math.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ yn unig
+    'on':
+    - <green>✔ Actif
+    'off':
+    - <dark_gray>Anactif
+    reset:
+      name: <gray>Ailosod pob hidlydd
+      lore: []
+  inspect:
+    title: Archwilio
+    missing:
+      name: <red>Dim croen ar gael
+      lore: []
+    preview:
+      name: <#e4ae39>Gweld croen
+      lore:
+      - '<gray> Yn dangos eich union gopi:'
+      - <gray>patrwm, lliwiau a gwisgo.
+      - ''
+      - <dark_gray>Sneak i gau'r rhagolwg.
+    data: <white>Manylion
+    favorite:
+      name: <white>Marciwch fel ffefryn
+      lore: []
+    unfavorite:
+      name: <yellow>★ Dileu ffefryn
+      lore: []
+    equip:
+      name: <green>Earpar
+      lore:
+      - <gray>Mae eich cleddyfau yn dangos y gyllell hon.
+      - <dark_gray>Difrod a swyngyfaredd yn aros yr un fath.
+    unequip:
+      name: <green>✔ Offer
+      lore:
+      - <gray>Cliciwch i ddadgyfarparu.
+    inspect3d:
+      name: <white>3D archwilio
+      lore:
+      - '<gray> Yn dangos eich union gopi:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Yn perthyn i chwaraewr arall
+      lore:
+      - <dark_gray>Gweld yn unig
+    equip-bow:
+      name: <green>Rhowch fwa
+      lore:
+      - <gray>Mae dy fwâu yn dangos y croen yma.
+    unequip-bow:
+      name: <green>✔ Ar fwa
+      lore:
+      - <gray>Cliciwch i ddileu.
+    equip-crossbow:
+      name: <green>Rhowch ar y bwa croes
+      lore:
+      - <gray>Mae eich bwâu croes yn dangos y croen hwn.
+    unequip-crossbow:
+      name: <green>✔ Ar y bwa croes
+      lore:
+      - <gray>Cliciwch i ddileu.
+    not-equippable:
+      name: <gray>Ddim yn gymwys
+      lore:
+      - <dark_gray>Ni ellir cyfarparu'r croen hwn.
+    delete:
+      name: <red>Dileu croen
+      lore:
+      - <gray>Yn tynnu'r croen hwn o'ch rhestr eiddo.
+      - <dark_gray>Yn gofyn am gadarnhad.
+view:
+  unknown: <prefix><red>Ni ddaethpwyd o hyd i chwaraewr <white><player></white>.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> rhestr eiddo <dark_gray>· <gray><category> <dark_gray>· <gray><count> crwyn <dark_gray>· <gray>Tudalen
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Cliciwch ar y dde: archwilio · Sneak + clic dde: ffefryn'
+  hint-knife:
+  - ''
+  - '<dark_gray>Cliciwch ar y dde: archwilio · Clic chwith: arfogi'
+  - '<dark_gray>Sneak + clic dde: ffefryn'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Cliciwch ar y dde: archwilio · Clic chwith: rhoi bwa ymlaen'
+  - '<dark_gray>Sneak + clic chwith: rhoi ar bwa croes'
+  - '<dark_gray>Sneak + clic dde: ffefryn'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> crwyn <dark_gray>· <gray>Tudalen <page>/<pages>
+  empty: <gray>Dim byd yma eto
+  button:
+    previous: <gray>Tudalen flaenorol
+    next: <gray>Tudalen nesaf
+    category: <white>Newid categori
+    sort: '<white>Sort: <#e4ae39><sort>'
+    filter: <white>Hidlo
+    list: <white>Dangos fel rhestr
+    close: <red>Cau
+preview:
+  loading: <gray>Rhagolwg rendro...
+  hint: <gray>Sneak i gau
+opening:
+  title: <case>
+  title-test: <red>PRAWF</red> <case>
+  bubble: <black>aur aur aur
+  world:
+    title: <white><player></white> <gray>agor <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Rydych chi eisoes yn agor achos.
+  case-disabled: <prefix><red>Nid yw'r achos hwn ar gael.
+  missing: <prefix><gray>Mae angen <white><case></white> a <white><key></white> arnat ti.
+  missing-now: <prefix><red>Nid yw'r cas neu'r allwedd bellach yn eich rhestr eiddo.
+  storage-error: <prefix><red>Methwyd cynilo. Dychwelwyd eich achos a'ch allwedd.
+  command-blocked: <prefix><gray>Arhoswch nes bydd yr agoriad wedi gorffen.
+  result: '<prefix><gray>Cawsoch <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Prawf]</red> <gray>Canlyniad: <skin> <dark_gray>(<float>, #<pattern>) - heb ei gadw'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>EITEM ARBENNIG RAD</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Archwilio
+      lore:
+      - <gray>Holl fanylion eich croen newydd
+    again:
+      name: <green>Agor un arall
+      lore:
+      - '<gray>Achosion: <white><cases> <dark_gray>· <gray>Allweddi: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Nid yw'r croen hwn yn ffitio'r arf hwn.
+  equipped:
+    knife: '<prefix><gray> Offer cyllell: <skin>'
+    bow: '<prefix><gray>Ar dy fwa: <skin>'
+    crossbow: '<prefix><gray>Ar eich bwa croes: <skin>'
+  unequipped:
+    knife: <prefix><gray>Cyllell heb gyfarpar.
+    bow: <prefix><gray>Tynnu croen y bwa.
+    crossbow: <prefix><gray>Tynnu croen y bwa croes.
+knife:
+  not-owned: <prefix><red>Nid yw'r croen hwn yn perthyn i chi.
+  equipped: '<prefix><gray>Yn meddu ar: <skin>'
+  unequipped: <prefix><gray>Cyllell heb gyfarpar.
+  sword-footer: '<dark_gray>Sylfaen: <base>'
+inspect:
+  running: <prefix><gray>Mae archwiliad eisoes yn rhedeg.
+  no-knife: <red>Dim croen ar gael <white>/skins
+shop:
+  title: Deliwr Achos
+  npc-name: <gradient:#e4ae39:#f6d27a>Gwerthwr Achos</gradient>
+  npc-description: <gray>Cliciwch ar y dde i fasnachu
+  balance:
+    name: '<white>Eich balans: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Dim ond eitemau heb eu haddasu sy'n cyfrif.
+  offer:
+  - ''
+  - '<gray>Pris: <aqua><price> <currency>'
+  - '<dark_gray>5 darn: <price5> <currency>'
+  affordable: <green>✔ Fforddiadwy
+  not-affordable: <red>✘ <missing> <currency> ar goll
+  affordable-five: '<dark_gray>Cliciwch sifft: prynwch 5'
+  hint-case:
+  - '<dark_gray>Cliciwch chwith: prynu · De-gliciwch: cynnwys'
+  hint-key:
+  - '<dark_gray>Cliciwch ar y chwith: prynwch'
+  bought: '<prefix><gray>Prynu: <white><amount>× <name></white> am <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Allwch chi ddim fforddio hynny.
+  inventory-full: <prefix><red>Mae eich rhestr eiddo yn llawn.
+slot:
+  name: <#e4ae39> Stocrestr croen
+  lore:
+  - '<gray>Cliciwch ar y dde: crwyn, cyllyll a chasys'
+  - <dark_gray>Mae'r eitem hon wedi'i chloi i'r slot hwn.
+  blocked: <prefix><gray>Rhyddhewch slot rhestr eiddo fel y gall yr eitem stocrestr croen ymddangos.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Gweinyddol
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Gwneud.
+  unknown: <prefix><red>Anhysbys <what>.
+  instance-unknown: <prefix><red>Ni chanfuwyd unrhyw ID croen cyfatebol. <gray>/rhestr gweinyddwr <player>
+  given: <prefix><gray> Wedi rhoi <amount>× <white><name></white> i <white><player></white>.
+  skin-given: <prefix><gray> Wedi rhoi <skin> <gray>i <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Croen <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Agoriadau diweddar <white><player>
+  scan-start: <prefix><gray>Sganio pob hedyn o <white><skin></white> am <white><metric></white>...
+  export-start: <prefix><gray>Pecyn adnoddau adeiladu...
+  export-done: '<prefix><green><skins> crwyn wedi''i allforio: <white><file>'
+  shop-spawned: <prefix><green>Deliwr achos wedi'i greu.
+  shop-removed: <prefix><green>Dilëwr achos wedi'i dynnu.
+  shop-none: <prefix><gray>Dim deliwr achosion gerllaw.
+  reload-busy: <prefix><gray>Mae ail-lwytho eisoes yn rhedeg.
+  reload-start: <prefix><gray>Ail-lwytho...
+  reload-failed: <prefix><red>Methwyd ail-lwytho, mae'r ffurfweddiad blaenorol yn aros yn weithredol. Gweler consol.
+  reload-done: '<prefix><green>Wedi''i ail-lwytho mewn <ms> ms: <skins> crwyn, casys <cases>, <warnings> rhybuddion (gweler y consol).'
+  browser:
+    title: 'Patrwm: <skin>'
+  manage:
+    title: 'Rheoli: <player>'
+    skin-title: Croen <player>
+    give-title: 'Rhowch groen: <player>'
+    give:
+      name: <green>Rhowch groen
+      lore:
+      - <gray>Dewiswch gas, yna croen.
+    give-hint:
+    - ''
+    - '<dark_gray>Cliciwch ar y chwith: rhoi · Cliciwch ar y dde: rhowch StatTrak™'
+    clear:
+      name: <red>Dileu pob crwyn
+      lore:
+      - <gray><count> bydd y crwyn yn cael eu tynnu.
+      - <dark_gray>Yn gofyn am gadarnhad.
+    cleared: <prefix><gray>Dileu <count> crwyn o <white><player></white>.
+    removed: <prefix><gray>Dileu <skin> <gray>o <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Cliciwch i doglo.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Gosod y fflôt i <white><float>
+    pattern-step:
+      name: <white>patrwm <step>
+      lore:
+      - '<gray>Cyfredol: <white><pattern>'
+    pattern-random:
+      name: <light_purple>patrwm ar hap
+      lore:
+      - '<gray>Cyfredol: <white><pattern>'
+    equip:
+      name: <green>Earpar ar gyfer chwaraewr
+      lore: []
+    unequip:
+      name: <green>✔ Offer
+      lore:
+      - <gray>Cliciwch i ddadgyfarparu.
+    remove:
+      name: <red>Dileu croen
+      lore:
+      - <dark_gray>Yn gofyn am gadarnhad.
+  labels:
+    case: achos
+    key: cywair
+    skin: croen
+    manual: cronfa ddata â llaw
+    automatic: awtomatig
+    none: dim (does gan y gorffeniad ddim proffil dadansoddi)
+    'off': i ffwrdd
+  debug:
+    seed: '<gray>patrwm: <white><seed>'
+    analysing: <dark_gray>Dadansoddi...
+    variant: '<gray>Amrywiad: <white><variant>'
+    classification: '<gray>Dosbarthiad: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Pylu: <white><fade>%'
+    preview:
+      name: <yellow>patrwm rhagolwg <seed>
+      lore:
+      - <gray>Yn dangos y map wedi'i rendro yn eich dwylo.
+    random:
+      name: <light_purple>patrwm ar hap
+      lore: []
+    title: <gold>Dadfygiwr patrwm <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Methwyd y rendrad: <error>'
+    metrics: '<gray>Metrigau: <white><metrics>'
+    scan-failed: <prefix><red>Methodd y sgan.
+    no-metric: <gray>Nid oes gan unrhyw batrwm fetrig <white><metric>
+    export-failed: '<prefix><red>Methwyd yr allforio: <error>'
+  odds: <gray><case> <dark_gray>(<count> eitem, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Crwyn: <white><skins> <gray>Cases: <white><cases> <gray>Arfau: <white><weapons>'
+    cache: '<gray>Rhagolygon wedi''u storio: <white><previews> <gray>Modd pecyn adnoddau: <white><pack>'
+    web: '<gray>Pecyn gweinydd gwe: <white><url>'
+wear:
+  factory_new: Ffatri Newydd
+  minimal_wear: Gwisgo Lleiaf
+  field_tested: Wedi'i Brofi Maes
+  well_worn: Wedi Gwisgo'n Dda
+  battle_scarred: Brwydr-Craith
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Cyfyngedig
+  classified: Dosbarthedig
+  covert: Cudd
+  rare_special: Eitem Arbennig Prin
+catalog:
+  key:
+    case_key: Allwedd Achos

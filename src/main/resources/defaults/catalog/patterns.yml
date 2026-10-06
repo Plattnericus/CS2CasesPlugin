@@ -1,0 +1,64 @@
+# Pattern seeds are drawn uniformly from this range.
+seed-range: [0, 999]
+
+# Color classes for automatic analysis (HSV: hue in degrees, saturation/value 0..1).
+# A hue range with min > max wraps around 0 (red). Within a profile the first matching class wins.
+color-classes:
+  warm:   {hue: [12, 70],   saturation: [0.45, 1.0], value: [0.50, 1.0]}
+  blue:   {hue: [190, 250], saturation: [0.30, 1.0], value: [0.18, 1.0]}
+  purple: {hue: [250, 300], saturation: [0.18, 1.0], value: [0.15, 1.0]}
+  pink:   {hue: [300, 345], saturation: [0.30, 1.0], value: [0.30, 1.0]}
+  red:    {hue: [345, 22],  saturation: [0.45, 1.0], value: [0.30, 1.0]}
+  gold:   {hue: [28, 62],   saturation: [0.28, 1.0], value: [0.32, 1.0]}
+  yellow: {hue: [38, 70],   saturation: [0.45, 1.0], value: [0.50, 1.0]}
+  green:  {hue: [90, 170],  saturation: [0.30, 1.0], value: [0.18, 1.0]}
+  silver: {hue: [0, 360],   saturation: [0.0, 0.18], value: [0.40, 1.0]}
+
+# Analysis profiles referenced by finishes (analysis: <profile>).
+# Metrics are "<region>.<class>" shares in 0..1 measured on the pre-wear paint; regions come from
+# weapons.yml ("full" = the whole painted area). Rules are checked top to bottom, first match wins.
+profiles:
+  case_hardened:
+    regions: [full, playside, blade]
+    classes: [blue, purple, gold, silver]
+    # Thresholds calibrated against all 1000 seeds of the default textures
+    # (~1% high tier, ~3% blue gem, ~8% blue heavy). Use /csadmin scan to re-check after changes.
+    rules:
+      - {name: "High-Tier Blue Gem", tier: 1, color: "#3b7bff", when: ["playside.blue >= 0.97", "full.blue >= 0.80"]}
+      - {name: "High-Tier Blue Gem", tier: 1, color: "#3b7bff", when: ["blade.blue >= 0.98", "full.blue >= 0.80"]}
+      - {name: "Blue Gem",           tier: 2, color: "#4b8bff", when: ["playside.blue >= 0.92", "full.blue >= 0.60"]}
+      - {name: "Blue Gem",           tier: 2, color: "#4b8bff", when: ["blade.blue >= 0.92", "full.blue >= 0.60"]}
+      - {name: "Blue Heavy",         tier: 3, color: "#6d9cff", when: ["full.blue >= 0.58"]}
+      - {name: "Full Gold",          tier: 3, color: "#e4ae39", when: ["full.gold >= 0.97"]}
+      - {name: "Purple Heavy",       tier: 4, color: "#a07ae0", when: ["full.purple >= 0.22"]}
+  fade:
+    regions: [full, blade]
+    classes: [warm, pink, purple, blue]
+    # fade percentage = how little of the blade (or painted area) shows the warm yellow/orange end.
+    # 'metric' may list fallbacks separated by '|'; the first one present is used.
+    fade: {metric: "blade.warm|full.warm", invert: true, from: 0.15, to: 1.0, min: 80, max: 100}
+    rules:
+      - {name: "Full Fade", tier: 1, color: "#ff7ad9", when: ["fade >= 99.5"]}
+      - {name: "High Fade", tier: 2, color: "#e98ad9", when: ["fade >= 97.5"]}
+  marble_fade:
+    regions: [full, tip]
+    classes: [red, yellow, blue, silver]
+    rules:
+      - {name: "Fire & Ice",      tier: 1, color: "#ff5a3a", when: ["tip.red >= 0.22", "tip.blue >= 0.22", "tip.yellow <= 0.12"]}
+      - {name: "Fake Fire & Ice", tier: 2, color: "#ff8a5a", when: ["tip.red >= 0.18", "tip.blue >= 0.18", "tip.yellow <= 0.25"]}
+      - {name: "Tricolor",        tier: 3, color: "#f2c230", when: ["tip.red >= 0.18", "tip.blue >= 0.18", "tip.yellow >= 0.18"]}
+      - {name: "Red Tip",         tier: 3, color: "#e0281e", when: ["tip.red >= 0.65"]}
+
+# Manual pattern database. Entries here always override automatic analysis.
+# Format: <skin id>: { <seed>: {name, tier, color} }
+manual:
+  ak47_case_hardened:
+    661: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}
+    670: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}
+    321: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}
+    955: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}
+    151: {name: "Tier 2 Blue Gem", tier: 2, color: "#4b8bff"}
+    168: {name: "Tier 2 Blue Gem", tier: 2, color: "#4b8bff"}
+  karambit_case_hardened:
+    387: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}
+    269: {name: "Tier 1 Blue Gem", tier: 1, color: "#2f6bff"}

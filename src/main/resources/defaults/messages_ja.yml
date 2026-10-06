@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>ケース</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>それを行う権限がありません。
+  player-only: <prefix><red>プレイヤーのみ。
+profile:
+  loading: <prefix><gray>スキン インベントリはまだ読み込み中です...
+  load-failed: <prefix><red>スキン インベントリをロードできませんでした。管理者に伝えてください。
+  recovered: '<prefix><gray>中断されたオープンが完了しました: <skin>'
+category:
+  pistol: ピストル
+  smg: SMG
+  rifle: ライフル
+  sniper: スナイパーライフル
+  heavy: 重い
+  equipment: 設備
+  knife: ナイフ
+items:
+  test-marker: <red>⚠ テスト項目 (管理者)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> の可能性のある項目
+    - ''
+    - '<gray>右クリック: <white>内容を表示'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>ケースを開けるときに使い切ります。
+    use-hint: <prefix><gray><white>case</white> を右クリックして、このキーで開きます。
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>外観: <white><wear>'
+    float: '<gray>浮動小数点: <white><float>'
+    float-range: '<gray>浮動小数点: <white><min_float> - <max_float>'
+    pattern: '<gray>パターン: <white><pattern>'
+    variant: '<gray>フェーズ: <class_color><variant>'
+    classification: '<gray>パターン タイプ: <class_color><classification>'
+    fade: '<gray>フェード: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>キル: <white><kills>'
+    has-variants: <dark_gray>複数のフェーズが可能
+    source: '<gray>出典: <white><case>'
+    date: '<gray>取得済み: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>削除済み: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>・<white><fade>% フェード'
+gui:
+  loading:
+    name: <gray>読み込み中...
+    lore: []
+  back:
+    name: <gray>戻る
+    lore: []
+  close:
+    name: <red>閉じる
+    lore: []
+  previous:
+    name: <gray>前のページ
+    lore:
+    - <dark_gray>ページ <page> / <pages>
+  next:
+    name: <gray>次のページ
+    lore:
+    - <dark_gray>ページ <page> / <pages>
+  cases:
+    title: 事例
+    header:
+      name: <#e4ae39>ケース
+      lore:
+      - <gray><white>ケースディーラー</white>からケースを入手してください。
+      - <gray>開くには一致するキーが必要です。
+    entry:
+    - ''
+    - '<gray>在庫あり: <white><owned> <dark_gray>・ <gray>キー: <white><keys>'
+    - '<gray>左クリック: <white>内容を表示'
+    can-open: '<green>右クリック: 開く'
+    to-skins:
+      name: <#e4ae39>スキンの在庫
+      lore:
+      - <gray>あなたの皮とナイフ
+  preview:
+    title: <case>
+    click-preview: <dark_gray>クリックしてプレビューを表示
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>珍しいナイフです。
+      - <dark_gray><count> のバリエーション · クリックして表示
+      - ''
+    open:
+      name: <green>オープンケース
+      lore:
+      - '<gray>ケース: <white><owned> <dark_gray>・ <gray>キー: <white><keys>'
+      - <dark_gray>1 つのケースと 1 つの <key> を使用します
+    cannot-open:
+      name: <gray>開けません
+      lore:
+      - '<gray>ケース: <white><owned> <dark_gray>・ <gray>キー: <white><keys>'
+      - <dark_gray>ケースと<key>が必要です。
+  rare:
+    title: ★ <case>
+  confirm:
+    title: 本気ですか？
+    'yes':
+      name: <green>はい、削除します
+      lore:
+      - <dark_gray>これは元に戻すことができません。
+    'no':
+      name: <red>キャンセル
+      lore: []
+  skins:
+    title: スキンの在庫
+    title-other: <player> のスキン
+    tab:
+      all:
+        name: <white>すべてのスキン
+        lore: []
+      weapons:
+        name: <white>武器スキン
+        lore: []
+      knives:
+        name: <white>ナイフ
+        lore:
+        - '<dark_gray>ナイフを右クリック: 装備します'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>お気に入り
+        lore: []
+      recent:
+        name: <white>最近入手したもの
+        lore: []
+    empty:
+      name: <gray>ここにはまだ何もありません
+      lore:
+      - <dark_gray>ケースを開いてスキンを入手してください。
+    equipped: <green>✔ 装備
+    favorite: <yellow>★ お気に入り
+    hint:
+    - ''
+    - '<dark_gray>左クリック: 検査・右クリック: 弓に装着'
+    - '<dark_gray>Shift クリック: お気に入り'
+    hint-knife:
+    - ''
+    - '<dark_gray>左クリック: 検査・右クリック: 装備'
+    - '<dark_gray>Shift クリック: お気に入り'
+    to-cases:
+      name: <#e4ae39>ケース
+      lore:
+      - <gray>あなたのケースへ
+    sort:
+      name: '<white>並べ替え: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>左: 次 · 右: 前'
+    sorts:
+      rarity: レアリティ
+      float: フロート
+      name: 名前
+      wear: 外観
+      pattern: パターン
+      newest: 最新の
+      oldest: 最古の
+    info:
+      name: <white><count> <gray>スキンを表示
+      lore:
+      - 合計 <dark_gray><total> · クリックして閉じます
+    filter:
+      name: <white>フィルター
+      lore:
+      - '<dark_gray>左: フィルターを選択 · 右: リセット'
+    active-knife:
+    - <green>✔ アクティブナイフ
+    - <dark_gray>詳細についてはクリックしてください
+  filter:
+    title: フィルター
+    header:
+      name: <white>フィルター
+      lore:
+      - <gray>同じ種類のフィルターを複数組み合わせます。
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ のみ
+    'on':
+    - <green>✔ アクティブ
+    'off':
+    - <dark_gray>非アクティブ
+    reset:
+      name: <gray>すべてのフィルターをリセット
+      lore: []
+  inspect:
+    title: 検査する
+    missing:
+      name: <red>スキンが利用できません
+      lore: []
+    preview:
+      name: <#e4ae39>スキンを表示
+      lore:
+      - <gray>正確なコピーを示します。
+      - <gray>パターン、色、着用感。
+      - ''
+      - <dark_gray>こっそりプレビューを閉じます。
+    data: <white>詳細
+    favorite:
+      name: <white>お気に入りとしてマーク
+      lore: []
+    unfavorite:
+      name: <yellow>★ お気に入りを削除
+      lore: []
+    equip:
+      name: <green>装備
+      lore:
+      - <gray>あなたの剣にはこのナイフが見えます。
+      - <dark_gray>ダメージとエンチャントは変わりません。
+    unequip:
+      name: <green>✔ 装備
+      lore:
+      - <gray>クリックして装備を解除します。
+    inspect3d:
+      name: <white>3D 検査
+      lore:
+      - <gray>正確なコピーを示します。
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>他のプレイヤーに属しています
+      lore:
+      - <dark_gray>表示のみ
+    equip-bow:
+      name: <green>弓をつけます
+      lore:
+      - <gray>あなたの弓にはこの肌が見えます。
+    unequip-bow:
+      name: <green>✔ 船首上
+      lore:
+      - <gray>クリックして削除します。
+    equip-crossbow:
+      name: <green>クロスボウを装着する
+      lore:
+      - <gray>あなたのクロスボウにはこの肌が見えます。
+    unequip-crossbow:
+      name: <green>✔ クロスボウの場合
+      lore:
+      - <gray>クリックして削除します。
+    not-equippable:
+      name: <gray>装備不可
+      lore:
+      - <dark_gray>このスキンは装備できません。
+    delete:
+      name: <red>スキンを削除
+      lore:
+      - <gray>このスキンをインベントリから削除します。
+      - <dark_gray>確認を求めます。
+view:
+  unknown: <prefix><red>プレーヤー <white><player></white> が見つかりませんでした。
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> の在庫 <dark_gray>· <gray><category> <dark_gray>· <gray><count> スキン <dark_gray>· <gray> ページ <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>右クリック: 検査・スニーク+右クリック: お気に入り'
+  hint-knife:
+  - ''
+  - '<dark_gray>右クリック: 検査・左クリック: 装備'
+  - '<dark_gray>スニーク + 右クリック: お気に入り'
+  hint-weapon:
+  - ''
+  - '<dark_gray>右クリック: 検査・左クリック: 弓に装着'
+  - '<dark_gray>スニーク + 左クリック: クロスボウを装着する'
+  - '<dark_gray>スニーク + 右クリック: お気に入り'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> スキン <dark_gray>· <gray>ページ <page>/<pages>
+  empty: <gray>ここにはまだ何もありません
+  button:
+    previous: <gray>前のページ
+    next: <gray>次のページ
+    category: <white>カテゴリを変更
+    sort: '<white>並べ替え: <#e4ae39><sort>'
+    filter: <white>フィルター
+    list: <white>リストとして表示
+    close: <red>閉じる
+preview:
+  loading: <gray>レンダリング プレビュー...
+  hint: <gray>こっそり閉店
+opening:
+  title: <case>
+  title-test: <red>テスト</red> <case>
+  bubble: <black>ゴールドゴールドゴールド
+  world:
+    title: <white><player></white> <gray><#e4ae39><case> を開きます
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>すでにケースをオープンしています。
+  case-disabled: <prefix><red>このケースは利用できません。
+  missing: <prefix><gray><white><case></white> と <white><key></white> が必要です。
+  missing-now: <prefix><red>ケースまたはキーは在庫にありません。
+  storage-error: <prefix><red>保存に失敗しました。ケースと鍵は返却されました。
+  command-blocked: <prefix><gray>オープニングが完了するまでお待ちください。
+  result: <prefix><gray><skin> <dark_gray>(<float>、#<pattern>) を受け取りました
+  result-test: '<prefix><red>[テスト]</red> <gray>結果: <skin> <dark_gray>(<float>, #<pattern>) - 保存されていません'
+  broadcast: <prefix><white><player></white> <gray>開梱済み <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>レアな特別アイテム</b></gradient>
+  buttons:
+    inspect:
+      name: <white>検査
+      lore:
+      - <gray>新しいスキンの詳細
+    again:
+      name: <green>別のを開く
+      lore:
+      - '<gray>ケース: <white><cases> <dark_gray>・ <gray>キー: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>このスキンはこの武器に適合しません。
+  equipped:
+    knife: '<prefix><gray>ナイフ装備: <skin>'
+    bow: '<prefix><gray>船首: <skin>'
+    crossbow: '<prefix><gray>クロスボウの場合: <skin>'
+  unequipped:
+    knife: <prefix><gray>ナイフが装備されていません。
+    bow: <prefix><gray>弓の皮を取り除きました。
+    crossbow: <prefix><gray>クロスボウのスキンを削除しました。
+knife:
+  not-owned: <prefix><red>このスキンはあなたのものではありません。
+  equipped: <prefix><gray>装備：<skin>
+  unequipped: <prefix><gray>ナイフが装備されていません。
+  sword-footer: '<dark_gray>ベース: <base>'
+inspect:
+  running: <prefix><gray>検査はすでに実行されています。
+  no-knife: <red>スキンが利用できません <white>/skins
+shop:
+  title: ケースディーラー
+  npc-name: <gradient:#e4ae39:#f6d27a>ケースディーラー</gradient>
+  npc-description: <gray>右クリックして取引します
+  balance:
+    name: '<white>残高: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>未変更の項目のみがカウントされます。
+  offer:
+  - ''
+  - '<gray>価格: <aqua><price> <currency>'
+  - <dark_gray>5個：<price5> <currency>
+  affordable: <green>✔ お手頃価格
+  not-affordable: <red>✘ <missing> <currency> がありません
+  affordable-five: '<dark_gray>シフトクリック: 5 個購入'
+  hint-case:
+  - <dark_gray>左クリック：購入・右クリック：内容
+  hint-key:
+  - '<dark_gray>左クリック: 購入'
+  bought: '<prefix><gray>購入: <white><amount>× <name></white>、<aqua><price> <currency></aqua>。'
+  not-enough: <prefix><red>そんな余裕はありません。
+  inventory-full: <prefix><red>在庫がいっぱいです。
+slot:
+  name: <#e4ae39>スキンの在庫
+  lore:
+  - '<gray>右クリック: スキン、ナイフ、ケース'
+  - <dark_gray>このアイテムはこのスロットにロックされています。
+  blocked: <prefix><gray>スキン インベントリ アイテムを表示できるようにインベントリ スロットを解放します。
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>管理者
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>完了。
+  unknown: <prefix><red>不明 <what>。
+  instance-unknown: <prefix><red>一致するスキン ID が見つかりません。 <gray>/csadmin リスト <player>
+  given: <prefix><gray><amount>× <white><name></white> を <white><player></white> に渡しました。
+  skin-given: <prefix><gray><skin> <gray> を <white><player></white> <dark_gray>(#<id>) に渡しました
+  list-header: <prefix><gray><white><player></white> <dark_gray>(<count>) のスキン
+  history-header: <prefix><gray>最近オープンした<white><player>
+  scan-start: <prefix><gray><white><skin></white> のすべてのシードをスキャンして <white><metric></white> を探しています...
+  export-start: <prefix><gray>リソース パックを構築しています...
+  export-done: '<prefix><green><skins> スキンがエクスポートされました: <white><file>'
+  shop-spawned: <prefix><green>ケースディーラーが作成されました。
+  shop-removed: <prefix><green>ケースディーラーが削除されました。
+  shop-none: <prefix><gray>近くにケース販売店がありません。
+  reload-busy: <prefix><gray>リロードはすでに実行中です。
+  reload-start: <prefix><gray>再読み込み中...
+  reload-failed: <prefix><red>リロードに失敗しました。前の構成はアクティブのままです。コンソールを参照してください。
+  reload-done: '<prefix><green><ms> ミリ秒でリロード: <skins> スキン、<cases> ケース、<warnings> 警告 (コンソールを参照)。'
+  browser:
+    title: 'パターン: <skin>'
+  manage:
+    title: '管理者: <player>'
+    skin-title: <player> のスキン
+    give-title: 'スキンを与える: <player>'
+    give:
+      name: <green>スキンを与える
+      lore:
+      - <gray>ケースを選択してから、スキンを選択します。
+    give-hint:
+    - ''
+    - <dark_gray>左クリック：与える · 右クリック：StatTrak™を与える
+    clear:
+      name: <red>すべてのスキンを削除
+      lore:
+      - <gray><count> スキンは削除されます。
+      - <dark_gray>確認を求めます。
+    cleared: <prefix><gray><white><player></white> の <count> スキンを削除しました。
+    removed: <prefix><gray><white><player> の <skin> <gray> を削除しました
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>クリックして切り替えます。
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>float を <white><float> に設定します
+    pattern-step:
+      name: <white>パターン <step>
+      lore:
+      - '<gray>現在: <white><pattern>'
+    pattern-random:
+      name: <light_purple>ランダムパターン
+      lore:
+      - '<gray>現在: <white><pattern>'
+    equip:
+      name: <green>プレイヤーの装備
+      lore: []
+    unequip:
+      name: <green>✔ 装備
+      lore:
+      - <gray>クリックして装備を解除します。
+    remove:
+      name: <red>スキンを削除
+      lore:
+      - <dark_gray>確認を求めます。
+  labels:
+    case: ケース
+    key: キー
+    skin: 皮膚
+    manual: マニュアルデータベース
+    automatic: 自動
+    none: なし (仕上げには分析プロファイルがありません)
+    'off': オフ
+  debug:
+    seed: '<gray>パターン: <white><seed>'
+    analysing: <dark_gray>分析中...
+    variant: '<gray>バリアント: <white><variant>'
+    classification: '<gray>分類: <white><classification> <dark_gray><mode>'
+    fade: '<gray>フェード: <white><fade>%'
+    preview:
+      name: <yellow>パターンのプレビュー <seed>
+      lore:
+      - <gray>レンダリングされた地図を手に表示します。
+    random:
+      name: <light_purple>ランダムパターン
+      lore: []
+    title: <gold>パターン デバッガ <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>レンダリングに失敗しました: <error>'
+    metrics: '<gray>メトリクス: <white><metrics>'
+    scan-failed: <prefix><red>スキャンに失敗しました。
+    no-metric: <gray>メトリック <white><metric> を持つパターンはありません
+    export-failed: '<prefix><red>エクスポートに失敗しました: <error>'
+  odds: <gray><case> <dark_gray>(<count> アイテム、StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>スキン: <white><skins> <gray>ケース: <white><cases> <gray>武器: <white><weapons>'
+    cache: '<gray>キャッシュされたプレビュー: <white><previews> <gray>リソース パック モード: <white><pack>'
+    web: '<gray>パック Web サーバー: <white><url>'
+wear:
+  factory_new: 工場出荷時の新製品
+  minimal_wear: 最小限の摩耗
+  field_tested: フィールドテスト済み
+  well_worn: 使い古された
+  battle_scarred: 戦いの傷跡
+rarity:
+  mil_spec: ミルスペック
+  restricted: 制限付き
+  classified: 機密扱い
+  covert: 秘密
+  rare_special: レアなスペシャルアイテム
+catalog:
+  key:
+    case_key: ケースキー

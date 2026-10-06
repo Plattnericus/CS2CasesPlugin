@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Cases</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Du har ikke tillatelse til å gjøre det.
+  player-only: <prefix><red>Kun spillere.
+profile:
+  loading: <prefix><gray>Skallbeholdningen din lastes fortsatt inn...
+  load-failed: <prefix><red>Skalbeholdningen din kunne ikke lastes. Fortell en administrator.
+  recovered: '<prefix><gray>Avbrutt åpning fullført: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Rifle
+  sniper: Snikskytterrifle
+  heavy: Tungt
+  equipment: Utstyr
+  knife: Kniv
+items:
+  test-marker: <red>⚠ Testelement (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> mulige elementer
+    - ''
+    - '<gray>Høyreklikk: <white>vis innhold'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Oppbrukt når en sak åpnes.
+    use-hint: <prefix><gray>Høyreklikk en <white>case</white> for å åpne den med denne nøkkelen.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Eksteriør: <white><wear>'
+    float: '<gray>Flyte: <white><float>'
+    float-range: '<gray>Flyte: <white><min_float> - <max_float>'
+    pattern: '<gray>Mønster: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Mønstertype: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Drap: <white><kills>'
+    has-variants: <dark_gray>Flere faser mulig
+    source: '<gray>Kilde: <white><case>'
+    date: '<gray>Montatt: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Slettet: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Laster...
+    lore: []
+  back:
+    name: <gray>Tilbake
+    lore: []
+  close:
+    name: <red>Lukk
+    lore: []
+  previous:
+    name: <gray>Forrige side
+    lore:
+    - <dark_gray>Side <page> / <pages>
+  next:
+    name: <gray>Neste side
+    lore:
+    - <dark_gray>Side <page> / <pages>
+  cases:
+    title: Saker
+    header:
+      name: <#e4ae39>Tilfeller
+      lore:
+      - <gray>Få saker fra <white>case-forhandleren</white>.
+      - <gray>Du trenger en matchende nøkkel for å åpne en.
+    entry:
+    - ''
+    - '<gray>I inventar: <white><owned> <dark_gray>· <gray>Nøkler: <white><keys>'
+    - '<gray>Venstreklikk: <white>vis innhold'
+    can-open: '<green>Høyreklikk: åpen'
+    to-skins:
+      name: <#e4ae39>Hudbeholdning
+      lore:
+      - <gray>Skallene og knivene dine
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Klikk for en forhåndsvisning
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>En sjelden kniv.
+      - <dark_gray><count> varianter · klikk for å se
+      - ''
+    open:
+      name: <green>Åpen boks
+      lore:
+      - '<gray>Kofferter: <white><owned> <dark_gray>· <gray>Nøkler: <white><keys>'
+      - <dark_gray>Bruker 1 etui og 1 <key>
+    cannot-open:
+      name: <gray>Kan ikke åpne
+      lore:
+      - '<gray>Kofferter: <white><owned> <dark_gray>· <gray>Nøkler: <white><keys>'
+      - <dark_gray>Du trenger etuiet og en <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Er du sikker?
+    'yes':
+      name: <green>Ja, slett
+      lore:
+      - <dark_gray>Dette kan ikke angres.
+    'no':
+      name: <red>Avbryt
+      lore: []
+  skins:
+    title: Hudinventar
+    title-other: Skinn av <player>
+    tab:
+      all:
+        name: <white>Alle skinn
+        lore: []
+      weapons:
+        name: <white>Våpenskinn
+        lore: []
+      knives:
+        name: <white>Kniver
+        lore:
+        - '<dark_gray>Høyreklikk på en kniv: utstyr'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoritter
+        lore: []
+      recent:
+        name: <white>Nylig innhentet
+        lore: []
+    empty:
+      name: <gray>Ingenting her ennå
+      lore:
+      - <dark_gray>Åpne etuier for å få skinn.
+    equipped: <green>✔ Utstyrt
+    favorite: <yellow>★ Favoritt
+    hint:
+    - ''
+    - '<dark_gray>Venstre klikk: inspiser · Høyreklikk: sett på buen'
+    - '<dark_gray>Shift-klikk: favoritt'
+    hint-knife:
+    - ''
+    - '<dark_gray>Venstreklikk: inspiser · Høyreklikk: utstyr'
+    - '<dark_gray>Shift-klikk: favoritt'
+    to-cases:
+      name: <#e4ae39>Tilfeller
+      lore:
+      - <gray>Til sakene dine
+    sort:
+      name: '<white>Sorter: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Venstre: neste · Høyre: forrige'
+    sorts:
+      rarity: Sjeldenhet
+      float: Flyte
+      name: Navn
+      wear: Eksteriør
+      pattern: Mønster
+      newest: Nyeste
+      oldest: Eldst
+    info:
+      name: <white><count> <gray>skinn vist
+      lore:
+      - <dark_gray><total> totalt · klikk for å lukke
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Venstre: velg filtre · Høyre: tilbakestill'
+    active-knife:
+    - <green>✔ Aktiv kniv
+    - <dark_gray>Klikk for detaljer
+  filter:
+    title: Filter
+    header:
+      name: <white>Filter
+      lore:
+      - <gray>Flere filtre av samme type er kombinert.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Bare <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Aktiv
+    'off':
+    - <dark_gray>Inaktiv
+    reset:
+      name: <gray>Tilbakestill alle filtre
+      lore: []
+  inspect:
+    title: Inspiser
+    missing:
+      name: <red>Skin ikke tilgjengelig
+      lore: []
+    preview:
+      name: <#e4ae39>Se hud
+      lore:
+      - '<gray>Viser din eksakte kopi:'
+      - <gray>mønster, farger og slitasje.
+      - ''
+      - <dark_gray>Snik for å lukke forhåndsvisningen.
+    data: <white>Detaljer
+    favorite:
+      name: <white>Merk som favoritt
+      lore: []
+    unfavorite:
+      name: <yellow>★ Fjern favoritt
+      lore: []
+    equip:
+      name: <green>Utstyr
+      lore:
+      - <gray>Sverdene dine viser denne kniven.
+      - <dark_gray>Skader og fortryllelser forblir de samme.
+    unequip:
+      name: <green>✔ Utstyrt
+      lore:
+      - <gray>Klikk for å avutstyre.
+    inspect3d:
+      name: <white>3D inspiser
+      lore:
+      - '<gray>Viser din eksakte kopi:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Tilhører en annen spiller
+      lore:
+      - <dark_gray>Vis kun
+    equip-bow:
+      name: <green>Ta på sløyfen
+      lore:
+      - <gray>Sløyfene dine viser denne huden.
+    unequip-bow:
+      name: <green>✔ På baugen
+      lore:
+      - <gray>Klikk for å fjerne.
+    equip-crossbow:
+      name: <green>Ta på armbrøst
+      lore:
+      - <gray>Arsbrøstene dine viser denne huden.
+    unequip-crossbow:
+      name: <green>✔ På armbrøst
+      lore:
+      - <gray>Klikk for å fjerne.
+    not-equippable:
+      name: <gray>Ikke utstyr
+      lore:
+      - <dark_gray>Dette skalet kan ikke utstyres.
+    delete:
+      name: <red>Slett skin
+      lore:
+      - <gray>Fjerner dette skallet fra beholdningen din.
+      - <dark_gray>Ber om bekreftelse.
+view:
+  unknown: <prefix><red>Player <white><player></white> ble ikke funnet.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> sin beholdning <dark_gray>· <gray><category> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Side
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Høyreklikk: inspiser · Snik + høyreklikk: favoritt'
+  hint-knife:
+  - ''
+  - '<dark_gray>Høyreklikk: inspiser · Venstreklikk: utstyr'
+  - '<dark_gray>Snik + høyreklikk: favoritt'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Høyreklikk: inspiser · Venstreklikk: sett på buen'
+  - '<dark_gray>Snik + venstreklikk: ta på armbrøst'
+  - '<dark_gray>Snik + høyreklikk: favoritt'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skinn <dark_gray>· <gray>Side <page>/<pages>
+  empty: <gray>Ingenting her ennå
+  button:
+    previous: <gray>Forrige side
+    next: <gray>Neste side
+    category: <white>Endre kategori
+    sort: '<white>Sorter: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Vis som liste
+    close: <red>Lukk
+preview:
+  loading: <gray>Gender forhåndsvisning...
+  hint: <gray>Snik for å lukke
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>gull gull gull
+  world:
+    title: <white><player></white> <gray>åpner <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Du åpner allerede en sak.
+  case-disabled: <prefix><red>Denne saken er ikke tilgjengelig.
+  missing: <prefix><gray>Du trenger <white><case></white> og en <white><key></white>.
+  missing-now: <prefix><red>Etuiet eller nøkkelen er ikke lenger i beholdningen din.
+  storage-error: <prefix><red>Lagre mislyktes. Kofferten og nøkkelen ble returnert.
+  command-blocked: <prefix><gray>Vent til åpningen er ferdig.
+  result: '<prefix><gray>Du mottok <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Resultat: <skin> <dark_gray>(<float>, #<pattern>) - ikke lagret'
+  broadcast: <prefix><white><player></white> <gray>uboks <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>SJELDEN SPESIALVARE</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspiser
+      lore:
+      - <gray>Alle detaljer om din nye hud
+    again:
+      name: <green>Åpne en annen
+      lore:
+      - '<gray>Kofferter: <white><cases> <dark_gray>· <gray>Nøkler: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Dette skinnet passer ikke til dette våpenet.
+  equipped:
+    knife: '<prefix><gray>Kniv utstyrt: <skin>'
+    bow: '<prefix><gray>På buen din: <skin>'
+    crossbow: '<prefix><gray>På armbrøsten: <skin>'
+  unequipped:
+    knife: <prefix><gray>Uutstyrt kniv.
+    bow: <prefix><gray>Bow hud fjernet.
+    crossbow: <prefix><gray>Korsbrøsthud fjernet.
+knife:
+  not-owned: <prefix><red>Dette skalet tilhører ikke deg.
+  equipped: '<prefix><gray>Utstyrt: <skin>'
+  unequipped: <prefix><gray>Uutstyrt kniv.
+  sword-footer: '<dark_gray>Basis: <base>'
+inspect:
+  running: <prefix><gray>En inspeksjon kjører allerede.
+  no-knife: <red>Skin ikke tilgjengelig <white>/skins
+shop:
+  title: Saksforhandler
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Høyreklikk for å handle
+  balance:
+    name: '<white>Din saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Kun uendrede elementer teller.
+  offer:
+  - ''
+  - '<gray>Pris: <aqua><price> <currency>'
+  - '<dark_gray>5 stykker: <price5> <currency>'
+  affordable: <green>✔ Rimelig
+  not-affordable: <red>✘ <missing> <currency> mangler
+  affordable-five: '<dark_gray>Shift-klikk: kjøp 5'
+  hint-case:
+  - '<dark_gray>Venstreklikk: kjøp · Høyreklikk: innhold'
+  hint-key:
+  - '<dark_gray>Venstreklikk: kjøp'
+  bought: '<prefix><gray>Kjøpt: <white><amount>× <name></white> for <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Du har ikke råd til det.
+  inventory-full: <prefix><red>Beholdningen din er full.
+slot:
+  name: <#e4ae39>Hudbeholdning
+  lore:
+  - '<gray>Høyreklikk: skinn, kniver og etuier'
+  - <dark_gray>Dette elementet er låst til dette sporet.
+  blocked: <prefix><gray>Frigjør en inventarplass slik at skin-inventarelementet kan vises.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Ferdig.
+  unknown: <prefix><red>Ukjent <what>.
+  instance-unknown: <prefix><red> Ingen samsvarende hud-ID funnet. <gray>/csadmin liste <player>
+  given: <prefix><gray>Ga <amount>× <white><name></white> til <white><player></white>.
+  skin-given: <prefix><gray>Ga <skin> <gray>til <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skinn av <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Nylige åpninger av <white><player>
+  scan-start: <prefix><gray>Skannner hvert frø av <white><skin></white> for <white><metric></white>...
+  export-start: <prefix><gray>Bygger ressurspakke...
+  export-done: '<prefix><green><skins> skall eksportert: <white><file>'
+  shop-spawned: <prefix><green>Case-forhandler opprettet.
+  shop-removed: <prefix><green>Koffertforhandler fjernet.
+  shop-none: <prefix><gray>Ingen saksforhandler i nærheten.
+  reload-busy: <prefix><gray>En omlasting kjører allerede.
+  reload-start: <prefix><gray>Laster inn på nytt...
+  reload-failed: <prefix><red>Reload mislyktes, den forrige konfigurasjonen forblir aktiv. Se konsoll.
+  reload-done: '<prefix><green>Lastet på nytt om <ms> ms: <skins> skinn, <cases> tilfeller, <warnings> advarsler (se konsoll).'
+  browser:
+    title: 'Mønster: <skin>'
+  manage:
+    title: 'Administrer: <player>'
+    skin-title: Huden til <player>
+    give-title: 'Gi hud: <player>'
+    give:
+      name: <green>Gi hud
+      lore:
+      - <gray>Velg et etui og deretter et skall.
+    give-hint:
+    - ''
+    - '<dark_gray>Venstreklikk: gi · Høyreklikk: gi StatTrak™'
+    clear:
+      name: <red>Slett alle skall
+      lore:
+      - <gray><count> skinn vil bli fjernet.
+      - <dark_gray>Ber om bekreftelse.
+    cleared: <prefix><gray>Slettet <count> skinn av <white><player></white>.
+    removed: <prefix><gray>Slettet <skin> <gray>av <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Klikk for å veksle.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Setter flottøren til <white><float>
+    pattern-step:
+      name: <white>Mønster <step>
+      lore:
+      - '<gray>Gjeldende: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Tilfeldig mønster
+      lore:
+      - '<gray>Gjeldende: <white><pattern>'
+    equip:
+      name: <green>Utstyr for spiller
+      lore: []
+    unequip:
+      name: <green>✔ Utstyrt
+      lore:
+      - <gray>Klikk for å avutstyre.
+    remove:
+      name: <red>Slett skin
+      lore:
+      - <dark_gray>Ber om bekreftelse.
+  labels:
+    case: sak
+    key: nøkkel
+    skin: hud
+    manual: manuell database
+    automatic: automatisk
+    none: ingen (finish har ingen analyseprofil)
+    'off': av
+  debug:
+    seed: '<gray>Mønster: <white><seed>'
+    analysing: <dark_gray>Analyser...
+    variant: '<gray>Variant: <white><variant>'
+    classification: '<gray>Klassifisering: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Forhåndsvisningsmønster <seed>
+      lore:
+      - <gray>Viser det gjengitte kartet i hendene dine.
+    random:
+      name: <light_purple>Tilfeldig mønster
+      lore: []
+    title: <gold>Mønsterfeilsøker <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Gjengivelse mislyktes: <error>'
+    metrics: '<gray>Beregninger: <white><metrics>'
+    scan-failed: <prefix><red>Skanning mislyktes.
+    no-metric: <gray>Ingen mønster har metrisk <white><metric>
+    export-failed: '<prefix><red>Eksport mislyktes: <error>'
+  odds: <gray><case> <dark_gray>(<count> elementer, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skinn: <white><skins> <gray>Etuier: <white><cases> <gray>Våpen: <white><weapons>'
+    cache: '<gray>Bufrede forhåndsvisninger: <white><previews> <gray>Ressurspakkemodus: <white><pack>'
+    web: '<gray>Pack webserver: <white><url>'
+wear:
+  factory_new: Fabrikkny
+  minimal_wear: Minimal slitasje
+  field_tested: Felttestet
+  well_worn: Godt slitt
+  battle_scarred: Kamp-arret
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Begrenset
+  classified: Klassifisert
+  covert: Skjult
+  rare_special: Sjelden spesialartikkel
+catalog:
+  key:
+    case_key: Etui nøkkel

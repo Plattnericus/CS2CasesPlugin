@@ -1,0 +1,6 @@
+# Keys. Cases reference a key id; the default catalog uses one universal key like CS2.
+keys:
+  case_key:
+    name: "Case Key"
+    color: "#e4ae39"
+    lore: []

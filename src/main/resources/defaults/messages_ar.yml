@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>الحالات</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>ليس لديك إذن للقيام بذلك.
+  player-only: <prefix><red>اللاعبون فقط.
+profile:
+  loading: <prefix><gray>لا يزال مخزون بشرتك قيد التحميل...
+  load-failed: <prefix><red>تعذر تحميل مخزون الجلد الخاص بك. من فضلك أخبر المشرف.
+  recovered: '<prefix><gray>اكتمل الفتح المتقطع: <skin>'
+category:
+  pistol: مسدس
+  smg: إس إم جي
+  rifle: بندقية
+  sniper: بندقية قنص
+  heavy: ثقيل
+  equipment: المعدات
+  knife: سكين
+items:
+  test-marker: <red>⚠ عنصر الاختبار (المسؤول)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> العناصر المحتملة
+    - ''
+    - '<gray>انقر بزر الماوس الأيمن: <white>عرض المحتويات'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray> يتم استخدامه عند فتح الحالة.
+    use-hint: <prefix><gray> انقر بزر الماوس الأيمن على <white>case</white> لفتحه باستخدام هذا المفتاح.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>الخارجي: <white><wear>'
+    float: '<gray> تعويم: <white><float>'
+    float-range: '<gray> تعويم: <white><min_float> - <max_float>'
+    pattern: '<gray>النمط: <white><pattern>'
+    variant: '<gray>المرحلة: <class_color><variant>'
+    classification: '<gray>نوع النمط: <class_color><classification>'
+    fade: '<gray>التلاشي: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>القتل: <white><kills>'
+    has-variants: <dark_gray>عدة مراحل ممكنة
+    source: '<gray>المصدر: <white><case>'
+    date: '<gray>تم الحصول عليه: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>محذوف: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% تلاشي'
+gui:
+  loading:
+    name: <gray>جارٍ التحميل...
+    lore: []
+  back:
+    name: <gray>العودة
+    lore: []
+  close:
+    name: <red>إغلاق
+    lore: []
+  previous:
+    name: <gray>الصفحة السابقة
+    lore:
+    - <dark_gray>الصفحة <page> / <pages>
+  next:
+    name: <gray>الصفحة التالية
+    lore:
+    - <dark_gray>الصفحة <page> / <pages>
+  cases:
+    title: الحالات
+    header:
+      name: <#e4ae39>الحالات
+      lore:
+      - <gray>احصل على الحالات من <white>تاجر الحالات</white>.
+      - <gray> أنت بحاجة إلى مفتاح مطابق لفتحه.
+    entry:
+    - ''
+    - '<gray>في المخزون: <white><owned> <dark_gray>· <gray>المفاتيح: <white><keys>'
+    - '<gray>انقر بزر الماوس الأيسر: <white>عرض المحتويات'
+    can-open: '<green> انقر بزر الماوس الأيمن: فتح'
+    to-skins:
+      name: <#e4ae39>مخزون الجلد
+      lore:
+      - <gray>جلودك وسكاكينك
+  preview:
+    title: <case>
+    click-preview: <dark_gray>انقر للمعاينة
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray> سكين نادر.
+      - <dark_gray><count> المتغيرات · انقر للعرض
+      - ''
+    open:
+      name: <green>حالة مفتوحة
+      lore:
+      - '<gray>الحالات: <white><owned> <dark_gray>· <gray>المفاتيح: <white><keys>'
+      - <dark_gray>يستخدم حالة واحدة و1 <key>
+    cannot-open:
+      name: <gray>لا يمكن فتحه
+      lore:
+      - '<gray>الحالات: <white><owned> <dark_gray>· <gray>المفاتيح: <white><keys>'
+      - <dark_gray> أنت بحاجة إلى الحالة و<key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: هل أنت متأكد؟
+    'yes':
+      name: <green>نعم، احذف
+      lore:
+      - <dark_gray>لا يمكن التراجع عن هذا.
+    'no':
+      name: <red>إلغاء
+      lore: []
+  skins:
+    title: مخزون الجلد
+    title-other: جلود <player>
+    tab:
+      all:
+        name: <white>جميع الجلود
+        lore: []
+      weapons:
+        name: <white>جلود الأسلحة
+        lore: []
+      knives:
+        name: <white>السكاكين
+        lore:
+        - '<dark_gray> انقر بزر الماوس الأيمن على السكين: تجهيز'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>المفضلة
+        lore: []
+      recent:
+        name: <white> تم الحصول عليه مؤخرًا
+        lore: []
+    empty:
+      name: <gray> لا شيء هنا بعد
+      lore:
+      - <dark_gray>افتح الحالات للحصول على الجلود.
+    equipped: <green>✔ مجهزة
+    favorite: <yellow>★ المفضلة
+    hint:
+    - ''
+    - '<dark_gray> انقر بالزر الأيسر: فحص · انقر بزر الماوس الأيمن: ضع القوس'
+    - '<dark_gray> انقر على Shift: المفضلة'
+    hint-knife:
+    - ''
+    - '<dark_gray> انقر بالزر الأيسر: فحص · انقر بزر الماوس الأيمن: تجهيز'
+    - '<dark_gray> انقر على Shift: المفضلة'
+    to-cases:
+      name: <#e4ae39>الحالات
+      lore:
+      - <gray> إلى حالاتك
+    sort:
+      name: '<white>الفرز: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray> اليسار: التالي · اليمين: السابق'
+    sorts:
+      rarity: ندرة
+      float: تعويم
+      name: الاسم
+      wear: الخارج
+      pattern: نمط
+      newest: الأحدث
+      oldest: الأقدم
+    info:
+      name: <white><count> <gray>الجلود المعروضة
+      lore:
+      - <dark_gray><total> إجمالاً · انقر للإغلاق
+    filter:
+      name: <white>تصفية
+      lore:
+      - '<dark_gray> اليسار: اختر المرشحات · اليمين: إعادة التعيين'
+    active-knife:
+    - <green>✔ سكين فعال
+    - <dark_gray>انقر للحصول على التفاصيل
+  filter:
+    title: تصفية
+    header:
+      name: <white>تصفية
+      lore:
+      - <gray> تم دمج عدة مرشحات من نفس النوع.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ فقط
+    'on':
+    - <green>✔ نشط
+    'off':
+    - <dark_gray>غير نشط
+    reset:
+      name: <gray>إعادة ضبط جميع المرشحات
+      lore: []
+  inspect:
+    title: فحص
+    missing:
+      name: <red>الجلد غير متوفر
+      lore: []
+    preview:
+      name: <#e4ae39>عرض الجلد
+      lore:
+      - '<gray>يظهر نسختك الدقيقة:'
+      - <gray>النمط والألوان والارتداء.
+      - ''
+      - <dark_gray>التسلل لإغلاق المعاينة.
+    data: <white>التفاصيل
+    favorite:
+      name: <white>ضع علامة كمفضلة
+      lore: []
+    unfavorite:
+      name: <yellow>★ إزالة المفضلة
+      lore: []
+    equip:
+      name: <green>تجهيز
+      lore:
+      - <gray> سيوفك تظهر هذه السكين.
+      - <dark_gray> يبقى الضرر والسحر كما هو.
+    unequip:
+      name: <green>✔ مجهزة
+      lore:
+      - <gray>انقر لإلغاء التجهيز.
+    inspect3d:
+      name: <white>فحص ثلاثي الأبعاد
+      lore:
+      - '<gray>يظهر نسختك الدقيقة:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray> ينتمي إلى لاعب آخر
+      lore:
+      - <dark_gray>عرض فقط
+    equip-bow:
+      name: <green> ارتدي القوس
+      lore:
+      - <gray> تظهر أقواسك هذا الجلد.
+    unequip-bow:
+      name: <green>✔ على القوس
+      lore:
+      - <gray>انقر للإزالة.
+    equip-crossbow:
+      name: <green> ضع القوس والنشاب
+      lore:
+      - <gray> تظهر أقواسك هذه البشرة.
+    unequip-crossbow:
+      name: <green>✔ على القوس والنشاب
+      lore:
+      - <gray>انقر للإزالة.
+    not-equippable:
+      name: <gray>غير قابل للتجهيز
+      lore:
+      - <dark_gray>لا يمكن تجهيز هذا الجلد.
+    delete:
+      name: <red>حذف الجلد
+      lore:
+      - <gray>يزيل هذا المظهر من المخزون الخاص بك.
+      - <dark_gray>يطلب التأكيد.
+view:
+  unknown: <prefix><red>لم يتم العثور على المشغل <white><player></white>.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> مخزون <dark_gray>· <gray><category> <dark_gray>· <gray><count> الجلود <dark_gray>· <gray>الصفحة <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray> انقر بزر الماوس الأيمن: فحص · تسلل + انقر بزر الماوس الأيمن: المفضلة'
+  hint-knife:
+  - ''
+  - '<dark_gray> انقر بزر الماوس الأيمن: فحص · انقر بزر الماوس الأيسر: تجهيز'
+  - '<dark_gray>Sneak + النقر بزر الماوس الأيمن: المفضلة'
+  hint-weapon:
+  - ''
+  - '<dark_gray> انقر بزر الماوس الأيمن: فحص · انقر بزر الماوس الأيسر: ضع القوس'
+  - '<dark_gray>Sneak + النقر بالزر الأيسر: ضع القوس والنشاب'
+  - '<dark_gray>Sneak + النقر بزر الماوس الأيمن: المفضلة'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> الجلود <dark_gray>· <gray>الصفحة <page>/<pages>
+  empty: <gray> لا شيء هنا بعد
+  button:
+    previous: <gray>الصفحة السابقة
+    next: <gray>الصفحة التالية
+    category: <white>تغيير الفئة
+    sort: '<white>الفرز: <#e4ae39><sort>'
+    filter: <white>تصفية
+    list: <white>إظهار كقائمة
+    close: <red>إغلاق
+preview:
+  loading: <gray>جاري عرض المعاينة...
+  hint: <gray>التسلل للإغلاق
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>ذهب ذهب ذهب
+  world:
+    title: <white><player></white> <gray>يفتح <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>أنت تفتح حالة بالفعل.
+  case-disabled: <prefix><red>هذه الحالة غير متوفرة.
+  missing: <prefix><gray>أنت بحاجة إلى <white><case></white> و<white><key></white>.
+  missing-now: <prefix><red> لم تعد الحقيبة أو المفتاح موجودًا في مخزونك.
+  storage-error: <prefix><red>فشل الحفظ. تم إرجاع حالتك ومفتاحك.
+  command-blocked: <prefix><gray>انتظر حتى ينتهي الافتتاح.
+  result: '<prefix><gray>لقد تلقيت <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[اختبار]</red> <gray>النتيجة: <skin> <dark_gray>(<float>, #<pattern>) - لم يتم الحفظ'
+  broadcast: <prefix><white><player></white> <gray>غير معلبة <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>عنصر خاص نادر</b></gradient>
+  buttons:
+    inspect:
+      name: <white>فحص
+      lore:
+      - <gray>كل تفاصيل بشرتك الجديدة
+    again:
+      name: <green>افتح آخر
+      lore:
+      - '<gray>الحالات: <white><cases> <dark_gray>· <gray>المفاتيح: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>هذا المظهر لا يناسب هذا السلاح.
+  equipped:
+    knife: '<prefix><gray>السكين المجهزة: <skin>'
+    bow: '<prefix><gray>على قوسك: <skin>'
+    crossbow: '<prefix><gray>على قوسك: <skin>'
+  unequipped:
+    knife: <prefix><gray>السكين غير مجهز.
+    bow: <prefix><gray>إزالة جلد القوس.
+    crossbow: <prefix><gray>تمت إزالة جلد القوس والنشاب.
+knife:
+  not-owned: <prefix><red>هذا الجلد لا ينتمي إليك.
+  equipped: '<prefix><gray>المعدات: <skin>'
+  unequipped: <prefix><gray>السكين غير مجهز.
+  sword-footer: '<dark_gray>القاعدة: <base>'
+inspect:
+  running: <prefix><gray>الفحص قيد التشغيل بالفعل.
+  no-knife: <red>الجلد غير متوفر <white>/skins
+shop:
+  title: تاجر القضية
+  npc-name: <gradient:#e4ae39:#f6d27a>تاجر الحالة</gradient>
+  npc-description: <gray> انقر بزر الماوس الأيمن للتداول
+  balance:
+    name: '<white>رصيدك: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray> يتم احتساب العناصر غير المعدلة فقط.
+  offer:
+  - ''
+  - '<gray>السعر: <aqua><price> <currency>'
+  - '<dark_gray>5 قطع: <price5> <currency>'
+  affordable: <green>✔ بأسعار معقولة
+  not-affordable: <red>✘ <missing> <currency> مفقود
+  affordable-five: '<dark_gray> انقر على Shift: شراء 5'
+  hint-case:
+  - '<dark_gray> انقر بالزر الأيسر: شراء · انقر بزر الماوس الأيمن: المحتويات'
+  hint-key:
+  - '<dark_gray> انقر على اليسار: شراء'
+  bought: '<prefix><gray>تم الشراء: <white><amount>× <name></white> لـ <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red> لا يمكنك تحمل ذلك.
+  inventory-full: <prefix><red>مخزونك ممتلئ.
+slot:
+  name: <#e4ae39>مخزون الجلد
+  lore:
+  - '<gray> انقر بزر الماوس الأيمن: الجلود والسكاكين والحالات'
+  - <dark_gray>هذا العنصر مقفل في هذه الفتحة.
+  blocked: <prefix><gray>حرر فتحة المخزون حتى يظهر عنصر مخزون المظهر.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>المسؤول
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>تم.
+  unknown: <prefix><red>غير معروف <what>.
+  instance-unknown: <prefix><red>لم يتم العثور على معرف الجلد المطابق. <gray>/قائمة csadmin <player>
+  given: <prefix><gray>أعطى <amount>× <white><name></white> إلى <white><player></white>.
+  skin-given: <prefix><gray>أعطى <skin> <gray>إلى <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>جلود <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>الافتتاحات الأخيرة لـ <white><player>
+  scan-start: <prefix><gray>مسح كل بذور <white><skin></white> بحثًا عن <white><metric></white>...
+  export-start: <prefix><gray>إنشاء حزمة الموارد...
+  export-done: '<prefix><green><skins> الأسطح المصدرة: <white><file>'
+  shop-spawned: <prefix><green>تم إنشاء وكيل الحالة.
+  shop-removed: <prefix><green>تمت إزالة تاجر الحالة.
+  shop-none: <prefix><gray> لا يوجد تاجر قريب.
+  reload-busy: <prefix><gray> عملية إعادة التحميل قيد التشغيل بالفعل.
+  reload-start: <prefix><gray>جارٍ إعادة التحميل...
+  reload-failed: <prefix><red>فشلت عملية إعادة التحميل، ويظل التكوين السابق نشطًا. انظر وحدة التحكم.
+  reload-done: '<prefix><green>تم إعادة التحميل في <ms> مللي ثانية: <skins> الأسطح، <cases> الحالات، <warnings> التحذيرات (انظر وحدة التحكم).'
+  browser:
+    title: 'النمط: <skin>'
+  manage:
+    title: 'إدارة: <player>'
+    skin-title: جلد <player>
+    give-title: 'إعطاء الجلد: <player>'
+    give:
+      name: <green> أعط الجلد
+      lore:
+      - <gray>اختر حالة، ثم الجلد.
+    give-hint:
+    - ''
+    - '<dark_gray>النقر بالزر الأيسر: إعطاء · النقر بزر الماوس الأيمن: إعطاء StatTrak™'
+    clear:
+      name: <red>حذف جميع الأسطح
+      lore:
+      - ستتم إزالة الأسطح <gray><count>.
+      - <dark_gray>يطلب التأكيد.
+    cleared: <prefix><gray> الأسطح <count> المحذوفة من <white><player></white>.
+    removed: <prefix><gray>محذوف <skin> <gray>من <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>انقر للتبديل.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray> يضبط التعويم على <white><float>
+    pattern-step:
+      name: <white>النمط <step>
+      lore:
+      - '<gray>الحالي: <white><pattern>'
+    pattern-random:
+      name: <light_purple>نمط عشوائي
+      lore:
+      - '<gray>الحالي: <white><pattern>'
+    equip:
+      name: <green>تجهيز اللاعب
+      lore: []
+    unequip:
+      name: <green>✔ مجهزة
+      lore:
+      - <gray>انقر لإلغاء التجهيز.
+    remove:
+      name: <red>حذف الجلد
+      lore:
+      - <dark_gray>يطلب التأكيد.
+  labels:
+    case: حالة
+    key: مفتاح
+    skin: الجلد
+    manual: قاعدة بيانات يدوية
+    automatic: تلقائي
+    none: لا شيء (النهاية لا تحتوي على ملف تعريف التحليل)
+    'off': خارج
+  debug:
+    seed: '<gray>النمط: <white><seed>'
+    analysing: <dark_gray>جاري التحليل...
+    variant: '<gray>البديل: <white><variant>'
+    classification: '<gray>التصنيف: <white><classification> <dark_gray><mode>'
+    fade: '<gray>التلاشي: <white><fade>%'
+    preview:
+      name: <yellow>نمط المعاينة <seed>
+      lore:
+      - <gray> يُظهر الخريطة المعروضة بين يديك.
+    random:
+      name: <light_purple>نمط عشوائي
+      lore: []
+    title: <gold>مصحح أخطاء النمط <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>فشل العرض: <error>'
+    metrics: '<gray>المقاييس: <white><metrics>'
+    scan-failed: <prefix><red>فشل الفحص.
+    no-metric: <gray>لا يوجد نمط له مقياس <white><metric>
+    export-failed: '<prefix><red>فشل التصدير: <error>'
+  odds: <gray><case> <dark_gray>(<count> العناصر، StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>الجلود: <white><skins> <gray>الحالات: <white><cases> <gray>الأسلحة: <white><weapons>'
+    cache: '<gray> المعاينات المخزنة مؤقتًا: <white><previews> <gray>وضع حزمة الموارد: <white><pack>'
+    web: '<gray>حزمة خادم الويب: <white><url>'
+wear:
+  factory_new: المصنع جديد
+  minimal_wear: الحد الأدنى من التآكل
+  field_tested: تم اختباره ميدانيًا
+  well_worn: جيد البالية
+  battle_scarred: ندوب المعركة
+rarity:
+  mil_spec: ميل المواصفات
+  restricted: مقيد
+  classified: مصنفة
+  covert: سرية
+  rare_special: عنصر خاص نادر
+catalog:
+  key:
+    case_key: مفتاح القضية

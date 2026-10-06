@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Cásanna</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Níl cead agat é sin a dhéanamh.
+  player-only: <prefix><red>Imreoirí amháin.
+profile:
+  loading: <prefix><gray>Tá fardal do chraiceann fós á lódáil...
+  load-failed: <prefix><red>Níorbh fhéidir fardal do chraiceann a lódáil. Inis do riarthóir le do thoil.
+  recovered: '<prefix><gray> Oscailt idirbhriste críochnaithe: <skin>'
+category:
+  pistol: Piostail
+  smg: SMG
+  rifle: Raidhfil
+  sniper: Raidhfil Sniper
+  heavy: Trom
+  equipment: Trealamh
+  knife: Scian
+items:
+  test-marker: <red>⚠ Mír tástála (riarachán)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> míreanna féideartha
+    - ''
+    - '<gray>Cliceáil ar dheis: <white>féach an t-ábhar'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Úsáidte nuair a bhíonn cás á oscailt.
+    use-hint: <prefix><gray>Cliceáil ar dheis ar <white>cás</white> chun é a oscailt leis an eochair seo.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray> Taobh amuigh: <white><wear>'
+    float: '<gray>Snámhphointe: <white><float>'
+    float-range: '<gray>Snámh: <white><min_float> - <max_float>'
+    pattern: '<gray>Patrún: <white><pattern>'
+    variant: '<gray>Céim: <class_color><variant>'
+    classification: '<gray>Cineál patrúin: <class_color><classification>'
+    fade: '<gray>Céim: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Maraíonn: <white><kills>'
+    has-variants: <dark_gray>Rinn céimeanna indéanta
+    source: '<gray>Foinse: <white><case>'
+    date: '<gray>Fuartha: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Scriosadh: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Céimnithe'
+gui:
+  loading:
+    name: <gray>Á lódáil...
+    lore: []
+  back:
+    name: <gray>Ar ais
+    lore: []
+  close:
+    name: <red>Dún
+    lore: []
+  previous:
+    name: <gray>An leathanach roimhe seo
+    lore:
+    - <dark_gray>Leathanach <page> / <pages>
+  next:
+    name: <gray>An chéad leathanach eile
+    lore:
+    - <dark_gray>Leathanach <page> / <pages>
+  cases:
+    title: Cásanna
+    header:
+      name: <#e4ae39>Cásanna
+      lore:
+      - <gray>Faigh cásanna ón díoltóir cásanna <white></white>.
+      - <gray>Tá eochair mheaitseála uait chun ceann a oscailt.
+    entry:
+    - ''
+    - '<gray>I bhfardal: <white><owned> <dark_gray>· <gray>Eochracha: <white><keys>'
+    - '<gray>Cliceáil ar chlé: <white>féach an t-ábhar'
+    can-open: '<green>Cliceáil ar dheis: oscail'
+    to-skins:
+      name: <#e4ae39>Fardal craicinn
+      lore:
+      - <gray>Do craicne agus sceana
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Cliceáil le haghaidh réamhamharc
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Scian annamh.
+      - <dark_gray><count> leagan · cliceáil chun é a fheiceáil
+      - ''
+    open:
+      name: <green>Cás oscailte
+      lore:
+      - '<gray>Cásanna: <white><owned> <dark_gray>· <gray>Eochracha: <white><keys>'
+      - <dark_gray>Úsáideann 1 chás agus 1 <key>
+    cannot-open:
+      name: <gray>Ní féidir a oscailt
+      lore:
+      - '<gray>Cásanna: <white><owned> <dark_gray>· <gray>Eochracha: <white><keys>'
+      - <dark_gray>Tá an cás agus <key> uait.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: An bhfuil tú cinnte?
+    'yes':
+      name: <green>Sea, scrios
+      lore:
+      - <dark_gray>Ní féidir é seo a chealú.
+    'no':
+      name: <red>Cealaigh
+      lore: []
+  skins:
+    title: Cearrbhachas craicne
+    title-other: Craicne de <player>
+    tab:
+      all:
+        name: <white>Gach craiceann
+        lore: []
+      weapons:
+        name: <white>craicne airm
+        lore: []
+      knives:
+        name: <white>Sceana
+        lore:
+        - '<dark_gray>Cliceáil scian ar dheis: trealamh'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Ceanáin
+        lore: []
+      recent:
+        name: <white>Fuarthas le déanaí
+        lore: []
+    empty:
+      name: <gray>Níl aon rud anseo fós
+      lore:
+      - <dark_gray>Oscail cásanna chun craicne a fháil.
+    equipped: <green>✔ Feistithe
+    favorite: <yellow>★ Is fearr leat
+    hint:
+    - ''
+    - '<dark_gray>Cliceáil ar chlé: iniúchadh · Deaschliceáil: cuir bogha air'
+    - '<dark_gray>Shift click: is fearr leat'
+    hint-knife:
+    - ''
+    - '<dark_gray>Cliceáil ar chlé: iniúchadh · Cliceáil ar dheis: trealamh'
+    - '<dark_gray>Shift click: is fearr leat'
+    to-cases:
+      name: <#e4ae39>Cásanna
+      lore:
+      - <gray>Chun do chásanna
+    sort:
+      name: '<white>Sórtáil: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Ar chlé: ar aghaidh · Ar dheis: roimhe seo'
+    sorts:
+      rarity: Uathúlacht
+      float: Snámh
+      name: Ainm
+      wear: Taobh amuigh
+      pattern: Patrún
+      newest: is nuaí
+      oldest: Is sine
+    info:
+      name: <white><count> <gray>craicne léirithe
+      lore:
+      - <dark_gray><total> san iomlán · cliceáil chun dúnadh
+    filter:
+      name: <white>Scag
+      lore:
+      - '<dark_gray>Clé: roghnaigh scagairí · Ar dheis: athshocrú'
+    active-knife:
+    - <green>✔ Scian gníomhach
+    - <dark_gray>Cliceáil le haghaidh sonraí
+  filter:
+    title: Scagaire
+    header:
+      name: <white>Scag
+      lore:
+      - <gray>Cuirtear roinnt scagairí den chineál céanna le chéile.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ amháin
+    'on':
+    - <green>✔ Gníomhach
+    'off':
+    - <dark_gray>Neamhghníomhach
+    reset:
+      name: <gray>Athshocraigh gach scagaire
+      lore: []
+  inspect:
+    title: Iniúchadh
+    missing:
+      name: <red>Níl an craiceann ar fáil
+      lore: []
+    preview:
+      name: <#e4ae39>Féach ar an gcraiceann
+      lore:
+      - '<gray>Taispeánann do chóip bheacht:'
+      - <gray>patrún, dathanna agus caitheamh.
+      - ''
+      - <dark_gray>Sneak chun an réamhamharc a dhúnadh.
+    data: <white>Mionsonraí
+    favorite:
+      name: <white>Marcáil mar is fearr leat
+      lore: []
+    unfavorite:
+      name: <yellow>★ Bain an ceann is fearr leat
+      lore: []
+    equip:
+      name: <green>Trealamh
+      lore:
+      - <gray>Taispeánann do chlaíomh an scian seo.
+      - <dark_gray>Fanann damáiste agus draíocht mar a chéile.
+    unequip:
+      name: <green>✔ Feistithe
+      lore:
+      - <gray>Cliceáil le díthrealamh.
+    inspect3d:
+      name: <white>3D iniúchadh
+      lore:
+      - '<gray>Taispeánann do chóip bheacht:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Baineann sé le imreoir eile
+      lore:
+      - <dark_gray>Féach amháin
+    equip-bow:
+      name: <green>Cuir ort bogha
+      lore:
+      - <gray>Taispeánann do bhogha an craiceann seo.
+    unequip-bow:
+      name: <green>✔ Ar bhogha
+      lore:
+      - <gray>Cliceáil chun é a bhaint.
+    equip-crossbow:
+      name: <green>Cuir ar chrosbhogha
+      lore:
+      - <gray>Taispeánann do chrosbhogha an craiceann seo.
+    unequip-crossbow:
+      name: <green>✔ Ar chrosbhogha
+      lore:
+      - <gray>Cliceáil chun é a bhaint.
+    not-equippable:
+      name: <gray>Ní intrealamh
+      lore:
+      - <dark_gray>Ní féidir an craiceann seo a fheistiú.
+    delete:
+      name: <red>Scrios an craiceann
+      lore:
+      - <gray>Baintear an craiceann seo de d'fhardal.
+      - <dark_gray>Iarr dearbhú.
+view:
+  unknown: Ní bhfuarthas <prefix><red>Imreoir <white><player></white>.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> fardal <dark_gray>· <gray><category> <dark_gray>· <gray><count> craicne <dark_gray>· <gray>Leathanach
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Cliceáil ar dheis: iniúchadh · Sneak + cliceáil ar dheis: is fearr leat'
+  hint-knife:
+  - ''
+  - '<dark_gray>Cliceáil ar dheis: iniúchadh · Cliceáil ar chlé: trealamh'
+  - '<dark_gray>Sneak + cliceáil ar dheis: is fearr leat'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Cliceáil ar dheis: iniúchadh · Cliceáil ar chlé: cuir bogha air'
+  - '<dark_gray>Sneak + cliceáil ar chlé: cuir ar chrosbhogha'
+  - '<dark_gray>Sneak + cliceáil ar dheis: is fearr leat'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> craicne <dark_gray>· <gray>Leathanaigh <page>/<pages>
+  empty: <gray>Níl aon rud anseo fós
+  button:
+    previous: <gray>An leathanach roimhe seo
+    next: <gray>An chéad leathanach eile
+    category: <white>Athraigh catagóir
+    sort: '<white>Sórtáil: <#e4ae39><sort>'
+    filter: <white>Scag
+    list: <white>Taispeáin mar liosta
+    close: <red>Dún
+preview:
+  loading: <gray>Réamhamharc ar rindreáil...
+  hint: <gray>Sneak a dhúnadh
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>ór óir
+  world:
+    title: <white><player></white> <gray>osclaíonn <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Tá cás á oscailt agat cheana féin.
+  case-disabled: <prefix><red>Níl an cás seo ar fáil.
+  missing: <prefix><gray>Tá <white><case></white> agus <white><key></white> uait.
+  missing-now: <prefix><red>Níl an tuiseal nó an eochair i d'fhardal a thuilleadh.
+  storage-error: <prefix><red>Theip ar shábháil. Cuireadh do chás agus eochair ar ais.
+  command-blocked: <prefix><gray>Fan go dtí go mbeidh an oscailt críochnaithe.
+  result: '<prefix><gray>Fuair tú <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Tástáil]</red> <gray>Toradh: <skin> <dark_gray>(<float>, #<pattern>) - gan sábháil'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>MÍR SPEISIALTA RÁT</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Iniúchadh
+      lore:
+      - <gray>Gach sonraí faoi do chraiceann nua
+    again:
+      name: <green>Oscail ceann eile
+      lore:
+      - '<gray>Cásanna: <white><cases> <dark_gray>· <gray>Eochracha: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Ní oireann an craiceann seo don arm seo.
+  equipped:
+    knife: '<prefix><gray>Scian feistithe: <skin>'
+    bow: '<prefix><gray>Ar do bhogha: <skin>'
+    crossbow: '<prefix><gray>Ar do chrosbhogha: <skin>'
+  unequipped:
+    knife: <prefix><gray>Scian gan trealamh.
+    bow: <prefix><gray>Bogha bainte den chraiceann.
+    crossbow: <prefix><gray>Craiceann crosbhogha bainte.
+knife:
+  not-owned: <prefix><red>Ní leatsa an craiceann seo.
+  equipped: '<prefix><gray>Feistithe: <skin>'
+  unequipped: <prefix><gray>Scian gan trealamh.
+  sword-footer: '<dark_gray>Bun: <base>'
+inspect:
+  running: <prefix><gray>Tá cigireacht ar siúl cheana féin.
+  no-knife: <red>Níl an craiceann ar fáil <white>/skins
+shop:
+  title: Déileálaí Cásanna
+  npc-name: <gradient:#e4ae39:#f6d27a>Déileálaí Cás</gradient>
+  npc-description: <gray>Cliceáil ar dheis chun trádáil
+  balance:
+    name: '<white>D’iarmhéid: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Ní áirítear ach míreanna neamhathraithe.
+  offer:
+  - ''
+  - '<gray>Praghas: <aqua><price> <currency>'
+  - '<dark_gray>5 píosa: <price5> <currency>'
+  affordable: <green>✔ Inacmhainne
+  not-affordable: <red>✘ <missing> <currency> in easnamh
+  affordable-five: '<dark_gray>Shift click: ceannaigh 5'
+  hint-case:
+  - '<dark_gray>Cliceáil ar chlé: ceannaigh · Cliceáil ar dheis: inneachar'
+  hint-key:
+  - '<dark_gray>Cliceáil: ceannaigh'
+  bought: '<prefix><gray>Cheannaigh: <white><amount>× <name></white> do <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Ní féidir leat é sin a dhéanamh.
+  inventory-full: <prefix><red>Tá d’fhardal lán.
+slot:
+  name: <#e4ae39>Fardal craicinn
+  lore:
+  - '<gray>Cliceáil ar dheis: craicne, sceana agus cásanna'
+  - <dark_gray>Tá an mhír seo faoi ghlas don sliotán seo.
+  blocked: <prefix><gray>Saor sliotán fardail ionas gur féidir an mhír fardail craiceann a bheith le feiceáil.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Riarachán
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Déanta.
+  unknown: <prefix><red>Anaithnid <what>.
+  instance-unknown: <prefix><red>Níor aimsíodh aon aitheantas craicinn meaitseála. <gray>/ liosta csadmin <player>
+  given: <prefix><gray>Thug <amount>× <white><name></white> do <white><player></white>.
+  skin-given: <prefix><gray>Thug <skin> <gray>do <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>craicne de <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Osclaíodh <white><player> le déanaí
+  scan-start: <prefix><gray>Scanadh gach síol de <white><skin></white> do <white><metric></white>...
+  export-start: <prefix><gray>Pacáiste acmhainní tógála...
+  export-done: '<prefix><green><skins> craicne easpórtáilte: <white><file>'
+  shop-spawned: <prefix><green>Déileálaí cáis cruthaithe.
+  shop-removed: <prefix><green>Déileálaí cáis bainte.
+  shop-none: <prefix><gray>Níl aon déileálaí cásanna in aice láimhe.
+  reload-busy: <prefix><gray>Tá athlódáil ar siúl cheana féin.
+  reload-start: <prefix><gray>Athlódáil...
+  reload-failed: <prefix><red>Theip ar athlódáil, fanann an chumraíocht roimhe seo gníomhach. Féach consól.
+  reload-done: '<prefix><green>Athluchtaithe i <ms> ms: <skins> craicne, cásanna <cases>, <warnings> rabhaidh (féach an consól).'
+  browser:
+    title: 'Patrún: <skin>'
+  manage:
+    title: 'Bainistigh: <player>'
+    skin-title: Craiceann <player>
+    give-title: 'Tabhair craiceann: <player>'
+    give:
+      name: <green>Tabhair craiceann
+      lore:
+      - <gray>Roghnaigh cás, ansin craiceann.
+    give-hint:
+    - ''
+    - '<dark_gray>Cliceáil ar chlé: tabhair · Cliceáil ar dheis: tabhair StatTrak™'
+    clear:
+      name: <red>Scrios gach craiceann
+      lore:
+      - Bainfear craicne <gray><count>.
+      - <dark_gray>Iarr dearbhú.
+    cleared: <prefix><gray>Scriosadh <count> craicne de <white><player></white>.
+    removed: <prefix><gray>Scriosadh <skin> <gray>de <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Cliceáil chun scoránaigh.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Socraigh an snámhán go <white><float>
+    pattern-step:
+      name: <white>Patrún <step>
+      lore:
+      - '<gray>Reatha: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Patrún randamach
+      lore:
+      - '<gray>Reatha: <white><pattern>'
+    equip:
+      name: <green>Trealamh don imreoir
+      lore: []
+    unequip:
+      name: <green>✔ Feistithe
+      lore:
+      - <gray>Cliceáil le díthrealamh.
+    remove:
+      name: <red>Scrios an craiceann
+      lore:
+      - <dark_gray>Iarr dearbhú.
+  labels:
+    case: cás
+    key: eochair
+    skin: craiceann
+    manual: bunachar sonraí láimhe
+    automatic: uathoibríoch
+    none: níl aon phróifíl anailíse ag an gcríoch
+    'off': as
+  debug:
+    seed: '<gray>Patrún: <white><seed>'
+    analysing: <dark_gray>Ag anailísiú...
+    variant: '<gray>Athraithe: <white><variant>'
+    classification: '<gray>Aicm: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Céim: <white><fade>%'
+    preview:
+      name: <yellow>Patrún réamhamhairc <seed>
+      lore:
+      - <gray>Taispeánann an léarscáil rindreáilte i do lámha.
+    random:
+      name: <light_purple>Patrún randamach
+      lore: []
+    title: <gold>Dífhabhtóir patrún <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Theip ar rindreáil: <error>'
+    metrics: '<gray>Méadracht: <white><metrics>'
+    scan-failed: <prefix><red>Theip ar an scanadh.
+    no-metric: <gray>Níl méadrach ag patrún ar bith <white><metric>
+    export-failed: '<prefix><red>Theip ar easpórtáil: <error>'
+  odds: <gray><case> <dark_gray>(<count> míreanna, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Craicne: <white><skins> <gray>Cásanna: <white><cases> <gray>Arm: <white><weapons>'
+    cache: '<gray> Réamhamhairc i dtaisce: <white><previews> <gray>Mód pacáiste acmhainní: <white><pack>'
+    web: '<gray>Pacáiste freastalaí gréasáin: <white><url>'
+wear:
+  factory_new: Monarcha Nua
+  minimal_wear: Caitheamh Íosta
+  field_tested: Tástáil Allamuigh
+  well_worn: Bhuel-caite
+  battle_scarred: Cath-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Srianta
+  classified: Rangaithe
+  covert: ceilte
+  rare_special: Mír Speisialta Uathúla
+catalog:
+  key:
+    case_key: Eochair Cás

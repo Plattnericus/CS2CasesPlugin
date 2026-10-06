@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Vakalar</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Bunu yapma izniniz yok.
+  player-only: <prefix><red>Yalnızca oyuncular.
+profile:
+  loading: <prefix><gray>Dış görünüm envanteriniz hâlâ yükleniyor...
+  load-failed: <prefix><red>Dış görünüm envanteriniz yüklenemedi. Lütfen bir yöneticiye söyleyin.
+  recovered: '<prefix><gray>Kesintiye uğrayan açılış tamamlandı: <skin>'
+category:
+  pistol: Tabanca
+  smg: SMG
+  rifle: Tüfek
+  sniper: Keskin Nişancı Tüfeği
+  heavy: Ağır
+  equipment: Ekipman
+  knife: Bıçak
+items:
+  test-marker: <red>⚠ Test öğesi (yönetici)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> olası öğeler
+    - ''
+    - '<gray>Sağ tıklayın: <white>içeriği görüntüle'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Bir vakayı açarken kullanıldı.
+    use-hint: <prefix><gray>Bir <white>case</white> dosyasını bu anahtarla açmak için sağ tıklayın.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Dış: <white><wear>'
+    float: '<gray>Kayan: <white><float>'
+    float-range: '<gray>Kayan: <white><min_float> - <max_float>'
+    pattern: '<gray>Desen: <white><pattern>'
+    variant: '<gray>Faz: <class_color><variant>'
+    classification: '<gray>Desen türü: <class_color><classification>'
+    fade: '<gray>Soluk: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Öldürmeler: <white><kills>'
+    has-variants: <dark_gray>Birkaç aşama mümkün
+    source: '<gray>Kaynak: <white><case>'
+    date: '<gray>Alındı: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Silindi: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Solma'
+gui:
+  loading:
+    name: <gray>Yükleniyor...
+    lore: []
+  back:
+    name: <gray>Geri
+    lore: []
+  close:
+    name: <red>Kapat
+    lore: []
+  previous:
+    name: <gray>Önceki sayfa
+    lore:
+    - <dark_gray>Sayfa <page> / <pages>
+  next:
+    name: <gray>Sonraki sayfa
+    lore:
+    - <dark_gray>Sayfa <page> / <pages>
+  cases:
+    title: Vakalar
+    header:
+      name: <#e4ae39>Vakalar
+      lore:
+      - <gray>Vakaları <white>vaka satıcısından</white> alın.
+      - <gray>Birini açmak için eşleşen bir anahtara ihtiyacınız var.
+    entry:
+    - ''
+    - '<gray>Envanterde: <white><owned> <dark_gray>· <gray>Anahtarlar: <white><keys>'
+    - '<gray>Sol tıklama: <white>içeriği görüntüle'
+    can-open: '<green>Sağ tıklayın: aç'
+    to-skins:
+      name: <#e4ae39>Deri envanteri
+      lore:
+      - <gray>Derileriniz ve bıçaklarınız
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Önizleme için tıklayın
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Nadir bir bıçak.
+      - <dark_gray><count> çeşitleri · görüntülemek için tıklayın
+      - ''
+    open:
+      name: <green>Açık vaka
+      lore:
+      - '<gray>Vakalar: <white><owned> <dark_gray>· <gray>Anahtarlar: <white><keys>'
+      - <dark_gray>1 büyük harf ve 1 büyük harf kullanır <key>
+    cannot-open:
+      name: <gray>Açılamıyor
+      lore:
+      - '<gray>Vakalar: <white><owned> <dark_gray>· <gray>Anahtarlar: <white><keys>'
+      - <dark_gray>Kutuya ve <key>'e ihtiyacınız var.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Emin misin?
+    'yes':
+      name: <green>Evet, sil
+      lore:
+      - <dark_gray>Bu işlem geri alınamaz.
+    'no':
+      name: <red>İptal
+      lore: []
+  skins:
+    title: Cilt envanteri
+    title-other: <player> görünümleri
+    tab:
+      all:
+        name: <white>Tüm görünümler
+        lore: []
+      weapons:
+        name: <white>Silah görünümleri
+        lore: []
+      knives:
+        name: <white>Bıçaklar
+        lore:
+        - '<dark_gray>Bir bıçağa sağ tıklayın: donatın'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoriler
+        lore: []
+      recent:
+        name: <white>Yakın zamanda edinildi
+        lore: []
+    empty:
+      name: <gray>Henüz burada hiçbir şey yok
+      lore:
+      - <dark_gray>Dış görünüm almak için kasaları açın.
+    equipped: <green>✔ Donanımlı
+    favorite: <yellow>★ Favori
+    hint:
+    - ''
+    - '<dark_gray>Sol tıklama: inceleyin · Sağ tıklama: pruvayı takın'
+    - '<dark_gray>Shift tıklama: favori'
+    hint-knife:
+    - ''
+    - '<dark_gray>Sol tıklama: inceleme · Sağ tıklama: donatma'
+    - '<dark_gray>Shift tıklama: favori'
+    to-cases:
+      name: <#e4ae39>Vakalar
+      lore:
+      - <gray>Vakalarınıza
+    sort:
+      name: '<white>Sırala: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Sol: sonraki · Sağ: önceki'
+    sorts:
+      rarity: Nadirlik
+      float: Şamandıra
+      name: İsim
+      wear: Dış
+      pattern: Desen
+      newest: En yeni
+      oldest: En eski
+    info:
+      name: <white><count> <gray>görüntüler gösteriliyor
+      lore:
+      - Toplam <dark_gray><total> · kapatmak için tıklayın
+    filter:
+      name: <white>Filtre
+      lore:
+      - '<dark_gray>Sol: filtreleri seçin · Sağ: sıfırla'
+    active-knife:
+    - <green>✔ Aktif bıçak
+    - <dark_gray>Ayrıntılar için tıklayın
+  filter:
+    title: Filtre
+    header:
+      name: <white>Filtre
+      lore:
+      - <gray>Aynı türden birkaç filtre birleştirilir.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Yalnızca <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Aktif
+    'off':
+    - <dark_gray>Aktif değil
+    reset:
+      name: <gray>Tüm filtreleri sıfırla
+      lore: []
+  inspect:
+    title: İncele
+    missing:
+      name: <red>Dış görünüm mevcut değil
+      lore: []
+    preview:
+      name: <#e4ae39>Cildi görüntüle
+      lore:
+      - '<gray>Tam kopyanızı gösterir:'
+      - <gray>desen, renkler ve giyim.
+      - ''
+      - <dark_gray>Önizlemeyi kapatmak için gizlice girin.
+    data: <white>Ayrıntılar
+    favorite:
+      name: <white>Favori olarak işaretle
+      lore: []
+    unfavorite:
+      name: <yellow>★ Favoriyi kaldır
+      lore: []
+    equip:
+      name: <green>Ekipman
+      lore:
+      - <gray>Kılıçlarınız bu bıçağı gösteriyor.
+      - <dark_gray>Hasar ve büyüler aynı kalır.
+    unequip:
+      name: <green>✔ Donanımlı
+      lore:
+      - <gray>Ekipmanı çıkarmak için tıklayın.
+    inspect3d:
+      name: <white>3D inceleme
+      lore:
+      - '<gray>Tam kopyanızı gösterir:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Başka bir oyuncuya ait
+      lore:
+      - <dark_gray>Salt görüntüleme
+    equip-bow:
+      name: <green>Yayı takın
+      lore:
+      - <gray>Yaylarınız bu cildi gösteriyor.
+    unequip-bow:
+      name: <green>✔ Pruvada
+      lore:
+      - <gray>Kaldırmak için tıklayın.
+    equip-crossbow:
+      name: <green>Arbalet takın
+      lore:
+      - <gray>Arbaletleriniz bu görünümü gösteriyor.
+    unequip-crossbow:
+      name: <green>✔ Arbalet üzerinde
+      lore:
+      - <gray>Kaldırmak için tıklayın.
+    not-equippable:
+      name: <gray>Donanılamaz
+      lore:
+      - <dark_gray>Bu görünüm donatılamaz.
+    delete:
+      name: <red>Dış görünümü sil
+      lore:
+      - <gray>Bu görünümü envanterinizden kaldırır.
+      - <dark_gray>Onay ister.
+view:
+  unknown: <prefix><red>Oyuncu <white><player></white> bulunamadı.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>'nin envanteri <dark_gray>· <gray><category> <dark_gray>· <gray><count> kaplamalar <dark_gray>· <gray>Sayfa
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Sağ tıklama: incele · Gizlice + sağ tıklama: favori'
+  hint-knife:
+  - ''
+  - '<dark_gray>Sağ tıklama: inceleme · Sol tıklama: donatma'
+  - '<dark_gray>Gizli + sağ tıklama: favori'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Sağ tıklama: inceleyin · Sol tıklama: pruvayı takın'
+  - '<dark_gray>Gizlice + sol tıklama: tatar yayını takın'
+  - '<dark_gray>Gizli + sağ tıklama: favori'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> dış görünümler <dark_gray>· <gray>Sayfa <page>/<pages>
+  empty: <gray>Henüz burada hiçbir şey yok
+  button:
+    previous: <gray>Önceki sayfa
+    next: <gray>Sonraki sayfa
+    category: <white>Kategoriyi değiştir
+    sort: '<white>Sırala: <#e4ae39><sort>'
+    filter: <white>Filtre
+    list: <white>Liste olarak göster
+    close: <red>Kapat
+preview:
+  loading: <gray>Önizleme oluşturuluyor...
+  hint: <gray>Kapatmak için gizlice girin
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>altın altın altın
+  world:
+    title: <white><player></white> <gray>açılır <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Zaten bir vaka açıyorsunuz.
+  case-disabled: <prefix><red>Bu vaka mevcut değil.
+  missing: <prefix><gray><white><case></white> ve <white><key></white>'ye ihtiyacınız var.
+  missing-now: <prefix><red>Kutu veya anahtar artık envanterinizde değil.
+  storage-error: <prefix><red>Kaydetme başarısız oldu. Çantanız ve anahtarınız iade edildi.
+  command-blocked: <prefix><gray>Açılış bitene kadar bekleyin.
+  result: '<prefix><gray>Aldığınız <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Sonuç: <skin> <dark_gray>(<float>, #<pattern>) - kaydedilmedi'
+  broadcast: <prefix><white><player></white> <gray>kutudan çıkarılmış <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>NADİR ÖZEL ÜRÜN</b></gradient>
+  buttons:
+    inspect:
+      name: <white>İncele
+      lore:
+      - <gray>Yeni cildinizin tüm ayrıntıları
+    again:
+      name: <green>Başka bir tane aç
+      lore:
+      - '<gray>Vakalar: <white><cases> <dark_gray>· <gray>Anahtarlar: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Bu görünüm bu silaha uymuyor.
+  equipped:
+    knife: '<prefix><gray>Bıçağa takılı: <skin>'
+    bow: '<prefix><gray>Yayda: <skin>'
+    crossbow: '<prefix><gray>Arbaletinizde: <skin>'
+  unequipped:
+    knife: <prefix><gray>Bıçak takılı değil.
+    bow: <prefix><gray>Yay derisi çıkarıldı.
+    crossbow: <prefix><gray>Arbalet derisi kaldırıldı.
+knife:
+  not-owned: <prefix><red>Bu görünüm size ait değil.
+  equipped: '<prefix><gray>Donanımlı: <skin>'
+  unequipped: <prefix><gray>Bıçak takılı değil.
+  sword-footer: '<dark_gray>Taban: <base>'
+inspect:
+  running: <prefix><gray>Bir inceleme zaten çalışıyor.
+  no-knife: <red>Dış görünüm mevcut değil <white>/skins
+shop:
+  title: Vaka Satıcısı
+  npc-name: <gradient:#e4ae39:#f6d27a>Vaka Satıcısı</gradient>
+  npc-description: <gray>Ticaret yapmak için sağ tıklayın
+  balance:
+    name: '<white>Bakiyeniz: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Yalnızca değiştirilmemiş öğeler sayılır.
+  offer:
+  - ''
+  - '<gray>Fiyat: <aqua><price> <currency>'
+  - '<dark_gray>5 parça: <price5> <currency>'
+  affordable: <green>✔ Uygun fiyatlı
+  not-affordable: <red>✘ <missing> <currency> eksik
+  affordable-five: '<dark_gray>Shift tıklama: 5 adet satın al'
+  hint-case:
+  - '<dark_gray>Sol tıklama: satın al · Sağ tıklama: içindekiler'
+  hint-key:
+  - '<dark_gray>Sol tıklama: satın al'
+  bought: '<prefix><gray>Satın Alınan: <white><amount>× <name></white>, <aqua><price> <currency></aqua> için.'
+  not-enough: <prefix><red>Bunu karşılayamazsınız.
+  inventory-full: <prefix><red>Envanteriniz dolu.
+slot:
+  name: <#e4ae39>Deri envanteri
+  lore:
+  - '<gray>Sağ tıklama: görünümler, bıçaklar ve kasalar'
+  - <dark_gray>Bu öğe bu yuvaya kilitlendi.
+  blocked: <prefix><gray>Dış görünüm envanter öğesinin görünebilmesi için bir envanter yuvasını boşaltın.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Yönetici
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Bitti.
+  unknown: <prefix><red>Bilinmiyor <what>.
+  instance-unknown: <prefix><red>Eşleşen dış görünüm kimliği bulunamadı. <gray>/csadmin listesi <player>
+  given: <prefix><gray><amount>× <white><name></white>'yi <white><player></white>'e verdi.
+  skin-given: <prefix><gray>Verdi <skin> <gray>to <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray><white><player></white> <dark_gray>(<count>) görünümleri
+  history-header: <prefix><gray><white><player>'nin son açılışları
+  scan-start: <prefix><gray><white><skin></white> öğesinin her tohumu <white><metric></white> için taranıyor...
+  export-start: <prefix><gray>Kaynak paketi oluşturuluyor...
+  export-done: '<prefix><green><skins> dışa aktarılan dış görünümler: <white><file>'
+  shop-spawned: <prefix><green>Vaka satıcısı oluşturuldu.
+  shop-removed: <prefix><green>Vaka satıcısı kaldırıldı.
+  shop-none: <prefix><gray>Yakınlarda vaka satıcısı yok.
+  reload-busy: <prefix><gray>Yeniden yükleme işlemi zaten çalışıyor.
+  reload-start: <prefix><gray>Yeniden yükleniyor...
+  reload-failed: <prefix><red>Yeniden yükleme başarısız oldu, önceki yapılandırma etkin kalıyor. Bkz. konsol.
+  reload-done: '<prefix><green><ms> ms içinde yeniden yüklendi: <skins> kaplamalar, <cases> vakalar, <warnings> uyarılar (konsola bakın).'
+  browser:
+    title: 'Desen: <skin>'
+  manage:
+    title: 'Yönet: <player>'
+    skin-title: <player> derisi
+    give-title: 'Görünümü ver: <player>'
+    give:
+      name: <green>Cildi ver
+      lore:
+      - <gray>Bir vaka seçin, ardından bir görünüm seçin.
+    give-hint:
+    - ''
+    - '<dark_gray>Sol tıklama: ver · Sağ tıklama: ver StatTrak™'
+    clear:
+      name: <red>Tüm kaplamaları sil
+      lore:
+      - <gray><count> kaplamalar kaldırılacak.
+      - <dark_gray>Onay ister.
+    cleared: <prefix><gray><white><player></white> öğesinin <count> dış görünümleri silindi.
+    removed: <prefix><gray>Silindi <skin> <gray>of <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Geçiş yapmak için tıklayın.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Şamandırayı <white><float> olarak ayarlar
+    pattern-step:
+      name: <white>Desen <step>
+      lore:
+      - '<gray>Geçerli: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Rastgele desen
+      lore:
+      - '<gray>Geçerli: <white><pattern>'
+    equip:
+      name: <green>Oyuncu için donatma
+      lore: []
+    unequip:
+      name: <green>✔ Donanımlı
+      lore:
+      - <gray>Ekipmanı çıkarmak için tıklayın.
+    remove:
+      name: <red>Dış görünümü sil
+      lore:
+      - <dark_gray>Onay ister.
+  labels:
+    case: dava
+    key: anahtar
+    skin: cilt
+    manual: manuel veritabanı
+    automatic: otomatik
+    none: hiçbiri (sonlandırmanın analiz profili yok)
+    'off': kapalı
+  debug:
+    seed: '<gray>Desen: <white><seed>'
+    analysing: <dark_gray>Analiz ediliyor...
+    variant: '<gray>Varyant: <white><variant>'
+    classification: '<gray>Sınıflandırma: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Soluk: <white><fade>%'
+    preview:
+      name: <yellow>Önizleme deseni <seed>
+      lore:
+      - <gray>Elinizde oluşturulan haritayı gösterir.
+    random:
+      name: <light_purple>Rastgele desen
+      lore: []
+    title: <gold>Desen hata ayıklayıcısı <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Oluşturma başarısız oldu: <error>'
+    metrics: '<gray>Metrikler: <white><metrics>'
+    scan-failed: <prefix><red>Tarama başarısız oldu.
+    no-metric: <gray>Hiçbir modelin metriği yok <white><metric>
+    export-failed: '<prefix><red>Dışa aktarma başarısız oldu: <error>'
+  odds: <gray><case> <dark_gray>(<count> öğeler, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Dış görünümler: <white><skins> <gray>Vakalar: <white><cases> <gray>Silahlar: <white><weapons>'
+    cache: '<gray>Önbelleğe alınmış önizlemeler: <white><previews> <gray>Kaynak paketi modu: <white><pack>'
+    web: '<gray>Web sunucusunu paketle: <white><url>'
+wear:
+  factory_new: Fabrikadan Yeni Çıkmış
+  minimal_wear: Az Aşınmış
+  field_tested: Görevde Kullanılmış
+  well_worn: Eskimiş
+  battle_scarred: Savaş Görmüş
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Kısıtlı
+  classified: Gizli
+  covert: Gizli
+  rare_special: Nadir Özel Eşya
+catalog:
+  key:
+    case_key: Durum Anahtarı

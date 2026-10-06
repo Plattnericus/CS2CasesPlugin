@@ -1,0 +1,32 @@
+# Dreams & Nightmares Case (2022)
+
+case:
+  name: "Dreams & Nightmares Case"
+  key: case_key
+  color: "#5a2ab0"
+  stattrak-chance: 0.10
+  description:
+    - "2022"
+
+skins:
+  fiveseven_scrawl: {weapon: fiveseven, rarity: mil_spec, name: "Scrawl", style: graffiti, palette: ["#e8e8e8", "#1a1a1a", "#5ab0e8"]}
+  mac10_ensnared: {weapon: mac10, rarity: mil_spec, name: "Ensnared", style: web, palette: ["#1a1a1a", "#5a1a8a", "#e8e8e8"]}
+  mag7_foresight: {weapon: mag7, rarity: mil_spec, name: "Foresight", style: swirl, palette: ["#1a1a2a", "#5a5ab0", "#e8e8f0"]}
+  mp5sd_necro_jr: {weapon: mp5sd, rarity: mil_spec, name: "Necro Jr.", style: graffiti, palette: ["#5ad01a", "#1a1a1a", "#e8e8e8"]}
+  p2000_lifted_spirits: {weapon: p2000, rarity: mil_spec, name: "Lifted Spirits", style: swirl, palette: ["#e8e8f0", "#5ab0e8", "#1a1a2a"]}
+  sawedoff_spirit_board: {weapon: sawedoff, rarity: mil_spec, name: "Spirit Board", style: tribal, palette: ["#3a2a1a", "#c8a070", "#1a1a1a"]}
+  scar20_poultrygeist: {weapon: scar20, rarity: mil_spec, name: "Poultrygeist", style: graffiti, palette: ["#e8e8e8", "#f0c020", "#c81a1a"]}
+  g3sg1_dream_glade: {weapon: g3sg1, rarity: restricted, name: "Dream Glade", style: floral, palette: ["#5ad01a", "#e83ab0", "#2a5ad0"]}
+  m4a1s_night_terror: {weapon: m4a1s, rarity: restricted, name: "Night Terror", style: graffiti, palette: ["#1a1a2a", "#5a1a8a", "#e8e8e8"]}
+  ppbizon_space_cat: {weapon: ppbizon, rarity: restricted, name: "Space Cat", style: graffiti, palette: ["#1a0a2a", "#e83ab0", "#f0c020"]}
+  usps_ticket_to_hell: {weapon: usps, rarity: restricted, name: "Ticket to Hell", style: flames, palette: ["#1a0a0a", "#c81a1a", "#f0c020"]}
+  xm1014_zombie_offensive: {weapon: xm1014, rarity: restricted, name: "Zombie Offensive", style: graffiti, palette: ["#5ad01a", "#c81a1a", "#1a1a1a"]}
+  dual_berettas_melondrama: {weapon: dual_berettas, rarity: classified, name: "Melondrama", style: graffiti, palette: ["#5ad01a", "#e83a5a", "#1a1a1a"]}
+  famas_rapid_eye_movement: {weapon: famas, rarity: classified, name: "Rapid Eye Movement", style: swirl, palette: ["#e83ab0", "#5ab0e8", "#1a1a2a"]}
+  mp7_abyssal_apparition: {weapon: mp7, rarity: classified, name: "Abyssal Apparition", style: swirl, palette: ["#0a0a2a", "#2ad0f0", "#e8e8e8"]}
+  ak47_nightwish: {weapon: ak47, rarity: covert, name: "Nightwish", style: swirl, palette: ["#1a0a3a", "#5a2ab0", "#e83ab0", "#f0e0f0"]}
+  mp9_starlight_protector: {weapon: mp9, rarity: covert, name: "Starlight Protector", style: swirl, palette: ["#1a1a3a", "#5a5ad0", "#f0d070", "#e8e8f8"]}
+
+rare-special:
+  knives: [butterfly, falchion, bowie, huntsman, shadow_daggers]
+  finishes: gamma

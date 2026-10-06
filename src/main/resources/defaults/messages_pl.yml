@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Przypadki</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Nie masz na to uprawnień.
+  player-only: <prefix><red>Tylko gracze.
+profile:
+  loading: <prefix><gray>Twoje zasoby skórek wciąż się ładują...
+  load-failed: <prefix><red>Nie można załadować Twojego asortymentu skórek. Proszę powiedzieć administratorowi.
+  recovered: '<prefix><gray>Zakończono przerwane otwieranie: <skin>'
+category:
+  pistol: Pistolet
+  smg: SMG
+  rifle: Karabin
+  sniper: Karabin snajperski
+  heavy: Ciężki
+  equipment: Sprzęt
+  knife: Nóż
+items:
+  test-marker: <red>⚠ Element testowy (administrator)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> możliwe pozycje
+    - ''
+    - '<gray>Kliknij prawym przyciskiem myszy: <white>wyświetl zawartość'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Zużyty podczas otwierania skrzynki.
+    use-hint: <prefix><gray>Kliknij prawym przyciskiem myszy <white>case</white>, aby otworzyć go za pomocą tego klucza.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Na zewnątrz: <white><wear>'
+    float: '<gray>Pływający: <white><float>'
+    float-range: '<gray>Pływający: <white><min_float> - <max_float>'
+    pattern: '<gray>Wzór: <white><pattern>'
+    variant: '<gray>Faza: <class_color><variant>'
+    classification: '<gray>Typ wzoru: <class_color><classification>'
+    fade: '<gray>Zanikanie: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Zabójstwa: <white><kills>'
+    has-variants: <dark_gray>Możliwych kilka faz
+    source: '<gray>Źródło: <white><case>'
+    date: '<gray>Uzyskane: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Usunięto: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Zanikanie'
+gui:
+  loading:
+    name: <gray>Ładowanie...
+    lore: []
+  back:
+    name: <gray>Wstecz
+    lore: []
+  close:
+    name: <red>Zamknij
+    lore: []
+  previous:
+    name: <gray>Poprzednia strona
+    lore:
+    - <dark_gray>Strona <page> / <pages>
+  next:
+    name: <gray>Następna strona
+    lore:
+    - <dark_gray>Strona <page> / <pages>
+  cases:
+    title: Przypadki
+    header:
+      name: <#e4ae39>Przypadki
+      lore:
+      - <gray>Zamów skrzynki od <white>sprzedawcy </white>.
+      - <gray>Do otwarcia potrzebny jest pasujący klucz.
+    entry:
+    - ''
+    - '<gray>Inwentarz: <white><owned> <dark_gray>· <gray>Klucze: <white><keys>'
+    - '<gray>Kliknięcie lewym przyciskiem myszy: <white>wyświetl zawartość'
+    can-open: '<green>Kliknięcie prawym przyciskiem myszy: otwórz'
+    to-skins:
+      name: <#e4ae39>Inwentarz skórek
+      lore:
+      - <gray>Twoje skórki i noże
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Kliknij, aby wyświetlić podgląd
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Rzadki nóż.
+      - <dark_gray><count> warianty · kliknij, aby zobaczyć
+      - ''
+    open:
+      name: <green>Otwórz obudowę
+      lore:
+      - '<gray>Obudowy: <white><owned> <dark_gray>· <gray>Klucze: <white><keys>'
+      - <dark_gray>Używa 1 przypadku i 1 <key>
+    cannot-open:
+      name: <gray>Nie można otworzyć
+      lore:
+      - '<gray>Obudowy: <white><owned> <dark_gray>· <gray>Klucze: <white><keys>'
+      - <dark_gray>Potrzebujesz etui i <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Czy jesteś pewien?
+    'yes':
+      name: <green>Tak, usuń
+      lore:
+      - <dark_gray>Nie można tego cofnąć.
+    'no':
+      name: <red>Anuluj
+      lore: []
+  skins:
+    title: Inwentarz skóry
+    title-other: Skórki <player>
+    tab:
+      all:
+        name: <white>Wszystkie skórki
+        lore: []
+      weapons:
+        name: <white>Skórki broni
+        lore: []
+      knives:
+        name: <white>Noże
+        lore:
+        - '<dark_gray>Kliknij prawym przyciskiem myszy nóż: wyposaż'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Ulubione
+        lore: []
+      recent:
+        name: <white>Niedawno uzyskane
+        lore: []
+    empty:
+      name: <gray>Jeszcze nic tutaj nie ma
+      lore:
+      - <dark_gray>Otwórz skrzynki, aby zdobyć skórki.
+    equipped: <green>✔ Wyposażony
+    favorite: <yellow>★ Ulubiony
+    hint:
+    - ''
+    - '<dark_gray>Lewe kliknięcie: inspekcja · Prawe kliknięcie: załóż łuk'
+    - '<dark_gray>Kliknięcie z Shiftem: ulubione'
+    hint-knife:
+    - ''
+    - '<dark_gray>Lewe kliknięcie: inspekcja · Prawe kliknięcie: wyposażenie'
+    - '<dark_gray>Kliknięcie z Shiftem: ulubione'
+    to-cases:
+      name: <#e4ae39>Przypadki
+      lore:
+      - <gray>Do Waszych spraw
+    sort:
+      name: '<white>Sortuj: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Po lewej: następny · Po prawej: poprzedni'
+    sorts:
+      rarity: Rzadkość
+      float: Unosić się
+      name: Imię
+      wear: Zewnętrzne
+      pattern: Wzór
+      newest: Najnowszy
+      oldest: Najstarszy
+    info:
+      name: <white><count> <gray>pokazano skórki
+      lore:
+      - <dark_gray><total> łącznie · kliknij, aby zamknąć
+    filter:
+      name: <white>Filtr
+      lore:
+      - '<dark_gray>Po lewej: wybierz filtry · Po prawej: reset'
+    active-knife:
+    - <green>✔ Aktywny nóż
+    - <dark_gray>Kliknij, aby zobaczyć szczegóły
+  filter:
+    title: Filtruj
+    header:
+      name: <white>Filtr
+      lore:
+      - <gray>Połączono kilka filtrów tego samego rodzaju.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Tylko <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Aktywny
+    'off':
+    - <dark_gray>Nieaktywny
+    reset:
+      name: <gray>Zresetuj wszystkie filtry
+      lore: []
+  inspect:
+    title: Sprawdź
+    missing:
+      name: <red>Skórka niedostępna
+      lore: []
+    preview:
+      name: <#e4ae39>Wyświetl skórkę
+      lore:
+      - '<gray>Pokazuje Twoją dokładną kopię:'
+      - <gray>wzór, kolory i zużycie.
+      - ''
+      - <dark_gray>Zakradnij się, aby zamknąć podgląd.
+    data: <white>Szczegóły
+    favorite:
+      name: <white>Oznacz jako ulubione
+      lore: []
+    unfavorite:
+      name: <yellow>★ Usuń ulubione
+      lore: []
+    equip:
+      name: <green>Wypos
+      lore:
+      - <gray>Twoje miecze pokazują ten nóż.
+      - <dark_gray>Obrażenia i zaklęcia pozostają takie same.
+    unequip:
+      name: <green>✔ Wyposażony
+      lore:
+      - <gray>Kliknij, aby zdjąć wyposażenie.
+    inspect3d:
+      name: <white>Kontrola 3D
+      lore:
+      - '<gray>Pokazuje Twoją dokładną kopię:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Należy do innego gracza
+      lore:
+      - <dark_gray>Tylko przeglądaj
+    equip-bow:
+      name: <green>Załóż kokardę
+      lore:
+      - <gray>Twoje łuki ukazują tę skórkę.
+    unequip-bow:
+      name: <green>✔ Na dziobie
+      lore:
+      - <gray>Kliknij, aby usunąć.
+    equip-crossbow:
+      name: <green>Załóż kuszę
+      lore:
+      - <gray>Twoje kusze pokazują tę skórkę.
+    unequip-crossbow:
+      name: <green>✔ Na kuszy
+      lore:
+      - <gray>Kliknij, aby usunąć.
+    not-equippable:
+      name: <gray>Nie można go wyposażyć
+      lore:
+      - <dark_gray>Tej skórki nie można założyć.
+    delete:
+      name: <red>Usuń skórkę
+      lore:
+      - <gray>Usuwa tę skórkę z twojego ekwipunku.
+      - <dark_gray>Prosi o potwierdzenie.
+view:
+  unknown: <prefix><red>Gracz <white><player></white> nie został znaleziony.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray> inwentarz <dark_gray>· <gray><category> <dark_gray>· <gray><count> skórki <dark_gray>· <gray>Strona <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Kliknięcie prawym przyciskiem myszy: sprawdź · Podkradanie się + kliknięcie prawym przyciskiem myszy: ulubione'
+  hint-knife:
+  - ''
+  - '<dark_gray>Kliknięcie prawym przyciskiem: sprawdź · Kliknięcie lewym przyciskiem: wyposażenie'
+  - '<dark_gray>Skradanie się + kliknięcie prawym przyciskiem myszy: ulubione'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Kliknięcie prawym przyciskiem: sprawdź · Kliknięcie lewym przyciskiem: załóż łuk'
+  - '<dark_gray>Skradanie się + kliknięcie lewym przyciskiem myszy: załóż kuszę'
+  - '<dark_gray>Skradanie się + kliknięcie prawym przyciskiem myszy: ulubione'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skórki <dark_gray>· <gray>Strona <page>/<pages>
+  empty: <gray>Jeszcze nic tutaj nie ma
+  button:
+    previous: <gray>Poprzednia strona
+    next: <gray>Następna strona
+    category: <white>Zmień kategorię
+    sort: '<white>Sortuj: <#e4ae39><sort>'
+    filter: <white>Filtr
+    list: <white>Pokaż jako listę
+    close: <red>Zamknij
+preview:
+  loading: <gray>Podgląd renderowania...
+  hint: <gray>Przekradnij się, aby zamknąć
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>złoto złoto złoto
+  world:
+    title: <white><player></white> <gray>otwiera <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Już otwierasz sprawę.
+  case-disabled: <prefix><red>Ten przypadek nie jest dostępny.
+  missing: <prefix><gray>Potrzebujesz <white><case></white> i <white><key></white>.
+  missing-now: <prefix><red>Etui lub klucz nie znajdują się już w Twoim ekwipunku.
+  storage-error: <prefix><red>Zapisywanie nie powiodło się. Twoja walizka i klucz zostały zwrócone.
+  command-blocked: <prefix><gray>Poczekaj, aż otwieranie się zakończy.
+  result: '<prefix><gray>Otrzymałeś <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Wynik: <skin> <dark_gray>(<float>, #<pattern>) - nie zapisano'
+  broadcast: <prefix><white><player></white> <gray>rozpakowane <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>RZADKI PRZEDMIOT SPECJALNY</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Sprawdź
+      lore:
+      - <gray>Wszystkie szczegóły Twojej nowej skórki
+    again:
+      name: <green>Otwórz inny
+      lore:
+      - '<gray>Obudowy: <white><cases> <dark_gray>· <gray>Klucze: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Ta skórka nie pasuje do tej broni.
+  equipped:
+    knife: '<prefix><gray>Wyposażony nóż: <skin>'
+    bow: '<prefix><gray>Na łuku: <skin>'
+    crossbow: '<prefix><gray>Na twojej kuszy: <skin>'
+  unequipped:
+    knife: <prefix><gray>Nóż nie jest wyposażony.
+    bow: <prefix><gray>Usunięto skórkę łuku.
+    crossbow: <prefix><gray>Usunięto skórkę do kuszy.
+knife:
+  not-owned: <prefix><red>Ta skórka nie należy do Ciebie.
+  equipped: '<prefix><gray>Wyposażony: <skin>'
+  unequipped: <prefix><gray>Nóż nie jest wyposażony.
+  sword-footer: '<dark_gray>Baza: <base>'
+inspect:
+  running: <prefix><gray>Kontrola już trwa.
+  no-knife: <red>Skórka niedostępna <white>/skins
+shop:
+  title: Sprzedawca spraw
+  npc-name: <gradient:#e4ae39:#f6d27a>Sprzedawca walizek</gradient>
+  npc-description: <gray>Kliknij prawym przyciskiem myszy, aby dokonać transakcji
+  balance:
+    name: '<white>Twoje saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Liczą się tylko niezmodyfikowane elementy.
+  offer:
+  - ''
+  - '<gray>Cena: <aqua><price> <currency>'
+  - '<dark_gray>5 sztuk: <price5> <currency>'
+  affordable: <green>✔ Niedrogi
+  not-affordable: <red>✘ <missing> <currency> brak
+  affordable-five: '<dark_gray>Kliknięcie z Shiftem: kup 5'
+  hint-case:
+  - '<dark_gray>Kliknięcie lewym przyciskiem: kup · Kliknięcie prawym przyciskiem: zawartość'
+  hint-key:
+  - '<dark_gray>Kliknięcie lewym przyciskiem myszy: kup'
+  bought: '<prefix><gray>Kupiłem: <white><amount>× <name></white> dla <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Nie możesz sobie na to pozwolić.
+  inventory-full: <prefix><red>Twój ekwipunek jest pełny.
+slot:
+  name: <#e4ae39>Inwentarz skórek
+  lore:
+  - '<gray>Kliknij prawym przyciskiem myszy: skórki, noże i etui'
+  - <dark_gray>Ten przedmiot jest przypisany do tego miejsca.
+  blocked: <prefix><gray>Zwolnij miejsce w ekwipunku, aby mogła pojawić się skórka.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Gotowe.
+  unknown: <prefix><red>Nieznany <what>.
+  instance-unknown: <prefix><red>Nie znaleziono pasującego identyfikatora skóry. <gray>/lista administratorów <player>
+  given: <prefix><gray>Dał <amount>× <white><name></white> <white><player></white>.
+  skin-given: <prefix><gray>Dałem <skin> <gray> <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skórki <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Ostatnie otwarcia <white><player>
+  scan-start: <prefix><gray>Skanowanie każdego materiału siewnego <white><skin></white> w poszukiwaniu <white><metric></white>...
+  export-start: <prefix><gray>Tworzenie pakietu zasobów...
+  export-done: '<prefix><green><skins> wyeksportowane skórki: <white><file>'
+  shop-spawned: <prefix><green>Utworzono dealera spraw.
+  shop-removed: <prefix><green>Usunięto sprzedawcę spraw.
+  shop-none: <prefix><gray>W pobliżu nie ma dealera.
+  reload-busy: <prefix><gray>Przeładowanie już trwa.
+  reload-start: <prefix><gray>Ponowne ładowanie...
+  reload-failed: <prefix><red>Reload nie powiódł się, poprzednia konfiguracja pozostaje aktywna. Zobacz konsolę.
+  reload-done: '<prefix><green>Reloaded w <ms> ms: <skins> skórki, <cases> skrzynki, <warnings> ostrzeżenia (patrz konsola).'
+  browser:
+    title: 'Wzór: <skin>'
+  manage:
+    title: 'Zarządzaj: <player>'
+    skin-title: Skórka <player>
+    give-title: 'Daj skórkę: <player>'
+    give:
+      name: <green>Daj skórę
+      lore:
+      - <gray>Wybierz obudowę, a potem skórkę.
+    give-hint:
+    - ''
+    - '<dark_gray>Kliknięcie lewym przyciskiem myszy: daj · Kliknięcie prawym przyciskiem myszy: daj StatTrak™'
+    clear:
+      name: <red>Usuń wszystkie skórki
+      lore:
+      - <gray><count> skórki zostaną usunięte.
+      - <dark_gray>Prosi o potwierdzenie.
+    cleared: <prefix><gray>Usunięto <count> skórki <white><player></white>.
+    removed: <prefix><gray>Usunięto <skin> <gray>z <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Kliknij, aby przełączyć.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Ustawia pływak na <white><float>
+    pattern-step:
+      name: <white>Wzór <step>
+      lore:
+      - '<gray>Bieżący: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Losowy wzór
+      lore:
+      - '<gray>Bieżący: <white><pattern>'
+    equip:
+      name: <green>Wyposażenie gracza
+      lore: []
+    unequip:
+      name: <green>✔ Wyposażony
+      lore:
+      - <gray>Kliknij, aby zdjąć wyposażenie.
+    remove:
+      name: <red>Usuń skórkę
+      lore:
+      - <dark_gray>Prosi o potwierdzenie.
+  labels:
+    case: sprawa
+    key: klucz
+    skin: skóra
+    manual: ręczna baza danych
+    automatic: automatyczne
+    none: brak (wykończenie nie ma profilu analitycznego)
+    'off': wyłączone
+  debug:
+    seed: '<gray>Wzór: <white><seed>'
+    analysing: <dark_gray>Analizuję...
+    variant: '<gray>Wariant: <white><variant>'
+    classification: '<gray>Klasyfikacja: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Zanikanie: <white><fade>%'
+    preview:
+      name: <yellow>Podgląd wzoru <seed>
+      lore:
+      - <gray>Pokazuje wyrenderowaną mapę w Twoich rękach.
+    random:
+      name: <light_purple>Losowy wzór
+      lore: []
+    title: <gold>Debuger wzorców <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Renderowanie nie powiodło się: <error>'
+    metrics: '<gray>Dane: <white><metrics>'
+    scan-failed: <prefix><red>Skanowanie nie powiodło się.
+    no-metric: <gray>Żaden wzór nie ma metryki <white><metric>
+    export-failed: '<prefix><red>Eksport nie powiódł się: <error>'
+  odds: <gray><case> <dark_gray>(<count> pozycji, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skórki: <white><skins> <gray>Przypadki: <white><cases> <gray>Broń: <white><weapons>'
+    cache: '<gray>Podglądy w pamięci podręcznej: <white><previews> <gray>Tryb pakietu zasobów: <white><pack>'
+    web: '<gray>Serwer WWW pakietu: <white><url>'
+wear:
+  factory_new: Fabrycznie nowy
+  minimal_wear: Minimalne zużycie
+  field_tested: Testowane w terenie
+  well_worn: Dobrze zużyte
+  battle_scarred: Blizny bojowe
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Ograniczone
+  classified: Tajne
+  covert: Tajne
+  rare_special: Rzadki przedmiot specjalny
+catalog:
+  key:
+    case_key: Klucz do sprawy

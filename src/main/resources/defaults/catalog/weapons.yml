@@ -1,0 +1,66 @@
+# Weapon models. 'textures' defaults to weapons/<id> inside the textures folder.
+# Regions are analysis areas in normalised canvas coordinates [x1, y1, x2, y2] (0..1).
+# 'icon' is the vanilla item used in menus when no resource pack is active.
+weapons:
+  # ---------------------------------------------------------------- pistols
+  glock18:       {name: "Glock-18",       category: pistol, icon: CROSSBOW, regions: {playside: [0.15, 0.34, 0.85, 0.52]}}
+  usps:          {name: "USP-S",          category: pistol, icon: CROSSBOW, regions: {playside: [0.08, 0.35, 0.65, 0.50]}}
+  p2000:         {name: "P2000",          category: pistol, icon: CROSSBOW, regions: {playside: [0.15, 0.34, 0.85, 0.52]}}
+  p250:          {name: "P250",           category: pistol, icon: CROSSBOW, regions: {playside: [0.18, 0.35, 0.82, 0.53]}}
+  fiveseven:     {name: "Five-SeveN",     category: pistol, icon: CROSSBOW, regions: {playside: [0.14, 0.36, 0.86, 0.52]}}
+  tec9:          {name: "Tec-9",          category: pistol, icon: CROSSBOW, regions: {playside: [0.12, 0.38, 0.72, 0.52]}}
+  cz75:          {name: "CZ75-Auto",      category: pistol, icon: CROSSBOW, regions: {playside: [0.15, 0.35, 0.85, 0.52]}}
+  dual_berettas: {name: "Dual Berettas",  category: pistol, icon: CROSSBOW, regions: {playside: [0.18, 0.45, 0.85, 0.62]}}
+  deagle:        {name: "Desert Eagle",   category: pistol, icon: CROSSBOW, regions: {playside: [0.12, 0.32, 0.90, 0.52]}}
+  r8_revolver:   {name: "R8 Revolver",    category: pistol, icon: CROSSBOW, regions: {playside: [0.28, 0.36, 0.95, 0.50]}}
+  # ---------------------------------------------------------------- smgs
+  mac10:         {name: "MAC-10",         category: smg, icon: CROSSBOW, regions: {playside: [0.18, 0.38, 0.78, 0.54]}}
+  mp9:           {name: "MP9",            category: smg, icon: CROSSBOW, regions: {playside: [0.20, 0.38, 0.78, 0.52]}}
+  mp7:           {name: "MP7",            category: smg, icon: CROSSBOW, regions: {playside: [0.22, 0.38, 0.75, 0.52]}}
+  mp5sd:         {name: "MP5-SD",         category: smg, icon: CROSSBOW, regions: {playside: [0.20, 0.40, 0.95, 0.52]}}
+  ump45:         {name: "UMP-45",         category: smg, icon: CROSSBOW, regions: {playside: [0.22, 0.38, 0.80, 0.52]}}
+  p90:           {name: "P90",            category: smg, icon: CROSSBOW, regions: {playside: [0.10, 0.38, 0.86, 0.58]}}
+  ppbizon:       {name: "PP-Bizon",       category: smg, icon: CROSSBOW, regions: {playside: [0.24, 0.39, 0.82, 0.59]}}
+  # ---------------------------------------------------------------- rifles
+  ak47:          {name: "AK-47",          category: rifle, icon: CROSSBOW, regions: {playside: [0.25, 0.40, 0.60, 0.51], magazine: [0.48, 0.50, 0.62, 0.69]}}
+  m4a4:          {name: "M4A4",           category: rifle, icon: CROSSBOW, regions: {playside: [0.26, 0.40, 0.62, 0.53], magazine: [0.45, 0.51, 0.56, 0.68]}}
+  m4a1s:         {name: "M4A1-S",         category: rifle, icon: CROSSBOW, regions: {playside: [0.25, 0.40, 0.58, 0.53]}}
+  galil:         {name: "Galil AR",       category: rifle, icon: CROSSBOW, regions: {playside: [0.24, 0.40, 0.57, 0.51]}}
+  famas:         {name: "FAMAS",          category: rifle, icon: CROSSBOW, regions: {playside: [0.10, 0.44, 0.78, 0.53]}}
+  aug:           {name: "AUG",            category: rifle, icon: CROSSBOW, regions: {playside: [0.10, 0.43, 0.76, 0.54]}}
+  sg553:         {name: "SG 553",         category: rifle, icon: CROSSBOW, regions: {playside: [0.23, 0.42, 0.57, 0.52]}}
+  # ---------------------------------------------------------------- snipers
+  ssg08:         {name: "SSG 08",         category: sniper, icon: CROSSBOW, regions: {playside: [0.04, 0.44, 0.38, 0.58]}}
+  awp:           {name: "AWP",            category: sniper, icon: CROSSBOW, regions: {playside: [0.03, 0.43, 0.62, 0.62]}}
+  scar20:        {name: "SCAR-20",        category: sniper, icon: CROSSBOW, regions: {playside: [0.22, 0.42, 0.62, 0.52]}}
+  g3sg1:         {name: "G3SG1",          category: sniper, icon: CROSSBOW, regions: {playside: [0.24, 0.42, 0.60, 0.51]}}
+  # ---------------------------------------------------------------- heavy
+  nova:          {name: "Nova",           category: heavy, icon: CROSSBOW, regions: {playside: [0.04, 0.43, 0.52, 0.56]}}
+  xm1014:        {name: "XM1014",         category: heavy, icon: CROSSBOW, regions: {playside: [0.04, 0.42, 0.56, 0.56]}}
+  sawedoff:      {name: "Sawed-Off",      category: heavy, icon: CROSSBOW, regions: {playside: [0.12, 0.44, 0.54, 0.62]}}
+  mag7:          {name: "MAG-7",          category: heavy, icon: CROSSBOW, regions: {playside: [0.20, 0.40, 0.67, 0.53]}}
+  m249:          {name: "M249",           category: heavy, icon: CROSSBOW, regions: {playside: [0.20, 0.41, 0.59, 0.66]}}
+  negev:         {name: "Negev",          category: heavy, icon: CROSSBOW, regions: {playside: [0.19, 0.40, 0.60, 0.62]}}
+  # ---------------------------------------------------------------- equipment
+  zeus:          {name: "Zeus x27",       category: equipment, icon: LIGHTNING_ROD, stattrak: false, regions: {playside: [0.22, 0.37, 0.80, 0.53]}}
+  # ---------------------------------------------------------------- knives
+  karambit:       {name: "Karambit",        category: knife, icon: IRON_SWORD, regions: {blade: [0.46, 0.38, 1.0, 0.70], tip: [0.84, 0.48, 1.0, 0.70]}}
+  butterfly:      {name: "Butterfly Knife", category: knife, icon: IRON_SWORD, regions: {blade: [0.51, 0.42, 1.0, 0.56], tip: [0.80, 0.42, 1.0, 0.56]}}
+  m9_bayonet:     {name: "M9 Bayonet",      category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.40, 1.0, 0.58], tip: [0.80, 0.40, 1.0, 0.58]}}
+  bayonet:        {name: "Bayonet",         category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.56], tip: [0.80, 0.42, 1.0, 0.56]}}
+  flip:           {name: "Flip Knife",      category: knife, icon: IRON_SWORD, regions: {blade: [0.47, 0.40, 1.0, 0.57], tip: [0.78, 0.40, 1.0, 0.57]}}
+  gut:            {name: "Gut Knife",       category: knife, icon: IRON_SWORD, regions: {blade: [0.45, 0.40, 1.0, 0.58], tip: [0.78, 0.40, 1.0, 0.58]}}
+  huntsman:       {name: "Huntsman Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.42, 0.38, 1.0, 0.60], tip: [0.78, 0.38, 1.0, 0.60]}}
+  falchion:       {name: "Falchion Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.36, 1.0, 0.57], tip: [0.78, 0.36, 1.0, 0.57]}}
+  bowie:          {name: "Bowie Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.42, 0.38, 1.0, 0.60], tip: [0.80, 0.38, 1.0, 0.60]}}
+  shadow_daggers: {name: "Shadow Daggers",  category: knife, icon: IRON_SWORD, regions: {blade: [0.28, 0.42, 0.95, 0.58], tip: [0.72, 0.42, 0.95, 0.58]}}
+  navaja:         {name: "Navaja Knife",    category: knife, icon: IRON_SWORD, regions: {blade: [0.43, 0.40, 1.0, 0.55], tip: [0.78, 0.40, 1.0, 0.55]}}
+  stiletto:       {name: "Stiletto Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.47, 0.45, 1.0, 0.55], tip: [0.80, 0.45, 1.0, 0.55]}}
+  talon:          {name: "Talon Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.50, 0.40, 1.0, 0.70], tip: [0.86, 0.50, 1.0, 0.70]}}
+  ursus:          {name: "Ursus Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.45, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
+  classic:        {name: "Classic Knife",   category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
+  paracord:       {name: "Paracord Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.45, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
+  survival:       {name: "Survival Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.58], tip: [0.80, 0.42, 1.0, 0.58]}}
+  nomad:          {name: "Nomad Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
+  skeleton:       {name: "Skeleton Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
+  kukri:          {name: "Kukri Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.38, 0.42, 1.0, 0.68], tip: [0.84, 0.50, 1.0, 0.68]}}

@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Выпадкі</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>У вас няма дазволу на гэта.
+  player-only: <prefix><red>Толькі для гульцоў.
+profile:
+  loading: <prefix><gray>Ваш інвентар скінаў яшчэ загружаецца...
+  load-failed: <prefix><red>Немагчыма загрузіць ваш інвентар скінаў. Скажыце, калі ласка, адміну.
+  recovered: '<prefix><gray>Перапыненае адкрыццё завершана: <skin>'
+category:
+  pistol: пісталет
+  smg: SMG
+  rifle: Вінтоўка
+  sniper: Снайперская вінтоўка
+  heavy: Цяжкая
+  equipment: Абсталяванне
+  knife: Нож
+items:
+  test-marker: <red>⚠ Тэставы элемент (адмін)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> магчымых элементаў
+    - ''
+    - '<gray>Пстрычка правай кнопкай мышы: <white>прагляд змесціва'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Выкарыстоўваецца пры адкрыцці кейса.
+    use-hint: <prefix><gray>Пстрыкніце правай кнопкай мышы <white>case</white>, каб адкрыць яго з дапамогай гэтага ключа.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Знешні выгляд: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Узор: <white><pattern>'
+    variant: '<gray>Фаза: <class_color><variant>'
+    classification: '<gray>Тып шаблону: <class_color><classification>'
+    fade: '<gray>Зніжэнне: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Забойствы: <white><kills>'
+    has-variants: <dark_gray>Магчыма некалькі этапаў
+    source: '<gray>Крыніца: <white><case>'
+    date: '<gray>Атрымана: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Выдалена: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Знікае'
+gui:
+  loading:
+    name: <gray>Загрузка...
+    lore: []
+  back:
+    name: <gray>Назад
+    lore: []
+  close:
+    name: <red>Зачыніць
+    lore: []
+  previous:
+    name: <gray>Папярэдняя старонка
+    lore:
+    - <dark_gray>Старонка <page> / <pages>
+  next:
+    name: <gray>Наступная старонка
+    lore:
+    - <dark_gray>Старонка <page> / <pages>
+  cases:
+    title: Справы
+    header:
+      name: <#e4ae39>Справы
+      lore:
+      - <gray>Атрымайце чахлы ў <white>дылера чахлоў</white>.
+      - <gray>Вам патрэбен адпаведны ключ, каб адкрыць яго.
+    entry:
+    - ''
+    - '<gray>У інвентары: <white><owned> <dark_gray>· <gray>Ключы: <white><keys>'
+    - '<gray>Пстрычка левай кнопкай мышы: <white>прагляд змесціва'
+    can-open: '<green>Пстрычка правай кнопкай мышы: адкрыць'
+    to-skins:
+      name: <#e4ae39>Інвентар скінаў
+      lore:
+      - <gray>Вашы шкуры і нажы
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Націсніце для папярэдняга прагляду
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Рэдкі нож.
+      - <dark_gray><count> варыянты · націсніце, каб паглядзець
+      - ''
+    open:
+      name: <green>Адкрытая справа
+      lore:
+      - '<gray>Выпадкі: <white><owned> <dark_gray>· <gray>Ключы: <white><keys>'
+      - <dark_gray>Выкарыстоўвае 1 корпус і 1 <key>
+    cannot-open:
+      name: <gray>Немагчыма адкрыць
+      lore:
+      - '<gray>Выпадкі: <white><owned> <dark_gray>· <gray>Ключы: <white><keys>'
+      - <dark_gray>Вам патрэбны футляр і <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Вы ўпэўнены?
+    'yes':
+      name: <green>Так, выдаліць
+      lore:
+      - <dark_gray>Гэта нельга адрабіць.
+    'no':
+      name: <red>Адмена
+      lore: []
+  skins:
+    title: Інвентар скуры
+    title-other: Скіны <player>
+    tab:
+      all:
+        name: <white>Усе скіны
+        lore: []
+      weapons:
+        name: <white>Скіны зброі
+        lore: []
+      knives:
+        name: <white>Нажы
+        lore:
+        - '<dark_gray>Пстрыкніце правай кнопкай мышы нож: абсталяваць'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Выбранае
+        lore: []
+      recent:
+        name: <white>Нядаўна атрыманы
+        lore: []
+    empty:
+      name: <gray>Пакуль нічога тут
+      lore:
+      - <dark_gray>Адкрывайце кейсы, каб атрымаць скіны.
+    equipped: <green>✔ Абсталяваны
+    favorite: <yellow>★ Любімае
+    hint:
+    - ''
+    - '<dark_gray>Пстрыкніце левай кнопкай мышы: праверыць · Пстрыкніце правай кнопкай мышы: надзеньце лук'
+    - '<dark_gray>Shift пстрычка: абранае'
+    hint-knife:
+    - ''
+    - '<dark_gray>Пстрыкніце левай кнопкай мышы: праверыць · Пстрыкніце правай кнопкай мышы: абсталяваць'
+    - '<dark_gray>Shift пстрычка: абранае'
+    to-cases:
+      name: <#e4ae39>Справы
+      lore:
+      - <gray>Да вашых спраў
+    sort:
+      name: '<white>Сартаванне: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Злева: наступны · Справа: папярэдні'
+    sorts:
+      rarity: Рарытэт
+      float: Паплавок
+      name: Імя
+      wear: Экстэр'ер
+      pattern: Выкрайка
+      newest: Самы новы
+      oldest: Самы стары
+    info:
+      name: Паказана <white><count> <gray>скінаў
+      lore:
+      - Усяго <dark_gray><total> · націсніце, каб закрыць
+    filter:
+      name: <white>Фільтр
+      lore:
+      - '<dark_gray>Злева: выбраць фільтры · Справа: скінуць'
+    active-knife:
+    - <green>✔ Актыўны нож
+    - <dark_gray>Націсніце для атрымання падрабязнай інфармацыі
+  filter:
+    title: Фільтраваць
+    header:
+      name: <white>Фільтр
+      lore:
+      - <gray>Некалькі фільтраў аднаго тыпу аб'ядноўваюцца.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Толькі <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Актыўны
+    'off':
+    - <dark_gray>Неактыўны
+    reset:
+      name: <gray>Скінуць усе фільтры
+      lore: []
+  inspect:
+    title: Агледзець
+    missing:
+      name: <red>Скін недаступны
+      lore: []
+    preview:
+      name: <#e4ae39>Праглядзець скін
+      lore:
+      - '<gray>Паказвае вашу дакладную копію:'
+      - <gray>ўзор, колеры і адзенне.
+      - ''
+      - <dark_gray>Крадком закрыйце папярэдні прагляд.
+    data: <white>Падрабязнасці
+    favorite:
+      name: <white>Пазначыць як абранае
+      lore: []
+    unfavorite:
+      name: <yellow>★ Выдаліць абранае
+      lore: []
+    equip:
+      name: <green>Экіпіроўка
+      lore:
+      - <gray>Вашы мячы паказваюць гэты нож.
+      - <dark_gray>Пашкоджанні і чары застаюцца ранейшымі.
+    unequip:
+      name: <green>✔ Абсталяваны
+      lore:
+      - <gray>Націсніце, каб зняць экіпіроўку.
+    inspect3d:
+      name: <white>3D праверка
+      lore:
+      - '<gray>Паказвае вашу дакладную копію:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Належыць іншаму гульцу
+      lore:
+      - <dark_gray>Толькі прагляд
+    equip-bow:
+      name: <green>Надзець лук
+      lore:
+      - <gray>Вашы лукі паказваюць гэтую скуру.
+    unequip-bow:
+      name: <green>✔ На паклоне
+      lore:
+      - <gray>Націсніце, каб выдаліць.
+    equip-crossbow:
+      name: <green>Надзець арбалет
+      lore:
+      - <gray>Вашы арбалеты паказваюць гэтую скуру.
+    unequip-crossbow:
+      name: <green>✔ На арбалет
+      lore:
+      - <gray>Націсніце, каб выдаліць.
+    not-equippable:
+      name: <gray>Не абсталяваны
+      lore:
+      - <dark_gray>Гэты скін нельга надзець.
+    delete:
+      name: <red>Выдаліць скуру
+      lore:
+      - <gray>Выдаляе гэтую вокладку з вашага інвентара.
+      - <dark_gray>Просіць пацверджання.
+view:
+  unknown: <prefix><red>Гулец <white><player></white> не знойдзены.
+gallery:
+  header-other: Інвентар <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> скіны <dark_gray>· <gray>Старонка <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Пстрыкніце правай кнопкай мышы: праверыць · Пракрасціся + пстрыкніце правай кнопкай мышы: абранае'
+  hint-knife:
+  - ''
+  - '<dark_gray>Пстрыкніце правай кнопкай мышы: праверыць · Пстрыкніце левай кнопкай мышы: абсталяваць'
+  - '<dark_gray>Пракрасціся + пстрычка правай кнопкай мышы: абранае'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Пстрычка правай кнопкай мышы: праверыць · Пстрычка левай кнопкай мышы: надзець лук'
+  - '<dark_gray>Пракрасціся + пстрычка левай кнопкай мышы: надзеньце арбалет'
+  - '<dark_gray>Пракрасціся + пстрычка правай кнопкай мышы: абранае'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> скіны <dark_gray>· <gray>Старонка <page>/<pages>
+  empty: <gray>Пакуль нічога тут
+  button:
+    previous: <gray>Папярэдняя старонка
+    next: <gray>Наступная старонка
+    category: <white>Змяніць катэгорыю
+    sort: '<white>Сартаванне: <#e4ae39><sort>'
+    filter: <white>Фільтр
+    list: <white>Паказаць як спіс
+    close: <red>Зачыніць
+preview:
+  loading: <gray>Папярэдні прагляд візуалізацыі...
+  hint: <gray>Крадком закрыць
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>золата золата золата
+  world:
+    title: <white><player></white> <gray>адкрываецца <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Вы ўжо адкрываеце справу.
+  case-disabled: <prefix><red>Гэты выпадак недаступны.
+  missing: <prefix><gray>Вам патрэбны <white><case></white> і <white><key></white>.
+  missing-now: <prefix><red>Кейса або ключа больш няма ў вашым інвентары.
+  storage-error: <prefix><red>Збой захавання. Ваш футляр і ключ былі вернуты.
+  command-blocked: <prefix><gray>Пачакайце, пакуль адкрыццё не скончыцца.
+  result: '<prefix><gray>Вы атрымалі <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Тэст]</red> <gray>Вынік: <skin> <dark_gray>(<float>, #<pattern>) - не захавана'
+  broadcast: <prefix><white><player></white> <gray>распакаваны <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>РЭДКІ СПЕЦЫЯЛЬНЫ ПРАДМЕТ</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Агледзець
+      lore:
+      - <gray>Усе дэталі вашага новага скіна
+    again:
+      name: <green>Адкрыйце іншы
+      lore:
+      - '<gray>Выпадкі: <white><cases> <dark_gray>· <gray>Ключы: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Гэта скура не падыходзіць для гэтай зброі.
+  equipped:
+    knife: '<prefix><gray>Узброены нож: <skin>'
+    bow: '<prefix><gray>На вашым луку: <skin>'
+    crossbow: '<prefix><gray>На вашым арбалеце: <skin>'
+  unequipped:
+    knife: <prefix><gray>Нож без экіпіроўкі.
+    bow: <prefix><gray>Скіна лука выдалена.
+    crossbow: <prefix><gray>Скіна арбалета выдалена.
+knife:
+  not-owned: <prefix><red>Гэта скура не належыць вам.
+  equipped: '<prefix><gray>Абсталявана: <skin>'
+  unequipped: <prefix><gray>Нож без экіпіроўкі.
+  sword-footer: '<dark_gray>База: <base>'
+inspect:
+  running: <prefix><gray>Праверка ўжо запушчана.
+  no-knife: <red>Скін недаступны <white>/skins
+shop:
+  title: Справа Дылер
+  npc-name: <gradient:#e4ae39:#f6d27a>Дылер кейсаў</gradient>
+  npc-description: <gray>Пстрыкніце правай кнопкай мышы, каб гандляваць
+  balance:
+    name: '<white>Ваш баланс: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Улічваюцца толькі нязмененыя элементы.
+  offer:
+  - ''
+  - '<gray>Кошт: <aqua><price> <currency>'
+  - '<dark_gray>5 штук: <price5> <currency>'
+  affordable: <green>✔ Даступны
+  not-affordable: <red>✘ <missing> <currency> адсутнічае
+  affordable-five: '<dark_gray>Пстрычка Shift: купіць 5'
+  hint-case:
+  - '<dark_gray>Левая кнопка: купіць · Правая кнопка: змесціва'
+  hint-key:
+  - '<dark_gray>Левая кнопка: купіць'
+  bought: '<prefix><gray>Куплена: <white><amount>× <name></white> за <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Вы не можаце сабе гэтага дазволіць.
+  inventory-full: <prefix><red>Ваш інвентар поўны.
+slot:
+  name: <#e4ae39>Інвентар скінаў
+  lore:
+  - '<gray>Пстрычка правай кнопкай мышы: скіны, нажы і футляры'
+  - <dark_gray>Гэты элемент заблакіраваны да гэтага слота.
+  blocked: <prefix><gray>Вызваліце ​​слот інвентара, каб з'явіўся прадмет інвентара скуры.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Адміністратар
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Гатова.
+  unknown: <prefix><red>Невядома <what>.
+  instance-unknown: <prefix><red>Не знойдзены адпаведны ідэнтыфікатар скіна. <gray>/спіс csadmin <player>
+  given: <prefix><gray>Аддаў <amount>× <white><name></white> <white><player></white>.
+  skin-given: <prefix><gray>Аддаў <skin> <gray> <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Скіны <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Апошнія адкрыцці <white><player>
+  scan-start: <prefix><gray>Сканаванне кожнага зерня <white><skin></white> для <white><metric></white>...
+  export-start: <prefix><gray>Стварэнне пакета рэсурсаў...
+  export-done: 'Экспартавана <prefix><green><skins> скінаў: <white><file>'
+  shop-spawned: <prefix><green>Створаны дылер Case.
+  shop-removed: <prefix><green>Дылер выдалены.
+  shop-none: <prefix><gray>Поблізу няма прадаўца чахлоў.
+  reload-busy: <prefix><gray>Перазагрузка ўжо запушчана.
+  reload-start: <prefix><gray>Перазагрузка...
+  reload-failed: <prefix><red>Збой перазагрузкі, папярэдняя канфігурацыя застаецца актыўнай. Глядзіце кансоль.
+  reload-done: '<prefix><green>Перазагружана праз <ms> мс: <skins> скінаў, <cases> выпадкаў, <warnings> папярэджанняў (гл. кансоль).'
+  browser:
+    title: 'Шаблон: <skin>'
+  manage:
+    title: 'Кіраваць: <player>'
+    skin-title: Скін <player>
+    give-title: 'Дайце скін: <player>'
+    give:
+      name: <green>Дайце скуру
+      lore:
+      - <gray>Выберыце чахол, а затым скін.
+    give-hint:
+    - ''
+    - '<dark_gray>Левая кнопка: даць · Правая кнопка: даць StatTrak™'
+    clear:
+      name: <red>Выдаліць усе скіны
+      lore:
+      - <gray><count> скінаў будуць выдалены.
+      - <dark_gray>Просіць пацверджання.
+    cleared: <prefix><gray>Выдалена <count> вокладак <white><player></white>.
+    removed: <prefix><gray>Выдалена <skin> <gray>з <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Націсніце, каб пераключыць.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Усталёўвае значэнне float у <white><float>
+    pattern-step:
+      name: <white>Узор <step>
+      lore:
+      - '<gray>Цяпер: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Выпадковы шаблон
+      lore:
+      - '<gray>Цяпер: <white><pattern>'
+    equip:
+      name: <green>Экіпіроўка для гульца
+      lore: []
+    unequip:
+      name: <green>✔ Абсталяваны
+      lore:
+      - <gray>Націсніце, каб зняць экіпіроўку.
+    remove:
+      name: <red>Выдаліць скуру
+      lore:
+      - <dark_gray>Просіць пацверджання.
+  labels:
+    case: выпадку
+    key: ключ
+    skin: скура
+    manual: ручная база дадзеных
+    automatic: аўтаматычны
+    none: няма (фініш не мае профілю аналізу)
+    'off': выключаны
+  debug:
+    seed: '<gray>Узор: <white><seed>'
+    analysing: <dark_gray>Аналіз...
+    variant: '<gray>Варыянт: <white><variant>'
+    classification: '<gray>Класіфікацыя: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Зніжэнне: <white><fade>%'
+    preview:
+      name: <yellow>Шаблон папярэдняга прагляду <seed>
+      lore:
+      - <gray>Паказвае адлюстраваную карту ў вашых руках.
+    random:
+      name: <light_purple>Выпадковы шаблон
+      lore: []
+    title: <gold>Адладчык шаблонаў <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Збой візуалізацыі: <error>'
+    metrics: '<gray>Паказчыкі: <white><metrics>'
+    scan-failed: <prefix><red>Збой сканавання.
+    no-metric: <gray>У шаблона няма метрыкі <white><metric>
+    export-failed: '<prefix><red>Збой экспарту: <error>'
+  odds: <gray><case> <dark_gray>(<count> элементаў, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Скіны: <white><skins> <gray>Кейсы: <white><cases> <gray>Зброя: <white><weapons>'
+    cache: '<gray>Кэшаваныя прагляды: <white><previews> <gray>Рэжым пакета рэсурсаў: <white><pack>'
+    web: '<gray>Упакаваць вэб-сервер: <white><url>'
+wear:
+  factory_new: Новы з завода
+  minimal_wear: Мінімальны знос
+  field_tested: Праверана ў палявых умовах
+  well_worn: Добра паношаны
+  battle_scarred: Пацярпелы ад баёў
+rarity:
+  mil_spec: Міль-спец
+  restricted: Абмежаваны
+  classified: Засакрэчаны
+  covert: Прыкрытая
+  rare_special: Рэдкі спецыяльны прадмет
+catalog:
+  key:
+    case_key: Справа ключ

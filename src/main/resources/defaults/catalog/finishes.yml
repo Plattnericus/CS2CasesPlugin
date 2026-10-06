@@ -1,0 +1,156 @@
+# Shared finishes (mainly knife finishes). A skin references one with 'finish: <id>'.
+#   float: [min, max]   default float range for skins using this finish
+#   analysis: <profile> pattern analysis profile from patterns.yml
+#   variants:           seed-selected sub-variants (Doppler phases, gems)
+#   wearable: false     no float based wear (Vanilla)
+#   per-instance-wear:  every copy gets its own scratch layout (pattern is never affected)
+finishes:
+  vanilla:
+    name: ""
+    style: solid
+    palette: ["#8f969e", "#b4bac1"]
+    wearable: false
+    patterned: false
+  fade:
+    name: "Fade"
+    style: fade_knife
+    palette: ["#f3d64f", "#f39a3c", "#e8508f", "#a347d6", "#5a5ce0"]
+    float: [0.00, 0.08]
+    analysis: fade
+  case_hardened:
+    name: "Case Hardened"
+    style: case_hardened
+    palette: ["#173f9e", "#2f62c8", "#6c5f9a", "#7d6a62", "#9a7f4e", "#b8933f", "#c7a14a", "#d9c27e"]
+    float: [0.00, 1.00]
+    analysis: case_hardened
+  crimson_web:
+    name: "Crimson Web"
+    style: web
+    palette: ["#a3151a", "#8c1216", "#121212"]
+    float: [0.06, 0.80]
+  slaughter:
+    name: "Slaughter"
+    style: swirl
+    palette: ["#7a0d12", "#c41e2a", "#e8d9d4"]
+    float: [0.01, 0.26]
+  night:
+    name: "Night"
+    style: solid
+    palette: ["#1c1e24", "#2a2d36"]
+    float: [0.06, 0.80]
+  blue_steel:
+    name: "Blue Steel"
+    style: brushed
+    palette: ["#2c3e5c", "#4a6488", "#8aa0b8"]
+    float: [0.00, 1.00]
+  boreal_forest:
+    name: "Boreal Forest"
+    style: camo
+    palette: ["#2a2f22", "#3d4a2e", "#6b6a4a", "#9a9a7a"]
+    float: [0.06, 0.80]
+  forest_ddpat:
+    name: "Forest DDPAT"
+    style: digital
+    palette: ["#1f241a", "#2f3b26", "#5b6b3e", "#8a8f6a"]
+    float: [0.06, 0.80]
+  safari_mesh:
+    name: "Safari Mesh"
+    style: mesh
+    palette: ["#4a4232", "#7a6a4a", "#a89a72"]
+    float: [0.06, 0.80]
+  scorched:
+    name: "Scorched"
+    style: camo
+    palette: ["#1a1a1a", "#2a2420", "#4a3a2a", "#8a7a62"]
+    float: [0.06, 0.80]
+  stained:
+    name: "Stained"
+    style: swirl
+    palette: ["#5a6a7a", "#7a6a8a", "#8a8a6a"]
+    float: [0.00, 1.00]
+  urban_masked:
+    name: "Urban Masked"
+    style: camo
+    palette: ["#1e1e1e", "#3a3a3a", "#7a7a7a", "#b0b0b0"]
+    float: [0.06, 0.80]
+  doppler:
+    name: "Doppler"
+    style: doppler
+    float: [0.00, 0.08]
+    palette: ["#2a0a30", "#a03a9a", "#e45ab0", "#6a2a8a"]
+    variants:
+      phase_1:     {name: "Phase 1",     weight: 24.0, palette: ["#08080e", "#2a0c30", "#7a2a6a", "#c43c8a", "#1a0a20"], color: "#c43c8a"}
+      phase_2:     {name: "Phase 2",     weight: 24.0, palette: ["#2a0a30", "#a03a9a", "#e45ab0", "#ff8ad0", "#6a2a8a"], color: "#e45ab0"}
+      phase_3:     {name: "Phase 3",     weight: 24.0, palette: ["#0f2a30", "#1f6a5a", "#2a8ab0", "#5ab0d0", "#5a3a8a"], color: "#2a8ab0"}
+      phase_4:     {name: "Phase 4",     weight: 24.0, palette: ["#0a1a3a", "#1f4ac0", "#4aa0e0", "#c45aa0", "#2a2a7a"], color: "#4aa0e0"}
+      ruby:        {name: "Ruby",        weight: 1.6,  palette: ["#2a0004", "#7a0a12", "#c8141e", "#ff3a3a", "#50000a"], color: "#e0202a"}
+      sapphire:    {name: "Sapphire",    weight: 1.6,  palette: ["#000a2a", "#06288a", "#1a5ae0", "#4a9aff", "#001450"], color: "#2a70f0"}
+      black_pearl: {name: "Black Pearl", weight: 0.8,  palette: ["#030308", "#140c2e", "#3a2272", "#7a4ab0", "#0a0a18"], color: "#7a4ab0"}
+  marble_fade:
+    name: "Marble Fade"
+    style: marble
+    palette: ["#1a46c8", "#3f7ff0", "#e9edf2", "#f2c230", "#e0281e"]
+    float: [0.00, 0.08]
+    analysis: marble_fade
+  tiger_tooth:
+    name: "Tiger Tooth"
+    style: tiger
+    palette: ["#f6c84a", "#e8a21a", "#a8560c"]
+    float: [0.00, 0.08]
+  damascus_steel:
+    name: "Damascus Steel"
+    style: damascus
+    palette: ["#3a3e44", "#8a9098", "#c8ccd2"]
+    float: [0.01, 0.50]
+  rust_coat:
+    name: "Rust Coat"
+    style: camo
+    palette: ["#3a2a22", "#5a2a12", "#8a4a22", "#b06a3a"]
+    float: [0.40, 1.00]
+  ultraviolet:
+    name: "Ultraviolet"
+    style: solid
+    palette: ["#2a1a4a", "#3a2a5a"]
+    float: [0.06, 0.80]
+  gamma_doppler:
+    name: "Gamma Doppler"
+    style: doppler
+    float: [0.00, 0.08]
+    palette: ["#0a3a2a", "#2ab07a", "#7ae0a0", "#0a6a4a"]
+    variants:
+      phase_1: {name: "Phase 1", weight: 24.5, palette: ["#05100a", "#0a3a22", "#1a8a4a", "#2ab06a", "#0a2a1a"], color: "#2ab06a"}
+      phase_2: {name: "Phase 2", weight: 24.5, palette: ["#0a3a2a", "#1a8a5a", "#4ad08a", "#9af0b0", "#0a6a4a"], color: "#4ad08a"}
+      phase_3: {name: "Phase 3", weight: 24.5, palette: ["#0a2a3a", "#1a6a8a", "#2ab0b0", "#5af0d0", "#1a4a6a"], color: "#2ab0b0"}
+      phase_4: {name: "Phase 4", weight: 24.5, palette: ["#0a1a3a", "#1a4ab0", "#2a8ad0", "#3ad0b0", "#1a3a8a"], color: "#2a8ad0"}
+      emerald: {name: "Emerald", weight: 2.0,  palette: ["#001a08", "#005a24", "#00a040", "#3aff8a", "#003a14"], color: "#20e070"}
+  lore:
+    name: "Lore"
+    style: tribal
+    palette: ["#7a5a2a", "#c8a24a", "#e8d08a"]
+    float: [0.00, 0.65]
+  autotronic:
+    name: "Autotronic"
+    style: circuit
+    palette: ["#1a1a1e", "#2a2a2e", "#c21e2a"]
+    float: [0.00, 0.80]
+  black_laminate:
+    name: "Black Laminate"
+    style: topo
+    palette: ["#0c0c0e", "#2a2a2e", "#5a5a62"]
+    float: [0.00, 1.00]
+  bright_water:
+    name: "Bright Water"
+    style: waves
+    palette: ["#0a3a6a", "#1a6ab0", "#5ab0e0", "#c8e8f8"]
+    float: [0.00, 0.50]
+  freehand:
+    name: "Freehand"
+    style: graffiti
+    palette: ["#1a1a1a", "#e8e8e8", "#2a5ad0", "#e83a2a"]
+    float: [0.00, 0.48]
+
+# Knife finish collections used by cases (rare-special.finishes).
+finish-sets:
+  original: [vanilla, fade, case_hardened, crimson_web, slaughter, night, blue_steel, boreal_forest, forest_ddpat, safari_mesh, scorched, stained, urban_masked]
+  chroma: [doppler, marble_fade, tiger_tooth, damascus_steel, rust_coat, ultraviolet]
+  gamma: [gamma_doppler, lore, autotronic, black_laminate, bright_water, freehand]

@@ -1,0 +1,31 @@
+# Shadow Case (2015)
+
+case:
+  name: "Shadow Case"
+  key: case_key
+  color: "#3a3a5a"
+  stattrak-chance: 0.10
+  description:
+    - "2015"
+
+skins:
+  dual_berettas_dualing_dragons: {weapon: dual_berettas, rarity: mil_spec, name: "Dualing Dragons", style: tribal, palette: ["#1a1a1a", "#c81a1a", "#c8a040"]}
+  famas_survivor_z: {weapon: famas, rarity: mil_spec, name: "Survivor Z", style: graffiti, palette: ["#3a4a2a", "#8a9a5a", "#1a1a1a"]}
+  glock18_wraiths: {weapon: glock18, rarity: mil_spec, name: "Wraiths", style: swirl, palette: ["#1a1a2a", "#5a5a8a", "#c8c8e8"]}
+  mac10_rangeen: {weapon: mac10, rarity: mil_spec, name: "Rangeen", style: tribal, palette: ["#e8e8e8", "#5a8ab0", "#c8a040"]}
+  mag7_cobalt_core: {weapon: mag7, rarity: mil_spec, name: "Cobalt Core", style: hex, palette: ["#0a1a3a", "#1a5ad0", "#c8c8c8"]}
+  scar20_green_marine: {weapon: scar20, rarity: mil_spec, name: "Green Marine", style: camo, palette: ["#1a3a2a", "#3a6a4a", "#8ab08a"]}
+  xm1014_scumbria: {weapon: xm1014, rarity: mil_spec, name: "Scumbria", style: graffiti, palette: ["#2a6a8a", "#e8e8e8", "#1a1a1a"]}
+  galil_stone_cold: {weapon: galil, rarity: restricted, name: "Stone Cold", style: digital, palette: ["#e8e8e8", "#8ab0d0", "#2a4a6a"]}
+  m249_nebula_crusader: {weapon: m249, rarity: restricted, name: "Nebula Crusader", style: swirl, palette: ["#0a0a2a", "#5a2a8a", "#e8a0e0"]}
+  mp7_special_delivery: {weapon: mp7, rarity: restricted, name: "Special Delivery", style: graffiti, palette: ["#e8e0d0", "#c81a1a", "#1a1a1a"]}
+  p250_wingshot: {weapon: p250, rarity: restricted, name: "Wingshot", style: floral, palette: ["#3a2a1a", "#a07a4a", "#e8d0a0"]}
+  ak47_frontside_misty: {weapon: ak47, rarity: classified, name: "Frontside Misty", style: graffiti, palette: ["#e8e8f0", "#2a3a6a", "#1a1a1a", "#5ab0e8"]}
+  g3sg1_flux: {weapon: g3sg1, rarity: classified, name: "Flux", style: swirl, palette: ["#1a0a2a", "#5a1a8a", "#c85ae8"]}
+  ssg08_big_iron: {weapon: ssg08, rarity: classified, name: "Big Iron", style: tribal, palette: ["#2a2a2e", "#c8a040", "#5a5a62"]}
+  usps_kill_confirmed: {weapon: usps, rarity: covert, name: "Kill Confirmed", style: graffiti, palette: ["#1a1a1a", "#e8e8e8", "#c81a1a", "#f0c020"]}
+  m4a1s_golden_coil: {weapon: m4a1s, rarity: covert, name: "Golden Coil", style: scales, palette: ["#1a1a1a", "#c8a040", "#f0d070"]}
+
+rare-special:
+  knives: [shadow_daggers]
+  finishes: original

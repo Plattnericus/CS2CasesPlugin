@@ -1,0 +1,29 @@
+name: MCCases
+version: '${version}'
+main: dev.plattnericus.cases.MCCasesPlugin
+api-version: '26.2'
+author: Plattnericus
+website: https://plattnericus.dev
+description: Server-side CS2-style cases, skins, patterns and knives.
+permissions:
+  mccases.trade:
+    description: Trade skins with other players
+    default: true
+  mccases.market:
+    description: Buy and sell skins on the marketplace
+    default: true
+  mccases.use:
+    description: Skin inventory, cases and knives
+    default: true
+  mccases.inspect:
+    description: 3D knife inspect
+    default: true
+  mccases.view:
+    description: View other players' skin inventories (/skins <player>)
+    default: true
+  mccases.shop:
+    description: Use the case dealer
+    default: true
+  mccases.admin:
+    description: All /csadmin functions
+    default: op

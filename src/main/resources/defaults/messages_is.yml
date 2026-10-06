@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Tilfelli</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Þú hefur ekki leyfi til að gera það.
+  player-only: <prefix><red>Aðeins leikmenn.
+profile:
+  loading: <prefix><gray>Húðbirgðin þín er enn að hlaðast...
+  load-failed: <prefix><red>Ekki var hægt að hlaða húðbirgðum þínum. Vinsamlegast segðu stjórnanda.
+  recovered: '<prefix><gray>Rofin opnun lokið: <skin>'
+category:
+  pistol: Skammbyssa
+  smg: SMG
+  rifle: Riffill
+  sniper: Leyniskytta riffill
+  heavy: Þungt
+  equipment: Búnaður
+  knife: Hnífur
+items:
+  test-marker: <red>⚠ Prófunaratriði (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> möguleg atriði
+    - ''
+    - '<gray>Hægri smellur: <white>skoða innihald'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Notað þegar mál er opnað.
+    use-hint: <prefix><gray>Hægri smelltu á <white>case</white> til að opna það með þessum lykli.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Ytra: <white><wear>'
+    float: '<gray>Fljót: <white><float>'
+    float-range: '<gray>Fljót: <white><min_float> - <max_float>'
+    pattern: '<gray>Mynstur: <white><pattern>'
+    variant: '<gray>Fasi: <class_color><variant>'
+    classification: '<gray>Mynsturgerð: <class_color><classification>'
+    fade: '<gray>Dynna: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Dráp: <white><kills>'
+    has-variants: <dark_gray>Nokkrir áfangar mögulegir
+    source: '<gray>Heimild: <white><case>'
+    date: '<gray>Fengið: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray> Eytt: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% dofna'
+gui:
+  loading:
+    name: <gray>Hleður...
+    lore: []
+  back:
+    name: <gray>Til baka
+    lore: []
+  close:
+    name: <red>Loka
+    lore: []
+  previous:
+    name: <gray>Fyrri síða
+    lore:
+    - <dark_gray>Síða <page> / <pages>
+  next:
+    name: <gray>Næsta síða
+    lore:
+    - <dark_gray>Síða <page> / <pages>
+  cases:
+    title: Mál
+    header:
+      name: <#e4ae39>Tilfelli
+      lore:
+      - <gray>Fáðu hulstur frá <white>case söluaðila</white>.
+      - <gray>Þú þarft samsvarandi lykil til að opna einn.
+    entry:
+    - ''
+    - '<gray>Í birgðum: <white><owned> <dark_gray>· <gray>Lyklar: <white><keys>'
+    - '<gray>Vinstri smellur: <white>skoða innihald'
+    can-open: '<green>Hægri smellur: opinn'
+    to-skins:
+      name: <#e4ae39>Húðbirgðir
+      lore:
+      - <gray>Húðin þín og hnífarnir
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Smelltu til að sjá forskoðun
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Sjaldan hnífur.
+      - <dark_gray><count> afbrigði · smelltu til að skoða
+      - ''
+    open:
+      name: <green>Opið hulstur
+      lore:
+      - '<gray>Tilfelli: <white><owned> <dark_gray>· <gray>Lyklar: <white><keys>'
+      - <dark_gray>Notar 1 hulstur og 1 <key>
+    cannot-open:
+      name: <gray>Getur ekki opnað
+      lore:
+      - '<gray>Tilfelli: <white><owned> <dark_gray>· <gray>Lyklar: <white><keys>'
+      - <dark_gray>Þú þarft hulstur og <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Ertu viss?
+    'yes':
+      name: <green>Já, eyða
+      lore:
+      - <dark_gray>Ekki er hægt að afturkalla þetta.
+    'no':
+      name: <red>Hætta við
+      lore: []
+  skins:
+    title: Húðskrá
+    title-other: Skinn af <player>
+    tab:
+      all:
+        name: <white>Öll skinn
+        lore: []
+      weapons:
+        name: <white>Vopnaskinn
+        lore: []
+      knives:
+        name: <white>Hnífar
+        lore:
+        - '<dark_gray>Hægri smelltu á hníf: útbúa'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Uppáhalds
+        lore: []
+      recent:
+        name: <white>Nýlega fengin
+        lore: []
+    empty:
+      name: <gray>Ekkert hér ennþá
+      lore:
+      - <dark_gray>Opnaðu hulstur til að fá skinn.
+    equipped: <green>✔ Búin
+    favorite: <yellow>★ Uppáhalds
+    hint:
+    - ''
+    - '<dark_gray>Vinstri smellur: skoða · Hægri smellur: settu á boga'
+    - '<dark_gray>Shift smellur: uppáhalds'
+    hint-knife:
+    - ''
+    - '<dark_gray>Vinstri smellur: skoða · Hægri smellur: útbúa'
+    - '<dark_gray>Shift smellur: uppáhalds'
+    to-cases:
+      name: <#e4ae39>Tilfelli
+      lore:
+      - <gray>Til málanna þinna
+    sort:
+      name: '<white>Raða: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Vinstri: næst · Hægri: fyrri'
+    sorts:
+      rarity: Sjaldgæfur
+      float: Fljóta
+      name: Nafn
+      wear: Að utan
+      pattern: Mynstur
+      newest: Nýjasta
+      oldest: Elst
+    info:
+      name: <white><count> <gray>skinn sýnd
+      lore:
+      - <dark_gray><total> alls · smelltu til að loka
+    filter:
+      name: <white>Sía
+      lore:
+      - '<dark_gray>Vinstri: veldu síur · Hægri: endurstilla'
+    active-knife:
+    - <green>✔ Virkur hnífur
+    - <dark_gray>Smelltu til að fá upplýsingar
+  filter:
+    title: Sía
+    header:
+      name: <white>Sía
+      lore:
+      - <gray>Nokkrar síur af sama tagi eru sameinaðar.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Aðeins <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Virkt
+    'off':
+    - <dark_gray>Óvirkt
+    reset:
+      name: <gray>Endurstilla allar síur
+      lore: []
+  inspect:
+    title: Skoðaðu
+    missing:
+      name: <red>Húð ekki tiltækt
+      lore: []
+    preview:
+      name: <#e4ae39>Skoða húð
+      lore:
+      - '<gray>Sýnir nákvæmlega afritið þitt:'
+      - <gray>mynstur, litir og slit.
+      - ''
+      - <dark_gray>Laumast til að loka forskoðuninni.
+    data: <white>Upplýsingar
+    favorite:
+      name: <white>Merkja sem uppáhalds
+      lore: []
+    unfavorite:
+      name: <yellow>★ Fjarlægja uppáhalds
+      lore: []
+    equip:
+      name: <green>Búa
+      lore:
+      - <gray>Sverðin þín sýna þennan hníf.
+      - <dark_gray>Skemmdir og töfrar eru óbreyttir.
+    unequip:
+      name: <green>✔ Búin
+      lore:
+      - <gray>Smelltu til að losa þig við.
+    inspect3d:
+      name: <white>3D skoðun
+      lore:
+      - '<gray>Sýnir nákvæmlega afritið þitt:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Tilheyrir öðrum leikmanni
+      lore:
+      - <dark_gray>Skoða eingöngu
+    equip-bow:
+      name: <green>Settu á boga
+      lore:
+      - <gray>Saugar þínar sýna þetta skinn.
+    unequip-bow:
+      name: <green>✔ Á boga
+      lore:
+      - <gray>Smelltu til að fjarlægja.
+    equip-crossbow:
+      name: <green>Settu á lásbogann
+      lore:
+      - <gray>Lásbogarnir þínir sýna þessa húð.
+    unequip-crossbow:
+      name: <green>✔ Á lásboga
+      lore:
+      - <gray>Smelltu til að fjarlægja.
+    not-equippable:
+      name: <gray>Ekki hægt að útbúa
+      lore:
+      - <dark_gray>Ekki er hægt að útbúa þetta skinn.
+    delete:
+      name: <red>Eyða skinni
+      lore:
+      - <gray>Fjarlægir þetta skinn úr birgðum þínum.
+      - <dark_gray>Biður um staðfestingu.
+view:
+  unknown: <prefix><red>Player <white><player></white> fannst ekki.
+gallery:
+  header-other: Birgðir <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> skinn <dark_gray>· <gray>Síða <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Hægri smellur: skoða · Sneak + hægri smellur: uppáhalds'
+  hint-knife:
+  - ''
+  - '<dark_gray>Hægri smellur: skoða · Vinstri smellur: útbúa'
+  - '<dark_gray>Sneak + hægri smellur: uppáhalds'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Hægri smellur: skoða · Vinstri smellur: settu á boga'
+  - '<dark_gray>Sneak + vinstri smellur: settu á lásbogann'
+  - '<dark_gray>Sneak + hægri smellur: uppáhalds'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skinn <dark_gray>· <gray>Síða <page>/<pages>
+  empty: <gray>Ekkert hér ennþá
+  button:
+    previous: <gray>Fyrri síða
+    next: <gray>Næsta síða
+    category: <white>Breyta flokki
+    sort: '<white>Raða: <#e4ae39><sort>'
+    filter: <white>Sía
+    list: <white>Sýna sem lista
+    close: <red>Loka
+preview:
+  loading: <gray>Gerir forskoðun...
+  hint: <gray>Lumast til að loka
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>gull gull gull
+  world:
+    title: <white><player></white> <gray>opnar <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Þú ert nú þegar að opna mál.
+  case-disabled: <prefix><red>Þetta mál er ekki tiltækt.
+  missing: <prefix><gray>Þú þarft <white><case></white> og <white><key></white>.
+  missing-now: <prefix><red>Húsið eða lykillinn er ekki lengur í birgðum þínum.
+  storage-error: <prefix><red>Vistun mistókst. Málinu þínu og lyklinum var skilað.
+  command-blocked: <prefix><gray>Bíddu þar til opnun er lokið.
+  result: '<prefix><gray>Þú fékkst <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Próf]</red> <gray>Niðurstaða: <skin> <dark_gray>(<float>, #<pattern>) - ekki vistað'
+  broadcast: <prefix><white><player></white> <gray>ópakkað <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>SJÁLDÆTT SÉRSTÖK ATRIÐUR</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Skoðaðu
+      lore:
+      - <gray>Allar upplýsingar um nýja skinnið þitt
+    again:
+      name: <green>Opnaðu annað
+      lore:
+      - '<gray>Tilfelli: <white><cases> <dark_gray>· <gray>Lyklar: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Þetta skinn passar ekki við þetta vopn.
+  equipped:
+    knife: '<prefix><gray>Hníf búinn: <skin>'
+    bow: '<prefix><gray>Á boga þínum: <skin>'
+    crossbow: '<prefix><gray>Á lásboganum þínum: <skin>'
+  unequipped:
+    knife: <prefix><gray>Hnífur óútbúinn.
+    bow: <prefix><gray>Bow húð fjarlægð.
+    crossbow: <prefix><gray>Krossbogahúð fjarlægð.
+knife:
+  not-owned: <prefix><red>Þetta skinn tilheyrir þér ekki.
+  equipped: '<prefix><gray>Búin: <skin>'
+  unequipped: <prefix><gray>Hnífur óútbúinn.
+  sword-footer: '<dark_gray>Grunn: <base>'
+inspect:
+  running: <prefix><gray>Könnun er þegar í gangi.
+  no-knife: <red>Húð ekki tiltækt <white>/skins
+shop:
+  title: Málsali
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Hægri smelltu til að eiga viðskipti
+  balance:
+    name: '<white>Staðan þín: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Aðeins óbreyttir hlutir telja.
+  offer:
+  - ''
+  - '<gray>Verð: <aqua><price> <currency>'
+  - '<dark_gray>5 stykki: <price5> <currency>'
+  affordable: <green>✔ Á viðráðanlegu verði
+  not-affordable: <red>✘ <missing> <currency> vantar
+  affordable-five: '<dark_gray>Shift smellur: kaupa 5'
+  hint-case:
+  - '<dark_gray>Vinstri smellur: kaupa · Hægri smellur: innihald'
+  hint-key:
+  - '<dark_gray>Vinstri smellur: kaupa'
+  bought: '<prefix><gray>Keypt: <white><amount>× <name></white> fyrir <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Þú hefur ekki efni á því.
+  inventory-full: <prefix><red>Birgið þitt er fullt.
+slot:
+  name: <#e4ae39>Húðbirgðir
+  lore:
+  - '<gray>Hægri smellur: skinn, hnífar og hulstur'
+  - <dark_gray>Þetta atriði er læst við þessa rauf.
+  blocked: <prefix><gray>Lausaðu birgðarými svo birgðahluturinn í húðinni geti birst.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Stjórnandi
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Lokið.
+  unknown: <prefix><red>Óþekkt <what>.
+  instance-unknown: <prefix><red>Ekkert samsvarandi húðauðkenni fannst. <gray>/csadmin listi <player>
+  given: <prefix><gray>Gaf <amount>× <white><name></white> til <white><player></white>.
+  skin-given: <prefix><gray>Gaf <skin> <gray>til <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Húð af <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Nýlegar opnanir á <white><player>
+  scan-start: <prefix><gray>Skanna hvert fræ af <white><skin></white> fyrir <white><metric></white>...
+  export-start: <prefix><gray>Aðfangapakki að byggja upp...
+  export-done: '<prefix><green><skins> skinn flutt út: <white><file>'
+  shop-spawned: <prefix><green>Málasali búinn til.
+  shop-removed: <prefix><green>Töskusali fjarlægður.
+  shop-none: <prefix><gray>Enginn töskusali nálægt.
+  reload-busy: <prefix><gray>Endurhleðsla er þegar í gangi.
+  reload-start: <prefix><gray>Endurhleður...
+  reload-failed: <prefix><red>Endurhleðsla mistókst, fyrri uppsetning helst virk. Sjá stjórnborð.
+  reload-done: '<prefix><green>Endurhlaðinn eftir <ms> ms: <skins> skinn, <cases> tilvik, <warnings> viðvaranir (sjá stjórnborð).'
+  browser:
+    title: 'Mynstur: <skin>'
+  manage:
+    title: 'Stjórna: <player>'
+    skin-title: Húð <player>
+    give-title: 'Gefðu húð: <player>'
+    give:
+      name: <green>Gefðu húð
+      lore:
+      - <gray>Veldu hulstur og síðan skinn.
+    give-hint:
+    - ''
+    - '<dark_gray>Vinstri smellur: gefa · Hægri smellur: gefa StatTrak™'
+    clear:
+      name: <red>Eyða öllum skinnum
+      lore:
+      - <gray><count> skinn verða fjarlægð.
+      - <dark_gray>Biður um staðfestingu.
+    cleared: <prefix><gray>Eyddi <count> skinn af <white><player></white>.
+    removed: <prefix><gray>Eydd <skin> <gray>af <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Smelltu til að skipta.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Stillir flotið á <white><float>
+    pattern-step:
+      name: <white>Mynstur <step>
+      lore:
+      - '<gray>Núverandi: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Tilviljanakennt mynstur
+      lore:
+      - '<gray>Núverandi: <white><pattern>'
+    equip:
+      name: <green>Búa fyrir leikmann
+      lore: []
+    unequip:
+      name: <green>✔ Búin
+      lore:
+      - <gray>Smelltu til að losa þig við.
+    remove:
+      name: <red>Eyða skinni
+      lore:
+      - <dark_gray>Biður um staðfestingu.
+  labels:
+    case: mál
+    key: lykill
+    skin: húð
+    manual: handvirkur gagnagrunnur
+    automatic: sjálfvirkur
+    none: enginn (finish hefur engan greiningarprófíl)
+    'off': af
+  debug:
+    seed: '<gray>Mynstur: <white><seed>'
+    analysing: <dark_gray>Greinir...
+    variant: '<gray>Afbrigði: <white><variant>'
+    classification: '<gray>Flokkun: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Dynna: <white><fade>%'
+    preview:
+      name: <yellow>Forskoða mynstur <seed>
+      lore:
+      - <gray>Sýnir myndað kort í höndum þínum.
+    random:
+      name: <light_purple>Tilviljanakennt mynstur
+      lore: []
+    title: <gold>Mynstur villuleit <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Tilgangur mistókst: <error>'
+    metrics: '<gray>Mælingar: <white><metrics>'
+    scan-failed: <prefix><red>Skönnun mistókst.
+    no-metric: <gray>Ekkert mynstur hefur mæligildi <white><metric>
+    export-failed: '<prefix><red>Útflutningur mistókst: <error>'
+  odds: <gray><case> <dark_gray>(<count> atriði, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Húð: <white><skins> <gray>Tilfelli: <white><cases> <gray>Vopn: <white><weapons>'
+    cache: '<gray>Forskoðun í skyndiminni: <white><previews> <gray>Tilfangapakkahamur: <white><pack>'
+    web: '<gray>Pakka vefþjónn: <white><url>'
+wear:
+  factory_new: Verksmiðju nýtt
+  minimal_wear: Lágmarks slit
+  field_tested: Vettvangsprófað
+  well_worn: Vel slitinn
+  battle_scarred: Battle-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Takmörkuð
+  classified: Flokkað
+  covert: Hulda
+  rare_special: Sjaldgæfur sérstakur vara
+catalog:
+  key:
+    case_key: Málslykill

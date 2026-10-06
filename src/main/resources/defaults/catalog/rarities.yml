@@ -1,0 +1,47 @@
+# Drop tiers. 'weight' values are relative odds; the defaults match the published CS2 case odds.
+# Exactly one tier should be marked rare-special (knives, gold reveal).
+rarities:
+  mil_spec:
+    name: "Mil-Spec"
+    color: "#4b69ff"
+    weight: 79.923
+    order: 1
+    pane: BLUE_STAINED_GLASS_PANE
+    reveal-sound: reveal.mil_spec
+  restricted:
+    name: "Restricted"
+    color: "#8847ff"
+    weight: 15.985
+    order: 2
+    pane: PURPLE_STAINED_GLASS_PANE
+    reveal-sound: reveal.restricted
+  classified:
+    name: "Classified"
+    color: "#d32ce6"
+    weight: 3.197
+    order: 3
+    pane: MAGENTA_STAINED_GLASS_PANE
+    reveal-sound: reveal.classified
+  covert:
+    name: "Covert"
+    color: "#eb4b4b"
+    weight: 0.639
+    order: 4
+    pane: RED_STAINED_GLASS_PANE
+    reveal-sound: reveal.covert
+  rare_special:
+    name: "Rare Special Item"
+    color: "#e4ae39"
+    weight: 0.256
+    order: 5
+    pane: YELLOW_STAINED_GLASS_PANE
+    rare-special: true
+    reveal-sound: reveal.rare_special
+
+# Exterior is derived from the float only: min <= float < max.
+wear:
+  factory_new:    {name: "Factory New",    short: FN, min: 0.00, max: 0.07}
+  minimal_wear:   {name: "Minimal Wear",   short: MW, min: 0.07, max: 0.15}
+  field_tested:   {name: "Field-Tested",   short: FT, min: 0.15, max: 0.38}
+  well_worn:      {name: "Well-Worn",      short: WW, min: 0.38, max: 0.45}
+  battle_scarred: {name: "Battle-Scarred", short: BS, min: 0.45, max: 1.0000001}

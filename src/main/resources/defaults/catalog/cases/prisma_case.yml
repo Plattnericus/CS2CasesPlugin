@@ -1,0 +1,32 @@
+# Prisma Case (2019)
+
+case:
+  name: "Prisma Case"
+  key: case_key
+  color: "#d05ab0"
+  stattrak-chance: 0.10
+  description:
+    - "2019"
+
+skins:
+  famas_crypsis: {weapon: famas, rarity: mil_spec, name: "Crypsis", style: camo, palette: ["#2a2a3a", "#5a5a7a", "#a0a0c0"]}
+  ak47_uncharted: {weapon: ak47, rarity: mil_spec, name: "Uncharted", style: topo, palette: ["#3a2a1a", "#8a6a3a", "#e8d0a0"]}
+  mac10_whitefish: {weapon: mac10, rarity: mil_spec, name: "Whitefish", style: waves, palette: ["#e8e8e8", "#5ab0e8", "#1a3a5a"]}
+  galil_akoben: {weapon: galil, rarity: mil_spec, name: "Akoben", style: tribal, palette: ["#1a1a1a", "#c8a040", "#c81a1a"]}
+  mp7_mischief: {weapon: mp7, rarity: mil_spec, name: "Mischief", style: graffiti, palette: ["#e8e8e8", "#e83ab0", "#1a1a1a"]}
+  p250_verdigris: {weapon: p250, rarity: mil_spec, name: "Verdigris", style: swirl, palette: ["#1a3a3a", "#3a8a7a", "#a0d0c0"]}
+  p90_off_world: {weapon: p90, rarity: mil_spec, name: "Off World", style: swirl, palette: ["#1a0a2a", "#5a2a8a", "#2ad0a0"]}
+  awp_atheris: {weapon: awp, rarity: restricted, name: "Atheris", style: scales, palette: ["#1a1a1a", "#e8e8e8", "#f0c020"]}
+  tec9_bamboozle: {weapon: tec9, rarity: restricted, name: "Bamboozle", style: graffiti, palette: ["#1a3a1a", "#5ad01a", "#f0e020"]}
+  deagle_light_rail: {weapon: deagle, rarity: restricted, name: "Light Rail", style: stripes, palette: ["#1a1a1a", "#5ab0e8", "#e8e8e8"]}
+  mp5sd_gauss: {weapon: mp5sd, rarity: restricted, name: "Gauss", style: circuit, palette: ["#1a1a1a", "#2a5ad0", "#e8e8e8"]}
+  ump45_moonrise: {weapon: ump45, rarity: restricted, name: "Moonrise", style: swirl, palette: ["#0a0a2a", "#5a5ab0", "#f0e0a0"]}
+  r8_revolver_skull_crusher: {weapon: r8_revolver, rarity: classified, name: "Skull Crusher", style: graffiti, palette: ["#1a1a1a", "#e8e8e8", "#5a5a5a"]}
+  aug_momentum: {weapon: aug, rarity: classified, name: "Momentum", style: stripes, palette: ["#e8e8e8", "#5ab0e8", "#f07a1a"]}
+  xm1014_incinegator: {weapon: xm1014, rarity: classified, name: "Incinegator", style: flames, palette: ["#1a0a0a", "#c81a1a", "#f0a020"]}
+  fiveseven_angry_mob: {weapon: fiveseven, rarity: covert, name: "Angry Mob", style: graffiti, palette: ["#e8e8e8", "#c81a1a", "#1a1a1a", "#f0c020"]}
+  m4a4_the_emperor: {weapon: m4a4, rarity: covert, name: "The Emperor", style: tribal, palette: ["#1a1a2a", "#c8a040", "#2a5ad0", "#e8e8e8"]}
+
+rare-special:
+  knives: [navaja, stiletto, talon, ursus]
+  finishes: chroma

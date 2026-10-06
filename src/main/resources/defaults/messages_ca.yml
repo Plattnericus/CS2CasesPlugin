@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Cases</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>No tens permís per fer-ho.
+  player-only: <prefix><red>Només jugadors.
+profile:
+  loading: <prefix><gray>El teu inventari de skins encara s'està carregant...
+  load-failed: <prefix><red>No s'ha pogut carregar el vostre inventari de skins. Si us plau, digueu a un administrador.
+  recovered: '<prefix><gray>Obertura interrompuda completada: <skin>'
+category:
+  pistol: Pistola
+  smg: SMG
+  rifle: Rifle
+  sniper: Rifle de franctirador
+  heavy: Pesant
+  equipment: Equipament
+  knife: Ganivet
+items:
+  test-marker: <red>⚠ Element de prova (administrador)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> elements possibles
+    - ''
+    - '<gray>Clic dret: <white>visualitza el contingut'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>S'ha utilitzat en obrir un cas.
+    use-hint: <prefix><gray>Feu clic amb el botó dret a un <white>cas</white> per obrir-lo amb aquesta clau.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Exterior: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Patró: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Tipus de patró: <class_color><classification>'
+    fade: '<gray>Evasió: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Mata: <white><kills>'
+    has-variants: <dark_gray>Posibles diverses fases
+    source: '<gray>Font: <white><case>'
+    date: '<gray>Obtingut: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Suprimit: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Esvaeix'
+gui:
+  loading:
+    name: <gray>S'està carregant...
+    lore: []
+  back:
+    name: <gray>Enrere
+    lore: []
+  close:
+    name: <red>Tancar
+    lore: []
+  previous:
+    name: <gray>Pàgina anterior
+    lore:
+    - <dark_gray>Pàgina <page> / <pages>
+  next:
+    name: <gray>Pàgina següent
+    lore:
+    - <dark_gray>Pàgina <page> / <pages>
+  cases:
+    title: Casos
+    header:
+      name: <#e4ae39>Casos
+      lore:
+      - <gray>Obteniu casos al <white>distribuïdor de casos</white>.
+      - <gray>Necessites una clau coincident per obrir-ne una.
+    entry:
+    - ''
+    - '<gray>A l''inventari: <white><owned> <dark_gray>· <gray>Claus: <white><keys>'
+    - '<gray>Clic esquerre: <white>visualitza el contingut'
+    can-open: '<green>Clic dret: obre'
+    to-skins:
+      name: <#e4ae39>Inventari de la pell
+      lore:
+      - <gray>Les vostres pells i ganivets
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Feu clic per obtenir una vista prèvia
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Un ganivet rar.
+      - <dark_gray><count> variants · feu clic per veure
+      - ''
+    open:
+      name: <green>Cas obert
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Claus: <white><keys>'
+      - <dark_gray>Utilitza 1 cas i 1 <key>
+    cannot-open:
+      name: <gray>No es pot obrir
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Claus: <white><keys>'
+      - <dark_gray>Necessites la funda i un <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: N'estàs segur?
+    'yes':
+      name: <green>Sí, suprimeix
+      lore:
+      - <dark_gray>Això no es pot desfer.
+    'no':
+      name: <red>Cancel·la
+      lore: []
+  skins:
+    title: Inventari de la pell
+    title-other: Pells de <player>
+    tab:
+      all:
+        name: <white>Totes les pells
+        lore: []
+      weapons:
+        name: <white>Pells d'armes
+        lore: []
+      knives:
+        name: <white>Navalles
+        lore:
+        - '<dark_gray>Clic dret sobre un ganivet: equipar'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Preferits
+        lore: []
+      recent:
+        name: <white>Recentment obtingut
+        lore: []
+    empty:
+      name: <gray>Encara no hi ha res
+      lore:
+      - <dark_gray>Obre els casos per obtenir aspectes.
+    equipped: <green>✔ Equipat
+    favorite: <yellow>★ Preferit
+    hint:
+    - ''
+    - '<dark_gray>Clic esquerre: inspeccionar · Clic dret: posar a l''arc'
+    - '<dark_gray>Clic Maj: preferit'
+    hint-knife:
+    - ''
+    - '<dark_gray>Clic esquerre: inspeccionar · Clic dret: equipar'
+    - '<dark_gray>Clic Maj: preferit'
+    to-cases:
+      name: <#e4ae39>Casos
+      lore:
+      - <gray>Als teus casos
+    sort:
+      name: '<white>Ordena: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Esquerra: següent · Dreta: anterior'
+    sorts:
+      rarity: La raresa
+      float: Flotar
+      name: Nom
+      wear: Exterior
+      pattern: Patró
+      newest: El més nou
+      oldest: El més antic
+    info:
+      name: <white><count> <gray>skins es mostren
+      lore:
+      - <dark_gray><total> en total · feu clic per tancar
+    filter:
+      name: <white>Filtre
+      lore:
+      - '<dark_gray>Esquerra: triar filtres · Dreta: restablir'
+    active-knife:
+    - <green>✔ Ganivet actiu
+    - <dark_gray>Feu clic per obtenir més informació
+  filter:
+    title: Filtre
+    header:
+      name: <white>Filtre
+      lore:
+      - <gray>Es combinen diversos filtres del mateix tipus.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Només <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Actiu
+    'off':
+    - <dark_gray>Inactiu
+    reset:
+      name: <gray>Restablir tots els filtres
+      lore: []
+  inspect:
+    title: Inspeccionar
+    missing:
+      name: <red>Skin no disponible
+      lore: []
+    preview:
+      name: <#e4ae39>Veure la pell
+      lore:
+      - '<gray>Mostra la teva còpia exacta:'
+      - <gray>patró, colors i desgast.
+      - ''
+      - <dark_gray>Col·leu per tancar la vista prèvia.
+    data: <white>Detalls
+    favorite:
+      name: <white>Marca com a preferit
+      lore: []
+    unfavorite:
+      name: <yellow>★ Elimina el favorit
+      lore: []
+    equip:
+      name: <green>Equip
+      lore:
+      - <gray>Les vostres espases mostren aquest ganivet.
+      - <dark_gray>Els danys i els encantaments segueixen igual.
+    unequip:
+      name: <green>✔ Equipat
+      lore:
+      - <gray>Feu clic per desequipar.
+    inspect3d:
+      name: <white>Inspecció 3D
+      lore:
+      - '<gray>Mostra la teva còpia exacta:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Pertany a un altre jugador
+      lore:
+      - <dark_gray>Només visualització
+    equip-bow:
+      name: <green>Posar llaç
+      lore:
+      - <gray>Els teus llaços mostren aquesta pell.
+    unequip-bow:
+      name: <green>✔ A proa
+      lore:
+      - <gray>Fes clic per eliminar-lo.
+    equip-crossbow:
+      name: <green>Posa't la ballesta
+      lore:
+      - <gray>Les vostres ballestes mostren aquesta pell.
+    unequip-crossbow:
+      name: <green>✔ A la ballesta
+      lore:
+      - <gray>Fes clic per eliminar-lo.
+    not-equippable:
+      name: <gray>No equipable
+      lore:
+      - <dark_gray>Aquesta pell no es pot equipar.
+    delete:
+      name: <red>Suprimeix la pell
+      lore:
+      - <gray>Suprimeix aquest aspecte del vostre inventari.
+      - <dark_gray>Demana confirmació.
+view:
+  unknown: <prefix><red>El jugador <white><player></white> no s'ha trobat.
+gallery:
+  header-other: Inventari de <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Pàgina
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Clic dret: inspeccionar · Furtiva + clic dret: favorit'
+  hint-knife:
+  - ''
+  - '<dark_gray>Clic dret: inspeccionar · Clic esquerre: equipar'
+  - '<dark_gray>Clic + clic dret: preferit'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Clic dret: inspeccionar · Clic esquerre: posar a l''arc'
+  - '<dark_gray>Col·lar + clic esquerre: posar-se a la ballesta'
+  - '<dark_gray>Clic + clic dret: preferit'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Pàgina <page>/<pages>
+  empty: <gray>Encara no hi ha res
+  button:
+    previous: <gray>Pàgina anterior
+    next: <gray>Pàgina següent
+    category: <white>Canvia categoria
+    sort: '<white>Ordena: <#e4ae39><sort>'
+    filter: <white>Filtre
+    list: <white>Mostra com a llista
+    close: <red>Tancar
+preview:
+  loading: <gray>Previsualització de renderització...
+  hint: <gray>Col·leu per tancar
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>or or or
+  world:
+    title: <white><player></white> <gray>obre <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Ja esteu obrint un cas.
+  case-disabled: <prefix><red>Aquest cas no està disponible.
+  missing: <prefix><gray>Necessites <white><case></white> i un <white><key></white>.
+  missing-now: <prefix><red>La funda o la clau ja no es troben al vostre inventari.
+  storage-error: <prefix><red>S'ha produït un error en desar. S'han retornat el teu estoig i la teva clau.
+  command-blocked: <prefix><gray>Espereu fins que acabi l'obertura.
+  result: '<prefix><gray>Heu rebut <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Prova]</red> <gray>Resultat: <skin> <dark_gray>(<float>, #<pattern>) - no desat'
+  broadcast: <prefix><white><player></white> <gray>desembalat <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>ART ESPECIAL rar</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspeccionar
+      lore:
+      - <gray>Tots els detalls de la teva nova pell
+    again:
+      name: <green>Obre un altre
+      lore:
+      - '<gray>Cases: <white><cases> <dark_gray>· <gray>Claus: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Aquesta pell no s'adapta a aquesta arma.
+  equipped:
+    knife: '<prefix><gray>Givet equipat: <skin>'
+    bow: '<prefix><gray>A la teva proa: <skin>'
+    crossbow: '<prefix><gray>A la teva ballesta: <skin>'
+  unequipped:
+    knife: <prefix><gray>Givet sense equipar.
+    bow: <prefix><gray>S'ha eliminat la pell de l'arc.
+    crossbow: <prefix><gray>S'ha eliminat la pell de la ballesta.
+knife:
+  not-owned: <prefix><red>Aquesta pell no et pertany.
+  equipped: '<prefix><gray>Equipat: <skin>'
+  unequipped: <prefix><gray>Givet sense equipar.
+  sword-footer: '<dark_gray>Base: <base>'
+inspect:
+  running: <prefix><gray>Ja s'està executant una inspecció.
+  no-knife: <red>Skin no disponible <white>/skins
+shop:
+  title: Distribuïdor de casos
+  npc-name: <gradient:#e4ae39:#f6d27a>Distribuïdor de casos</gradient>
+  npc-description: <gray>Feu clic amb el botó dret per operar
+  balance:
+    name: '<white>El teu saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Només compten els articles no modificats.
+  offer:
+  - ''
+  - '<gray>Preu: <aqua><price> <currency>'
+  - '<dark_gray>5 peces: <price5> <currency>'
+  affordable: <green>✔ Assequible
+  not-affordable: Falta <red>✘ <missing> <currency>
+  affordable-five: '<dark_gray>Clic Maj: compra 5'
+  hint-case:
+  - '<dark_gray>Clic esquerre: comprar · Clic dret: contingut'
+  hint-key:
+  - '<dark_gray>Clic esquerre: compra'
+  bought: '<prefix><gray>Comprat: <white><amount>× <name></white> per <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>No t'ho pots permetre.
+  inventory-full: <prefix><red>El vostre inventari està ple.
+slot:
+  name: <#e4ae39>Inventari de la pell
+  lore:
+  - '<gray>Clic dret: pells, ganivets i estoigs'
+  - <dark_gray>Aquest element està bloquejat en aquesta ranura.
+  blocked: <prefix><gray>Allibera un espai d'inventari perquè l'element d'inventari de la pell pugui aparèixer.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Administrador
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Fet.
+  unknown: <prefix><red>Desconegut <what>.
+  instance-unknown: <prefix><red>No s'ha trobat cap identificador de skin coincident. <gray>/csadmin list <player>
+  given: <prefix><gray>Va donar <amount>× <white><name></white> a <white><player></white>.
+  skin-given: <prefix><gray>Va donar <skin> <gray>a <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins de <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Obertures recents de <white><player>
+  scan-start: <prefix><gray>S'estan escanejant cada llavor de <white><skin></white> per a <white><metric></white>...
+  export-start: <prefix><gray>S'està creant el paquet de recursos...
+  export-done: '<prefix><green><skins> aspectes exportats: <white><file>'
+  shop-spawned: <prefix><green>S'ha creat un distribuïdor de casos.
+  shop-removed: <prefix><green>S'ha eliminat el distribuïdor de casos.
+  shop-none: <prefix><gray>No hi ha cap distribuïdor de casos a prop.
+  reload-busy: <prefix><gray>Ja s'està executant una recàrrega.
+  reload-start: <prefix><gray>S'està tornant a carregar...
+  reload-failed: <prefix><red>La recàrrega ha fallat, la configuració anterior es manté activa. Veure consola.
+  reload-done: '<prefix><green>Recarregat en <ms> ms: <skins> aspectes, <cases> casos, <warnings> avisos (vegeu la consola).'
+  browser:
+    title: 'Patró: <skin>'
+  manage:
+    title: 'Gestiona: <player>'
+    skin-title: Aspecte de <player>
+    give-title: 'Dona la pell: <player>'
+    give:
+      name: <green>Dona pell
+      lore:
+      - <gray>Tria un cas, després un aspecte.
+    give-hint:
+    - ''
+    - '<dark_gray>Clic esquerre: donar · Clic dret: donar StatTrak™'
+    clear:
+      name: <red>Suprimeix tots els aspectes
+      lore:
+      - <gray><count> s'eliminaran les pells.
+      - <dark_gray>Demana confirmació.
+    cleared: <prefix><gray>S'han suprimit <count> aspectes de <white><player></white>.
+    removed: <prefix><gray>Suprimit <skin> <gray>de <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Feu clic per canviar.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Defineix el flotador a <white><float>
+    pattern-step:
+      name: <white>Patró <step>
+      lore:
+      - '<gray>Actual: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Patró aleatori
+      lore:
+      - '<gray>Actual: <white><pattern>'
+    equip:
+      name: <green>Equip per al jugador
+      lore: []
+    unequip:
+      name: <green>✔ Equipat
+      lore:
+      - <gray>Feu clic per desequipar.
+    remove:
+      name: <red>Suprimeix la pell
+      lore:
+      - <dark_gray>Demana confirmació.
+  labels:
+    case: cas
+    key: clau
+    skin: pell
+    manual: base de dades manual
+    automatic: automàtic
+    none: cap (acabar no té perfil d'anàlisi)
+    'off': apagat
+  debug:
+    seed: '<gray>Patró: <white><seed>'
+    analysing: <dark_gray>S'està analitzant...
+    variant: '<gray>Variant: <white><variant>'
+    classification: '<gray>Classificació: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Evasió: <white><fade>%'
+    preview:
+      name: <yellow>Vista prèvia del patró <seed>
+      lore:
+      - <gray>Mostra el mapa representat a les vostres mans.
+    random:
+      name: <light_purple>Patró aleatori
+      lore: []
+    title: <gold>Depurador de patrons <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Error de renderització: <error>'
+    metrics: '<gray>Mètriques: <white><metrics>'
+    scan-failed: <prefix><red>S'ha produït un error en l'escaneig.
+    no-metric: <gray>Cap patró té mètrica <white><metric>
+    export-failed: '<prefix><red>S''ha produït un error en l''exportació: <error>'
+  odds: <gray><case> <dark_gray>(<count> elements, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Cases: <white><cases> <gray>Armes: <white><weapons>'
+    cache: '<gray>Previsualitzacions en memòria cau: <white><previews> <gray>Mode de paquet de recursos: <white><pack>'
+    web: '<gray>Pack servidor web: <white><url>'
+wear:
+  factory_new: Nou de fàbrica
+  minimal_wear: Desgast mínim
+  field_tested: Provat al camp
+  well_worn: Ben gastat
+  battle_scarred: Marcat per la batalla
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Restringit
+  classified: Classificat
+  covert: Encobert
+  rare_special: Element especial rar
+catalog:
+  key:
+    case_key: Clau del cas

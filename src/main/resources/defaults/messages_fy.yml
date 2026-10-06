@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Gefallen</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Jo hawwe gjin tastimming om dat te dwaan.
+  player-only: <prefix><red>Allinnich spilers.
+profile:
+  loading: <prefix><gray>Jo skin-ynventaris wurdt noch laden...
+  load-failed: <prefix><red>Jo skin-ynventaris koe net laden wurde. Fertel asjebleaft in admin.
+  recovered: '<prefix><gray>Underbrutsen iepening foltôge: <skin>'
+category:
+  pistol: Pistol
+  smg: SMG
+  rifle: Rifle
+  sniper: Sniper Rifle
+  heavy: Swier
+  equipment: Equipment
+  knife: Knife
+items:
+  test-marker: <red>⚠ Test item (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> mooglike items
+    - ''
+    - '<gray>Rjochtsklik: <white>besjoch ynhâld'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Brûkt by it iepenjen fan in saak.
+    use-hint: <prefix><gray>Rjochtsklik op in <white>case</white> om dy te iepenjen mei dizze kaai.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Eksterieur: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Patroan: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Patroantype: <class_color><classification>'
+    fade: '<gray>Fade: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Kills: <white><kills>'
+    has-variants: <dark_gray>Ferskate fazen mooglik
+    source: '<gray>Boarne: <white><case>'
+    date: '<gray>Behelle: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Wiske: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Fade'
+gui:
+  loading:
+    name: <gray>Laden...
+    lore: []
+  back:
+    name: <gray>Werom
+    lore: []
+  close:
+    name: <red>Slute
+    lore: []
+  previous:
+    name: <gray>Foarige side
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  next:
+    name: <gray>Folgjende side
+    lore:
+    - <dark_gray>Page <page> / <pages>
+  cases:
+    title: Cases
+    header:
+      name: <#e4ae39>Gefallen
+      lore:
+      - <gray>Krij gefallen fan de <white>case dealer</white>.
+      - <gray>Jo hawwe in oerienkommende kaai nedich om ien te iepenjen.
+    entry:
+    - ''
+    - '<gray>In ynventaris: <white><owned> <dark_gray>· <gray>Kaaien: <white><keys>'
+    - '<gray>Linksklik: <white>besjoch ynhâld'
+    can-open: '<green>Rjochtsklik: iepenje'
+    to-skins:
+      name: <#e4ae39>Skin ynventarisaasje
+      lore:
+      - <gray>Jo skins en messen
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Klik foar in foarbyld
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>In seldsum mes.
+      - <dark_gray><count> farianten · klik om te besjen
+      - ''
+    open:
+      name: <green>Iepenje saak
+      lore:
+      - '<gray>Gefallen: <white><owned> <dark_gray>· <gray>Kaaien: <white><keys>'
+      - <dark_gray>Gebrûkt 1 gefal en 1 <key>
+    cannot-open:
+      name: <gray>Kin net iepenje
+      lore:
+      - '<gray>Gefallen: <white><owned> <dark_gray>· <gray>Kaaien: <white><keys>'
+      - <dark_gray>Jo moatte de saak en in <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Bisto wis?
+    'yes':
+      name: <green>Ja, wiskje
+      lore:
+      - <dark_gray>Dit kin net ûngedien makke wurde.
+    'no':
+      name: <red>Ofbrekke
+      lore: []
+  skins:
+    title: Skin ynventarisaasje
+    title-other: Skins fan <player>
+    tab:
+      all:
+        name: <white>Alle skins
+        lore: []
+      weapons:
+        name: <white>Vapen skins
+        lore: []
+      knives:
+        name: <white>Messen
+        lore:
+        - '<dark_gray>Rjochtsklik op in mes: equip'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoriten
+        lore: []
+      recent:
+        name: <white>Koartlyn krigen
+        lore: []
+    empty:
+      name: <gray>Noch neat hjir
+      lore:
+      - <dark_gray>Iepenje gefallen om skins te krijen.
+    equipped: <green>✔ Útrist
+    favorite: <yellow>★ Favorite
+    hint:
+    - ''
+    - '<dark_gray>Linkerklik: ynspektearje · Rjochtsklik: set op bôge'
+    - '<dark_gray>Shift klik: favoryt'
+    hint-knife:
+    - ''
+    - '<dark_gray>Linksklik: ynspektearje · Rjochtsklik: equip'
+    - '<dark_gray>Shift klik: favoryt'
+    to-cases:
+      name: <#e4ae39>Gefallen
+      lore:
+      - <gray>Om jo gefallen
+    sort:
+      name: '<white>Sortearje: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Links: folgjende · Rjochts: foarige'
+    sorts:
+      rarity: Rarity
+      float: Float
+      name: Namme
+      wear: Eksterieur
+      pattern: Pattern
+      newest: Nijste
+      oldest: Aldste
+    info:
+      name: <white><count> <gray>skins werjûn
+      lore:
+      - <dark_gray><total> yn totaal · klik om te sluten
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Links: kies filters · Rjochts: weromsette'
+    active-knife:
+    - <green>✔ Aktyf mes
+    - <dark_gray>Klik foar details
+  filter:
+    title: Filter
+    header:
+      name: <white>Filter
+      lore:
+      - <gray> Ferskate filters fan deselde soarte wurde kombinearre.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ allinne
+    'on':
+    - <green>✔ Aktyf
+    'off':
+    - <dark_gray>Ynaktyf
+    reset:
+      name: <gray>Reset alle filters
+      lore: []
+  inspect:
+    title: Ynspektearje
+    missing:
+      name: <red>Skin net beskikber
+      lore: []
+    preview:
+      name: <#e4ae39>Besjoch skin
+      lore:
+      - '<gray>Toant jo krekte kopy:'
+      - <gray>patroan, kleuren en wear.
+      - ''
+      - <dark_gray>Sneak om it foarbyld te sluten.
+    data: <white>Details
+    favorite:
+      name: <white>Markearje as favoryt
+      lore: []
+    unfavorite:
+      name: <yellow>★ Favoriet fuortsmite
+      lore: []
+    equip:
+      name: <green>Equip
+      lore:
+      - <gray>Jo swurden litte dit mes sjen.
+      - <dark_gray>Skea en betsjoeningen bliuwe itselde.
+    unequip:
+      name: <green>✔ Útrist
+      lore:
+      - <gray>Klik om unequip.
+    inspect3d:
+      name: <white>3D ynspektearje
+      lore:
+      - '<gray>Toant jo krekte kopy:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Hist ta in oare spiler
+      lore:
+      - <dark_gray>Allinnich sjen
+    equip-bow:
+      name: <green>Bôge opsette
+      lore:
+      - <gray>Jo bôgen litte dizze hûd sjen.
+    unequip-bow:
+      name: <green>✔ Op bôge
+      lore:
+      - <gray>Klik om te ferwiderjen.
+    equip-crossbow:
+      name: <green>Pet op krúsbôge
+      lore:
+      - <gray>Jo krúsbôgen litte dizze hûd sjen.
+    unequip-crossbow:
+      name: <green>✔ Op krúsbôge
+      lore:
+      - <gray>Klik om te ferwiderjen.
+    not-equippable:
+      name: <gray>Net útrist
+      lore:
+      - <dark_gray>Dizze hûd kin net útrist.
+    delete:
+      name: <red>Skin wiskje
+      lore:
+      - <gray>Ferwideret dizze hûd út jo ynventaris.
+      - <dark_gray>Freget om befêstiging.
+view:
+  unknown: <prefix><red>Spiler <white><player></white> is net fûn.
+gallery:
+  header-other: <#e4ae39><player></#e4ae39><gray>'s ynventaris <dark_gray>· <gray><category> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Page <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Rjochtsklik: ynspektearje · Sneak + rjochtsklik: favoryt'
+  hint-knife:
+  - ''
+  - '<dark_gray>Rjochtsklik: ynspektearje · Linksklik: equip'
+  - '<dark_gray>Sneak + rjochts klikke: favoryt'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Rjochtsklik: ynspektearje · Linkerklik: set op bôge'
+  - '<dark_gray>Sneak + lofts klik: set op krúsbôge'
+  - '<dark_gray>Sneak + rjochts klikke: favoryt'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Page <page>/<pages>
+  empty: <gray>Noch neat hjir
+  button:
+    previous: <gray>Foarige side
+    next: <gray>Folgjende side
+    category: <white>Feroarje kategory
+    sort: '<white>Sortearje: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Lit sjen litte
+    close: <red>Slute
+preview:
+  loading: <gray>foarbyld werjaan...
+  hint: <gray>Sneak om te sluten
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>goud goud goud
+  world:
+    title: <white><player></white> <gray>iepent <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Jo iepenje al in saak.
+  case-disabled: <prefix><red>Dizze saak is net beskikber.
+  missing: <prefix><gray>Jo moatte <white><case></white> en in <white><key></white>.
+  missing-now: <prefix><red>De saak of kaai is net mear yn jo ynventaris.
+  storage-error: <prefix><red>Opslaan mislearre. Jo koffer en kaai waarden weromjûn.
+  command-blocked: <prefix><gray>Wachtsje oant de iepening klear is.
+  result: '<prefix><gray>Jo hawwe <skin> <dark_gray>(<float>, #<pattern>) ûntfongen'
+  result-test: '<prefix><red>[Test]</red> <gray>Resultaat: <skin> <dark_gray>(<float>, #<pattern>) - net bewarre'
+  broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b> RARE SPECIAL ITEM</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Ynspektearje
+      lore:
+      - <gray>Alle details fan jo nije hûd
+    again:
+      name: <green>Iepenje in oare
+      lore:
+      - '<gray>Gefallen: <white><cases> <dark_gray>· <gray>Kaaien: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Dit fel past net op dit wapen.
+  equipped:
+    knife: '<prefix><gray>Mes foarsjoen: <skin>'
+    bow: '<prefix><gray>Op jo bôge: <skin>'
+    crossbow: '<prefix><gray>Op jo krúsbôge: <skin>'
+  unequipped:
+    knife: <prefix><gray>Mes unequipped.
+    bow: <prefix><gray>Bow skin fuorthelle.
+    crossbow: <prefix><gray>Crossbow fel fuortsmiten.
+knife:
+  not-owned: <prefix><red>Dizze hûd heart net by dy.
+  equipped: '<prefix><gray>Utfierd: <skin>'
+  unequipped: <prefix><gray>Mes unequipped.
+  sword-footer: '<dark_gray>Basis: <base>'
+inspect:
+  running: <prefix><gray>In ynspeksje rint al.
+  no-knife: <red>Skin net beskikber <white>/skins
+shop:
+  title: Case Dealer
+  npc-name: <gradient:#e4ae39:#f6d27a>Case Dealer</gradient>
+  npc-description: <gray>Rjochtsklik om te hanneljen
+  balance:
+    name: '<white>Jo saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Allinnich net wizige items telle.
+  offer:
+  - ''
+  - '<gray>Priis: <aqua><price> <currency>'
+  - '<dark_gray>5 stikken: <price5> <currency>'
+  affordable: <green>✔ Betelber
+  not-affordable: <red>✘ <missing> <currency> ûntbrekt
+  affordable-five: '<dark_gray>Shift klik: keapje 5'
+  hint-case:
+  - '<dark_gray>Linksklik: keapje · Rjochtsklik: ynhâld'
+  hint-key:
+  - '<dark_gray>Loftsklik: keapje'
+  bought: '<prefix><gray>Kocht: <white><amount>× <name></white> foar <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Jo kinne dat net betelje.
+  inventory-full: <prefix><red>Jo ynventaris is fol.
+slot:
+  name: <#e4ae39>Skin ynventarisaasje
+  lore:
+  - '<gray>Rjochtsklik: skins, messen en gefallen'
+  - <dark_gray>Dit item is beskoattele op dit slot.
+  blocked: <prefix><gray>Freegje in ynventarisaasje slot sadat de skin ynventarisaasje item kin ferskine.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Klear.
+  unknown: <prefix><red>Unbekend <what>.
+  instance-unknown: <prefix><red>Gjin oerienkommende skin-id fûn. <gray>/csadmin list <player>
+  given: <prefix><gray>Joech <amount>× <white><name></white> oan <white><player></white>.
+  skin-given: <prefix><gray>Joech <skin> <gray>oan <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins fan <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Recent iepeningen fan <white><player>
+  scan-start: <prefix><gray>Scannen elk sied fan <white><skin></white> foar <white><metric></white>...
+  export-start: <prefix><gray>Boarnepakket bouwe...
+  export-done: '<prefix><green><skins> skins eksportearre: <white><file>'
+  shop-spawned: <prefix><green>Case dealer makke.
+  shop-removed: <prefix><green>Case dealer fuorthelle.
+  shop-none: <prefix><gray>Gjin saak dealer tichtby.
+  reload-busy: <prefix><gray>Der is al in opnij laden.
+  reload-start: <prefix><gray>Opnij laden...
+  reload-failed: <prefix><red>Reload mislearre, de foarige konfiguraasje bliuwt aktyf. Sjoch konsole.
+  reload-done: '<prefix><green>Reloaded yn <ms> ms: <skins> skins, <cases> gefallen, <warnings> warskôgings (sjoch konsole).'
+  browser:
+    title: 'Patroan: <skin>'
+  manage:
+    title: 'Beheare: <player>'
+    skin-title: Skin of <player>
+    give-title: 'Jou skin: <player>'
+    give:
+      name: <green>Jou skin
+      lore:
+      - <gray>Kies in saak, dan in skin.
+    give-hint:
+    - ''
+    - '<dark_gray>Linksklik: jou · Rjochtsklik: jou StatTrak™'
+    clear:
+      name: <red>Alle skins wiskje
+      lore:
+      - <gray><count> skins wurde fuortsmiten.
+      - <dark_gray>Freget om befêstiging.
+    cleared: <prefix><gray>Wiske <count> skins fan <white><player></white>.
+    removed: <prefix><gray>Wiske <skin> <gray>fan <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Klik om te wikseljen.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Stelt de float yn op <white><float>
+    pattern-step:
+      name: <white>Patroan <step>
+      lore:
+      - '<gray>Hjoeddei: <white><pattern>'
+    pattern-random:
+      name: <light_purple>willekeurich patroan
+      lore:
+      - '<gray>Hjoeddei: <white><pattern>'
+    equip:
+      name: <green>Equip foar spiler
+      lore: []
+    unequip:
+      name: <green>✔ Útrist
+      lore:
+      - <gray>Klik om unequip.
+    remove:
+      name: <red>Skin wiskje
+      lore:
+      - <dark_gray>Freget om befêstiging.
+  labels:
+    case: gefal
+    key: kaai
+    skin: fel
+    manual: hânmjittich databank
+    automatic: automatyske
+    none: gjin (finish hat gjin analyseprofyl)
+    'off': ôf
+  debug:
+    seed: '<gray>Patroan: <white><seed>'
+    analysing: <dark_gray>Analysearje...
+    variant: '<gray>Fariant: <white><variant>'
+    classification: '<gray>Klassifikaasje: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Fade: <white><fade>%'
+    preview:
+      name: <yellow>Preview patroan <seed>
+      lore:
+      - <gray> Toant de werjûn kaart yn jo hannen.
+    random:
+      name: <light_purple>willekeurich patroan
+      lore: []
+    title: <gold>Patroandebugger <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Render mislearre: <error>'
+    metrics: '<gray>Metriken: <white><metrics>'
+    scan-failed: <prefix><red>Sken mislearre.
+    no-metric: <gray>Gjin patroan hat metrysk <white><metric>
+    export-failed: '<prefix><red>Eksportearje mislearre: <error>'
+  odds: <gray><case> <dark_gray>(<count> items, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Koffers: <white><cases> <gray>Wapens: <white><weapons>'
+    cache: '<gray>Cached foarbylden: <white><previews> <gray>Resource pack modus: <white><pack>'
+    web: '<gray>Pack webserver: <white><url>'
+wear:
+  factory_new: Fabryk Nij
+  minimal_wear: Minimal Wear
+  field_tested: Field-Tested
+  well_worn: Goed droegen
+  battle_scarred: Slach-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Beheind
+  classified: Klassifisearre
+  covert: Covert
+  rare_special: Rare Special Item
+catalog:
+  key:
+    case_key: Case Key

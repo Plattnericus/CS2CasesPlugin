@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Casos</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Você não tem permissão para fazer isso.
+  player-only: <prefix><red>Somente jogadores.
+profile:
+  loading: <prefix><gray>Seu inventário de skins ainda está carregando...
+  load-failed: <prefix><red>Não foi possível carregar seu inventário de skins. Por favor, informe um administrador.
+  recovered: '<prefix><gray>Abertura interrompida concluída: <skin>'
+category:
+  pistol: Pistola
+  smg: Submetralhadora
+  rifle: Fuzil
+  sniper: Rifle de atirador
+  heavy: Pesado
+  equipment: Equipamento
+  knife: Faca
+items:
+  test-marker: <red>⚠ Item de teste (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> itens possíveis
+    - ''
+    - '<gray>Clique com o botão direito: <white>ver conteúdo'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Usado ao abrir um caso.
+    use-hint: <prefix><gray>Clique com o botão direito em <white>case</white> para abri-lo com esta chave.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Exterior: <white><wear>'
+    float: '<gray>Float: <white><float>'
+    float-range: '<gray>Float: <white><min_float> - <max_float>'
+    pattern: '<gray>Padrão: <white><pattern>'
+    variant: '<gray>Fase: <class_color><variant>'
+    classification: '<gray>Tipo de padrão: <class_color><classification>'
+    fade: '<gray>Desaparecer: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Mata: <white><kills>'
+    has-variants: <dark_gray>Várias fases possíveis
+    source: '<gray>Fonte: <white><case>'
+    date: '<gray>Obtido: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Excluído: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Desaparecer'
+gui:
+  loading:
+    name: <gray>Carregando...
+    lore: []
+  back:
+    name: <gray>Voltar
+    lore: []
+  close:
+    name: <red>Fechar
+    lore: []
+  previous:
+    name: <gray>Página anterior
+    lore:
+    - <dark_gray>Página <page> / <pages>
+  next:
+    name: <gray>Próxima página
+    lore:
+    - <dark_gray>Página <page> / <pages>
+  cases:
+    title: Casos
+    header:
+      name: <#e4ae39>Casos
+      lore:
+      - <gray>Obtenha casos do <white>revendedor de casos</white>.
+      - <gray>Você precisa de uma chave correspondente para abrir uma.
+    entry:
+    - ''
+    - '<gray>No inventário: <white><owned> <dark_gray>· <gray>Chaves: <white><keys>'
+    - '<gray>Clique esquerdo: <white>ver conteúdo'
+    can-open: '<green>Clique com o botão direito: abrir'
+    to-skins:
+      name: <#e4ae39>Inventário de pele
+      lore:
+      - <gray>Suas peles e facas
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Clique para visualizar
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Uma faca rara.
+      - <dark_gray><count> variantes · clique para ver
+      - ''
+    open:
+      name: <green>Abrir caso
+      lore:
+      - '<gray>Casos: <white><owned> <dark_gray>· <gray>Chaves: <white><keys>'
+      - <dark_gray>Usa 1 caixa e 1 <key>
+    cannot-open:
+      name: <gray>Não é possível abrir
+      lore:
+      - '<gray>Casos: <white><owned> <dark_gray>· <gray>Chaves: <white><keys>'
+      - <dark_gray>Você precisa do caso e de um <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Tem certeza?
+    'yes':
+      name: <green>Sim, excluir
+      lore:
+      - <dark_gray>Isso não pode ser desfeito.
+    'no':
+      name: <red>Cancelar
+      lore: []
+  skins:
+    title: Inventário de pele
+    title-other: Peles de <player>
+    tab:
+      all:
+        name: <white>Todas as skins
+        lore: []
+      weapons:
+        name: <white>Skins de armas
+        lore: []
+      knives:
+        name: <white>Facas
+        lore:
+        - '<dark_gray>Clique com o botão direito em uma faca: equipar'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Favoritos
+        lore: []
+      recent:
+        name: <white>Obtido recentemente
+        lore: []
+    empty:
+      name: <gray>Nada aqui ainda
+      lore:
+      - <dark_gray>Abra casos para obter skins.
+    equipped: <green>✔ Equipado
+    favorite: <yellow>★ Favorito
+    hint:
+    - ''
+    - '<dark_gray>Clique esquerdo: inspecionar · Clique direito: colocar o arco'
+    - '<dark_gray>Shift clique: favorito'
+    hint-knife:
+    - ''
+    - '<dark_gray>Clique esquerdo: inspecionar · Clique direito: equipar'
+    - '<dark_gray>Shift clique: favorito'
+    to-cases:
+      name: <#e4ae39>Casos
+      lore:
+      - <gray>Para seus casos
+    sort:
+      name: '<white>Classificar: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Esquerda: próximo · Direita: anterior'
+    sorts:
+      rarity: Raridade
+      float: Flutuar
+      name: Nome
+      wear: Exterior
+      pattern: Padrão
+      newest: Mais recente
+      oldest: Mais antigo
+    info:
+      name: <white><count> <gray>skins mostradas
+      lore:
+      - <dark_gray><total> no total · clique para fechar
+    filter:
+      name: <white>Filtro
+      lore:
+      - '<dark_gray>Esquerda: escolha filtros · Direita: redefinir'
+    active-knife:
+    - <green>✔ Faca ativa
+    - <dark_gray>Clique para detalhes
+  filter:
+    title: Filtro
+    header:
+      name: <white>Filtro
+      lore:
+      - <gray>Vários filtros do mesmo tipo são combinados.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: <#cf6a32>StatTrak™ apenas
+    'on':
+    - <green>✔ Ativo
+    'off':
+    - <dark_gray>Inativo
+    reset:
+      name: <gray>Redefinir todos os filtros
+      lore: []
+  inspect:
+    title: Inspecionar
+    missing:
+      name: <red>Pele não disponível
+      lore: []
+    preview:
+      name: <#e4ae39>Ver skin
+      lore:
+      - '<gray>Mostra sua cópia exata:'
+      - <gray>padrão, cores e desgaste.
+      - ''
+      - <dark_gray>Sneak para fechar a visualização.
+    data: <white>Detalhes
+    favorite:
+      name: <white>Marcar como favorito
+      lore: []
+    unfavorite:
+      name: <yellow>★ Remover favorito
+      lore: []
+    equip:
+      name: <green>Equipar
+      lore:
+      - <gray>Suas espadas mostram esta faca.
+      - <dark_gray>Dano e encantamentos permanecem os mesmos.
+    unequip:
+      name: <green>✔ Equipado
+      lore:
+      - <gray>Clique para desequipar.
+    inspect3d:
+      name: <white>inspeção 3D
+      lore:
+      - '<gray>Mostra sua cópia exata:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Pertence a outro jogador
+      lore:
+      - <dark_gray>Ver apenas
+    equip-bow:
+      name: <green>Coloque o arco
+      lore:
+      - <gray>Seus arcos mostram essa pele.
+    unequip-bow:
+      name: <green>✔ Na proa
+      lore:
+      - <gray>Clique para remover.
+    equip-crossbow:
+      name: <green>Coloque a besta
+      lore:
+      - <gray>Suas bestas mostram esta skin.
+    unequip-crossbow:
+      name: <green>✔ Na besta
+      lore:
+      - <gray>Clique para remover.
+    not-equippable:
+      name: <gray>Não equipável
+      lore:
+      - <dark_gray>Esta skin não pode ser equipada.
+    delete:
+      name: <red>Excluir tema
+      lore:
+      - <gray>Remove esta skin do seu inventário.
+      - <dark_gray>Pede confirmação.
+view:
+  unknown: <prefix><red>Player <white><player></white> não foi encontrado.
+gallery:
+  header-other: Inventário de <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Página
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Clique com o botão direito: inspecionar · Furtivo + clique com o botão direito: favorito'
+  hint-knife:
+  - ''
+  - '<dark_gray>Clique com o botão direito: inspecionar · Clique com o botão esquerdo: equipar'
+  - '<dark_gray>Sneak + clique direito: favorito'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Clique com o botão direito: inspecionar · Clique com o botão esquerdo: colocar o arco'
+  - '<dark_gray>Sneak + clique esquerdo: coloque a besta'
+  - '<dark_gray>Sneak + clique direito: favorito'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> skins <dark_gray>· <gray>Página <page>/<pages>
+  empty: <gray>Nada aqui ainda
+  button:
+    previous: <gray>Página anterior
+    next: <gray>Próxima página
+    category: <white>Alterar categoria
+    sort: '<white>Classificar: <#e4ae39><sort>'
+    filter: <white>Filtro
+    list: <white>Mostrar como lista
+    close: <red>Fechar
+preview:
+  loading: <gray>Visualização da renderização...
+  hint: <gray>Esgueirar-se para fechar
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>ouro ouro ouro
+  world:
+    title: <white><player></white> <gray>abre <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Você já está abrindo um caso.
+  case-disabled: <prefix><red>Este caso não está disponível.
+  missing: <prefix><gray>Você precisa de <white><case></white> e de um <white><key></white>.
+  missing-now: <prefix><red>A caixa ou chave não está mais em seu inventário.
+  storage-error: <prefix><red>Falha ao salvar. Sua maleta e chave foram devolvidas.
+  command-blocked: <prefix><gray>Aguarde até que a abertura termine.
+  result: '<prefix><gray>Você recebeu <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Teste]</red> <gray>Resultado: <skin> <dark_gray>(<float>, #<pattern>) - não salvo'
+  broadcast: <prefix><white><player></white> <gray>desembalado <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>ITEM ESPECIAL RARO</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Inspecionar
+      lore:
+      - <gray>Todos os detalhes da sua nova skin
+    again:
+      name: <green>Abra outro
+      lore:
+      - '<gray>Casos: <white><cases> <dark_gray>· <gray>Chaves: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Esta skin não cabe nesta arma.
+  equipped:
+    knife: '<prefix><gray>Faca equipada: <skin>'
+    bow: '<prefix><gray>No seu arco: <skin>'
+    crossbow: '<prefix><gray>Na sua besta: <skin>'
+  unequipped:
+    knife: <prefix><gray>Faca não equipada.
+    bow: <prefix><gray>Pele do arco removida.
+    crossbow: <prefix><gray> Pele de besta removida.
+knife:
+  not-owned: <prefix><red>Esta skin não pertence a você.
+  equipped: '<prefix><gray>Equipado: <skin>'
+  unequipped: <prefix><gray>Faca não equipada.
+  sword-footer: '<dark_gray>Base: <base>'
+inspect:
+  running: <prefix><gray>Uma inspeção já está em execução.
+  no-knife: <red>Pele não disponível <white>/skins
+shop:
+  title: Revendedor de casos
+  npc-name: <gradient:#e4ae39:#f6d27a>Revendedor de Caso</gradient>
+  npc-description: <gray>Clique com o botão direito para negociar
+  balance:
+    name: '<white>Seu saldo: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Apenas itens não modificados contam.
+  offer:
+  - ''
+  - '<gray>Preço: <aqua><price> <currency>'
+  - '<dark_gray>5 peças: <price5> <currency>'
+  affordable: <green>✔ Acessível
+  not-affordable: <red>✘ <missing> <currency> ausente
+  affordable-five: '<dark_gray>Shift clique: compre 5'
+  hint-case:
+  - '<dark_gray>Clique esquerdo: comprar · Clique direito: conteúdo'
+  hint-key:
+  - '<dark_gray>Clique esquerdo: comprar'
+  bought: '<prefix><gray>Comprei: <white><amount>× <name></white> por <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Você não pode pagar por isso.
+  inventory-full: <prefix><red>Seu inventário está cheio.
+slot:
+  name: <#e4ae39>Inventário de pele
+  lore:
+  - '<gray>Clique com o botão direito: skins, facas e estojos'
+  - <dark_gray>Este item está bloqueado neste slot.
+  blocked: <prefix><gray>Libere um slot de inventário para que o item de inventário de skin possa aparecer.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Concluído.
+  unknown: <prefix><red>Desconhecido <what>.
+  instance-unknown: <prefix><red>Nenhum ID de skin correspondente encontrado. <gray>/lista csadmin <player>
+  given: <prefix><gray>Deu <amount>× <white><name></white> para <white><player></white>.
+  skin-given: <prefix><gray>Deu <skin> <gray>para <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Skins de <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Inaugurações recentes de <white><player>
+  scan-start: <prefix><gray>Verificando cada semente de <white><skin></white> para <white><metric></white>...
+  export-start: <prefix><gray>Construindo pacote de recursos...
+  export-done: '<prefix><green><skins> skins exportadas: <white><file>'
+  shop-spawned: <prefix><green>Revendedor de caso criado.
+  shop-removed: <prefix><green>Revendedor de caso removido.
+  shop-none: <prefix><gray>Nenhum revendedor por perto.
+  reload-busy: <prefix><gray>Uma recarga já está em execução.
+  reload-start: <prefix><gray>Recarregando...
+  reload-failed: <prefix><red>Falha no recarregamento, a configuração anterior permanece ativa. Veja console.
+  reload-done: '<prefix><green>Recarregado em <ms> ms: skins <skins>, casos <cases>, avisos <warnings> (consulte o console).'
+  browser:
+    title: 'Padrão: <skin>'
+  manage:
+    title: 'Gerenciar: <player>'
+    skin-title: Pele de <player>
+    give-title: 'Dê pele: <player>'
+    give:
+      name: <green>Dar pele
+      lore:
+      - <gray>Escolha uma caixa e depois uma skin.
+    give-hint:
+    - ''
+    - '<dark_gray>Clique esquerdo: dar · Clique direito: dar StatTrak™'
+    clear:
+      name: <red>Excluir todas as skins
+      lore:
+      - <gray><count> skins serão removidas.
+      - <dark_gray>Pede confirmação.
+    cleared: <prefix><gray>Skins <count> excluídos de <white><player></white>.
+    removed: <prefix><gray>Excluído <skin> <gray>de <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Clique para alternar.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Define o float como <white><float>
+    pattern-step:
+      name: <white>Padrão <step>
+      lore:
+      - '<gray>Atual: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Padrão aleatório
+      lore:
+      - '<gray>Atual: <white><pattern>'
+    equip:
+      name: <green>Equip para jogador
+      lore: []
+    unequip:
+      name: <green>✔ Equipado
+      lore:
+      - <gray>Clique para desequipar.
+    remove:
+      name: <red>Excluir tema
+      lore:
+      - <dark_gray>Pede confirmação.
+  labels:
+    case: caso
+    key: chave
+    skin: pele
+    manual: banco de dados manual
+    automatic: automático
+    none: nenhum (o acabamento não tem perfil de análise)
+    'off': desligado
+  debug:
+    seed: '<gray>Padrão: <white><seed>'
+    analysing: <dark_gray>Analisando...
+    variant: '<gray>Variante: <white><variant>'
+    classification: '<gray>Classificação: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Desaparecer: <white><fade>%'
+    preview:
+      name: <yellow>Padrão de visualização <seed>
+      lore:
+      - <gray>Mostra o mapa renderizado em suas mãos.
+    random:
+      name: <light_purple>Padrão aleatório
+      lore: []
+    title: <gold>Depurador de padrões <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Falha na renderização: <error>'
+    metrics: '<gray>Métricas: <white><metrics>'
+    scan-failed: <prefix><red>Falha na verificação.
+    no-metric: <gray>Nenhum padrão possui métrica <white><metric>
+    export-failed: '<prefix><red>Falha na exportação: <error>'
+  odds: <gray><case> <dark_gray>(<count> itens, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Skins: <white><skins> <gray>Casos: <white><cases> <gray>Armas: <white><weapons>'
+    cache: '<gray>Pré-visualizações em cache: <white><previews> <gray>Modo de pacote de recursos: <white><pack>'
+    web: '<gray>Pack servidor web: <white><url>'
+wear:
+  factory_new: Fábrica nova
+  minimal_wear: Desgaste mínimo
+  field_tested: Testado em campo
+  well_worn: Bem gasto
+  battle_scarred: Com cicatrizes de batalha
+rarity:
+  mil_spec: Especificação Mil
+  restricted: Restrito
+  classified: Classificado
+  covert: Secreto
+  rare_special: Item Especial Raro
+catalog:
+  key:
+    case_key: Chave do caso

@@ -1,0 +1,490 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Primeri</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Nimate dovoljenja za to.
+  player-only: <prefix><red>Samo za igralce.
+profile:
+  loading: <prefix><gray>Vaš seznam preoblek se še nalaga ...
+  load-failed: <prefix><red>Vašega popisa preoblek ni bilo mogoče naložiti. Prosim povejte administratorju.
+  recovered: '<prefix><gray>Prekinjeno odpiranje končano: <skin>'
+category:
+  pistol: Pištola
+  smg: SMG
+  rifle: Puška
+  sniper: Ostrostrelska puška
+  heavy: Težko
+  equipment: Oprema
+  knife: Nož
+items:
+  test-marker: <red>⚠ Preizkusni element (admin)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> možnih predmetov
+    - ''
+    - '<gray>Desni klik: <white>ogled vsebine'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Porabljeno ob odpiranju kovčka.
+    use-hint: <prefix><gray>Desni klik na <white>primer</white>, da ga odprete s to tipko.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Zunanjost: <white><wear>'
+    float: '<gray>Plavajoče: <white><float>'
+    float-range: '<gray>Plavajoče: <white><min_float> - <max_float>'
+    pattern: '<gray>Vzorec: <white><pattern>'
+    variant: '<gray>Faza: <class_color><variant>'
+    classification: '<gray>Vrsta vzorca: <class_color><classification>'
+    fade: '<gray>Zbledenje: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Ubije: <white><kills>'
+    has-variants: <dark_gray>Možnih več faz
+    source: '<gray>Vir: <white><case>'
+    date: '<gray>Pridobljeno: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Izbrisano: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Zbledi'
+gui:
+  loading:
+    name: <gray>Nalaganje ...
+    lore: []
+  back:
+    name: <gray>Nazaj
+    lore: []
+  close:
+    name: <red>Zapri
+    lore: []
+  previous:
+    name: <gray>Prejšnja stran
+    lore:
+    - <dark_gray>Stran <page> / <pages>
+  next:
+    name: <gray>Naslednja stran
+    lore:
+    - <dark_gray>Stran <page> / <pages>
+  cases:
+    title: Primeri
+    header:
+      name: <#e4ae39>Primeri
+      lore:
+      - <gray>Pridobite kovčke pri <white>trgovcu s kovčki</white>.
+      - <gray>Potrebujete ustrezen ključ, da ga odprete.
+    entry:
+    - ''
+    - '<gray>V inventarju: <white><owned> <dark_gray>· <gray>Ključi: <white><keys>'
+    - '<gray>Levi klik: <white>ogled vsebine'
+    can-open: '<green>Desni klik: odpri'
+    to-skins:
+      name: <#e4ae39>Popis kože
+      lore:
+      - <gray>Vaše kože in noži
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Kliknite za predogled
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Redek nož.
+      - <dark_gray><count> različic · kliknite za ogled
+      - ''
+    open:
+      name: <green>Odprt primer
+      lore:
+      - '<gray>Primeri: <white><owned> <dark_gray>· <gray>Ključi: <white><keys>'
+      - <dark_gray>Uporablja 1 etui in 1 <key>
+    cannot-open:
+      name: <gray>Ni mogoče odpreti
+      lore:
+      - '<gray>Primeri: <white><owned> <dark_gray>· <gray>Ključi: <white><keys>'
+      - <dark_gray>Potrebujete etui in <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: Ste prepričani?
+    'yes':
+      name: <green>Da, izbriši
+      lore:
+      - <dark_gray>Tega ni mogoče razveljaviti.
+    'no':
+      name: <red>Prekliči
+      lore: []
+  skins:
+    title: Popis kože
+    title-other: Preobleke za <player>
+    tab:
+      all:
+        name: <white>Vse preobleke
+        lore: []
+      weapons:
+        name: <white>Preobleke za orožje
+        lore: []
+      knives:
+        name: <white>Noži
+        lore:
+        - '<dark_gray>Desni klik na nož: opremi'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Priljubljene
+        lore: []
+      recent:
+        name: <white>Pred kratkim pridobljeno
+        lore: []
+    empty:
+      name: <gray>Tu še ni ničesar
+      lore:
+      - <dark_gray>Odprite primere, da dobite preobleke.
+    equipped: <green>✔ Opremljeno
+    favorite: <yellow>★ Priljubljena
+    hint:
+    - ''
+    - '<dark_gray>Levi klik: preglejte · Desni klik: nadenite lok'
+    - '<dark_gray>Shift klik: priljubljeno'
+    hint-knife:
+    - ''
+    - '<dark_gray>Levi klik: pregled · Desni klik: opremi'
+    - '<dark_gray>Shift klik: priljubljeno'
+    to-cases:
+      name: <#e4ae39>Primeri
+      lore:
+      - <gray>Za vaše primere
+    sort:
+      name: '<white>Razvrsti: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Levo: naslednji · Desno: prejšnji'
+    sorts:
+      rarity: Redkost
+      float: Lebdi
+      name: Ime
+      wear: Zunanjost
+      pattern: Vzorec
+      newest: Najnovejša
+      oldest: Najstarejši
+    info:
+      name: <white><count> <gray>prikazane preobleke
+      lore:
+      - <dark_gray><total> skupaj · kliknite za zapiranje
+    filter:
+      name: <white>Filter
+      lore:
+      - '<dark_gray>Levo: izberite filtre · Desno: ponastavite'
+    active-knife:
+    - <green>✔ Aktiven nož
+    - <dark_gray>Kliknite za podrobnosti
+  filter:
+    title: Filter
+    header:
+      name: <white>Filter
+      lore:
+      - <gray>Kombinira se več filtrov iste vrste.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Samo <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Aktiven
+    'off':
+    - <dark_gray>Neaktiven
+    reset:
+      name: <gray>Ponastavi vse filtre
+      lore: []
+  inspect:
+    title: Preglejte
+    missing:
+      name: <red>Preobleka ni na voljo
+      lore: []
+    preview:
+      name: <#e4ae39>Ogled kože
+      lore:
+      - '<gray>Prikaže vašo natančno kopijo:'
+      - <gray>vzorec, barve in obraba.
+      - ''
+      - <dark_gray>Prikradite se, da zaprete predogled.
+    data: <white>Podrobnosti
+    favorite:
+      name: <white>Označi kot priljubljeno
+      lore: []
+    unfavorite:
+      name: <yellow>★ Odstrani priljubljeno
+      lore: []
+    equip:
+      name: <green>Opremi
+      lore:
+      - <gray>Tvoji meči kažejo ta nož.
+      - <dark_gray>Poškodbe in čarovnije ostanejo enake.
+    unequip:
+      name: <green>✔ Opremljeno
+      lore:
+      - <gray>Kliknite za razopremo.
+    inspect3d:
+      name: <white>3D pregled
+      lore:
+      - '<gray>Prikaže vašo natančno kopijo:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Pripada drugemu igralcu
+      lore:
+      - <dark_gray>Samo ogled
+    equip-bow:
+      name: <green>Nadeni lok
+      lore:
+      - <gray>Tvoji loki kažejo to kožo.
+    unequip-bow:
+      name: <green>✔ Na lok
+      lore:
+      - <gray>Kliknite za odstranitev.
+    equip-crossbow:
+      name: <green>Nadeni si samostrel
+      lore:
+      - <gray>Tvoji samostreli kažejo to kožo.
+    unequip-crossbow:
+      name: <green>✔ Na samostrelu
+      lore:
+      - <gray>Kliknite za odstranitev.
+    not-equippable:
+      name: <gray>Ni mogoče opremiti
+      lore:
+      - <dark_gray>Te kože ni mogoče opremiti.
+    delete:
+      name: <red>Izbriši kožo
+      lore:
+      - <gray>Odstrani to preobleko iz vašega inventarja.
+      - <dark_gray>Prosi za potrditev.
+view:
+  unknown: <prefix><red>Igralec <white><player></white> ni bil najden.
+gallery:
+  header-other: Inventar <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> preobleke <dark_gray>· <gray>Stran <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Desni klik: pregled · Prikradenje + desni klik: priljubljeno'
+  hint-knife:
+  - ''
+  - '<dark_gray>Desni klik: pregled · Levi klik: opremi'
+  - '<dark_gray>Sneak + desni klik: priljubljeno'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Desni klik: preglejte · Levi klik: nadenite lok'
+  - '<dark_gray>Prikrade se + levi klik: nadenite si samostrel'
+  - '<dark_gray>Sneak + desni klik: priljubljeno'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> preobleke <dark_gray>· <gray>Stran <page>/<pages>
+  empty: <gray>Tu še ni ničesar
+  button:
+    previous: <gray>Prejšnja stran
+    next: <gray>Naslednja stran
+    category: <white>Spremeni kategorijo
+    sort: '<white>Razvrsti: <#e4ae39><sort>'
+    filter: <white>Filter
+    list: <white>Prikaži kot seznam
+    close: <red>Zapri
+preview:
+  loading: <gray>Predogled upodabljanja ...
+  hint: <gray>Prikradeno zapiranje
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>zlato zlato zlato
+  world:
+    title: <white><player></white> <gray>odpre <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Zadevo že odpirate.
+  case-disabled: <prefix><red>Ta zadeva ni na voljo.
+  missing: <prefix><gray>Potrebujete <white><case></white> in <white><key></white>.
+  missing-now: <prefix><red>Etuija ali ključa ni več v vašem inventarju.
+  storage-error: <prefix><red>Shranjevanje ni uspelo. Vaš kovček in ključ sta bila vrnjena.
+  command-blocked: <prefix><gray>Počakajte, da se odpiranje konča.
+  result: '<prefix><gray>Prejeli ste <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Test]</red> <gray>Rezultat: <skin> <dark_gray>(<float>, #<pattern>) - ni shranjeno'
+  broadcast: <prefix><white><player></white> <gray>razpakirano <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>REDEK POSEBNI PREDMET</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Preglejte
+      lore:
+      - <gray>Vse podrobnosti vaše nove kože
+    again:
+      name: <green>Odpri drugo
+      lore:
+      - '<gray>Primeri: <white><cases> <dark_gray>· <gray>Ključi: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Ta koža ne ustreza temu orožju.
+  equipped:
+    knife: '<prefix><gray>Opremljen z nožem: <skin>'
+    bow: '<prefix><gray>Na vašem loku: <skin>'
+    crossbow: '<prefix><gray>Na vašem samostrelu: <skin>'
+  unequipped:
+    knife: <prefix><gray>Nož brez opreme.
+    bow: <prefix><gray>Odstranjena koža loka.
+    crossbow: <prefix><gray>Odstranjena koža samostrela.
+knife:
+  not-owned: <prefix><red>Ta koža ne pripada tebi.
+  equipped: '<prefix><gray>Opremljeno: <skin>'
+  unequipped: <prefix><gray>Nož brez opreme.
+  sword-footer: '<dark_gray>Osnova: <base>'
+inspect:
+  running: <prefix><gray>Pregled že poteka.
+  no-knife: <red>Preobleka ni na voljo <white>/skins
+shop:
+  title: Prodajalec kovčkov
+  npc-name: <gradient:#e4ae39:#f6d27a>Trgovec kovčkov</gradient>
+  npc-description: <gray>Desni klik za trgovanje
+  balance:
+    name: '<white>Vaše stanje: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Štejejo samo nespremenjeni elementi.
+  offer:
+  - ''
+  - '<gray>Cena: <aqua><price> <currency>'
+  - '<dark_gray>5 kosov: <price5> <currency>'
+  affordable: <green>✔ Ugodno
+  not-affordable: <red>✘ <missing> <currency> manjka
+  affordable-five: '<dark_gray>Shift klik: kupi 5'
+  hint-case:
+  - '<dark_gray>Levi klik: nakup · Desni klik: vsebina'
+  hint-key:
+  - '<dark_gray>Levi klik: kupi'
+  bought: '<prefix><gray>Kupljeno: <white><amount>× <name></white> za <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Tega si ne morete privoščiti.
+  inventory-full: <prefix><red>Vaš inventar je poln.
+slot:
+  name: <#e4ae39>Popis kože
+  lore:
+  - '<gray>Desni klik: kože, noži in etuiji'
+  - <dark_gray>Ta element je zaklenjen na to režo.
+  blocked: <prefix><gray>Sprostite režo za inventar, da se lahko pojavi predmet inventarja kože.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Admin
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Končano.
+  unknown: <prefix><red>Neznano <what>.
+  instance-unknown: <prefix><red>Ni ustreznega ID-ja kože. <gray>/csadmin seznam <player>
+  given: <prefix><gray>Dal <amount>× <white><name></white> <white><player></white>.
+  skin-given: <prefix><gray>Dal <skin> <gray> <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Preobleke za <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Nedavna odprtja <white><player>
+  scan-start: <prefix><gray>Skeniranje vsakega semena <white><skin></white> za <white><metric></white> ...
+  export-start: <prefix><gray>Gradnja paketa virov ...
+  export-done: '<prefix><green><skins> izvoženih preoblek: <white><file>'
+  shop-spawned: <prefix><green>Ustvarjen prodajalec kovčkov.
+  shop-removed: <prefix><green>Trgovec ohišja odstranjen.
+  shop-none: <prefix><gray>Ni prodajalca kovčkov v bližini.
+  reload-busy: <prefix><gray>Ponovno nalaganje že poteka.
+  reload-start: <prefix><gray>Ponovno nalaganje ...
+  reload-failed: <prefix><red>Ponovno nalaganje ni uspelo, prejšnja konfiguracija ostane aktivna. Glej konzolo.
+  reload-done: '<prefix><green>Ponovno naloženo v <ms> ms: <skins> preoblek, <cases> primerov, <warnings> opozoril (glejte konzolo).'
+  browser:
+    title: 'Vzorec: <skin>'
+  manage:
+    title: 'Upravljanje: <player>'
+    skin-title: Preobleka <player>
+    give-title: 'Daj kožo: <player>'
+    give:
+      name: <green>Podari kožo
+      lore:
+      - <gray>Izberite kovček in nato preobleko.
+    give-hint:
+    - ''
+    - '<dark_gray>Levi klik: daj · Desni klik: daj StatTrak™'
+    clear:
+      name: <red>Izbriši vse preobleke
+      lore:
+      - <gray><count> preoblek bo odstranjenih.
+      - <dark_gray>Prosi za potrditev.
+    cleared: <prefix><gray>Izbrisanih <count> preoblek <white><player></white>.
+    removed: <prefix><gray>Izbrisano <skin> <gray>od <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Kliknite za preklop.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Nastavi plavajočo vrednost na <white><float>
+    pattern-step:
+      name: <white>Vzorec <step>
+      lore:
+      - '<gray>Trenutno: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Naključni vzorec
+      lore:
+      - '<gray>Trenutno: <white><pattern>'
+    equip:
+      name: <green>Opremite za igralca
+      lore: []
+    unequip:
+      name: <green>✔ Opremljeno
+      lore:
+      - <gray>Kliknite za razopremo.
+    remove:
+      name: <red>Izbriši kožo
+      lore:
+      - <dark_gray>Prosi za potrditev.
+  labels:
+    case: primeru
+    key: ključ
+    skin: kožo
+    manual: ročna zbirka podatkov
+    automatic: samodejno
+    none: nič (finiš nima profila analize)
+    'off': izklopljeno
+  debug:
+    seed: '<gray>Vzorec: <white><seed>'
+    analysing: <dark_gray>Analiziranje ...
+    variant: '<gray>Različica: <white><variant>'
+    classification: '<gray>Razvrstitev: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Zbledenje: <white><fade>%'
+    preview:
+      name: <yellow>Predogled vzorca <seed>
+      lore:
+      - <gray>Prikaže upodobljeni zemljevid v vaših rokah.
+    random:
+      name: <light_purple>Naključni vzorec
+      lore: []
+    title: <gold>Razhroščevalnik vzorcev <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Upodobitev ni uspela: <error>'
+    metrics: '<gray>Meritve: <white><metrics>'
+    scan-failed: <prefix><red>Skeniranje ni uspelo.
+    no-metric: <gray>Noben vzorec nima metrike <white><metric>
+    export-failed: '<prefix><red>Izvoz ni uspel: <error>'
+  odds: <gray><case> <dark_gray>(<count> elementov, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Preobleke: <white><skins> <gray>Ohišja: <white><cases> <gray>Orožje: <white><weapons>'
+    cache: '<gray>Predpomnjeni predogledi: <white><previews> <gray>Način paketa virov: <white><pack>'
+    web: '<gray>Paket spletnega strežnika: <white><url>'
+wear:
+  factory_new: Tovarniško novo
+  minimal_wear: Minimalno obrabe
+  field_tested: Preizkušeno na terenu
+  well_worn: Dobro obrabljena
+  battle_scarred: Battle-Scarred
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Omejeno
+  classified: Zaupno
+  covert: Prikrito
+  rare_special: Redek poseben predmet
+catalog:
+  key:
+    case_key: Ključ ohišja

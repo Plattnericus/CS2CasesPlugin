@@ -1,0 +1,491 @@
+# MiniMessage messages; client-language: true follows Minecraft client settings.
+# Selected automatically from the Minecraft client locale. No runtime translation requests.
+prefix: '<dark_gray>[<#e4ae39>Случаи</#e4ae39>]</dark_gray> '
+general:
+  no-permission: <prefix><red>Нямате разрешение да направите това.
+  player-only: <prefix><red>Само за играчи.
+profile:
+  loading: <prefix><gray>Вашият списък с кожи все още се зарежда...
+  load-failed: <prefix><red>Вашият списък с кожи не можа да бъде зареден. Моля, кажете на администратор.
+  recovered: '<prefix><gray>Прекъснатото отваряне е завършено: <skin>'
+category:
+  pistol: Пистолет
+  smg: SMG
+  rifle: Пушка
+  sniper: Снайперска пушка
+  heavy: тежък
+  equipment: Оборудване
+  knife: Нож
+items:
+  test-marker: <red>⚠ Тестови елемент (администратор)
+  case:
+    name: <case_color><name>
+    lore:
+    - <dark_gray><count> възможни елементи
+    - ''
+    - '<gray>Щракнете с десен бутон: <white>вижте съдържанието'
+  key:
+    name: <key_color><name>
+    lore:
+    - ''
+    - <gray>Изразходван при отваряне на кутия.
+    use-hint: <prefix><gray>Щракнете с десния бутон върху <white>case</white>, за да го отворите с този ключ.
+skin:
+  lore:
+    rarity: <rarity_color><rarity></rarity_color> <dark_gray>· <gray><category>
+    category: <dark_gray><weapon> · <finish>
+    exterior: '<gray>Ектериор: <white><wear>'
+    float: '<gray>Плаващ: <white><float>'
+    float-range: '<gray>Плаващ: <white><min_float> - <max_float>'
+    pattern: '<gray>Модел: <white><pattern>'
+    variant: '<gray>Фаза: <class_color><variant>'
+    classification: '<gray>Тип модел: <class_color><classification>'
+    fade: '<gray>Избледняване: <white><fade>%'
+    stattrak: '<#cf6a32>StatTrak™ <gray>Убийства: <white><kills>'
+    has-variants: <dark_gray>Възможни са няколко фази
+    source: '<gray>Източник: <white><case>'
+    date: '<gray>Получено: <white><date>'
+    id: <dark_gray>#<id>
+  deleted: '<prefix><gray>Изтрит: <skin>'
+actionbar:
+  name: <rarity_color><skin></rarity_color>
+  wear: ' <dark_gray>· <white><wear_short> <gray><float>'
+  pattern: ' <dark_gray>· <gray>#<white><pattern>'
+  variant: ' <dark_gray>· <class_color><variant>'
+  classification: ' <dark_gray>· <class_color><classification>'
+  fade: ' <dark_gray>· <white><fade>% Избледняване'
+gui:
+  loading:
+    name: <gray>Зарежда се...
+    lore: []
+  back:
+    name: <gray>Назад
+    lore: []
+  close:
+    name: <red>Затвори
+    lore: []
+  previous:
+    name: <gray>Предишна страница
+    lore:
+    - <dark_gray>Страница <page> / <pages>
+  next:
+    name: <gray>Следваща страница
+    lore:
+    - <dark_gray>Страница <page> / <pages>
+  cases:
+    title: Случаи
+    header:
+      name: <#e4ae39>Калъфи
+      lore:
+      - <gray>Вземете калъфи от <white>търговец на калъфи</white>.
+      - <gray>Необходим ви е съвпадащ ключ, за да отворите такъв.
+    entry:
+    - ''
+    - '<gray>В инвентара: <white><owned> <dark_gray>· <gray>Ключове: <white><keys>'
+    - '<gray>Щракване с ляв бутон: <white>преглед на съдържанието'
+    can-open: '<green>Щракване с десен бутон: отваряне'
+    to-skins:
+      name: <#e4ae39>Инвентаризация на кожата
+      lore:
+      - <gray>Вашите кожи и ножове
+  preview:
+    title: <case>
+    click-preview: <dark_gray>Щракнете за преглед
+    rare:
+      name: <rarity_color>★ <rarity>
+      lore:
+      - <gray>Рядък нож.
+      - <dark_gray><count> варианти · щракнете, за да видите
+      - ''
+    open:
+      name: <green>Отворен случай
+      lore:
+      - '<gray>Калъфи: <white><owned> <dark_gray>· <gray>Ключове: <white><keys>'
+      - <dark_gray>Използва 1 кутия и 1 <key>
+    cannot-open:
+      name: <gray>Не може да се отвори
+      lore:
+      - '<gray>Калъфи: <white><owned> <dark_gray>· <gray>Ключове: <white><keys>'
+      - <dark_gray>Трябва ви калъфът и <key>.
+  rare:
+    title: ★ <case>
+  confirm:
+    title: сигурен ли си
+    'yes':
+      name: <green>Да, изтрий
+      lore:
+      - <dark_gray>Това не може да бъде отменено.
+    'no':
+      name: <red>Отказ
+      lore: []
+  skins:
+    title: Инвентаризация на кожата
+    title-other: Кожи на <player>
+    tab:
+      all:
+        name: <white>Всички кожи
+        lore: []
+      weapons:
+        name: <white>Кожи за оръжие
+        lore: []
+      knives:
+        name: <white>Ножове
+        lore:
+        - '<dark_gray>Щракнете с десния бутон върху нож: екипирайте'
+      stattrak:
+        name: <#cf6a32>StatTrak™
+        lore: []
+      favorites:
+        name: <white>Любими
+        lore: []
+      recent:
+        name: <white>Наскоро получено
+        lore: []
+    empty:
+      name: <gray>Тук още няма нищо
+      lore:
+      - <dark_gray>Отворете случаи, за да получите кожи.
+    equipped: <green>✔ Оборудван
+    favorite: <yellow>★ Любим
+    hint:
+    - ''
+    - '<dark_gray>Щракване с ляв бутон: инспектиране · Щракване с десен бутон: поставяне на лък'
+    - '<dark_gray>Щракване с Shift: любимо'
+    hint-knife:
+    - ''
+    - '<dark_gray>Щракване с ляв бутон: инспектиране · Щракване с десен бутон: оборудване'
+    - '<dark_gray>Щракване с Shift: любимо'
+    to-cases:
+      name: <#e4ae39>Калъфи
+      lore:
+      - <gray>За вашите случаи
+    sort:
+      name: '<white>Сортиране: <#e4ae39><sort>'
+      lore:
+      - '<dark_gray>Отляво: следващ · Отдясно: предишен'
+    sorts:
+      rarity: Рядкост
+      float: Поплавък
+      name: Име
+      wear: Екстериор
+      pattern: Модел
+      newest: Най-новите
+      oldest: Най-старият
+    info:
+      name: Показани са <white><count> <gray>кожи
+      lore:
+      - Общо <dark_gray><total> · щракнете, за да затворите
+    filter:
+      name: <white>Филтър
+      lore:
+      - '<dark_gray>Отляво: изберете филтри · Отдясно: нулиране'
+    active-knife:
+    - <green>✔ Активен нож
+    - <dark_gray>Щракнете за подробности
+  filter:
+    title: Филтър
+    header:
+      name: <white>Филтър
+      lore:
+      - <gray>Няколко филтъра от един и същи вид се комбинират.
+    rarity: <rarity_color><rarity>
+    wear: <white><wear> <dark_gray>(<short>)
+    stattrak: Само <#cf6a32>StatTrak™
+    'on':
+    - <green>✔ Активен
+    'off':
+    - <dark_gray>Неактивен
+    reset:
+      name: <gray>Нулирайте всички филтри
+      lore: []
+  inspect:
+    title: Инспектирайте
+    missing:
+      name: <red>Кожата не е налична
+      lore: []
+    preview:
+      name: <#e4ae39>Вижте кожата
+      lore:
+      - '<gray>Показва вашето точно копие:'
+      - <gray>модел, цветове и износване.
+      - ''
+      - <dark_gray>Промъкнете се, за да затворите визуализацията.
+    data: <white>Подробности
+    favorite:
+      name: <white>Маркиране като любимо
+      lore: []
+    unfavorite:
+      name: <yellow>★ Премахване на любими
+      lore: []
+    equip:
+      name: <green>Екипирайте
+      lore:
+      - <gray>Вашите мечове показват този нож.
+      - <dark_gray>Щетите и омагьосванията остават същите.
+    unequip:
+      name: <green>✔ Оборудван
+      lore:
+      - <gray>Щракнете, за да свалите оборудването.
+    inspect3d:
+      name: <white>3D проверка
+      lore:
+      - '<gray>Показва вашето точно копие:'
+      - F / Shift + F / /inspect
+    foreign:
+      name: <gray>Принадлежи на друг играч
+      lore:
+      - <dark_gray>Само преглед
+    equip-bow:
+      name: <green>Сложете лък
+      lore:
+      - <gray>Вашите лъкове показват тази кожа.
+    unequip-bow:
+      name: <green>✔ На поклон
+      lore:
+      - <gray>Щракнете за премахване.
+    equip-crossbow:
+      name: <green>Сложете арбалет
+      lore:
+      - <gray>Вашите арбалети показват тази кожа.
+    unequip-crossbow:
+      name: <green>✔ На арбалет
+      lore:
+      - <gray>Щракнете за премахване.
+    not-equippable:
+      name: <gray>Не може да се оборудва
+      lore:
+      - <dark_gray>Тази кожа не може да бъде екипирана.
+    delete:
+      name: <red>Изтриване на кожата
+      lore:
+      - <gray>Премахва тази кожа от вашия инвентар.
+      - <dark_gray>Иска потвърждение.
+view:
+  unknown: <prefix><red>Играч <white><player></white> не беше намерен.
+gallery:
+  header-other: Инвентар на <#e4ae39><player></#e4ae39><gray> <dark_gray>· <gray><category> <dark_gray>· <gray><count> кожи <dark_gray>· <gray>Страница
+    <page>/<pages>
+  hint:
+  - ''
+  - '<dark_gray>Щракване с десен бутон: инспектиране · Промъкване + щракване с десен бутон: любим'
+  hint-knife:
+  - ''
+  - '<dark_gray>Щракнете с десен бутон: инспектирайте · Кликнете с ляв бутон: екипирайте'
+  - '<dark_gray>Промъкване + десен клик: любимо'
+  hint-weapon:
+  - ''
+  - '<dark_gray>Щракнете с десен бутон: инспектирайте · Кликнете с ляв бутон: поставете лък'
+  - '<dark_gray>Промъкнете се + ляв клик: сложете арбалет'
+  - '<dark_gray>Промъкване + десен клик: любимо'
+  header: <#e4ae39><category></#e4ae39> <dark_gray>· <gray><count> кожи <dark_gray>· <gray>Страница <page>/<pages>
+  empty: <gray>Тук още няма нищо
+  button:
+    previous: <gray>Предишна страница
+    next: <gray>Следваща страница
+    category: <white>Промяна на категорията
+    sort: '<white>Сортиране: <#e4ae39><sort>'
+    filter: <white>Филтър
+    list: <white>Покажи като списък
+    close: <red>Затвори
+preview:
+  loading: <gray>Визуализация на изобразяване...
+  hint: <gray>Промъкнете се, за да затворите
+opening:
+  title: <case>
+  title-test: <red>TEST</red> <case>
+  bubble: <black>злато злато злато
+  world:
+    title: <white><player></white> <gray>отваря <#e4ae39><case>
+  marker: <#e4ae39>▼
+  mystery: <rarity_color>★ <rarity>
+  already: <prefix><gray>Вече отваряте случай.
+  case-disabled: <prefix><red>Този случай не е наличен.
+  missing: <prefix><gray>Имате нужда от <white><case></white> и <white><key></white>.
+  missing-now: <prefix><red>Калъфът или ключът вече не са в инвентара ви.
+  storage-error: <prefix><red>Запазването не бе успешно. Вашият калъф и ключ бяха върнати.
+  command-blocked: <prefix><gray>Изчакайте отварянето да приключи.
+  result: '<prefix><gray>Получихте <skin> <dark_gray>(<float>, #<pattern>)'
+  result-test: '<prefix><red>[Тест]</red> <gray>Резултат: <skin> <dark_gray>(<float>, #<pattern>) - не е запазен'
+  broadcast: <prefix><white><player></white> <gray>разопаковано <skin><gray>!
+  reveal:
+    rare-title: <gradient:#e4ae39:#f6d27a><b>РЕДКИ СПЕЦИАЛЕН АРТИКУЛ</b></gradient>
+  buttons:
+    inspect:
+      name: <white>Проверете
+      lore:
+      - <gray>Всички подробности за новата ви кожа
+    again:
+      name: <green>Отворете друг
+      lore:
+      - '<gray>Калъфи: <white><cases> <dark_gray>· <gray>Ключове: <white><keys>'
+equip:
+  wrong-slot: <prefix><red>Тази кожа не пасва на това оръжие.
+  equipped:
+    knife: '<prefix><gray>Оборудван с нож: <skin>'
+    bow: '<prefix><gray>На носа ви: <skin>'
+    crossbow: '<prefix><gray>На вашия арбалет: <skin>'
+  unequipped:
+    knife: <prefix><gray>Нож без оборудване.
+    bow: <prefix><gray>Кожата на лъка е премахната.
+    crossbow: <prefix><gray>Кожата на арбалет е премахната.
+knife:
+  not-owned: <prefix><red>Тази кожа не ви принадлежи.
+  equipped: '<prefix><gray>Оборудван: <skin>'
+  unequipped: <prefix><gray>Нож без оборудване.
+  sword-footer: '<dark_gray>База: <base>'
+inspect:
+  running: <prefix><gray>Проверката вече се изпълнява.
+  no-knife: <red>Кожата не е налична <white>/skins
+shop:
+  title: Търговец на калъфи
+  npc-name: <gradient:#e4ae39:#f6d27a>Търговец на калъфи</gradient>
+  npc-description: <gray>Щракнете с десния бутон, за да търгувате
+  balance:
+    name: '<white>Вашето салдо: <aqua><balance> <currency>'
+    lore:
+    - <dark_gray>Броят се само непроменени елементи.
+  offer:
+  - ''
+  - '<gray>Цена: <aqua><price> <currency>'
+  - '<dark_gray>5 броя: <price5> <currency>'
+  affordable: <green>✔ Достъпни
+  not-affordable: <red>✘ <missing> <currency> липсва
+  affordable-five: '<dark_gray>Щракване с Shift: купете 5'
+  hint-case:
+  - '<dark_gray>Щракване с ляв бутон: купете · Щракване с десен бутон: съдържание'
+  hint-key:
+  - '<dark_gray>Щракнете с ляв бутон: купете'
+  bought: '<prefix><gray>Купено: <white><amount>× <name></white> за <aqua><price> <currency></aqua>.'
+  not-enough: <prefix><red>Не можете да си позволите това.
+  inventory-full: <prefix><red>Вашият инвентар е пълен.
+slot:
+  name: <#e4ae39>Инвентаризация на кожата
+  lore:
+  - '<gray>Щракнете с десен бутон: кожи, ножове и калъфи'
+  - <dark_gray>Този елемент е заключен към този слот.
+  blocked: <prefix><gray>Освободете слот за инвентар, за да може да се появи елементът от инвентара на кожата.
+admin:
+  help:
+  - <#e4ae39>MCCases <dark_gray>» <gray>Админ
+  - <gray>/csadmin givecase|givekey <player> <id> [amount] [test]
+  - <gray>/csadmin giveskin <player> <skin> [float] [pattern] [stattrak]
+  - '<gray>/csadmin manage <player> <dark_gray>(menu: give, edit, delete)'
+  - <gray>/csadmin list|history <player>
+  - <gray>/csadmin removeskin|equip <player> <id>
+  - <gray>/csadmin setfloat|setpattern|setstattrak <player> <id> <value>
+  - <gray>/csadmin testcase <case> [keep] <dark_gray>· <gray>/csadmin odds <case>
+  - <gray>/csadmin preview <skin> [pattern] [float]
+  - <gray>/csadmin pattern <skin> <pattern> <dark_gray>· <gray>/csadmin browser <skin> [pattern]
+  - <gray>/csadmin scan <skin> [metric] [count]
+  - <gray>/csadmin shop spawn|remove <dark_gray>· <gray>/csadmin exportpack|reload|info
+  done: <prefix><green>Готово.
+  unknown: <prefix><red>Неизвестно <what>.
+  instance-unknown: <prefix><red>Не е намерен съответстващ идентификатор на кожата. <gray>/csadmin списък <player>
+  given: <prefix><gray>Даде <amount>× <white><name></white> на <white><player></white>.
+  skin-given: <prefix><gray>Даде <skin> <gray>на <white><player></white> <dark_gray>(#<id>)
+  list-header: <prefix><gray>Кожи на <white><player></white> <dark_gray>(<count>)
+  history-header: <prefix><gray>Последни отваряния на <white><player>
+  scan-start: <prefix><gray>Сканиране на всяко начало на <white><skin></white> за <white><metric></white>...
+  export-start: <prefix><gray>Изграждане на пакет с ресурси...
+  export-done: '<prefix><green><skins> експортирани кожи: <white><file>'
+  shop-spawned: <prefix><green>Създаден дилър на калъф.
+  shop-removed: <prefix><green>Дилърът на кутията е премахнат.
+  shop-none: <prefix><gray>Няма търговец на калъфи наблизо.
+  reload-busy: <prefix><gray>Презареждането вече се изпълнява.
+  reload-start: <prefix><gray>Презарежда се...
+  reload-failed: <prefix><red>Презареждането е неуспешно, предишната конфигурация остава активна. Вижте конзолата.
+  reload-done: '<prefix><green>Презареден за <ms> ms: <skins> кожи, <cases> случая, <warnings> предупреждения (вижте конзолата).'
+  browser:
+    title: 'Модел: <skin>'
+  manage:
+    title: 'Управление: <player>'
+    skin-title: Скин на <player>
+    give-title: 'Дайте кожа: <player>'
+    give:
+      name: <green>Дайте кожа
+      lore:
+      - <gray>Изберете калъф, след това кожа.
+    give-hint:
+    - ''
+    - '<dark_gray>Щракване с ляв бутон: дайте · Щракване с десен бутон: дайте StatTrak™'
+    clear:
+      name: <red>Изтриване на всички кожи
+      lore:
+      - <gray><count> кожи ще бъдат премахнати.
+      - <dark_gray>Иска потвърждение.
+    cleared: <prefix><gray>Изтрити <count> кожи на <white><player></white>.
+    removed: <prefix><gray>Изтрито <skin> <gray>от <white><player>
+    stattrak:
+      name: '<#cf6a32>StatTrak™: <white><state>'
+      lore:
+      - <gray>Щракнете за превключване.
+    wear:
+      name: <white><wear>
+      lore:
+      - <gray>Задава float на <white><float>
+    pattern-step:
+      name: <white>Модел <step>
+      lore:
+      - '<gray>Текущо: <white><pattern>'
+    pattern-random:
+      name: <light_purple>Случаен модел
+      lore:
+      - '<gray>Текущо: <white><pattern>'
+    equip:
+      name: <green>Екипировка за играч
+      lore: []
+    unequip:
+      name: <green>✔ Оборудван
+      lore:
+      - <gray>Щракнете, за да свалите оборудването.
+    remove:
+      name: <red>Изтриване на кожата
+      lore:
+      - <dark_gray>Иска потвърждение.
+  labels:
+    case: случай
+    key: ключ
+    skin: кожата
+    manual: ръчна база данни
+    automatic: автоматичен
+    none: няма (финишът няма профил за анализ)
+    'off': изключено
+  debug:
+    seed: '<gray>Модел: <white><seed>'
+    analysing: <dark_gray>Анализиране...
+    variant: '<gray>Вариант: <white><variant>'
+    classification: '<gray>Класификация: <white><classification> <dark_gray><mode>'
+    fade: '<gray>Избледняване: <white><fade>%'
+    preview:
+      name: <yellow>Визуализация на модела <seed>
+      lore:
+      - <gray>Показва изобразената карта в ръцете ви.
+    random:
+      name: <light_purple>Случаен модел
+      lore: []
+    title: <gold>Програма за отстраняване на грешки в шаблони <dark_gray>» <white><skin> <gray>#<seed>
+    render-failed: '<prefix><red>Неуспешно изобразяване: <error>'
+    metrics: '<gray>Показатели: <white><metrics>'
+    scan-failed: <prefix><red>Сканирането е неуспешно.
+    no-metric: <gray>Няма шаблон с показател <white><metric>
+    export-failed: '<prefix><red>Неуспешно експортиране: <error>'
+  odds: <gray><case> <dark_gray>(<count> елемента, StatTrak™ <chance>%)
+  info:
+    catalog: '<gray>Кожи: <white><skins> <gray>Калъфи: <white><cases> <gray>Оръжия: <white><weapons>'
+    cache: '<gray>Кеширани визуализации: <white><previews> <gray>Режим на пакет с ресурси: <white><pack>'
+    web: '<gray>Пакетирайте уеб сървър: <white><url>'
+wear:
+  factory_new: Фабрично ново
+  minimal_wear: Минимално износване
+  field_tested: Тестван на терен
+  well_worn: Добре носени
+  battle_scarred: Белязан от битка
+rarity:
+  mil_spec: Mil-Spec
+  restricted: Ограничен
+  classified: Класифицирани
+  covert: Прикритие
+  rare_special: Рядък специален предмет
+catalog:
+  key:
+    case_key: Калъф ключ
