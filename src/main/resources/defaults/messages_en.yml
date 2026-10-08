@@ -627,3 +627,72 @@ tradein:
   unavailable: "<prefix><yellow>Trade-in is currently unavailable."
   result: "<prefix><green>Trade-in completed: <skin>"
   gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>won <skin> through a <bold>TRADE-IN</bold>!"
+
+# Case recommendations and filters
+case-guide:
+  info:
+    name: <gold>How the ranking works
+    lore:
+    - <gray>Price includes the case and matching key.
+    - <gray>Value = expected reward points / price.
+    - '<gray>Points per tier: 1 / 8 / 40 / 220 / 1800*'
+    - '<gray>*Knives: ×(0.5 + preference / 100), then finish.'
+    - <gray>Server points; no promised sale proceeds.
+    - '<gray>Custom weights: case-guide.yml'
+    - '<gray>Preferences: curated snapshot <date>.'
+    - <gray>cs2.io/en/skins/knives · r/csmoneyofficial
+    - '<gray>Float, pattern and StatTrak: no point bonus.'
+  sort:
+    name: '<aqua>Sort: <value>'
+    lore:
+    - '<gray>Left: next · Right: previous'
+  sorts:
+    value: Best value
+    price_asc: Cheapest first
+    price_desc: Most expensive first
+    community: Knife preferences
+    owned: Owned first
+    name: Name
+  knife:
+    name: '<gold>Knife: <value>'
+    lore:
+    - <gray>All, favorites, or a specific knife model.
+    - '<gray>Left: next · Right: previous'
+  knives:
+    all: All
+    favorites: Community favorites
+    owned: Owned cases
+  budget:
+    name: '<aqua>Max price: <value> <currency>'
+    lore:
+    - '<gray>Left: enter amount · Right: clear'
+    - <gray>Dealer case + matching key, per opening.
+  budget-prompt: <aqua>Maximum total price? Enter 0–4294967294, or cancel.
+  bad-budget: <red>Enter a nonnegative whole number.
+  search:
+    name: '<aqua>Search: <value>'
+    lore:
+    - '<gray>Left: search · Right: clear'
+  search-prompt: <aqua>Case name or ID? Enter cancel to go back.
+  owned:
+    name: '<yellow>Show: <value>'
+    lore:
+    - <gray>Click to switch owned/all cases.
+  reset:
+    name: <yellow>Reset filters
+    lore:
+    - <gray>Show all cases sorted by value.
+  empty:
+    name: <gray>No matching cases
+    lore:
+    - <gray>Try another filter or reset.
+  unlimited: Any
+  unavailable: Not sold
+  metrics:
+  - '<gray>Case + key: <white><cost> <currency>'
+  - '<gray>EV: <white><points> points'
+  - '<gray>Value: <green><value> points / <currency>'
+  - '<gray>Any knife: <gold><knives>%'
+  - '<gray>Favorite knife: <gold><favorites>%'
+  - '<gray>Knife preference: <white><community> / 100'
+  target: '<gray><knife>: <gold><chance>% per opening'

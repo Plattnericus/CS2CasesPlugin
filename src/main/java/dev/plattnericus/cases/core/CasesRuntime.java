@@ -48,7 +48,7 @@ public final class CasesRuntime implements CasesContext {
 
     /** Everything a reload replaces, swapped as one unit. */
     record State(PluginSettings settings, Messages messages, SoundBank sounds, Catalog catalog,
-                 SkinFormatter formatter, InspectModels inspectModels, TextureStore textures) {
+                 SkinFormatter formatter, InspectModels inspectModels, TextureStore textures, dev.plattnericus.cases.catalog.CaseGuide caseGuide) {
     }
 
     private final JavaPlugin plugin;
@@ -103,7 +103,7 @@ public final class CasesRuntime implements CasesContext {
         InspectModels inspectModels = new InspectModels(new File(folder, "inspect.yml"), warn);
         SkinFormatter formatter = new SkinFormatter(messages, result.catalog(), settings.display().floatDecimals(),
                 settings.display().inspectDecimals(), settings.display().dateFormat());
-        return new State(settings, messages, sounds, result.catalog(), formatter, inspectModels, textures);
+        return new State(settings, messages, sounds, result.catalog(), formatter, inspectModels, textures, new dev.plattnericus.cases.catalog.CaseGuide(new File(folder, "case-guide.yml"), warn));
     }
 
     RenderService.Engine engine(State s) {
@@ -186,6 +186,8 @@ public final class CasesRuntime implements CasesContext {
     public MapPaletteSource.Palette mapPalette() {
         return mapPalette;
     }
+
+    @Override public dev.plattnericus.cases.catalog.CaseGuide caseGuide() { return state.caseGuide(); }
 
     public InspectModels inspectModels() {
         return state.inspectModels();

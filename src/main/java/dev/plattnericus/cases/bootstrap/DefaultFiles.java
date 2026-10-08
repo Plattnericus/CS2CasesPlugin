@@ -32,7 +32,7 @@ public final class DefaultFiles {
         for (String entry : entries) {
             File target = new File(plugin.getDataFolder(), entry);
             if (target.exists()) {
-                if (entry.equals("config.yml") || entry.equals("market.yml") || entry.equals("sounds.yml") || entry.startsWith("messages_")) mergeMissing(plugin, entry, target);
+                if (entry.equals("case-guide.yml") || entry.equals("inspect-profiles.yml") || entry.equals("config.yml") || entry.equals("market.yml") || entry.equals("sounds.yml") || entry.startsWith("messages_")) mergeMissing(plugin, entry, target);
                 continue;
             }
             File parent = target.getParentFile();

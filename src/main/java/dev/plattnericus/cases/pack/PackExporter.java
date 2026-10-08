@@ -94,6 +94,8 @@ public final class PackExporter {
                 String selected = "trade/selected/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
                 model(zip, namespace, selected, "minecraft:item/generated");
+                try { rig(zip, namespace, skin, renderer); }
+                catch (TextureException e) { throw new IOException("inspect rig " + skin.id(), e); }
                 skins++;
             }
             for (CaseDefinition c : catalog.cases().stream().sorted(Comparator.comparing(CaseDefinition::id)).toList()) {
@@ -129,6 +131,45 @@ public final class PackExporter {
 
     private static void model(ZipOutputStream zip, String ns, String path, String parent) throws IOException {
         model(zip, ns, path, parent, null);
+    }
+
+    /** Textured cuboids give the inspect asset thickness from every angle, with separate joints. */
+    private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer) throws IOException, TextureException {
+        double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
+        ArgbImage source = renderer.render(skin, 0, fl, 0).image();
+        BufferedImage canvas = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = canvas.createGraphics();
+        g.drawImage(source.toBufferedImage(), 2, 2, 60, 60, null); g.dispose();
+        for (String layer : dev.plattnericus.cases.inspect.InspectRig.layers(skin.weapon()).stream().map(dev.plattnericus.cases.inspect.InspectRig.Layer::id).distinct().toList()) {
+            BufferedImage texture = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
+            boolean[][] mask = new boolean[SPRITE][SPRITE];
+            for (int y = 0; y < SPRITE; y++) for (int x = 0; x < SPRITE; x++) {
+                int pixel = canvas.getRGB(x, y);
+                if ((pixel >>> 24) > 10 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), (x - 1.5) / 60, (y - 1.5) / 60))) {
+                    texture.setRGB(x, y, pixel); mask[y][x] = true;
+                }
+            }
+            String path = "inspect/" + skin.id() + "/" + layer;
+            png(zip, "assets/" + ns + "/textures/item/" + path + ".png", texture);
+            List<String> elements = new ArrayList<>();
+            double thickness = skin.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2 : .45) : 2.6;
+            for (int y = 0; y < SPRITE; y++) for (int x = 0; x < SPRITE; x++) {
+                if (!mask[y][x]) continue;
+                int right = x + 1; while (right < SPRITE && mask[y][right]) right++;
+                int bottom = y + 1;
+                outer: while (bottom < SPRITE) { for (int xx = x; xx < right; xx++) if (!mask[bottom][xx]) break outer; bottom++; }
+                for (int yy = y; yy < bottom; yy++) for (int xx = x; xx < right; xx++) mask[yy][xx] = false;
+                double x1 = x / 4.0, x2 = right / 4.0, y1 = y / 4.0, y2 = bottom / 4.0;
+                StringBuilder faces = new StringBuilder();
+                for (String face : List.of("north", "south", "east", "west", "up", "down")) {
+                    if (!faces.isEmpty()) faces.append(',');
+                    faces.append("\"").append(face).append("\":{\"uv\":[").append(face.equals("north") ? x2 : x1).append(',').append(y1).append(',').append(face.equals("north") ? x1 : x2).append(',').append(y2).append("],\"texture\":\"#skin\"}");
+                }
+                elements.add("{\"from\":[" + x1 + ',' + (16-y2) + ',' + (8-thickness/2) + "],\"to\":[" + x2 + ',' + (16-y1) + ',' + (8+thickness/2) + "],\"faces\":{" + faces + "}}");
+            }
+            text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\"}}");
+            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false,\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\"},\"elements\":[" + String.join(",", elements) + "]}");
+        }
     }
 
     private static void model(ZipOutputStream zip, String ns, String path, String parent, String display) throws IOException {

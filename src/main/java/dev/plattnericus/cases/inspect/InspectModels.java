@@ -50,6 +50,18 @@ public final class InspectModels {
         } catch (java.io.IOException e) {
             warn.accept("inspect.yml: cannot read bundled defaults: " + e.getMessage());
         }
+        // New profiles live separately so upgrades preserve existing inspect.yml customisation.
+        YamlConfiguration profiles = YamlConfiguration.loadConfiguration(new File(file.getParentFile(), "inspect-profiles.yml"));
+        try (var bundled = InspectModels.class.getResourceAsStream("/defaults/inspect-profiles.yml")) {
+            if (bundled != null) {
+                profiles.setDefaults(YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(bundled, java.nio.charset.StandardCharsets.UTF_8)));
+                profiles.options().copyDefaults(true);
+            }
+        } catch (java.io.IOException e) { warn.accept("inspect-profiles.yml: " + e.getMessage()); }
+        if (profiles.getBoolean("enabled", true)) for (String section : List.of("animations", "animation-pools")) {
+            ConfigurationSection entries = profiles.getConfigurationSection(section);
+            if (entries != null) for (String key : entries.getKeys(false)) y.set(section + "." + key, entries.get(key));
+        }
         anchor = anchor(y.getConfigurationSection("anchor"), new Anchor(1.25, 0.57, -0.07));
         revealAnchor = anchor(y.getConfigurationSection("reveal-anchor"), new Anchor(1.35, 0, -0.05));
         handAnchor = anchor(y.getConfigurationSection("hand-anchor"), new Anchor(0.26, 0.34, -0.8));
@@ -77,7 +89,7 @@ public final class InspectModels {
         if (bp != null) {
             for (String k : bp.getKeys(false)) {
                 Material m = Material.matchMaterial(k);
-                if (m == null || !m.isBlock()) {
+                if (m == null || (org.bukkit.Bukkit.getServer() != null && !m.isBlock())) {
                     warn.accept("inspect.yml: block-palette entry '" + k + "' is not a block");
                     continue;
                 }
@@ -228,7 +240,8 @@ public final class InspectModels {
             }
             groups.put(gid, new InspectAnimation.Group(gid, g.getString("parent"), vec(g, "pivot", 0), frames));
         }
-        return new InspectAnimation(id, groups, sounds, a.getInt("substeps", 3));
+        try { return new InspectAnimation(id, groups, sounds, a.getInt("substeps", 3)); }
+        catch (IllegalArgumentException invalid) { warn.accept("inspect animation '" + id + "': " + invalid.getMessage()); return null; }
     }
 
     private static Vector3f vec(ConfigurationSection s, String key, float def) {
@@ -243,6 +256,9 @@ public final class InspectModels {
         KnifeModel m = models.get(id);
         return m != null ? m : models.get("default");
     }
+
+    public boolean hasModel(String id) { return models.containsKey(id); }
+    public List<String> pool(String weapon) { return animationPools.getOrDefault(weapon, List.of()); }
 
     public InspectAnimation animation(String id) {
         InspectAnimation a = animations.get(id);
