@@ -5,7 +5,7 @@ Version 1.2 adds individual inspect rigs for all 20 knives and 35 weapons, plus 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.1.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](docs/images/skins.png)
 
@@ -19,13 +19,14 @@ are available without it. Swords, bows and crossbows keep their normal gameplay 
 
 | Feature | Included |
 | --- | --- |
-| Catalog | 21 cases, 713 skins and 55 weapon and knife models |
+| Catalog | 22 cases, 743 skins and 55 weapon and knife models |
+| Case guide | Full case + key price, reward points per Diamond, knife preferences, budget and search |
 | Collection | Categories, favorites, filters, seven sort orders and the 36 newest skins |
 | Trading | Direct skin trades with two live offers, confirmation from both players and cancellation safeguards |
 | Marketplace | Real Emerald item payments, durable offline claims, search, sorting and filters |
 | Skin values | Float, exterior, pattern, StatTrak, origin and creation date |
 | Pattern analysis | Doppler phases, Fade percentage, Blue Gem classifications and Fire & Ice |
-| Inspects | 46 timelines with random variations for weapon classes and knife families |
+| Inspects | 165 individual inspect profiles, articulated Butterfly handles and paired weapons |
 | Language | English for all players by default; 45 translation files available |
 | Dealer | Villager or mannequin with skin changes, player tracking and gestures |
 | Storage | SQLite or MySQL/MariaDB, opening history and recovery of interrupted openings |
@@ -43,13 +44,13 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.1.0.jar](release/MCCases-1.1.0.jar) into `plugins/`.
+2. Copy [MCCases-1.2.0.jar](release/MCCases-1.2.0.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
 
 No other plugins are required. The build targets Paper 26.3 Build 159 beta with Java 25. Paper 26.3 is currently a beta release.
-See [verification](docs/VERIFICATION-1.1.md) for the checks actually performed.
+See [verification](docs/VERIFICATION-1.2.md) for the checks actually performed.
 Check your server configuration before using another Paper version.
 The development check plugin is separate and is not part of the release installation.
 
@@ -463,7 +464,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-1.1.0.zip](release/MCCases-ResourcePack-1.1.0.zip).
+[release/MCCases-ResourcePack-1.2.0.zip](release/MCCases-ResourcePack-1.2.0.zip).
 
 ### Automatic distribution
 

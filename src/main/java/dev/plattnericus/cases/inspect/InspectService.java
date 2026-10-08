@@ -98,8 +98,9 @@ public final class InspectService implements Listener {
             return false;
         }
         InspectModels m = models.get();
-        KnifeModel model = m.model(def.weapon().inspectModel() == null ? def.weapon().id() : def.weapon().inspectModel());
-        if (!def.isKnife() && !m.hasModel(def.weapon().id())) model = m.model(def.weapon().category().name().toLowerCase(java.util.Locale.ROOT));
+        String modelId = def.weapon().inspectModel() == null ? def.weapon().id() : def.weapon().inspectModel();
+        KnifeModel model = m.model(modelId);
+        if (!def.isKnife() && !m.hasModel(modelId)) model = m.model(def.weapon().category().name().toLowerCase(java.util.Locale.ROOT));
         if (model == null) {
             return false;
         }

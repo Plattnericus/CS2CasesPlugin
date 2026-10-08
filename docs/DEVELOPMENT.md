@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.1.0.jar` and `build/distributions/MCCases-ResourcePack-1.1.0.zip`.
+`build/libs/MCCases-1.2.0.jar` and `build/distributions/MCCases-ResourcePack-1.2.0.zip`.
 The pack ZIP is also embedded in the plugin JAR.
 
 | Task | Purpose / output |
@@ -36,14 +36,16 @@ The pack ZIP is also embedded in the plugin JAR.
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.1.0.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.0.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Feature checks cover the default catalog's 713 skins and 21 cases, 5,250 reward and reel checks,
-weighted drop chances, float limits, regional language fallbacks and 46 animation timelines.
+Feature checks cover the default catalog's 743 skins and 22 cases, 5,500 reward and reel checks,
+weighted drop chances, float limits, regional language fallbacks and 46 legacy animation timelines.
+They also validate all 165 individual profiles/55 rigs, full-timeline 70°/4:3 framing in both hands
+with pack/fallback geometry, joint continuity, invalid configuration and case-guide probabilities.
 Filmstrips check each tick for clipped models at a 70° vertical field of view and 16:9 aspect ratio.
 `hand_pack_*` uses a geometric avatar reference. These render views are not Minecraft client
 screenshots.
@@ -119,7 +121,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.1.0.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.0.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -142,10 +144,13 @@ drags must not move skins or insert items into the chest menu. It requires a sec
 client with a loaded profile to verify that a pending request for another player's collection
 cannot replace the subsequently opened vanilla menu.
 
+Before running `full`, give and equip an owned knife with `/csadmin giveskin` and `/csadmin equip`,
+and spawn a dealer with `/csadmin shop spawn`. These are required test fixtures.
+
 `full` additionally checks shop payments and rollback, signed items, inventory protection,
 cosmetic restoration, equipment, menus, dealers, inspect inputs, previews, SQLite transactions
-and a complete case opening. The physical inventory is restored; the opening check leaves
-one additional `TEST` skin. When the inventory shortcut is disabled, checks verify that
+and two independent case openings. The physical inventory is restored; the opening check leaves
+two additional `TEST` skins. When the inventory shortcut is disabled, checks verify that
 remaining marked stars are removed from inventory, offhand and cursor, ordinary stars are
 preserved, and the formerly reserved slot can be used normally.
 
@@ -172,6 +177,7 @@ Additional isolated-server commands:
 ```text
 mccasesdevcheck items
 mccasesdevcheck DevTester gold
+mccasesdevcheck DevTester guide
 mccasesdevcheck DevTester recovery
 ```
 
@@ -185,15 +191,28 @@ executes the actual service, checks atomic input consumption and rare-special ou
 the SQL announcement marker (zero for admin, one for the normal contract). Outputs are removed
 afterward. Inspect both clients' chat to verify that only the normal contract announces.
 
+`guide` checks case-value/full-price sorting, favorite and individual knife filtering,
+preview/back state, zero budget, ID search, reset and hotbar protection. Menu clicks are
+spaced across ticks so they respect the production duplicate-click guard. Pack item models
+must be enabled for this fixture, because case IDs are read from their icon models.
+
 `recovery` consumes two signed test pairs and waits for two persisted PENDING outcomes. After
 READY RECOVERY, disconnect the player before the animation completes, then stop the isolated server.
 Restart and reconnect;
 the same two UUIDs must become OWNED and the opening records must remain unique. This command
 intentionally leaves the test rewards for inspection.
 
-See [VERIFICATION-1.1.md](VERIFICATION-1.1.md) for the checks actually run for this release.
+See [VERIFICATION-1.2.md](VERIFICATION-1.2.md) for the checks actually run for this release.
 
-Remove temporary screenshots, extra check JARs and test fixtures after validation.
+The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`,
+`scripts/capture_inspect_audit.py`, `scripts/capture_inspect_motion.py` and
+`scripts/build_visual_evidence.py`. They require two isolated connected clients, a separately
+compiled test Java agent, a local RCON setup and the development check plugin. The agent
+uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
+Pose captures pause the inspect task; motion captures leave the real scheduler running.
+Use the shipped verification report and visual archive for the recorded 1.2 results.
+
+Remove extra check JARs and test fixtures after validation; retain useful labeled test evidence.
 Keep source checks available for later development. The session's temporary world, database and
 client data are removed when its watched desktop app closes.
 

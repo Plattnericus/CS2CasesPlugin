@@ -630,6 +630,7 @@ tradein:
 
 # Case recommendations and filters
 case-guide:
+  contents: <dark_gray><count> possible items
   info:
     name: <gold>How the ranking works
     lore:

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0
+## 1.2.0 — 2026-10-08
 
 - CS20 Case with 17 weapons and 13 Classic Knife finishes; all 55 weapon IDs now have obtainable skins.
 - Separate textured 3D inspect meshes and joints for all 55 weapons, including articulated Butterfly handles, folding blades and paired daggers/pistols.
