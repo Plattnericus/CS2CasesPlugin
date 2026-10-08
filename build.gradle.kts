@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.1.0"
+version = "1.2.0"
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
@@ -65,6 +65,7 @@ sourceSets.main {
 
 tasks.processResources {
     dependsOn(defaultsIndex)
+    inputs.property("pluginVersion", project.version.toString())
     filteringCharset = "UTF-8"
     filesMatching("plugin.yml") {
         expand("version" to project.version)
@@ -142,7 +143,7 @@ tasks.register<Jar>("devChecks") {
     dependsOn(tasks.named("toolsClasses"))
     archiveFileName.set("MCCases-DevChecks-${project.version}.jar")
     from(sourceSets["tools"].output) {
-        include("dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
+        include("dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
     }
     val metadata = layout.buildDirectory.file("generated/dev-checks/plugin.yml")
     doFirst {

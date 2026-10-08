@@ -19,12 +19,14 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 catch (Exception | AssertionError error) { getLogger().log(java.util.logging.Level.SEVERE, "Item runtime audit failed", error); }
                 return true;
             }
-            if (args.length < 1 || args.length > 3) return false;
+            if (args.length < 1 || args.length > 8) return false;
             Player player = Bukkit.getPlayerExact(args[0]);
             if (player == null) { sender.sendMessage("Player is not online."); return true; }
             try {
                 CasesContext ctx = context();
-                if (args.length == 2 && args[1].equals("gold")) {
+                if (args.length >= 4 && args[1].equals("visual")) {
+                    VisualRuntimeChecks.frame(sender, player, ctx, args);
+                } else if (args.length == 2 && args[1].equals("gold")) {
                     CommerceRuntimeChecks.gold(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("recovery")) {
                     CommerceRuntimeChecks.queueRecovery(this, sender, player, ctx);

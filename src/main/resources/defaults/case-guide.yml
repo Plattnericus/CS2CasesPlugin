@@ -1,0 +1,43 @@
+# Reward points are server preferences, never currency or promised sale proceeds.
+# EV = sum(tier chance * average points in tier). Value = EV / (dealer case + matching key).
+# Knife points = rarity points * (0.5 + knife score / 100) * finish multiplier.
+# Float, pattern and StatTrak have no extra point premium. Actual drop odds are unchanged.
+snapshot: '2026-10-08'
+favorite-threshold: 85
+rarity-points:
+  mil_spec: 1
+  restricted: 8
+  classified: 40
+  covert: 220
+  rare_special: 1800
+finish-multipliers:
+  fade: 1.3
+  doppler: 1.4
+  gamma_doppler: 1.4
+  marble_fade: 1.3
+# Curated preference preset; not a universal poll or a live price feed.
+# Top six follow the publisher's demand list on the snapshot date; other scores are editor preferences.
+sources:
+  - 'https://cs2.io/en/skins/knives'
+  - 'https://www.reddit.com/r/csmoneyofficial/comments/1vzzwxp/knives_tier_list_after_your_votes_navaja_knife_is/'
+knife-scores:
+  butterfly: 100
+  skeleton: 96
+  talon: 94
+  karambit: 92
+  m9_bayonet: 90
+  stiletto: 85
+  bayonet: 80
+  nomad: 76
+  ursus: 73
+  flip: 72
+  kukri: 70
+  huntsman: 68
+  falchion: 66
+  classic: 65
+  paracord: 60
+  survival: 58
+  bowie: 56
+  shadow_daggers: 42
+  gut: 40
+  navaja: 30

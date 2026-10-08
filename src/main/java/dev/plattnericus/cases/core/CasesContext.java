@@ -39,6 +39,8 @@ public interface CasesContext {
 
     Catalog catalog();
 
+    dev.plattnericus.cases.catalog.CaseGuide caseGuide();
+
     SkinFormatter formatter();
 
     default SkinFormatter formatter(org.bukkit.command.CommandSender viewer) {

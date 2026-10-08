@@ -42,7 +42,8 @@ public final class InspectAnimation {
         this.id = id;
         this.groups = Map.copyOf(groups);
         this.sounds = Map.copyOf(sounds);
-        this.substeps = Math.max(1, substeps);
+        this.substeps = Math.max(1, Math.min(20, substeps));
+        validate();
         compile();
     }
 
@@ -64,6 +65,27 @@ public final class InspectAnimation {
 
     public boolean hasGroup(String group) {
         return groups.containsKey(group);
+    }
+
+    private void validate() {
+        if (groups.isEmpty() || groups.size() > 32) throw new IllegalArgumentException("requires 1..32 groups");
+        for (Group g : groups.values()) {
+            java.util.Set<String> parents = new java.util.HashSet<>();
+            Group ancestor = g;
+            while (ancestor != null) {
+                if (!parents.add(ancestor.id())) throw new IllegalArgumentException("cyclic parent at " + ancestor.id());
+                String parent = ancestor.parent();
+                if (parent != null && !groups.containsKey(parent)) throw new IllegalArgumentException("unknown parent " + parent);
+                ancestor = parent == null ? null : groups.get(parent);
+            }
+            if (!g.pivot().isFinite() || g.keyframes().size() > 256) throw new IllegalArgumentException("invalid group " + g.id());
+            int duration = 0;
+            for (Keyframe k : g.keyframes()) {
+                if (k.ticks() < 0 || k.ticks() > 1200 || (duration += k.ticks()) > 2400) throw new IllegalArgumentException("duration exceeds 2400 ticks");
+                for (Vector3f v : new Vector3f[]{k.move(), k.rotate(), k.scale()}) if (v != null && !v.isFinite()) throw new IllegalArgumentException("nonfinite pose");
+                if (k.scale() != null && (k.scale().x <= 0 || k.scale().y <= 0 || k.scale().z <= 0)) throw new IllegalArgumentException("scale must be positive");
+            }
+        }
     }
 
     private void compile() {

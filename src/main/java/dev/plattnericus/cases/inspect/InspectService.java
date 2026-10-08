@@ -48,9 +48,6 @@ import java.util.function.Supplier;
  */
 public final class InspectService implements Listener {
 
-    /** Model space (x right, y up, z towards the viewer) to display-local space. */
-    private static final Matrix4f BASIS = new Matrix4f().rotateY((float) Math.PI);
-
     private final CasesContext ctx;
     private final Supplier<InspectModels> models;
     private final Map<UUID, InspectSession> sessions = new HashMap<>();
@@ -102,7 +99,7 @@ public final class InspectService implements Listener {
         }
         InspectModels m = models.get();
         KnifeModel model = m.model(def.weapon().inspectModel() == null ? def.weapon().id() : def.weapon().inspectModel());
-        if (!def.isKnife()) model = m.model(def.weapon().category().name().toLowerCase(java.util.Locale.ROOT));
+        if (!def.isKnife() && !m.hasModel(def.weapon().id())) model = m.model(def.weapon().category().name().toLowerCase(java.util.Locale.ROOT));
         if (model == null) {
             return false;
         }
@@ -113,11 +110,9 @@ public final class InspectService implements Listener {
         }
         if (!reveal) lastAnimations.put(player.getUniqueId(), animation.id());
         ctx.gallery().close(player);
-        List<ModelPart> parts = model.parts();
+        List<ModelPart> parts = InspectRig.blockParts(def.weapon(), model.parts());
         if (ctx.settings().resourcePack().enabled() && m.packModel()) {
-            float s = m.packModelScale();
-            parts = List.of(new ModelPart("pack", ModelPart.Type.ITEM, "$item", new org.joml.Vector3f(0, 0, 0),
-                    new org.joml.Vector3f(s, s, s), new org.joml.Vector3f(0, 0, def.isKnife() ? -45 : 0), "body", false));
+            parts = InspectRig.packParts(def.weapon(), m.packModelScale());
         }
         InspectModels.Anchor selectedAnchor = reveal ? m.revealAnchor() : bodyHand ? m.handAnchor() : m.anchor();
         float scale = reveal ? 1f : bodyHand ? m.handModelScale() : m.modelScale();
@@ -210,31 +205,11 @@ public final class InspectService implements Listener {
     }
 
     private static Matrix4f matrix(InspectAnimation animation, ModelPart part, int t, float scale, boolean leftHand, boolean bodyHand) {
-        // parts of the main body follow the "roll" group when the animation has one: it is a child of
-        // "body", so it turns the knife around its own blade axis (the CS-style flip to the other side)
-        return matrix(animation.groupMatrix(group(animation, part), t), animation.groupMatrix("body", t), part, scale, leftHand, bodyHand);
+        return InspectTransform.at(animation, part, t, scale, leftHand, bodyHand);
     }
-
-    private static String group(InspectAnimation animation, ModelPart part) {
-        return part.group().equals("body") && animation.hasGroup("roll") ? "roll" : part.group();
-    }
-
+    private static String group(InspectAnimation animation, ModelPart part) { return InspectTransform.group(animation, part); }
     private static Matrix4f matrix(Matrix4f raw, Matrix4f body, ModelPart part, float scale, boolean leftHand, boolean bodyHand) {
-        Matrix4f pose = new Matrix4f(raw);
-        // Enlarging the asset must not also enlarge its travel. Keep rotations intact and
-        // constrain the shared root movement so the grip stays near the hand during flips.
-        float damp = bodyHand ? 0.9f : 0.5f;
-        pose.m30(pose.m30() - body.m30() * damp).m31(pose.m31() - body.m31() * damp).m32(pose.m32() - body.m32() * damp);
-        Matrix4f m = new Matrix4f(BASIS).scale(leftHand ? -scale : scale, scale, scale).mul(pose);
-        m.translate(part.position())
-                .rotateXYZ((float) Math.toRadians(part.rotation().x), (float) Math.toRadians(part.rotation().y),
-                        (float) Math.toRadians(part.rotation().z))
-                .scale(part.size());
-        if (part.type() == ModelPart.Type.BLOCK) {
-            // block displays render from their corner; centre the unit cube on the part position
-            m.translate(-0.5f, -0.5f, -0.5f);
-        }
-        return m;
+        return InspectTransform.matrix(raw, body, part, scale, leftHand, bodyHand);
     }
 
     /** Keeps the scene in front of the player; only teleports when the view actually changed. */
@@ -299,6 +274,13 @@ public final class InspectService implements Listener {
             ItemStack item;
             if (part.material().equals("$item")) {
                 item = skinItem;
+            } else if (part.material().startsWith("$rig:")) {
+                item = skinItem.clone();
+                item.editMeta(meta -> {
+                    org.bukkit.NamespacedKey base = meta.getItemModel();
+                    if (base != null) meta.setItemModel(new org.bukkit.NamespacedKey(base.getNamespace(),
+                            "inspect/" + base.getKey().replaceFirst("^skin/", "") + "/" + part.material().substring(5)));
+                });
             } else {
                 Material mat = material(part.material(), resolved, Material.IRON_SWORD);
                 item = new ItemStack(mat.isItem() ? mat : Material.IRON_SWORD);

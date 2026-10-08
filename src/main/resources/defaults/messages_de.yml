@@ -626,3 +626,72 @@ tradein:
   unavailable: "<prefix><yellow>Trade-in ist derzeit nicht verfügbar."
   result: "<prefix><green>Trade-in abgeschlossen: <skin>"
   gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>hat durch einen <bold>TRADE-IN</bold> <skin> gewonnen!"
+
+# Case recommendations and filters
+case-guide:
+  info:
+    name: <gold>So entsteht die Rangliste
+    lore:
+    - <gray>Preis enthält Case und passenden Schlüssel.
+    - <gray>Value = erwartete Belohnungspunkte / Preis.
+    - '<gray>Punkte pro Stufe: 1 / 8 / 40 / 220 / 1800*'
+    - '<gray>*Messer: ×(0,5 + Präferenz / 100), dann Finish.'
+    - <gray>Serverpunkte; kein versprochener Verkaufserlös.
+    - '<gray>Eigene Gewichtung: case-guide.yml'
+    - '<gray>Präferenzen: kuratierter Stand <date>.'
+    - <gray>cs2.io/en/skins/knives · r/csmoneyofficial
+    - '<gray>Float, Pattern und StatTrak: kein Punktebonus.'
+  sort:
+    name: '<aqua>Sortierung: <value>'
+    lore:
+    - '<gray>Links: weiter · Rechts: zurück'
+  sorts:
+    value: Beste Value
+    price_asc: Günstigste zuerst
+    price_desc: Teuerste zuerst
+    community: Messerpräferenzen
+    owned: Besitz zuerst
+    name: Name
+  knife:
+    name: '<gold>Messer: <value>'
+    lore:
+    - <gray>Alle, Favoriten oder ein bestimmtes Messer.
+    - '<gray>Links: weiter · Rechts: zurück'
+  knives:
+    all: Alle
+    favorites: Community-Favoriten
+    owned: Eigene Cases
+  budget:
+    name: '<aqua>Max. Preis: <value> <currency>'
+    lore:
+    - '<gray>Links: Betrag eingeben · Rechts: löschen'
+    - <gray>Händlercase + Schlüssel, pro Öffnung.
+  budget-prompt: <aqua>Maximaler Gesamtpreis? 0–4294967294 eingeben oder abbrechen.
+  bad-budget: <red>Bitte eine ganze, nichtnegative Zahl eingeben.
+  search:
+    name: '<aqua>Suche: <value>'
+    lore:
+    - '<gray>Links: suchen · Rechts: löschen'
+  search-prompt: <aqua>Case-Name oder ID? Mit abbrechen zurück.
+  owned:
+    name: '<yellow>Anzeigen: <value>'
+    lore:
+    - <gray>Klicken für eigene/alle Cases.
+  reset:
+    name: <yellow>Filter zurücksetzen
+    lore:
+    - <gray>Alle Cases nach Value anzeigen.
+  empty:
+    name: <gray>Keine passenden Cases
+    lore:
+    - <gray>Filter ändern oder zurücksetzen.
+  unlimited: Alle
+  unavailable: Nicht verkauft
+  metrics:
+  - '<gray>Case + Schlüssel: <white><cost> <currency>'
+  - '<gray>EV: <white><points> Punkte'
+  - '<gray>Value: <green><value> Punkte / <currency>'
+  - '<gray>Beliebiges Messer: <gold><knives>%'
+  - '<gray>Favoriten-Messer: <gold><favorites>%'
+  - '<gray>Messerpräferenz: <white><community> / 100'
+  target: '<gray><knife>: <gold><chance>% pro Öffnung'
