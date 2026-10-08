@@ -36,6 +36,8 @@ public final class CaseGuide {
             else out.put(id, n);
         }
     }
+    public double tierPoints(String rarity) { return rarityPoints.getOrDefault(rarity, 0d); }
+    public double favoriteThreshold() { return favoriteThreshold; }
     public String snapshot() { return snapshot; }
     public boolean favorite(String knife) { return scores.getOrDefault(knife, 0d) >= favoriteThreshold; }
     public double points(SkinDefinition skin) {

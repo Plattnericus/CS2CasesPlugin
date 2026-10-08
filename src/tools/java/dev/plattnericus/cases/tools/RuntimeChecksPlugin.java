@@ -24,7 +24,11 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
             if (player == null) { sender.sendMessage("Player is not online."); return true; }
             try {
                 CasesContext ctx = context();
-                if (args.length >= 4 && args[1].equals("visual")) {
+                if (args.length == 2 && args[1].equals("guide")) {
+                    CaseGuideRuntimeChecks.run(sender, player, ctx);
+                } else if (args.length == 3 && args[1].equals("guiclick")) {
+                    CaseGuideRuntimeChecks.click(player, Integer.parseInt(args[2]));
+                } else if (args.length >= 4 && args[1].equals("visual")) {
                     VisualRuntimeChecks.frame(sender, player, ctx, args);
                 } else if (args.length == 2 && args[1].equals("gold")) {
                     CommerceRuntimeChecks.gold(this, sender, player, ctx);

@@ -1,5 +1,8 @@
 # MCCases
 
+Version 1.2 adds individual inspect rigs for all 20 knives and 35 weapons, plus case price/value/knife filters. See [the rig and case guide](docs/INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+
+
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
 **Version 1.1.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)

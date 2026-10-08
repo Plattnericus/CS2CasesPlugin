@@ -634,7 +634,7 @@ case-guide:
     lore:
     - <gray>Preis enthält Case und passenden Schlüssel.
     - <gray>Value = erwartete Belohnungspunkte / Preis.
-    - '<gray>Punkte pro Stufe: 1 / 8 / 40 / 220 / 1800*'
+    - '<gray>Punkte pro Stufe: <tiers>*'
     - '<gray>*Messer: ×(0,5 + Präferenz / 100), dann Finish.'
     - <gray>Serverpunkte; kein versprochener Verkaufserlös.
     - '<gray>Eigene Gewichtung: case-guide.yml'

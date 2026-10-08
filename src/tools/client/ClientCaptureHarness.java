@@ -44,6 +44,19 @@ public final class ClientCaptureHarness {
                                 Class<?> visibility = Class.forName("net.minecraft.world.entity.player.ChatVisiblity");
                                 setting.getClass().getMethod("set", Object.class).invoke(setting, visibility.getField(args[1]).get(null));
                             }
+                            case "command", "chattext" -> {
+                                Object player = minecraftClass.getField("player").get(mc);
+                                Object connection = player.getClass().getField("connection").get(player);
+                                connection.getClass().getMethod(args[0].equals("command") ? "sendCommand" : "sendChat", String.class).invoke(connection, args[1]);
+                            }
+                            case "hover" -> {
+                                Object window = minecraftClass.getMethod("getWindow").invoke(mc);
+                                String[] xy = args[1].split(",");
+                                double x = Double.parseDouble(xy[0]) * ((Number)window.getClass().getMethod("getScreenWidth").invoke(window)).doubleValue();
+                                double y = Double.parseDouble(xy[1]) * ((Number)window.getClass().getMethod("getScreenHeight").invoke(window)).doubleValue();
+                                Object mouse = minecraftClass.getField("mouseHandler").get(mc);
+                                for (String axis : new String[]{"xpos", "ypos"}) { var f=mouse.getClass().getDeclaredField(axis);f.setAccessible(true);f.setDouble(mouse,axis.equals("xpos")?x:y); }
+                            }
                             case "shot" -> {
                                 Object renderer = minecraftClass.getField("gameRenderer").get(mc);
                                 Object target = renderer.getClass().getMethod("mainRenderTarget").invoke(renderer);

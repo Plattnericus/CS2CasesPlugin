@@ -14,9 +14,9 @@ public final class InspectRig {
 
     public static List<Layer> layers(WeaponType weapon) {
         String id = weapon.id();
-        if (id.equals("shadow_daggers") || id.equals("dual_berettas")) return List.of(
-                new Layer("body", "pair_a", new Vector3f(-.09f, .07f, -.035f)),
-                new Layer("body", "pair_b", new Vector3f(.09f, -.07f, .035f)));
+        if (paired(weapon)) return List.of(
+                new Layer(id.equals("dual_berettas") ? "pistol_a" : "body", "pair_a", new Vector3f(-.14f, .03f, -.035f)),
+                new Layer(id.equals("dual_berettas") ? "pistol_b" : "body", "pair_b", new Vector3f(.40f, -.03f, .035f)));
         if (id.equals("butterfly")) return List.of(new Layer("blade", "body", new Vector3f()),
                 new Layer("handle_a", "handle_a", new Vector3f()), new Layer("handle_b", "handle_b", new Vector3f()));
         if (FOLDERS.contains(id)) return List.of(new Layer("body", "body", new Vector3f()), new Layer("blade", "blade", new Vector3f()));
@@ -26,6 +26,7 @@ public final class InspectRig {
 
     /** Coordinates refer to the original, unrotated square weapon canvas, preserving the hinge. */
     public static String layerAt(WeaponType weapon, double x, double y) {
+        if (weapon.id().equals("dual_berettas")) return y < .44 || (x < .32 && y < .59) ? "pistol_a" : "pistol_b";
         if (weapon.id().equals("butterfly")) {
             if (x >= .505) return "blade";
             return y < .49 ? "handle_a" : "handle_b";
@@ -49,6 +50,8 @@ public final class InspectRig {
         }
         return "body";
     }
+
+    public static boolean paired(WeaponType weapon) { return weapon.id().equals("shadow_daggers") || weapon.id().equals("dual_berettas"); }
 
     public static List<ModelPart> packParts(WeaponType weapon, float scale) {
         List<ModelPart> parts = new ArrayList<>();

@@ -62,17 +62,20 @@ public final class InspectModels {
             ConfigurationSection entries = profiles.getConfigurationSection(section);
             if (entries != null) for (String key : entries.getKeys(false)) y.set(section + "." + key, entries.get(key));
         }
-        anchor = anchor(y.getConfigurationSection("anchor"), new Anchor(1.25, 0.57, -0.07));
+        Anchor configuredAnchor = anchor(y.getConfigurationSection("anchor"), new Anchor(1.25, 0.57, -0.07));
+        // Only migrate the stock camera. Explicit server anchor edits keep their exact values.
+        anchor = profiles.getBoolean("enabled", true) && configuredAnchor.equals(new Anchor(1.25, .57, -.07))
+                ? anchor(profiles.getConfigurationSection("anchor"), new Anchor(1.75, .43, -.07)) : configuredAnchor;
         revealAnchor = anchor(y.getConfigurationSection("reveal-anchor"), new Anchor(1.35, 0, -0.05));
         handAnchor = anchor(y.getConfigurationSection("hand-anchor"), new Anchor(0.26, 0.34, -0.8));
-        handModelScale = (float) y.getDouble("hand-model-scale", 1.3);
+        handModelScale = number(y, "hand-model-scale", 1.3f, .1f, 4, warn);
         maxParts = Math.max(1, Math.min(32, y.getInt("max-parts", 16)));
-        viewRange = (float) y.getDouble("view-range", 0.5);
-        brightness = y.getInt("brightness", 15);
-        followThreshold = y.getDouble("follow-threshold", 0.015);
+        viewRange = number(y, "view-range", .5f, .1f, 16, warn);
+        brightness = Math.clamp(y.getInt("brightness", 15), -1, 15);
+        followThreshold = number(y, "follow-threshold", .015f, 0, 1, warn);
         packModel = y.getBoolean("pack-model", true);
-        packModelScale = (float) y.getDouble("pack-model-scale", 0.75);
-        modelScale = (float) y.getDouble("model-scale", 1.24);
+        packModelScale = number(y, "pack-model-scale", .75f, .1f, 4, warn);
+        modelScale = number(y, "model-scale", 1.24f, .1f, 4, warn);
 
         ConfigurationSection al = y.getConfigurationSection("aliases");
         if (al != null) {
@@ -160,7 +163,15 @@ public final class InspectModels {
         if (s == null) {
             return def;
         }
-        return new Anchor(s.getDouble("forward", def.forward()), s.getDouble("right", def.right()), s.getDouble("up", def.up()));
+        double forward = s.getDouble("forward", def.forward()), right = s.getDouble("right", def.right()), up = s.getDouble("up", def.up());
+        if (!Double.isFinite(forward) || !Double.isFinite(right) || !Double.isFinite(up) || Math.abs(forward)>8 || Math.abs(right)>8 || Math.abs(up)>8) return def;
+        return new Anchor(forward, right, up);
+    }
+
+    private static float number(YamlConfiguration y, String key, float fallback, float min, float max, Consumer<String> warn) {
+        double value = y.getDouble(key, fallback);
+        if (!Double.isFinite(value) || value < min || value > max) { warn.accept("inspect.yml: invalid " + key + "; using " + fallback); return fallback; }
+        return (float)value;
     }
 
     private KnifeModel model(String id, ConfigurationSection m, Consumer<String> warn) {
@@ -186,9 +197,14 @@ public final class InspectModels {
                 warn.accept("inspect.yml: model '" + id + "' part '" + pid + "' has unknown type");
                 continue;
             }
-            parts.add(new ModelPart(pid, type, p.getString("material", "$primary"), vec(p, "position", 0),
-                    vec(p, "size", 0.1f), vec(p, "rotation", 0), p.getString("group", "body"), p.getBoolean("glow", false)));
+            Vector3f position = vec(p, "position", 0), size = vec(p, "size", .1f), rotation = vec(p, "rotation", 0);
+            if (!position.isFinite() || !size.isFinite() || !rotation.isFinite() || size.x<=0 || size.y<=0 || size.z<=0
+                    || position.length()>8 || Math.max(size.x,Math.max(size.y,size.z))>4) {
+                warn.accept("inspect.yml: invalid geometry in " + id + "." + pid + "; skipping part"); continue;
+            }
+            parts.add(new ModelPart(pid, type, p.getString("material", "$primary"), position, size, rotation, p.getString("group", "body"), p.getBoolean("glow", false)));
         }
+        if (parts.isEmpty()) { warn.accept("inspect.yml: model " + id + " has no valid parts"); return null; }
         return new KnifeModel(id, m.getString("animation", "default"), parts);
     }
 
