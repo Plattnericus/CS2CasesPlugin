@@ -629,6 +629,7 @@ tradein:
 
 # Case recommendations and filters
 case-guide:
+  contents: <dark_gray><count> mögliche Items
   info:
     name: <gold>So entsteht die Rangliste
     lore:

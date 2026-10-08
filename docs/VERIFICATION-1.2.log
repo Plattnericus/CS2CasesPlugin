@@ -1,0 +1,127 @@
+MCCases 1.2.0 verification — 2026-10-08
+Java 25.0.2; Paper 26.3 build 159 beta; two vanilla Minecraft 26.3 clients; SQLite.
+Development setup failures were resolved as described in VERIFICATION-1.2.md.
+
+FINAL BUILD
+> Task :compileJava
+> Task :defaultsIndex
+> Task :processResources
+> Task :classes
+> Task :compileToolsJava
+> Task :processToolsResources NO-SOURCE
+> Task :toolsClasses
+> Task :resourcePack
+Resource pack: 743 skins, 22 cases, 1 keys -> /Users/nexor/Github/CS2CasesPlugin/build/distributions/MCCases-ResourcePack-1.2.0.zip
+> Task :jar
+> Task :assemble
+> Task :devChecks
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :verifyFeatures
+PASS: all 55 weapon rigs / 165 individual timelines, 451488 finite joint frames in right/left eye/hand views, 70° 4:3 camera bounds; held-pose continuity, cyclic-rig rejection, full dealer price/overflow/unknown price and exact knife probabilities.
+PASS: price bounds, item-payment prepare/complete/cancel, concurrent buyers, exact identity transfer, partial/repeated claims, injected SQL rollback/retry, reservations, restart recovery, v1/v2 legacy migration.
+PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.
+Verified 743 skins, 22 cases, 5500 rewards/reels, weighted odds, wear boundaries, inventory queries and journal recovery codec.
+Verified 45 language schemas, German/English commerce texts and English fallbacks, regional fallbacks, 46 animation timelines and reel easing.
+> Task :check
+> Task :build
+BUILD SUCCESSFUL in 12s
+8 actionable tasks: 8 executed
+
+API 26.2 COMPATIBILITY
+> Task :compileJava
+
+BUILD SUCCESSFUL in 970ms
+1 actionable task: 1 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
+
+FINAL RUNTIME PASSES
+[18:16:00] [Server thread/INFO]: [MCCases] Enabled with 743 skins in 22 cases (1294 ms). Made by Plattnericus - plattnericus.dev
+[18:17:24] [Server thread/INFO]: [MCCasesDevChecks] PASS ITEM RUNTIME: genuine Paper emerald stacks/PDC, storage+offhand payment, armor exclusion, negative/overflow/insufficient funds, full/partial inventory claims, idempotent receipts, 20 exact case/key pairs, test provenance and v1/v2 opening journals. Controlled player proxy; no connected-client gameplay test.
+[18:18:45] [Server thread/INFO]: PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection.
+[18:19:10] [Server thread/INFO]: PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.
+[18:19:53] [Server thread/INFO]: PASS GOLD RUNTIME: two five-Covert contracts, atomic consumption, actual rare-special outputs, suppressed ADMIN announcement and exactly one claimed TRADE_IN announcement.
+[18:20:07] [Server thread/INFO]: PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.
+[18:21:10] [Server thread/INFO]: PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.
+[18:21:10] [Server thread/INFO]: PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.
+[18:21:10] [Server thread/INFO]: PASS: command-only skin inventory; legacy marked stars/cursor/offhand removed; ordinary stars retained and former reserved slot usable.
+[18:21:10] [Server thread/INFO]: PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.
+[18:21:41] [Server thread/INFO]: PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.
+[18:21:41] [Server thread/INFO]: PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.
+[18:21:41] [Server thread/INFO]: PASS: command-only skin inventory; legacy marked stars/cursor/offhand removed; ordinary stars retained and former reserved slot usable.
+[18:21:41] [Server thread/INFO]: PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.
+[18:21:41] [Server thread/INFO]: PASS: journal mutations and malformed-entry recovery; case/shop/skin/list menus render and protect icons; dealer interaction and damage protection.
+[18:21:42] [Server thread/INFO]: PASS: /inventory keeps the gallery open while scrolling/using number keys in both sneak states; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.
+[18:21:43] [Server thread/INFO]: PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.
+[18:21:43] [Server thread/INFO]: PASS: resource-pack item and map previews, asynchronous cancellation, callback and real inventory preserved.
+[18:21:43] [Server thread/INFO]: PASS: SQLite opening transaction/idempotency, PENDING recovery, favorite, concurrent StatTrak increments, equip persistence and offline profile snapshot.
+[18:21:52] [Server thread/INFO]: PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.
+[18:23:42] [Server thread/INFO]: PASS TWO CLIENTS: actual locales en_US / en_US; plugin language en / en; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup.
+[18:24:07] [Server thread/INFO]: PASS INVENTORY MODES: /inventory hologram -> /inventory vanilla protected skin menu -> hologram; stale other-player requests rejected, old display removed, number-key and drag protection.
+[18:26:29] [Server thread/INFO]: [Cases] Reloaded in 763 ms: 743 skins, 22 cases, 0 warnings (see console).
+
+LIVE ANIMATION COMPLETION
+PASS LIVE glock18
+PASS LIVE usps
+PASS LIVE p2000
+PASS LIVE p250
+PASS LIVE fiveseven
+PASS LIVE tec9
+PASS LIVE cz75
+PASS LIVE dual_berettas
+PASS LIVE deagle
+PASS LIVE r8_revolver
+PASS LIVE mac10
+PASS LIVE mp9
+PASS LIVE mp7
+PASS LIVE mp5sd
+PASS LIVE ump45
+PASS LIVE p90
+PASS LIVE ppbizon
+PASS LIVE ak47
+PASS LIVE m4a4
+PASS LIVE m4a1s
+PASS LIVE galil
+PASS LIVE famas
+PASS LIVE aug
+PASS LIVE sg553
+PASS LIVE ssg08
+PASS LIVE awp
+PASS LIVE scar20
+PASS LIVE g3sg1
+PASS LIVE nova
+PASS LIVE xm1014
+PASS LIVE sawedoff
+PASS LIVE mag7
+PASS LIVE m249
+PASS LIVE negev
+PASS LIVE zeus
+PASS LIVE karambit
+PASS LIVE butterfly
+PASS LIVE m9_bayonet
+PASS LIVE bayonet
+PASS LIVE flip
+PASS LIVE gut
+PASS LIVE huntsman
+PASS LIVE falchion
+PASS LIVE bowie
+PASS LIVE shadow_daggers
+PASS LIVE navaja
+PASS LIVE stiletto
+PASS LIVE talon
+PASS LIVE ursus
+PASS LIVE classic
+PASS LIVE paracord
+PASS LIVE survival
+PASS LIVE nomad
+PASS LIVE skeleton
+PASS LIVE kukri
+COMPLETE LIVE 55
+
+ASSET ZIP: 1233 nonempty inspect models; 14585 textured cuboids; all texture references present.
+VISUAL: 1410 unique real client captures; 55 weapons; all 165 profiles.
+PYTHON: 2 launcher tests passed.
+PASS fallback rigs: butterfly, shadow_daggers, ak47; both actual clients and cleanup.
+PASS actual client disconnect: frozen Butterfly multipart owner/public scene removed completely.

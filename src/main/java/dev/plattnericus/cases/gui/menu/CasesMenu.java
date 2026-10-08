@@ -77,7 +77,7 @@ public final class CasesMenu extends Menu {
         int pages = GuiItems.pages(cases.size(), perPage);
         page = Math.min(page, pages - 1);
         set(4, GuiItems.icon(ctx.messages(viewer), Material.BOOK, "case-guide.info", Text.unparsed("date", guide.snapshot()),
-                Text.unparsed("tiers", ctx.catalog().raritiesOrdered().stream().map(r -> String.format(java.util.Locale.ROOT, "%g", guide.tierPoints(r.id()))).collect(java.util.stream.Collectors.joining(" / "))),
+                Text.unparsed("tiers", ctx.catalog().raritiesOrdered().stream().map(r -> java.math.BigDecimal.valueOf(guide.tierPoints(r.id())).stripTrailingZeros().toPlainString()).collect(java.util.stream.Collectors.joining(" / "))),
                 Text.unparsed("threshold", guide.favoriteThreshold())));
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "case-guide.sort", Text.component("value", ctx.messages(viewer).item("case-guide.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
             sort = Sort.values()[(sort.ordinal() + (c.isRightClick() ? Sort.values().length - 1 : 1)) % Sort.values().length]; page = 0; playClick(); render();
@@ -114,7 +114,9 @@ public final class CasesMenu extends Menu {
             int keys = items.count(viewer, CaseItems.TYPE_KEY, def.keyId());
             ItemStack icon = items.caseIcon(def, ctx.messages(viewer));
             icon.editMeta(meta -> {
-                List<Component> lore = new ArrayList<>(meta.lore() == null ? List.of() : meta.lore());
+                List<Component> lore = new ArrayList<>();
+                for (String line : def.description()) lore.add(Text.item("<gray>" + Text.escape(line)));
+                lore.add(ctx.messages(viewer).item("case-guide.contents", Text.unparsed("count", def.size())));
                 lore.addAll(ctx.messages(viewer).itemList("gui.cases.entry",
                         Text.unparsed("owned", owned), Text.unparsed("keys", keys)));
                 var m = metrics.get(def.id());

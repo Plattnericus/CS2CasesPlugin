@@ -47,6 +47,6 @@ The top-six preset follows the publisher's demand order in the [CS2.IO knife cat
 
 ## Install
 
-Use `release/MCCases-1.2.0.jar` with `release/MCCases-ResourcePack-1.2.0.zip`. Update both together: the new inspect meshes require the new pack. The pack stays within the configured namespace and does not replace vanilla files. Existing admin config files and catalog data are preserved; new profile/guide files and missing language entries are added. `inspect-profiles.yml` supplies the new individual pools independently of the old file.
+Use `release/MCCases-1.2.0.jar` with `release/MCCases-ResourcePack-1.2.0.zip`. Update both together: the new inspect meshes require the new pack. Enable `resource-pack.enabled: true` only after clients receive that pack, or configure the built-in distribution as described in the README. Without the pack, articulated block models remain available. The pack stays within the configured namespace and does not replace vanilla files. Existing admin config files and catalog data are preserved; new profile/guide files and missing language entries are added. `inspect-profiles.yml` supplies the new individual pools independently of the old file.
 
 As in 1.1, stop the server and back up the plugin data folder, database and player files together before replacing the plugin. The development checks JAR and client capture harness are audit tools; install neither on the production server.

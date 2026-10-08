@@ -62,7 +62,7 @@ def main():
     shot('client',f'{id}_{v}_left',data);shot('observer',f'{id}_{v}_left_front',data)
     frame(id,v,22,'hand',1)
     for camera,suffix in [('THIRD_PERSON_BACK','f5_back'),('THIRD_PERSON_FRONT','f5_front')]:
-     client(root,'client','camera|'+camera);time.sleep(.65);shot('client',f'{id}_{v}_{suffix}',dict(data,mode='hand',camera=camera))
+     client(root,'client','camera|'+camera);time.sleep(.65);shot('client',f'{id}_{v}_{suffix}',dict(data,mode='hand',camera=camera,angle=1))
     client(root,'client','camera|FIRST_PERSON');client(root,'client','hand|RIGHT');time.sleep(.15)
   (out/'manifest.json').write_text(json.dumps(manifest,indent=2));print(f'CAPTURED {id}: {len(manifest)} frames',flush=True)
  rcon.command('mccasesdevcheck DevTester visual DevObserver stop');print(f'COMPLETE {len(manifest)} real frames',flush=True)
