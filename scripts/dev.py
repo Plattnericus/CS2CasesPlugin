@@ -70,16 +70,16 @@ def prepare_client_preferences(client):
 
 def prepare():
  SERVER.mkdir(parents=True,exist_ok=True);CLIENT.mkdir(parents=True,exist_ok=True)
- download('https://fill-data.papermc.io/v1/objects/b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083/paper-26.2-129.jar',SERVER/'paper.jar','b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083')
- version=json.loads((GAME/'versions/26.2/26.2.json').read_text())
+ download('https://fill-data.papermc.io/v1/objects/2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0/paper-26.3-159.jar',SERVER/'paper.jar','2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0')
+ version=json.loads((GAME/'versions/26.3/26.3.json').read_text())
  prepare_assets(version)
  for lib in version['libraries']:
   artifact=lib.get('downloads',{}).get('artifact')
   if artifact and not (GAME/'libraries'/artifact['path']).exists():
    download(artifact['url'],RUNTIME/'libraries'/artifact['path'],artifact['sha1'],'sha1')
  plugins=SERVER/'plugins/MCCases';plugins.mkdir(parents=True,exist_ok=True)
- shutil.copy2(ROOT/'build/libs/MCCases-1.0.0.jar',SERVER/'plugins/MCCases-1.0.0.jar')
- checks=ROOT/'build/libs/MCCases-DevChecks.jar'
+ shutil.copy2(ROOT/'build/libs/MCCases-1.1.0.jar',SERVER/'plugins/MCCases-1.1.0.jar')
+ checks=ROOT/'build/libs/MCCases-DevChecks-1.1.0.jar'
  if checks.exists():shutil.copy2(checks,SERVER/'plugins'/checks.name)
  for source in (ROOT/'src/main/resources/defaults').glob('messages_*.yml'):shutil.copy2(source,plugins/source.name)
  shutil.copy2(ROOT/'src/main/resources/defaults/inspect.yml',plugins/'inspect.yml')
@@ -119,7 +119,7 @@ def client_command(username='DevTester'):
   shutil.copy2(CLIENT/'resourcepacks/MCCases.zip',client/'resourcepacks/MCCases.zip')
   if not (client/'options.txt').exists():(client/'options.txt').write_text('renderDistance:4\nmaxFps:30\nonboardAccessibility:false\n')
  prepare_client_preferences(client)
- version=json.loads((GAME/'versions/26.2/26.2.json').read_text())
+ version=json.loads((GAME/'versions/26.3/26.3.json').read_text())
  libraries=[]
  for lib in version['libraries']:
   allow=not lib.get('rules')
@@ -133,14 +133,14 @@ def client_command(username='DevTester'):
    if not path.exists():path=RUNTIME/'libraries'/lib['downloads']['artifact']['path']
    if not path.exists():raise RuntimeError(f'Missing installed client library: {path.name}')
    libraries.append(str(path))
- jar=GAME/'versions/26.2/26.2.jar'
- if not jar.exists():raise RuntimeError('Minecraft 26.2 client jar is not installed')
+ jar=GAME/'versions/26.3/26.3.jar'
+ if not jar.exists():raise RuntimeError('Minecraft 26.3 client jar is not installed')
  libraries.append(str(jar));natives=client/'natives';natives.mkdir(exist_ok=True)
  ident=bytearray(hashlib.md5(('OfflinePlayer:'+username).encode()).digest());ident[6]=(ident[6]&15)|48;ident[8]=(ident[8]&63)|128
  return [str(JAVA),'-XstartOnFirstThread','-Xmx2G','--sun-misc-unsafe-memory-access=allow','--enable-native-access=ALL-UNNAMED',
   f'-Djava.library.path={natives}/java',f'-Djna.tmpdir={natives}/jna',f'-Dorg.lwjgl.system.SharedLibraryExtractPath={natives}/lwjgl',f'-Dio.netty.native.workdir={natives}/netty',
   '-Dminecraft.launcher.brand=MCCasesDev','-Dminecraft.launcher.version=1.0','-cp',os.pathsep.join(libraries),version['mainClass'],
-  '--username',username,'--version','26.2','--gameDir',str(client),'--assetsDir',str(RUNTIME/'assets'),'--assetIndex',version['assetIndex']['id'],
+  '--username',username,'--version','26.3','--gameDir',str(client),'--assetsDir',str(RUNTIME/'assets'),'--assetIndex',version['assetIndex']['id'],
   '--uuid',str(uuid.UUID(bytes=bytes(ident))),'--accessToken','0','--clientId','MCCasesDev','--xuid','0','--versionType','release',
   '--width','1280','--height','720','--quickPlayMultiplayer','127.0.0.1:25565']
 

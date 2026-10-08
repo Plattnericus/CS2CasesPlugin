@@ -10,7 +10,7 @@ public final class SkinInstance {
 
     public enum Status { PENDING, OWNED, LISTED, REMOVED }
 
-    public enum Origin { CASE, ADMIN, TEST }
+    public enum Origin { CASE, ADMIN, TEST, TRADE_IN }
 
     private final UUID id;
     private final UUID owner;

@@ -77,8 +77,8 @@ public final class CasesMenu extends Menu {
             set(GuiItems.CONTENT[i], icon, click -> {
                 playClick();
                 if (click.isRightClick() && owned > 0 && keys > 0) {
-                    viewer.closeInventory();
                     ctx.openings().open(viewer, def, false, false);
+                    render();
                 } else {
                     new CasePreviewMenu(ctx, viewer, def, this::reopen).open();
                 }
@@ -95,6 +95,7 @@ public final class CasesMenu extends Menu {
                 render();
             }
         });
+        set(53, GuiItems.icon(ctx.messages(viewer), Material.CLOCK, "opening.active-button"), c -> new dev.plattnericus.cases.opening.ActiveOpeningsMenu(ctx, viewer).open());
         set(GuiItems.SLOT_CENTER, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
         set(GuiItems.SLOT_NEXT, GuiItems.next(ctx.messages(viewer), page, pages), c -> {
             if (page + 1 < pages) {

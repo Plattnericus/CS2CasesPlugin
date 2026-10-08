@@ -56,7 +56,7 @@ final class RevealEffects {
                 Text.component("skin", full), Text.unparsed("case", caseDef.name()),
                 Text.unparsed("float", ctx.formatter(player).floatText(instance.floatValue(), false)),
                 Text.unparsed("pattern", instance.pattern()));
-        if (!testOnly && reward.rarity().rareSpecial() && ctx.settings().opening().broadcastRare()) {
+        if (!testOnly && instance.origin() == SkinInstance.Origin.CASE && reward.rarity().rareSpecial() && ctx.settings().opening().broadcastRare()) {
             for (Player other : Bukkit.getOnlinePlayers()) {
                 if (other != player) {
                     ctx.messages(other).send(other, "opening.broadcast", Text.unparsed("player", player.getName()),

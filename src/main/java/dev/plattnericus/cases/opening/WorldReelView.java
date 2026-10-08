@@ -34,15 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The reel as a floating strip in the world, visible to everyone nearby.
- * <p>
- * Every reel item is its own display entity with a fixed item, so the item that stops under the
- * marker is by construction the item at the winner index: nothing is ever swapped or snapped. The
- * whole strip is moved with keyframes (one target every few ticks, the client interpolates in
- * between); the keyframes follow the same ease-out curve as the session and the last keyframe puts
- * the winner exactly on the marker. Items outside the window are scaled to zero.
- */
+/** Public reel with a bounded ring of display entities reused outside the visible window. */
 final class WorldReelView implements OpeningView {
 
     private static final AxisAngle4f NO_ROTATION = new AxisAngle4f();
@@ -58,6 +50,7 @@ final class WorldReelView implements OpeningView {
     private final double window;
     private final List<ItemDisplay> items = new ArrayList<>();
     private final List<BlockDisplay> bars = new ArrayList<>();
+    private int[] represented;
     private final List<Entity> all = new ArrayList<>();
     private final Map<String, ItemStack> icons = new HashMap<>();
     private TextDisplay title;
@@ -85,8 +78,9 @@ final class WorldReelView implements OpeningView {
                 new Vector3f((float) width, (float) (cfg.itemScale() + 0.36), 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (half + 0.04), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (-half - 0.14), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
+        represented = new int[cfg.visibleItems() + 4]; java.util.Arrays.fill(represented, -1);
         List<SkinDefinition> reel = session.reel;
-        for (int i = 0; i < reel.size(); i++) {
+        for (int i = 0; i < cfg.visibleItems() + 4; i++) {
             SkinDefinition def = reel.get(i);
             ItemStack stack = icon(def, false);
             ItemDisplay item = anchor.getWorld().spawn(anchor, ItemDisplay.class, d -> {
@@ -156,6 +150,12 @@ final class WorldReelView implements OpeningView {
             distance = Math.max(1.2, eye.toVector().distance(hit.getHitPosition()) - 0.5);
         }
         Location loc = eye.clone().add(forward.multiply(distance)).add(0, cfg.height(), 0);
+        // Separate lanes for concurrent openings, including the result hold period.
+        Vector right = eye.getDirection().setY(0).normalize().crossProduct(new Vector(0, 1, 0)).normalize();
+        int column = session.lane % 3;
+        int row = session.lane / 3;
+        loc.add(right.multiply((column == 0 ? 0 : column == 1 ? -1 : 1) * (cfg.visibleItems() * cfg.spacing() + 0.7)))
+                .add(0, row * (cfg.itemScale() + 0.85), 0);
         loc.setYaw(eye.getYaw() + 180);
         loc.setPitch(0);
         return loc;
@@ -215,7 +215,12 @@ final class WorldReelView implements OpeningView {
     private void place(double center, int duration) {
         float half = (float) (cfg.itemScale() / 2);
         for (int i = 0; i < items.size(); i++) {
-            float x = (float) ((i - center) * cfg.spacing());
+            int first = (int) Math.floor(center) - items.size() / 2;
+            int index = first + Math.floorMod(i - first, items.size());
+            int safeIndex = Math.clamp(index, 0, session.reel.size() - 1);
+            SkinDefinition def = session.reel.get(safeIndex);
+            if (represented[i] != safeIndex) { items.get(i).setItemStack(icon(def, false)); bars.get(i).setBlock(barBlock(def.rarity())); represented[i] = safeIndex; }
+            float x = (float) ((index - center) * cfg.spacing());
             float edge = (float) Math.min(1, Math.abs(x) / (window + 0.0001));
             boolean visible = Math.abs(x) <= window;
             float s = visible ? (float) (cfg.itemScale() * (1 - 0.35 * edge * edge)) : 0f;
@@ -239,7 +244,7 @@ final class WorldReelView implements OpeningView {
         }
         SkinDefinition reward = session.reward;
         int w = session.winnerIndex;
-        ItemDisplay winner = items.get(w);
+        ItemDisplay winner = items.get(Math.floorMod(w, items.size()));
         // the same entity that scrolled in: only the gold mystery icon is replaced by the real item
         if (reward.rarity().rareSpecial()) {
             winner.setItemStack(icon(reward, true));
@@ -286,6 +291,7 @@ final class WorldReelView implements OpeningView {
             e.remove();
         }
         all.clear();
+        service.viewClosed(session);
     }
 
     private ItemStack icon(SkinDefinition def, boolean revealedWinner) {

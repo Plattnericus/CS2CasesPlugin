@@ -41,27 +41,33 @@ public final class CommerceCommands {
         commands.register("market", "Buy and sell skins", List.of("marketplace", "skinmarket"), new BasicCommand() {
             @Override public String permission() { return "mccases.market"; }
             @Override public void execute(CommandSourceStack source, String[] args) {
-                if (args.length > 0 && args[0].equalsIgnoreCase("credit")) {
+                if (args.length > 0 && args[0].equalsIgnoreCase("legacy")) {
                     if (!source.getSender().hasPermission("mccases.admin")) { ctx.messages().send(source.getSender(), "general.no-permission"); return; }
-                    if (args.length != 3) { ctx.messages().send(source.getSender(), "market.credit-usage"); return; }
+                    if (args.length != 2) { ctx.messages().send(source.getSender(), "market.legacy-usage"); return; }
                     var target = Bukkit.getOfflinePlayerIfCached(args[1]);
                     if (target == null) { ctx.messages().send(source.getSender(), "view.unknown", Text.unparsed("player", args[1])); return; }
-                    try { ctx.commerce().credit(source.getSender(), target.getUniqueId(), Long.parseLong(args[2])); }
-                    catch (NumberFormatException e) { ctx.messages().send(source.getSender(), "market.invalid"); }
-                    return;
+                    ctx.commerce().repository().legacyBalance(target.getUniqueId()).whenComplete((balance, error) -> {
+                        if (ctx.plugin().isEnabled()) Bukkit.getScheduler().runTask(ctx.plugin(), () -> ctx.messages(source.getSender()).send(source.getSender(),
+                                error == null ? "market.legacy" : "commerce.storage-error", Text.unparsed("player", args[1]), Text.unparsed("balance", balance)));
+                    }); return;
                 }
                 if (!(source.getExecutor() instanceof Player player)) { ctx.messages().send(source.getSender(), "general.player-only"); return; }
+                if (args.length == 1 && args[0].equalsIgnoreCase("recover")) {
+                    if (!ctx.commerce().payments().canRecover(player.getUniqueId()) || ctx.openings().isOpening(player) || ctx.commerce().trade(player.getUniqueId()) != null) { ctx.messages(player).send(player, "trade.busy"); return; }
+                    ctx.profiles().load(player); return;
+                }
                 if (!ready(ctx, player)) return;
                 if (ctx.commerce().trade(player.getUniqueId()) != null) { ctx.messages(player).send(player, "trade.busy"); return; }
                 if (args.length == 0) { new MarketMenu(ctx, player).open(); return; }
                 switch (args[0].toLowerCase(Locale.ROOT)) {
-                    case "balance" -> ctx.commerce().refreshBalance(player, () -> ctx.messages(player).send(player, "market.balance",
-                            Text.unparsed("balance", ctx.commerce().cachedBalance(player.getUniqueId())), Text.unparsed("currency", ctx.commerce().currency())));
+                    case "balance" -> ctx.commerce().refreshBalance(player, () -> ctx.messages(player).send(player, "market.emerald-balance",
+                            Text.unparsed("balance", ctx.commerce().inventoryBalance(player)), Text.unparsed("currency", ctx.commerce().currency())));
+                    case "claims" -> ctx.commerce().payments().claim(player);
                     case "own" -> new MarketMenu(ctx, player).own().open();
                     case "search" -> new MarketMenu(ctx, player).search(String.join(" ", java.util.Arrays.copyOfRange(args, 1, args.length))).open();
                     case "sell" -> {
                         if (args.length == 1) { new SkinPickerMenu(ctx, player).open(); return; }
-                        if (args.length != 3) { ctx.messages(player).send(player, "market.usage"); return; }
+                        if (args.length != 3) { ctx.messages(player).send(player, "market.emerald-usage"); return; }
                         var profile = ctx.profiles().get(player); String prefix = args[1].toLowerCase(Locale.ROOT);
                         var found = profile.owned().stream().filter(s -> s.id().toString().startsWith(prefix)).toList();
                         if (prefix.length() < 8 || found.size() != 1 || !ctx.commerce().mutable(profile, found.getFirst())) {
@@ -69,17 +75,17 @@ public final class CommerceCommands {
                         }
                         try {
                             long price = Long.parseLong(args[2]);
-                            if (price < 1 || price > ctx.commerce().maxPrice()) throw new NumberFormatException();
+                            if (price < ctx.commerce().minPrice() || price > ctx.commerce().maxPrice()) throw new NumberFormatException();
                             new SellMenu(ctx, player, found.getFirst(), price).open();
                         } catch (NumberFormatException e) { ctx.messages(player).send(player, "market.invalid"); }
                     }
-                    default -> ctx.messages(player).send(player, "market.usage");
+                    default -> ctx.messages(player).send(player, "market.emerald-usage");
                 }
             }
             @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
                 if (args.length <= 1) {
-                    var words = new java.util.ArrayList<>(List.of("sell", "own", "search", "balance"));
-                    if (source.getSender().hasPermission("mccases.admin")) words.add("credit");
+                    var words = new java.util.ArrayList<>(List.of("sell", "own", "search", "balance", "claims", "recover"));
+                    if (source.getSender().hasPermission("mccases.admin")) words.add("legacy");
                     String prefix = args.length == 0 ? "" : args[0].toLowerCase(Locale.ROOT);
                     return words.stream().filter(s -> s.startsWith(prefix)).toList();
                 }
@@ -87,7 +93,7 @@ public final class CommerceCommands {
                     var profile = ctx.profiles().get(player); if (profile == null) return List.of();
                     return profile.owned().stream().filter(s -> !ctx.commerce().locked(s.id())).map(s -> s.shortId()).filter(s -> s.startsWith(args[1])).toList();
                 }
-                if (args.length == 2 && args[0].equalsIgnoreCase("credit") && source.getSender().hasPermission("mccases.admin"))
+                if (args.length == 2 && args[0].equalsIgnoreCase("legacy") && source.getSender().hasPermission("mccases.admin"))
                     return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(n -> n.toLowerCase(Locale.ROOT).startsWith(args[1].toLowerCase(Locale.ROOT))).toList();
                 return List.of();
             }
@@ -96,7 +102,7 @@ public final class CommerceCommands {
     private static boolean ready(CasesContext ctx, Player player) {
         if (!ctx.commerce().available()) { ctx.messages(player).send(player, "market.unavailable"); return false; }
         if (ctx.profiles().get(player) == null) { ctx.messages(player).send(player, "profile.loading"); return false; }
-        if (ctx.openings().isOpening(player)) { ctx.messages(player).send(player, "opening.command-blocked"); return false; }
+        if (ctx.commerce().payments().busy(player.getUniqueId())) { ctx.messages(player).send(player, "market.payment-busy"); return false; }
         return true;
     }
 }

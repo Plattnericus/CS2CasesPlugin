@@ -8,12 +8,19 @@ import java.util.UUID;
 /** A confirmation belongs to one exact revision of both offers. */
 public final class TradeSession {
     public static final int MAX_ITEMS = 12;
+    public int limit() { return limit; }
     private final UUID first, second;
+    private final int limit;
+    private final long reviewMillis;
     private final Set<UUID> firstOffer = new LinkedHashSet<>(), secondOffer = new LinkedHashSet<>();
     private int revision, firstConfirmed = -1, secondConfirmed = -1;
     private boolean committing;
     private long changedAt = System.currentTimeMillis();
     public TradeSession(UUID first, UUID second) {
+        this(first, second, MAX_ITEMS, 2000);
+    }
+    public TradeSession(UUID first, UUID second, int limit, long reviewMillis) {
+        this.limit = Math.clamp(limit, 1, MAX_ITEMS); this.reviewMillis = Math.clamp(reviewMillis, 500, 10000);
         if (first.equals(second)) throw new IllegalArgumentException("Two distinct players required");
         this.first = first; this.second = second;
     }
@@ -27,13 +34,13 @@ public final class TradeSession {
     public boolean empty() { return firstOffer.isEmpty() && secondOffer.isEmpty(); }
     public int reviewSeconds(long now) {
         long elapsed = Math.max(0, now - changedAt);
-        return elapsed >= 2000 ? 0 : (int) ((2000 - elapsed + 999) / 1000);
+        return elapsed >= reviewMillis ? 0 : (int) ((reviewMillis - elapsed + 999) / 1000);
     }
     public boolean toggle(UUID owner, UUID skin) {
         if (committing) return false;
         Set<UUID> offer = offer(owner);
         if (!offer.remove(skin)) {
-            if (offer.size() >= MAX_ITEMS || offer(other(owner)).contains(skin)) return false;
+            if (offer.size() >= limit || offer(other(owner)).contains(skin)) return false;
             offer.add(skin);
         }
         revision++; firstConfirmed = secondConfirmed = -1; changedAt = System.currentTimeMillis(); return true;

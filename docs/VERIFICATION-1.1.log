@@ -1,0 +1,20 @@
+[final-build.log]
+PASS: price bounds, item-payment prepare/complete/cancel, concurrent buyers, exact identity transfer, partial/repeated claims, injected SQL rollback/retry, reservations, restart recovery, v1/v2 legacy migration.
+PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.
+Verified 713 skins, 21 cases, 5250 rewards/reels, weighted odds, wear boundaries, inventory queries and journal recovery codec.
+Verified 45 language schemas, German/English commerce texts and English fallbacks, regional fallbacks, 46 animation timelines and reel easing.
+BUILD SUCCESSFUL in 8s
+[commerce-final-and-disconnect.log]
+[15:27:20] [Server thread/INFO]: PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.
+[15:29:05] [Server thread/INFO]: READY RECOVERY: two persisted PENDING rewards; stop the server now, restart and reconnect to verify exact recovery.
+[gold-and-recovery.log]
+[15:24:28] [Server thread/INFO]: PASS GOLD RUNTIME: two five-Covert contracts, atomic consumption, actual rare-special outputs, suppressed ADMIN announcement and exactly one claimed TRADE_IN announcement.
+[15:25:28] [Server thread/INFO]: READY RECOVERY: two persisted PENDING rewards; stop the server now, restart and reconnect to verify exact recovery.
+[recovery-after.log]
+[15:30:36] [Server thread/INFO]: [MCCases] Recovered 2 interrupted case reward(s) for DevTester
+[15:31:07] [Server thread/INFO]: [MCCasesDevChecks] PASS ITEM RUNTIME: genuine Paper emerald stacks/PDC, storage+offhand payment, armor exclusion, negative/overflow/insufficient funds, full/partial inventory claims, idempotent receipts, 20 exact case/key pairs, test provenance and v1/v2 opening journals. Controlled player proxy; no connected-client gameplay test.
+[DevTester actual chat]
+[15:24:28] [Render thread/INFO]: [System] [CHAT] ✦ GOLD DROP ✦ DevTester won ★ Kukri Knife | Stained (Field-Tested) through a TRADE-IN!
+[DevObserver actual chat]
+[15:24:28] [Render thread/INFO]: [System] [CHAT] ✦ GOLD DROP ✦ DevTester won ★ Kukri Knife | Stained (Field-Tested) through a TRADE-IN!
+PASS LIVE RECOVERY: snapshot IDs/roll fields unchanged; OWNED; one opening-history row per UUID.

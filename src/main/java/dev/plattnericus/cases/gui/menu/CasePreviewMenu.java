@@ -118,8 +118,8 @@ public final class CasePreviewMenu extends Menu {
                 return;
             }
             playClick();
-            viewer.closeInventory();
             ctx.openings().open(viewer, def, false, false);
+            render();
         });
         set(GuiItems.SLOT_EXTRA, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
     }

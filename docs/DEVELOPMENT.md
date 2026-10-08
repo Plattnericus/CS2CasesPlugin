@@ -12,7 +12,7 @@
 | `scripts/` | Local development server and cleanup checks |
 | `release/` | Plugin JAR and resource pack ZIP |
 | `resourcepack/` | Pack assets for merging into a server pack |
-| `build/` | Build output and render checks; not tracked |
+| `build/` | Generated output; new files ignored, historical tracked outputs retained |
 
 ## Build
 
@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.0.0.jar` and `build/distributions/MCCases-ResourcePack-1.0.0.zip`.
+`build/libs/MCCases-1.1.0.jar` and `build/distributions/MCCases-ResourcePack-1.1.0.zip`.
 The pack ZIP is also embedded in the plugin JAR.
 
 | Task | Purpose / output |
@@ -36,7 +36,7 @@ The pack ZIP is also embedded in the plugin JAR.
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.1.0.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
@@ -49,9 +49,10 @@ Filmstrips check each tick for clipped models at a 70° vertical field of view a
 screenshots.
 
 `verifyFeatures` also checks trade confirmation revisions and offer limits, and runs real SQLite
-transactions for the marketplace: duplicate purchase attempts, incorrect owners, preserved skin
-values, insufficient funds, rollback of a partially executed trade, test-skin restrictions,
-listings, admin credits, transaction history, migration from schema 1 and database reopening.
+transactions for Emerald purchases/claims: concurrent buyers, incorrect owners, preserved skin
+values, partial and repeated payouts, SQL failure rollback/retry, trade reservations, transaction
+history, migration from schemas 1/2 and database reopening. Signed item and inventory-capacity
+checks run separately on actual Paper through `mccasesdevcheck items`.
 The SQLite driver is included only on the check classpath and is not distributed with the plugin;
 Paper supplies the driver at runtime.
 
@@ -65,7 +66,7 @@ Existing configuration files retain their settings, so check these values on old
 `scripts/dev.py` starts Paper and a vanilla client in `.dev/runtime/`. Requirements:
 
 - macOS, Python 3 with PyYAML, and Java 25;
-- Minecraft 26.2 installed in `~/Library/Application Support/minecraft/`;
+- Minecraft 26.3 installed in `~/Library/Application Support/minecraft/`;
 - available local ports 25565 and 8165;
 - a built plugin and pack ZIP.
 
@@ -118,7 +119,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.1.0.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -156,29 +157,41 @@ The check verifies real client locales, menu titles, item text with unchanged si
 amounts, scale, and separate visibility of first-person and body-hand scenes.
 Let any active case opening finish before running it.
 
-`commerce` also requires two connected clients with loaded profiles. It creates 20 temporary
-admin skins and checks trade requests, protected menus, offer reservations, equip and delete
-restrictions, confirmation delay, reset after offer changes, two-sided exchange, listing and
-purchase through menu buttons, exact Coin payments, withdrawal, closing and quit cancellation,
-and declined requests. Temporary skins are removed afterward, and inventories and equipment
-are restored.
+`commerce` requires two connected vanilla clients with loaded profiles. It creates 82 temporary
+admin skin fixtures across two players, checks a three-page collection browser, retained selection,
+protected hotbar/drag actions, shared reservations, synchronized offers, review and both confirmations.
+It then buys an exact skin for 320 of 400 real inventory Emeralds, collects precisely 65 of 320
+Emeralds into limited inventory space, verifies that a full-inventory retry adds nothing, and opens
+three cases per player while starting and cancelling an independent direct trade. It waits for
+all six rewards and both case/key inventories to finish. It restores physical inventories and
+removes its admin skin fixtures; test openings remain in the development collection and the
+seller's uncollected fixture claim remains in the isolated database.
 
-The check also verifies the live trade interface: both player heads with correct profile UUIDs,
-colored halves, immediately visible own skins, counteroffers on every collection page,
-selection and removal through inventory events, automatic countdown completion, one-click
-acceptance, acceptance withdrawal and the accepted-offer view.
-Selected own skins must use `trade/selected/<skin-id>` models with the pack enabled; partner
-offers and removed selections must use normal models. The accepted own offer must retain
-its selected models. With pack models disabled, the glint fallback marks the selection.
+Additional isolated-server commands:
 
-`/trade accept` is tested through actual command registration for requests and active offers;
-an incorrect player name must not accept anything. Updates must preserve the same open inventory
-instances for both clients. Stale confirmations must be rejected.
+```text
+mccasesdevcheck items
+mccasesdevcheck DevTester gold
+mccasesdevcheck DevTester recovery
+```
 
-Head icons use static copies of existing player profiles so live updates do not trigger additional
-skin requests for offline test players. The check verifies profile type, UUID, name and copied
-properties. It also checks the cancel button, gift warning and an actual one-sided transfer.
-Marketplace purchase transfers 120 Coins between the test players, so the buyer needs that balance.
+`items` uses genuine Paper ItemStacks and PDC with controlled player/inventory proxies; it needs
+no connected player. It covers storage/offhand, armor exclusion, insufficient/negative/overflow
+payment, full/partial capacity, saved idempotent receipts, twenty signed case/key pairs, test
+provenance and legacy/current journals. This is a runtime API test, not a gameplay test.
+
+`gold` creates five Covert fixtures for each of an ADMIN and a normal CASE-origin contract,
+executes the actual service, checks atomic input consumption and rare-special output, and checks
+the SQL announcement marker (zero for admin, one for the normal contract). Outputs are removed
+afterward. Inspect both clients' chat to verify that only the normal contract announces.
+
+`recovery` consumes two signed test pairs and waits for two persisted PENDING outcomes. After
+READY RECOVERY, disconnect the player before the animation completes, then stop the isolated server.
+Restart and reconnect;
+the same two UUIDs must become OWNED and the opening records must remain unique. This command
+intentionally leaves the test rewards for inspection.
+
+See [VERIFICATION-1.1.md](VERIFICATION-1.1.md) for the checks actually run for this release.
 
 Remove temporary screenshots, extra check JARs and test fixtures after validation.
 Keep source checks available for later development. The session's temporary world, database and

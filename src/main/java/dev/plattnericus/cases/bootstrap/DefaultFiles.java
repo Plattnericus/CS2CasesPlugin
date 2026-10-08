@@ -32,6 +32,7 @@ public final class DefaultFiles {
         for (String entry : entries) {
             File target = new File(plugin.getDataFolder(), entry);
             if (target.exists()) {
+                if (entry.equals("config.yml") || entry.equals("market.yml") || entry.equals("sounds.yml") || entry.startsWith("messages_")) mergeMissing(plugin, entry, target);
                 continue;
             }
             File parent = target.getParentFile();
@@ -47,6 +48,30 @@ public final class DefaultFiles {
             written++;
         }
         return written;
+    }
+
+    /** Merge leaves only; a malformed user file is never silently replaced. */
+    private static void mergeMissing(JavaPlugin plugin, String entry, File target) throws IOException {
+        try (InputStream in = open(plugin, entry)) {
+            if (in == null) return;
+            var defaults = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new InputStreamReader(in, StandardCharsets.UTF_8));
+            var existing = new org.bukkit.configuration.file.YamlConfiguration();
+            existing.options().parseComments(true);
+            try { existing.load(target); }
+            catch (org.bukkit.configuration.InvalidConfigurationException error) { throw new IOException("Invalid YAML in " + target + "; preserving file", error); }
+            boolean changed = false;
+            for (String key : defaults.getKeys(true)) if (!defaults.isConfigurationSection(key) && !existing.contains(key, true)) {
+                existing.set(key, defaults.get(key)); changed = true;
+            }
+            if (changed) {
+                var temp = Files.createTempFile(target.toPath().getParent(), target.getName(), ".tmp");
+                try {
+                    Files.writeString(temp, existing.saveToString(), StandardCharsets.UTF_8);
+                    try { Files.move(temp, target.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING); }
+                    catch (java.nio.file.AtomicMoveNotSupportedException unsupported) { Files.move(temp, target.toPath(), StandardCopyOption.REPLACE_EXISTING); }
+                } finally { Files.deleteIfExists(temp); }
+            }
+        }
     }
 
     /** Opens a bundled default for reading (used to fill in missing config keys). */

@@ -33,7 +33,11 @@ public final class OpeningSession {
     int winnerIndex;
     OpeningView view;
     BukkitTask task;
+    int lane;
     int tick;
+    public UUID id() { return openingId; }
+    public String caseName() { return caseDef.name(); }
+    public SkinInstance instance() { return instance; }
     int lastOffset = -1;
     boolean revealed;
     boolean finalized;

@@ -2,354 +2,177 @@ package dev.plattnericus.cases.tools;
 
 import dev.plattnericus.cases.commerce.*;
 import dev.plattnericus.cases.core.CasesContext;
-import dev.plattnericus.cases.gui.Menu;
-import dev.plattnericus.cases.profile.EquipSlot;
+import dev.plattnericus.cases.gui.GuiItems;
 import dev.plattnericus.cases.skin.PatternInfo;
 import dev.plattnericus.cases.skin.SkinInstance;
 import dev.plattnericus.cases.util.Text;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BooleanSupplier;
 
-/** Exercises the public services and inventory listeners with two connected Vanilla clients. */
+/** Updated two-client integration checks. Run only on an isolated development server. */
 public final class CommerceRuntimeChecks {
     private CommerceRuntimeChecks() { }
     public static void run(Plugin plugin, CommandSender sender, Player first, Player second, CasesContext ctx) {
         require(first != second && ctx.profiles().get(first) != null && ctx.profiles().get(second) != null, "two loaded players required");
         require(ctx.commerce().available(), "commerce not ready");
-        ctx.commerce().cancel(first); ctx.commerce().cancel(second); ctx.gallery().close(first); ctx.gallery().close(second);
-        var definition = ctx.catalog().skins().stream().filter(s -> s.isKnife()).findFirst().orElseThrow();
-        SkinInstance a = fixture(first, definition.id()), b = fixture(second, definition.id()), c = fixture(first, definition.id());
-        var fixtures = new java.util.ArrayList<>(List.of(a, b, c));
-        var collectionFixtures = new java.util.ArrayList<SkinInstance>();
-        for (int i = 0; i < 17; i++) { var skin = fixture(first, definition.id()); collectionFixtures.add(skin); fixtures.add(skin); }
-        ItemStack[] firstInventory = snapshot(first), secondInventory = snapshot(second);
-        var firstSlots = slots(first, ctx); var secondSlots = slots(second, ctx);
-        long[] before = new long[2];
-        Inventory[] tradeViews = new Inventory[2];
-        int[] previousRevision = new int[1];
-        ItemStack[][] firstPage = new ItemStack[1][];
-        SkinInstance[] selected = new SkinInstance[1];
+        var def = ctx.catalog().skins().stream().filter(s -> s.isKnife()).findFirst().orElseThrow();
+        var fixtures = new java.util.ArrayList<SkinInstance>();
+        for (int i = 0; i < 81; i++) fixtures.add(fixture(first, def.id()));
+        SkinInstance a = fixtures.get(0), sale = fixtures.get(1), b = fixture(second, def.id()); fixtures.add(b);
+        ItemStack[] savedFirst = snapshot(first), savedSecond = snapshot(second);
+        long[] openingBaseline = new long[2];
+        long claimBaseline = ctx.commerce().payments().pending(first.getUniqueId());
+        UUID[] listingId = new UUID[1];
+        Runnable cleanup = () -> {
+            ctx.commerce().cancel(first); ctx.commerce().cancel(second); first.closeInventory(); second.closeInventory();
+            first.getInventory().setContents(savedFirst); second.getInventory().setContents(savedSecond);
+            for (var fixture : fixtures) {
+                var one = ctx.profiles().get(first).get(fixture.id()); var two = ctx.profiles().get(second).get(fixture.id());
+                UUID owner = one != null ? first.getUniqueId() : second.getUniqueId();
+                ctx.profiles().removeLoaded(owner, fixture.id()); ctx.repository().removeOwned(owner, fixture.id());
+            }
+        };
         main(plugin, CompletableFuture.allOf(fixtures.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new)))
             .thenRun(() -> {
-                for (var skin : fixtures) ctx.profiles().addLoaded(skin.owner(), skin);
-                new TradePlayersMenu(ctx, first).open();
-                int partnerSlot = -1;
-                for (int slot = 9; slot < 45; slot++) if (isHead(first.getOpenInventory().getTopInventory().getItem(slot), second)) { partnerSlot = slot; break; }
-                require(partnerSlot >= 0, "partner selection did not show the actual player head");
-                click(first, partnerSlot); command(second, "trade accept " + first.getName());
-                TradeSession trade = ctx.commerce().trade(first.getUniqueId());
-                require(trade != null && trade == ctx.commerce().trade(second.getUniqueId()), "trade request/accept failed");
-                require(first.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu
-                        && second.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu, "trade menus not open for both clients");
-                tradeViews[0] = first.getOpenInventory().getTopInventory(); tradeViews[1] = second.getOpenInventory().getTopInventory();
-                require(tradeViews[0].getItem(38).getType() == org.bukkit.Material.GRAY_CONCRETE, "empty trade allowed confirmation");
-                require(isHead(tradeViews[0].getItem(2), first) && isHead(tradeViews[0].getItem(6), second)
-                        && isHead(tradeViews[1].getItem(2), second) && isHead(tradeViews[1].getItem(6), first), "trade halves showed the wrong player heads");
-                require(tradeViews[0].getItem(0).getType() == org.bukkit.Material.BLUE_STAINED_GLASS_PANE
-                        && tradeViews[0].getItem(8).getType() == org.bukkit.Material.LIME_STAINED_GLASS_PANE, "halves not visually distinct");
-                require(collectionFixtures.stream().anyMatch(skin -> findSkin(tradeViews[0], skin, true) >= 0), "own skins did not appear immediately");
-                verifyText(first); verifyText(second);
-                ctx.commerce().toggle(first, a.id()); click(second, findSkin(tradeViews[1], b, true));
-                require(containsSkin(tradeViews[0], 14, b) && containsSkin(tradeViews[1], 14, a), "counteroffer not visible while selecting skins");
-                verifySelection(tradeViews[1].getItem(findSkin(tradeViews[1], b, true)), b, true, ctx);
-                verifySelection(tradeViews[0].getItem(14), b, false, ctx);
-                verifySelection(tradeViews[1].getItem(14), a, false, ctx);
-                require(tradeViews[0].getItem(48).getType() == org.bukkit.Material.SPECTRAL_ARROW, "large collection did not offer a second page");
-                firstPage[0] = tradeViews[0].getContents();
-                require(tradeViews[1].getItem(38).getType() == org.bukkit.Material.CLOCK, "confirmation did not show review countdown");
-                require(first.getOpenInventory().getTopInventory() == tradeViews[0]
-                        && second.getOpenInventory().getTopInventory() == tradeViews[1], "live offer update reopened a menu");
-                previousRevision[0] = trade.revision();
+                first.getInventory().clear(); second.getInventory().clear();
+                second.getInventory().setItem(0, new ItemStack(Material.EMERALD, 64));
+                for (int i = 1; i < 6; i++) second.getInventory().setItem(i, new ItemStack(Material.EMERALD, 64));
+                second.getInventory().setItemInOffHand(new ItemStack(Material.EMERALD, 16));
+                fixtures.forEach(s -> ctx.profiles().addLoaded(s.owner(), s));
+                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName());
+                require(first.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu && second.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu, "trade menus missing");
+                require(first.getOpenInventory().getTopInventory().getSize() == 54 && first.getOpenInventory().getTopInventory().getItem(2).getType() == Material.PLAYER_HEAD, "large trade menu/head missing");
+                click(first, 46);
+                require(first.getOpenInventory().getTopInventory().getHolder(false) instanceof SkinPickerMenu && ctx.commerce().trade(first.getUniqueId()) != null, "collection navigation cancelled trade");
+                require(first.getOpenInventory().getTopInventory().getSize() == 54, "picker not 54 slots");
+                ctx.commerce().toggle(first, a.id()); ctx.commerce().toggle(second, b.id());
                 require(ctx.commerce().locked(a.id()) && ctx.commerce().locked(b.id()), "offer not reserved");
-                require(!ctx.knives().equip(first, a), "reserved skin was equipped");
-                new dev.plattnericus.cases.admin.AdminActions(ctx).remove(ctx.profiles().get(first), a);
-                require(ctx.profiles().get(first).get(a.id()) == a, "reserved skin was deleted");
-                ctx.commerce().confirm(first); require(!trade.confirmed(first.getUniqueId()), "confirmation cooldown bypassed");
-            })
-            .thenCompose(v -> delay(plugin, 4))
+                require(!ctx.knives().equip(first, a), "reserved skin equipped");
+                require(Text.plain(second.getOpenInventory().getTopInventory().getItem(14).getItemMeta().displayName()).contains(def.weapon().name()), "partner offer not synchronized");
+            }).thenCompose(v -> delay(plugin, 3)).thenRun(() -> {
+                click(first, 50); require(ctx.commerce().trade(first.getUniqueId()).items(first.getUniqueId()).contains(a.id()), "page switch lost selection");
+                require(first.getOpenInventory().getTopInventory().getItem(48).getType() == Material.SPECTRAL_ARROW, "large collection page navigation failed");
+                var illegal = new InventoryClickEvent(first.getOpenInventory(), InventoryType.SlotType.CONTAINER, 9, ClickType.NUMBER_KEY, InventoryAction.HOTBAR_SWAP, 0);
+                Bukkit.getPluginManager().callEvent(illegal); require(illegal.isCancelled(), "hotbar GUI extraction not cancelled");
+                var drag = new InventoryDragEvent(first.getOpenInventory(), new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND), false, java.util.Map.of(9, new ItemStack(Material.DIAMOND)));
+                Bukkit.getPluginManager().callEvent(drag); require(drag.isCancelled(), "GUI drag accepted");
+            }).thenCompose(v -> delay(plugin, 3)).thenRun(() -> {
+                click(first, 45); require(first.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu && ctx.commerce().trade(first.getUniqueId()) != null, "back cancelled trade");
+            }).thenCompose(v -> delay(plugin, 45)).thenRun(() -> {
+                ctx.commerce().confirm(first); require(!ctx.commerce().trade(first.getUniqueId()).ready(), "one confirmation completed trade");
+                ctx.commerce().confirm(second);
+            }).thenCompose(v -> until(plugin, () -> ctx.commerce().trade(first.getUniqueId()) == null))
             .thenRun(() -> {
-                click(first, 14);
-                require(ctx.commerce().trade(first.getUniqueId()).items(second.getUniqueId()).contains(b.id()), "counteroffer click changed the partner's offer");
-                ctx.commerce().toggle(second, b.id());
-                require(!containsSkin(tradeViews[0], 14, b) && tradeViews[0].getItem(24).getType() == org.bukkit.Material.LIME_STAINED_GLASS_PANE,
-                        "removed counteroffer did not disappear live");
-                ctx.commerce().toggle(second, b.id());
-                require(containsSkin(tradeViews[0], 14, b), "counteroffer re-add did not update the collection view");
-                require(tradeViews[0].getItem(48).getType() == org.bukkit.Material.SPECTRAL_ARROW, "remote change hid collection navigation");
-                verifyText(first); verifyText(second);
-            })
-            .thenCompose(v -> delay(plugin, 4))
+                require(ctx.profiles().get(second).get(a.id()) != null && ctx.profiles().get(first).get(b.id()) != null, "atomic exchange failed");
+                ctx.commerce().list(first, sale, 320);
+            }).thenCompose(v -> until(plugin, () -> ctx.commerce().listings().stream().anyMatch(l -> l.skin().id().equals(sale.id()))))
             .thenRun(() -> {
-                click(first, 48);
-                require(!java.util.Objects.equals(firstPage[0][9], tradeViews[0].getItem(9)), "next collection page did not change visible skins");
-                require(containsSkin(tradeViews[0], 14, b) && tradeViews[0].getItem(45).getType() == org.bukkit.Material.SPECTRAL_ARROW,
-                        "counteroffer or previous button disappeared on the second page");
-                require(first.getOpenInventory().getTopInventory() == tradeViews[0], "collection pagination reopened the trade");
-                verifyText(first);
-            })
-            .thenCompose(v -> delay(plugin, 4))
+                var listing = ctx.commerce().listings().stream().filter(l -> l.skin().id().equals(sale.id())).findFirst().orElseThrow(); listingId[0] = listing.id();
+                new ListingMenu(ctx, second, listing).open(); require(second.getOpenInventory().getTopInventory().getSize() == 54, "listing preview not large");
+                ctx.commerce().buy(second, listing);
+            }).thenCompose(v -> until(plugin, () -> ctx.profiles().get(second).get(sale.id()) != null && !ctx.commerce().payments().busy(second.getUniqueId())))
             .thenRun(() -> {
-                click(first, 45);
-                require(java.util.Objects.equals(firstPage[0][9], tradeViews[0].getItem(9)), "previous collection page did not restore the first page");
-                int offeredSlot = findSkin(tradeViews[0], a, true);
-                if (offeredSlot >= 0) verifySelection(tradeViews[0].getItem(offeredSlot), a, true, ctx);
-                selected[0] = collectionFixtures.stream().filter(skin -> findSkin(tradeViews[0], skin, true) >= 0).findFirst().orElseThrow();
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                int slot = findSkin(tradeViews[0], selected[0], true); click(first, slot);
-                require(ctx.commerce().trade(first.getUniqueId()).items(first.getUniqueId()).contains(selected[0].id()), "collection click did not select the skin");
-                verifySelection(tradeViews[0].getItem(slot), selected[0], true, ctx);
-                require(findSkin(tradeViews[1], selected[0], false) >= 0, "collection selection did not appear in the partner's offer panel");
-                verifySelection(tradeViews[1].getItem(findSkin(tradeViews[1], selected[0], false)), selected[0], false, ctx);
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                click(first, findSkin(tradeViews[0], selected[0], true));
-                require(!ctx.commerce().trade(first.getUniqueId()).items(first.getUniqueId()).contains(selected[0].id())
-                        && findSkin(tradeViews[1], selected[0], false) < 0, "collection click did not remove the skin for both players");
-                verifySelection(tradeViews[0].getItem(findSkin(tradeViews[0], selected[0], true)), selected[0], false, ctx);
-                protectMenu(first);
-            })
-            .thenCompose(v -> delay(plugin, 45))
-            .thenRun(() -> {
-                TradeSession trade = ctx.commerce().trade(first.getUniqueId());
-                require(tradeViews[0].getItem(38).getType() == org.bukkit.Material.LIME_CONCRETE, "countdown did not unlock confirmation automatically");
-                ctx.commerce().confirm(first, previousRevision[0]);
-                require(!trade.confirmed(first.getUniqueId()), "stale view confirmed a changed offer");
-                click(first, 38);
-                require(trade.confirmed(first.getUniqueId()), "first confirmation failed");
-                require(containsSkin(tradeViews[0], 9, a) && containsSkin(tradeViews[0], 14, b)
-                        && collectionFixtures.stream().noneMatch(skin -> findSkin(tradeViews[0], skin, true) >= 0), "accepted view did not show only the exact offered skins");
-                verifySelection(tradeViews[0].getItem(9), a, true, ctx);
-                verifySelection(tradeViews[0].getItem(14), b, false, ctx);
-                require(tradeViews[1].getItem(42).getType() == org.bukkit.Material.LIME_CONCRETE, "confirmation did not update partner status live");
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                click(first, 38);
-                require(!ctx.commerce().trade(first.getUniqueId()).confirmed(first.getUniqueId())
-                        && tradeViews[1].getItem(42).getType() == org.bukkit.Material.RED_CONCRETE, "acceptance could not be withdrawn");
-                require(collectionFixtures.stream().anyMatch(skin -> findSkin(tradeViews[0], skin, true) >= 0), "withdrawing acceptance did not restore skin selection");
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                click(first, 38);
-                TradeSession trade = ctx.commerce().trade(first.getUniqueId()); require(trade.confirmed(first.getUniqueId()), "accepting again failed");
-                ctx.commerce().toggle(second, b.id()); ctx.commerce().toggle(second, b.id());
-                require(!trade.confirmed(first.getUniqueId()), "offer edit did not invalidate confirmation");
-                require(tradeViews[1].getItem(42).getType() == org.bukkit.Material.RED_CONCRETE
-                        && tradeViews[0].getItem(38).getType() == org.bukkit.Material.CLOCK, "changed offer retained confirmed UI state");
-                int offeredSlot = findSkin(tradeViews[0], a, true);
-                if (offeredSlot >= 0) verifySelection(tradeViews[0].getItem(offeredSlot), a, true, ctx);
-                require(first.getOpenInventory().getTopInventory() == tradeViews[0]
-                        && second.getOpenInventory().getTopInventory() == tradeViews[1], "status update reopened a menu");
-                verifyText(first); verifyText(second);
-            })
-            .thenCompose(v -> delay(plugin, 45))
-            .thenRun(() -> {
-                command(first, "trade accept Nobody");
-                require(!ctx.commerce().trade(first.getUniqueId()).confirmed(first.getUniqueId()), "accept command ignored the named partner");
-                command(first, "trade accept " + second.getName());
-                require(ctx.commerce().trade(first.getUniqueId()).confirmed(first.getUniqueId()), "accept command did not accept the active offer");
-                click(second, 38);
-            })
-            .thenCompose(v -> await(plugin, () -> ctx.commerce().trade(first.getUniqueId()) == null && ctx.profiles().get(first).get(b.id()) != null, "trade commit"))
-            .thenRun(() -> {
-                require(ctx.profiles().get(first).get(a.id()) == null && ctx.profiles().get(second).get(b.id()) == null, "old owners retained traded skins");
-                var moved = ctx.profiles().get(second).get(a.id());
-                require(moved != null && moved.owner().equals(second.getUniqueId()) && moved.id().equals(a.id())
-                        && moved.floatValue() == a.floatValue() && moved.pattern() == a.pattern() && moved.kills() == a.kills(), "live trade changed skin values");
-                require(!ctx.commerce().locked(a.id()) && !ctx.commerce().locked(b.id()), "trade left reservations behind");
-                sender.sendMessage("PASS SIMPLE TRADE UI: both real player heads and coloured halves; own skins visible immediately; selected green models and checkmarks, removal restores normal models, accepted offers retain highlights; actual select/remove, pagination and one-click Accept; acceptance withdrawal, /trade accept for invitations and active offers; live counteroffers, cooldown, stale confirmation rejection and atomic exchange.");
-                sender.sendMessage("PASS: trade reservation/equip/delete guards, cooldown and changed-offer confirmation reset with two connected Vanilla clients.");
-            })
-            .thenCompose(v -> main(plugin, ctx.commerce().repository().balance(first.getUniqueId(), ctx.commerce().startingBalance())))
-            .thenAccept(balance -> before[0] = balance)
-            .thenCompose(v -> main(plugin, ctx.commerce().repository().balance(second.getUniqueId(), ctx.commerce().startingBalance())))
-            .thenAccept(balance -> { before[1] = balance; require(balance >= 120, "test buyer needs 120 Coins"); })
-            .thenRun(() -> {
-                var skin = ctx.profiles().get(first).get(b.id()); require(ctx.knives().equip(first, skin), "fixture equip failed");
-                ctx.commerce().list(first, skin, 120);
-            })
-            .thenCompose(v -> await(plugin, () -> ctx.commerce().listings().stream().anyMatch(l -> l.skin().id().equals(b.id())), "market listing"))
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                require(ctx.profiles().get(first).get(b.id()).status() == SkinInstance.Status.LISTED
-                        && !ctx.profiles().get(first).isEquipped(b.id()), "listed skin not reserved/unequipped");
-                var listing = ctx.commerce().listings().stream().filter(l -> l.skin().id().equals(b.id())).findFirst().orElseThrow();
-                new MarketMenu(ctx, first).own().open(); verifyText(first); protectMenu(first);
-                new ListingMenu(ctx, second, listing).open(); verifyText(second); click(second, 11);
-            })
-            .thenCompose(v -> await(plugin, () -> ctx.profiles().get(second).get(b.id()) != null
-                    && ctx.commerce().listings().stream().noneMatch(l -> l.skin().id().equals(b.id())), "market purchase"))
-            .thenCompose(v -> main(plugin, ctx.commerce().repository().balance(first.getUniqueId(), ctx.commerce().startingBalance())))
-            .thenAccept(balance -> require(balance == before[0] + 120, "seller not paid exact price"))
-            .thenCompose(v -> main(plugin, ctx.commerce().repository().balance(second.getUniqueId(), ctx.commerce().startingBalance())))
-            .thenAccept(balance -> require(balance == before[1] - 120, "buyer not charged exact price"))
-            .thenRun(() -> {
-                require(ctx.profiles().get(first).get(b.id()) == null, "seller retained sold skin");
-                new SkinPickerMenu(ctx, first).open(); verifyText(first);
-                new SellMenu(ctx, first, c, 250).open(); verifyText(first);
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> click(first, 29))
-            .thenCompose(v -> await(plugin, () -> ctx.commerce().listings().stream().anyMatch(l -> l.skin().id().equals(c.id())), "cancel fixture listing"))
-            .thenRun(() -> {
-                var listing = ctx.commerce().listings().stream().filter(l -> l.skin().id().equals(c.id())).findFirst().orElseThrow(); ctx.commerce().cancelListing(first, listing);
-            })
-            .thenCompose(v -> await(plugin, () -> ctx.profiles().get(first).get(c.id()) != null
-                    && ctx.profiles().get(first).get(c.id()).status() == SkinInstance.Status.OWNED, "listing withdrawal"))
-            .thenRun(() -> {
-                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName()); ctx.commerce().toggle(first, c.id());
-            })
-            .thenCompose(v -> delay(plugin, 4))
-            .thenRun(() -> {
-                click(first, 49);
-                require(ctx.commerce().trade(first.getUniqueId()) == null && ctx.commerce().trade(second.getUniqueId()) == null
-                        && !ctx.commerce().locked(c.id()) && ctx.profiles().get(first).get(c.id()) != null, "cancel button did not release both players' offers");
-                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName()); ctx.commerce().toggle(first, c.id());
-                first.closeInventory();
-                require(ctx.commerce().trade(first.getUniqueId()) == null && ctx.commerce().trade(second.getUniqueId()) == null
-                        && !ctx.commerce().locked(c.id()) && ctx.profiles().get(first).get(c.id()) != null, "menu close did not cancel/release trade");
-                ctx.commerce().request(first, second); ctx.commerce().decline(second);
-                ctx.commerce().accept(second, first.getName()); require(ctx.commerce().trade(first.getUniqueId()) == null, "declined request was accepted");
-                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName()); ctx.commerce().toggle(first, c.id());
-                ctx.commerce().onQuit(new org.bukkit.event.player.PlayerQuitEvent(second, net.kyori.adventure.text.Component.empty()));
-                require(ctx.commerce().trade(first.getUniqueId()) == null && !ctx.commerce().locked(c.id()), "quit listener did not cancel/release trade");
-                sender.sendMessage("PASS: marketplace menus and icon protection; live listing, cosmetic unequip, buy/publish buttons, exact Coin payment, skin delivery, withdrawal, trade close/quit cancellation and request decline.");
-                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName()); ctx.commerce().toggle(first, c.id());
-            })
-            .thenCompose(v -> delay(plugin, 45))
-            .thenRun(() -> {
-                var button = first.getOpenInventory().getTopInventory().getItem(38);
-                String warning = Text.plain(button.getItemMeta().displayName()).toLowerCase(java.util.Locale.ROOT);
-                require(warning.contains("verschenken") || warning.contains("give away"), "one-sided gift did not warn that the giver receives nothing");
-                click(first, 38); command(second, "trade accept");
-            })
-            .thenCompose(v -> await(plugin, () -> ctx.commerce().trade(first.getUniqueId()) == null && ctx.profiles().get(second).get(c.id()) != null, "gift delivery"))
-            .thenRun(() -> {
-                require(ctx.profiles().get(first).get(c.id()) == null && !ctx.commerce().locked(c.id()), "gift kept the old owner/reservation");
-                sender.sendMessage("PASS: cancel button, clear gift warning and one-sided gift accepted through the button and /trade accept; original owners/locks cleared.");
-            })
-            .whenComplete((v, error) -> {
-                ctx.commerce().cancel(first); ctx.commerce().cancel(second);
-                if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Commerce runtime checks failed", error);
-                for (Player player : List.of(first, second)) {
-                    var profile = ctx.profiles().get(player); if (profile == null) continue;
-                    for (SkinInstance fixture : fixtures) {
-                        var skin = profile.get(fixture.id()); if (skin != null && skin.status() == SkinInstance.Status.OWNED)
-                            new dev.plattnericus.cases.admin.AdminActions(ctx).remove(profile, skin);
-                    }
-                    player.closeInventory();
+                require(ctx.commerce().inventoryBalance(second) == 80 && ctx.commerce().listing(listingId[0]) == null, "400-320 emerald payment or delisting failed");
+                var transferred = ctx.profiles().get(second).get(sale.id());
+                require(transferred.floatValue() == sale.floatValue() && transferred.pattern() == sale.pattern() && transferred.kills() == sale.kills(), "purchase changed instance details");
+                for (int i = 0; i < 36; i++) first.getInventory().setItem(i, new ItemStack(Material.STONE, 64));
+                first.getInventory().setItem(5, new ItemStack(Material.EMERALD, 63)); first.getInventory().setItem(8, null);
+                ctx.commerce().payments().claim(first);
+            }).thenCompose(v -> until(plugin, () -> !ctx.commerce().payments().busy(first.getUniqueId()) && ctx.commerce().inventoryBalance(first) == 128))
+            .thenCompose(v -> main(plugin, ctx.commerce().repository().emeralds().claims(first.getUniqueId())))
+            .thenAccept(claims -> { require(claims.stream().mapToLong(c -> c.remaining()).sum() == claimBaseline + 255, "partial payout not exactly 65"); ctx.commerce().payments().claim(first); })
+            .thenCompose(v -> delay(plugin, 10)).thenRun(() -> {
+                require(ctx.commerce().inventoryBalance(first) == 128, "full inventory payout duplicated items");
+                first.closeInventory(); second.closeInventory(); first.getInventory().clear(); second.getInventory().clear();
+                var caseDef = ctx.catalog().caseDefinition("kilowatt_case"); var key = ctx.catalog().key(caseDef.keyId());
+                openingBaseline[0] = ctx.profiles().get(first).all().size(); openingBaseline[1] = ctx.profiles().get(second).all().size();
+                for (Player p : List.of(first, second)) {
+                    p.getInventory().setItem(0, ctx.caseItems().caseItem(caseDef, 3, false, ctx.messages(p)));
+                    p.getInventory().setItem(1, ctx.caseItems().keyItem(key, 3, true, ctx.messages(p)));
+                    for (int i = 0; i < 3; i++) ctx.openings().open(p, caseDef, false, false);
+                    require(ctx.openings().activeCount(p) == 3, "parallel opening overwritten or blocked");
                 }
-                first.getInventory().setContents(firstInventory); second.getInventory().setContents(secondInventory);
-                restoreSlots(first, firstSlots, ctx); restoreSlots(second, secondSlots, ctx);
-                if (error == null) sender.sendMessage("PASS: all commerce runtime checks completed; test skins removed and physical inventories restored.");
+                ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName());
+                require(ctx.commerce().trade(first.getUniqueId()) != null, "ongoing openings blocked an independent trade");
+                ctx.commerce().cancel(first);
+            }).thenCompose(v -> until(plugin, () -> ctx.openings().activeCount(first) == 0 && ctx.openings().activeCount(second) == 0))
+            .thenRun(() -> {
+                require(ctx.profiles().get(first).all().size() == openingBaseline[0] + 3 && ctx.profiles().get(second).all().size() == openingBaseline[1] + 3, "six parallel case rewards lost/duplicated");
+                var caseDef = ctx.catalog().caseDefinition("kilowatt_case");
+                for (Player p : List.of(first, second)) require(ctx.caseItems().count(p, "case", caseDef.id()) == 0 && ctx.caseItems().count(p, "key", caseDef.keyId()) == 0 && ctx.profiles().journal().entries(p).isEmpty(), "case/key consumption or journal completion failed");
+                sender.sendMessage("PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.");
+            }).whenComplete((v, error) -> {
+                if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Two-client commerce audit failed", error);
+                cleanup.run();
             });
     }
-    private static SkinInstance fixture(Player owner, String id) {
-        return new SkinInstance(UUID.randomUUID(), owner.getUniqueId(), id, 0.01, 42, 123456L, true, 7, PatternInfo.NONE,
-                "admin", SkinInstance.Origin.ADMIN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
+    public static void gold(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) throws ReflectiveOperationException {
+        var field = dev.plattnericus.cases.storage.CommerceRepository.class.getDeclaredField("db"); field.setAccessible(true);
+        var db = (dev.plattnericus.cases.storage.Database) field.get(ctx.commerce().repository());
+        goldContract(plugin, player, ctx, db, SkinInstance.Origin.ADMIN)
+                .thenCompose(v -> goldContract(plugin, player, ctx, db, SkinInstance.Origin.CASE))
+                .whenComplete((v, error) -> {
+                    if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Gold runtime audit failed", error);
+                    else sender.sendMessage("PASS GOLD RUNTIME: two five-Covert contracts, atomic consumption, actual rare-special outputs, suppressed ADMIN announcement and exactly one claimed TRADE_IN announcement.");
+                });
     }
-    private static java.util.Map<EquipSlot, UUID> slots(Player player, CasesContext ctx) {
-        var slots = new java.util.EnumMap<EquipSlot, UUID>(EquipSlot.class);
-        for (var slot : EquipSlot.values()) { var id = ctx.profiles().get(player).equipped(slot); if (id != null) slots.put(slot, id); }
-        return slots;
+    private static CompletableFuture<Void> goldContract(Plugin plugin, Player player, CasesContext ctx, dev.plattnericus.cases.storage.Database db, SkinInstance.Origin origin) {
+        player.closeInventory(); var source = ctx.catalog().caseDefinition("kilowatt_case");
+        var input = source.pool().values().stream().flatMap(List::stream).filter(def -> {
+            var tier = dev.plattnericus.cases.tradein.TradeInRules.target(ctx.catalog(), def);
+            return tier != null && tier.rareSpecial();
+        }).findFirst().orElseThrow();
+        var before = ctx.profiles().get(player).all().stream().map(SkinInstance::id).collect(java.util.stream.Collectors.toSet());
+        var inputs = java.util.stream.IntStream.range(0, 5).mapToObj(i -> new SkinInstance(UUID.randomUUID(), player.getUniqueId(), input.id(), 0.2, 100 + i, i, false, 0, PatternInfo.NONE, source.id(), origin, System.currentTimeMillis(), false, SkinInstance.Status.OWNED)).toList();
+        java.util.function.Supplier<SkinInstance> result = () -> ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id()) && !inputs.stream().anyMatch(i -> i.id().equals(s.id())) && ctx.catalog().skin(s.skinId()).rarity().rareSpecial()).findFirst().orElse(null);
+        return main(plugin, CompletableFuture.allOf(inputs.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new))).thenRun(() -> {
+            inputs.forEach(s -> { ctx.profiles().addLoaded(player.getUniqueId(), s); ctx.tradeIns().toggle(player, s.id()); });
+            require(ctx.tradeIns().selected(player).size() == 5, "gold inputs not selectable"); ctx.tradeIns().confirm(player);
+        }).thenCompose(v -> until(plugin, () -> !ctx.tradeIns().busy(player) && result.get() != null)).thenCompose(v -> delay(plugin, 10))
+          .thenCompose(v -> { UUID rewardId = result.get().id(); return main(plugin, db.run(c -> {
+              try (var ps = c.prepareStatement("SELECT announced FROM " + db.table("trade_contracts") + " WHERE instance_id=?")) {
+                  ps.setString(1, rewardId.toString()); try (var rows = ps.executeQuery()) { require(rows.next(), "gold contract not persisted"); return rows.getInt(1); }
+              }
+          })); }).thenAccept(announced -> {
+              require(announced == (origin == SkinInstance.Origin.ADMIN ? 0 : 1), "incorrect gold broadcast eligibility");
+              require(inputs.stream().noneMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "gold inputs not consumed");
+              var reward = result.get(); require(reward.origin() == (origin == SkinInstance.Origin.ADMIN ? origin : SkinInstance.Origin.TRADE_IN), "gold origin wrong");
+              ctx.profiles().removeLoaded(player.getUniqueId(), reward.id()); ctx.repository().removeOwned(player.getUniqueId(), reward.id()); player.closeInventory();
+          });
     }
-    private static void restoreSlots(Player player, java.util.Map<EquipSlot, UUID> slots, CasesContext ctx) {
-        for (var slot : EquipSlot.values()) {
-            var id = slots.get(slot); var skin = id == null ? null : ctx.profiles().get(player).get(id);
-            if (skin == null) ctx.knives().unequip(player, slot); else ctx.knives().equip(player, skin, slot);
-        }
+    public static void queueRecovery(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) {
+        var source = ctx.catalog().caseDefinition("kilowatt_case");
+        var before = ctx.profiles().get(player).all().stream().map(SkinInstance::id).collect(java.util.stream.Collectors.toSet());
+        player.closeInventory(); player.getInventory().setItem(0, ctx.caseItems().caseItem(source, 2, false, ctx.messages(player)));
+        player.getInventory().setItem(1, ctx.caseItems().keyItem(ctx.catalog().key(source.keyId()), 2, true, ctx.messages(player)));
+        ctx.openings().open(player, source, false, false); ctx.openings().open(player, source, false, false);
+        until(plugin, () -> ctx.profiles().get(player).all().stream().filter(s -> !before.contains(s.id()) && s.status() == SkinInstance.Status.PENDING).count() == 2)
+                .thenRun(() -> sender.sendMessage("READY RECOVERY: two persisted PENDING rewards; stop the server now, restart and reconnect to verify exact recovery."));
     }
-    private static ItemStack[] snapshot(Player player) {
-        var contents = player.getInventory().getContents();
-        for (int i = 0; i < contents.length; i++) if (contents[i] != null) contents[i] = contents[i].clone(); return contents;
+    private static SkinInstance fixture(Player p, String skin) {
+        return new SkinInstance(UUID.randomUUID(), p.getUniqueId(), skin, 0.012345, 271, 88123, true, 42, new PatternInfo("phase2", "Phase 2", "Pink Galaxy", 2, 0xff1234, 99.5), "chroma_case", SkinInstance.Origin.ADMIN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
     }
-    private static void protectMenu(Player player) {
-        var click = new InventoryClickEvent(player.getOpenInventory(), InventoryType.SlotType.CONTAINER, 4, ClickType.LEFT, InventoryAction.PICKUP_ALL);
-        Bukkit.getPluginManager().callEvent(click); require(click.isCancelled(), "menu icon was movable");
-        var drag = new InventoryDragEvent(player.getOpenInventory(), new ItemStack(org.bukkit.Material.DIAMOND),
-                new ItemStack(org.bukkit.Material.DIAMOND), false, java.util.Map.of(4, new ItemStack(org.bukkit.Material.DIAMOND)));
-        Bukkit.getPluginManager().callEvent(drag); require(drag.isCancelled(), "menu drag was allowed");
+    private static ItemStack[] snapshot(Player p) { return java.util.Arrays.stream(p.getInventory().getContents()).map(i -> i == null ? null : i.clone()).toArray(ItemStack[]::new); }
+    private static void click(Player p, int slot) { Bukkit.getPluginManager().callEvent(new InventoryClickEvent(p.getOpenInventory(), InventoryType.SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ALL)); }
+    private static CompletableFuture<Void> delay(Plugin plugin, long ticks) { var future = new CompletableFuture<Void>(); Bukkit.getScheduler().runTaskLater(plugin, () -> future.complete(null), ticks); return future; }
+    private static <T> CompletableFuture<T> main(Plugin plugin, CompletableFuture<T> work) {
+        var future = new CompletableFuture<T>(); work.whenComplete((result, error) -> Bukkit.getScheduler().runTask(plugin, () -> { if (error != null) future.completeExceptionally(error); else future.complete(result); })); return future;
     }
-    private static void click(Player player, int slot) {
-        require(slot >= 0, "expected clickable skin/button not found");
-        var event = new InventoryClickEvent(player.getOpenInventory(), InventoryType.SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ALL);
-        Bukkit.getPluginManager().callEvent(event); require(event.isCancelled(), "menu icon was not protected");
+    private static CompletableFuture<Void> until(Plugin plugin, BooleanSupplier condition) {
+        var future = new CompletableFuture<Void>();
+        new org.bukkit.scheduler.BukkitRunnable() { private int elapsed; @Override public void run() {
+            try { if (condition.getAsBoolean()) { cancel(); future.complete(null); } else if ((elapsed += 2) > 600) { cancel(); future.completeExceptionally(new AssertionError("runtime operation timed out")); } }
+            catch (Exception | AssertionError error) { cancel(); future.completeExceptionally(error); }
+        } }.runTaskTimer(plugin, 2, 2); return future;
     }
-    private static void command(Player player, String command) {
-        require(Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "execute as " + player.getName() + " run " + command), "command dispatch failed");
-    }
-    private static boolean isHead(ItemStack item, Player owner) {
-        if (item == null || item.getType() != org.bukkit.Material.PLAYER_HEAD) return false;
-        var profile = item.getData(io.papermc.paper.datacomponent.DataComponentTypes.PROFILE);
-        return profile != null && !profile.dynamic() && owner.getUniqueId().equals(profile.uuid())
-                && owner.getName().equals(profile.name()) && profile.properties().containsAll(owner.getPlayerProfile().getProperties());
-    }
-    private static boolean containsSkin(Inventory inventory, int slot, SkinInstance skin) {
-        ItemStack item = inventory.getItem(slot);
-        return item != null && item.hasItemMeta() && item.getItemMeta().lore() != null
-                && item.getItemMeta().lore().stream().anyMatch(line -> Text.plain(line).contains(skin.shortId()));
-    }
-    private static int findSkin(Inventory inventory, SkinInstance skin, boolean own) {
-        for (int slot = 9; slot < 45; slot++) {
-            if ((own ? slot % 9 < 4 : slot % 9 > 4) && containsSkin(inventory, slot, skin)) return slot;
-        }
-        return -1;
-    }
-    private static void verifySelection(ItemStack item, SkinInstance skin, boolean selected, CasesContext ctx) {
-        require(item != null && item.getType() == dev.plattnericus.cases.items.SkinIcons.material(ctx.catalog().skin(skin.skinId())), "selection replaced the weapon icon");
-        var meta = item.getItemMeta();
-        require(Text.plain(meta.displayName()).startsWith("✓ ") == selected, "selection checkmark incorrect");
-        if (ctx.settings().resourcePack().enabled()) {
-            var expected = new org.bukkit.NamespacedKey(ctx.settings().resourcePack().namespace(),
-                    (selected ? "trade/selected/" : "skin/") + skin.skinId());
-            require(expected.equals(meta.getItemModel()), "wrong selected/normal item model: " + meta.getItemModel());
-        } else require((meta.hasEnchantmentGlintOverride() && meta.getEnchantmentGlintOverride()) == selected, "vanilla selection fallback incorrect");
-    }
-    private static void verifyText(Player player) {
-        require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof Menu, "expected menu");
-        for (ItemStack item : player.getOpenInventory().getTopInventory().getContents()) {
-            if (item == null || !item.hasItemMeta()) continue; var meta = item.getItemMeta();
-            var lines = new java.util.ArrayList<net.kyori.adventure.text.Component>();
-            if (meta.displayName() != null) lines.add(meta.displayName()); if (meta.lore() != null) lines.addAll(meta.lore());
-            for (var line : lines) {
-                String plain = Text.plain(line);
-                require(!plain.matches(".*(?:market|trade|commerce)\\.[a-z-]+.*"), "raw translation key in menu: " + plain);
-                String rendered = plain.replace("/market sell <ID> <price>", "");
-                require(!rendered.matches(".*<(?:price|seller|currency|count|max|seconds|player|own|other)>.*"), "unresolved offer text: " + plain);
-            }
-        }
-    }
-    private static <T> CompletableFuture<T> main(Plugin plugin, CompletableFuture<T> source) {
-        CompletableFuture<T> result = new CompletableFuture<>();
-        source.whenComplete((value, error) -> Bukkit.getScheduler().runTask(plugin, () -> {
-            if (error == null) result.complete(value); else result.completeExceptionally(error);
-        })); return result;
-    }
-    private static CompletableFuture<Void> delay(Plugin plugin, int ticks) {
-        CompletableFuture<Void> result = new CompletableFuture<>(); Bukkit.getScheduler().runTaskLater(plugin, () -> result.complete(null), ticks); return result;
-    }
-    private static CompletableFuture<Void> await(Plugin plugin, BooleanSupplier condition, String step) {
-        CompletableFuture<Void> result = new CompletableFuture<>(); long deadline = System.currentTimeMillis() + 15000;
-        var task = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            try {
-                if (condition.getAsBoolean()) result.complete(null);
-                else if (System.currentTimeMillis() > deadline) result.completeExceptionally(new IllegalStateException("Timed out: " + step));
-            } catch (Exception failure) { result.completeExceptionally(failure); }
-        }, 1, 2);
-        result.whenComplete((v, e) -> task.cancel()); return result;
-    }
-    private static void require(boolean pass, String message) { if (!pass) throw new IllegalStateException(message); }
+    private static void require(boolean condition, String message) { if (!condition) throw new AssertionError(message); }
 }

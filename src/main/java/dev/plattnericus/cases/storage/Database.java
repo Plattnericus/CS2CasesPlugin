@@ -27,7 +27,7 @@ public final class Database implements AutoCloseable {
         T run(Connection connection) throws SQLException;
     }
 
-    private static final int SCHEMA_VERSION = 2;
+    private static final int SCHEMA_VERSION = 3;
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor(r -> {
         Thread t = new Thread(r, "MCCases-Database");
@@ -140,6 +140,7 @@ public final class Database implements AutoCloseable {
                     version = rs.getInt(1);
                 }
             }
+            if (version > SCHEMA_VERSION) throw new SQLException("Database schema is newer than this plugin: " + version);
             if (version < 1) {
                 s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("skins") + " ("
                         + "instance_id CHAR(36) NOT NULL PRIMARY KEY,"
@@ -161,8 +162,7 @@ public final class Database implements AutoCloseable {
                         + "created_at BIGINT NOT NULL,"
                         + "favorite INTEGER NOT NULL DEFAULT 0,"
                         + "status VARCHAR(16) NOT NULL)");
-                s.executeUpdate("CREATE INDEX " + (isMySql() ? "" : "IF NOT EXISTS ") + table("skins_owner")
-                        + " ON " + table("skins") + " (owner, status)");
+                ensureIndex(c, "skins_owner", "skins", "owner, status");
                 s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("equipped") + " ("
                         + "owner CHAR(36) NOT NULL,"
                         + "slot VARCHAR(32) NOT NULL,"
@@ -181,8 +181,7 @@ public final class Database implements AutoCloseable {
                         + "stattrak INTEGER NOT NULL,"
                         + "test INTEGER NOT NULL,"
                         + "opened_at BIGINT NOT NULL)");
-                s.executeUpdate("CREATE INDEX " + (isMySql() ? "" : "IF NOT EXISTS ") + table("openings_owner")
-                        + " ON " + table("openings") + " (owner, opened_at)");
+                ensureIndex(c, "openings_owner", "openings", "owner, opened_at");
                 s.executeUpdate("DELETE FROM " + table("schema"));
                 s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (1)");
             }
@@ -198,9 +197,48 @@ public final class Database implements AutoCloseable {
                         + "actor CHAR(36) NOT NULL, counterparty CHAR(36), amount BIGINT NOT NULL,"
                         + "details TEXT NOT NULL, created_at BIGINT NOT NULL)");
                 s.executeUpdate("DELETE FROM " + table("schema"));
-                s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (" + SCHEMA_VERSION + ")");
+                s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (2)");
+            }
+            if (version < 3) {
+                // DDL is restartable even on MySQL (which implicitly commits DDL).
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("legacy_market_listings")
+                        + " (listing_id CHAR(36) PRIMARY KEY, instance_id CHAR(36), seller CHAR(36), seller_name VARCHAR(16), price BIGINT, created_at BIGINT)");
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("market_payments")
+                        + " (tx_id CHAR(36) PRIMARY KEY, listing_id CHAR(36) NOT NULL, instance_id CHAR(36) NOT NULL, buyer CHAR(36) NOT NULL, seller CHAR(36) NOT NULL, amount BIGINT NOT NULL, state VARCHAR(16) NOT NULL, created_at BIGINT NOT NULL)");
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("market_reservations")
+                        + " (listing_id CHAR(36) PRIMARY KEY, tx_id CHAR(36) NOT NULL UNIQUE)");
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("emerald_claims")
+                        + " (claim_id CHAR(36) PRIMARY KEY, owner CHAR(36) NOT NULL, amount BIGINT NOT NULL, remaining BIGINT NOT NULL, reserved_delivery CHAR(36), created_at BIGINT NOT NULL)");
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("emerald_deliveries")
+                        + " (delivery_id CHAR(36) PRIMARY KEY, claim_id CHAR(36) NOT NULL, owner CHAR(36) NOT NULL, amount BIGINT NOT NULL, state VARCHAR(16) NOT NULL, created_at BIGINT NOT NULL)");
+                s.executeUpdate("CREATE TABLE IF NOT EXISTS " + table("trade_contracts")
+                        + " (contract_id CHAR(36) PRIMARY KEY, owner CHAR(36) NOT NULL, instance_id CHAR(36) NOT NULL UNIQUE, inputs TEXT NOT NULL, announced INTEGER NOT NULL DEFAULT 0, created_at BIGINT NOT NULL)");
+                // Never reinterpret existing Coin prices as item prices. Archive and return the skins.
+                c.setAutoCommit(false);
+                try {
+                    s.executeUpdate(dialect.insertIgnore() + table("legacy_market_listings")
+                            + " SELECT * FROM " + table("market_listings"));
+                    s.executeUpdate("UPDATE " + table("skins") + " SET status='OWNED' WHERE status='LISTED' AND instance_id IN (SELECT instance_id FROM " + table("market_listings") + ")");
+                    s.executeUpdate("DELETE FROM " + table("market_listings"));
+                    s.executeUpdate("DELETE FROM " + table("schema"));
+                    s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (3)");
+                    c.commit();
+                } catch (SQLException error) { c.rollback(); throw error; }
+                finally { c.setAutoCommit(true); }
+            }
+
+            ensureIndex(c, "market_payment_owner", "market_payments", "buyer, state");
+            ensureIndex(c, "emerald_claim_owner", "emerald_claims", "owner, remaining");
+            ensureIndex(c, "emerald_delivery_owner", "emerald_deliveries", "owner, state");
+        }
+    }
+    private void ensureIndex(Connection c, String index, String table, String columns) throws SQLException {
+        if (isMySql()) {
+            try (var rs = c.getMetaData().getIndexInfo(c.getCatalog(), null, table(table), false, false)) {
+                while (rs.next()) if (table(index).equalsIgnoreCase(rs.getString("INDEX_NAME"))) return;
             }
         }
+        try (Statement s = c.createStatement()) { s.executeUpdate("CREATE INDEX " + (isMySql() ? "" : "IF NOT EXISTS ") + table(index) + " ON " + table(table) + " (" + columns + ")"); }
     }
 
     /**

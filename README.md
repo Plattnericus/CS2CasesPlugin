@@ -2,7 +2,7 @@
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.0.0** · **Paper 26.2** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.1.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](docs/images/skins.png)
 
@@ -19,7 +19,7 @@ are available without it. Swords, bows and crossbows keep their normal gameplay 
 | Catalog | 21 cases, 713 skins and 55 weapon and knife models |
 | Collection | Categories, favorites, filters, seven sort orders and the 36 newest skins |
 | Trading | Direct skin trades with two live offers, confirmation from both players and cancellation safeguards |
-| Marketplace | Fixed-price listings, search, sorting, categories and persistent Coin balances |
+| Marketplace | Real Emerald item payments, durable offline claims, search, sorting and filters |
 | Skin values | Float, exterior, pattern, StatTrak, origin and creation date |
 | Pattern analysis | Doppler phases, Fade percentage, Blue Gem classifications and Fire & Ice |
 | Inspects | 46 timelines with random variations for weapon classes and knife families |
@@ -39,13 +39,14 @@ the drop chance or the selected skin.
 
 ## Installation
 
-1. Prepare a **Paper 26.2 server running Java 25**.
-2. Copy [MCCases-1.0.0.jar](release/MCCases-1.0.0.jar) into `plugins/`.
+1. Prepare a **Paper 26.3 server running Java 25**.
+2. Copy [MCCases-1.1.0.jar](release/MCCases-1.1.0.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
 
-No other plugins are required. Local runtime checks use Paper 26.2 Build 129.
+No other plugins are required. The build targets Paper 26.3 Build 159 beta with Java 25. Paper 26.3 is currently a beta release.
+See [verification](docs/VERIFICATION-1.1.md) for the checks actually performed.
 Check your server configuration before using another Paper version.
 The development check plugin is separate and is not part of the release installation.
 
@@ -134,26 +135,21 @@ Use `/trade` to choose a player or `/trade PlayerName` to send a request. The re
 or decline in chat; `/trade accept PlayerName` and `/trade decline` perform the same actions.
 Requests expire after 60 seconds by default.
 
-The trade menu has two colored halves with your actual player heads. Your available skins appear
-on the left immediately. The right side shows the skins the other player offers you.
-Click one of your skins to add it to your offer; click it again to remove it.
-Selected skins have a green background behind the weapon and a **✓** before the name.
-The green background uses a dedicated menu sprite from the optional resource pack.
-When pack models are disabled, an enchantment glint and the **✓** mark the selection instead.
-Equipped weapons keep their normal appearance.
+The 54-slot main menu shows your own offer on the left and your partner's offer on the right,
+with actual player heads and confirmation status. **Open full collection** opens a separate
+54-slot browser with 36 skin entries per page. Search privately through chat, cycle weapon-category
+and rarity filters, or sort by rarity, name, float and newest. Right-click the search button to clear it.
 
-You can offer up to twelve skins. Larger collections have page arrows.
-The other player's offer remains visible and updates live while you browse.
-Each skin shows its float, pattern, StatTrak values and specific instance ID.
-The other player's offer uses normal skin icons; green selection backgrounds identify your own
-selected skins.
+Click a skin to add or remove it. Your selected skins show green pack sprites, glint and a **✓**;
+selection survives paging, filtering, search and navigation back to the main offer. Reserved and listed
+skins are excluded. The partner's main menu updates immediately as your offer changes.
+You can offer up to twelve skins, or a lower configured limit.
+Every icon includes float, pattern, StatTrak and instance identity.
 
-Click **Accept** to confirm the current offer. Your left half then shows exactly the skins
-you are giving away, with their green selection backgrounds still visible.
-The other player sees your acceptance immediately. Before the trade completes,
-clicking Accept again withdraws your acceptance and returns to your collection.
-`/trade accept` accepts either a request or the current offer; an optional player name
-must match the actual trade partner.
+Click **Accept** in the main menu to confirm the exact current offer. Click it again to withdraw
+acceptance. `/trade accept` accepts either a request or the current offer; an optional player name
+must match the actual partner. Opening the selection browser is safe navigation and does not cancel
+the trade. Closing the main menu or collection browser ordinarily cancels it.
 
 A one-sided offer is a gift and still needs both players to accept.
 If you receive nothing, the Accept button explicitly warns you.
@@ -167,67 +163,90 @@ Adding an equipped skin to an offer unequips it; after cancellation it can be eq
 
 ### Skin marketplace
 
-`/market` opens all listings. Tabs lead to your own listings, skin selection for selling
-and your Coin balance. The collection and case dealer also have trade and marketplace buttons;
-a skin's inspect menu lets its owner select it for sale.
+`/market` opens a 54-slot Emerald marketplace. Tabs lead to your own listings and the full sale
+collection. The header shows real Emeralds in your inventory and pending item deliveries.
+The case dealer continues to use diamonds.
 
 | Action | Command or menu |
 | --- | --- |
-| Browse listings | `/market` or `/marketplace` |
-| Manage your listings | `/market own` |
-| Sell a skin | **Sell a Skin**, then set and confirm the price |
-| Set an exact price | `/market sell <Skin-ID> <Price>`; opens price confirmation |
-| Search for a skin or seller | `/market search <Name>` |
-| View your balance | `/market balance` |
-| Add funds as an admin | `/market credit <Known-Player> <Amount>`; also available from the console |
+| Browse listings | `/market`, `/marketplace`, `/skinmarket` |
+| Manage listings | `/market own` |
+| Sell a skin | **Sell a skin**, select a skin, choose a price, confirm |
+| Type an exact price | Click the price item and type privately in chat; or `/market sell <Skin-ID> <Price>` |
+| Search name or seller | Search button; or `/market search <Name>` |
+| Count inventory Emeralds | `/market balance` |
+| Collect sale proceeds | `/market claims` or the Emerald-block button |
+| Retry an interrupted financial operation | `/market recover`, or reconnect |
+| Read archived Coin data (admin) | `/market legacy <Known-Player>` |
 
-Listings can be sorted by date, price or float and filtered by knives or weapons.
-Before purchase, the menu displays the seller, full skin values and total price.
-Purchases require a separate confirmation. Sellers can cancel their listings for free
-until someone buys them. Listed skins are reserved and hidden from the collection.
+Filter by weapons/knives, individual weapon categories and rarity. Sort by price in either direction,
+newest, rarity or float. Listing details show seller, price, full skin properties and a rendered preview.
+A separate confirmation buys or withdraws the offer; stale detail views show an unavailable marker.
 
-The currency is a separate, persistent **Coin balance**. Each player receives 1,000 Coins
-on first access by default. Sellers receive the full price, including when they are offline.
-There are no fees and no additional economy plugin is required. Coins and the case dealer's
-diamonds are separate currencies; they cannot be exchanged.
+Payment sources are storage slots 0–35 plus offhand by default, configured through
+`emeralds.include-offhand`; armor, cursor, shulker contents and Emerald blocks do not count.
+Only `Material.EMERALD` items are debited. The inventory is checked again at the actual debit.
+No Vault, virtual balance, starting allowance or `/market credit` exists.
 
-`plugins/MCCases/market.yml` controls the starting balance, currency display name, maximum price,
-listing limit and timeouts. Use `/csadmin reload` after changes.
-The starting balance is granted once; later configuration changes do not alter existing balances.
-Defaults allow 20 active listings per player and a maximum price of one billion Coins.
+Each completed purchase transfers the exact skin instance and creates one UUID-based Emerald-item
+claim for the seller, including offline sellers. Collection is explicit. If only part fits, that exact
+quantity is delivered and the remainder stays pending. Full inventories never cause dropped payouts.
+`emeralds.partial-claims: false` defers a delivery unless the whole claim fits; the configurable
+per-click limit defaults to the 2,304 items that fit into 36 empty storage slots.
 
-Purchase, payment and ownership transfer are saved together in the database.
-A skin can be sold only once. Listings and balances survive restarts.
-Transfers and credits are recorded in `commerce_log`. Float, pattern, StatTrak count
-and origin are preserved when ownership changes. Equipment and favorite settings reset
-for the new owner. Skins with origin `TEST` cannot be traded or sold.
+SQL preparation reserves an offer before payment. A receipt is saved with the changed player
+inventory, then the ownership transfer, claim and purchase journal commit together in SQL.
+Payout receipts similarly make repeated recovery safe. An uncertain database acknowledgement is
+retained for recovery instead of blindly refunding or paying twice. Minecraft saves and SQL commits
+are separate persistence systems; see [the recovery limits and upgrade procedure](docs/UPGRADE-1.1.md).
 
-Trading and marketplace messages include English and German translations. With the default
-English server language, all players see English. If client language selection is enabled,
-other client languages use the English fallback for these menus; their existing translations
-remain available for other features.
+Existing Coin wallets remain a read-only archive. Old Coin-priced listings are archived and their
+skins returned to the original owners; prices are never silently interpreted as Emerald prices.
+Administrators may export the archive and perform their own explicitly approved compensation,
+but this plugin provides no automatic Coin-to-Emerald conversion.
 
-### Skin previews
+`market.yml` configures Emerald price bounds, listing limits, payout options, trade limits and timeouts.
+Defaults allow 20 listings, prices 1–1,000,000 Emeralds, 12 skins per trade and two seconds of review.
+English and German messages are complete; other languages use the English fallback for new features.
+Existing YAML settings and translations are preserved while missing defaults are added on enable.
 
-| Mode | Display |
-| --- | --- |
-| `item` | Rotating skin sprite from the resource pack |
-| `map` | Rendered map showing the instance's pattern, float and wear |
-| `hologram` | The same instance as a colored text-display grid |
+### Independent case openings
 
-`item` is the default and falls back to a map when pack models are disabled.
-Pack sprites show the skin's general appearance; `map` and `hologram` show individual
-patterns and wear.
+Every normal opening starts one independent session with its own opening UUID, server roll, journal,
+SQL record and animation task. Continue clicking the ordinary case-opening button, or right-click a
+case entry in `/cases`, while earlier animations run. Every committed opening consumes exactly one
+signed case and one matching key. There is no batch button or waiting cooldown.
 
-### Dealer
+`/openings` and the clock button in `/cases` show active sessions and the last 20 results.
+World reels use separate lanes and a bounded pool of display entities. GUI reels continue running
+when hidden; opening, closing or replacing a chest GUI changes only presentation. The case preview
+stays open so its ordinary open button remains usable. Inventory roulette has the same ordinary
+**Open again** action during movement. Collection rewards are independent of the visible GUI.
 
-The dealer sells cases and keys for **diamonds**. Currency, prices and excluded cases
-are configured in `shop.yml`. Purchases support quantities of one or five.
-Payment is taken only if the delivery fits in the player's inventory.
+The default technical capacity is eight sessions per player and 64 globally. Held world results
+count toward the limit until their entities are removed. Rejected requests consume no items.
+Disconnects and shutdowns leave determined results in SQL or the player journal for recovery.
+Case openings can overlap direct trading; reserved skins remain unavailable to other systems.
 
-A mannequin uses a player name or signed texture data for its skin. It can change skins,
-look at nearby players, wave to newcomers and hold a case. A villager is also available.
-Remove a nearby dealer with `/csadmin shop remove`.
+### Trade-in contracts and gold drops
+
+`/tradein` (alias `/tradeup`) opens a separate contract menu, also accessible from the vanilla skin
+collection. Select ten available weapons of the same rarity and StatTrak type for one weapon of the
+next tier. Five Covert weapons instead produce a rare-special Gold item. Inputs must retain a valid
+source case with an output pool in that tier. This is CS2-inspired and uses this plugin's configured
+case pools as collections.
+
+The output case is sampled proportionally to the number of inputs from each case; the output skin
+is uniform in that case's target tier. Average input float is mapped into the output's float bounds.
+Pattern and wear seeds are server-generated. Inputs and the result exchange in one SQL transaction,
+with a dedicated contract UUID. A final yes/no confirmation permanently consumes the selected skins.
+
+Gold is detected through `rarity.rareSpecial()`. A successful eligible contract broadcasts a gold
+MiniMessage line with player and complete skin name, detailed hover lore and an optional server sound.
+The dispatch marker is claimed once in SQL before sending: retrying cannot duplicate the message,
+but a crash between claiming and sending can suppress it. Tests are excluded; administrator-origin
+inputs suppress normal broadcasts unless `trade-in.broadcast-admin` is explicitly enabled.
+These announcements never pass through the ordinary case-drop broadcaster.
 
 ## Commands
 
@@ -255,7 +274,11 @@ All player commands are used in-game.
 | `/market own` | — | `mccases.market` | Manage your listings |
 | `/market sell <Skin-ID> <Price>` | — | `mccases.market` | Set a sale price and open confirmation |
 | `/market search <Name>` | — | `mccases.market` | Search listings |
-| `/market balance` | — | `mccases.market` | View your Coin balance |
+| `/market balance` | — | `mccases.market` | Count real inventory Emeralds |
+| `/market claims` | — | `mccases.market` | Collect pending Emerald item deliveries |
+| `/market recover` | — | `mccases.market` | Reconcile interrupted payment receipts |
+| `/openings` | — | `mccases.use` | Active sessions and recent rewards |
+| `/tradein` | `/tradeup` | `mccases.tradein` | Separate skin trade-in contracts |
 
 Viewing another player's collection also requires `mccases.view`.
 The player may be offline but must already be known to the server.
@@ -282,7 +305,7 @@ must be online, except `/csadmin manage`, which also supports known offline play
 | `/csadmin setfloat <Player> <ID> <Value>` | In-game / console | Change float |
 | `/csadmin setpattern <Player> <ID> <Value>` | In-game / console | Change pattern and update its analysis |
 | `/csadmin setstattrak <Player> <ID> <true\|false>` | In-game / console | Change the StatTrak flag |
-| `/market credit <Known-Player> <Amount>` | In-game / console | Add Coins to a known player's balance |
+| `/market legacy <Known-Player>` | In-game / console | Read the archived Coin balance |
 
 `<ID>` identifies a skin instance from `/csadmin list`, not a catalog ID.
 Use a full UUID or an unambiguous prefix. Amounts must be **1–64**, float must be **0–1**
@@ -347,7 +370,8 @@ spawn point. Pack export writes to `plugins/MCCases/resourcepack/MCCases-Resourc
 | `mccases.view` | All players | View other players' collections |
 | `mccases.shop` | All players | Buy from the dealer |
 | `mccases.trade` | All players | Trade skins and use trade requests |
-| `mccases.market` | All players | Buy and sell skins; view Coin balance |
+| `mccases.tradein` | All players | Exchange skins through separate contracts |
+| `mccases.market` | All players | Buy and sell skins; collect Emerald items |
 | `mccases.admin` | Operators | All admin commands and management menus |
 
 ## Configuration
@@ -365,6 +389,10 @@ Default files are stored in `plugins/MCCases/`. Values below refer to the bundle
 | `opening.display` | `world` | Public opening reel; alternatively `gui` |
 | `opening.duration-ticks` | `120` | Roulette movement duration; 20 ticks equal one second |
 | `opening.easing` | `cinematic` | Deceleration curve |
+| `opening.max-active-per-player` | `8` | Concurrent sessions; rejects before item consumption |
+| `opening.max-active-global` | `64` | Global animation capacity |
+| `trade-in.broadcast-gold` | `true` | Gold contract broadcasts |
+| `trade-in.broadcast-admin` | `false` | Allow administrator-input broadcasts explicitly |
 | `opening.broadcast-rare` | `true` | Announce rare special drops |
 | `opening.speech-bubble.enabled` | `true` | Speech bubble when clicking an active world opening |
 | `preview.mode` | `item` | `item`, `map` or `hologram` |
@@ -432,7 +460,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-1.0.0.zip](release/MCCases-ResourcePack-1.0.0.zip).
+[release/MCCases-ResourcePack-1.1.0.zip](release/MCCases-ResourcePack-1.1.0.zip).
 
 ### Automatic distribution
 
@@ -535,7 +563,7 @@ plugins/MCCases/
 ├── sounds.yml                    Sound cues
 ├── inspect.yml                   Models and inspect timelines
 ├── shop.yml                      Prices, currency and dealer
-├── market.yml                    Coin balances, marketplace and trade limits
+├── market.yml                    Emerald payments, claims and trade limits
 ├── data.db                       SQLite database with default configuration
 ├── secret.key                    Signing key for cases and keys
 ├── resourcepack/                 Bundled or exported pack
@@ -651,7 +679,7 @@ python3 scripts/dev.py restart
 python3 scripts/dev.py stop
 ```
 
-This requires an installed Minecraft 26.2 client, a built plugin and acceptance of the Minecraft
+This requires an installed Minecraft 26.3 client, a built plugin and acceptance of the Minecraft
 EULA before the server can start. `observer` starts the second client for trade testing.
 Use `127.0.0.1:25565` to connect to the local server.
 The check plugin is for development only; keep it out of `release/`.

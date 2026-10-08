@@ -204,6 +204,7 @@ public final class SkinInventoryMenu extends Menu {
         }
         if (!readOnly && !admin) {
             if (viewer.hasPermission("mccases.market")) set(46, GuiItems.icon(ctx.messages(viewer), Material.EMERALD, "market.browse"), c -> new dev.plattnericus.cases.commerce.MarketMenu(ctx, viewer).open());
+            if (viewer.hasPermission("mccases.tradein")) set(46, GuiItems.icon(ctx.messages(viewer), Material.GOLD_INGOT, "tradein.button"), c -> new dev.plattnericus.cases.tradein.TradeInMenu(ctx, viewer).open());
             if (viewer.hasPermission("mccases.trade")) set(52, GuiItems.icon(ctx.messages(viewer), Material.WRITABLE_BOOK, "trade.choose-partner"), c -> new dev.plattnericus.cases.commerce.TradePlayersMenu(ctx, viewer).open());
         }
     }

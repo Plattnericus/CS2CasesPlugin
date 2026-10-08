@@ -70,6 +70,9 @@ public final class CasesRuntime implements CasesContext {
     private SkinRepository repository;
     private dev.plattnericus.cases.commerce.CommerceService commerce;
     private ReservedSlotService reservedSlot;
+    private dev.plattnericus.cases.tradein.TradeInService tradeIns;
+    public void setTradeIns(dev.plattnericus.cases.tradein.TradeInService service) { tradeIns = service; }
+    @Override public dev.plattnericus.cases.tradein.TradeInService tradeIns() { return tradeIns; }
     private dev.plattnericus.cases.shop.ShopNpcAnimator npcAnimator;
     private dev.plattnericus.cases.pack.PackDistribution packDistribution;
 
@@ -146,6 +149,7 @@ public final class CasesRuntime implements CasesContext {
                     render.reconfigure(engine(s));
                     shop.load(new File(plugin.getDataFolder(), "shop.yml"), warnings::add);
                     commerce.load();
+                    tradeIns.load();
                     npcAnimator.refreshAll();
                     packDistribution.apply();
                     reservedSlot.ensureAll();

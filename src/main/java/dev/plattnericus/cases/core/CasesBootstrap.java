@@ -101,6 +101,8 @@ public final class CasesBootstrap {
                 new dev.plattnericus.cases.storage.CommerceRepository(database));
         runtime.setCommerce(commerce);
         commerce.load(); commerce.start(); profiles.lockCheck(commerce::locked);
+        profiles.beforeLoad(commerce.payments()::recover);
+        runtime.setTradeIns(new dev.plattnericus.cases.tradein.TradeInService(runtime, new dev.plattnericus.cases.storage.ContractRepository(database)));
         shop.load(new File(plugin.getDataFolder(), "shop.yml"), w -> plugin.getLogger().warning(w));
         profiles.onLoad(knives::refreshHeld);
 
@@ -114,7 +116,7 @@ public final class CasesBootstrap {
         packDistribution.apply();
         runtime.setExtras(npcAnimator, packDistribution);
 
-        register(new MenuListener(), profiles, previews, openings, knives, new StatTrakListener(runtime), inspect, commerce,
+        register(new MenuListener(), profiles, previews, openings, knives, new StatTrakListener(runtime), inspect, commerce, commerce.input(), runtime.tradeIns(),
                 new ShopListener(runtime), reservedSlot, new ItemProtectionListener(caseItems), new CaseItemListener(runtime),
                 npcAnimator, packDistribution, runtime.gallery(),
                 new dev.plattnericus.cases.config.ClientLanguageListener(runtime, reservedSlot::ensure));
@@ -149,6 +151,7 @@ public final class CasesBootstrap {
             packDistribution.stop();
         }
         if (runtime != null) {
+            if (runtime.tradeIns() != null) runtime.tradeIns().shutdown();
             if (runtime.commerce() != null) runtime.commerce().shutdown();
             runtime.gallery().shutdown();
         }
