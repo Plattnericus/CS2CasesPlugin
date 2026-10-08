@@ -33,6 +33,11 @@ public final class PlayerCommands {
                 inventoryCommand(ctx, MenuStates.Category.KNIVES));
         commands.register("cases", "Shows your cases", List.of(), command(ctx, "mccases.use", p ->
                 new CasesMenu(ctx, p).open()));
+        commands.register("tradein", "CS2-inspired skin contracts", List.of("tradeup"), command(ctx, "mccases.tradein", p -> {
+            if (ctx.tradeIns().enabled() && ctx.profiles().get(p) != null && ctx.commerce().trade(p.getUniqueId()) == null) new dev.plattnericus.cases.tradein.TradeInMenu(ctx, p).open();
+            else ctx.messages(p).send(p, "tradein.unavailable");
+        }));
+        commands.register("openings", "Active openings and recent results", List.of(), command(ctx, "mccases.use", p -> new dev.plattnericus.cases.opening.ActiveOpeningsMenu(ctx, p).open()));
         commands.register("inspect", "Inspects your held weapon or equipped knife; hand places it at the skin hand in F5", List.of(), new BasicCommand() {
             @Override public String permission() { return "mccases.inspect"; }
             @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
@@ -41,10 +46,6 @@ public final class PlayerCommands {
             @Override public void execute(CommandSourceStack source, String[] args) {
                 if (!(source.getExecutor() instanceof Player p)) {
                     ctx.messages().send(source.getSender(), "general.player-only");
-                    return;
-                }
-                if (ctx.openings().isOpening(p)) {
-                    ctx.messages().send(p, "opening.command-blocked");
                     return;
                 }
                 PlayerProfile profile = ctx.profiles().get(p);
@@ -77,10 +78,6 @@ public final class PlayerCommands {
                 }
                 MenuStates.State state = ctx.menuStates().get(player.getUniqueId());
                 long requestVersion = ++state.inventoryRequestVersion;
-                if (ctx.openings().isOpening(player)) {
-                    ctx.messages().send(player, "opening.command-blocked");
-                    return;
-                }
                 if (args.length > 1) {
                     ctx.messages().send(player, "inventory.usage");
                     return;
@@ -115,10 +112,6 @@ public final class PlayerCommands {
                         Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
                             if (!player.isOnline() || ctx.menuStates().get(player.getUniqueId()) != state
                                     || state.inventoryRequestVersion != requestVersion) {
-                                return;
-                            }
-                            if (ctx.openings().isOpening(player)) {
-                                ctx.messages().send(player, "opening.command-blocked");
                                 return;
                             }
                             if (error != null || profile == null) {
@@ -162,10 +155,6 @@ public final class PlayerCommands {
             public void execute(CommandSourceStack source, String[] args) {
                 if (!(source.getExecutor() instanceof Player player)) {
                     ctx.messages().send(source.getSender(), "general.player-only");
-                    return;
-                }
-                if (ctx.openings().isOpening(player)) {
-                    ctx.messages().send(player, "opening.command-blocked");
                     return;
                 }
                 action.accept(player);

@@ -21,7 +21,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
@@ -29,26 +28,17 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 
-/**
- * Case opening state machine. Order of a real opening:
- * <ol>
- *   <li>lock: one session per player, checked and set on the server thread</li>
- *   <li>roll the reward (server RNG) and analyse its pattern off-thread</li>
- *   <li>consume case + key and journal the reward in the player file, saved immediately</li>
- *   <li>store reward + audit row in one database transaction (status PENDING)</li>
- *   <li>animate; the reward is marked OWNED at the reveal or as soon as the menu is closed</li>
- * </ol>
- * Failures before step 4 completes refund the items. Quits and crashes leave a PENDING row or a
- * journal entry that is completed exactly once on the next login.
- */
+/** Independent opening IDs; persisted results are decoupled from every animation and visible menu. */
 public final class OpeningService implements Listener {
 
     private final CasesContext ctx;
     private final PendingJournal journal;
     private final RewardRoller roller;
     private final RevealEffects effects;
-    private final Map<UUID, OpeningSession> sessions = new HashMap<>();
+    private final OpeningSessions sessions = new OpeningSessions();
     private final SpeechBubble bubble;
+    private boolean stopped;
+    private final Map<UUID, java.util.Deque<SkinInstance>> recent = new HashMap<>();
     /** Click hitboxes of running world reels; clicking one makes the clicker say the bubble text. */
     private final java.util.Set<UUID> reelHitboxes = new java.util.HashSet<>();
     private final Map<UUID, Integer> lastBubble = new HashMap<>();
@@ -66,8 +56,15 @@ public final class OpeningService implements Listener {
     }
 
     public boolean isOpening(Player player) {
-        OpeningSession s = sessions.get(player.getUniqueId());
-        return s != null && s.isActive();
+        return sessions.values().stream().anyMatch(s -> s.playerId.equals(player.getUniqueId()) && s.isActive());
+    }
+    public int activeCount(Player player) { return (int) sessions.values().stream().filter(s -> s.playerId.equals(player.getUniqueId())).count(); }
+    public java.util.List<OpeningSession> active(Player player) { return sessions.forPlayer(player.getUniqueId()); }
+    public java.util.List<SkinInstance> recent(Player player) { return java.util.List.copyOf(recent.getOrDefault(player.getUniqueId(), new java.util.ArrayDeque<>())); }
+    void viewClosed(OpeningSession session) { sessions.remove(session.openingId, session); }
+    public void show(Player player, UUID id) {
+        OpeningSession session = sessions.get(id);
+        if (session != null && session.playerId.equals(player.getUniqueId()) && session.view instanceof OpeningMenu menu) menu.open();
     }
 
     /**
@@ -75,9 +72,8 @@ public final class OpeningService implements Listener {
      * test reward is stored in the admin's inventory.
      */
     public void open(Player player, CaseDefinition def, boolean adminTest, boolean keep) {
-        if (isOpening(player)) {
-            ctx.messages().send(player, "opening.already");
-            return;
+        if (stopped || activeCount(player) >= ctx.settings().opening().maxActive() || sessions.size() >= ctx.settings().opening().maxGlobal()) {
+            ctx.messages(player).send(player, "opening.limit"); return;
         }
         PlayerProfile profile = ctx.profiles().get(player);
         if (profile == null) {
@@ -107,7 +103,9 @@ public final class OpeningService implements Listener {
         ctx.inspect().stop(player);
         ctx.gallery().close(player);
         OpeningSession session = new OpeningSession(player.getUniqueId(), current, catalog, adminTest, keep);
-        sessions.put(player.getUniqueId(), session);
+        if (!sessions.add(session, ctx.settings().opening().maxActive(), ctx.settings().opening().maxGlobal())) {
+            ctx.messages(player).send(player, "opening.limit"); return;
+        }
 
         RolledReward roll = roller.roll(current, catalog);
         ctx.render().report(roll.skin(), roll.pattern()).handle((report, error) -> {
@@ -117,12 +115,12 @@ public final class OpeningService implements Listener {
                 return PatternReport.none(null, null);
             }
             return report;
-        }).thenAccept(report -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> commit(player, session, roll, report)));
+        }).thenAccept(report -> { if (!stopped && ctx.plugin().isEnabled()) Bukkit.getScheduler().runTask(ctx.plugin(), () -> commit(player, session, roll, report)); });
     }
 
     /** Server thread: consume items, journal, then persist asynchronously. */
     private void commit(Player player, OpeningSession session, RolledReward roll, PatternReport report) {
-        if (sessions.get(session.playerId) != session || session.state != OpeningSession.State.ROLLING) {
+        if (sessions.get(session.openingId) != session || session.state != OpeningSession.State.ROLLING) {
             return;
         }
         if (!player.isOnline()) {
@@ -167,25 +165,21 @@ public final class OpeningService implements Listener {
         }
         if (!session.adminTest) {
             // the case/key removal and the reward reach disk in the same file save
-            journal.add(player, session.instance);
-            player.saveData();
+            try { journal.add(player, session.instance, record); player.saveData(); }
+            catch (RuntimeException error) { ctx.plugin().getLogger().log(Level.SEVERE, "Saving opening receipt failed " + session.openingId, error); abort(session); ctx.messages(player).send(player, "opening.storage-error"); return; }
         }
         SkinInstance snapshot = session.instance;
-        ctx.repository().persistOpening(snapshot, record).whenComplete((v, error) ->
-                Bukkit.getScheduler().runTask(ctx.plugin(), () -> afterPersist(player, session, error)));
+        ctx.repository().persistOpening(snapshot, record).whenComplete((v, error) -> {
+            if (!stopped && ctx.plugin().isEnabled()) Bukkit.getScheduler().runTask(ctx.plugin(), () -> afterPersist(player, session, error));
+        });
     }
 
     private void afterPersist(Player player, OpeningSession session, Throwable error) {
         if (error != null) {
             ctx.plugin().getLogger().log(Level.SEVERE, "Storing case reward " + session.instance.id() + " failed", error);
-            if (player.isOnline()) {
-                if (!session.adminTest) {
-                    // nothing was stored: undo the journal entry and give the items back
-                    journal.remove(player, session.instance.id());
-                    refund(player, session);
-                }
-                ctx.messages().send(player, "opening.storage-error");
-            }
+            // Keep the saved consumption + reward journal: a failed commit may have succeeded remotely.
+            // Replaying the same instance is safe; refunding here could duplicate a committed reward.
+            if (player.isOnline()) ctx.messages().send(player, "opening.storage-error");
             abort(session);
             return;
         }
@@ -200,7 +194,7 @@ public final class OpeningService implements Listener {
                     session.instance.patternInfo().hasClassification() ? ", " + session.instance.patternInfo().classification() : "",
                     session.instance.shortId()));
         }
-        if (!player.isOnline() || sessions.get(session.playerId) != session) {
+        if (!player.isOnline() || sessions.get(session.openingId) != session) {
             // reward stays PENDING and is recovered on the next login
             return;
         }
@@ -208,17 +202,9 @@ public final class OpeningService implements Listener {
         startAnimation(player, session);
     }
 
-    private void refund(Player player, OpeningSession session) {
-        CaseItems.giveOrDrop(player, ctx.caseItems().caseItem(session.caseDef, 1, session.consumed.caseTest(), ctx.messages(player)));
-        KeyDefinition key = session.catalog.key(session.caseDef.keyId());
-        if (key != null) {
-            CaseItems.giveOrDrop(player, ctx.caseItems().keyItem(key, 1, session.consumed.keyTest(), ctx.messages(player)));
-        }
-    }
-
     private void abort(OpeningSession session) {
         session.state = OpeningSession.State.ABORTED;
-        sessions.remove(session.playerId, session);
+        sessions.remove(session.openingId, session);
     }
 
     // ------------------------------------------------------------------ animation
@@ -229,7 +215,12 @@ public final class OpeningService implements Listener {
                 ? new WorldReelView(ctx, player, session, this)
                 : new OpeningMenu(ctx, player, session, this);
         session.tick = 0;
-        session.view.open();
+        if (session.view instanceof OpeningMenu menu) {
+            // Keep case preview / trading menus usable while independent hidden reels run.
+            Object holder = player.getOpenInventory().getTopInventory().getHolder(false);
+            if (holder instanceof OpeningMenu || player.getOpenInventory().getTopInventory().getType() == org.bukkit.event.inventory.InventoryType.CRAFTING) menu.open();
+            else menu.initializeHidden();
+        } else session.view.open();
         ctx.sounds().play(player, "opening.start");
         Easing easing = Easing.parse(ctx.settings().opening().easing());
         int duration = ctx.settings().opening().durationTicks();
@@ -276,10 +267,11 @@ public final class OpeningService implements Listener {
                     return;
                 }
                 session.state = OpeningSession.State.FINISHED;
-                sessions.remove(session.playerId, session);
                 session.view.result();
+                if (session.view instanceof OpeningMenu) sessions.remove(session.openingId, session);
                 if (gold && session.reward.isKnife() && ctx.settings().opening().knifeAutoPreview()
-                        && ctx.settings().inspect().revealPreview() && session.persistent()) {
+                        && ctx.settings().inspect().revealPreview() && session.persistent() && activeCount(player) <= 1
+                        && player.getOpenInventory().getTopInventory().getType() == org.bukkit.event.inventory.InventoryType.CRAFTING) {
                     session.view.close();
                     ctx.inspect().start(player, session.instance, true);
                 }
@@ -294,23 +286,39 @@ public final class OpeningService implements Listener {
         }
         session.finalized = true;
         if (session.persistent()) {
-            session.instance.setStatus(SkinInstance.Status.OWNED);
-            ctx.repository().setStatus(session.instance.id(), SkinInstance.Status.OWNED);
-        }
+            ctx.repository().setStatus(session.instance.id(), SkinInstance.Status.OWNED).whenComplete((ignored, error) -> {
+                if (stopped || !ctx.plugin().isEnabled()) return;
+                Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+                    if (error != null) {
+                        ctx.plugin().getLogger().log(Level.SEVERE, "Finalizing reward failed; retained PENDING " + session.instance.id(), error);
+                        Player player = Bukkit.getPlayer(session.playerId);
+                        if (player != null) ctx.messages(player).send(player, "opening.storage-error");
+                        return;
+                    }
+                    session.instance.setStatus(SkinInstance.Status.OWNED);
+                    var profile = ctx.profiles().get(session.playerId);
+                    if (profile != null && profile.get(session.instance.id()) != null) profile.get(session.instance.id()).setStatus(SkinInstance.Status.OWNED);
+                    publishReward(session);
+                });
+            });
+        } else publishReward(session);
+    }
+    private void publishReward(OpeningSession session) {
+        var results = recent.computeIfAbsent(session.playerId, id -> new java.util.ArrayDeque<>());
+        results.addFirst(session.instance.copyWithStatus(SkinInstance.Status.OWNED));
+        while (results.size() > 20) results.removeLast();
         Player player = Bukkit.getPlayer(session.playerId);
-        if (player != null) {
-            effects.announce(player, session.reward, session.instance, session.caseDef, session.adminTest && !session.keep);
-        }
+        if (player != null) effects.announce(player, session.reward, session.instance, session.caseDef, session.adminTest && !session.keep);
     }
 
     /**
      * Teleport, world change or death during a world reel: finish instantly like closing the menu.
      */
     private void interrupt(Player player) {
-        OpeningSession s = sessions.get(player.getUniqueId());
-        if (s != null && s.view != null) {
-            onMenuClosed(player, s);
-            s.view.close();
+        for (OpeningSession s : active(player)) if (s.view != null) {
+            if (s.task != null) s.task.cancel();
+            finalizeReward(s); s.state = OpeningSession.State.FINISHED; s.view.close();
+            sessions.remove(s.openingId, s);
         }
     }
 
@@ -326,24 +334,8 @@ public final class OpeningService implements Listener {
         interrupt(event.getEntity());
     }
 
-    /** Menu closed: finish instantly (no reward is ever lost by closing). */
-    void onMenuClosed(Player player, OpeningSession session) {
-        if (sessions.get(session.playerId) != session) {
-            return;
-        }
-        if (session.state == OpeningSession.State.ANIMATING || session.state == OpeningSession.State.REVEALING) {
-            if (session.task != null) {
-                session.task.cancel();
-            }
-            boolean wasRevealed = session.revealed;
-            finalizeReward(session);
-            session.state = OpeningSession.State.FINISHED;
-            sessions.remove(session.playerId, session);
-            if (!wasRevealed && player.isOnline()) {
-                effects.reveal(player, session.reward, session.instance);
-            }
-        }
-    }
+    /** Closing a chest only detaches its presentation; the session keeps running. */
+    void onMenuClosed(Player player, OpeningSession session) { }
 
     void openInspect(Player player, OpeningSession session) {
         if (session.instance == null || !session.persistent()) {
@@ -359,17 +351,6 @@ public final class OpeningService implements Listener {
     }
 
     // ------------------------------------------------------------------ guards & cleanup
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onCommand(PlayerCommandPreprocessEvent event) {
-        OpeningSession s = sessions.get(event.getPlayer().getUniqueId());
-        if (s != null && ctx.settings().opening().blockCommands()
-                && (s.state == OpeningSession.State.ROLLING || s.state == OpeningSession.State.PERSISTING
-                || s.state == OpeningSession.State.ANIMATING || s.state == OpeningSession.State.REVEALING)) {
-            event.setCancelled(true);
-            ctx.messages().send(event.getPlayer(), "opening.command-blocked");
-        }
-    }
 
     void registerReelHitbox(UUID id) {
         reelHitboxes.add(id);
@@ -412,26 +393,19 @@ public final class OpeningService implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         lastBubble.remove(event.getPlayer().getUniqueId());
         bubble.remove(event.getPlayer());
-        OpeningSession s = sessions.remove(event.getPlayer().getUniqueId());
-        if (s == null) {
-            return;
-        }
-        if (s.task != null) {
-            s.task.cancel();
-        }
-        if (s.view != null) {
-            s.view.close();
-        }
-        if (s.state == OpeningSession.State.ANIMATING || s.state == OpeningSession.State.REVEALING) {
-            // not yet revealed rewards stay PENDING; the next login completes them with a message
-            s.state = OpeningSession.State.FINISHED;
-        } else if (s.state == OpeningSession.State.ROLLING) {
-            s.state = OpeningSession.State.ABORTED;
+        recent.remove(event.getPlayer().getUniqueId());
+        for (OpeningSession s : active(event.getPlayer())) {
+            sessions.remove(s.openingId, s);
+            if (s.task != null) s.task.cancel();
+            if (s.view != null) s.view.close();
+            if (s.state == OpeningSession.State.ROLLING) s.state = OpeningSession.State.ABORTED;
+            // PERSISTING / PENDING rewards are replayed on next login.
         }
     }
 
     /** Plugin disable: finalize everything that is already stored. */
     public void shutdown() {
+        stopped = true;
         bubble.removeAll();
         for (OpeningSession s : sessions.values().toArray(OpeningSession[]::new)) {
             if (s.task != null) {
@@ -445,11 +419,10 @@ public final class OpeningService implements Listener {
                 s.view.close();
             }
         }
-        sessions.clear();
+        sessions.clear(); recent.clear();
     }
 
     public SkinDefinition rewardOf(Player player) {
-        OpeningSession s = sessions.get(player.getUniqueId());
-        return s == null ? null : s.reward;
+        return active(player).stream().map(s -> s.reward).filter(java.util.Objects::nonNull).findFirst().orElse(null);
     }
 }

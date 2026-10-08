@@ -35,6 +35,11 @@ public abstract class Menu implements InventoryHolder {
 
     protected abstract void build();
 
+    public void initializeHidden() {
+        inventory = Bukkit.createInventory(this, rows() * 9, title());
+        render();
+    }
+
     public void open() {
         ctx.menuStates().get(viewer.getUniqueId()).inventoryRequestVersion++;
         inventory = Bukkit.createInventory(this, rows() * 9, title());

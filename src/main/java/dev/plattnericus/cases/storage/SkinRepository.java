@@ -163,7 +163,7 @@ public final class SkinRepository {
         });
     }
 
-    private void insert(Connection c, SkinInstance i) throws SQLException {
+    void insert(Connection c, SkinInstance i) throws SQLException {
         try (PreparedStatement ps = c.prepareStatement(db.dialect().insertIgnore() + skins + " (" + COLUMNS + ") "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             PatternInfo p = i.patternInfo();

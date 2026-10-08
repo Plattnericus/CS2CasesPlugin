@@ -14,12 +14,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RuntimeChecksPlugin extends JavaPlugin {
     @Override public void onEnable() {
         getCommand("mccasesdevcheck").setExecutor((sender, command, label, args) -> {
+            if (args.length == 1 && args[0].equals("items")) {
+                try { ItemRuntimeChecks.run(this, context()); }
+                catch (Exception | AssertionError error) { getLogger().log(java.util.logging.Level.SEVERE, "Item runtime audit failed", error); }
+                return true;
+            }
             if (args.length < 1 || args.length > 3) return false;
             Player player = Bukkit.getPlayerExact(args[0]);
             if (player == null) { sender.sendMessage("Player is not online."); return true; }
             try {
                 CasesContext ctx = context();
-                if (args.length == 3 && args[1].equals("commerce")) {
+                if (args.length == 2 && args[1].equals("gold")) {
+                    CommerceRuntimeChecks.gold(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("recovery")) {
+                    CommerceRuntimeChecks.queueRecovery(this, sender, player, ctx);
+                } else if (args.length == 3 && args[1].equals("commerce")) {
                     Player other = Bukkit.getPlayerExact(args[2]);
                     if (other == null || other.equals(player)) { sender.sendMessage("A second online player is required."); return true; }
                     CommerceRuntimeChecks.run(this, sender, player, other, ctx);
@@ -670,7 +679,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
         require(!ctx.openings().isOpening(player) && ctx.caseItems().count(player, "case", def.id()) == 2, "missing-key opening consumed items");
         player.getInventory().setItem(1, ctx.caseItems().keyItem(key, 2, true, ctx.messages(player)));
         ctx.openings().open(player, def, false, false);
-        ctx.openings().open(player, def, false, false); // duplicate request must not create another session/reward
+        ctx.openings().open(player, def, false, false); // independent ordinary opening, while the first session is active
         new org.bukkit.scheduler.BukkitRunnable() {
             private int elapsed;
             @Override public void run() {
@@ -680,10 +689,10 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     require(elapsed < 600, "opening did not finish within 30 seconds");
                     if (ctx.openings().isOpening(player)) return;
                     var added = ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id())).toList();
-                    require(added.size() == 1 && added.getFirst().origin() == dev.plattnericus.cases.skin.SkinInstance.Origin.TEST,
+                    require(added.size() == 2 && added.getFirst().origin() == dev.plattnericus.cases.skin.SkinInstance.Origin.TEST,
                             "opening reward count/test-key origin");
-                    require(ctx.caseItems().count(player, "case", def.id()) == 1 && ctx.caseItems().count(player, "key", key.id()) == 1,
-                            "opening did not consume exactly one pair");
+                    require(ctx.caseItems().count(player, "case", def.id()) == 0 && ctx.caseItems().count(player, "key", key.id()) == 0,
+                            "two openings did not consume exactly two pairs");
                     require(ctx.profiles().journal().entries(player).isEmpty(), "completed opening left journal pending");
                     var rewardId = added.getFirst().id();
                     cancel(); restore();
@@ -693,7 +702,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                         return true;
                     }).whenComplete((ok, error) -> Bukkit.getScheduler().runTask(RuntimeChecksPlugin.this, () -> {
                         if (error != null) report(new IllegalStateException("opening durability failed", error));
-                        else sender.sendMessage("PASS FULL AUDIT: actual case reel/reveal, duplicate request guard, exact item consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.");
+                        else sender.sendMessage("PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.");
                     }));
                 } catch (Exception failure) { cancel(); restore(); report(failure); }
             }

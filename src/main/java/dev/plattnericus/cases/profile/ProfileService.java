@@ -41,6 +41,8 @@ public final class ProfileService implements Listener {
     private final Function<String, SkinDefinition> skins;
     private final Map<UUID, PlayerProfile> profiles = new HashMap<>();
     private final Map<UUID, Long> revisions = new HashMap<>();
+    private Function<Player, CompletableFuture<Void>> beforeLoad = p -> CompletableFuture.completedFuture(null);
+    public void beforeLoad(Function<Player, CompletableFuture<Void>> hook) { beforeLoad = hook; }
     private java.util.function.Predicate<UUID> locked = id -> false;
     private final List<Consumer<Player>> loadListeners = new ArrayList<>();
 
@@ -88,15 +90,16 @@ public final class ProfileService implements Listener {
         long revision = revisions.getOrDefault(id, 0L);
         // replay the journal first; insert-ignore makes this safe even if the rows already exist
         List<SkinInstance> journaled = journal.entries(player);
-        CompletableFuture<Void> replay = CompletableFuture.completedFuture(null);
+        CompletableFuture<Void> replay = beforeLoad.apply(player);
         for (SkinInstance entry : journaled) {
-            replay = replay.thenCompose(v -> repository.insert(entry));
+            var record = journal.opening(player, entry.id());
+            replay = replay.thenCompose(v -> record == null ? repository.insert(entry) : repository.persistOpening(entry, record));
         }
         CompletableFuture<List<SkinInstance>> skinsFuture = replay.thenCompose(v -> repository.loadActive(id));
         CompletableFuture<java.util.Map<String, UUID>> knifeFuture = replay.thenCompose(v -> repository.equippedAll(id));
         skinsFuture.thenCombine(knifeFuture, (list, knife) -> new Object[]{list, knife}).whenComplete((result, error) ->
-                Bukkit.getScheduler().runTask(plugin, () -> {
-                    if (!player.isOnline()) {
+                { if (!plugin.isEnabled()) return; Bukkit.getScheduler().runTask(plugin, () -> {
+                    if (!player.isOnline() || Bukkit.getPlayer(id) != player) {
                         return;
                     }
                     if (revision != revisions.getOrDefault(id, 0L)) { load(player); return; }
@@ -113,7 +116,7 @@ public final class ProfileService implements Listener {
                     @SuppressWarnings("unchecked")
                     java.util.Map<String, UUID> equipped = (java.util.Map<String, UUID>) result[1];
                     apply(player, list, equipped);
-                }));
+                }); });
     }
 
     private void apply(Player player, List<SkinInstance> list, java.util.Map<String, UUID> equipped) {
@@ -133,16 +136,25 @@ public final class ProfileService implements Listener {
         });
         profiles.put(player.getUniqueId(), profile);
         if (!recovered.isEmpty()) {
-            repository.finalizePending(player.getUniqueId());
-            for (SkinInstance s : recovered) {
-                s.setStatus(SkinInstance.Status.OWNED);
-                SkinDefinition def = skins.apply(s.skinId());
-                if (def != null) {
-                    messages.get().send(player, "profile.recovered",
-                            dev.plattnericus.cases.util.Text.component("skin", formatter.get().forAudience(player).fullName(def, s)));
-                }
-            }
-            plugin.getLogger().info("Recovered " + recovered.size() + " interrupted case reward(s) for " + player.getName());
+            repository.finalizePending(player.getUniqueId()).whenComplete((ignored, error) -> {
+                if (!plugin.isEnabled()) return;
+                Bukkit.getScheduler().runTask(plugin, () -> {
+                    if (error != null) {
+                        plugin.getLogger().log(Level.SEVERE, "Could not finalize recovered rewards for " + player.getUniqueId(), error);
+                        if (player.isOnline()) messages.get().send(player, "profile.load-failed");
+                        return;
+                    }
+                    if (!player.isOnline() || profiles.get(player.getUniqueId()) != profile) return;
+                    for (SkinInstance s : recovered) {
+                        s.setStatus(SkinInstance.Status.OWNED);
+                        SkinDefinition def = skins.apply(s.skinId());
+                        if (def != null) messages.get().send(player, "profile.recovered",
+                                dev.plattnericus.cases.util.Text.component("skin", formatter.get().forAudience(player).fullName(def, s)));
+                    }
+                    plugin.getLogger().info("Recovered " + recovered.size() + " interrupted case reward(s) for " + player.getName());
+                    for (Consumer<Player> listener : loadListeners) listener.accept(player);
+                });
+            });
         }
         for (Consumer<Player> l : loadListeners) {
             l.accept(player);

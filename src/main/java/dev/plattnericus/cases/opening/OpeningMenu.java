@@ -108,6 +108,11 @@ final class OpeningMenu extends Menu implements OpeningView {
         if (!result) {
             set(MARKER_TOP, marker(ctx.settings().opening().markerTop(), "opening.marker"));
             set(MARKER_BOTTOM, marker(ctx.settings().opening().markerBottom(), "opening.marker"));
+            int cases = ctx.caseItems().count(viewer, CaseItems.TYPE_CASE, session.caseDef.id());
+            int keys = ctx.caseItems().count(viewer, CaseItems.TYPE_KEY, session.caseDef.keyId());
+            if (!session.adminTest) set(18, GuiItems.icon(ctx.messages(viewer), Material.LIME_DYE, "opening.buttons.again",
+                    Text.unparsed("cases", cases), Text.unparsed("keys", keys)), c -> service.open(viewer, session.caseDef, false, false));
+            set(26, GuiItems.icon(ctx.messages(viewer), Material.CLOCK, "opening.active-button"), c -> new ActiveOpeningsMenu(ctx, viewer).open());
             return;
         }
         ItemStack winnerPane = pane(session.reward.rarity());

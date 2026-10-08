@@ -15,12 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/** Cancels every interaction with menu inventories and dispatches button clicks (throttled). */
+/** Cancels inventory mutations and dispatches one logical menu click per server tick. */
 public final class MenuListener implements Listener {
 
-    private static final long CLICK_INTERVAL_MS = 120;
-
-    private final Map<UUID, Long> lastClick = new HashMap<>();
+    private final Map<UUID, Integer> lastClick = new HashMap<>();
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onClick(InventoryClickEvent event) {
@@ -34,9 +32,10 @@ public final class MenuListener implements Listener {
         if (event.getClickedInventory() != event.getView().getTopInventory()) {
             return;
         }
-        long now = System.currentTimeMillis();
-        Long last = lastClick.get(player.getUniqueId());
-        if (last != null && now - last < CLICK_INTERVAL_MS) {
+        if (!event.getClick().isLeftClick() && !event.getClick().isRightClick()) return;
+        int now = Bukkit.getCurrentTick();
+        Integer last = lastClick.get(player.getUniqueId());
+        if (last != null && now == last) {
             return;
         }
         lastClick.put(player.getUniqueId(), now);

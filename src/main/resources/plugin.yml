@@ -6,6 +6,9 @@ author: Plattnericus
 website: https://plattnericus.dev
 description: Server-side CS2-style cases, skins, patterns and knives.
 permissions:
+  mccases.tradein:
+    description: Exchange skins through trade-in contracts
+    default: true
   mccases.trade:
     description: Trade skins with other players
     default: true

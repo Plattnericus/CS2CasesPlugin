@@ -20,7 +20,8 @@ public final class TradeMenu extends Menu {
     private static final int[] OWN = {9,10,11,12,18,19,20,21,27,28,29,30};
     private static final int[] OTHER = {14,15,16,17,23,24,25,26,32,33,34,35};
     private final TradeSession trade;
-    private int page, displayedSeconds;
+    private int displayedSeconds;
+    private boolean navigating;
 
     public TradeMenu(CasesContext ctx, Player viewer, TradeSession trade) { super(ctx, viewer); this.trade = trade; }
     public boolean belongsTo(TradeSession session) { return trade == session; }
@@ -51,38 +52,21 @@ public final class TradeMenu extends Menu {
         }
         set(2, GuiItems.glowing(GuiItems.playerHead(ctx.messages(viewer), viewer,
                 trade.confirmed(own) ? "trade.your-offer-head" : "trade.your-head",
-                Text.unparsed("player", viewer.getName()), Text.unparsed("count", ownCount), Text.unparsed("max", TradeSession.MAX_ITEMS)), trade.confirmed(own)));
+                Text.unparsed("player", viewer.getName()), Text.unparsed("count", ownCount), Text.unparsed("max", trade.limit())), trade.confirmed(own)));
         set(6, GuiItems.glowing(GuiItems.playerHead(ctx.messages(viewer), partner, "trade.partner-head",
                 Text.unparsed("player", partner.getName()), Text.unparsed("count", otherCount)), trade.confirmed(other)));
 
-        if (trade.confirmed(own) || trade.committing()) {
-            drawOffer(own, OWN, true);
-            if (ownCount == 0) set(20, GuiItems.icon(ctx.messages(viewer), Material.BLUE_STAINED_GLASS_PANE, "trade.own-empty"));
-        } else drawCollection(profile.owned());
+        drawOffer(own, OWN, true);
+        if (ownCount == 0) set(20, GuiItems.icon(ctx.messages(viewer), Material.BLUE_STAINED_GLASS_PANE, "trade.own-empty"));
+        if (!trade.committing()) set(46, GuiItems.icon(ctx.messages(viewer), Material.CHEST, "trade.open-collection"), c -> {
+            navigating = true; new SkinPickerMenu(ctx, viewer, trade).open();
+        });
         drawOffer(other, OTHER, false);
         if (otherCount == 0) set(24, GuiItems.icon(ctx.messages(viewer), Material.LIME_STAINED_GLASS_PANE, "trade.other-empty", Text.unparsed("player", partner.getName())));
         set(42, GuiItems.icon(ctx.messages(viewer), trade.confirmed(other) ? Material.LIME_CONCRETE : Material.RED_CONCRETE,
                 trade.confirmed(other) ? "trade.partner-accepted" : "trade.partner-waiting", Text.unparsed("player", partner.getName())));
         drawAccept(own, ownCount, otherCount);
         set(49, GuiItems.icon(ctx.messages(viewer), Material.BARRIER, "trade.cancel"), c -> ctx.commerce().cancel(viewer));
-    }
-    private void drawCollection(List<SkinInstance> owned) {
-        List<UUID> selected = trade.items(viewer.getUniqueId());
-        List<SkinInstance> skins = owned.stream().filter(s -> ctx.catalog().skin(s.skinId()) != null
-                && s.origin() != SkinInstance.Origin.TEST && (!ctx.commerce().locked(s.id()) || selected.contains(s.id())))
-                .sorted(java.util.Comparator.comparing(SkinInstance::createdAt).reversed().thenComparing(SkinInstance::id)).toList();
-        int pages = GuiItems.pages(skins.size(), OWN.length); page = Math.min(page, pages - 1);
-        if (skins.isEmpty()) set(20, GuiItems.icon(ctx.messages(viewer), Material.BLUE_STAINED_GLASS_PANE, "trade.empty"));
-        for (int i = 0; i < OWN.length && page * OWN.length + i < skins.size(); i++) {
-            SkinInstance skin = skins.get(page * OWN.length + i);
-            boolean offered = selected.contains(skin.id());
-            set(OWN[i], icon(skin, offered ? "trade.selected" : "trade.add", offered), c -> ctx.commerce().toggle(viewer, skin.id()));
-        }
-        if (pages > 1) {
-            set(46, GuiItems.icon(ctx.messages(viewer), Material.PAPER, "trade.page", Text.unparsed("page", page + 1), Text.unparsed("pages", pages)));
-            if (page > 0) set(45, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { page--; render(); });
-            if (page + 1 < pages) set(48, GuiItems.next(ctx.messages(viewer), page, pages), c -> { page++; render(); });
-        }
     }
     private void drawAccept(UUID own, int ownCount, int otherCount) {
         if (trade.committing()) { set(38, GuiItems.icon(ctx.messages(viewer), Material.CLOCK, "trade.saving")); return; }
@@ -116,5 +100,5 @@ public final class TradeMenu extends Menu {
         if (selected) name = Component.text("✓ ", net.kyori.adventure.text.format.NamedTextColor.GREEN).append(name);
         return SkinIcons.tradeIcon(def, name, lore, ctx.settings(), selected);
     }
-    @Override protected void onClose() { ctx.commerce().cancel(trade, "trade.cancelled"); }
+    @Override protected void onClose() { if (!navigating) ctx.commerce().cancel(trade, "trade.cancelled"); }
 }

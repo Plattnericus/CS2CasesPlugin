@@ -40,9 +40,6 @@ public final class CaseItemListener implements Listener {
             ctx.messages().send(event.getPlayer(), "opening.case-disabled");
             return;
         }
-        if (ctx.openings().isOpening(event.getPlayer())) {
-            return;
-        }
         new CasePreviewMenu(ctx, event.getPlayer(), def, null).open();
     }
 

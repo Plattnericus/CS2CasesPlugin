@@ -65,8 +65,10 @@ opening:
   marker-top: HOPPER
   marker-bottom: HOPPER
   filler: BLACK_STAINED_GLASS_PANE
-  # Block commands while an opening is in progress.
-  block-commands: true
+  # Legacy setting retained for upgrades; openings no longer block commands.
+  block-commands: false
+  max-active-per-player: 8
+  max-active-global: 64
   # Announce rare special drops to everyone.
   broadcast-rare: true
   # Clicking the floating reel of a running opening makes the clicking player say something in a
@@ -191,3 +193,12 @@ resource-pack:
     # true = players who decline are disconnected
     required: false
     prompt: "<gray>MCCases skin textures"
+
+# Independent CS2-inspired contracts; not direct player trading.
+trade-in:
+  enabled: true
+  allow-admin-inputs: true
+  broadcast-gold: true
+  # Administrator inputs never generate ordinary gold announcements by default.
+  broadcast-admin: false
+  broadcast-sound: true

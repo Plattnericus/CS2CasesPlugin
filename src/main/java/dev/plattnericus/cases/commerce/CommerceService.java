@@ -32,31 +32,43 @@ public final class CommerceService implements Listener {
     private final CasesContext ctx;
     private final CommerceRepository repository;
     private final Map<UUID, Listing> listings = new HashMap<>();
-    private final Map<UUID, Long> balances = new HashMap<>();
+    private final EmeraldPayments payments;
+    private final ChatInput input;
+    public ChatInput input() { return input; }
     private final Map<UUID, Invitation> invitations = new HashMap<>();
     private final Map<UUID, TradeSession> trades = new HashMap<>();
     private final Map<TradeSession, Long> activity = new HashMap<>();
     private final Set<UUID> locked = new HashSet<>(), busyListings = new HashSet<>();
     private boolean loaded, enabled = true, stopped;
-    private long startingBalance = 1000, maxPrice = 1_000_000_000L;
+    private long minPrice = 1, maxPrice = 1_000_000;
+    private boolean includeOffhand = true, partialClaims = true;
+    private int maxDelivery = 2304;
+    public int maxDelivery() { return maxDelivery; }
+    public boolean partialClaims() { return partialClaims; }
+    private int tradeLimit = 12, reviewMillis = 2000;
     private int listingLimit = 20, requestSeconds = 60, idleSeconds = 300;
-    private String currency = "Coins";
+
     private BukkitTask timer;
 
-    public CommerceService(CasesContext ctx, CommerceRepository repository) { this.ctx = ctx; this.repository = repository; }
+    public CommerceService(CasesContext ctx, CommerceRepository repository) { this.ctx = ctx; this.repository = repository; payments = new EmeraldPayments(ctx, repository.emeralds()); input = new ChatInput(ctx); }
     public CommerceRepository repository() { return repository; }
     public void load() {
         var y = YamlConfiguration.loadConfiguration(new File(ctx.plugin().getDataFolder(), "market.yml"));
         enabled = y.getBoolean("enabled", true);
-        startingBalance = Math.clamp(y.getLong("starting-balance", 1000), 0, CommerceRepository.MAX_BALANCE);
-        maxPrice = Math.clamp(y.getLong("max-price", 1_000_000_000L), 1, CommerceRepository.MAX_BALANCE);
+        minPrice = Math.clamp(y.getLong("emeralds.min-price", 1), 1, 1_000_000);
+        includeOffhand = y.getBoolean("emeralds.include-offhand", true);
+        partialClaims = y.getBoolean("emeralds.partial-claims", true);
+        maxDelivery = Math.clamp(y.getInt("emeralds.max-items-per-claim", 2304), 1, 2304);
+        tradeLimit = Math.clamp(y.getInt("trade-max-skins", 12), 1, 12);
+        reviewMillis = Math.clamp(y.getInt("trade-review-millis", 2000), 500, 10000);
+        maxPrice = Math.clamp(y.getLong("emeralds.max-price", 1_000_000), minPrice, 1_000_000);
         listingLimit = Math.clamp(y.getInt("max-listings-per-player", 20), 1, 1000);
         requestSeconds = Math.clamp(y.getInt("trade-request-seconds", 60), 10, 600);
         idleSeconds = Math.clamp(y.getInt("trade-idle-seconds", 300), 30, 3600);
-        currency = y.getString("currency-name", "Coins");
+
     }
     public void start() {
-        finish(repository.listings(), all -> { all.forEach(l -> listings.put(l.id(), l)); loaded = true; refreshMarketViews(); }, null);
+        reloadListings();
         timer = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), () -> {
             long now = System.currentTimeMillis();
             invitations.entrySet().removeIf(e -> {
@@ -73,12 +85,19 @@ public final class CommerceService implements Listener {
             }
         }, 5, 5);
     }
-    public String currency() { return currency; }
-    public long startingBalance() { return startingBalance; }
+    public void reloadListings() { finish(repository.listings(), all -> { listings.clear(); all.forEach(l -> listings.put(l.id(), l)); loaded = true; refreshMarketViews(); }, null); }
+    public String currency() { return ctx.messages().raw("market.currency"); }
+    public boolean includeOffhand() { return includeOffhand; }
+    public long minPrice() { return minPrice; }
+    public EmeraldPayments payments() { return payments; }
     public long maxPrice() { return maxPrice; }
     public boolean available() { return loaded && enabled && !stopped; }
     public List<Listing> listings() { return List.copyOf(listings.values()); }
     public Listing listing(UUID id) { return listings.get(id); }
+    public boolean available(Listing listing) {
+        Listing current = listings.get(listing.id());
+        return current != null && current.price() == listing.price() && current.skin().id().equals(listing.skin().id()) && current.skin().owner().equals(listing.skin().owner());
+    }
     public boolean locked(UUID id) { return locked.contains(id); }
     public boolean reserveMutation(UUID id) { return locked.add(id); }
     public void releaseMutation(UUID id) { locked.remove(id); }
@@ -92,20 +111,8 @@ public final class CommerceService implements Listener {
         PlayerProfile live = ctx.profiles().get(profile.owner());
         return live == null || live == profile;
     }
-    public Long cachedBalance(UUID player) { return balances.get(player); }
-    public void refreshBalance(Player player, Runnable done) {
-        finish(repository.balance(player.getUniqueId(), startingBalance), balance -> {
-            balances.put(player.getUniqueId(), balance); if (player.isOnline()) done.run();
-        }, player);
-    }
-    public void credit(org.bukkit.command.CommandSender admin, UUID owner, long amount) {
-        UUID actor = admin instanceof Player p ? p.getUniqueId() : new UUID(0, 0);
-        finish(repository.credit(actor, owner, amount, startingBalance), balance -> {
-            balances.put(owner, balance);
-            ctx.messages(admin).send(admin, "market.credited", Text.unparsed("amount", amount), Text.unparsed("balance", balance), Text.unparsed("currency", currency));
-            refreshMarketViews();
-        }, admin);
-    }
+    public long inventoryBalance(Player player) { return EmeraldItems.count(player.getInventory(), includeOffhand); }
+    public void refreshBalance(Player player, Runnable done) { payments.refresh(player, done); }
 
     public void request(Player sender, Player target) {
         if (target == null || sender.equals(target) || !sender.canSee(target) || !sender.hasPermission("mccases.trade")
@@ -145,7 +152,7 @@ public final class CommerceService implements Listener {
         }
         invitations.entrySet().removeIf(e -> e.getKey().equals(sender.getUniqueId()) || e.getKey().equals(target.getUniqueId())
                 || e.getValue().sender().equals(sender.getUniqueId()) || e.getValue().sender().equals(target.getUniqueId()));
-        TradeSession trade = new TradeSession(sender.getUniqueId(), target.getUniqueId());
+        TradeSession trade = new TradeSession(sender.getUniqueId(), target.getUniqueId(), tradeLimit, reviewMillis);
         trades.put(trade.first(), trade); trades.put(trade.second(), trade); activity.put(trade, System.currentTimeMillis());
         ctx.gallery().close(sender); ctx.gallery().close(target); ctx.inspect().stop(sender); ctx.inspect().stop(target);
         new TradeMenu(ctx, sender, trade).open(); new TradeMenu(ctx, target, trade).open();
@@ -193,6 +200,7 @@ public final class CommerceService implements Listener {
         finish(repository.trade(trade.first(), trade.second(), transfers), skins -> {
             for (SkinInstance skin : skins) applyTransfer(trade.other(skin.owner()), skin);
             end(trade); closeTradeViews(trade); notifyPlayer(trade.first(), "trade.completed"); notifyPlayer(trade.second(), "trade.completed");
+            for (UUID id : List.of(trade.first(), trade.second())) { Player p = Bukkit.getPlayer(id); if (p != null) ctx.sounds().play(p, "trade.complete"); }
         }, player, () -> { end(trade); closeTradeViews(trade); notifyPlayer(trade.first(), "trade.failed"); notifyPlayer(trade.second(), "trade.failed"); });
     }
     public void cancel(Player player) {
@@ -212,6 +220,7 @@ public final class CommerceService implements Listener {
     public void cancel(TradeSession trade, String message) {
         if (trade.committing() || trades.get(trade.first()) != trade) return;
         end(trade); closeTradeViews(trade); notifyPlayer(trade.first(), message); notifyPlayer(trade.second(), message);
+        for (UUID id : List.of(trade.first(), trade.second())) { Player p = Bukkit.getPlayer(id); if (p != null) ctx.sounds().play(p, "trade.cancel"); }
     }
     private void end(TradeSession trade) {
         trades.remove(trade.first(), trade); trades.remove(trade.second(), trade); activity.remove(trade);
@@ -220,13 +229,15 @@ public final class CommerceService implements Listener {
     private void closeTradeViews(TradeSession trade) {
         for (UUID id : List.of(trade.first(), trade.second())) {
             Player p = Bukkit.getPlayer(id);
-            if (p != null && p.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu menu && menu.belongsTo(trade)) p.closeInventory();
+            if (p != null && (p.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu menu && menu.belongsTo(trade)
+                    || p.getOpenInventory().getTopInventory().getHolder(false) instanceof SkinPickerMenu picker && picker.belongsTo(trade))) p.closeInventory();
         }
     }
     private void refreshTrade(TradeSession trade) {
         for (UUID id : List.of(trade.first(), trade.second())) {
             Player p = Bukkit.getPlayer(id);
             if (p != null && p.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu menu && menu.belongsTo(trade)) menu.render();
+            else if (p != null && p.getOpenInventory().getTopInventory().getHolder(false) instanceof SkinPickerMenu picker && picker.belongsTo(trade)) picker.render();
         }
     }
 
@@ -235,6 +246,7 @@ public final class CommerceService implements Listener {
                 || skin.origin() == SkinInstance.Origin.TEST || trade(seller.getUniqueId()) != null) {
             ctx.messages(seller).send(seller, "commerce.locked"); return;
         }
+        if (price < minPrice || price > maxPrice) { ctx.messages(seller).send(seller, "market.invalid"); return; }
         locked.add(skin.id()); ctx.inspect().stop(seller);
         finish(repository.list(seller.getUniqueId(), seller.getName(), skin.id(), price, maxPrice, listingLimit), listing -> {
             locked.remove(skin.id()); skin.setStatus(SkinInstance.Status.LISTED);
@@ -244,7 +256,7 @@ public final class CommerceService implements Listener {
                     if (skin.id().equals(profile.equipped(slot))) { profile.setEquipped(slot, null); ctx.knives().strip(seller, slot); }
             }
             listings.put(listing.id(), listing);
-            ctx.messages(seller).send(seller, "market.listed", Text.unparsed("price", price), Text.unparsed("currency", currency));
+            ctx.messages(seller).send(seller, "market.listed", Text.unparsed("price", price), Text.unparsed("currency", currency()));
             if (seller.isOnline()) new MarketMenu(ctx, seller).own().open(); refreshMarketViews();
         }, seller, () -> locked.remove(skin.id()));
     }
@@ -257,19 +269,21 @@ public final class CommerceService implements Listener {
     }
     public void buy(Player buyer, Listing listing) {
         if (listing.skin().owner().equals(buyer.getUniqueId()) || ctx.catalog().skin(listing.skin().skinId()) == null || !beginListing(buyer, listing)) return;
-        finish(repository.buy(buyer.getUniqueId(), listing.id(), listing.price(), startingBalance), skin -> {
-            releaseListing(listing); listings.remove(listing.id()); applyTransfer(listing.skin().owner(), skin);
-            ctx.messages(buyer).send(buyer, "market.bought", Text.unparsed("price", listing.price()), Text.unparsed("currency", currency));
-            notifyPlayer(listing.skin().owner(), "market.sold");
+        if (inventoryBalance(buyer) < listing.price()) { releaseListing(listing); ctx.messages(buyer).send(buyer, "market.emerald-not-enough"); return; }
+        payments.buy(buyer, listing, skin -> {
+            listings.remove(listing.id()); applyTransfer(listing.skin().owner(), skin);
+            if (buyer.isOnline()) ctx.messages(buyer).send(buyer, "market.bought", Text.unparsed("price", listing.price()), Text.unparsed("currency", currency()));
+            notifyPlayer(listing.skin().owner(), "market.emerald-sold");
             Player seller = Bukkit.getPlayer(listing.skin().owner());
             if (seller != null) refreshBalance(seller, this::refreshMarketViews);
-            if (buyer.isOnline()) { refreshBalance(buyer, this::refreshMarketViews); new MarketMenu(ctx, buyer).open(); }
+            if (buyer.isOnline()) new MarketMenu(ctx, buyer).open();
             refreshMarketViews();
-        }, buyer, () -> releaseListing(listing));
+        }, () -> releaseListing(listing));
     }
+
     private boolean beginListing(Player player, Listing listing) {
         if (!canUse(player) || !player.hasPermission("mccases.market") || trade(player.getUniqueId()) != null
-                || listings.get(listing.id()) != listing || !busyListings.add(listing.id())) {
+                || !available(listing) || !busyListings.add(listing.id())) {
             ctx.messages(player).send(player, "market.unavailable"); return false;
         }
         locked.add(listing.skin().id()); return true;
@@ -281,9 +295,12 @@ public final class CommerceService implements Listener {
         if (old != null) { ctx.inspect().stop(old); ctx.gallery().close(old); ctx.knives().refreshHeld(old); }
         Player next = Bukkit.getPlayer(skin.owner()); if (next != null) ctx.gallery().close(next);
     }
-    private boolean canUse(Player player) { return available() && player.isOnline() && ctx.profiles().get(player) != null && !ctx.openings().isOpening(player); }
+    private boolean canUse(Player player) { return available() && player.isOnline() && ctx.profiles().get(player) != null && !payments.busy(player.getUniqueId()) && (ctx.tradeIns() == null || !ctx.tradeIns().busy(player)); }
     private void refreshMarketViews() {
-        for (Player p : Bukkit.getOnlinePlayers()) if (p.getOpenInventory().getTopInventory().getHolder(false) instanceof MarketMenu menu) menu.render();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p.getOpenInventory().getTopInventory().getHolder(false) instanceof MarketMenu menu) menu.render();
+            else if (p.getOpenInventory().getTopInventory().getHolder(false) instanceof ListingMenu menu) menu.render();
+        }
     }
     private void notifyPlayer(UUID id, String key) { Player p = Bukkit.getPlayer(id); if (p != null) ctx.messages(p).send(p, key); }
     private <T> void finish(CompletableFuture<T> future, Consumer<T> success, org.bukkit.command.CommandSender audience) {
@@ -297,7 +314,7 @@ public final class CommerceService implements Listener {
                 failed.run(); Throwable cause = error; while (cause.getCause() != null) cause = cause.getCause();
                 if (cause instanceof CommerceRepository.Rejected rejection) {
                     if (audience != null) ctx.messages(audience).send(audience, switch (rejection.reason()) {
-                        case FUNDS -> "market.not-enough"; case LIMIT -> "market.limit"; case INVALID -> "market.invalid"; case UNAVAILABLE -> "market.unavailable";
+                        case FUNDS -> "market.emerald-not-enough"; case LIMIT -> "market.emerald-limit"; case INVALID -> "market.invalid"; case UNAVAILABLE -> "market.unavailable";
                     });
                 } else {
                     ctx.plugin().getLogger().log(Level.SEVERE, "Commerce transaction failed", error);
@@ -307,8 +324,9 @@ public final class CommerceService implements Listener {
         });
     }
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onQuit(PlayerQuitEvent event) { cancel(event.getPlayer()); balances.remove(event.getPlayer().getUniqueId()); }
+    public void onQuit(PlayerQuitEvent event) { cancel(event.getPlayer()); payments.forget(event.getPlayer().getUniqueId()); }
     public void shutdown() {
+        input.shutdown();
         if (timer != null) timer.cancel();
         for (TradeSession trade : new HashSet<>(trades.values())) cancel(trade, "trade.cancelled"); stopped = true;
     }

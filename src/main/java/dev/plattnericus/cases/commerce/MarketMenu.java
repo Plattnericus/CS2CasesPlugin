@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public final class MarketMenu extends Menu {
     private boolean own;
-    private int page, sort, category;
+    private int page, sort, category, rarity;
     private String query = "";
     public MarketMenu(CasesContext ctx, Player viewer) { super(ctx, viewer); }
     public MarketMenu own() { own = true; return this; }
@@ -27,20 +27,24 @@ public final class MarketMenu extends Menu {
     @Override protected int rows() { return 6; }
     @Override protected Component title() { return ctx.messages(viewer).get(own ? "market.own-title" : "market.title"); }
     @Override protected void build() {
+        rarity = Math.clamp(rarity, 0, ctx.catalog().raritiesOrdered().size());
         var service = ctx.commerce();
         set(1, GuiItems.glowing(GuiItems.icon(ctx.messages(viewer), Material.CHEST, "market.browse"), !own), c -> { own = false; page = 0; refreshLanguage(); });
         set(3, GuiItems.glowing(GuiItems.icon(ctx.messages(viewer), Material.ENDER_CHEST, "market.own"), own), c -> { own = true; page = 0; refreshLanguage(); });
         set(5, GuiItems.icon(ctx.messages(viewer), Material.EMERALD, "market.sell"), c -> new SkinPickerMenu(ctx, viewer).open());
-        Long balance = service.cachedBalance(viewer.getUniqueId());
-        set(7, GuiItems.icon(ctx.messages(viewer), Material.GOLD_INGOT, "market.wallet", Text.unparsed("balance", balance == null ? "…" : balance), Text.unparsed("currency", service.currency())), c -> service.refreshBalance(viewer, this::render));
+        long balance = service.inventoryBalance(viewer);
+        set(7, GuiItems.icon(ctx.messages(viewer), Material.EMERALD, "market.emerald-wallet", Text.unparsed("balance", balance), Text.unparsed("currency", service.currency())), c -> service.refreshBalance(viewer, this::render));
+        set(0, GuiItems.icon(ctx.messages(viewer), Material.EMERALD_BLOCK, "market.claims-button", Text.unparsed("amount", service.payments().pending(viewer.getUniqueId()))), c -> service.payments().claim(viewer));
+        set(8, GuiItems.icon(ctx.messages(viewer), Material.AMETHYST_SHARD, "browser.rarity", Text.unparsed("value", rarity == 0 ? ctx.messages(viewer).raw("browser.all-rarities") : ctx.catalog().raritiesOrdered().get(rarity - 1).name())), c -> { rarity = (rarity + 1) % (ctx.catalog().raritiesOrdered().size() + 1); page = 0; render(); });
         Comparator<Listing> comparator = switch (sort) {
             case 1 -> Comparator.comparingLong(Listing::price); case 2 -> Comparator.comparingLong(Listing::price).reversed();
-            case 3 -> Comparator.comparingDouble(l -> l.skin().floatValue()); default -> Comparator.comparingLong(Listing::createdAt).reversed();
+            case 3 -> Comparator.comparingDouble(l -> l.skin().floatValue()); case 4 -> Comparator.<Listing>comparingInt(l -> { var def = ctx.catalog().skin(l.skin().skinId()); return def == null ? -1 : def.rarity().order(); }).reversed(); default -> Comparator.comparingLong(Listing::createdAt).reversed();
         };
         var offers = service.listings().stream().filter(l -> !own || l.skin().owner().equals(viewer.getUniqueId()))
                 .filter(l -> {
                     var def = ctx.catalog().skin(l.skin().skinId());
-                    return def != null && (category == 0 || (category == 1) == def.isKnife())
+                    return def != null && (category == 0 || (category == 1 ? def.isKnife() : category == 2 ? !def.isKnife() : def.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.values()[category - 3]))
+                            && (rarity == 0 || def.rarity().id().equals(ctx.catalog().raritiesOrdered().get(rarity - 1).id()))
                             && (query.isBlank() || (def.id() + " " + Text.plain(ctx.formatter(viewer).fullName(def, l.skin())) + " " + l.sellerName()).toLowerCase(Locale.ROOT).contains(query));
                 }).sorted(comparator.thenComparing(l -> l.id().toString())).toList();
         int pages = GuiItems.pages(offers.size(), GuiItems.CONTENT.length); page = Math.min(page, pages - 1);
@@ -51,12 +55,12 @@ public final class MarketMenu extends Menu {
             set(GuiItems.CONTENT[i], listingIcon(ctx, viewer, listing, true), c -> new ListingMenu(ctx, viewer, listing).open());
         }
         set(45, GuiItems.icon(ctx.messages(viewer), Material.CHEST_MINECART, "gui.cases.to-skins"), c -> ctx.gallery().open(viewer, null));
-        set(47, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "market.sort", Text.unparsed("sort", ctx.messages(viewer).raw("market.sorts." + sort))), c -> { sort = Math.floorMod(sort + (c.isRightClick() ? -1 : 1), 4); page = 0; render(); });
+        set(47, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "market.sort", Text.unparsed("sort", ctx.messages(viewer).raw("market.sorts." + sort))), c -> { sort = Math.floorMod(sort + (c.isRightClick() ? -1 : 1), 5); page = 0; render(); });
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(49, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
         set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
-        set(51, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "market.filter", Text.unparsed("category", ctx.messages(viewer).raw("market.categories." + category))), c -> { category = (category + 1) % 3; page = 0; render(); });
-        set(53, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "market.search", Text.unparsed("query", query)), c -> { query = ""; page = 0; render(); });
+        set(51, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "market.filter", Text.unparsed("category", ctx.messages(viewer).raw("market.categories." + category))), c -> { category = (category + 1) % (3 + dev.plattnericus.cases.catalog.WeaponCategory.values().length); page = 0; render(); });
+        set(53, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "market.emerald-search", Text.unparsed("query", query)), c -> { if (c.isRightClick()) { query = ""; page = 0; render(); } else ctx.commerce().input().ask(viewer, "input.search", text -> { search(text); page = 0; open(); }, this::open); });
     }
     public static org.bukkit.inventory.ItemStack listingIcon(CasesContext ctx, Player viewer, Listing listing, boolean hint) {
         var def = ctx.catalog().skin(listing.skin().skinId());

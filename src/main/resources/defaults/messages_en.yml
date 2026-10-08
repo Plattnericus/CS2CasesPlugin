@@ -301,7 +301,6 @@ opening:
   case-disabled: <prefix><red>This case is not available.
   missing: <prefix><gray>You need <white><case></white> and a <white><key></white>.
   missing-now: <prefix><red>The case or key is no longer in your inventory.
-  storage-error: <prefix><red>Saving failed. Your case and key were returned.
   command-blocked: <prefix><gray>Wait until the opening has finished.
   result: '<prefix><gray>You received <skin> <dark_gray>(<float>, #<pattern>)'
   result-test: '<prefix><red>[Test]</red> <gray>Result: <skin> <dark_gray>(<float>, #<pattern>) - not saved'
@@ -317,6 +316,21 @@ opening:
       name: <green>Open another
       lore:
       - '<gray>Cases: <white><cases> <dark_gray>· <gray>Keys: <white><keys>'
+  limit: "<prefix><yellow>The animation capacity is full. No case or key was consumed."
+  storage-error: "<prefix><yellow>Your result remains in the recovery journal. Reconnect after the database error is resolved."
+  active-title: "Openings and recent results"
+  active-button: {"name": "<aqua>Active openings", "lore": []}
+  active-refresh: {"name": "<aqua>Refresh overview", "lore": []}
+  active-session: {"name": "<gold><case> · #<id>", "lore": ["<gray><state>", "<yellow>GUI roulette: click to view."]}
+
+  states:
+    ROLLING: "Preparing result"
+    PERSISTING: "Saving reward"
+    ANIMATING: "Opening"
+    REVEALING: "Revealing"
+    FINISHED: "Finished"
+    ABORTED: "Stopped"
+
 equip:
   wrong-slot: <prefix><red>This skin does not fit this weapon.
   equipped:
@@ -516,7 +530,6 @@ trade:
   add: '<yellow>Click to add to your offer'
   remove: '<yellow>Click to remove from your offer'
   offered: '<gray>Offered by your trade partner'
-  your-head: {name: '<aqua><player> · Your skins', lore: ['<gray>Click a skin on the left to offer it.', '<gray>✓ = selected.', '<gray>Click again to remove.', '<aqua>Selected: <white><count>/<max>']}
   your-offer-head: {name: '<aqua><player> · Your accepted offer', lore: ['<gray>You give these <white><count> skins<gray>.', '<gray>Waiting for your trade partner.']}
   partner-head: {name: '<green><player> · You receive <count> skins', lore: ['<gray>Their current offer is on the right.', '<gray>Changes appear immediately for both players.']}
   own-empty: {name: '<aqua>You do not give any skins', lore: ['<gray>You receive a gift.']}
@@ -535,23 +548,20 @@ trade:
   empty: {name: '<gray>No skins available', lore: ['<gray>Reserved and test skins cannot be offered.']}
   saving: {name: '<yellow>Completing transaction…', lore: ['<gray>Please wait a moment.']}
   cancel: {name: '<red>Cancel trade', lore: ['<gray>Keep your skins and close both menus.']}
+  choose-title: "Choose skins for your trade"
+  open-collection: {"name": "<aqua>Open full collection", "lore": ["<gray>36 skins per page, search and filters."]}
+  your-head: {"name": "<aqua><player> · Your offer", "lore": ["<gray><count>/<max> Skins", "<yellow>Open the collection to choose more skins."]}
+
 market:
   title: 'Skin marketplace'
   own-title: 'Your listings'
   choose-title: 'Choose a skin to sell'
   sell-title: 'Set your asking price'
   purchase-title: 'Review listing'
-  usage: '<prefix><gray>/market · /market sell <skin ID> <price> · /market own · /market search <name> · /market balance'
-  credit-usage: '<prefix><gray>/market credit <player> <amount>'
-  balance: '<prefix><gray>Your balance: <gold><balance> <currency>'
-  credited: '<prefix><gray>Added <gold><amount> <currency></gold>. New balance: <white><balance>'
   listed: '<prefix><green>Skin listed for <price> <currency>. You can withdraw it under Your listings.'
   cancelled: '<prefix><gray>Listing withdrawn. The skin is back in your collection.'
   bought: '<prefix><green>Skin purchased for <price> <currency> and added to your collection.'
-  sold: '<prefix><green>Your skin sold. The proceeds are in your marketplace wallet.'
   unavailable: '<prefix><yellow>This listing is unavailable or the marketplace is not ready. Open /market to refresh.'
-  not-enough: '<prefix><red>Your marketplace balance is too low. No payment was made.'
-  limit: '<prefix><yellow>The listing limit or wallet limit has been reached.'
   invalid: '<prefix><red>Enter a positive whole-number amount within the configured limit. Test skins cannot be sold.'
   select-skin: '<yellow>Click to set a price'
   manage-hint: '<yellow>Click to review or withdraw your listing'
@@ -560,18 +570,60 @@ market:
   browse: {name: '<white>Marketplace', lore: ['<gray>Browse skins offered by other players.']}
   own: {name: '<white>Your listings', lore: ['<gray>Review your offers or take a skin back.']}
   sell: {name: '<green>Sell a skin', lore: ['<gray>Choose a skin and set a fixed price.']}
-  wallet: {name: '<gold><balance> <currency>', lore: ['<gray>Your saved marketplace balance.', '<yellow>Click to refresh.']}
   empty: {name: '<gray>No matching listings', lore: ['<gray>Try another category or search.']}
   own-empty: {name: '<gray>You have no active listings', lore: ['<gray>Choose Sell a skin to create an offer.']}
   no-skins: {name: '<gray>No skins available to sell', lore: ['<gray>Reserved and test skins are excluded.']}
-  price: {name: '<gold><price> <currency>', lore: ['<gray>This is the total asking price.']}
   change-price: {name: '<white><change>', lore: ['<gray>Adjust the asking price.']}
-  sell-info: {name: '<white>Before you list', lore: ['<gray>Your skin stays reserved while listed.', '<gray>You can withdraw it until someone buys it.', '<gray>No listing fee. You receive the full price.', '<gray>For an exact price: /market sell <ID> <price>']}
   publish: {name: '<green>List for <price> <currency>', lore: ['<gray>Confirm and publish this offer.']}
   withdraw: {name: '<yellow>Withdraw listing', lore: ['<gray>Return this skin to your collection.', '<gray>No charge.']}
   buy: {name: '<green>Buy for <price> <currency>', lore: ['<gray>Confirm this purchase.', '<gray>The skin is added to your collection.']}
   sort: {name: '<white>Sort: <sort>', lore: ['<gray>Click to switch · Right click to go back.']}
   filter: {name: '<white>Category: <category>', lore: ['<gray>Click to change category.']}
-  search: {name: '<white>Search: <query>', lore: ['<gray>/market search <name or seller>', '<yellow>Click to clear your search.']}
-  sorts: {'0': 'Newest first', '1': 'Lowest price', '2': 'Highest price', '3': 'Lowest float'}
-  categories: {'0': 'All skins', '1': 'Knives', '2': 'Weapons'}
+  currency: "Emeralds"
+  emerald-usage: "<prefix><gray>/market · /market sell <ID> <price> · /market own · /market search <name> · /market balance · /market claims"
+  emerald-balance: "<prefix><gray>Emeralds in your inventory: <green><balance>"
+  emerald-sold: "<prefix><green>Your skin sold. Collect the Emerald items using /market claims."
+  emerald-not-enough: "<prefix><red>Not enough Emeralds in your inventory. No payment was taken."
+  emerald-limit: "<prefix><yellow>Your listing limit has been reached."
+  emerald-wallet: {"name": "<green><balance> Emeralds", "lore": ["<gray>Actual inventory items; configured offhand included.", "<yellow>Click to refresh."]}
+  emerald-price: {"name": "<green><price> Emeralds", "lore": ["<yellow>Click to enter an exact price in chat."]}
+  emerald-search: {"name": "<white>Search: <query>", "lore": ["<yellow>Click: type text · Right click: clear."]}
+  emerald-sell-info: {"name": "<white>Before you list", "lore": ["<gray>Your skin stays reserved; withdraw it before purchase.", "<gray>You receive the full price as Emerald items.", "<gray>Collect proceeds from offline sales: /market claims"]}
+  claims-button: {"name": "<green><amount> Emeralds to collect", "lore": ["<gray>Pending item deliveries, no virtual wallet.", "<yellow>Click to collect as much of the next claim as fits."]}
+  claimed: "<prefix><green>Collected <amount> Emerald items."
+  no-claims: "<prefix><gray>No Emerald deliveries are pending."
+  claim-full: "<prefix><yellow>No room. The Emeralds remain pending for collection."
+  payment-busy: "<prefix><yellow>A payment is running or awaiting recovery. Use /market recover after an error."
+  recovery-needed: "<prefix><yellow>The transaction remains saved for recovery. Use /market recover or reconnect."
+  sold-marker: {"name": "<red>Listing no longer available", "lore": []}
+  inspect: {"name": "<aqua>Preview this skin", "lore": ["<gray>Exact float and pattern from this listing."]}
+  legacy-usage: "<prefix><gray>/market legacy <player>"
+  legacy: "<prefix><gray>Archived Coin balance for <player>: <balance>. No Emerald conversion."
+  sorts: {"0": "Newest", "1": "Price ascending", "2": "Price descending", "3": "Lowest float", "4": "Rarity"}
+  categories: {"0": "All skins", "1": "Knives", "2": "Weapons", "3": "Pistols", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives"}
+
+
+input:
+  search: "<prefix><aqua>Type your search in chat. cancel = back; expires in 30 seconds."
+  price: "<prefix><aqua>Type a whole-number Emerald price in chat. cancel = back."
+  timeout: "<prefix><gray>Text input expired."
+
+browser:
+  all-rarities: "All rarities"
+  category: {"name": "<white>Category: <value>", "lore": []}
+  rarity: {"name": "<white>Rarity: <value>", "lore": []}
+  sort: {"name": "<white>Sort: <value>", "lore": []}
+  search: {"name": "<white>Search: <query>", "lore": ["<yellow>Click: type · Right click: clear"]}
+  sorts: {"0": "Rarity", "1": "Name", "2": "Float", "3": "Newest"}
+  categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives"}
+
+tradein:
+  title: "Trade-in contract"
+  button: {"name": "<gold>Trade-in", "lore": ["<gray>Exchange skins for one from the next tier."]}
+  rules: {"name": "<gold>Contract rules", "lore": ["<gray>10 same-tier weapons → next rarity.", "<gold>5 Covert weapons → gold special item.", "<gray>All inputs must have matching StatTrak status.", "<gray>Output from an input case; average float remapped.", "<red>Confirmed inputs are consumed permanently."]}
+  confirm: {"name": "<gold>Review contract with <count> skins", "lore": ["<red>Inputs will be permanently exchanged for a new skin."]}
+  invalid: "<prefix><red>Use available same-tier skins with matching StatTrak from valid source cases."
+  count: "<prefix><yellow>Use 10 matching weapons, or 5 Covert skins for gold."
+  unavailable: "<prefix><yellow>Trade-in is currently unavailable."
+  result: "<prefix><green>Trade-in completed: <skin>"
+  gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>won <skin> through a <bold>TRADE-IN</bold>!"

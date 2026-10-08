@@ -3,7 +3,8 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.0.0"
+version = "1.1.0"
+val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
 repositories {
@@ -11,7 +12,7 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
 }
 
-val paperApi = providers.gradleProperty("paperApi").getOrElse("io.papermc.paper:paper-api:26.2.build.129-stable")
+val paperApi = providers.gradleProperty("paperApi").getOrElse("io.papermc.paper:paper-api:26.3.build.159-beta")
 
 sourceSets {
     create("tools") {
@@ -139,15 +140,15 @@ tasks.check { dependsOn(verifyFeatures) }
 tasks.register<Jar>("devChecks") {
     group = "verification"
     dependsOn(tasks.named("toolsClasses"))
-    archiveFileName.set("MCCases-DevChecks.jar")
+    archiveFileName.set("MCCases-DevChecks-${project.version}.jar")
     from(sourceSets["tools"].output) {
-        include("dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class")
+        include("dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
     }
     val metadata = layout.buildDirectory.file("generated/dev-checks/plugin.yml")
     doFirst {
         metadata.get().asFile.apply {
             parentFile.mkdirs()
-            writeText("name: MCCasesDevChecks\nversion: 1.0\nmain: dev.plattnericus.cases.tools.RuntimeChecksPlugin\napi-version: '26.2'\ndepend: [MCCases]\ncommands:\n  mccasesdevcheck:\n    permission: mccases.admin\n")
+            writeText("name: MCCasesDevChecks\nversion: $releaseVersion\nmain: dev.plattnericus.cases.tools.RuntimeChecksPlugin\napi-version: '26.2'\ndepend: [MCCases]\ncommands:\n  mccasesdevcheck:\n    permission: mccases.admin\n")
         }
     }
     from(metadata) { rename { "plugin.yml" } }

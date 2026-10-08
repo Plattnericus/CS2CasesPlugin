@@ -11,15 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Crash-safety journal stored in the player's own data file. When a case is opened, the removed
- * case/key and the rolled reward are written to the same file in one save, so after any crash
- * exactly one of two states exists on disk: "case still there, no reward" or "case gone, reward
- * journaled". The journal is replayed into the database (idempotently) on the next login.
- */
+/** Consumption and reward receipt share the player save. SQL replay is idempotent; storage durability still depends on Minecraft and the filesystem. */
 public final class PendingJournal {
 
     private final PluginKeys keys;
+    private static final com.google.gson.Gson GSON = new com.google.gson.Gson();
+    private record Entry(int version, String skin, dev.plattnericus.cases.storage.OpeningRecord opening) { }
 
     public PendingJournal(PluginKeys keys) {
         this.keys = keys;
@@ -29,6 +26,24 @@ public final class PendingJournal {
         List<String> entries = new ArrayList<>(read(player));
         entries.add(InstanceCodec.encode(instance));
         write(player, entries);
+    }
+
+    public void add(Player player, SkinInstance instance, dev.plattnericus.cases.storage.OpeningRecord opening) {
+        List<String> entries = new ArrayList<>(read(player));
+        entries.add(GSON.toJson(new Entry(2, InstanceCodec.encode(instance), opening))); write(player, entries);
+    }
+    private Entry envelope(String raw) {
+        try { Entry entry = GSON.fromJson(raw, Entry.class); return entry != null && entry.version() == 2 && entry.skin() != null ? entry : null; }
+        catch (com.google.gson.JsonParseException error) { return null; }
+    }
+    public dev.plattnericus.cases.storage.OpeningRecord opening(Player player, UUID instanceId) {
+        for (String raw : read(player)) {
+            Entry entry = envelope(raw); if (entry == null) continue;
+            SkinInstance instance = InstanceCodec.decode(entry.skin());
+            if (instance != null && instance.id().equals(instanceId) && instance.owner().equals(player.getUniqueId()) && entry.opening() != null
+                    && entry.opening().owner().equals(instance.owner()) && entry.opening().instanceId().equals(instanceId)) return entry.opening();
+        }
+        return null;
     }
 
     public void remove(Player player, UUID instanceId) {
@@ -41,7 +56,8 @@ public final class PendingJournal {
     public List<SkinInstance> entries(Player player) {
         List<SkinInstance> out = new ArrayList<>();
         for (String raw : read(player)) {
-            SkinInstance decoded = InstanceCodec.decode(raw);
+            Entry entry = envelope(raw);
+            SkinInstance decoded = InstanceCodec.decode(entry == null ? raw : entry.skin());
             if (decoded != null && decoded.owner().equals(player.getUniqueId())) {
                 out.add(decoded);
             }

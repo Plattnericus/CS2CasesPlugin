@@ -53,7 +53,7 @@ public record PluginSettings(
     public record Opening(int durationTicks, String easing, int reelLength, int revealHoldTicks, int goldPauseTicks,
                           boolean knifeAutoPreview, Material markerTop, Material markerBottom, Material filler,
                           boolean blockCommands, boolean broadcastRare, String display, WorldReel world,
-                          boolean speechBubble, int speechBubbleTicks) {
+                          boolean speechBubble, int speechBubbleTicks, int maxActive, int maxGlobal) {
 
         /** "world" shows the reel to everyone with item displays, "gui" uses the inventory roulette. */
         public boolean worldDisplay() {
@@ -171,7 +171,9 @@ public record PluginSettings(
                         clamp(c.getInt("opening.world.hold-ticks", 80), 20, 400),
                         c.getDouble("opening.world.view-range", 1.0)),
                 c.getBoolean("opening.speech-bubble.enabled", true),
-                clamp(c.getInt("opening.speech-bubble.duration-ticks", 60), 10, 400));
+                clamp(c.getInt("opening.speech-bubble.duration-ticks", 60), 10, 400),
+                clamp(c.getInt("opening.max-active-per-player", 8), 1, 32),
+                clamp(c.getInt("opening.max-active-global", 64), 1, 256));
         if (!opening.display().equals("gui") && !opening.display().equals("world")) {
             warn.accept("config.yml: opening.display must be gui or world - using gui");
         }

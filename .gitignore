@@ -1,0 +1,7 @@
+.DS_Store
+.gradle/
+build/
+.dev/
+logs/
+__pycache__/
+*.pyc

@@ -16,6 +16,7 @@ public final class FeatureChecks {
     public static void main(String[] args) throws Exception {
         File root = new File(args[0]);
         CommerceChecks.run();
+        dev.plattnericus.cases.opening.OpeningChecks.run(root);
         checkCatalogAndJournal(root);
         var english = new YamlConfiguration();
         english.load(new File(root, "messages_en.yml"));
@@ -25,7 +26,7 @@ public final class FeatureChecks {
             language.load(file); // Unlike loadConfiguration, this fails on invalid YAML.
             for (String key : english.getKeys(true)) {
                 if (english.isConfigurationSection(key)) continue;
-                boolean commerceFallback = ((key.startsWith("trade.") || key.startsWith("market.") || key.startsWith("commerce."))
+                boolean commerceFallback = ((key.startsWith("trade.") || key.startsWith("market.") || key.startsWith("commerce.") || key.startsWith("browser.") || key.startsWith("input.") || key.startsWith("tradein.") || key.startsWith("opening.active-") || key.startsWith("opening.states.") || key.equals("opening.limit"))
                         && !file.getName().equals("messages_de.yml")) || key.equals("inventory.usage");
                 require(language.contains(key) || commerceFallback, file.getName() + " missing " + key);
                 var source = language.contains(key) ? language : english;

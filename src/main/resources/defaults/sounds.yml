@@ -40,3 +40,9 @@ sounds:
   shop:
     buy: {sound: "minecraft:entity.villager.yes", volume: 0.5, pitch: 1.0}
     deny: {sound: "minecraft:entity.villager.no", volume: 0.5, pitch: 1.0}
+
+  trade:
+    complete: {sound: minecraft:entity.player.levelup, volume: 0.65, pitch: 1.2}
+    cancel: {sound: minecraft:block.note_block.bass, volume: 0.5, pitch: 0.8}
+  tradein:
+    gold: {sound: minecraft:ui.toast.challenge_complete, volume: 0.7, pitch: 1.0}
