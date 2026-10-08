@@ -635,7 +635,7 @@ case-guide:
     lore:
     - <gray>Price includes the case and matching key.
     - <gray>Value = expected reward points / price.
-    - '<gray>Points per tier: 1 / 8 / 40 / 220 / 1800*'
+    - '<gray>Points per tier: <tiers>*'
     - '<gray>*Knives: ×(0.5 + preference / 100), then finish.'
     - <gray>Server points; no promised sale proceeds.
     - '<gray>Custom weights: case-guide.yml'

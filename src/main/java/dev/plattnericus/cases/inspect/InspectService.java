@@ -115,27 +115,33 @@ public final class InspectService implements Listener {
             parts = InspectRig.packParts(def.weapon(), m.packModelScale());
         }
         InspectModels.Anchor selectedAnchor = reveal ? m.revealAnchor() : bodyHand ? m.handAnchor() : m.anchor();
+        InspectModels.Anchor observerAnchor = m.handAnchor();
+        if (InspectRig.paired(def.weapon())) {
+            selectedAnchor = new InspectModels.Anchor(selectedAnchor.forward(), 0, selectedAnchor.up());
+            observerAnchor = new InspectModels.Anchor(observerAnchor.forward(), 0, observerAnchor.up());
+        }
         float scale = reveal ? 1f : bodyHand ? m.handModelScale() : m.modelScale();
         Location anchor = anchor(player, selectedAnchor, bodyHand);
         boolean leftHand = player.getMainHand() == org.bukkit.inventory.MainHand.LEFT;
-        Location handAnchor = anchor(player, m.handAnchor(), true);
+        Location handAnchor = anchor(player, observerAnchor, true);
         List<InspectSession.PartEntity> spawned = new ArrayList<>();
         Map<String, Material> resolved = resolveMaterials(def, instance, m);
         ItemStack skinItem = SkinIcons.icon(def, ctx.formatter(player).name(def, instance), List.of(), ctx.settings(), false);
+        try {
         for (ModelPart part : parts) {
             Display display = spawn(anchor, part, resolved, skinItem, animation, m, scale, leftHand, bodyHand, false);
             if (display != null) {
-                player.showEntity(ctx.plugin(), display);
                 spawned.add(new InspectSession.PartEntity(part, display, false));
+                player.showEntity(ctx.plugin(), display);
             }
             Display observer = spawn(handAnchor, part, resolved, skinItem, animation, m, m.handModelScale(), leftHand, true, true);
             if (observer != null) {
-                player.hideEntity(ctx.plugin(), observer);
                 spawned.add(new InspectSession.PartEntity(part, observer, true));
+                player.hideEntity(ctx.plugin(), observer);
             }
         }
         InspectSession session = new InspectSession(player.getUniqueId(), animation, spawned, reveal, leftHand, bodyHand,
-                scale, selectedAnchor, m.handAnchor(), m.handModelScale());
+                scale, selectedAnchor, observerAnchor, m.handModelScale());
         session.lastAnchor = anchor;
         session.lastHandAnchor = handAnchor;
         sessions.put(player.getUniqueId(), session);
@@ -145,6 +151,12 @@ public final class InspectService implements Listener {
         // first sample is sent one tick after spawning, otherwise the client would skip the interpolation
         session.task = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), () -> tick(player, session, def, instance), 1L, 1L);
         return true;
+        } catch (RuntimeException failure) {
+            sessions.remove(player.getUniqueId());
+            for (InspectSession.PartEntity part : spawned) part.entity().remove();
+            ctx.plugin().getLogger().log(java.util.logging.Level.WARNING, "Cannot start inspect for " + def.weapon().id(), failure);
+            return false;
+        }
     }
 
     private void tick(Player player, InspectSession s, SkinDefinition def, SkinInstance instance) {

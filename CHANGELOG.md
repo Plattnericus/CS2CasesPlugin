@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+
+- CS20 Case with 17 weapons and 13 Classic Knife finishes; all 55 weapon IDs now have obtainable skins.
+- Separate textured 3D inspect meshes and joints for all 55 weapons, including articulated Butterfly handles, folding blades and paired daggers/pistols.
+- Three individual random inspect variants per weapon, with no immediate repeats.
+- Case value/price/preference sorting, knife filters, budget/search/owned filters and preserved preview navigation.
+- Transparent dealer-price reward points and exact target-knife probabilities, with editable preference sources.
+- Full-timeline framing checks for right/left hand, pack/fallback geometry and the default 70° FOV on 4:3 screens; safer malformed rigs and scene cleanup.
+- Build version is now an explicit resource input so plugin.yml cannot retain a previous release number.
+
+
 ## 1.1.0 — 2026-10-08
 
 - Real Emerald marketplace payments from storage and optional offhand; no new Coin wallets or credits.

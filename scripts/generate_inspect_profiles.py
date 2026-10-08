@@ -48,7 +48,9 @@ GUNS = {
  'zeus':['capacitor_check','contact_peek','compact_roll'],
 }
 
-def frame(t, **kw): return dict(ticks=t, **kw, ease='inout')
+class Frame(dict): pass
+yaml.SafeDumper.add_representer(Frame, lambda dumper, value: dumper.represent_mapping('tag:yaml.org,2002:map',value,flow_style=True))
+def frame(t, **kw): return Frame(ticks=t, **kw, ease='inout')
 def group(frames, parent=None, pivot=None):
  d={'keyframes':frames}
  if parent: d['parent']=parent
@@ -67,7 +69,7 @@ def body(i, variant, weight):
    frame(hold),frame(weight,rotate=[-4,-sign*yaw,-sign*bank]),
    frame(8,move=[0,-.04,0],rotate=[0,10,12])])
 
-out={'enabled':True,'animations':{},'animation-pools':{}}
+out={'enabled':True,'anchor':{'forward':1.75,'right':.43,'up':-.07},'animations':{},'animation-pools':{}}
 for i,(id,w) in enumerate(weapons.items()):
  knife=id in KNIVES
  names=KNIVES[id][4] if knife else GUNS[id]
@@ -100,10 +102,10 @@ for i,(id,w) in enumerate(weapons.items()):
     groups['roll']=group([frame(0,rotate=[0,0,0]),frame(10),frame(10,rotate=[0,0,90]),frame(24),frame(duration-44,rotate=[0,0,0])],'body',[.25,0,0])
   if id in ['shadow_daggers','dual_berettas']:
    for side,sgn in [('pair_a',1),('pair_b',-1)]:
-    parent='roll' if knife else 'body'
+    parent='body'
     groups[side]=group([frame(0,rotate=[0,0,0],move=[0,0,0]),frame(9+v,rotate=[0,sgn*(25+v*10),sgn*12],move=[sgn*.04,sgn*.035,0]),
       frame(weight,rotate=[0,sgn*65,sgn*(180 if knife else 25)]),frame(12),
-      frame(duration-21-v-weight,rotate=[0,0,0],move=[0,0,0])],parent)
+      frame(duration-21-v-weight,rotate=[0,0,0],move=[0,0,0])],parent,[-.29,.03,0] if side=='pair_a' else [.25,-.03,0])
   if not knife and id!='dual_berettas':
    slide = id in ['glock18','usps','p2000','p250','fiveseven','cz75','deagle','nova','sawedoff','ssg08','awp']
    # A light slide/bolt check; no ammunition or weapon mechanics are changed.

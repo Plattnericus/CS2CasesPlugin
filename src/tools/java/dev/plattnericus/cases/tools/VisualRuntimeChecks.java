@@ -18,7 +18,8 @@ public final class VisualRuntimeChecks {
         Player observer = Bukkit.getPlayerExact(args[2]); if (observer == null) throw new IllegalArgumentException("observer offline");
         if (args[3].equals("stop")) { ctx.inspect().stop(player); sender.sendMessage("VISUAL STOP"); return; }
         var weapon = ctx.catalog().weapon(args[3]); if (weapon == null) throw new IllegalArgumentException("unknown weapon");
-        int variant = Integer.parseInt(args[4]), tick = Integer.parseInt(args[5]), angle = Integer.parseInt(args[7]);
+        boolean play = args[5].equals("play");
+        int variant = Integer.parseInt(args[4]), tick = play ? 0 : Integer.parseInt(args[5]), angle = Integer.parseInt(args[7]);
         boolean hand = args[6].equals("hand");
         ctx.gallery().close(player); player.closeInventory(); observer.closeInventory(); ctx.inspect().stop(player);
         World world = player.getWorld(); world.setTime(6000); world.setStorm(false);
@@ -39,7 +40,7 @@ public final class VisualRuntimeChecks {
         try { if (!ctx.inspect().start(player, instance, false, hand)) throw new IllegalStateException("inspect start failed"); }
         finally { pools.put(weapon.id(), original); }
         Map<UUID,Object> sessions = field(ctx.inspect(), "sessions", Map.class); Object session = sessions.get(player.getUniqueId());
-        field(session, "task", BukkitTask.class).cancel();
+        if (!play) field(session, "task", BukkitTask.class).cancel();
         var apply = ctx.inspect().getClass().getDeclaredMethod("apply",session.getClass(),int.class,int.class); apply.setAccessible(true);
         apply.invoke(ctx.inspect(), session, tick, 0);
         var hide = ctx.inspect().getClass().getDeclaredMethod("setHandVisible", Player.class,boolean.class,boolean.class); hide.setAccessible(true); hide.invoke(null,player,false,false);

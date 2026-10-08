@@ -1,0 +1,31 @@
+# CS20 Case (2019), including the Classic Knife.
+# Sources: https://blog.counter-strike.net/2019/10/25884/
+# https://steamcommunity.com/market/listings/730/CS20%20Case
+case:
+  name: 'CS20 Case'
+  key: case_key
+  color: '#e4b04a'
+  stattrak-chance: 0.10
+  description:
+    - '2019 · 20 Years of Counter-Strike'
+skins:
+  dual_berettas_elite_16: {weapon: dual_berettas, rarity: mil_spec, name: 'Elite 1.6', style: stripes, palette: ['#303232', '#4a5a32', '#9da68b']}
+  tec9_flash_out: {weapon: tec9, rarity: mil_spec, name: 'Flash Out', style: graffiti, palette: ['#34323a', '#756255', '#b9ad93']}
+  mac10_classic_crate: {weapon: mac10, rarity: mil_spec, name: 'Classic Crate', style: camo, palette: ['#a48645', '#5b4b29', '#252723']}
+  mag7_popdog: {weapon: mag7, rarity: mil_spec, name: 'Popdog', style: graffiti, palette: ['#694327', '#b88856', '#e8dabc']}
+  scar20_assault: {weapon: scar20, rarity: mil_spec, name: 'Assault', style: circuit, palette: ['#163650', '#487c9a', '#bfd6df']}
+  famas_decommissioned: {weapon: famas, rarity: mil_spec, name: 'Decommissioned', style: graffiti, palette: ['#566565', '#798c83', '#e2d4ab']}
+  glock18_sacrifice: {weapon: glock18, rarity: mil_spec, name: 'Sacrifice', style: graffiti, palette: ['#282c33', '#853626', '#cb7147']}
+  m249_aztec: {weapon: m249, rarity: restricted, name: 'Aztec', style: tribal, palette: ['#a2884d', '#52573d', '#d1c08c']}
+  mp5sd_agent: {weapon: mp5sd, rarity: restricted, name: 'Agent', style: stripes, palette: ['#16304f', '#28598a', '#d6ad42']}
+  p250_inferno: {weapon: p250, rarity: restricted, name: 'Inferno', style: graffiti, palette: ['#6b4141', '#ba6135', '#d3ae72']}
+  fiveseven_buddy: {weapon: fiveseven, rarity: restricted, name: 'Buddy', style: stripes, palette: ['#de602a', '#3f4248', '#ebc492']}
+  ump45_plastique: {weapon: ump45, rarity: restricted, name: 'Plastique', style: circuit, palette: ['#445347', '#95986a', '#9a542c']}
+  mp9_hydra: {weapon: mp9, rarity: classified, name: 'Hydra', style: circuit, palette: ['#153f32', '#67c93a', '#d9e66d']}
+  p90_nostalgia: {weapon: p90, rarity: classified, name: 'Nostalgia', style: graffiti, palette: ['#c78c24', '#392814', '#f0d584']}
+  aug_death_by_puppy: {weapon: aug, rarity: classified, name: 'Death by Puppy', style: graffiti, palette: ['#dc6dbc', '#62b6c8', '#e8d6b7']}
+  awp_wildfire: {weapon: awp, rarity: covert, name: 'Wildfire', style: graffiti, palette: ['#202128', '#d43e18', '#ec9e23']}
+  famas_commemoration: {weapon: famas, rarity: covert, name: 'Commemoration', style: tribal, palette: ['#a57b2b', '#e5c367', '#5d4623']}
+rare-special:
+  knives: [classic]
+  finishes: original

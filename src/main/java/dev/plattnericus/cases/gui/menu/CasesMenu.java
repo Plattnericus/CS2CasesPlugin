@@ -76,7 +76,9 @@ public final class CasesMenu extends Menu {
         int perPage = GuiItems.CONTENT.length;
         int pages = GuiItems.pages(cases.size(), perPage);
         page = Math.min(page, pages - 1);
-        set(4, GuiItems.icon(ctx.messages(viewer), Material.BOOK, "case-guide.info", Text.unparsed("date", guide.snapshot())));
+        set(4, GuiItems.icon(ctx.messages(viewer), Material.BOOK, "case-guide.info", Text.unparsed("date", guide.snapshot()),
+                Text.unparsed("tiers", ctx.catalog().raritiesOrdered().stream().map(r -> String.format(java.util.Locale.ROOT, "%g", guide.tierPoints(r.id()))).collect(java.util.stream.Collectors.joining(" / "))),
+                Text.unparsed("threshold", guide.favoriteThreshold())));
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "case-guide.sort", Text.component("value", ctx.messages(viewer).item("case-guide.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
             sort = Sort.values()[(sort.ordinal() + (c.isRightClick() ? Sort.values().length - 1 : 1)) % Sort.values().length]; page = 0; playClick(); render();
         });
