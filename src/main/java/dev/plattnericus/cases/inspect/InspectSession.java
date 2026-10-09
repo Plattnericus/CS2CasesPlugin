@@ -23,6 +23,7 @@ final class InspectSession {
     final InspectModels.Anchor anchor;
     final InspectModels.Anchor handAnchor;
     final float handScale;
+    final java.util.Map<UUID, org.joml.Matrix4f> lastMatrices = new java.util.HashMap<>();
     BukkitTask task;
     int tick;
     int sampleIndex;

@@ -18,19 +18,47 @@ public final class OpeningChecks {
     public static void run(File root) throws Exception {
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var def = catalog.caseDefinition("kilowatt_case");
+        // Official Perfect World case table, including equal item probability within each tier.
+        var expectedOdds = java.util.Map.of("mil_spec", .79923, "restricted", .15985, "classified", .03197, "covert", .00639, "rare_special", .00256);
+        for (var caseDef : catalog.cases()) {
+            require(Math.abs(caseDef.statTrakChance() - .1) < 1e-12, "CS2 StatTrak probability changed: " + caseDef.id());
+            double total = 0;
+            for (var rarity : catalog.raritiesOrdered()) {
+                double chance = RewardRoller.chance(caseDef, catalog, rarity);
+                require(Math.abs(chance - expectedOdds.get(rarity.id())) < 1e-12, "CS2 rarity probability changed: " + caseDef.id() + "/" + rarity.id());
+                require(!caseDef.skins(rarity).isEmpty(), "missing rarity pool"); total += chance;
+            }
+            require(Math.abs(total - 1) < 1e-12, "case probability total");
+            if (java.util.Set.of("glove_case", "clutch_case", "snakebite_case").contains(caseDef.id())) {
+                var gloves = caseDef.skins(catalog.raritiesOrdered().getLast());
+                require(gloves.size() == 24 && gloves.stream().allMatch(s -> s.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !s.statTrakEligible()), "glove gold pool incomplete or StatTrak eligible");
+                var covert = caseDef.skins(catalog.raritiesOrdered().get(3)).getFirst();
+                var input = new SkinInstance(UUID.randomUUID(), UUID.randomUUID(), covert.id(), .2, 0, 0, true, 0, PatternInfo.NONE, caseDef.id(), SkinInstance.Origin.CASE, 0, false, SkinInstance.Status.OWNED);
+                require(TradeInRules.pool(catalog, input, catalog.raritiesOrdered().getLast()).isEmpty(), "StatTrak contract could output gloves");
+            }
+        }
         UUID a = UUID.randomUUID(), b = UUID.randomUUID();
         var registry = new OpeningSessions(); var sessions = new java.util.ArrayList<OpeningSession>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             var session = new OpeningSession(a, def, catalog, false, false);
-            require(registry.add(session, 8, 10), "independent opening rejected"); sessions.add(session);
+            sessions.add(session);
         }
-        require(registry.forPlayer(a).size() == 8 && sessions.stream().map(s -> s.openingId).distinct().count() == 8 && sessions.stream().map(s -> s.lane).distinct().count() == 8, "opening IDs or lanes overwritten");
-        require(!registry.add(new OpeningSession(a, def, catalog, false, false), 8, 10), "per-player capacity exceeded");
-        for (int i = 0; i < 2; i++) require(registry.add(new OpeningSession(b, def, catalog, false, false), 8, 10), "other player blocked");
-        require(!registry.add(new OpeningSession(UUID.randomUUID(), def, catalog, false, false), 8, 10), "global capacity exceeded");
-        registry.remove(sessions.getFirst().openingId, sessions.get(1)); require(registry.size() == 10, "wrong session removed another result");
-        registry.remove(sessions.getFirst().openingId, sessions.getFirst()); require(registry.size() == 9, "cleanup failed");
-        var replacement = new OpeningSession(a, def, catalog, false, false); require(registry.add(replacement, 8, 10) && replacement.lane == 0, "released lane was not reusable");
+        require(registry.addAll(sessions, 9, 11), "nine-case request rejected");
+        require(registry.forPlayer(a).size() == 9 && sessions.stream().map(s -> s.openingId).distinct().count() == 9 && sessions.stream().map(s -> s.lane).distinct().count() == 9, "opening IDs or lanes overwritten");
+        require(registry.reserved(a, def.id(), false) == 9 && registry.reserved(a, def.keyId(), true) == 9, "pending item reservations missing");
+        sessions.get(1).state = OpeningSession.State.PERSISTING;
+        require(registry.reserved(a, def.id(), false) == 8 && registry.reserved(a, def.keyId(), true) == 8, "consumed items reserved twice");
+        require(!registry.add(new OpeningSession(a, def, catalog, false, false), 9, 11), "per-player capacity exceeded");
+        var tooLarge = java.util.stream.IntStream.range(0, 3).mapToObj(i -> new OpeningSession(b, def, catalog, false, false)).toList();
+        require(!registry.addAll(tooLarge, 9, 11) && registry.forPlayer(b).isEmpty(), "rejected batch partly admitted");
+        require(!registry.addAll(List.of(tooLarge.getFirst(), tooLarge.getFirst()), 9, 11), "duplicate batch accepted");
+        require(!registry.addAll(List.of(tooLarge.getFirst(), new OpeningSession(a, def, catalog, false, false)), 9, 11), "mixed owners admitted");
+        for (int i = 0; i < 2; i++) require(registry.add(new OpeningSession(b, def, catalog, false, false), 9, 11), "other player blocked");
+        require(!registry.add(new OpeningSession(UUID.randomUUID(), def, catalog, false, false), 9, 11), "global capacity exceeded");
+        registry.remove(sessions.getFirst().openingId, sessions.get(1)); require(registry.size() == 11, "wrong session removed another result");
+        registry.remove(sessions.getFirst().openingId, sessions.getFirst()); require(registry.size() == 10, "cleanup failed");
+        var replacement = new OpeningSession(a, def, catalog, false, false); require(registry.add(replacement, 9, 11) && replacement.lane == 0, "released lane was not reusable");
+        layout();
         var directory = Files.createTempDirectory("mccases-openings-");
         var settings = new PluginSettings.Storage("sqlite", "opening.db", "", 0, "", "", "", "test_");
         var roller = new RewardRoller(); var outcomes = new java.util.ArrayList<SkinInstance>();
@@ -56,6 +84,35 @@ public final class OpeningChecks {
             }
         } finally { try (var paths = Files.walk(directory)) { for (var p : paths.sorted(java.util.Comparator.reverseOrder()).toList()) Files.delete(p); } }
         System.out.println("PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.");
+    }
+    private static void layout() {
+        var queue = new OpeningQueue(); UUID owner = UUID.randomUUID();
+        require(!queue.add(owner, "a", "key", 0) && !queue.add(owner, "a", "key", 1001), "invalid amount accepted");
+        require(queue.add(owner, "a", "key", 100), "100-case queue rejected");
+        require(queue.add(owner, "b", "key", 9), "mixed case queue rejected");
+        require(queue.reserved(owner, "key", true) == 109 && queue.reserved(owner, "a", false) == 100, "shared-key reservations wrong");
+        int opened = 0, waves = 0;
+        while (opened < 100) {
+            var next = queue.take(owner, 9);
+            require(next.caseId().equals("a") && next.amount() == Math.min(9, 100 - opened), "queue order or wave size wrong");
+            opened += next.amount(); waves++;
+        }
+        require(waves == 12 && queue.count(owner) == 9, "100-case wave accounting wrong");
+        require(queue.take(owner, 0) == null && queue.count(owner) == 9, "zero capacity consumed waiting request");
+        require(queue.clear(owner) == 9 && queue.count(owner) == 0 && queue.owners().isEmpty(), "cancel leaked reservations");
+        require(queue.add(owner, "a", "key", 1000) && !queue.add(owner, "a", "key", 1), "queue capacity exceeded");
+        queue.clear();
+        require(queue.count(owner) == 0, "shutdown queue not cleared");
+        for (Easing easing : Easing.values()) {
+            double previous = -1;
+            for (int tick = 0; tick <= 400; tick++) {
+                double position = easing.apply(tick / 400.0);
+                require(Double.isFinite(position) && position >= previous && position >= 0 && position <= 1, "reel reversed or overshot");
+                previous = position;
+            }
+            require(easing.apply(0) == 0 && easing.apply(1) == 1, "reel missed winner");
+        }
+        require(Easing.CINEMATIC.apply(.001) < .00002 && 1 - Easing.CINEMATIC.apply(.999) < .00002, "cinematic snap at endpoint");
     }
     private static void contracts(Catalog catalog, CaseDefinition source, UUID owner, Database db, SkinRepository repo) {
         var special = catalog.raritiesOrdered().stream().filter(Rarity::rareSpecial).findFirst().orElseThrow();

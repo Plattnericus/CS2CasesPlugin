@@ -1,8 +1,15 @@
-# Marketplace uses a persistent wallet. Payments and skin ownership share one transaction.
+# Payments use real Material.EMERALD items. No virtual wallets or Vault.
 enabled: true
-currency-name: Coins
-starting-balance: 1000
-max-price: 1000000000
+emeralds:
+  min-price: 1
+  max-price: 1000000
+  # Sources: storage slots 0..35, optionally offhand. No cursor, armor or containers.
+  include-offhand: true
+  partial-claims: true
+  max-items-per-claim: 2304
+# Every sale creates a durable item claim. Collection is explicit and may be partial.
 max-listings-per-player: 20
 trade-request-seconds: 60
 trade-idle-seconds: 300
+trade-max-skins: 12
+trade-review-millis: 2000

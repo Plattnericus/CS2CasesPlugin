@@ -16,7 +16,9 @@ public final class TradeInRules {
     }
     public static int required(Rarity target) { return target != null && target.rareSpecial() ? 5 : 10; }
     public static List<SkinDefinition> pool(Catalog catalog, SkinInstance input, Rarity target) {
-        var source = catalog.caseDefinition(input.sourceCase()); return source == null ? List.of() : source.skins(target);
+        var source = catalog.caseDefinition(input.sourceCase());
+        return source == null ? List.of() : source.skins(target).stream()
+                .filter(def -> !input.statTrak() || def.statTrakEligible()).toList();
     }
     public static Rarity validate(Catalog catalog, List<SkinInstance> inputs, boolean allowAdmin) {
         if (inputs.isEmpty() || inputs.stream().map(SkinInstance::id).distinct().count() != inputs.size()) throw new IllegalArgumentException("tradein.invalid");

@@ -1,5 +1,5 @@
 name: MCCasesDevChecks
-version: 1.0
+version: 1.2.0
 main: dev.plattnericus.cases.tools.RuntimeChecksPlugin
 api-version: '26.2'
 depend: [MCCases]

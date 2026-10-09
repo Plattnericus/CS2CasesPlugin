@@ -88,6 +88,19 @@ gui:
       lore:
       - <gray>Deine Skins und Messer
   preview:
+    queue-quantity:
+      name: '<gold>Menge: <amount>'
+      lore: ['<gray>Klicken: 9, 18, 25, 50, 90 oder 100']
+    queue-start:
+      name: '<green><amount> Cases einreihen'
+      lore: ['<gray>Eine große Roulette, nacheinander.', '<gray>Benötigt <amount> Cases und passende Keys.']
+    open-nine:
+      name: <gold>9 Cases nacheinander öffnen
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+      - '<gray>Freie Paare: <white><available>'
+      - <dark_gray>Verbraucht 9 Cases und 9 passende Keys.
+      - <dark_gray>Jede Case erhält einen eigenen Gewinn.
     title: <case>
     click-preview: <dark_gray>Klicke für eine Vorschau
     rare:
@@ -121,6 +134,9 @@ gui:
     title: Skin-Inventar
     title-other: Skins von <player>
     tab:
+      gloves:
+        name: <white>Handschuhe
+        lore: ["<gray>Klicken: beide Handschuhe inspizieren."]
       all:
         name: <white>Alle Skins
         lore: []
@@ -291,6 +307,15 @@ preview:
   loading: <gray>Vorschau wird gerendert...
   hint: <gray>Schleichen zum Schließen
 opening:
+  missing-amount: '<prefix><red>Du brauchst <amount> verfügbare <case>-Cases und passende Keys.'
+  queue-added: '<prefix><gray><amount> Cases eingereiht. Noch <remaining> Öffnungen; eine Roulette nacheinander.'
+  queue-full: '<prefix><red>Die Warteschlange erlaubt insgesamt 1 bis 1000 Öffnungen.'
+  queue-interrupted: '<prefix><yellow>Warteschlange gestoppt: Case oder Key fehlt oder wurde geändert. Wartende Items bleiben bei dir.'
+  queue-cancelled: '<prefix><gray><amount> wartende Öffnungen entfernt. Bereits vorbereitete Gewinne werden noch angezeigt.'
+  queue-usage: '<prefix><gray>/cases open \<Case-ID> \<1–1000> oder /cases cancel'
+  queue-summary: {name: '<gold>Warteschlange', lore: ['<gray>Vorbereitet: <active>/9', '<gray>Wartend: <waiting>', '<gray>Eine Roulette in voller Größe.']}
+  queue-cancel: {name: '<red>Wartende Öffnungen abbrechen', lore: ['<gray>Bereits vorbereitete Gewinne bleiben erhalten.']}
+  missing-nine: '<prefix><red>Du brauchst 9 verfügbare <case>-Cases und 9 passende <key>-Keys.'
   title: <case>
   title-test: <red>TEST</red> <case>
   bubble: <black>Gold Gold Gold
@@ -307,7 +332,7 @@ opening:
   result-test: '<prefix><red>[Test]</red> <gray>Ergebnis: <skin> <dark_gray>(<float>, #<pattern>) - nicht gespeichert'
   broadcast: <prefix><white><player></white> <gray>hat <skin> <gray>gezogen!
   reveal:
-    rare-title: <gradient:#e4ae39:#f6d27a><b>SELTENER SPEZIALGEGENSTAND</b></gradient>
+    rare-title: <gradient:#e4ae39:#f6d27a><b>★ SELTENER DROP</b></gradient>
   buttons:
     inspect:
       name: <white>Inspizieren
@@ -326,6 +351,7 @@ opening:
 
   states:
     ROLLING: "Ergebnis wird vorbereitet"
+    READY: "Gewinn vorbereitet"
     PERSISTING: "Gewinn wird gespeichert"
     ANIMATING: "Öffnung läuft"
     REVEALING: "Gewinn wird enthüllt"
@@ -599,7 +625,7 @@ market:
   legacy-usage: "<prefix><gray>/market legacy <Spieler>"
   legacy: "<prefix><gray>Archiviertes Coin-Guthaben von <player>: <balance>. Keine Emerald-Umrechnung."
   sorts: {"0": "Neueste zuerst", "1": "Preis aufsteigend", "2": "Preis absteigend", "3": "Niedrigster Float", "4": "Seltenheit"}
-  categories: {"0": "Alle Skins", "1": "Knives", "2": "Waffen", "3": "Pistolen", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives"}
+  categories: {"0": "Alle Skins", "1": "Knives", "2": "Waffen", "3": "Pistolen", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives", "10": "Handschuhe"}
 
 
 input:
@@ -614,7 +640,7 @@ browser:
   sort: {"name": "<white>Sortierung: <value>", "lore": []}
   search: {"name": "<white>Suche: <query>", "lore": ["<yellow>Klick: eingeben · Rechtsklick: löschen"]}
   sorts: {"0": "Seltenheit", "1": "Name", "2": "Float", "3": "Neueste"}
-  categories: {"ALL": "Alle", "PISTOL": "Pistolen", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives"}
+  categories: {"ALL": "Alle", "PISTOL": "Pistolen", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Handschuhe"}
 
 tradein:
   title: "Trade-in-Vertrag"

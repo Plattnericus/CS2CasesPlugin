@@ -28,10 +28,12 @@ final class RevealEffects {
         this.ctx = ctx;
     }
 
-    void reveal(Player player, SkinDefinition reward, SkinInstance instance) {
+    void reveal(Player player, SkinDefinition reward, SkinInstance instance, boolean overlay) {
         Rarity rarity = reward.rarity();
         ctx.sounds().play(player, rarity.revealSound());
+        // Allow callers to suppress the overlay while retaining the reveal sound.
         Component name = ctx.formatter(player).name(reward, instance);
+        if (!overlay) { player.sendActionBar(name); return; }
         if (rarity.rareSpecial()) {
             player.showTitle(Title.title(ctx.messages(player).get("opening.reveal.rare-title"), name,
                     Title.Times.times(Duration.ofMillis(150), Duration.ofMillis(2600), Duration.ofMillis(600))));

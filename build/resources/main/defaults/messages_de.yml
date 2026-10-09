@@ -88,6 +88,19 @@ gui:
       lore:
       - <gray>Deine Skins und Messer
   preview:
+    queue-quantity:
+      name: '<gold>Menge: <amount>'
+      lore: ['<gray>Klicken: 9, 18, 25, 50, 90 oder 100']
+    queue-start:
+      name: '<green><amount> Cases einreihen'
+      lore: ['<gray>Eine große Roulette, nacheinander.', '<gray>Benötigt <amount> Cases und passende Keys.']
+    open-nine:
+      name: <gold>9 Cases nacheinander öffnen
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+      - '<gray>Freie Paare: <white><available>'
+      - <dark_gray>Verbraucht 9 Cases und 9 passende Keys.
+      - <dark_gray>Jede Case erhält einen eigenen Gewinn.
     title: <case>
     click-preview: <dark_gray>Klicke für eine Vorschau
     rare:
@@ -121,6 +134,9 @@ gui:
     title: Skin-Inventar
     title-other: Skins von <player>
     tab:
+      gloves:
+        name: <white>Handschuhe
+        lore: ["<gray>Klicken: beide Handschuhe inspizieren."]
       all:
         name: <white>Alle Skins
         lore: []
@@ -291,6 +307,15 @@ preview:
   loading: <gray>Vorschau wird gerendert...
   hint: <gray>Schleichen zum Schließen
 opening:
+  missing-amount: '<prefix><red>Du brauchst <amount> verfügbare <case>-Cases und passende Keys.'
+  queue-added: '<prefix><gray><amount> Cases eingereiht. Noch <remaining> Öffnungen; eine Roulette nacheinander.'
+  queue-full: '<prefix><red>Die Warteschlange erlaubt insgesamt 1 bis 1000 Öffnungen.'
+  queue-interrupted: '<prefix><yellow>Warteschlange gestoppt: Case oder Key fehlt oder wurde geändert. Wartende Items bleiben bei dir.'
+  queue-cancelled: '<prefix><gray><amount> wartende Öffnungen entfernt. Bereits vorbereitete Gewinne werden noch angezeigt.'
+  queue-usage: '<prefix><gray>/cases open \<Case-ID> \<1–1000> oder /cases cancel'
+  queue-summary: {name: '<gold>Warteschlange', lore: ['<gray>Vorbereitet: <active>/9', '<gray>Wartend: <waiting>', '<gray>Eine Roulette in voller Größe.']}
+  queue-cancel: {name: '<red>Wartende Öffnungen abbrechen', lore: ['<gray>Bereits vorbereitete Gewinne bleiben erhalten.']}
+  missing-nine: '<prefix><red>Du brauchst 9 verfügbare <case>-Cases und 9 passende <key>-Keys.'
   title: <case>
   title-test: <red>TEST</red> <case>
   bubble: <black>Gold Gold Gold
@@ -302,13 +327,12 @@ opening:
   case-disabled: <prefix><red>Dieses Case ist nicht verfügbar.
   missing: <prefix><gray>Du brauchst <white><case></white> und einen <white><key></white>.
   missing-now: <prefix><red>Case oder Key ist nicht mehr in deinem Inventar.
-  storage-error: <prefix><red>Speichern fehlgeschlagen. Case und Key wurden zurückgegeben.
   command-blocked: <prefix><gray>Warte, bis die Öffnung beendet ist.
   result: '<prefix><gray>Du hast <skin> <gray>erhalten <dark_gray>(<float>, #<pattern>)'
   result-test: '<prefix><red>[Test]</red> <gray>Ergebnis: <skin> <dark_gray>(<float>, #<pattern>) - nicht gespeichert'
   broadcast: <prefix><white><player></white> <gray>hat <skin> <gray>gezogen!
   reveal:
-    rare-title: <gradient:#e4ae39:#f6d27a><b>SELTENER SPEZIALGEGENSTAND</b></gradient>
+    rare-title: <gradient:#e4ae39:#f6d27a><b>★ SELTENER DROP</b></gradient>
   buttons:
     inspect:
       name: <white>Inspizieren
@@ -318,6 +342,22 @@ opening:
       name: <green>Nochmal öffnen
       lore:
       - '<gray>Fälle: <white><cases> <dark_gray>· <gray>Schlüssel: <white><keys>'
+  limit: "<prefix><yellow>Die technische Animationsgrenze ist erreicht. Keine Case oder Keys verbraucht."
+  storage-error: "<prefix><yellow>Dein Ergebnis bleibt im Wiederherstellungsjournal. Verbinde dich nach Behebung des Datenbankfehlers erneut."
+  active-title: "Öffnungen und Ergebnisse"
+  active-button: {"name": "<aqua>Laufende Öffnungen", "lore": []}
+  active-refresh: {"name": "<aqua>Übersicht aktualisieren", "lore": []}
+  active-session: {"name": "<gold><case> · #<id>", "lore": ["<gray><state>", "<yellow>GUI-Roulette: klicken zum Anzeigen."]}
+
+  states:
+    ROLLING: "Ergebnis wird vorbereitet"
+    READY: "Gewinn vorbereitet"
+    PERSISTING: "Gewinn wird gespeichert"
+    ANIMATING: "Öffnung läuft"
+    REVEALING: "Gewinn wird enthüllt"
+    FINISHED: "Abgeschlossen"
+    ABORTED: "Beendet"
+
 equip:
   wrong-slot: <prefix><red>Dieser Skin passt nicht auf diese Waffe.
   equipped:
@@ -515,7 +555,6 @@ trade:
   add: '<yellow>Klicken, um den Skin anzubieten'
   remove: '<yellow>Klicken, um den Skin aus dem Angebot zu nehmen'
   offered: '<gray>Angeboten von deinem Handelspartner'
-  your-head: {name: '<aqua><player> · Deine Skins', lore: ['<gray>Klicke links auf einen Skin, um ihn anzubieten.', '<gray>Leuchtend = ausgewählt. Nochmal klicken = entfernen.', '<aqua>Ausgewählt: <white><count>/<max>']}
   your-offer-head: {name: '<aqua><player> · Dein angenommenes Angebot', lore: ['<gray>Diese <white><count> Skins <gray>gibst du ab.', '<gray>Du wartest auf deinen Handelspartner.']}
   partner-head: {name: '<green><player> · Du erhältst <count> Skins', lore: ['<gray>Rechts siehst du sein aktuelles Angebot.', '<gray>Änderungen erscheinen sofort bei euch beiden.']}
   own-empty: {name: '<aqua>Du gibst keine Skins ab', lore: ['<gray>Du erhältst ein Geschenk.']}
@@ -534,23 +573,20 @@ trade:
   empty: {name: '<gray>Keine verfügbaren Skins', lore: ['<gray>Reservierte Skins und Test-Skins sind gesperrt.']}
   saving: {name: '<yellow>Transaktion wird abgeschlossen…', lore: ['<gray>Einen Moment bitte.']}
   cancel: {name: '<red>Handel abbrechen', lore: ['<gray>Skins behalten und beide Menüs schließen.']}
+  choose-title: "Skin-Collection für den Trade"
+  open-collection: {"name": "<aqua>Collection öffnen", "lore": ["<gray>36 Skins pro Seite, Suche und Filter."]}
+  your-head: {"name": "<aqua><player> · Dein Angebot", "lore": ["<gray><count>/<max> Skins", "<yellow>Collection öffnen, um weitere Skins auszuwählen."]}
+
 market:
   title: 'Skin-Marktplatz'
   own-title: 'Deine Angebote'
   choose-title: 'Skin zum Verkauf wählen'
   sell-title: 'Verkaufspreis festlegen'
   purchase-title: 'Angebot prüfen'
-  usage: '<prefix><gray>/market · /market sell <Skin-ID> <Preis> · /market own · /market search <Name> · /market balance'
-  credit-usage: '<prefix><gray>/market credit <Spieler> <Betrag>'
-  balance: '<prefix><gray>Dein Guthaben: <gold><balance> <currency>'
-  credited: '<prefix><gray><gold><amount> <currency></gold> gutgeschrieben. Neues Guthaben: <white><balance>'
   listed: '<prefix><green>Skin für <price> <currency> angeboten. Unter Deine Angebote kannst du ihn zurückziehen.'
   cancelled: '<prefix><gray>Angebot zurückgezogen. Der Skin ist wieder in deiner Sammlung.'
   bought: '<prefix><green>Skin für <price> <currency> gekauft und deiner Sammlung hinzugefügt.'
-  sold: '<prefix><green>Dein Skin wurde verkauft. Der Erlös liegt in deinem Marktplatz-Guthaben.'
   unavailable: '<prefix><yellow>Das Angebot ist nicht mehr verfügbar oder der Marktplatz ist noch nicht bereit. Öffne /market erneut.'
-  not-enough: '<prefix><red>Dein Marktplatz-Guthaben reicht nicht aus. Es wurde nichts abgebucht.'
-  limit: '<prefix><yellow>Das Angebotslimit oder Guthabenlimit ist erreicht.'
   invalid: '<prefix><red>Gib eine positive ganze Zahl innerhalb des Preislimits ein. Test-Skins können nicht verkauft werden.'
   select-skin: '<yellow>Klicken, um einen Preis festzulegen'
   manage-hint: '<yellow>Klicken, um dein Angebot zu prüfen oder zurückzuziehen'
@@ -559,18 +595,130 @@ market:
   browse: {name: '<white>Marktplatz', lore: ['<gray>Entdecke die Angebote anderer Spieler.']}
   own: {name: '<white>Deine Angebote', lore: ['<gray>Prüfe Angebote oder hole einen Skin zurück.']}
   sell: {name: '<green>Skin verkaufen', lore: ['<gray>Wähle einen Skin und lege deinen Preis fest.']}
-  wallet: {name: '<gold><balance> <currency>', lore: ['<gray>Dein gespeichertes Marktplatz-Guthaben.', '<yellow>Klicken zum Aktualisieren.']}
   empty: {name: '<gray>Keine passenden Angebote', lore: ['<gray>Versuche eine andere Kategorie oder Suche.']}
   own-empty: {name: '<gray>Du hast keine aktiven Angebote', lore: ['<gray>Mit Skin verkaufen erstellst du ein Angebot.']}
   no-skins: {name: '<gray>Keine Skins zum Verkaufen', lore: ['<gray>Reservierte Skins und Test-Skins sind gesperrt.']}
-  price: {name: '<gold><price> <currency>', lore: ['<gray>Das ist der gesamte Verkaufspreis.']}
   change-price: {name: '<white><change>', lore: ['<gray>Verkaufspreis anpassen.']}
-  sell-info: {name: '<white>Vor dem Verkauf', lore: ['<gray>Dein Skin bleibt während des Angebots reserviert.', '<gray>Bis zum Kauf kannst du ihn zurückziehen.', '<gray>Keine Gebühr. Du erhältst den vollen Preis.', '<gray>Genauer Preis: /market sell <ID> <Preis>']}
   publish: {name: '<green>Für <price> <currency> anbieten', lore: ['<gray>Bestätigen und dieses Angebot veröffentlichen.']}
   withdraw: {name: '<yellow>Angebot zurückziehen', lore: ['<gray>Skin in deine Sammlung zurückholen.', '<gray>Ohne Kosten.']}
   buy: {name: '<green>Für <price> <currency> kaufen', lore: ['<gray>Diesen Kauf bestätigen.', '<gray>Der Skin kommt in deine Sammlung.']}
   sort: {name: '<white>Sortierung: <sort>', lore: ['<gray>Klicken zum Wechseln · Rechtsklick zurück.']}
   filter: {name: '<white>Kategorie: <category>', lore: ['<gray>Klicken, um die Kategorie zu wechseln.']}
-  search: {name: '<white>Suche: <query>', lore: ['<gray>/market search <Name oder Verkäufer>', '<yellow>Klicken, um die Suche zu löschen.']}
-  sorts: {'0': 'Neueste zuerst', '1': 'Niedrigster Preis', '2': 'Höchster Preis', '3': 'Niedrigster Float'}
-  categories: {'0': 'Alle Skins', '1': 'Messer', '2': 'Waffen'}
+  currency: "Emeralds"
+  emerald-usage: "<prefix><gray>/market · /market sell <ID> <Preis> · /market own · /market search <Name> · /market balance · /market claims"
+  emerald-balance: "<prefix><gray>Emeralds im Inventar: <green><balance>"
+  emerald-sold: "<prefix><green>Dein Skin wurde verkauft. Hole die Emeralds über /market claims ab."
+  emerald-not-enough: "<prefix><red>Zu wenige Emeralds im Inventar. Es wurde nichts bezahlt."
+  emerald-limit: "<prefix><yellow>Das Angebotslimit wurde erreicht."
+  emerald-wallet: {"name": "<green><balance> Emeralds", "lore": ["<gray>Emeralds im Inventar und in der Offhand gemäß Konfiguration.", "<yellow>Klicken zum Aktualisieren."]}
+  emerald-price: {"name": "<green><price> Emeralds", "lore": ["<yellow>Klicken: exakten Preis im Chat eingeben."]}
+  emerald-search: {"name": "<white>Suche: <query>", "lore": ["<yellow>Klicken: Text eingeben · Rechtsklick: löschen."]}
+  emerald-sell-info: {"name": "<white>Vor dem Verkauf", "lore": ["<gray>Skin bleibt reserviert; jederzeit zurückziehbar.", "<gray>Du erhältst den vollen Preis als Emerald-Items.", "<gray>Abholung auch nach Offline-Verkäufen: /market claims"]}
+  claims-button: {"name": "<green><amount> Emeralds abholen", "lore": ["<gray>Gespeicherte Item-Auszahlungen, kein Wallet.", "<yellow>Klicken: nächsten Anspruch teilweise abholen."]}
+  claimed: "<prefix><green><amount> Emeralds sicher abgeholt."
+  no-claims: "<prefix><gray>Keine offenen Emerald-Auszahlungen."
+  claim-full: "<prefix><yellow>Kein Platz. Die Emeralds bleiben sicher zur Abholung gespeichert."
+  payment-busy: "<prefix><yellow>Ein Zahlungsvorgang läuft oder wartet auf Wiederherstellung. Nutze bei Fehlern /market recover."
+  recovery-needed: "<prefix><yellow>Der Vorgang bleibt zur Wiederherstellung gespeichert. Nutze /market recover oder verbinde dich erneut."
+  sold-marker: {"name": "<red>Angebot nicht mehr verfügbar", "lore": []}
+  inspect: {"name": "<aqua>Skin-Vorschau", "lore": ["<gray>Exakter Float und Pattern des Angebots."]}
+  legacy-usage: "<prefix><gray>/market legacy <Spieler>"
+  legacy: "<prefix><gray>Archiviertes Coin-Guthaben von <player>: <balance>. Keine Emerald-Umrechnung."
+  sorts: {"0": "Neueste zuerst", "1": "Preis aufsteigend", "2": "Preis absteigend", "3": "Niedrigster Float", "4": "Seltenheit"}
+  categories: {"0": "Alle Skins", "1": "Knives", "2": "Waffen", "3": "Pistolen", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives", "10": "Handschuhe"}
+
+
+input:
+  search: "<prefix><aqua>Gib die Suche im Chat ein. cancel = zurück, 30 Sekunden Zeit."
+  price: "<prefix><aqua>Gib einen ganzen Emerald-Preis im Chat ein. cancel = zurück."
+  timeout: "<prefix><gray>Die Texteingabe ist abgelaufen."
+
+browser:
+  all-rarities: "Alle Seltenheiten"
+  category: {"name": "<white>Kategorie: <value>", "lore": []}
+  rarity: {"name": "<white>Seltenheit: <value>", "lore": []}
+  sort: {"name": "<white>Sortierung: <value>", "lore": []}
+  search: {"name": "<white>Suche: <query>", "lore": ["<yellow>Klick: eingeben · Rechtsklick: löschen"]}
+  sorts: {"0": "Seltenheit", "1": "Name", "2": "Float", "3": "Neueste"}
+  categories: {"ALL": "Alle", "PISTOL": "Pistolen", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Handschuhe"}
+
+tradein:
+  title: "Trade-in-Vertrag"
+  button: {"name": "<gold>Trade-in", "lore": ["<gray>Skins gegen einen Skin der nächsten Stufe eintauschen."]}
+  rules: {"name": "<gold>Vertragsregeln", "lore": ["<gray>10 Waffen gleicher Seltenheit → nächsthöhere Stufe.", "<gold>5 Covert-Waffen → Gold-Special-Item.", "<gray>StatTrak muss bei allen Eingaben übereinstimmen.", "<gray>Ausgabe aus einer Eingabe-Case; durchschnittlicher Float.", "<red>Bestätigte Eingaben werden endgültig verbraucht."]}
+  confirm: {"name": "<gold>Vertrag mit <count> Skins prüfen", "lore": ["<red>Eingaben werden dauerhaft gegen einen neuen Skin getauscht."]}
+  invalid: "<prefix><red>Der Vertrag braucht passende, verfügbare Skins gleicher Seltenheit und StatTrak-Art aus gültigen Cases."
+  count: "<prefix><yellow>Verwende 10 passende Waffen oder 5 Covert-Skins für Gold."
+  unavailable: "<prefix><yellow>Trade-in ist derzeit nicht verfügbar."
+  result: "<prefix><green>Trade-in abgeschlossen: <skin>"
+  gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>hat durch einen <bold>TRADE-IN</bold> <skin> gewonnen!"
+
+# Case recommendations and filters
+case-guide:
+  contents: <dark_gray><count> mögliche Items
+  info:
+    name: <gold>So entsteht die Rangliste
+    lore:
+    - <gray>Preis enthält Case und passenden Schlüssel.
+    - <gray>Value = erwartete Belohnungspunkte / Preis.
+    - '<gray>Punkte pro Stufe: <tiers>*'
+    - '<gray>*Messer: ×(0,5 + Präferenz / 100), dann Finish.'
+    - <gray>Serverpunkte; kein versprochener Verkaufserlös.
+    - '<gray>Eigene Gewichtung: case-guide.yml'
+    - '<gray>Präferenzen: kuratierter Stand <date>.'
+    - <gray>cs2.io/en/skins/knives · r/csmoneyofficial
+    - '<gray>Float, Pattern und StatTrak: kein Punktebonus.'
+  sort:
+    name: '<aqua>Sortierung: <value>'
+    lore:
+    - '<gray>Links: weiter · Rechts: zurück'
+  sorts:
+    value: Beste Value
+    price_asc: Günstigste zuerst
+    price_desc: Teuerste zuerst
+    community: Messerpräferenzen
+    owned: Besitz zuerst
+    name: Name
+  knife:
+    name: '<gold>Messer: <value>'
+    lore:
+    - <gray>Alle, Favoriten oder ein bestimmtes Messer.
+    - '<gray>Links: weiter · Rechts: zurück'
+  knives:
+    all: Alle
+    favorites: Community-Favoriten
+    owned: Eigene Cases
+  budget:
+    name: '<aqua>Max. Preis: <value> <currency>'
+    lore:
+    - '<gray>Links: Betrag eingeben · Rechts: löschen'
+    - <gray>Händlercase + Schlüssel, pro Öffnung.
+  budget-prompt: <aqua>Maximaler Gesamtpreis? 0–4294967294 eingeben oder abbrechen.
+  bad-budget: <red>Bitte eine ganze, nichtnegative Zahl eingeben.
+  search:
+    name: '<aqua>Suche: <value>'
+    lore:
+    - '<gray>Links: suchen · Rechts: löschen'
+  search-prompt: <aqua>Case-Name oder ID? Mit abbrechen zurück.
+  owned:
+    name: '<yellow>Anzeigen: <value>'
+    lore:
+    - <gray>Klicken für eigene/alle Cases.
+  reset:
+    name: <yellow>Filter zurücksetzen
+    lore:
+    - <gray>Alle Cases nach Value anzeigen.
+  empty:
+    name: <gray>Keine passenden Cases
+    lore:
+    - <gray>Filter ändern oder zurücksetzen.
+  unlimited: Alle
+  unavailable: Nicht verkauft
+  metrics:
+  - '<gray>Case + Schlüssel: <white><cost> <currency>'
+  - '<gray>EV: <white><points> Punkte'
+  - '<gray>Value: <green><value> Punkte / <currency>'
+  - '<gray>Beliebiges Messer: <gold><knives>%'
+  - '<gray>Favoriten-Messer: <gold><favorites>%'
+  - '<gray>Messerpräferenz: <white><community> / 100'
+  target: '<gray><knife>: <gold><chance>% pro Öffnung'

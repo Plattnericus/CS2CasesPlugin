@@ -11,13 +11,13 @@ import java.util.UUID;
 
 /**
  * One case opening. States only move forward:
- * ROLLING → PERSISTING → ANIMATING → REVEALING → FINISHED, or ROLLING/PERSISTING → ABORTED.
+ * ROLLING → PERSISTING → READY → ANIMATING → REVEALING → FINISHED, or ROLLING/PERSISTING → ABORTED.
  * The reward exists (in the journal or the database) from PERSISTING on; everything after that
  * is presentation.
  */
 public final class OpeningSession {
 
-    public enum State { ROLLING, PERSISTING, ANIMATING, REVEALING, FINISHED, ABORTED }
+    public enum State { ROLLING, PERSISTING, READY, ANIMATING, REVEALING, FINISHED, ABORTED }
 
     final UUID playerId;
     final UUID openingId = UUID.randomUUID();
@@ -34,6 +34,11 @@ public final class OpeningSession {
     OpeningView view;
     BukkitTask task;
     int lane;
+    boolean sequence;
+    boolean interrupted;
+    int duration;
+    Easing easing;
+    org.bukkit.Location origin;
     int tick;
     public UUID id() { return openingId; }
     public String caseName() { return caseDef.name(); }

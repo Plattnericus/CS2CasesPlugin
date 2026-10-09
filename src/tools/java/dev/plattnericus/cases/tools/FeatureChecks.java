@@ -27,7 +27,7 @@ public final class FeatureChecks {
             language.load(file); // Unlike loadConfiguration, this fails on invalid YAML.
             for (String key : english.getKeys(true)) {
                 if (english.isConfigurationSection(key)) continue;
-                boolean commerceFallback = ((key.startsWith("case-guide.") || key.startsWith("trade.") || key.startsWith("market.") || key.startsWith("commerce.") || key.startsWith("browser.") || key.startsWith("input.") || key.startsWith("tradein.") || key.startsWith("opening.active-") || key.startsWith("opening.states.") || key.equals("opening.limit"))
+                boolean commerceFallback = ((key.startsWith("gui.skins.tab.gloves.") || key.startsWith("gui.preview.open-nine.") || key.startsWith("gui.preview.queue-") || key.startsWith("opening.queue-") || key.equals("opening.missing-amount") || key.equals("opening.missing-nine") || key.startsWith("case-guide.") || key.startsWith("trade.") || key.startsWith("market.") || key.startsWith("commerce.") || key.startsWith("browser.") || key.startsWith("input.") || key.startsWith("tradein.") || key.startsWith("opening.active-") || key.startsWith("opening.states.") || key.equals("opening.limit"))
                         && !file.getName().equals("messages_de.yml")) || key.equals("inventory.usage");
                 require(language.contains(key) || commerceFallback, file.getName() + " missing " + key);
                 var source = language.contains(key) ? language : english;
@@ -57,6 +57,7 @@ public final class FeatureChecks {
         require(messages.forLocale("../../en") == messages, "locale must never access paths");
         require(messages.forLocale("fr_FR").raw("gui.close.name").contains("Fermer"), "French lookup");
         require(messages.forLocale("fr_FR").raw("market.title").equals("Skin marketplace"), "new commerce keys use English fallback");
+        require(messages.forLocale("fr_FR").raw("gui.skins.tab.gloves.name").equals("<white>Gloves"), "new glove tab uses English fallback");
         var received = new java.util.concurrent.atomic.AtomicReference<net.kyori.adventure.text.Component>();
         org.bukkit.entity.Player french = (org.bukkit.entity.Player) java.lang.reflect.Proxy.newProxyInstance(
                 FeatureChecks.class.getClassLoader(), new Class<?>[]{org.bukkit.entity.Player.class}, (proxy, method, parameters) -> {
@@ -214,6 +215,7 @@ public final class FeatureChecks {
                 case ALL, RECENT -> true;
                 case WEAPONS -> !e.definition().weapon().category().isStarItem();
                 case KNIVES -> e.definition().isKnife();
+                case GLOVES -> e.definition().weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE;
                 case STATTRAK -> e.instance().statTrak();
                 case FAVORITES -> e.instance().favorite();
             }), "inventory category " + category);

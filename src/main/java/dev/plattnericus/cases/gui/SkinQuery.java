@@ -51,6 +51,7 @@ public final class SkinQuery {
             case ALL, RECENT -> true;
             case WEAPONS -> !def.weapon().category().isStarItem();
             case KNIVES -> def.isKnife();
+            case GLOVES -> def.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE;
             case STATTRAK -> inst.statTrak();
             case FAVORITES -> inst.favorite();
         };

@@ -14,6 +14,8 @@ public final class InspectRig {
 
     public static List<Layer> layers(WeaponType weapon) {
         String id = weapon.id();
+        if (weapon.category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE) return List.of(
+                new Layer("left", "pair_a", new Vector3f()), new Layer("right", "pair_b", new Vector3f()));
         if (paired(weapon)) return List.of(
                 new Layer(id.equals("dual_berettas") ? "pistol_a" : "body", "pair_a", new Vector3f(-.14f, .03f, -.035f)),
                 new Layer(id.equals("dual_berettas") ? "pistol_b" : "body", "pair_b", new Vector3f(.40f, -.03f, .035f)));
@@ -26,6 +28,7 @@ public final class InspectRig {
 
     /** Coordinates refer to the original, unrotated square weapon canvas, preserving the hinge. */
     public static String layerAt(WeaponType weapon, double x, double y) {
+        if (weapon.category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE) return x < .5 ? "left" : "right";
         if (weapon.id().equals("dual_berettas")) return y < .44 || (x < .32 && y < .59) ? "pistol_a" : "pistol_b";
         if (weapon.id().equals("butterfly")) {
             if (x >= .505) return "blade";
@@ -51,7 +54,7 @@ public final class InspectRig {
         return "body";
     }
 
-    public static boolean paired(WeaponType weapon) { return weapon.id().equals("shadow_daggers") || weapon.id().equals("dual_berettas"); }
+    public static boolean paired(WeaponType weapon) { return weapon.category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE || weapon.id().equals("shadow_daggers") || weapon.id().equals("dual_berettas"); }
 
     public static List<ModelPart> packParts(WeaponType weapon, float scale) {
         List<ModelPart> parts = new ArrayList<>();
@@ -62,12 +65,21 @@ public final class InspectRig {
 
     public static List<ModelPart> blockParts(WeaponType weapon, List<ModelPart> source) {
         List<ModelPart> parts = new ArrayList<>();
-        boolean pair = weapon.id().equals("shadow_daggers") || weapon.id().equals("dual_berettas");
+        boolean pair = paired(weapon);
         for (ModelPart p : source) {
             String group = FOLDERS.contains(weapon.id()) && (p.id().startsWith("blade") || p.id().equals("tip") || p.id().equals("edge")) ? "blade" : p.group();
-            if (!weapon.isKnife() && (p.id().equals("slide") || p.id().equals("handguard") || p.id().equals("magazine"))) group = "mechanism";
-            if (pair) for (Layer layer : layers(weapon)) parts.add(new ModelPart(p.id() + "_" + layer.group(), p.type(), p.material(),
-                    new Vector3f(p.position()).mul(.7f).add(layer.position()), new Vector3f(p.size()).mul(.7f), p.rotation(), layer.group(), p.glow()));
+            if (!weapon.category().isStarItem() && (p.id().equals("slide") || p.id().equals("handguard") || p.id().equals("magazine"))) group = "mechanism";
+            if (pair) for (Layer layer : layers(weapon)) {
+                Vector3f position = new Vector3f(p.position()).mul(.7f).add(layer.position());
+                Vector3f rotation = new Vector3f(p.rotation());
+                if (weapon.category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE) {
+                    boolean left = layer.group().equals("pair_a");
+                    position.x = left ? -position.x - .16f : position.x + .16f;
+                    if (left) rotation.mul(1, -1, -1);
+                }
+                parts.add(new ModelPart(p.id() + "_" + layer.group(), p.type(), p.material(),
+                        position, new Vector3f(p.size()).mul(.7f), rotation, layer.group(), p.glow()));
+            }
             else parts.add(new ModelPart(p.id(), p.type(), p.material(), p.position(), p.size(), p.rotation(), group, p.glow()));
         }
         return List.copyOf(parts);

@@ -31,8 +31,29 @@ public final class PlayerCommands {
                 inventoryCommand(ctx, MenuStates.Category.ALL));
         commands.register("knife", "Opens your or another player's knife collection", List.of("knives"),
                 inventoryCommand(ctx, MenuStates.Category.KNIVES));
-        commands.register("cases", "Shows your cases", List.of(), command(ctx, "mccases.use", p ->
-                new CasesMenu(ctx, p).open()));
+        commands.register("cases", "Case contents and sequential opening queue", List.of(), new BasicCommand() {
+            @Override public String permission() { return "mccases.use"; }
+            @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
+                if (args.length <= 1) return List.of("open", "cancel");
+                if (args.length == 2 && args[0].equalsIgnoreCase("open")) return ctx.catalog().cases().stream().filter(c -> c.enabled()).map(c -> c.id()).toList();
+                if (args.length == 3 && args[0].equalsIgnoreCase("open")) return List.of("1", "9", "25", "50", "90", "100");
+                return List.of();
+            }
+            @Override public void execute(CommandSourceStack source, String[] args) {
+                if (!(source.getExecutor() instanceof Player p)) { ctx.messages().send(source.getSender(), "general.player-only"); return; }
+                if (args.length == 0) { new CasesMenu(ctx, p).open(); return; }
+                if (args.length == 1 && args[0].equalsIgnoreCase("cancel")) {
+                    ctx.messages(p).send(p, "opening.queue-cancelled", Text.unparsed("amount", ctx.openings().cancelQueued(p))); return;
+                }
+                if (args.length == 3 && args[0].equalsIgnoreCase("open")) {
+                    var def = ctx.catalog().caseDefinition(args[1]);
+                    try { int amount = Integer.parseInt(args[2]);
+                        if (def != null && amount > 0 && amount <= 1000) { ctx.openings().queue(p, def, amount); return; }
+                    } catch (NumberFormatException ignored) { }
+                }
+                ctx.messages(p).send(p, "opening.queue-usage");
+            }
+        });
         commands.register("tradein", "CS2-inspired skin contracts", List.of("tradeup"), command(ctx, "mccases.tradein", p -> {
             if (ctx.tradeIns().enabled() && ctx.profiles().get(p) != null && ctx.commerce().trade(p.getUniqueId()) == null) new dev.plattnericus.cases.tradein.TradeInMenu(ctx, p).open();
             else ctx.messages(p).send(p, "tradein.unavailable");

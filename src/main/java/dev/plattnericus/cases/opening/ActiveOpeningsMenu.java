@@ -32,6 +32,11 @@ public final class ActiveOpeningsMenu extends Menu {
                         ctx.formatter(viewer).lore(def, instance, true), ctx.settings(), false));
             }
         }
+        set(4, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "opening.queue-summary",
+                Text.unparsed("active", active.size()), Text.unparsed("waiting", ctx.openings().queuedCount(viewer))));
+        set(51, GuiItems.icon(ctx.messages(viewer), Material.RED_DYE, "opening.queue-cancel"), c -> {
+            ctx.messages(viewer).send(viewer, "opening.queue-cancelled", Text.unparsed("amount", ctx.openings().cancelQueued(viewer))); render();
+        });
         set(45, GuiItems.back(ctx.messages(viewer)), c -> new dev.plattnericus.cases.gui.menu.CasesMenu(ctx, viewer).open());
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(49, GuiItems.icon(ctx.messages(viewer), Material.CLOCK, "opening.active-refresh"), c -> render());

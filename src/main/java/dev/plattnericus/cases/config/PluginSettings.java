@@ -151,7 +151,7 @@ public record PluginSettings(
 
         Opening opening = new Opening(
                 clamp(c.getInt("opening.duration-ticks", 120), 40, 400),
-                c.getString("opening.easing", "cubic").toLowerCase(Locale.ROOT),
+                c.getString("opening.easing", "cinematic").toLowerCase(Locale.ROOT),
                 clamp(c.getInt("opening.reel-length", 64), 30, 200),
                 clamp(c.getInt("opening.reveal-hold-ticks", 50), 0, 200),
                 clamp(c.getInt("opening.gold-pause-ticks", 16), 0, 100),
@@ -172,7 +172,7 @@ public record PluginSettings(
                         c.getDouble("opening.world.view-range", 1.0)),
                 c.getBoolean("opening.speech-bubble.enabled", true),
                 clamp(c.getInt("opening.speech-bubble.duration-ticks", 60), 10, 400),
-                clamp(c.getInt("opening.max-active-per-player", 8), 1, 32),
+                clamp(c.getInt("opening.max-active-per-player", 9), 1, 32),
                 clamp(c.getInt("opening.max-active-global", 64), 1, 256));
         if (!opening.display().equals("gui") && !opening.display().equals("world")) {
             warn.accept("config.yml: opening.display must be gui or world - using gui");

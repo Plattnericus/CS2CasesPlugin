@@ -57,6 +57,31 @@ public final class ClientCaptureHarness {
                                 Object mouse = minecraftClass.getField("mouseHandler").get(mc);
                                 for (String axis : new String[]{"xpos", "ypos"}) { var f=mouse.getClass().getDeclaredField(axis);f.setAccessible(true);f.setDouble(mouse,axis.equals("xpos")?x:y); }
                             }
+                            case "displays" -> {
+                                Object level = minecraftClass.getField("level").get(mc);
+                                Class<?> display = Class.forName("net.minecraft.world.entity.Display");
+                                Class<?> interpolator = Class.forName("net.minecraft.world.entity.Display$GenericInterpolator");
+                                var progressField = display.getDeclaredField("lastProgress"); progressField.setAccessible(true);
+                                var targetMethod = display.getDeclaredMethod("createTransformation", Class.forName("net.minecraft.network.syncher.SynchedEntityData")); targetMethod.setAccessible(true);
+                                StringBuilder report = new StringBuilder("id\ttype\ttick\tprogress\tx\tscale\ttargetX\ttargetScale\n");
+                                for (Object entity : (Iterable<?>) level.getClass().getMethod("entitiesForRendering").invoke(level)) {
+                                    if (!display.isInstance(entity)) continue;
+                                    Object state = display.getMethod("renderState").invoke(entity); if (state == null) continue;
+                                    float progress = progressField.getFloat(entity);
+                                    Object curve = state.getClass().getMethod("transformation").invoke(state);
+                                    Object pose = interpolator.getMethod("get", float.class).invoke(curve, progress);
+                                    Object target = targetMethod.invoke(null, entity.getClass().getMethod("getEntityData").invoke(entity));
+                                    report.append(entity.getClass().getMethod("getUUID").invoke(entity)).append('\t')
+                                            .append(entity.getClass().getSimpleName()).append('\t')
+                                            .append(entity.getClass().getField("tickCount").getInt(entity)).append('\t').append(progress);
+                                    for (Object transform : new Object[]{pose, target}) for (String component : new String[]{"translation", "scale"}) {
+                                        Object vector = transform.getClass().getMethod(component).invoke(transform);
+                                        report.append('\t').append(Class.forName("org.joml.Vector3fc").getMethod("x").invoke(vector));
+                                    }
+                                    report.append('\n');
+                                }
+                                Path output = Path.of(args[1]); Files.createDirectories(output.getParent()); Files.writeString(output, report);
+                            }
                             case "shot" -> {
                                 Object renderer = minecraftClass.getField("gameRenderer").get(mc);
                                 Object target = renderer.getClass().getMethod("mainRenderTarget").invoke(renderer);
