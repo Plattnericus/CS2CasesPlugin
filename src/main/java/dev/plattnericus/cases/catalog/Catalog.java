@@ -22,6 +22,7 @@ public final class Catalog {
     private final Map<String, Finish> finishes;
     private final Map<String, SkinDefinition> skins;
     private final Map<String, CaseDefinition> cases;
+    private final Map<String, List<CaseDefinition>> casesBySkin;
     private final Map<String, KeyDefinition> keys;
     private final PatternConfig patterns;
 
@@ -38,6 +39,11 @@ public final class Catalog {
         this.finishes = Map.copyOf(finishes);
         this.skins = Map.copyOf(skins);
         this.cases = Map.copyOf(cases);
+        Map<String, List<CaseDefinition>> sources = new java.util.HashMap<>();
+        for (var source : cases.values()) for (var pool : source.pool().values()) for (var skin : pool)
+            sources.computeIfAbsent(skin.id(), id -> new ArrayList<>()).add(source);
+        sources.replaceAll((id, entries) -> entries.stream().distinct().sorted(Comparator.comparing(CaseDefinition::id)).toList());
+        this.casesBySkin = Map.copyOf(sources);
         this.keys = Map.copyOf(keys);
         this.patterns = patterns;
     }
@@ -82,6 +88,9 @@ public final class Catalog {
     public CaseDefinition caseDefinition(String id) {
         return cases.get(id);
     }
+
+    /** Indexed once per immutable catalog; contract browsing never scans all case contents. */
+    public List<CaseDefinition> casesForSkin(String id) { return casesBySkin.getOrDefault(id, List.of()); }
 
     /** Cases sorted by display name. */
     public List<CaseDefinition> cases() {

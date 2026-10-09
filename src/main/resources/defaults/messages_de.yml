@@ -93,9 +93,9 @@ gui:
       lore: ['<gray>Klicken: 9, 18, 25, 50, 90 oder 100']
     queue-start:
       name: '<green><amount> Cases einreihen'
-      lore: ['<gray>Eine große Roulette, nacheinander.', '<gray>Benötigt <amount> Cases und passende Keys.']
+      lore: ['<gray>Bis zu 9 zentrierte Roulettes gleichzeitig.', '<gray>Benötigt <amount> Cases und passende Keys.']
     open-nine:
-      name: <gold>9 Cases nacheinander öffnen
+      name: <gold>9 Cases gleichzeitig öffnen
       lore:
       - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
       - '<gray>Freie Paare: <white><available>'
@@ -643,10 +643,32 @@ browser:
   categories: {"ALL": "Alle", "PISTOL": "Pistolen", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Handschuhe"}
 
 tradein:
+  all: "Alle"
+  normal: "Normal"
+  weapon-title: "Trade-in-Waffen auswählen"
+  weapon: {name: "<aqua>Waffe: <value>", lore: ["<gray>Klicken, um eine Waffe direkt auszuwählen.", "<gray>Bereits gewählte Eingaben bleiben im Vertrag."]}
+  weapon-choice: {lore: ["<gray><count> passende verfügbare Skins", "<yellow>Klicken, um diese Waffe anzuzeigen."]}
+  all-weapons: {name: "<white>Alle Waffen", lore: ["<gray>Alle passenden Waffentypen anzeigen."]}
+  rarity: {name: "<light_purple>Seltenheit: <value>", lore: ["<gray>Links: weiter · Rechts: zurück"]}
+  stattrak: {name: "<gold>StatTrak: <value>", lore: ["<gray>Alle, Normal oder StatTrak.", "<gray>Links: weiter · Rechts: zurück"]}
+  reset-filters: {name: "<yellow>Filter zurücksetzen", lore: ["<gray>Alle passenden Eingaben zeigen; Auswahl behalten."]}
+  empty: {name: "<gray>Keine passenden Eingaben", lore: ["<gray>Filter zurücksetzen oder Vertragsauswahl leeren."]}
+  choose-tier: "Zuerst einen Skin auswählen"
+  sort: {name: "<aqua>Sortierung: <sort>", lore: ["<gray>Links: weiter · Rechts: zurück", "<gray>Auswahl bleibt beim Sortieren und Blättern erhalten."]}
+  sorts:
+    newest: "Neueste zuerst"
+    name: "Waffen- / Skinname"
+    rarity: "Höchste Seltenheit zuerst"
+    float_asc: "Niedrigster Float zuerst"
+    float_desc: "Höchster Float zuerst"
+  fill: {name: "<green>Passende Eingaben auffüllen", lore: ["<gray>Nutzt die Sortierung über alle Seiten hinweg.", "<gray>Favoriten werden nicht automatisch ausgewählt.", "<gray>Eingaben vor der Bestätigung prüfen."]}
+  clear: {name: "<yellow>Auswahl leeren", lore: ["<gray>Andere Seltenheit oder StatTrak-Art wählen."]}
+  no-fill: "<prefix><yellow>Nicht genug passende Skins ohne Favoriten für einen vollständigen Vertrag."
   title: "Trade-in-Vertrag"
   button: {"name": "<gold>Trade-in", "lore": ["<gray>Skins gegen einen Skin der nächsten Stufe eintauschen."]}
   rules: {"name": "<gold>Vertragsregeln", "lore": ["<gray>10 Waffen gleicher Seltenheit → nächsthöhere Stufe.", "<gold>5 Covert-Waffen → Gold-Special-Item.", "<gray>StatTrak muss bei allen Eingaben übereinstimmen.", "<gray>Ausgabe aus einer Eingabe-Case; durchschnittlicher Float.", "<red>Bestätigte Eingaben werden endgültig verbraucht."]}
-  confirm: {"name": "<gold>Vertrag mit <count> Skins prüfen", "lore": ["<red>Eingaben werden dauerhaft gegen einen neuen Skin getauscht."]}
+  confirm: {name: "<gold>Vertrag prüfen: <count>/<required>", lore: ["<gray>Ziel: <white><target>", "<gray>Durchschnittlicher Eingabe-Float: <white><float>", "<red>Eingaben werden dauerhaft gegen einen neuen Skin getauscht."]}
+  review: {name: "<gold>Vertrag prüfen: <count>/<required>", lore: ["<gray>Ziel: <white><target>", "<gray>Durchschnittlicher Eingabe-Float: <white><float>", "<red>Eingaben werden dauerhaft gegen einen neuen Skin getauscht."]}
   invalid: "<prefix><red>Der Vertrag braucht passende, verfügbare Skins gleicher Seltenheit und StatTrak-Art aus gültigen Cases."
   count: "<prefix><yellow>Verwende 10 passende Waffen oder 5 Covert-Skins für Gold."
   unavailable: "<prefix><yellow>Trade-in ist derzeit nicht verfügbar."

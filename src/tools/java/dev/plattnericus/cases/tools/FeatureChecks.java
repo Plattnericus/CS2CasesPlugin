@@ -18,6 +18,8 @@ public final class FeatureChecks {
         InspectRigChecks.run(root);
         CommerceChecks.run();
         dev.plattnericus.cases.opening.OpeningChecks.run(root);
+        TradeInChecks.run(root);
+        InventoryInputChecks.run();
         checkCatalogAndJournal(root);
         var english = new YamlConfiguration();
         english.load(new File(root, "messages_en.yml"));

@@ -107,7 +107,8 @@ public final class SkinFormatter {
                 Text.color("class_color", p.color() == 0 ? 0xFFFFFF : p.color()),
                 Text.unparsed("fade", p.fadePercent() == null ? "" : Text.formatFloat(p.fadePercent(), 1)),
                 Text.unparsed("kills", inst == null ? "0" : String.valueOf(inst.kills())),
-                Text.unparsed("case", source == null ? (inst == null || inst.sourceCase() == null ? "-" : inst.sourceCase()) : source.name()),
+                Text.unparsed("case", inst != null && inst.origin().tradeIn() ? "TRADE IN"
+                        : source == null ? (inst == null || inst.sourceCase() == null ? "-" : inst.sourceCase()) : source.name()),
                 Text.unparsed("date", inst == null ? "" : dateFormat.format(Instant.ofEpochMilli(inst.createdAt()))),
                 Text.unparsed("id", inst == null ? "" : inst.shortId()),
                 Text.unparsed("min_float", Text.formatFloat(def.minFloat(), 2)),
@@ -141,8 +142,10 @@ public final class SkinFormatter {
         if (inst.statTrak()) {
             lore.add(m.item("skin.lore.stattrak", r));
         }
-        if (precise) {
+        if (precise || inst.origin().tradeIn()) {
             lore.add(m.item("skin.lore.source", r));
+        }
+        if (precise) {
             lore.add(m.item("skin.lore.date", r));
             lore.add(m.item("skin.lore.id", r));
         }

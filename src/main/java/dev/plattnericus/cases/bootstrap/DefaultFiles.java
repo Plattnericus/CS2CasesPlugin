@@ -59,7 +59,8 @@ public final class DefaultFiles {
             existing.options().parseComments(true);
             try { existing.load(target); }
             catch (org.bukkit.configuration.InvalidConfigurationException error) { throw new IOException("Invalid YAML in " + target + "; preserving file", error); }
-            boolean changed = false;
+            boolean changed = entry.equals("inspect-profiles.yml")
+                    && dev.plattnericus.cases.inspect.InspectProfileDefaults.upgrade(existing, defaults);
             for (String key : defaults.getKeys(true)) if (!defaults.isConfigurationSection(key) && !existing.contains(key, true)) {
                 existing.set(key, defaults.get(key)); changed = true;
             }

@@ -38,7 +38,6 @@ public final class OpeningService implements Listener {
     private boolean stopped;
     private boolean pumping;
     private final OpeningQueue queue = new OpeningQueue();
-    private final java.util.Set<UUID> presentationGap = new java.util.HashSet<>();
     private final Map<UUID, java.util.Deque<SkinInstance>> recent = new HashMap<>();
     /** Click hitboxes of running world reels; clicking one makes the clicker say the bubble text. */
     private final java.util.Set<UUID> reelHitboxes = new java.util.HashSet<>();
@@ -65,15 +64,7 @@ public final class OpeningService implements Listener {
     void viewClosed(OpeningSession session) {
         sessions.remove(session.openingId, session);
         Player player = Bukkit.getPlayer(session.playerId);
-        if (!stopped && player != null && session.view instanceof WorldReelView) {
-            presentationGap.add(session.playerId);
-            // Removed displays and new displays can otherwise share a client frame while
-            // Paper flushes its tracking packets. Give the old scene two ticks to disappear.
-            Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> {
-                presentationGap.remove(session.playerId);
-                presentNext(player);
-            }, 2);
-        } else if (!stopped && player != null) presentNext(player);
+        if (!stopped && player != null) { reflow(player); presentNext(player); }
         pump();
     }
     public int queuedCount(Player player) { return queue.count(player.getUniqueId()); }
@@ -121,12 +112,13 @@ public final class OpeningService implements Listener {
         }
         boolean sequence = amount > 1 || activeCount(player) > 0 || queuedCount(player) > 0;
         queue.add(player.getUniqueId(), current.id(), current.keyId(), amount);
+        closeLauncher(player);
         if (sequence) ctx.messages(player).send(player, "opening.queue-added", Text.unparsed("amount", amount),
                 Text.unparsed("remaining", activeCount(player) + queuedCount(player)));
         pump();
     }
 
-    /** Fill at most nine durable slots per player. Only one of those slots owns a view. */
+    /** Fill at most nine durable slots per player, each with its own world presentation. */
     private void pump() {
         if (stopped || pumping) return;
         pumping = true;
@@ -161,10 +153,16 @@ public final class OpeningService implements Listener {
         CaseDefinition current = catalog.caseDefinition(def.id());
         if (ctx.profiles().get(player) == null || current == null || !current.enabled()) return false;
         ctx.inspect().stop(player); ctx.gallery().close(player);
+        // An accepted opening dismisses its launcher immediately, before async rendering/persistence.
+        closeLauncher(player);
+        org.bukkit.Location origin = active(player).stream().map(s -> s.origin).filter(java.util.Objects::nonNull)
+                .findFirst().orElseGet(player::getEyeLocation);
+        if (sequence) active(player).forEach(s -> s.sequence = true);
         var requested = new java.util.ArrayList<OpeningSession>();
         for (int i = 0; i < amount; i++) {
             OpeningSession session = new OpeningSession(player.getUniqueId(), current, catalog, adminTest, keep);
             session.sequence = sequence;
+            session.origin = origin.clone();
             requested.add(session);
         }
         if (!sessions.addAll(requested, playerLimit(), ctx.settings().opening().maxGlobal())) return false;
@@ -173,11 +171,22 @@ public final class OpeningService implements Listener {
     }
 
     private void presentNext(Player player) {
-        if (stopped || !player.isOnline() || presentationGap.contains(player.getUniqueId())) return;
-        var owned = active(player);
-        if (owned.stream().anyMatch(s -> s.view != null)) return;
-        // Asynchronous persistence may finish out of order; presentation retains request order.
-        if (!owned.isEmpty() && owned.getFirst().state == OpeningSession.State.READY) startAnimation(player, owned.getFirst());
+        if (stopped || !player.isOnline()) return;
+        for (OpeningSession session : sessions.readyForPresentation(player.getUniqueId(), ctx.settings().opening().worldDisplay()))
+            startAnimation(player, session);
+        reflow(player);
+    }
+
+    private static void closeLauncher(Player player) {
+        Object holder = player.getOpenInventory().getTopInventory().getHolder(false);
+        if (holder instanceof dev.plattnericus.cases.gui.menu.CasePreviewMenu
+                || holder instanceof dev.plattnericus.cases.gui.menu.CasesMenu) player.closeInventory();
+    }
+
+    private void reflow(Player player) {
+        var views = active(player).stream().map(s -> s.view).filter(WorldReelView.class::isInstance)
+                .map(WorldReelView.class::cast).toList();
+        for (int i = 0; i < views.size(); i++) views.get(i).layout(i, views.size());
     }
 
     private void roll(Player player, OpeningSession session) {
@@ -304,7 +313,7 @@ public final class OpeningService implements Listener {
         Easing easing = Easing.parse(ctx.settings().opening().easing());
         int duration = ctx.settings().opening().durationTicks();
         session.duration = duration; session.easing = easing;
-        session.origin = player.getEyeLocation();
+        if (session.origin == null) session.origin = player.getEyeLocation();
         session.state = OpeningSession.State.ANIMATING;
         session.view = ctx.settings().opening().worldDisplay()
                 ? new WorldReelView(ctx, player, session, this)
@@ -316,7 +325,8 @@ public final class OpeningService implements Listener {
             if (holder instanceof OpeningMenu || player.getOpenInventory().getTopInventory().getType() == org.bukkit.event.inventory.InventoryType.CRAFTING) menu.open();
             else menu.initializeHidden();
         } else session.view.open();
-        ctx.sounds().play(player, "opening.start");
+        if (active(player).stream().filter(s -> s.state == OpeningSession.State.ANIMATING).count() == 1)
+            ctx.sounds().play(player, "opening.start");
         int start = 4;
         int distance = session.winnerIndex - start;
         session.task = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), () -> {
@@ -333,7 +343,9 @@ public final class OpeningService implements Listener {
                 double speed = position - before;
                 float pitch = (float) (0.85 + Math.min(0.55, speed * 0.22));
                 session.lastOffset = offset;
-                ctx.sounds().play(player, "opening.tick", pitch);
+                // Nine reels share one audible tick track; avoid stacking nine sounds each frame.
+                if (active(player).stream().filter(s -> s.state == OpeningSession.State.ANIMATING).findFirst().orElse(null) == session)
+                    ctx.sounds().play(player, "opening.tick", pitch);
             }
             if (session.tick >= duration) {
                 session.view.frame(session.winnerIndex);
@@ -492,7 +504,6 @@ public final class OpeningService implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent event) {
         queue.clear(event.getPlayer().getUniqueId());
-        presentationGap.remove(event.getPlayer().getUniqueId());
         lastBubble.remove(event.getPlayer().getUniqueId());
         bubble.remove(event.getPlayer());
         recent.remove(event.getPlayer().getUniqueId());
@@ -511,7 +522,6 @@ public final class OpeningService implements Listener {
     public void shutdown() {
         stopped = true;
         queue.clear();
-        presentationGap.clear();
         bubble.removeAll();
         for (OpeningSession s : sessions.values().toArray(OpeningSession[]::new)) {
             if (s.task != null) {

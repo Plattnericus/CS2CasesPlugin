@@ -34,7 +34,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -59,8 +58,9 @@ import java.util.UUID;
  * The skin inventory as a floating wall of item displays with a dark backdrop, visible to everyone
  * nearby. Only the player who opened it can use it: looking at an entry highlights it and shows a
  * tooltip next to it, right click opens the inspect view, left click equips a knife, sneak + right
- * click toggles favorite, and the page buttons browse. Hotbar selection remains fully usable while
- * the wall is open. Walking ten blocks away closes it; paging rebuilds it in the same place.
+ * click toggles favorite, and the page buttons browse. Scroll wheel and number keys select
+ * the hotbar normally, including over entries. Walking ten blocks away closes it;
+ * paging rebuilds it in the same place.
  * <p>
  * The same wall shows other players' inventories read-only ({@code /skins <player>}).
  */
@@ -115,8 +115,6 @@ public final class SkinGallery implements Listener {
     private final CasesContext ctx;
     private final Map<UUID, View> views = new HashMap<>();
     private final Map<UUID, View> byHitbox = new HashMap<>();
-    private final Map<UUID, Integer> pendingSlots = new HashMap<>();
-    private final java.util.Set<UUID> slotSyncScheduled = new java.util.HashSet<>();
 
     public SkinGallery(CasesContext ctx) {
         this.ctx = ctx;
@@ -547,8 +545,6 @@ public final class SkinGallery implements Listener {
 
     private void remove(View view) {
         views.remove(view.viewer, view);
-        pendingSlots.remove(view.viewer);
-        slotSyncScheduled.remove(view.viewer);
         if (view.task != null) {
             view.task.cancel();
         }
@@ -585,50 +581,6 @@ public final class SkinGallery implements Listener {
             event.setCancelled(true);
             click(event.getPlayer(), event.getAttacked(), true);
         }
-    }
-
-    /** Number keys and the scroll wheel share the same packet; let both change the held slot normally. */
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onScroll(PlayerItemHeldEvent event) {
-        Player player = event.getPlayer();
-        View view = views.get(player.getUniqueId());
-        if (view == null) {
-            return;
-        }
-        int direction = scrollDirection(event.getPreviousSlot(), event.getNewSlot());
-        if (view.hovered != null && direction != 0) {
-            // The cursor is over the inventory hologram: use the same packet as a page turn and
-            // leave the held slot untouched. Number keys and wheel steps share this event in Paper.
-            event.setCancelled(true);
-            page(player, direction);
-            return;
-        }
-        // Never cancel this event: cancellation makes the client snap back to the slot selected
-        // when the gallery opened. Confirm the requested slot once more after the packet is applied
-        // because some client/server combinations keep the old slot while a container is focused.
-        UUID id = player.getUniqueId();
-        pendingSlots.put(id, event.getNewSlot());
-        if (!slotSyncScheduled.add(id)) {
-            return;
-        }
-        Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
-            slotSyncScheduled.remove(id);
-            Integer requested = pendingSlots.remove(id);
-            if (requested == null || !player.isOnline() || !isOpen(player)) {
-                return;
-            }
-            if (player.getInventory().getHeldItemSlot() != requested) {
-                player.getInventory().setHeldItemSlot(requested);
-                player.updateInventory();
-            }
-        });
-    }
-
-    private static int scrollDirection(int previous, int next) {
-        int difference = next - previous;
-        if (difference > 4) difference -= 9;
-        if (difference < -4) difference += 9;
-        return Integer.compare(difference, 0);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

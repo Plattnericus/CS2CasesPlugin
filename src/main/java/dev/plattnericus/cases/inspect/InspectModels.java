@@ -54,7 +54,9 @@ public final class InspectModels {
         YamlConfiguration profiles = YamlConfiguration.loadConfiguration(new File(file.getParentFile(), "inspect-profiles.yml"));
         try (var bundled = InspectModels.class.getResourceAsStream("/defaults/inspect-profiles.yml")) {
             if (bundled != null) {
-                profiles.setDefaults(YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(bundled, java.nio.charset.StandardCharsets.UTF_8)));
+                var defaults = YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(bundled, java.nio.charset.StandardCharsets.UTF_8));
+                InspectProfileDefaults.upgrade(profiles, defaults);
+                profiles.setDefaults(defaults);
                 profiles.options().copyDefaults(true);
             }
         } catch (java.io.IOException e) { warn.accept("inspect-profiles.yml: " + e.getMessage()); }

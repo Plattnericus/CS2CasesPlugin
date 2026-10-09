@@ -30,6 +30,8 @@ The pack ZIP is also embedded in the plugin JAR.
 | Task | Purpose / output |
 | --- | --- |
 | `bash gradlew build` | Build the plugin and run feature checks |
+| `bash gradlew verifyPack` | Verify all exported sprites, rim UVs and both hand transforms |
+| `bash gradlew inspectRigPreview` | Software filmstrips of all 252 articulated variants |
 | `bash gradlew verifyFeatures` | Check catalog, reward selection, translations, inventory queries, journal and timelines |
 | `bash gradlew resourcePack` | Export the default catalog's pack |
 | `bash gradlew generateAssets` | Regenerate weapon layers and pattern PNGs in the default resources |
@@ -42,9 +44,9 @@ The pack ZIP is also embedded in the plugin JAR.
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Feature checks cover the default catalog's 743 skins and 22 cases, 5,500 reward and reel checks,
+Feature checks cover the default catalog's 815 skins and 22 cases, 5,500 reward and reel checks,
 weighted drop chances, float limits, regional language fallbacks and 46 legacy animation timelines.
-They also validate all 165 individual profiles/55 rigs, full-timeline 70°/4:3 framing in both hands
+They also validate all 252 individual profiles/63 rigs, full-timeline 70°/4:3 framing in both hands
 with pack/fallback geometry, joint continuity, invalid configuration and case-guide probabilities.
 Filmstrips check each tick for clipped models at a 70° vertical field of view and 16:9 aspect ratio.
 `hand_pack_*` uses a geometric avatar reference. These render views are not Minecraft client
@@ -133,8 +135,9 @@ mccasesdevcheck DevTester observer DevObserver
 mccasesdevcheck DevTester commerce DevObserver
 ```
 
-The first command checks `/inventory`: hotbar changes work normally both while sneaking and
-standing. Over a hologram target, they change pages while preserving the held slot.
+The first command checks `/inventory`: hotbar changes work both while sneaking and
+standing, including over a hologram target. Wheel/number-key input never changes pages;
+the page buttons browse the collection.
 The gallery stays open and is fully removed at exactly ten blocks of distance.
 The check then verifies normal crossbow-to-bow switching and inspect cancellation.
 
@@ -177,6 +180,9 @@ Additional isolated-server commands:
 ```text
 mccasesdevcheck items
 mccasesdevcheck DevTester gold
+mccasesdevcheck DevTester nine
+mccasesdevcheck DevTester spam
+mccasesdevcheck DevTester tradein-ui
 mccasesdevcheck DevTester guide
 mccasesdevcheck DevTester recovery
 ```
@@ -202,7 +208,8 @@ Restart and reconnect;
 the same two UUIDs must become OWNED and the opening records must remain unique. This command
 intentionally leaves the test rewards for inspection.
 
-See [VERIFICATION-1.2.md](VERIFICATION-1.2.md) for the checks actually run for this release.
+See [MULTI-OPENING-VERIFICATION.md](MULTI-OPENING-VERIFICATION.md) for the current parallel-opening,
+trade-in, texture and 252-animation checks. [VERIFICATION-1.2.md](VERIFICATION-1.2.md) records the earlier release checks.
 
 The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`,
 `scripts/capture_inspect_audit.py`, `scripts/capture_inspect_motion.py` and

@@ -163,7 +163,9 @@ public final class CommerceRuntimeChecks {
           })); }).thenAccept(announced -> {
               require(announced == (gold && origin == SkinInstance.Origin.CASE ? 1 : 0), "incorrect broadcast eligibility");
               require(inputs.stream().noneMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "inputs not consumed");
-              var reward = result.get(); require(reward.origin() == (origin == SkinInstance.Origin.ADMIN ? origin : SkinInstance.Origin.TRADE_IN), "output origin wrong");
+              var reward = result.get(); require(reward.origin() == (origin.admin() ? SkinInstance.Origin.ADMIN_TRADE_IN : SkinInstance.Origin.TRADE_IN), "output origin wrong");
+              for (boolean precise : new boolean[]{false, true}) require(ctx.formatter(player).lore(ctx.catalog().skin(reward.skinId()), reward, precise).stream()
+                      .map(Text::plain).anyMatch(line -> line.contains("TRADE IN")), "trade-in output missing inventory provenance");
               if (caseId.equals("glove_case")) require(ctx.catalog().skin(reward.skinId()).weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !reward.statTrak(), "glove contract output wrong");
               ctx.profiles().removeLoaded(player.getUniqueId(), reward.id()); ctx.repository().removeOwned(player.getUniqueId(), reward.id()); player.closeInventory();
           });

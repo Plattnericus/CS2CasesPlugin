@@ -10,7 +10,11 @@ public final class SkinInstance {
 
     public enum Status { PENDING, OWNED, LISTED, REMOVED }
 
-    public enum Origin { CASE, ADMIN, TEST, TRADE_IN }
+    public enum Origin {
+        CASE, ADMIN, TEST, TRADE_IN, ADMIN_TRADE_IN;
+        public boolean admin() { return this == ADMIN || this == ADMIN_TRADE_IN; }
+        public boolean tradeIn() { return this == TRADE_IN || this == ADMIN_TRADE_IN; }
+    }
 
     private final UUID id;
     private final UUID owner;

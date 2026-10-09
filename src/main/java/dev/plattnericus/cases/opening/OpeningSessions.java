@@ -38,6 +38,18 @@ public final class OpeningSessions {
     public int capacity(UUID player, int playerLimit, int globalLimit) {
         return Math.max(0, Math.min(playerLimit - forPlayer(player).size(), globalLimit - size()));
     }
+    /** Keep request order across async commits, while allowing every durable world reel to run. */
+    public List<OpeningSession> readyForPresentation(UUID player, boolean concurrent) {
+        var owned = forPlayer(player);
+        if (!concurrent) return owned.stream().anyMatch(s -> s.view != null) || owned.isEmpty()
+                || owned.getFirst().state != OpeningSession.State.READY ? List.of() : List.of(owned.getFirst());
+        var ready = new java.util.ArrayList<OpeningSession>();
+        for (OpeningSession session : owned) {
+            if (session.state == OpeningSession.State.ROLLING || session.state == OpeningSession.State.PERSISTING) break;
+            if (session.state == OpeningSession.State.READY && session.view == null) ready.add(session);
+        }
+        return List.copyOf(ready);
+    }
     public OpeningSession get(UUID id) { return sessions.get(id); }
     public void remove(UUID id, OpeningSession expected) { sessions.remove(id, expected); }
     public Collection<OpeningSession> values() { return List.copyOf(sessions.values()); }

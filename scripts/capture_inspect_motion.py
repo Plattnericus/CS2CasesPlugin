@@ -9,7 +9,7 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--only',default='');args=p.parse_args();root=args.root.resolve();out=args.output.resolve();out.mkdir(parents=True,exist_ok=True)
  repo=Path(__file__).resolve().parents[1];weapons=yaml.safe_load((repo/'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons'];profiles=yaml.safe_load((repo/'src/main/resources/defaults/inspect-profiles.yml').read_text())
  if args.only:weapons={id:weapons[id] for id in args.only.split(',')}
- rc=Rcon(root);client(root,'client','camera|FIRST_PERSON');client(root,'client','hand|RIGHT');time.sleep(.2)
+ rc=Rcon(root/'server');client(root,'client','camera|FIRST_PERSON');client(root,'client','hand|RIGHT');time.sleep(.2)
  evidence=[]
  for id in weapons:
   animation=profiles['animation-pools'][id][0];duration=max(sum(k['ticks'] for k in g['keyframes']) for g in profiles['animations'][animation]['groups'].values())/20

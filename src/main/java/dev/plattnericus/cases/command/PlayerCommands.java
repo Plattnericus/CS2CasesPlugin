@@ -31,7 +31,7 @@ public final class PlayerCommands {
                 inventoryCommand(ctx, MenuStates.Category.ALL));
         commands.register("knife", "Opens your or another player's knife collection", List.of("knives"),
                 inventoryCommand(ctx, MenuStates.Category.KNIVES));
-        commands.register("cases", "Case contents and sequential opening queue", List.of(), new BasicCommand() {
+        commands.register("cases", "Case contents and parallel opening queue", List.of(), new BasicCommand() {
             @Override public String permission() { return "mccases.use"; }
             @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
                 if (args.length <= 1) return List.of("open", "cancel");

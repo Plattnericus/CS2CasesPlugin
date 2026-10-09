@@ -51,7 +51,7 @@ GLOVES = {id: ['knuckle_check', 'palm_turn', 'cuff_inspect'] for id, w in weapon
 
 class Frame(dict): pass
 yaml.SafeDumper.add_representer(Frame, lambda dumper, value: dumper.represent_mapping('tag:yaml.org,2002:map',value,flow_style=True))
-def frame(t, **kw): return Frame(ticks=t, **kw, ease='inout')
+def frame(t, ease='inout', **kw): return Frame(ticks=t, **kw, ease=ease)
 def group(frames, parent=None, pivot=None):
  d={'keyframes':frames}
  if parent: d['parent']=parent
@@ -64,19 +64,29 @@ def body(i, variant, weight):
  bank = 13 + (i % 5)*2
  sign = -1 if variant == 1 else 1
  hold = 12 + (i % 4)*2
+ if variant == 3:
+  # A deliberate presentation arc with a soft wrist recoil and a longer readable broadside.
+  return group([frame(0,move=[0,-.04,0],rotate=[0,10,12]),
+    frame(5,move=[.018,-.075,-.01],rotate=[-4,6,8]),
+    frame(11,ease='out',move=[-.085,.045,.035],rotate=[12,-yaw,bank+4]),
+    frame(weight,move=[-.06,.065,.025],rotate=[4,yaw+12,bank]),
+    frame(hold+6),frame(weight,move=[.015,-.02,0],rotate=[-6,-yaw/2,-bank/2]),
+    frame(7,ease='out',move=[-.008,-.03,.002],rotate=[2,14,16]),
+    frame(9,move=[0,-.04,0],rotate=[0,10,12])])
  return group([frame(0,move=[0,-.04,0],rotate=[0,10,12]),
    frame(4,move=[.012,-.065,-.012],rotate=[-2,7,8]),
-   frame(8+variant,move=[-.07,.035,.015],rotate=[-5+variant*3,sign*yaw,sign*bank]),
+   frame(8+variant,ease='out',move=[-.07,.035,.015],rotate=[-5+variant*3,sign*yaw,sign*bank]),
    frame(weight,move=[-.04,.05,0],rotate=[8-variant*4,sign*(yaw+22),sign*(bank+8)]),
    frame(hold),frame(weight,rotate=[-4,-sign*yaw,-sign*bank]),
    frame(6,move=[-.006,-.032,.003],rotate=[1,12,14]),
-   frame(6,move=[0,-.04,0],rotate=[0,10,12])])
+   frame(9,move=[0,-.04,0],rotate=[0,10,12])])
 
 out={'enabled':True,'anchor':{'forward':1.75,'right':.43,'up':-.07},'animations':{},'animation-pools':{}}
 for i,(id,w) in enumerate(weapons.items()):
  knife=id in KNIVES
  glove=id in GLOVES
  names=KNIVES[id][4] if knife else GLOVES[id] if glove else GUNS[id]
+ names=names+(['blade_presentation'] if knife else ['paired_presentation'] if glove or id=='dual_berettas' else ['broadside_check'])
  pool=[]
  for v,name in enumerate(names):
   aid=f'{id}__{name}'; pool.append(aid)
@@ -86,7 +96,7 @@ for i,(id,w) in enumerate(weapons.items()):
   if knife:
    pivot,axis,angle,_,_=KNIVES[id]
    # Every gesture differs in grip axis, direction and turn count.
-   turn=angle if v==0 else (-180 if v==1 else (360 if angle<360 else -angle))
+   turn=angle if v==0 else (-180 if v==1 else (360 if angle<360 else -angle)) if v==2 else 0
    rotation=[0,0,0];rotation['xyz'.index(axis)]=turn
    # A completed full turn is already the held orientation. Do not unwind it backwards.
    recovery=rotation if turn % 360 == 0 else [0,0,0]
@@ -98,7 +108,7 @@ for i,(id,w) in enumerate(weapons.items()):
        frame(7,rotate=[0,0,sgn*(330 if v==1 else 80)]),frame(6,rotate=[0,0,sgn*(190 if v==2 else 0)]),
        frame(8,rotate=[0,0,sgn*(360 if v==1 else 0)]),frame(duration-30-v,rotate=[0,0,0])]
      groups[side]=group(sequence,'roll',[.005,.009,0])
-   if id in ['flip','navaja','stiletto','falchion']:
+   if id in ['flip','navaja','stiletto','falchion'] and v != 3:
     # Hinge in the pack is around its canvas blade boundary, close to the block rig's origin.
     hinge=w['regions']['blade'][0];px=(hinge-.5)*.75*60/64
     fold=165 if id!='stiletto' else 175
@@ -121,7 +131,7 @@ for i,(id,w) in enumerate(weapons.items()):
   if not knife and not glove and id!='dual_berettas':
    slide = id in ['glock18','usps','p2000','p250','fiveseven','cz75','deagle','nova','sawedoff','ssg08','awp']
    # A light slide/bolt check; no ammunition or weapon mechanics are changed.
-   shift=[-.045 if slide else 0,0 if slide else -.035,0]
+   shift=[(-.04-.008*v) if slide else 0,0 if slide else (-.025-.006*v),0]
    rot=[0,0,0] if slide else ([0,0,-24] if id in ['m249','negev','r8_revolver'] else [0,0,-7])
    groups['mechanism']=group([frame(0,move=[0,0,0],rotate=[0,0,0]),frame(12+v),
      frame(5,move=shift,rotate=rot),frame(6+v),frame(7,move=[0,0,0],rotate=[0,0,0]),frame(duration-30-2*v)],'roll' if id=='deagle' and v==0 else 'body',[-.04,.06,0])

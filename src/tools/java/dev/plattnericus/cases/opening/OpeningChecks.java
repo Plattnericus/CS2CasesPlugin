@@ -18,6 +18,7 @@ public final class OpeningChecks {
     public static void run(File root) throws Exception {
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var def = catalog.caseDefinition("kilowatt_case");
+        presentation(catalog, def);
         // Official Perfect World case table, including equal item probability within each tier.
         var expectedOdds = java.util.Map.of("mil_spec", .79923, "restricted", .15985, "classified", .03197, "covert", .00639, "rare_special", .00256);
         for (var caseDef : catalog.cases()) {
@@ -86,6 +87,23 @@ public final class OpeningChecks {
         System.out.println("PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.");
     }
     private static void layout() {
+        for (double distance : new double[]{1.2, 3, 6}) for (int count = 1; count <= 9; count++) {
+            int size = count;
+            var cells = java.util.stream.IntStream.range(0, count).mapToObj(i -> OpeningLayout.cell(i, size, 4.54, 1.15, distance)).toList();
+            double minY = cells.stream().mapToDouble(c -> c.up() - .575 * c.scale()).min().orElseThrow();
+            double maxY = cells.stream().mapToDouble(c -> c.up() + .575 * c.scale()).max().orElseThrow();
+            require(Math.abs(minY + maxY) < 1e-9, "partial reel rows not vertically centered: " + count);
+            require(Math.abs(cells.stream().mapToDouble(OpeningLayout.Cell::right).sum()) < 1e-9, "partial reel row not horizontally centered");
+            for (var cell : cells) {
+                require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + 2.27 * cell.scale() < distance * .78,
+                        "reel clipped horizontally: " + count);
+                require(Math.abs(cell.up()) + .575 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
+            }
+            for (int i = 0; i < cells.size(); i++) for (int j = i + 1; j < cells.size(); j++) {
+                var a = cells.get(i); var b = cells.get(j);
+                require(Math.abs(a.right() - b.right()) > 4.54 * a.scale() || Math.abs(a.up() - b.up()) > 1.15 * a.scale(), "reels overlap");
+            }
+        }
         var queue = new OpeningQueue(); UUID owner = UUID.randomUUID();
         require(!queue.add(owner, "a", "key", 0) && !queue.add(owner, "a", "key", 1001), "invalid amount accepted");
         require(queue.add(owner, "a", "key", 100), "100-case queue rejected");
@@ -113,6 +131,24 @@ public final class OpeningChecks {
             require(easing.apply(0) == 0 && easing.apply(1) == 1, "reel missed winner");
         }
         require(Easing.CINEMATIC.apply(.001) < .00002 && 1 - Easing.CINEMATIC.apply(.999) < .00002, "cinematic snap at endpoint");
+    }
+    private static void presentation(Catalog catalog, CaseDefinition def) {
+        UUID owner = UUID.randomUUID(); var registry = new OpeningSessions();
+        var sessions = java.util.stream.IntStream.range(0, 9).mapToObj(i -> new OpeningSession(owner, def, catalog, false, false)).toList();
+        require(registry.addAll(sessions, 9, 9), "nine presentation fixtures rejected");
+        for (int i = 8; i > 0; i--) sessions.get(i).state = OpeningSession.State.READY;
+        require(registry.readyForPresentation(owner, true).isEmpty(), "async persistence reordered requests");
+        sessions.getFirst().state = OpeningSession.State.READY;
+        require(registry.readyForPresentation(owner, true).equals(sessions), "nine durable world sessions were serialized");
+        require(registry.readyForPresentation(owner, false).equals(List.of(sessions.getFirst())), "GUI fallback started multiple menus");
+        sessions.getFirst().state = OpeningSession.State.ANIMATING;
+        sessions.getFirst().view = new OpeningView() {
+            public void open() { } public void frame(double center) { } public void reveal() { } public void result() { } public void close() { }
+        };
+        require(registry.readyForPresentation(owner, true).size() == 8 && registry.readyForPresentation(owner, false).isEmpty(), "live first view blocked parallel reels");
+        sessions.get(3).state = OpeningSession.State.PERSISTING;
+        require(registry.readyForPresentation(owner, true).equals(sessions.subList(1, 3)), "uncommitted result displayed");
+        System.out.println("PASS: nine simultaneous durable world presentations, out-of-order commit barrier, sequential GUI fallback; centered, non-overlapping 1–9 grids at 1.2/3/6 blocks.");
     }
     private static void contracts(Catalog catalog, CaseDefinition source, UUID owner, Database db, SkinRepository repo) {
         var special = catalog.raritiesOrdered().stream().filter(Rarity::rareSpecial).findFirst().orElseThrow();
