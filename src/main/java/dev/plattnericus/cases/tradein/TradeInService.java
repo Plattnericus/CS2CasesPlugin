@@ -28,6 +28,7 @@ public final class TradeInService implements Listener {
     public void load() { config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.File(ctx.plugin().getDataFolder(), "config.yml")); }
     public TradeInService(CasesContext ctx, ContractRepository repository) { this.ctx = ctx; this.repository = repository; load(); }
     public boolean enabled() { return config.getBoolean("trade-in.enabled", true); }
+    public boolean allowAdmin() { return config.getBoolean("trade-in.allow-admin-inputs", true); }
     public List<UUID> selected(Player p) { return List.copyOf(selected.getOrDefault(p.getUniqueId(), Set.of())); }
     public boolean busy(Player p) { return committing.contains(p.getUniqueId()); }
     public void toggle(Player p, UUID id) {
@@ -35,7 +36,12 @@ public final class TradeInService implements Listener {
         Set<UUID> offer = selected.computeIfAbsent(p.getUniqueId(), key -> new LinkedHashSet<>());
         if (offer.remove(id)) { ctx.commerce().releaseMutation(id); return; }
         var profile = ctx.profiles().get(p); var skin = profile == null ? null : profile.get(id);
-        if (skin == null || !ctx.commerce().mutable(profile, skin) || skin.origin() == SkinInstance.Origin.TEST || offer.size() >= 10) { ctx.messages(p).send(p, "commerce.locked"); return; }
+        if (skin == null || !ctx.commerce().mutable(profile, skin)) { ctx.messages(p).send(p, "commerce.locked"); return; }
+        var first = offer.isEmpty() ? skin : profile.get(offer.iterator().next());
+        if (!TradeInRules.compatible(ctx.catalog(), first, skin, allowAdmin())) { ctx.messages(p).send(p, "tradein.invalid"); return; }
+        if (offer.size() >= TradeInRules.required(TradeInRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId())))) {
+            ctx.messages(p).send(p, "tradein.count"); return;
+        }
         if (!ctx.commerce().reserveMutation(id)) return;
         offer.add(id); var slot = profile.slotOf(id); if (slot != null) ctx.knives().unequip(p, slot); ctx.inspect().stop(p);
     }
@@ -52,15 +58,17 @@ public final class TradeInService implements Listener {
         committing.add(p.getUniqueId());
         UUID owner = p.getUniqueId(); UUID contract = UUID.randomUUID(); var rng = ctx.openings().roller().random();
         var source = inputs.get(rng.nextInt(inputs.size()));
-        var outputPool = TradeInRules.pool(catalog, source, target);
+        var sources = TradeInRules.sources(catalog, source, target);
+        var sourceCase = sources.get(rng.nextInt(sources.size()));
+        var outputPool = sourceCase.skins(target).stream().filter(def -> !source.statTrak() || def.statTrakEligible()).toList();
         var def = outputPool.get(rng.nextInt(outputPool.size()));
         int pattern = catalog.patterns().seedMin() + rng.nextInt(catalog.patterns().seedMax() - catalog.patterns().seedMin() + 1);
         double fl = TradeInRules.outputFloat(inputs, def); long seed = rng.nextLong();
-        boolean admin = inputs.stream().anyMatch(s -> s.origin() == SkinInstance.Origin.ADMIN);
+        boolean admin = inputs.stream().anyMatch(s -> s.origin().admin());
         ctx.render().report(def, pattern).thenCompose(report -> {
             var result = new SkinInstance(UUID.randomUUID(), owner, def.id(), fl, pattern, seed,
-                    inputs.getFirst().statTrak() && def.statTrakEligible(), 0, PatternInfo.of(report), source.sourceCase(),
-                    admin ? SkinInstance.Origin.ADMIN : SkinInstance.Origin.TRADE_IN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
+                    inputs.getFirst().statTrak() && def.statTrakEligible(), 0, PatternInfo.of(report), sourceCase.id(),
+                    admin ? SkinInstance.Origin.ADMIN_TRADE_IN : SkinInstance.Origin.TRADE_IN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
             return repository.commit(contract, owner, inputs, result);
         }).whenComplete((result, error) -> main(() -> {
             committing.remove(p.getUniqueId()); release(p.getUniqueId());

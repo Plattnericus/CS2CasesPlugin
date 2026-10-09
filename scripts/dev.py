@@ -2,7 +2,7 @@
 """Isolated macOS Paper + Minecraft development session, owned by the desktop app.
 No account tokens or global Minecraft settings are read or changed.
 """
-import argparse, concurrent.futures, hashlib, json, os, platform, plistlib, shutil, signal, socket, subprocess, sys, time, uuid, urllib.request
+import argparse, concurrent.futures, hashlib, json, os, platform, plistlib, re, shutil, signal, socket, subprocess, sys, time, uuid, urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 RUNTIME=ROOT/'.dev/runtime'
@@ -57,7 +57,7 @@ def prepare_assets(version):
 
 def prepare_client_preferences(client):
  options=client/'options.txt'
- if not options.exists():options.write_text('renderDistance:6\nsimulationDistance:4\nmaxFps:90\nonboardAccessibility:false\n')
+ if not options.exists():options.write_text('renderDistance:6\nsimulationDistance:5\nmaxFps:90\nonboardAccessibility:false\n')
  managed={'lang':'en_us','resourcePacks':'["vanilla","file/MCCases.zip"]','pauseOnLostFocus':'false','tutorialStep':'none'}
  lines=[line for line in options.read_text().splitlines() if line.split(':',1)[0] not in managed]
  options.write_text('\n'.join(lines+[f'{key}:{value}' for key,value in managed.items()])+'\n')
@@ -68,7 +68,19 @@ def prepare_client_preferences(client):
  entry=b'\x08'+string('name')+string('MCCases Local')+b'\x08'+string('ip')+string('127.0.0.1:25565')+b'\x01'+string('acceptTextures')+b'\x01\x00'
  (client/'servers.dat').write_bytes(b'\x0a'+string('')+b'\x09'+string('servers')+b'\x0a'+struct.pack('>i',1)+entry+b'\x00')
 
+def build_artifacts():
+ match=re.search(r'^version\s*=\s*"([A-Za-z0-9._-]+)"', (ROOT/'build.gradle.kts').read_text(), re.MULTILINE)
+ if not match:raise RuntimeError('Cannot identify the current Gradle release version')
+ release=match.group(1)
+ plugin=ROOT/f'build/libs/MCCases-{release}.jar'
+ checks=ROOT/f'build/libs/MCCases-DevChecks-{release}.jar'
+ pack=ROOT/f'build/distributions/MCCases-ResourcePack-{release}.zip'
+ for artifact in (plugin,pack):
+  if not artifact.is_file():raise FileNotFoundError(f'Build the current release first: {artifact}')
+ return plugin,checks,pack
+
 def prepare():
+ plugin_build,checks,pack_build=build_artifacts()
  SERVER.mkdir(parents=True,exist_ok=True);CLIENT.mkdir(parents=True,exist_ok=True)
  download('https://fill-data.papermc.io/v1/objects/2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0/paper-26.3-159.jar',SERVER/'paper.jar','2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0')
  version=json.loads((GAME/'versions/26.3/26.3.json').read_text())
@@ -78,16 +90,21 @@ def prepare():
   if artifact and not (GAME/'libraries'/artifact['path']).exists():
    download(artifact['url'],RUNTIME/'libraries'/artifact['path'],artifact['sha1'],'sha1')
  plugins=SERVER/'plugins/MCCases';plugins.mkdir(parents=True,exist_ok=True)
- shutil.copy2(ROOT/'build/libs/MCCases-1.1.0.jar',SERVER/'plugins/MCCases-1.1.0.jar')
- checks=ROOT/'build/libs/MCCases-DevChecks-1.1.0.jar'
- if checks.exists():shutil.copy2(checks,SERVER/'plugins'/checks.name)
+ # The disposable server must test the current plugin and pack together, without old duplicate jars.
+ for obsolete in (SERVER/'plugins').glob('MCCases-*.jar'):obsolete.unlink()
+ shutil.copy2(plugin_build,SERVER/'plugins/MCCases.jar')
+ if checks.exists():shutil.copy2(checks,SERVER/'plugins/MCCases-DevChecks.jar')
  for source in (ROOT/'src/main/resources/defaults').glob('messages_*.yml'):shutil.copy2(source,plugins/source.name)
  shutil.copy2(ROOT/'src/main/resources/defaults/inspect.yml',plugins/'inspect.yml')
  import yaml
  settings=yaml.safe_load((ROOT/'src/main/resources/defaults/config.yml').read_text())
  settings['resource-pack']['distribution'].update({'enabled':True,'bind-address':'127.0.0.1','port':8165,'public-url':'http://127.0.0.1:8165'})
  (plugins/'config.yml').write_text(yaml.safe_dump(settings,sort_keys=False,allow_unicode=True))
- (SERVER/'server.properties').write_text('''server-ip=127.0.0.1
+ properties=SERVER/'server.properties'
+ rcon=[]
+ if properties.exists():
+  rcon=[line for line in properties.read_text().splitlines() if line.split('=',1)[0] in ('enable-rcon','rcon.port','rcon.password')]
+ properties.write_text('''server-ip=127.0.0.1
 server-port=25565
 online-mode=false
 enforce-secure-profile=false
@@ -103,10 +120,10 @@ max-players=4
 motd=MCCases Local Development
 pause-when-empty-seconds=-1
 allow-flight=true
-''')
+'''+''.join(line+'\n' for line in rcon))
  if not (SERVER/'eula.txt').exists():(SERVER/'eula.txt').write_text('eula=false\n')
  packs=CLIENT/'resourcepacks';packs.mkdir(exist_ok=True)
- shutil.copy2(ROOT/'build/distributions/MCCases-ResourcePack-1.0.0.zip',packs/'MCCases.zip')
+ shutil.copy2(pack_build,packs/'MCCases.zip')
  prepare_client_preferences(CLIENT)
  print('Prepared isolated server and client in',RUNTIME)
 
@@ -137,9 +154,11 @@ def client_command(username='DevTester'):
  if not jar.exists():raise RuntimeError('Minecraft 26.3 client jar is not installed')
  libraries.append(str(jar));natives=client/'natives';natives.mkdir(exist_ok=True)
  ident=bytearray(hashlib.md5(('OfflinePlayer:'+username).encode()).digest());ident[6]=(ident[6]&15)|48;ident[8]=(ident[8]&63)|128
+ capture=RUNTIME/'capture-harness.jar'
+ capture_args=[f'-javaagent:{capture}={client}/capture'] if capture.is_file() else []
  return [str(JAVA),'-XstartOnFirstThread','-Xmx2G','--sun-misc-unsafe-memory-access=allow','--enable-native-access=ALL-UNNAMED',
   f'-Djava.library.path={natives}/java',f'-Djna.tmpdir={natives}/jna',f'-Dorg.lwjgl.system.SharedLibraryExtractPath={natives}/lwjgl',f'-Dio.netty.native.workdir={natives}/netty',
-  '-Dminecraft.launcher.brand=MCCasesDev','-Dminecraft.launcher.version=1.0','-cp',os.pathsep.join(libraries),version['mainClass'],
+  '-Dminecraft.launcher.brand=MCCasesDev','-Dminecraft.launcher.version=1.0',*capture_args,'-cp',os.pathsep.join(libraries),version['mainClass'],
   '--username',username,'--version','26.3','--gameDir',str(client),'--assetsDir',str(RUNTIME/'assets'),'--assetIndex',version['assetIndex']['id'],
   '--uuid',str(uuid.UUID(bytes=bytes(ident))),'--accessToken','0','--clientId','MCCasesDev','--xuid','0','--versionType','release',
   '--width','1280','--height','720','--quickPlayMultiplayer','127.0.0.1:25565']

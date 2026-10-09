@@ -55,6 +55,9 @@ final class WorldReelView implements OpeningView {
     private final Map<String, ItemStack> icons = new HashMap<>();
     private TextDisplay title;
     private Location anchor;
+    private Location baseAnchor;
+    private double sceneScale = 1;
+    private int layoutIndex = -1, layoutCount;
     private double lastKeyframe = Double.NaN;
     private int ticksSinceKeyframe = STEP;
     private BukkitTask cleanup;
@@ -71,7 +74,8 @@ final class WorldReelView implements OpeningView {
 
     @Override
     public void open() {
-        anchor = anchor();
+        baseAnchor = anchor();
+        anchor = baseAnchor.clone();
         double width = cfg.visibleItems() * cfg.spacing() + 0.2;
         double half = cfg.itemScale() / 2;
         all.add(block(Material.BLACK_CONCRETE, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
@@ -91,6 +95,37 @@ final class WorldReelView implements OpeningView {
         all.add(title);
         clickTargets(half);
         place(4, 4, 0);
+    }
+
+    /** Recenter every live scene, including held rewards, whenever one is added or removed. */
+    void layout(int index, int count) {
+        if (closed || layoutIndex == index && layoutCount == count) return;
+        layoutIndex = index; layoutCount = count;
+        double distance = baseAnchor.toVector().distance(session.origin.toVector());
+        var cell = OpeningLayout.cell(index, count, cfg.visibleItems() * cfg.spacing() + .2,
+                cfg.itemScale() + .65, distance);
+        Vector right = baseAnchor.getDirection().multiply(-1).crossProduct(new Vector(0, 1, 0)).normalize();
+        Location next = baseAnchor.clone().add(right.multiply(cell.right())).add(0, cell.up(), 0);
+        double ratio = cell.scale() / sceneScale;
+        for (Entity entity : all) {
+            if (entity instanceof Display display) {
+                Transformation pose = display.getTransformation();
+                pose.getTranslation().mul((float) ratio); pose.getScale().mul((float) ratio);
+                display.setInterpolationDuration(0); display.setTransformation(pose);
+                display.setTeleportDuration(4); display.teleport(next);
+            } else if (entity instanceof org.bukkit.entity.Interaction box) {
+                Vector offset = box.getLocation().toVector().subtract(anchor.toVector()).multiply(ratio);
+                box.teleport(next.clone().add(offset));
+                box.setInteractionWidth(box.getInteractionWidth() * (float) ratio);
+                box.setInteractionHeight(box.getInteractionHeight() * (float) ratio);
+            }
+        }
+        sceneScale = cell.scale(); anchor = next;
+    }
+
+    private Transformation scaled(Transformation pose) {
+        pose.getTranslation().mul((float) sceneScale); pose.getScale().mul((float) sceneScale);
+        return pose;
     }
 
     /**
@@ -251,14 +286,14 @@ final class WorldReelView implements OpeningView {
         // Both endpoints stay inside the strip, including when a fast keyframe crosses its
         // boundary. Client interpolation must never carry a still-visible sprite beyond it.
         float boundedX = (float) Math.clamp(x, -window, window);
-        return new Transformation(new Vector3f(boundedX, 0, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION);
+        return scaled(new Transformation(new Vector3f(boundedX, 0, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION));
     }
     private Transformation barPose(int index, double center) {
         float x = (float) ((index - center) * cfg.spacing());
         float visible = visibility(x), width = (float) (cfg.spacing() * .82) * falloff(x);
         float boundedX = (float) Math.clamp(x, -window, window);
-        return new Transformation(new Vector3f(boundedX - width / 2, (float) (-cfg.itemScale() / 2 - .09), -.04f), NO_ROTATION,
-                new Vector3f(width, .035f * visible, .02f), NO_ROTATION);
+        return scaled(new Transformation(new Vector3f(boundedX - width / 2, (float) (-cfg.itemScale() / 2 - .09), -.04f), NO_ROTATION,
+                new Vector3f(width, .035f * visible, .02f), NO_ROTATION));
     }
 
     @Override
@@ -285,8 +320,8 @@ final class WorldReelView implements OpeningView {
         float big = (float) (cfg.itemScale() * 1.6);
         winner.setInterpolationDelay(0);
         winner.setInterpolationDuration(8);
-        winner.setTransformation(new Transformation(new Vector3f(0, 0.04f, 0.08f), NO_ROTATION,
-                new Vector3f(big, big, big), NO_ROTATION));
+        winner.setTransformation(scaled(new Transformation(new Vector3f(0, 0.04f, 0.08f), NO_ROTATION,
+                new Vector3f(big, big, big), NO_ROTATION)));
         winner.setGlowColorOverride(Color.fromRGB(reward.rarity().color() & 0xFFFFFF));
         winner.setGlowing(true);
         title.text(ctx.formatter(player).fullName(reward, session.instance));
@@ -304,7 +339,7 @@ final class WorldReelView implements OpeningView {
         if (closed || cleanup != null) {
             return;
         }
-        cleanup = Bukkit.getScheduler().runTaskLater(ctx.plugin(), this::close, session.sequence ? Math.min(10, cfg.holdTicks()) : cfg.holdTicks());
+        cleanup = Bukkit.getScheduler().runTaskLater(ctx.plugin(), this::close, cfg.holdTicks());
     }
 
     @Override

@@ -15,12 +15,13 @@ public final class InspectRigChecks {
         Catalog catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var warnings = new ArrayList<String>();
         InspectModels models = new InspectModels(new File(root, "inspect.yml"), warnings::add);
+        profileUpgrade(root);
         require(warnings.isEmpty(), "inspect warnings " + warnings);
         var soundConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "sounds.yml"));
         int frames = 0; double requiredForward = 0; String furthest = ""; Set<String> all = new HashSet<>(), motionSignatures = new HashSet<>();
         for (WeaponType weapon : catalog.weapons()) {
             require(catalog.skins().stream().anyMatch(s -> s.weapon().id().equals(weapon.id())), "unobtainable weapon " + weapon.id());
-            var pool = models.pool(weapon.id()); require(pool.size() == 3, "three individual variants required: " + weapon.id());
+            var pool = models.pool(weapon.id()); require(pool.size() == 4, "four individual variants required: " + weapon.id());
             var base = models.model(weapon.isKnife() ? weapon.id() : weapon.category().name().toLowerCase(Locale.ROOT));
             if (weapon.category() == WeaponCategory.GLOVE) {
                 var fallback = InspectRig.blockParts(weapon, base.parts());
@@ -75,7 +76,7 @@ public final class InspectRigChecks {
             }
         }
         require(models.anchor().forward() >= requiredForward + .015, "camera requires forward >= " + (requiredForward + .015) + " at " + furthest);
-        require(all.size() == catalog.weapons().size() * 3, "weapon coverage");
+        require(all.size() == catalog.weapons().size() * 4, "weapon coverage");
         var spin = List.of(new InspectAnimation.Keyframe(0, null, new Vector3f(), null, InspectAnimation.Ease.LINEAR),
                 new InspectAnimation.Keyframe(12, null, new Vector3f(0,0,360), null, InspectAnimation.Ease.LINEAR));
         var compound = new InspectAnimation("compound", Map.of(
@@ -112,6 +113,24 @@ public final class InspectRigChecks {
     }
     private static List<Vector3f> cube() {
         var out = new ArrayList<Vector3f>(); for (int v=0;v<8;v++) out.add(new Vector3f(v&1,v>>1&1,v>>2&1)); return out;
+    }
+    private static void profileUpgrade(File root) {
+        try (var in = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-v1.yml")) {
+            require(in != null, "missing stock profile migration");
+            var current = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8));
+            var defaults = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "inspect-profiles.yml"));
+            String custom = current.getConfigurationSection("animations").getKeys(false).iterator().next();
+            current.set("animations." + custom + ".substeps", 2);
+            current.set("animation-pools.karambit", java.util.List.of(custom));
+            require(InspectProfileDefaults.upgrade(current, defaults), "stock upgrade did not run");
+            require(current.getInt("animations." + custom + ".substeps") == 2
+                    && current.getStringList("animation-pools.karambit").equals(java.util.List.of(custom)), "custom animation/pool overwritten");
+            require(current.getStringList("animation-pools.ak47").size() == 4, "existing stock server did not receive fourth variant");
+            var reloaded = new org.bukkit.configuration.file.YamlConfiguration(); reloaded.loadFromString(current.saveToString());
+            require(reloaded.getStringList("animation-pools.ak47").equals(defaults.getStringList("animation-pools.ak47")), "migration not serializable");
+            require(!InspectProfileDefaults.upgrade(reloaded, defaults), "profile upgrade not idempotent");
+            System.out.println("PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.");
+        } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
     private static List<Vector3f> vertices(File root, WeaponType weapon, ModelPart part) {
         try {

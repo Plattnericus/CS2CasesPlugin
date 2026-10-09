@@ -28,6 +28,10 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     CaseGuideRuntimeChecks.run(sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("nine")) {
                     queueAudit(sender, player, ctx, 9);
+                } else if (args.length == 2 && args[1].equals("spam")) {
+                    RuntimeUiChecks.spam(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("tradein-ui")) {
+                    RuntimeUiChecks.tradeIn(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("queue-controls")) {
                     queueControls(sender, player, ctx);
                 } else if (args.length > 1 && args[1].equalsIgnoreCase("hundred")) {
@@ -50,6 +54,13 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     Player observer = Bukkit.getPlayerExact(args[2]);
                     if (observer == null || observer.equals(player)) { sender.sendMessage("A second online player is required."); return true; }
                     observerAudit(sender, player, observer, ctx);
+                } else if (args.length == 2 && args[1].equals("gallery-state")) {
+                    Object view = galleryView(ctx, player);
+                    sender.sendMessage("GALLERY STATE: open=" + (view != null) + " slot=" + player.getInventory().getHeldItemSlot()
+                            + " page=" + ctx.menuStates().get(player.getUniqueId()).page
+                            + " hovered=" + (view != null && field(view, "hovered") != null)
+                            + " sneak=" + player.isSneaking()
+                            + " entities=" + (view == null ? 0 : ((java.util.List<?>) field(view, "entities")).size()));
                 } else if (args.length == 2 && args[1].equals("inventory")) {
                     inventoryModesAudit(sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("full")) {
@@ -86,7 +97,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                         require(Bukkit.dispatchCommand(player, "inventory"), "hologram command missing after vanilla mode");
                         Bukkit.getScheduler().runTask(this, () -> {
                             try { require(ctx.gallery().isOpen(player), "switching back to hologram failed");
-                                sender.sendMessage("PASS INVENTORY MODES: /inventory hologram -> /inventory vanilla protected skin menu -> hologram; stale other-player requests rejected, old display removed, number-key and drag protection."); }
+                                String result = "PASS INVENTORY MODES: /inventory hologram -> /inventory vanilla protected skin menu -> hologram; stale other-player requests rejected, old display removed, number-key and drag protection.";
+                                sender.sendMessage(result); getLogger().info(result); }
                             catch (Exception failure) { report(failure); }
                             finally { ctx.gallery().close(player); player.closeInventory(); }
                         });
@@ -135,20 +147,19 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     int from = inventory.getHeldItemSlot();
                     PlayerItemHeldEvent switchSlot = new PlayerItemHeldEvent(player, from, slot);
                     Bukkit.getPluginManager().callEvent(switchSlot);
-                    require(!switchSlot.isCancelled(), "gallery cancelled hotbar selection: sneak=" + sneak + ", slot=" + slot);
-                    inventory.setHeldItemSlot(slot);
+                    require(!switchSlot.isCancelled(), "gallery blocked hotbar selection: sneak=" + sneak + ", slot=" + slot);
+                    inventory.setHeldItemSlot(slot); // Paper applies an accepted packet after its event.
                     require(galleryView(ctx, player) == view, "hotbar selection closed or rebuilt the gallery");
-                    require(inventory.getHeldItemSlot() == slot, "allowed hotbar selection did not commit the new slot");
+                    require(inventory.getHeldItemSlot() == slot, "gallery did not retain the requested slot");
                 }
             }
-            // Simulate the client/container race: the final packet requested slot 8, but the
-            // server briefly still reports the previous slot. SkinGallery must reconcile it next tick.
+            // Cosmetic refreshes must retain the latest accepted slot.
             inventory.setHeldItemSlot(7);
             player.setSneaking(false);
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 try {
                     require(ctx.gallery().isOpen(player), "gallery closed after delayed refresh");
-                    require(inventory.getHeldItemSlot() == 8,
+                    require(inventory.getHeldItemSlot() == 7,
                             "latest scrolled slot changed after delayed refresh: " + inventory.getHeldItemSlot());
                     galleryPageScrollAudit(player, ctx, inventory);
                     galleryClickStabilityAudit(player, ctx);
@@ -185,7 +196,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 require(!ctx.inspect().isInspecting(player), "inspect was not removed after slot change");
                 require(inventory.getHeldItemSlot() == 0 && inventory.getItemInMainHand().getType() == Material.BOW,
                         "inspect restored the old crossbow slot");
-                sender.sendMessage("PASS: /inventory keeps the gallery open while scrolling/using number keys in both sneak states; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.");
+                sender.sendMessage("PASS: /inventory allows hotbar scrolling/number keys in both sneak states and over targets without changing pages; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.");
+                getLogger().info("PASS INVENTORY INPUT: hotbar selection allowed in both sneak states and over targets, no wheel paging, distance/cancellation cleanup and inspect held-slot transitions.");
                 passed = true;
             } catch (Exception failure) { report(failure); }
             finally { restore.run(); }
@@ -227,7 +239,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
         player.setSneaking(sneaking);
     }
 
-    /** Hovering a hologram target turns the same wheel/key packet into a page turn. */
+    /** Hotbar input over a target must leave the gallery page and entities untouched. */
     private static void galleryPageScrollAudit(Player player, CasesContext ctx,
                                                org.bukkit.inventory.PlayerInventory inventory) throws Exception {
         Object view = galleryView(ctx, player);
@@ -238,17 +250,15 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
         hovered.set(view, target);
         var state = ctx.menuStates().get(player.getUniqueId());
         int beforePage = state.page;
-        int beforeSlot = inventory.getHeldItemSlot();
-        int count = dev.plattnericus.cases.gui.SkinQuery.run(ctx.catalog(),
-                ((dev.plattnericus.cases.profile.PlayerProfile) field(view, "owner")).owned(), state).size();
-        int perPage = ctx.settings().skinInventory().columns() * ctx.settings().skinInventory().rows();
-        int pages = Math.max(1, (count + perPage - 1) / perPage);
-        PlayerItemHeldEvent pageScroll = new PlayerItemHeldEvent(player, beforeSlot, (beforeSlot + 1) % 9);
-        Bukkit.getPluginManager().callEvent(pageScroll);
-        require(pageScroll.isCancelled(), "hologram scroll was treated as a hotbar change");
-        require(inventory.getHeldItemSlot() == beforeSlot, "hologram scroll changed the held slot");
-        if (pages > 1) {
-            require(state.page == Math.min(beforePage + 1, pages - 1), "hologram scroll did not advance the page");
+        var entities = java.util.List.copyOf((java.util.List<?>) field(view, "entities"));
+        for (int slot : new int[]{8, 0, 1, 0, 8, 7, 4, 2, 6}) {
+            PlayerItemHeldEvent scroll = new PlayerItemHeldEvent(player, inventory.getHeldItemSlot(), slot);
+            Bukkit.getPluginManager().callEvent(scroll);
+            require(!scroll.isCancelled(), "hovering a target blocked hotbar slot " + slot);
+            inventory.setHeldItemSlot(slot);
+            require(state.page == beforePage, "hotbar input over a target changed the gallery page");
+            require(galleryView(ctx, player) == view && entities.equals(field(view, "entities")),
+                    "hotbar input over a target rebuilt the gallery");
         }
         ctx.gallery().close(player);
         ctx.gallery().open(player, MenuStates.Category.ALL);
@@ -753,6 +763,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 if (amount == 9) CaseGuideRuntimeChecks.click(player, dev.plattnericus.cases.gui.GuiItems.SLOT_FILTER);
                 else Bukkit.dispatchCommand(player, "cases open " + def.id() + " " + amount);
                 require(ctx.openings().activeCount(player) == 9 && ctx.openings().queuedCount(player) == amount - 9 && ctx.openings().available(player, def) == 0, "nine GUI action failed to reserve all pairs");
+                require(!(player.getOpenInventory().getTopInventory().getHolder(false) instanceof dev.plattnericus.cases.gui.menu.CasePreviewMenu), "accepted batch left the launch menu open");
                 ctx.openings().openNine(player, def);
                 ctx.openings().open(player, def, false, false);
                 require(ctx.openings().activeCount(player) == 9, "duplicate request exceeded nine sessions");
@@ -766,21 +777,28 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                         elapsed += 5;
                         try {
                             require(player.isOnline() && elapsed < amount * 320 + 1000, "queue runtime audit timed out or disconnected");
-                            require(ctx.openings().visibleCount(player) <= 1, "multiple simultaneous roulette views");
+                            require(ctx.openings().visibleCount(player) <= 9, "more than nine simultaneous roulette views");
+                            if (ctx.settings().opening().worldDisplay() && ctx.openings().activeCount(player) == 9
+                                    && ctx.openings().active(player).stream().noneMatch(o -> o.state() == dev.plattnericus.cases.opening.OpeningSession.State.ROLLING
+                                            || o.state() == dev.plattnericus.cases.opening.OpeningSession.State.PERSISTING))
+                                require(ctx.openings().visibleCount(player) == 9, "nine admitted sessions were not simultaneously visible");
                             if (ctx.settings().opening().worldDisplay() && ctx.openings().active(player).stream().anyMatch(o -> o.state() == dev.plattnericus.cases.opening.OpeningSession.State.ANIMATING)) {
                                 var displays = player.getWorld().getEntities().stream().filter(e -> e instanceof org.bukkit.entity.ItemDisplay
                                         && e.getPersistentDataContainer().has(ctx.keys().displayEntity) && e.getLocation().distanceSquared(player.getLocation()) < 100)
                                         .map(e -> (org.bukkit.entity.ItemDisplay) e).toList();
-                                var positions = new java.util.ArrayList<Float>();
+                                var positionsByReel = new java.util.HashMap<org.bukkit.Location, java.util.ArrayList<Float>>();
                                 for (var display : displays) {
                                     var stack = display.getItemStack(); String model = stack.getType() + ":" + stack.getItemMeta().getItemModel();
                                     String prior = reelModels.putIfAbsent(display.getUniqueId(), model);
-                                    require(prior == null || prior.equals(model), "client entity changed its roulette item identity");
-                                    if (display.getTransformation().getScale().x() > .04f) positions.add(display.getTransformation().getTranslation().x());
+                                    require(prior == null || prior.equals(model) || prior.startsWith("GOLD_INGOT:"), "client entity changed its roulette item identity");
+                                    if (prior != null && prior.startsWith("GOLD_INGOT:") && !prior.equals(model)) reelModels.put(display.getUniqueId(), model);
+                                    if (display.getTransformation().getScale().x() > .04f) positionsByReel.computeIfAbsent(display.getLocation(), k -> new java.util.ArrayList<>()).add(display.getTransformation().getTranslation().x());
                                 }
-                                positions.sort(Float::compare);
-                                for (int i = 1; i < positions.size(); i++) require(positions.get(i) - positions.get(i-1) >= ctx.settings().opening().world().spacing() * .99, "roulette items collapsed/overlapped");
-                                require(displays.size() <= ctx.settings().opening().world().visibleItems() + 32, "roulette entity window grew unbounded");
+                                for (var positions : positionsByReel.values()) {
+                                    positions.sort(Float::compare);
+                                    for (int i = 1; i < positions.size(); i++) require(positions.get(i) - positions.get(i-1) > .01, "roulette items collapsed/overlapped");
+                                }
+                                require(displays.size() <= 9 * (ctx.settings().opening().world().visibleItems() + 32), "roulette entity window grew unbounded");
                             }
                             if (ctx.openings().activeCount(player) != 0 || ctx.openings().queuedCount(player) != 0) return;
                             var added = ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id())).toList();

@@ -111,9 +111,9 @@ gui:
       lore: ['<gray>Click: 9, 18, 25, 50, 90 or 100']
     queue-start:
       name: '<green>Queue <amount> cases'
-      lore: ['<gray>One full-size roulette, in sequence.', '<gray>Requires <amount> cases and matching keys.']
+      lore: ['<gray>Up to 9 centered roulettes at once.', '<gray>Requires <amount> cases and matching keys.']
     open-nine:
-      name: <gold>Open 9 cases in sequence
+      name: <gold>Open 9 cases together
       lore:
       - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
       - '<gray>Available pairs: <white><available>'
@@ -644,10 +644,32 @@ browser:
   categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Gloves"}
 
 tradein:
+  all: "All"
+  normal: "Normal"
+  weapon-title: "Choose trade-in weapons"
+  weapon: {name: "<aqua>Weapon: <value>", lore: ["<gray>Click to choose a weapon directly.", "<gray>Already selected inputs stay in your contract."]}
+  weapon-choice: {lore: ["<gray><count> matching available skins", "<yellow>Click to show this weapon."]}
+  all-weapons: {name: "<white>All weapons", lore: ["<gray>Show every compatible weapon type."]}
+  rarity: {name: "<light_purple>Rarity: <value>", lore: ["<gray>Left: next · Right: previous"]}
+  stattrak: {name: "<gold>StatTrak: <value>", lore: ["<gray>All, normal or StatTrak.", "<gray>Left: next · Right: previous"]}
+  reset-filters: {name: "<yellow>Reset filters", lore: ["<gray>Show all compatible inputs; keep your selection."]}
+  empty: {name: "<gray>No matching inputs", lore: ["<gray>Reset filters or clear the selected contract."]}
+  choose-tier: "Choose a skin first"
+  sort: {name: "<aqua>Sort: <sort>", lore: ["<gray>Left: next · Right: previous", "<gray>Selection stays when sorting or changing pages."]}
+  sorts:
+    newest: "Newest first"
+    name: "Weapon / skin name"
+    rarity: "Highest rarity first"
+    float_asc: "Lowest float first"
+    float_desc: "Highest float first"
+  fill: {name: "<green>Fill matching inputs", lore: ["<gray>Uses the current sort order across all pages.", "<gray>Favorites stay out of automatic selection.", "<gray>Review the inputs before confirming."]}
+  clear: {name: "<yellow>Clear selection", lore: ["<gray>Choose a different rarity or StatTrak type."]}
+  no-fill: "<prefix><yellow>Not enough matching non-favorite skins to fill a contract."
   title: "Trade-in contract"
   button: {"name": "<gold>Trade-in", "lore": ["<gray>Exchange skins for one from the next tier."]}
   rules: {"name": "<gold>Contract rules", "lore": ["<gray>10 same-tier weapons → next rarity.", "<gold>5 Covert weapons → gold special item.", "<gray>All inputs must have matching StatTrak status.", "<gray>Output from an input case; average float remapped.", "<red>Confirmed inputs are consumed permanently."]}
-  confirm: {"name": "<gold>Review contract with <count> skins", "lore": ["<red>Inputs will be permanently exchanged for a new skin."]}
+  confirm: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Inputs will be permanently exchanged for a new skin."]}
+  review: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Inputs will be permanently exchanged for a new skin."]}
   invalid: "<prefix><red>Use available same-tier skins with matching StatTrak from valid source cases."
   count: "<prefix><yellow>Use 10 matching weapons, or 5 Covert skins for gold."
   unavailable: "<prefix><yellow>Trade-in is currently unavailable."

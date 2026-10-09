@@ -138,12 +138,34 @@ val verifyFeatures by tasks.registering(JavaExec::class) {
 
 tasks.check { dependsOn(verifyFeatures) }
 
+val verifyPack by tasks.registering(JavaExec::class) {
+    group = "verification"
+    dependsOn("resourcePack")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.PackChecks")
+    args(file("src/main/resources/defaults").absolutePath,
+        providers.gradleProperty("packToVerify").orElse(layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath).get(),
+        layout.buildDirectory.dir("verification").get().asFile.absolutePath)
+}
+
+tasks.check { dependsOn(verifyPack) }
+
+tasks.register<JavaExec>("inspectRigPreview") {
+    group = "mccases"
+    dependsOn("resourcePack")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.RigMotionPreview")
+    args(file("src/main/resources/defaults").absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath,
+        layout.buildDirectory.dir("verification/animations").get().asFile.absolutePath)
+}
+
 tasks.register<Jar>("devChecks") {
     group = "verification"
     dependsOn(tasks.named("toolsClasses"))
     archiveFileName.set("MCCases-DevChecks-${project.version}.jar")
     from(sourceSets["tools"].output) {
-        include("dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
+        include("dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/RuntimeUiChecks*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
     }
     val metadata = layout.buildDirectory.file("generated/dev-checks/plugin.yml")
     doFirst {

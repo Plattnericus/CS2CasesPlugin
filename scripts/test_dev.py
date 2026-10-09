@@ -4,6 +4,18 @@ from unittest import mock
 import dev
 
 class CleanupTests(unittest.TestCase):
+ def test_build_uses_current_matching_plugin_pack_and_checks(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   root=Path(temporary);(root/'build.gradle.kts').write_text('version = "1.2.0"\n')
+   plugin=root/'build/libs/MCCases-1.2.0.jar';plugin.parent.mkdir(parents=True);plugin.write_bytes(b'current plugin')
+   pack=root/'build/distributions/MCCases-ResourcePack-1.2.0.zip';pack.parent.mkdir(parents=True);pack.write_bytes(b'current pack')
+   (plugin.parent/'MCCases-1.1.0.jar').write_bytes(b'old plugin')
+   with mock.patch.object(dev,'ROOT',root):
+    actual=dev.build_artifacts()
+    self.assertEqual(actual,(plugin,root/'build/libs/MCCases-DevChecks-1.2.0.jar',pack))
+    pack.unlink()
+    with self.assertRaises(FileNotFoundError):dev.build_artifacts()
+
  def test_app_exit_kills_unresponsive_server_and_finishes_cleanup(self):
   with tempfile.TemporaryDirectory() as temporary:
    runtime=Path(temporary)/'runtime';agent=Path(temporary)/'cleanup.plist'

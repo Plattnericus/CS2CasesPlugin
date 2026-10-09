@@ -49,23 +49,10 @@ public final class MenuListener implements Listener {
         }
     }
 
-    /** Keep hotbar scrolling usable while a menu inventory has focus. */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    /** Lock the held slot while a plugin inventory has focus. */
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onHeld(PlayerItemHeldEvent event) {
-        if (!(event.getPlayer().getOpenInventory().getTopInventory().getHolder(false) instanceof Menu menu)) {
-            return;
-        }
-        int requested = event.getNewSlot();
-        Bukkit.getScheduler().runTask(menu.ctx.plugin(), () -> {
-            if (!event.getPlayer().isOnline()
-                    || event.getPlayer().getOpenInventory().getTopInventory().getHolder(false) != menu) {
-                return;
-            }
-            if (event.getPlayer().getInventory().getHeldItemSlot() != requested) {
-                event.getPlayer().getInventory().setHeldItemSlot(requested);
-                event.getPlayer().updateInventory();
-            }
-        });
+        if (event.getPlayer().getOpenInventory().getTopInventory().getHolder(false) instanceof Menu) event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

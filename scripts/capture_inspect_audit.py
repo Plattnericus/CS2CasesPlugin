@@ -39,9 +39,9 @@ def main():
  root=args.root.resolve();out=args.output.resolve();out.mkdir(parents=True,exist_ok=True);repo=Path(__file__).resolve().parents[1]
  weapons=yaml.safe_load((repo/'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons'];profiles=yaml.safe_load((repo/'src/main/resources/defaults/inspect-profiles.yml').read_text())
  if args.only: weapons={id:weapons[id] for id in args.only.split(',')}
- rcon=Rcon(root);manifest=[]
+ rcon=Rcon(root/'server');manifest=[]
  for folder in ['client','observer']:
-  client(root,folder,'camera|FIRST_PERSON');client(root,folder,'chat|HIDDEN');client(root,folder,'hand|RIGHT')
+  client(root,folder,'camera|FIRST_PERSON');client(root,folder,'chat|HIDDEN');client(root,folder,'hand|RIGHT');client(root,folder,'fov|70')
  def shot(folder,name,data):
   file=out/(name+'.png');client(root,folder,'shot|'+str(file));manifest.append(dict(data,viewer=folder,file=file.name))
  def frame(id,v,tick,mode,angle):

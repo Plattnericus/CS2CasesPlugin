@@ -19,14 +19,14 @@ are available without it. Swords, bows and crossbows keep their normal gameplay 
 
 | Feature | Included |
 | --- | --- |
-| Catalog | 22 cases, 743 skins and 55 weapon and knife models |
+| Catalog | 22 cases, 815 skins and 63 weapon, knife and glove models |
 | Case guide | Full case + key price, reward points per Diamond, knife preferences, budget and search |
 | Collection | Categories, favorites, filters, seven sort orders and the 36 newest skins |
 | Trading | Direct skin trades with two live offers, confirmation from both players and cancellation safeguards |
 | Marketplace | Real Emerald item payments, durable offline claims, search, sorting and filters |
 | Skin values | Float, exterior, pattern, StatTrak, origin and creation date |
 | Pattern analysis | Doppler phases, Fade percentage, Blue Gem classifications and Fire & Ice |
-| Inspects | 165 individual inspect profiles, articulated Butterfly handles and paired weapons |
+| Inspects | 252 individual inspect profiles, articulated Butterfly handles and paired weapons |
 | Language | English for all players by default; 45 translation files available |
 | Dealer | Villager or mannequin with skin changes, player tracking and gestures |
 | Storage | SQLite or MySQL/MariaDB, opening history and recovery of interrupted openings |
@@ -93,8 +93,7 @@ releases the slot; ordinary items are preserved.
 | Sneak + left-click a weapon skin | Equip or unequip it on the crossbow |
 | Sneak + right-click | Toggle favorite |
 | Use the buttons below the wall | Change page, category, sort order, filters or list view |
-| Mouse wheel or number keys | Change hotbar slot normally; the collection stays open |
-| Mouse wheel or number keys over a skin in the hologram | Change page without changing the held slot |
+| Mouse wheel or number keys | Select the hotbar normally, including over entries; use the page buttons to browse the collection |
 | Move ten blocks from the gallery | Close the collection automatically |
 
 The close button ends the collection view at any time. Distance is measured from the gallery's
@@ -217,12 +216,14 @@ Existing YAML settings and translations are preserved while missing defaults are
 ### Independent case openings
 
 Every committed opening has its own UUID, server roll, journal and SQL record, and consumes
-exactly one signed case and matching key. **Open 9 cases in sequence** in the case contents menu
+exactly one signed case and matching key. **Open 9 cases together** in the case contents menu
 starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
 `/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-One roulette presents the results in request order, at exactly the configured single-opening
-size and position. At most nine sessions per player are prepared ahead of that presentation.
+Up to nine world roulettes run simultaneously in centered rows. Rows and scale adjust whenever
+a reel appears or disappears, including incomplete rows and scenes pulled closer by a wall.
+The launcher closes after a valid request. Right-clicking more case items while a world opening
+is active adds reels up to the nine-slot limit; explicit quantity commands support larger queues.
 The default global preparation limit is 64. Repeated clicks reserve cases and shared keys, so
 the same pair cannot be promised twice. Waiting requests consume no items. Inventory changes
 or catalog changes that invalidate a waiting request stop the remaining queue.
@@ -235,9 +236,10 @@ Committed results remain in SQL or the player journal and are recovered after re
 World presentation uses a bounded moving window of display entities. Each entity keeps its
 item identity; prefetched entries initialize invisibly, and edge fades stay inside the strip.
 Unchanged poses do not restart interpolation. Each result fades the other icons, enlarges the winner and
-then advances the queue. Queued results use shorter holds (at most 20 reveal ticks and 10 world
-result ticks); roulette movement keeps the configured duration and easing. GUI presentation
-also runs sequentially and continues when hidden. Case preview and trading menus remain usable.
+then releases its slot for a waiting request. Queued reveals pause for at most 20 ticks; world
+results retain the configured result hold, so rewards remain readable. Roulette movement keeps
+the configured duration and easing. Reels share one audible tick track. GUI presentation runs
+sequentially and continues when hidden.
 
 On an existing server, set `opening.max-active-per-player: 9` in
 `plugins/MCCases/config.yml`; existing limits are preserved. Lower limits also work with the
@@ -256,6 +258,13 @@ The output case is sampled proportionally to the number of inputs from each case
 is uniform in that case's target tier. Average input float is mapped into the output's float bounds.
 Pattern and wear seeds are server-generated. Inputs and the result exchange in one SQL transaction,
 with a dedicated contract UUID. A final yes/no confirmation permanently consumes the selected skins.
+
+Choose a weapon directly, filter by rarity and StatTrak, and sort by newest, name, rarity or float
+in either direction. The first selected input limits candidates to compatible skins. Selection
+survives sorting, filtering and paging. Automatic filling follows the current filters and sort
+across every page, excluding favorites. Clear selection and reset filters are separate controls.
+Results show **Source: TRADE IN** in both collection views while retaining their source case for
+further contracts. Administrator provenance also remains intact through subsequent contracts.
 
 Gold is detected through `rarity.rareSpecial()`. A successful eligible contract broadcasts a gold
 MiniMessage line with player and complete skin name, detailed hover lore and an optional server sound.
@@ -405,7 +414,7 @@ Default files are stored in `plugins/MCCases/`. Values below refer to the bundle
 | `opening.display` | `world` | Public opening reel; alternatively `gui` |
 | `opening.duration-ticks` | `120` | Roulette movement duration; 20 ticks equal one second |
 | `opening.easing` | `cinematic` | Deceleration curve |
-| `opening.max-active-per-player` | `9` | Prepared sessions per player, capped at nine; one visible roulette |
+| `opening.max-active-per-player` | `9` | Sessions per player, capped at nine; centered simultaneous world roulettes |
 | `opening.max-active-global` | `64` | Global animation capacity |
 | `trade-in.broadcast-gold` | `true` | Gold contract broadcasts |
 | `trade-in.broadcast-admin` | `false` | Allow administrator-input broadcasts explicitly |

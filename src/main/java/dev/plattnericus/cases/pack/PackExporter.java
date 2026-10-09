@@ -87,13 +87,13 @@ public final class PackExporter {
                 String path = "skin/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", sprite);
                 if (skin.isKnife()) {
-                    model(zip, namespace, path, "minecraft:item/handheld");
+                    model(zip, namespace, path, "minecraft:item/handheld", KNIFE_DISPLAY);
                 } else {
                     model(zip, namespace, path, "minecraft:item/generated", GUN_DISPLAY);
                 }
                 String selected = "trade/selected/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
-                model(zip, namespace, selected, "minecraft:item/generated");
+                model(zip, namespace, selected, "minecraft:item/generated", FIXED_DISPLAY);
                 try { rig(zip, namespace, skin, renderer); }
                 catch (TextureException e) { throw new IOException("inspect rig " + skin.id(), e); }
                 skins++;
@@ -122,12 +122,26 @@ public final class PackExporter {
      */
     private static final String GUN_DISPLAY = """
               "display": {
+                "fixed": {"rotation": [0, 0, 0], "scale": [1, 1, 1]},
                 "firstperson_righthand": {"rotation": [0, 90, 5], "translation": [1.13, 3.2, 1.13], "scale": [0.75, 0.75, 0.75]},
                 "firstperson_lefthand": {"rotation": [0, -90, -5], "translation": [1.13, 3.2, 1.13], "scale": [0.75, 0.75, 0.75]},
                 "thirdperson_righthand": {"rotation": [0, 90, 0], "translation": [0, 3, 1], "scale": [0.65, 0.65, 0.65]},
                 "thirdperson_lefthand": {"rotation": [0, -90, 0], "translation": [0, 3, 1], "scale": [0.65, 0.65, 0.65]}
               },
             """;
+
+    // Vanilla generated/handheld models inherit a 180-degree FIXED turn and point +X towards
+    // the camera in the right hand. Our sprites already face right: explicitly face forward.
+    private static final String KNIFE_DISPLAY = """
+              "display": {
+                "fixed": {"rotation": [0, 0, 0], "scale": [1, 1, 1]},
+                "firstperson_righthand": {"rotation": [0, 90, -20], "translation": [1.13, 3.2, 1.13], "scale": [0.68, 0.68, 0.68]},
+                "firstperson_lefthand": {"rotation": [0, -90, 20], "translation": [1.13, 3.2, 1.13], "scale": [0.68, 0.68, 0.68]},
+                "thirdperson_righthand": {"rotation": [0, 90, -20], "translation": [0, 4, 0.5], "scale": [0.85, 0.85, 0.85]},
+                "thirdperson_lefthand": {"rotation": [0, -90, 20], "translation": [0, 4, 0.5], "scale": [0.85, 0.85, 0.85]}
+              },
+            """;
+    private static final String FIXED_DISPLAY = "\"display\":{\"fixed\":{\"rotation\":[0,0,0],\"scale\":[1,1,1]}},\n";
 
     private static void model(ZipOutputStream zip, String ns, String path, String parent) throws IOException {
         model(zip, ns, path, parent, null);
@@ -139,14 +153,17 @@ public final class PackExporter {
         ArgbImage source = renderer.render(skin, 0, fl, 0).image();
         BufferedImage canvas = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = canvas.createGraphics();
-        g.drawImage(source.toBufferedImage(), 2, 2, 60, 60, null); g.dispose();
+        // Use alpha-aware area filtering instead of Graphics2D's nearest-neighbour reduction.
+        g.drawImage(source.scaledTo(60, 60).toBufferedImage(), 2, 2, null); g.dispose();
         for (String layer : dev.plattnericus.cases.inspect.InspectRig.layers(skin.weapon()).stream().map(dev.plattnericus.cases.inspect.InspectRig.Layer::id).distinct().toList()) {
             BufferedImage texture = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
             boolean[][] mask = new boolean[SPRITE][SPRITE];
             for (int y = 0; y < SPRITE; y++) for (int x = 0; x < SPRITE; x++) {
                 int pixel = canvas.getRGB(x, y);
-                if ((pixel >>> 24) > 10 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), (x - 1.5) / 60, (y - 1.5) / 60))) {
-                    texture.setRGB(x, y, pixel); mask[y][x] = true;
+                if ((pixel >>> 24) >= 128 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), (x - 1.5) / 60, (y - 1.5) / 60))) {
+                    // Geometry covers this texel completely. Partial alpha made the solid rim
+                    // see-through and caused dark seams during spins.
+                    texture.setRGB(x, y, pixel | 0xFF000000); mask[y][x] = true;
                 }
             }
             String path = "inspect/" + skin.id() + "/" + layer;
@@ -163,12 +180,22 @@ public final class PackExporter {
                 StringBuilder faces = new StringBuilder();
                 for (String face : List.of("north", "south", "east", "west", "up", "down")) {
                     if (!faces.isEmpty()) faces.append(',');
-                    faces.append("\"").append(face).append("\":{\"uv\":[").append(face.equals("north") ? x2 : x1).append(',').append(y1).append(',').append(face.equals("north") ? x1 : x2).append(',').append(y2).append("],\"texture\":\"#skin\"}");
+                    // Side faces sample just the corresponding boundary texels, rather than
+                    // stretching the whole weapon face across its thickness. Half-texel insets
+                    // keep every sample inside an opaque pixel, including one-pixel edges.
+                    double u1 = (x + .5) / 4, u2 = (right - .5) / 4;
+                    double v1 = (y + .5) / 4, v2 = (bottom - .5) / 4;
+                    if (face.equals("north")) { double swap = u1; u1 = u2; u2 = swap; }
+                    if (face.equals("east")) u1 = u2;
+                    if (face.equals("west")) u2 = u1;
+                    if (face.equals("up")) v2 = v1;
+                    if (face.equals("down")) v1 = v2;
+                    faces.append("\"").append(face).append("\":{\"uv\":[").append(u1).append(',').append(v1).append(',').append(u2).append(',').append(v2).append("],\"texture\":\"#skin\"}");
                 }
                 elements.add("{\"from\":[" + x1 + ',' + (16-y2) + ',' + (8-thickness/2) + "],\"to\":[" + x2 + ',' + (16-y1) + ',' + (8+thickness/2) + "],\"faces\":{" + faces + "}}");
             }
             text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\"}}");
-            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false,\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\"},\"elements\":[" + String.join(",", elements) + "]}");
+            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false,\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\",\"particle\":\"#skin\"},\"elements\":[" + String.join(",", elements) + "]}");
         }
     }
 

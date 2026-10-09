@@ -57,6 +57,32 @@ public final class ClientCaptureHarness {
                                 Object mouse = minecraftClass.getField("mouseHandler").get(mc);
                                 for (String axis : new String[]{"xpos", "ypos"}) { var f=mouse.getClass().getDeclaredField(axis);f.setAccessible(true);f.setDouble(mouse,axis.equals("xpos")?x:y); }
                             }
+                            case "scroll" -> {
+                                Object window = minecraftClass.getMethod("getWindow").invoke(mc);
+                                long handle = ((Number) window.getClass().getMethod("handle").invoke(window)).longValue();
+                                Object mouse = minecraftClass.getField("mouseHandler").get(mc);
+                                mouse.getClass().getMethod("onScroll", long.class, double.class, double.class)
+                                        .invoke(mouse, handle, 0d, Double.parseDouble(args[1]));
+                            }
+                            case "sneak" -> {
+                                Object key = options.getClass().getField("keyShift").get(options);
+                                key.getClass().getMethod("setDown", boolean.class).invoke(key, Boolean.parseBoolean(args[1]));
+                            }
+                            case "look" -> {
+                                Object player = minecraftClass.getField("player").get(mc);
+                                String[] angles = args[1].split(",");
+                                player.getClass().getMethod("setYRot", float.class).invoke(player, Float.parseFloat(angles[0]));
+                                player.getClass().getMethod("setXRot", float.class).invoke(player, Float.parseFloat(angles[1]));
+                            }
+                            case "use" -> {
+                                var use = minecraftClass.getDeclaredMethod("startUseItem"); use.setAccessible(true); use.invoke(mc);
+                            }
+                            case "state" -> {
+                                Object player = minecraftClass.getField("player").get(mc);
+                                Object inventory = player.getClass().getMethod("getInventory").invoke(player);
+                                String report = "slot=" + inventory.getClass().getMethod("getSelectedSlot").invoke(inventory) + "\n";
+                                Path output = Path.of(args[1]); Files.createDirectories(output.getParent()); Files.writeString(output, report);
+                            }
                             case "displays" -> {
                                 Object level = minecraftClass.getField("level").get(mc);
                                 Class<?> display = Class.forName("net.minecraft.world.entity.Display");
