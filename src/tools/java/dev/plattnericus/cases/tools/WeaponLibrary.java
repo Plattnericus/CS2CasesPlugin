@@ -85,7 +85,64 @@ final class WeaponLibrary {
         list.add(nomad());
         list.add(skeleton());
         list.add(kukri());
+        for (String glove : List.of("bloodhound_gloves", "hydra_gloves", "broken_fang_gloves", "sport_gloves",
+                "driver_gloves", "hand_wraps", "moto_gloves", "specialist_gloves")) list.add(gloves(glove));
         return list;
+    }
+
+    /** Paired dorsal glove silhouettes, using the same material-aware baking as the weapons. */
+    private static WeaponSketch gloves(String id) {
+        WeaponSketch s = new WeaponSketch(id);
+        boolean fingerless = id.equals("bloodhound_gloves") || id.equals("hydra_gloves") || id.equals("broken_fang_gloves");
+        boolean wrap = id.equals("hand_wraps");
+        glovePart(s, Mat.DARK, rrect(46, 166, 63, 44, 13));
+        glovePart(s, Mat.PAINT, curve(43, 105, 50, 94, 103, 94, 113, 112, 108, 172, 48, 177, 39, 143));
+        glovePart(s, Mat.PAINT, rot(rrect(30, 120, 20, 46, 17), -28, 43, 145));
+        double[] tips = {81, 65, 71, 88};
+        for (int f = 0; f < 4; f++) {
+            double x = 44 + f * 17, top = fingerless ? 96 + (f == 3 ? 9 : 0) : tips[f];
+            glovePart(s, Mat.PAINT, rrect(x, top, 15, 66 + 65 - top, 12));
+            glovePart(s, Mat.DARK, rect(x + 2, fingerless ? top + 3 : top + 25, 11, 2));
+            glovePart(s, Mat.LIGHT, rect(x + 4, top + 5, 2, fingerless ? 7 : 12));
+        }
+        glovePart(s, Mat.DARK, rrect(47, 169, 59, 10, 6));
+        glovePart(s, Mat.PAINT, rrect(49, 181, 54, 17, 6));
+        glovePart(s, Mat.LIGHT, rect(53, 203, 45, 2));
+        if (wrap) {
+            for (int b = 0; b < 6; b++) {
+                glovePart(s, Mat.DARK, rot(rect(45, 111 + b * 13, 62, 3), b % 2 == 0 ? 12 : -12, 76, 145));
+                glovePart(s, Mat.PAINT, rot(rect(46, 115 + b * 13, 60, 5), b % 2 == 0 ? 12 : -12, 76, 145));
+            }
+        } else if (id.equals("driver_gloves")) {
+            for (int y = 122; y <= 152; y += 10) for (int x = 55; x <= 98; x += 9)
+                glovePart(s, Mat.DARK, circle(x, y, 1.8));
+            glovePart(s, Mat.DARK, ellipse(77, 113, 20, 5));
+        } else if (id.equals("moto_gloves") || id.equals("specialist_gloves")) {
+            glovePart(s, Mat.DARK, rrect(47, 109, 58, 26, 8));
+            for (int p = 0; p < 4; p++) glovePart(s, Mat.PAINT, rrect(51 + p * 13, 111, 10, 18, 6));
+            glovePart(s, Mat.DARK, poly(53, 145, 76, 138, 101, 144, 96, 157, 77, 164, 57, 157));
+            glovePart(s, Mat.LIGHT, rect(57, 146, 37, 2));
+            if (id.equals("specialist_gloves")) glovePart(s, Mat.PAINT, rect(104, 138, 7, 24));
+        } else if (fingerless) {
+            for (int p = 0; p < 4; p++) {
+                glovePart(s, Mat.DARK, circle(53 + p * 15, 113, 4));
+                glovePart(s, Mat.METAL, circle(53 + p * 15, 113, 2.5));
+            }
+            glovePart(s, Mat.DARK, ellipse(77, 147, 20, 10));
+            if (id.equals("hydra_gloves")) glovePart(s, Mat.PAINT, poly(63, 147, 77, 136, 91, 147, 77, 158));
+            else if (id.equals("broken_fang_gloves")) glovePart(s, Mat.METAL, poly(64, 140, 71, 155, 77, 141, 84, 155, 91, 140));
+            else glovePart(s, Mat.LIGHT, circle(77, 147, 5));
+        } else {
+            glovePart(s, Mat.DARK, poly(50, 121, 60, 116, 100, 139, 98, 149));
+            glovePart(s, Mat.PAINT, poly(57, 148, 65, 141, 95, 159, 87, 166));
+            glovePart(s, Mat.LIGHT, rect(63, 129, 23, 2));
+        }
+        return s;
+    }
+
+    private static void glovePart(WeaponSketch s, Mat material, java.awt.Shape shape) {
+        s.add(material, shape);
+        s.add(material, new java.awt.geom.AffineTransform(-1, 0, 0, 1, 256, 0).createTransformedShape(shape));
     }
 
     // ================================================================= pistol parts

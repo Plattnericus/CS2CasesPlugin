@@ -16,14 +16,26 @@ public final class InspectRigChecks {
         var warnings = new ArrayList<String>();
         InspectModels models = new InspectModels(new File(root, "inspect.yml"), warnings::add);
         require(warnings.isEmpty(), "inspect warnings " + warnings);
+        var soundConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "sounds.yml"));
         int frames = 0; double requiredForward = 0; String furthest = ""; Set<String> all = new HashSet<>(), motionSignatures = new HashSet<>();
         for (WeaponType weapon : catalog.weapons()) {
             require(catalog.skins().stream().anyMatch(s -> s.weapon().id().equals(weapon.id())), "unobtainable weapon " + weapon.id());
             var pool = models.pool(weapon.id()); require(pool.size() == 3, "three individual variants required: " + weapon.id());
             var base = models.model(weapon.isKnife() ? weapon.id() : weapon.category().name().toLowerCase(Locale.ROOT));
+            if (weapon.category() == WeaponCategory.GLOVE) {
+                var fallback = InspectRig.blockParts(weapon, base.parts());
+                var leftPalm = fallback.stream().filter(p -> p.id().equals("palm_pair_a")).findFirst().orElseThrow();
+                var rightPalm = fallback.stream().filter(p -> p.id().equals("palm_pair_b")).findFirst().orElseThrow();
+                require(rightPalm.position().x - leftPalm.position().x >= .3f, "fallback gloves overlap " + weapon.id());
+                var leftThumb = fallback.stream().filter(p -> p.id().equals("thumb_pair_a")).findFirst().orElseThrow();
+                var rightThumb = fallback.stream().filter(p -> p.id().equals("thumb_pair_b")).findFirst().orElseThrow();
+                require(leftThumb.position().x > leftPalm.position().x && rightThumb.position().x < rightPalm.position().x,
+                        "fallback glove thumbs must face inward " + weapon.id());
+            }
             for (String id : pool) {
                 require(all.add(id) && id.startsWith(weapon.id() + "__"), "shared weapon timeline " + id);
                 InspectAnimation animation = models.animation(id);
+                for (String cue : animation.sounds().values()) require(soundConfig.contains("sounds." + cue), "missing sound cue " + id + "/" + cue);
                 StringBuilder signature = new StringBuilder().append(animation.duration());
                 for (int sample=0;sample<=animation.duration();sample++) signature.append(animation.groupMatrix("body",sample).hashCode());
                 require(motionSignatures.add(signature.toString()), "duplicated weapon motion " + id);
@@ -63,7 +75,14 @@ public final class InspectRigChecks {
             }
         }
         require(models.anchor().forward() >= requiredForward + .015, "camera requires forward >= " + (requiredForward + .015) + " at " + furthest);
-        require(all.size() == 165, "weapon coverage");
+        require(all.size() == catalog.weapons().size() * 3, "weapon coverage");
+        var spin = List.of(new InspectAnimation.Keyframe(0, null, new Vector3f(), null, InspectAnimation.Ease.LINEAR),
+                new InspectAnimation.Keyframe(12, null, new Vector3f(0,0,360), null, InspectAnimation.Ease.LINEAR));
+        var compound = new InspectAnimation("compound", Map.of(
+                "body", new InspectAnimation.Group("body", null, new Vector3f(), spin),
+                "child", new InspectAnimation.Group("child", "body", new Vector3f(), spin)), Map.of(), 1);
+        for (int i = 1; i < compound.samples().size(); i++) require(compound.samples().get(i) - compound.samples().get(i - 1) == 1,
+                "compound full turns used a sparse shortest-path interpolation");
         try {
             var a = new InspectAnimation.Group("a", "b", new Vector3f(), List.of());
             var b = new InspectAnimation.Group("b", "a", new Vector3f(), List.of());
@@ -89,7 +108,7 @@ public final class InspectRigChecks {
             require(huge.cost() == 4294967294L && Double.isFinite(huge.value()), "price overflow " + def.id());
         }
         require(warnings.isEmpty(), "guide warnings " + warnings);
-        System.out.println("PASS: all 55 weapon rigs / 165 individual timelines, " + frames + " finite joint frames in right/left eye/hand views, 70° 4:3 camera bounds; held-pose continuity, cyclic-rig rejection, full dealer price/overflow/unknown price and exact knife probabilities.");
+        System.out.println("PASS: all " + catalog.weapons().size() + " weapon/glove rigs / " + all.size() + " individual timelines, " + frames + " finite joint frames in right/left eye/hand views, 70° 4:3 camera bounds; held-pose continuity, cyclic-rig rejection, full dealer price/overflow/unknown price and exact knife probabilities.");
     }
     private static List<Vector3f> cube() {
         var out = new ArrayList<Vector3f>(); for (int v=0;v<8;v++) out.add(new Vector3f(v&1,v>>1&1,v>>2&1)); return out;

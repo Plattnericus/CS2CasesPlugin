@@ -26,6 +26,12 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 CasesContext ctx = context();
                 if (args.length == 2 && args[1].equals("guide")) {
                     CaseGuideRuntimeChecks.run(sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("nine")) {
+                    queueAudit(sender, player, ctx, 9);
+                } else if (args.length == 2 && args[1].equals("queue-controls")) {
+                    queueControls(sender, player, ctx);
+                } else if (args.length > 1 && args[1].equalsIgnoreCase("hundred")) {
+                    queueAudit(sender, player, ctx, 100);
                 } else if (args.length == 3 && args[1].equals("guiclick")) {
                     CaseGuideRuntimeChecks.click(player, Integer.parseInt(args[2]));
                 } else if (args.length >= 4 && args[1].equals("visual")) {
@@ -34,6 +40,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     CommerceRuntimeChecks.gold(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("recovery")) {
                     CommerceRuntimeChecks.queueRecovery(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("recovery-nine")) {
+                    CommerceRuntimeChecks.queueRecovery(this, sender, player, ctx, 9);
                 } else if (args.length == 3 && args[1].equals("commerce")) {
                     Player other = Bukkit.getPlayerExact(args[2]);
                     if (other == null || other.equals(player)) { sender.sendMessage("A second online player is required."); return true; }
@@ -667,6 +675,142 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 }, 10);
             } catch (Exception failure) { restore.run(); report(failure); }
         }, 10);
+    }
+
+    private void queueControls(CommandSender sender, Player player, CasesContext ctx) {
+        require(ctx.openings().activeCount(player) == 0 && ctx.openings().queuedCount(player) == 0, "queue controls require idle player");
+        ctx.inspect().stop(player); ctx.gallery().close(player); player.closeInventory();
+        var saved = snapshot(player); int held = player.getInventory().getHeldItemSlot();
+        var at = player.getLocation(); var def = ctx.catalog().caseDefinition("kilowatt_case"); var key = ctx.catalog().key(def.keyId());
+        var before = ctx.profiles().get(player).all().stream().map(dev.plattnericus.cases.skin.SkinInstance::id).collect(java.util.stream.Collectors.toSet());
+        player.getInventory().clear();
+        for (int i = 0; i < 2; i++) {
+            player.getInventory().setItem(i * 2, ctx.caseItems().caseItem(def, i == 0 ? 64 : 36, true));
+            player.getInventory().setItem(i * 2 + 1, ctx.caseItems().keyItem(key, i == 0 ? 64 : 36, true));
+        }
+        new dev.plattnericus.cases.gui.menu.CasePreviewMenu(ctx, player, def, null).open();
+        new org.bukkit.scheduler.BukkitRunnable() {
+            int step, elapsed; boolean interrupted;
+            @Override public void run() {
+                try {
+                    require(player.isOnline() && elapsed++ < 300, "queue controls timed out");
+                    if (step < 5) { CaseGuideRuntimeChecks.click(player, 47); step++; return; }
+                    if (step == 5) {
+                        CaseGuideRuntimeChecks.click(player, 52); step++;
+                        require(ctx.openings().activeCount(player) == 9 && ctx.openings().queuedCount(player) == 91, "GUI quantity 100 not queued");
+                        for (String input : java.util.List.of("0", "-1", "1001", "99999999999999999", "bad")) Bukkit.dispatchCommand(player, "cases open " + def.id() + " " + input);
+                        require(ctx.openings().queuedCount(player) == 91, "invalid command mutated queue");
+                        Bukkit.dispatchCommand(player, "cases cancel");
+                        require(ctx.openings().queuedCount(player) == 0 && ctx.openings().activeCount(player) == 9, "cancel removed prepared reward or left waiting request");
+                        return;
+                    }
+                    if (!interrupted) {
+                        if (ctx.openings().active(player).stream().anyMatch(o -> o.instance() == null || o.state() == dev.plattnericus.cases.opening.OpeningSession.State.PERSISTING)) return;
+                        require(ctx.caseItems().count(player, "case", def.id()) == 91 && ctx.caseItems().count(player, "key", key.id()) == 91, "cancel consumed waiting pairs");
+                        ctx.openings().queue(player, def, 91);
+                        require(ctx.openings().queuedCount(player) == 91, "cancel failed to release reservations");
+                        player.teleport(at.clone().add(20, 0, 0)); interrupted = true;
+                        require(ctx.openings().activeCount(player) == 0 && ctx.openings().queuedCount(player) == 0, "teleport left queue/display slots");
+                        return;
+                    }
+                    var added = ctx.profiles().get(player).owned().stream().filter(o -> !before.contains(o.id())).toList();
+                    if (added.size() != 9) return;
+                    require(ctx.caseItems().count(player, "case", def.id()) == 91 && ctx.caseItems().count(player, "key", key.id()) == 91, "teleport consumed waiting pairs");
+                    require(ctx.profiles().journal().entries(player).isEmpty(), "queue controls left receipts");
+                    cancel(); restore();
+                    String result = "PASS QUEUE CONTROLS: real GUI quantity 100, invalid numeric commands, cancel releases 91 reservations, teleport preserves 91 signed pairs and finalizes nine prepared rewards. Inventory restored.";
+                    sender.sendMessage(result); getLogger().info(result);
+                } catch (Exception failure) { cancel(); restore(); report(failure); }
+            }
+            void restore() { player.closeInventory(); player.teleport(at); player.getInventory().setContents(saved); player.getInventory().setHeldItemSlot(held); player.updateInventory(); }
+        }.runTaskTimer(this, 3, 2);
+    }
+
+    private void queueAudit(CommandSender sender, Player player, CasesContext ctx, int amount) {
+        require(ctx.openings().activeCount(player) == 0, "wait for held results to close before the nine audit");
+        ctx.inspect().stop(player); ctx.gallery().close(player); player.closeInventory();
+        ItemStack[] saved = snapshot(player);
+        int held = player.getInventory().getHeldItemSlot();
+        var def = ctx.catalog().caseDefinition("kilowatt_case");
+        var key = ctx.catalog().key(def.keyId());
+        var before = new java.util.HashSet<>(ctx.profiles().get(player).all().stream().map(dev.plattnericus.cases.skin.SkinInstance::id).toList());
+        player.getInventory().clear();
+        player.getInventory().setItem(0, ctx.caseItems().caseItem(def, Math.min(64, amount), true, ctx.messages(player)));
+        player.getInventory().setItem(1, ctx.caseItems().keyItem(key, Math.min(64, amount - 1), true, ctx.messages(player)));
+        if (amount > 64) {
+            player.getInventory().setItem(2, ctx.caseItems().caseItem(def, amount - 64, true, ctx.messages(player)));
+            player.getInventory().setItem(3, ctx.caseItems().keyItem(key, amount - 65, true, ctx.messages(player)));
+        }
+        ctx.openings().queue(player, def, amount);
+        require(ctx.openings().activeCount(player) == 0 && ctx.caseItems().count(player, "case", def.id()) == amount
+                && ctx.caseItems().count(player, "key", key.id()) == amount - 1, "insufficient nine request partly admitted or consumed");
+        player.getInventory().setItem(1, ctx.caseItems().keyItem(key, Math.min(64, amount), true, ctx.messages(player)));
+        if (amount > 64) player.getInventory().setItem(3, ctx.caseItems().keyItem(key, amount - 64, true, ctx.messages(player)));
+        // Exercise the actual protected GUI action, then its duplicate request guard.
+        new dev.plattnericus.cases.gui.menu.CasePreviewMenu(ctx, player, def, null).open();
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            try {
+                if (amount == 9) CaseGuideRuntimeChecks.click(player, dev.plattnericus.cases.gui.GuiItems.SLOT_FILTER);
+                else Bukkit.dispatchCommand(player, "cases open " + def.id() + " " + amount);
+                require(ctx.openings().activeCount(player) == 9 && ctx.openings().queuedCount(player) == amount - 9 && ctx.openings().available(player, def) == 0, "nine GUI action failed to reserve all pairs");
+                ctx.openings().openNine(player, def);
+                ctx.openings().open(player, def, false, false);
+                require(ctx.openings().activeCount(player) == 9, "duplicate request exceeded nine sessions");
+                sender.sendMessage("NINE READY: nine independent sessions admitted through the real preview button.");
+                getLogger().info("QUEUE READY " + amount + ": nine prepared slots; insufficient and duplicate requests rejected.");
+                player.closeInventory();
+                new org.bukkit.scheduler.BukkitRunnable() {
+                    private int elapsed;
+                    private final java.util.Map<java.util.UUID, String> reelModels = new java.util.HashMap<>();
+                    @Override public void run() {
+                        elapsed += 5;
+                        try {
+                            require(player.isOnline() && elapsed < amount * 320 + 1000, "queue runtime audit timed out or disconnected");
+                            require(ctx.openings().visibleCount(player) <= 1, "multiple simultaneous roulette views");
+                            if (ctx.settings().opening().worldDisplay() && ctx.openings().active(player).stream().anyMatch(o -> o.state() == dev.plattnericus.cases.opening.OpeningSession.State.ANIMATING)) {
+                                var displays = player.getWorld().getEntities().stream().filter(e -> e instanceof org.bukkit.entity.ItemDisplay
+                                        && e.getPersistentDataContainer().has(ctx.keys().displayEntity) && e.getLocation().distanceSquared(player.getLocation()) < 100)
+                                        .map(e -> (org.bukkit.entity.ItemDisplay) e).toList();
+                                var positions = new java.util.ArrayList<Float>();
+                                for (var display : displays) {
+                                    var stack = display.getItemStack(); String model = stack.getType() + ":" + stack.getItemMeta().getItemModel();
+                                    String prior = reelModels.putIfAbsent(display.getUniqueId(), model);
+                                    require(prior == null || prior.equals(model), "client entity changed its roulette item identity");
+                                    if (display.getTransformation().getScale().x() > .04f) positions.add(display.getTransformation().getTranslation().x());
+                                }
+                                positions.sort(Float::compare);
+                                for (int i = 1; i < positions.size(); i++) require(positions.get(i) - positions.get(i-1) >= ctx.settings().opening().world().spacing() * .99, "roulette items collapsed/overlapped");
+                                require(displays.size() <= ctx.settings().opening().world().visibleItems() + 32, "roulette entity window grew unbounded");
+                            }
+                            if (ctx.openings().activeCount(player) != 0 || ctx.openings().queuedCount(player) != 0) return;
+                            var added = ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id())).toList();
+                            require(added.size() == amount && added.stream().allMatch(s -> s.origin() == dev.plattnericus.cases.skin.SkinInstance.Origin.TEST), "nine-case reward count/provenance");
+                            require(ctx.caseItems().count(player, "case", def.id()) == 0 && ctx.caseItems().count(player, "key", key.id()) == 0, "nine-case pair consumption");
+                            require(ctx.profiles().journal().entries(player).isEmpty(), "nine-case receipt journal not cleared");
+                            require(player.getWorld().getEntities().stream().noneMatch(e -> e.getPersistentDataContainer().has(ctx.keys().displayEntity)
+                                    && e.getLocation().distanceSquared(player.getLocation()) < 100), "nine-case entities leaked");
+                            cancel(); restore();
+                            ctx.repository().loadActive(player.getUniqueId()).thenCombine(ctx.repository().history(player.getUniqueId(), 100), (active, history) -> {
+                                for (var reward : added) {
+                                    require(active.stream().filter(s -> s.id().equals(reward.id()) && s.status() == dev.plattnericus.cases.skin.SkinInstance.Status.OWNED).count() == 1, "batch reward not durable");
+                                    require(history.stream().filter(r -> r.instanceId().equals(reward.id()) && r.test()).count() == 1, "duplicate/missing batch audit");
+                                }
+                                return true;
+                            }).whenComplete((ok, error) -> Bukkit.getScheduler().runTask(RuntimeChecksPlugin.this, () -> {
+                                if (error != null) report(new IllegalStateException("nine-case durability failed", error));
+                                else {
+                                    String result = "PASS QUEUE " + amount + ": GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, receipt and world-entity cleanup. Inventory restored.";
+                                    sender.sendMessage(result); getLogger().info(result);
+                                }
+                            }));
+                        } catch (Exception failure) { cancel(); restore(); report(failure); }
+                    }
+                    private void restore() { player.closeInventory(); player.getInventory().setContents(saved); player.getInventory().setHeldItemSlot(held); player.updateInventory(); }
+                }.runTaskTimer(RuntimeChecksPlugin.this, 5, 5);
+            } catch (Exception failure) {
+                player.closeInventory(); player.getInventory().setContents(saved); player.getInventory().setHeldItemSlot(held); player.updateInventory(); report(failure);
+            }
+        }, 3);
     }
 
     private void openingAudit(CommandSender sender, Player player, CasesContext ctx) {

@@ -106,6 +106,19 @@ gui:
       lore:
       - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
       - <dark_gray>You need the case and a <key>.
+    queue-quantity:
+      name: '<gold>Quantity: <amount>'
+      lore: ['<gray>Click: 9, 18, 25, 50, 90 or 100']
+    queue-start:
+      name: '<green>Queue <amount> cases'
+      lore: ['<gray>One full-size roulette, in sequence.', '<gray>Requires <amount> cases and matching keys.']
+    open-nine:
+      name: <gold>Open 9 cases in sequence
+      lore:
+      - '<gray>Cases: <white><owned> <dark_gray>· <gray>Keys: <white><keys>'
+      - '<gray>Available pairs: <white><available>'
+      - <dark_gray>Uses 9 cases and 9 matching keys.
+      - <dark_gray>Each case has its own independent reward.
   rare:
     title: ★ <case>
   confirm:
@@ -121,6 +134,9 @@ gui:
     title: Skin inventory
     title-other: Skins of <player>
     tab:
+      gloves:
+        name: <white>Gloves
+        lore: ["<gray>Click to inspect the paired gloves."]
       all:
         name: <white>All skins
         lore: []
@@ -290,6 +306,15 @@ preview:
   loading: <gray>Rendering preview...
   hint: <gray>Sneak to close
 opening:
+  missing-amount: '<prefix><red>You need <amount> available <case> cases and matching keys.'
+  queue-added: '<prefix><gray>Queued <amount> cases. <remaining> openings remain; one roulette in sequence.'
+  queue-full: '<prefix><red>The queue accepts a total of 1 to 1000 openings.'
+  queue-interrupted: '<prefix><yellow>Queue stopped: a case or key is missing or changed. Waiting items remain yours.'
+  queue-cancelled: '<prefix><gray>Removed <amount> waiting openings. Prepared rewards will still be shown.'
+  queue-usage: '<prefix><gray>/cases open \<Case-ID> \<1–1000> or /cases cancel'
+  queue-summary: {name: '<gold>Opening queue', lore: ['<gray>Prepared: <active>/9', '<gray>Waiting: <waiting>', '<gray>One full-size roulette.']}
+  queue-cancel: {name: '<red>Cancel waiting openings', lore: ['<gray>Prepared rewards remain yours.']}
+  missing-nine: '<prefix><red>You need 9 available <case> cases and 9 matching <key> keys.'
   title: <case>
   title-test: <red>TEST</red> <case>
   bubble: <black>gold gold gold
@@ -306,7 +331,7 @@ opening:
   result-test: '<prefix><red>[Test]</red> <gray>Result: <skin> <dark_gray>(<float>, #<pattern>) - not saved'
   broadcast: <prefix><white><player></white> <gray>unboxed <skin><gray>!
   reveal:
-    rare-title: <gradient:#e4ae39:#f6d27a><b>RARE SPECIAL ITEM</b></gradient>
+    rare-title: <gradient:#e4ae39:#f6d27a><b>★ RARE DROP</b></gradient>
   buttons:
     inspect:
       name: <white>Inspect
@@ -325,6 +350,7 @@ opening:
 
   states:
     ROLLING: "Preparing result"
+    READY: "Prepared reward"
     PERSISTING: "Saving reward"
     ANIMATING: "Opening"
     REVEALING: "Revealing"
@@ -600,7 +626,7 @@ market:
   legacy-usage: "<prefix><gray>/market legacy <player>"
   legacy: "<prefix><gray>Archived Coin balance for <player>: <balance>. No Emerald conversion."
   sorts: {"0": "Newest", "1": "Price ascending", "2": "Price descending", "3": "Lowest float", "4": "Rarity"}
-  categories: {"0": "All skins", "1": "Knives", "2": "Weapons", "3": "Pistols", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives"}
+  categories: {"0": "All skins", "1": "Knives", "2": "Weapons", "3": "Pistols", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives", "10": "Gloves"}
 
 
 input:
@@ -615,7 +641,7 @@ browser:
   sort: {"name": "<white>Sort: <value>", "lore": []}
   search: {"name": "<white>Search: <query>", "lore": ["<yellow>Click: type · Right click: clear"]}
   sorts: {"0": "Rarity", "1": "Name", "2": "Float", "3": "Newest"}
-  categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives"}
+  categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Gloves"}
 
 tradein:
   title: "Trade-in contract"

@@ -216,21 +216,33 @@ Existing YAML settings and translations are preserved while missing defaults are
 
 ### Independent case openings
 
-Every normal opening starts one independent session with its own opening UUID, server roll, journal,
-SQL record and animation task. Continue clicking the ordinary case-opening button, or right-click a
-case entry in `/cases`, while earlier animations run. Every committed opening consumes exactly one
-signed case and one matching key. There is no batch button or waiting cooldown.
+Every committed opening has its own UUID, server roll, journal and SQL record, and consumes
+exactly one signed case and matching key. **Open 9 cases in sequence** in the case contents menu
+starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
+`/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-`/openings` and the clock button in `/cases` show active sessions and the last 20 results.
-World reels use separate lanes and a bounded pool of display entities. GUI reels continue running
-when hidden; opening, closing or replacing a chest GUI changes only presentation. The case preview
-stays open so its ordinary open button remains usable. Inventory roulette has the same ordinary
-**Open again** action during movement. Collection rewards are independent of the visible GUI.
+One roulette presents the results in request order, at exactly the configured single-opening
+size and position. At most nine sessions per player are prepared ahead of that presentation.
+The default global preparation limit is 64. Repeated clicks reserve cases and shared keys, so
+the same pair cannot be promised twice. Waiting requests consume no items. Inventory changes
+or catalog changes that invalidate a waiting request stop the remaining queue.
 
-The default technical capacity is eight sessions per player and 64 globally. Held world results
-count toward the limit until their entities are removed. Rejected requests consume no items.
-Disconnects and shutdowns leave determined results in SQL or the player journal for recovery.
-Case openings can overlap direct trading; reserved skins remain unavailable to other systems.
+`/openings` shows prepared sessions, waiting count and the last 20 results. `/cases cancel`
+(or the cancellation button in `/openings`) removes waiting requests; already prepared rewards
+still finish. Disconnects, death, distant teleports and shutdowns cancel unstarted requests.
+Committed results remain in SQL or the player journal and are recovered after reconnecting.
+
+World presentation uses a bounded moving window of display entities. Each entity keeps its
+item identity; prefetched entries initialize invisibly, and edge fades stay inside the strip.
+Unchanged poses do not restart interpolation. Each result fades the other icons, enlarges the winner and
+then advances the queue. Queued results use shorter holds (at most 20 reveal ticks and 10 world
+result ticks); roulette movement keeps the configured duration and easing. GUI presentation
+also runs sequentially and continues when hidden. Case preview and trading menus remain usable.
+
+On an existing server, set `opening.max-active-per-player: 9` in
+`plugins/MCCases/config.yml`; existing limits are preserved. Lower limits also work with the
+queue; higher limits are capped at nine. Held world results count toward preparation capacity.
+Case openings may overlap direct trading; reserved skins remain unavailable to other systems.
 
 ### Trade-in contracts and gold drops
 
@@ -393,7 +405,7 @@ Default files are stored in `plugins/MCCases/`. Values below refer to the bundle
 | `opening.display` | `world` | Public opening reel; alternatively `gui` |
 | `opening.duration-ticks` | `120` | Roulette movement duration; 20 ticks equal one second |
 | `opening.easing` | `cinematic` | Deceleration curve |
-| `opening.max-active-per-player` | `8` | Concurrent sessions; rejects before item consumption |
+| `opening.max-active-per-player` | `9` | Prepared sessions per player, capped at nine; one visible roulette |
 | `opening.max-active-global` | `64` | Global animation capacity |
 | `trade-in.broadcast-gold` | `true` | Gold contract broadcasts |
 | `trade-in.broadcast-admin` | `false` | Allow administrator-input broadcasts explicitly |

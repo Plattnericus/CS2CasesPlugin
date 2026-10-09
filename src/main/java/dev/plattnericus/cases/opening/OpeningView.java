@@ -10,6 +10,9 @@ interface OpeningView {
 
     void frame(double center);
 
+    /** Client ticks needed to finish the last movement before the winner grows. */
+    default int settleTicks() { return 0; }
+
     /** The winner is now known to the player (gold mystery icon replaced, effects). */
     void reveal();
 

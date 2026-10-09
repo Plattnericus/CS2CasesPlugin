@@ -26,3 +26,29 @@ skins:
   mp9_food_chain: {weapon: mp9, rarity: classified, name: "Food Chain", style: graffiti, palette: ["#1a1a1a", "#5ad01a", "#c81a1a"]}
   m4a4_in_living_color: {weapon: m4a4, rarity: covert, name: "In Living Color", style: graffiti, palette: ["#e83ab0", "#2ad0f0", "#f0e020", "#1a1a1a"]}
   usps_the_traitor: {weapon: usps, rarity: covert, name: "The Traitor", style: graffiti, palette: ["#1a1a1a", "#c8a040", "#c81a1a", "#e8e8e8"]}
+
+  # Complete 24-finish glove rare-special pool; no StatTrak gloves.
+  broken_fang_gloves_needle_point: {"weapon": "broken_fang_gloves", "rarity": "rare_special", "name": "Needle Point", "style": "mesh", "palette": ["#34262c", "#875268", "#bc9d9a"], "float": [0.06, 0.8], "stattrak": false}
+  broken_fang_gloves_yellow_banded: {"weapon": "broken_fang_gloves", "rarity": "rare_special", "name": "Yellow-banded", "style": "stripes", "palette": ["#2a2720", "#b39136", "#e2ca6a"], "float": [0.06, 0.8], "stattrak": false}
+  broken_fang_gloves_jade: {"weapon": "broken_fang_gloves", "rarity": "rare_special", "name": "Jade", "style": "solid", "palette": ["#183329", "#418d65", "#a2c49f"], "float": [0.06, 0.8], "stattrak": false}
+  broken_fang_gloves_unhinged: {"weapon": "broken_fang_gloves", "rarity": "rare_special", "name": "Unhinged", "style": "graffiti", "palette": ["#2b2c30", "#74777d", "#d0cec5"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_slingshot: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Slingshot", "style": "mesh", "palette": ["#34202d", "#9e2c52", "#dd91a1"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_nocts: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Nocts", "style": "carbon", "palette": ["#131519", "#33353c", "#666a73"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_scarlet_shamagh: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Scarlet Shamagh", "style": "camo", "palette": ["#361b22", "#862c3f", "#c47b7d"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_big_game: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Big Game", "style": "camo", "palette": ["#2c3227", "#80754a", "#c69861"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_snow_leopard: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Snow Leopard", "style": "scales", "palette": ["#424747", "#bcc0b5", "#efefdc"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_rezan_the_red: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Rezan the Red", "style": "solid", "palette": ["#302328", "#7e3d44", "#b87174"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_black_tie: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Black Tie", "style": "stripes", "palette": ["#16181c", "#7b7e80", "#e3e2d9"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_queen_jaguar: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Queen Jaguar", "style": "scales", "palette": ["#483e2a", "#a29361", "#d7c791"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_caution: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "CAUTION!", "style": "stripes", "palette": ["#2a2721", "#e3bf39", "#f5e482"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_constrictor: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Constrictor", "style": "scales", "palette": ["#453626", "#8b7651", "#bba983"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_giraffe: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Giraffe", "style": "camo", "palette": ["#63482e", "#b5a16d", "#e1cea0"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_desert_shamagh: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Desert Shamagh", "style": "camo", "palette": ["#74684f", "#b9ad8d", "#d8ccae"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_smoke_out: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Smoke Out", "style": "carbon", "palette": ["#22272c", "#636970", "#adb3b5"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_finish_line: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Finish Line", "style": "stripes", "palette": ["#173744", "#389aaf", "#dfe9e3"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_blood_pressure: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Blood Pressure", "style": "web", "palette": ["#28161c", "#992639", "#da7480"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_3rd_commando_company: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "3rd Commando Company", "style": "camo", "palette": ["#272e22", "#646c44", "#aaa773"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_marble_fade: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Marble Fade", "style": "marble", "palette": ["#ebc740", "#e96361", "#5385cf"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_tiger_strike: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Tiger Strike", "style": "tiger", "palette": ["#322518", "#cb8739", "#e9be63"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_lt_commander: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Lt. Commander", "style": "camo", "palette": ["#353c34", "#859078", "#bfba9b"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_field_agent: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Field Agent", "style": "stripes", "palette": ["#223550", "#3c6b9b", "#c59d5a"], "float": [0.06, 0.8], "stattrak": false}

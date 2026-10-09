@@ -56,7 +56,7 @@ public final class InspectAnimation {
     }
 
     public List<Integer> samples() {
-        return samples;
+        return List.copyOf(samples);
     }
 
     public Map<Integer, String> sounds() {
@@ -126,7 +126,29 @@ public final class InspectAnimation {
             duration = Math.max(duration, t);
         }
         times.add(duration);
+        // Endpoint quaternions cannot detect full turns. Refine using unwrapped
+        // angular travel of the joint and every parent to preserve compound spins.
+        boolean refined;
+        do {
+            refined = false;
+            var ordered = List.copyOf(times);
+            for (int i = 1; i < ordered.size(); i++) {
+                int start = ordered.get(i - 1), end = ordered.get(i);
+                if (end - start <= 1) continue;
+                for (Group group : groups.values()) if (rotationTravel(group, start, end) > 60) {
+                    times.add((start + end) / 2);
+                    refined = true;
+                    break;
+                }
+            }
+        } while (refined);
         samples.addAll(times);
+    }
+
+    private float rotationTravel(Group group, int start, int end) {
+        Vector3f delta = new Vector3f(pose(group.id(), end).rotate()).sub(pose(group.id(), start).rotate()).absolute();
+        float travel = delta.x + delta.y + delta.z;
+        return travel + (group.parent() == null ? 0 : rotationTravel(groups.get(group.parent()), start, end));
     }
 
     /** Pose of a group at time {@code t} (ticks). */

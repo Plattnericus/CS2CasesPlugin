@@ -208,12 +208,17 @@ public final class InspectService implements Listener {
             if (!d.isValid()) {
                 continue;
             }
-            d.setInterpolationDelay(0);
-            d.setInterpolationDuration(duration);
             String group = group(s.animation, pe.part());
             Matrix4f pose = poses.computeIfAbsent(group, key -> s.animation.groupMatrix(key, targetTick));
-            d.setTransformationMatrix(matrix(pose, body, pe.part(), pe.observers() ? s.handScale : s.scale,
-                    s.leftHand, pe.observers() || s.bodyHand));
+            Matrix4f target = matrix(pose, body, pe.part(), pe.observers() ? s.handScale : s.scale,
+                    s.leftHand, pe.observers() || s.bodyHand);
+            // A held joint must finish its prior tween. Resetting only its start time replays
+            // that movement even though the target matrix is unchanged.
+            Matrix4f previous = s.lastMatrices.put(d.getUniqueId(), target);
+            if (duration != 0 && target.equals(previous)) continue;
+            d.setInterpolationDelay(0);
+            d.setInterpolationDuration(duration);
+            d.setTransformationMatrix(target);
         }
     }
 

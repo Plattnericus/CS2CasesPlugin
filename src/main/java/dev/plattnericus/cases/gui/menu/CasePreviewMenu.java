@@ -26,6 +26,8 @@ public final class CasePreviewMenu extends Menu {
     private final CaseDefinition def;
     private final Runnable back;
     private int page;
+    private int quantityIndex;
+    private static final int[] QUANTITIES = {9, 18, 25, 50, 90, 100};
 
     public CasePreviewMenu(CasesContext ctx, Player viewer, CaseDefinition def, Runnable back) {
         super(ctx, viewer);
@@ -108,7 +110,8 @@ public final class CasePreviewMenu extends Menu {
         });
         int owned = ctx.caseItems().count(viewer, CaseItems.TYPE_CASE, def.id());
         int keys = ctx.caseItems().count(viewer, CaseItems.TYPE_KEY, def.keyId());
-        boolean canOpen = owned > 0 && keys > 0;
+        int available = ctx.openings().available(viewer, def);
+        boolean canOpen = available > 0;
         String keyName = ctx.catalog().key(def.keyId()) == null ? def.keyId() : ctx.catalog().key(def.keyId()).name();
         set(GuiItems.SLOT_CENTER, GuiItems.icon(ctx.messages(viewer), canOpen ? Material.LIME_DYE : Material.GRAY_DYE,
                 canOpen ? "gui.preview.open" : "gui.preview.cannot-open",
@@ -121,6 +124,18 @@ public final class CasePreviewMenu extends Menu {
             ctx.openings().open(viewer, def, false, false);
             render();
         });
+        set(GuiItems.SLOT_FILTER, GuiItems.icon(ctx.messages(viewer), available >= 9 ? Material.ENDER_CHEST : Material.GRAY_DYE,
+                "gui.preview.open-nine", Text.unparsed("owned", owned), Text.unparsed("keys", keys),
+                Text.unparsed("available", available), Text.unparsed("key", keyName)), c -> {
+            playClick();
+            ctx.openings().openNine(viewer, def);
+            render();
+        });
+        int quantity = QUANTITIES[quantityIndex];
+        set(47, GuiItems.icon(ctx.messages(viewer), Material.COMPARATOR, "gui.preview.queue-quantity",
+                Text.unparsed("amount", quantity)), c -> { quantityIndex = (quantityIndex + 1) % QUANTITIES.length; playClick(); render(); });
+        set(52, GuiItems.icon(ctx.messages(viewer), available >= quantity ? Material.LIME_DYE : Material.GRAY_DYE,
+                "gui.preview.queue-start", Text.unparsed("amount", quantity)), c -> { playClick(); ctx.openings().queue(viewer, def, quantity); render(); });
         set(GuiItems.SLOT_EXTRA, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
     }
 

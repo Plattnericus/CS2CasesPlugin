@@ -43,7 +43,7 @@ public final class MarketMenu extends Menu {
         var offers = service.listings().stream().filter(l -> !own || l.skin().owner().equals(viewer.getUniqueId()))
                 .filter(l -> {
                     var def = ctx.catalog().skin(l.skin().skinId());
-                    return def != null && (category == 0 || (category == 1 ? def.isKnife() : category == 2 ? !def.isKnife() : def.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.values()[category - 3]))
+                    return def != null && (category == 0 || (category == 1 ? def.isKnife() : category == 2 ? !def.weapon().category().isStarItem() : def.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.values()[category - 3]))
                             && (rarity == 0 || def.rarity().id().equals(ctx.catalog().raritiesOrdered().get(rarity - 1).id()))
                             && (query.isBlank() || (def.id() + " " + Text.plain(ctx.formatter(viewer).fullName(def, l.skin())) + " " + l.sellerName()).toLowerCase(Locale.ROOT).contains(query));
                 }).sorted(comparator.thenComparing(l -> l.id().toString())).toList();

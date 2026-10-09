@@ -10,7 +10,7 @@ import java.util.UUID;
 /** Remembers category, sorting and filters of each player's skin inventory for the session. */
 public final class MenuStates {
 
-    public enum Category { ALL, WEAPONS, KNIVES, STATTRAK, FAVORITES, RECENT }
+    public enum Category { ALL, WEAPONS, KNIVES, STATTRAK, FAVORITES, RECENT, GLOVES }
 
     public enum Sort { RARITY, FLOAT, NAME, WEAR, PATTERN, NEWEST, OLDEST }
 

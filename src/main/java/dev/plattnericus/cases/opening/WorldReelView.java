@@ -34,12 +34,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Public reel with a bounded ring of display entities reused outside the visible window. */
+/** Public reel with immutable item identities and a bounded, moving display window. */
 final class WorldReelView implements OpeningView {
 
     private static final AxisAngle4f NO_ROTATION = new AxisAngle4f();
     /** Ticks between keyframes; the client interpolates linearly in between. */
     private static final int STEP = 2;
+    private static final int WARMUP = 1;
 
     private final CasesContext ctx;
     private final OpeningService service;
@@ -48,9 +49,8 @@ final class WorldReelView implements OpeningView {
     private final OpeningSession session;
     private final PluginSettings.WorldReel cfg;
     private final double window;
-    private final List<ItemDisplay> items = new ArrayList<>();
-    private final List<BlockDisplay> bars = new ArrayList<>();
-    private int[] represented;
+    private record Slot(ItemDisplay item, BlockDisplay bar, int spawnedAt) { }
+    private final Map<Integer, Slot> slots = new java.util.LinkedHashMap<>();
     private final List<Entity> all = new ArrayList<>();
     private final Map<String, ItemStack> icons = new HashMap<>();
     private TextDisplay title;
@@ -74,41 +74,23 @@ final class WorldReelView implements OpeningView {
         anchor = anchor();
         double width = cfg.visibleItems() * cfg.spacing() + 0.2;
         double half = cfg.itemScale() / 2;
-        all.add(block(Material.BLACK_STAINED_GLASS, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
+        all.add(block(Material.BLACK_CONCRETE, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
                 new Vector3f((float) width, (float) (cfg.itemScale() + 0.36), 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (half + 0.04), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (-half - 0.14), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
-        represented = new int[cfg.visibleItems() + 4]; java.util.Arrays.fill(represented, -1);
-        List<SkinDefinition> reel = session.reel;
-        for (int i = 0; i < cfg.visibleItems() + 4; i++) {
-            SkinDefinition def = reel.get(i);
-            ItemStack stack = icon(def, false);
-            ItemDisplay item = anchor.getWorld().spawn(anchor, ItemDisplay.class, d -> {
-                common(d);
-                d.setItemStack(stack);
-                d.setItemDisplayTransform(ItemDisplay.ItemDisplayTransform.FIXED);
-            });
-            BlockData barBlock = barBlock(def.rarity());
-            BlockDisplay bar = anchor.getWorld().spawn(anchor, BlockDisplay.class, d -> {
-                common(d);
-                d.setBlock(barBlock);
-            });
-            items.add(item);
-            bars.add(bar);
-            all.add(item);
-            all.add(bar);
-        }
         title = anchor.getWorld().spawn(anchor, TextDisplay.class, d -> {
             common(d);
             d.text(ctx.messages(player).get("opening.world.title", Text.unparsed("player", player.getName()),
                     Text.unparsed("case", session.caseDef.name())));
             d.setBackgroundColor(Color.fromARGB(150, 10, 12, 16));
+            d.setLineWidth(280);
+            float textScale = .6f;
             d.setTransformation(new Transformation(new Vector3f(0, (float) (half + 0.2), 0), NO_ROTATION,
-                    new Vector3f(0.6f, 0.6f, 0.6f), NO_ROTATION));
+                    new Vector3f(textScale), NO_ROTATION));
         });
         all.add(title);
         clickTargets(half);
-        place(4, 0);
+        place(4, 4, 0);
     }
 
     /**
@@ -138,7 +120,7 @@ final class WorldReelView implements OpeningView {
 
     /** In front of the player at eye height, pulled closer if a wall is in the way, facing the player. */
     private Location anchor() {
-        Location eye = player.getEyeLocation();
+        Location eye = session.origin == null ? player.getEyeLocation() : session.origin.clone();
         Vector forward = eye.getDirection().setY(0);
         if (forward.lengthSquared() < 1e-6) {
             forward = new Vector(0, 0, 1);
@@ -150,12 +132,6 @@ final class WorldReelView implements OpeningView {
             distance = Math.max(1.2, eye.toVector().distance(hit.getHitPosition()) - 0.5);
         }
         Location loc = eye.clone().add(forward.multiply(distance)).add(0, cfg.height(), 0);
-        // Separate lanes for concurrent openings, including the result hold period.
-        Vector right = eye.getDirection().setY(0).normalize().crossProduct(new Vector(0, 1, 0)).normalize();
-        int column = session.lane % 3;
-        int row = session.lane / 3;
-        loc.add(right.multiply((column == 0 ? 0 : column == 1 ? -1 : 1) * (cfg.visibleItems() * cfg.spacing() + 0.7)))
-                .add(0, row * (cfg.itemScale() + 0.85), 0);
         loc.setYaw(eye.getYaw() + 180);
         loc.setPitch(0);
         return loc;
@@ -197,45 +173,96 @@ final class WorldReelView implements OpeningView {
         if (target == lastKeyframe) {
             return;
         }
-        place(target, last ? 1 : STEP);
+        place(center, target, last ? 1 : STEP);
         ticksSinceKeyframe = 0;
         lastKeyframe = target;
     }
 
     /** Position {@link #STEP} ticks ahead on the session's easing curve. */
     private double predict(double center) {
-        int duration = ctx.settings().opening().durationTicks();
-        Easing easing = Easing.parse(ctx.settings().opening().easing());
+        int duration = session.duration;
+        Easing easing = session.easing;
         int distance = session.winnerIndex - 4;
         double t = Math.min(duration, session.tick + STEP) / (double) duration;
         return Math.max(center, Math.min(session.winnerIndex, 4 + easing.apply(t) * distance));
     }
 
-    /** Puts the strip so that reel index {@code center} is under the marker. */
-    private void place(double center, int duration) {
-        float half = (float) (cfg.itemScale() / 2);
-        for (int i = 0; i < items.size(); i++) {
-            int first = (int) Math.floor(center) - items.size() / 2;
-            int index = first + Math.floorMod(i - first, items.size());
-            int safeIndex = Math.clamp(index, 0, session.reel.size() - 1);
-            SkinDefinition def = session.reel.get(safeIndex);
-            if (represented[i] != safeIndex) { items.get(i).setItemStack(icon(def, false)); bars.get(i).setBlock(barBlock(def.rarity())); represented[i] = safeIndex; }
-            float x = (float) ((index - center) * cfg.spacing());
-            float edge = (float) Math.min(1, Math.abs(x) / (window + 0.0001));
-            boolean visible = Math.abs(x) <= window;
-            float s = visible ? (float) (cfg.itemScale() * (1 - 0.35 * edge * edge)) : 0f;
-            float barWidth = visible ? (float) (cfg.spacing() * 0.82 * (1 - 0.35 * edge * edge)) : 0f;
-            ItemDisplay item = items.get(i);
-            item.setInterpolationDelay(0);
-            item.setInterpolationDuration(duration);
-            item.setTransformation(new Transformation(new Vector3f(x, 0, 0), NO_ROTATION, new Vector3f(s, s, s), NO_ROTATION));
-            BlockDisplay bar = bars.get(i);
-            bar.setInterpolationDelay(0);
-            bar.setInterpolationDuration(duration);
-            bar.setTransformation(new Transformation(new Vector3f(x - barWidth / 2, -half - 0.09f, -0.04f), NO_ROTATION,
-                    new Vector3f(barWidth, visible ? 0.035f : 0f, 0.02f), NO_ROTATION));
+    /** Keep the current and next window. A slot's reel identity never changes in the client. */
+    private void place(double current, double target, int duration) {
+        int padding = cfg.visibleItems() / 2 + 2;
+        int first = Math.max(0, (int) Math.floor(current) - padding);
+        double preload = session.duration == 0 ? target : 4 + session.easing.apply(
+                Math.min(session.duration, session.tick + 2 * STEP + WARMUP) / (double) session.duration) * (session.winnerIndex - 4);
+        int last = Math.min(session.reel.size() - 1, (int) Math.ceil(Math.max(target, preload)) + padding);
+        for (var iterator = slots.entrySet().iterator(); iterator.hasNext();) {
+            var entry = iterator.next();
+            if (entry.getKey() < first || entry.getKey() > last) {
+                Slot slot = entry.getValue(); slot.item().remove(); slot.bar().remove();
+                all.remove(slot.item()); all.remove(slot.bar()); iterator.remove();
+            }
+        }
+        for (int index = first; index <= last; index++) {
+            Slot slot = slots.get(index);
+            if (slot == null) {
+                SkinDefinition def = session.reel.get(index);
+                final int reelIndex = index;
+                ItemDisplay item = anchor.getWorld().spawn(anchor, ItemDisplay.class, d -> {
+                    common(d); d.setItemStack(icon(def, false));
+                    d.setItemDisplayTransform(ItemDisplay.ItemDisplayTransform.FIXED);
+                    d.setInterpolationDuration(0);
+                    d.setTransformation(itemPose(reelIndex, target));
+                });
+                BlockDisplay bar = anchor.getWorld().spawn(anchor, BlockDisplay.class, d -> {
+                    common(d); d.setBlock(barBlock(def.rarity()));
+                    d.setInterpolationDuration(0);
+                    d.setTransformation(barPose(reelIndex, target));
+                });
+                slot = new Slot(item, bar, session.tick); slots.put(index, slot); all.add(item); all.add(bar);
+            }
+            // A newly tracked display has no previous client render state. Interpolating its
+            // first metadata packet can blend from the default unit-scale pose. Preload far
+            // enough along the curve to initialize invisible entries before they reach the
+            // strip, then update every entry on the same keyframe schedule.
+            int interpolation = session.tick - slot.spawnedAt() < WARMUP ? 0 : duration;
+            keyframe(slot.item(), itemPose(index, target), interpolation);
+            keyframe(slot.bar(), barPose(index, target), interpolation);
         }
     }
+
+    private void keyframe(Display display, Transformation pose, int duration) {
+        // Resetting start_interpolation without changing the pose restarts the previous client
+        // tween. At the edge that makes an already hidden item jump back into view forever.
+        if (display.getTransformation().equals(pose)) return;
+        display.setInterpolationDelay(0);
+        display.setInterpolationDuration(duration);
+        display.setTransformation(pose);
+    }
+
+    private float visibility(float x) {
+        return (float) Math.clamp((window - Math.abs(x)) / (cfg.spacing() * .65), 0, 1);
+    }
+    private float falloff(float x) {
+        double edge = Math.min(1, Math.abs(x) / window);
+        return (float) ((1 - .35 * edge * edge) * visibility(x));
+    }
+    private Transformation itemPose(int index, double center) {
+        float x = (float) ((index - center) * cfg.spacing());
+        float scale = (float) cfg.itemScale() * falloff(x);
+        // Both endpoints stay inside the strip, including when a fast keyframe crosses its
+        // boundary. Client interpolation must never carry a still-visible sprite beyond it.
+        float boundedX = (float) Math.clamp(x, -window, window);
+        return new Transformation(new Vector3f(boundedX, 0, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION);
+    }
+    private Transformation barPose(int index, double center) {
+        float x = (float) ((index - center) * cfg.spacing());
+        float visible = visibility(x), width = (float) (cfg.spacing() * .82) * falloff(x);
+        float boundedX = (float) Math.clamp(x, -window, window);
+        return new Transformation(new Vector3f(boundedX - width / 2, (float) (-cfg.itemScale() / 2 - .09), -.04f), NO_ROTATION,
+                new Vector3f(width, .035f * visible, .02f), NO_ROTATION);
+    }
+
+    @Override
+    public int settleTicks() { return STEP + 1; }
 
     @Override
     public void reveal() {
@@ -244,7 +271,13 @@ final class WorldReelView implements OpeningView {
         }
         SkinDefinition reward = session.reward;
         int w = session.winnerIndex;
-        ItemDisplay winner = items.get(Math.floorMod(w, items.size()));
+        ItemDisplay winner = slots.get(w).item();
+        for (Slot slot : slots.values()) {
+            Transformation barPose = slot.bar().getTransformation(); barPose.getScale().zero(); keyframe(slot.bar(), barPose, 8);
+            if (slot.item() != winner) {
+                Transformation pose = slot.item().getTransformation(); pose.getScale().zero(); keyframe(slot.item(), pose, 8);
+            }
+        }
         // the same entity that scrolled in: only the gold mystery icon is replaced by the real item
         if (reward.rarity().rareSpecial()) {
             winner.setItemStack(icon(reward, true));
@@ -271,7 +304,7 @@ final class WorldReelView implements OpeningView {
         if (closed || cleanup != null) {
             return;
         }
-        cleanup = Bukkit.getScheduler().runTaskLater(ctx.plugin(), this::close, cfg.holdTicks());
+        cleanup = Bukkit.getScheduler().runTaskLater(ctx.plugin(), this::close, session.sequence ? Math.min(10, cfg.holdTicks()) : cfg.holdTicks());
     }
 
     @Override
@@ -290,7 +323,7 @@ final class WorldReelView implements OpeningView {
         for (Entity e : all) {
             e.remove();
         }
-        all.clear();
+        all.clear(); slots.clear();
         service.viewClosed(session);
     }
 

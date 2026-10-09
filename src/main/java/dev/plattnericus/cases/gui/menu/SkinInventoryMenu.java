@@ -24,7 +24,7 @@ import java.util.Locale;
 public final class SkinInventoryMenu extends Menu {
 
     private static final Material[] TAB_ICONS = {Material.CHEST, Material.CROSSBOW, Material.IRON_SWORD,
-            Material.COMPARATOR, Material.NETHER_STAR, Material.CLOCK};
+            Material.COMPARATOR, Material.NETHER_STAR, Material.CLOCK, Material.LEATHER};
 
     private final MenuStates.State state;
 

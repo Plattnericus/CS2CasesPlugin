@@ -64,3 +64,13 @@ weapons:
   nomad:          {name: "Nomad Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
   skeleton:       {name: "Skeleton Knife",  category: knife, icon: IRON_SWORD, regions: {blade: [0.44, 0.42, 1.0, 0.57], tip: [0.80, 0.42, 1.0, 0.57]}}
   kukri:          {name: "Kukri Knife",     category: knife, icon: IRON_SWORD, regions: {blade: [0.38, 0.42, 1.0, 0.68], tip: [0.84, 0.50, 1.0, 0.68]}}
+
+  # Gloves: paired, cosmetic rare-special items; never StatTrak.
+  bloodhound_gloves: {"name": "Bloodhound Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  hydra_gloves: {"name": "Hydra Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  broken_fang_gloves: {"name": "Broken Fang Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  sport_gloves: {"name": "Sport Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  driver_gloves: {"name": "Driver Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  hand_wraps: {"name": "Hand Wraps", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  moto_gloves: {"name": "Moto Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}
+  specialist_gloves: {"name": "Specialist Gloves", "category": "glove", "icon": "LEATHER", "stattrak": false, "regions": {"playside": [0.15, 0.35, 0.85, 0.8]}}

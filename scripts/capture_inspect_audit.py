@@ -53,7 +53,7 @@ def main():
    for tick in [8,22,40]:
     frame(id,v,tick,'eye',0);data=dict(weapon=id,animation=animation,tick=tick,mode='eye',hand='right',angle=0)
     shot('client',f'{id}_{v}_{tick}_eye',data);shot('observer',f'{id}_{v}_{tick}_front',data)
-   if weapon['category']=='knife':
+   if weapon['category'] in {'knife','glove'}:
     for angle in [1,2,3]:
      frame(id,v,22,'eye',angle);data=dict(weapon=id,animation=animation,tick=22,mode='eye',hand='right',angle=angle)
      shot('observer',f'{id}_{v}_side{angle}',data)

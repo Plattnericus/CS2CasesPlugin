@@ -26,3 +26,29 @@ skins:
   sawedoff_wasteland_princess: {weapon: sawedoff, rarity: classified, name: "Wasteland Princess", style: graffiti, palette: ["#e8e8e8", "#c8a040", "#c81a1a", "#1a1a1a"]}
   m4a4_buzz_kill: {weapon: m4a4, rarity: covert, name: "Buzz Kill", style: hex, palette: ["#1a1a1a", "#f0c020", "#e8e8e8"]}
   ssg08_dragonfire: {weapon: ssg08, rarity: covert, name: "Dragonfire", style: flames, palette: ["#1a0a0a", "#c81a1a", "#f0a020", "#f0e060"]}
+
+  # Complete 24-finish glove rare-special pool; no StatTrak gloves.
+  bloodhound_gloves_charred: {"weapon": "bloodhound_gloves", "rarity": "rare_special", "name": "Charred", "style": "carbon", "palette": ["#25272b", "#555b64", "#92979e"], "float": [0.06, 0.8], "stattrak": false}
+  bloodhound_gloves_snakebite: {"weapon": "bloodhound_gloves", "rarity": "rare_special", "name": "Snakebite", "style": "scales", "palette": ["#453727", "#837346", "#b8a47a"], "float": [0.06, 0.8], "stattrak": false}
+  bloodhound_gloves_bronzed: {"weapon": "bloodhound_gloves", "rarity": "rare_special", "name": "Bronzed", "style": "brushed", "palette": ["#372a23", "#895b3f", "#bda37b"], "float": [0.06, 0.8], "stattrak": false}
+  bloodhound_gloves_guerrilla: {"weapon": "bloodhound_gloves", "rarity": "rare_special", "name": "Guerrilla", "style": "camo", "palette": ["#2b3829", "#686644", "#ba975d"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_hedge_maze: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Hedge Maze", "style": "mesh", "palette": ["#143c25", "#288b3d", "#b6d366"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_pandora_s_box: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Pandora's Box", "style": "hex", "palette": ["#17122c", "#543294", "#9c6ddd"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_superconductor: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Superconductor", "style": "circuit", "palette": ["#1b323d", "#71c7db", "#cdeef3"], "float": [0.06, 0.8], "stattrak": false}
+  sport_gloves_arid: {"weapon": "sport_gloves", "rarity": "rare_special", "name": "Arid", "style": "camo", "palette": ["#655339", "#a79469", "#d6c79e"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_lunar_weave: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Lunar Weave", "style": "mesh", "palette": ["#171f31", "#506f9b", "#a1b2ce"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_convoy: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Convoy", "style": "camo", "palette": ["#363b29", "#727754", "#aaa881"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_crimson_weave: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Crimson Weave", "style": "mesh", "palette": ["#27151b", "#9f2036", "#cc727d"], "float": [0.06, 0.8], "stattrak": false}
+  driver_gloves_diamondback: {"weapon": "driver_gloves", "rarity": "rare_special", "name": "Diamondback", "style": "scales", "palette": ["#43352a", "#9d8d72", "#cabda4"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_leather: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Leather", "style": "brushed", "palette": ["#533b28", "#9b734c", "#c9a578"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_spruce_ddpat: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Spruce DDPAT", "style": "digital", "palette": ["#2a3e32", "#6d7863", "#b5b49b"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_slaughter: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Slaughter", "style": "stripes", "palette": ["#401019", "#af1931", "#ed5865"], "float": [0.06, 0.8], "stattrak": false}
+  hand_wraps_badlands: {"weapon": "hand_wraps", "rarity": "rare_special", "name": "Badlands", "style": "camo", "palette": ["#695239", "#b49a6b", "#d3c3a0"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_eclipse: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Eclipse", "style": "carbon", "palette": ["#252a2d", "#585f63", "#9eaaa4"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_spearmint: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Spearmint", "style": "stripes", "palette": ["#20352f", "#70b79c", "#ddf4e7"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_boom: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Boom!", "style": "halftone", "palette": ["#553116", "#e7852c", "#fad899"], "float": [0.06, 0.8], "stattrak": false}
+  moto_gloves_cool_mint: {"weapon": "moto_gloves", "rarity": "rare_special", "name": "Cool Mint", "style": "mesh", "palette": ["#233844", "#389db7", "#a9e1df"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_forest_ddpat: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Forest DDPAT", "style": "digital", "palette": ["#243024", "#647052", "#a8ac83"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_crimson_kimono: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Crimson Kimono", "style": "stripes", "palette": ["#1f1b23", "#982337", "#e24152"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_emerald_web: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Emerald Web", "style": "web", "palette": ["#142f22", "#287c51", "#71b887"], "float": [0.06, 0.8], "stattrak": false}
+  specialist_gloves_foundation: {"weapon": "specialist_gloves", "rarity": "rare_special", "name": "Foundation", "style": "shards", "palette": ["#6c512d", "#e29b41", "#f4dcc0"], "float": [0.06, 0.8], "stattrak": false}

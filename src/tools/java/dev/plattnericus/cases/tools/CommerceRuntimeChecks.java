@@ -118,45 +118,69 @@ public final class CommerceRuntimeChecks {
     public static void gold(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) throws ReflectiveOperationException {
         var field = dev.plattnericus.cases.storage.CommerceRepository.class.getDeclaredField("db"); field.setAccessible(true);
         var db = (dev.plattnericus.cases.storage.Database) field.get(ctx.commerce().repository());
-        goldContract(plugin, player, ctx, db, SkinInstance.Origin.ADMIN)
-                .thenCompose(v -> goldContract(plugin, player, ctx, db, SkinInstance.Origin.CASE))
+        contract(plugin, player, ctx, db, SkinInstance.Origin.ADMIN, "kilowatt_case", true)
+                .thenCompose(v -> contract(plugin, player, ctx, db, SkinInstance.Origin.CASE, "kilowatt_case", true))
+                .thenCompose(v -> contract(plugin, player, ctx, db, SkinInstance.Origin.CASE, "kilowatt_case", false))
+                .thenCompose(v -> contract(plugin, player, ctx, db, SkinInstance.Origin.CASE, "glove_case", true))
                 .whenComplete((v, error) -> {
-                    if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Gold runtime audit failed", error);
-                    else sender.sendMessage("PASS GOLD RUNTIME: two five-Covert contracts, atomic consumption, actual rare-special outputs, suppressed ADMIN announcement and exactly one claimed TRADE_IN announcement.");
+                    if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Tradeup runtime audit failed", error);
+                    else {
+                        String message = "PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract.";
+                        sender.sendMessage(message); plugin.getLogger().info(message);
+                    }
                 });
     }
-    private static CompletableFuture<Void> goldContract(Plugin plugin, Player player, CasesContext ctx, dev.plattnericus.cases.storage.Database db, SkinInstance.Origin origin) {
-        player.closeInventory(); var source = ctx.catalog().caseDefinition("kilowatt_case");
+    private static CompletableFuture<Void> contract(Plugin plugin, Player player, CasesContext ctx, dev.plattnericus.cases.storage.Database db, SkinInstance.Origin origin, String caseId, boolean gold) {
+        player.closeInventory(); var source = ctx.catalog().caseDefinition(caseId);
         var input = source.pool().values().stream().flatMap(List::stream).filter(def -> {
             var tier = dev.plattnericus.cases.tradein.TradeInRules.target(ctx.catalog(), def);
-            return tier != null && tier.rareSpecial();
+            return tier != null && tier.rareSpecial() == gold;
         }).findFirst().orElseThrow();
+        var tier = dev.plattnericus.cases.tradein.TradeInRules.target(ctx.catalog(), input);
+        int amount = dev.plattnericus.cases.tradein.TradeInRules.required(tier);
         var before = ctx.profiles().get(player).all().stream().map(SkinInstance::id).collect(java.util.stream.Collectors.toSet());
-        var inputs = java.util.stream.IntStream.range(0, 5).mapToObj(i -> new SkinInstance(UUID.randomUUID(), player.getUniqueId(), input.id(), 0.2, 100 + i, i, false, 0, PatternInfo.NONE, source.id(), origin, System.currentTimeMillis(), false, SkinInstance.Status.OWNED)).toList();
-        java.util.function.Supplier<SkinInstance> result = () -> ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id()) && !inputs.stream().anyMatch(i -> i.id().equals(s.id())) && ctx.catalog().skin(s.skinId()).rarity().rareSpecial()).findFirst().orElse(null);
-        return main(plugin, CompletableFuture.allOf(inputs.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new))).thenRun(() -> {
-            inputs.forEach(s -> { ctx.profiles().addLoaded(player.getUniqueId(), s); ctx.tradeIns().toggle(player, s.id()); });
-            require(ctx.tradeIns().selected(player).size() == 5, "gold inputs not selectable"); ctx.tradeIns().confirm(player);
-        }).thenCompose(v -> until(plugin, () -> !ctx.tradeIns().busy(player) && result.get() != null)).thenCompose(v -> delay(plugin, 10))
+        var inputs = java.util.stream.IntStream.range(0, amount).mapToObj(i -> new SkinInstance(UUID.randomUUID(), player.getUniqueId(), input.id(), 0.2, 100 + i, i, false, 0, PatternInfo.NONE, source.id(), origin, System.currentTimeMillis() + i, false, SkinInstance.Status.OWNED)).toList();
+        java.util.function.Supplier<SkinInstance> result = () -> ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id()) && !inputs.stream().anyMatch(i -> i.id().equals(s.id())) && ctx.catalog().skin(s.skinId()).rarity().id().equals(tier.id())).findFirst().orElse(null);
+        var work = main(plugin, CompletableFuture.allOf(inputs.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new))).thenRun(() -> {
+            inputs.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
+            require(Bukkit.dispatchCommand(player, "tradeup"), "/tradeup alias failed");
+            require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof dev.plattnericus.cases.tradein.TradeInMenu, "/tradeup did not open selection menu");
+        });
+        for (int i = 0; i < amount; i++) {
+            final int slot = GuiItems.CONTENT[i];
+            work = work.thenCompose(v -> delay(plugin, 2)).thenRun(() -> click(player, slot));
+        }
+        return work.thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
+            require(ctx.tradeIns().selected(player).size() == amount, "GUI selection count wrong");
+            click(player, 49); require(player.getOpenInventory().getTopInventory().getSize() == 27, "confirmation missing");
+            require(result.get() == null && inputs.stream().allMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "contract consumed before final confirmation");
+        }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> click(player, 11))
+          .thenCompose(v -> until(plugin, () -> !ctx.tradeIns().busy(player) && result.get() != null)).thenCompose(v -> delay(plugin, 10))
           .thenCompose(v -> { UUID rewardId = result.get().id(); return main(plugin, db.run(c -> {
               try (var ps = c.prepareStatement("SELECT announced FROM " + db.table("trade_contracts") + " WHERE instance_id=?")) {
-                  ps.setString(1, rewardId.toString()); try (var rows = ps.executeQuery()) { require(rows.next(), "gold contract not persisted"); return rows.getInt(1); }
+                  ps.setString(1, rewardId.toString()); try (var rows = ps.executeQuery()) { require(rows.next(), "contract not persisted"); return rows.getInt(1); }
               }
           })); }).thenAccept(announced -> {
-              require(announced == (origin == SkinInstance.Origin.ADMIN ? 0 : 1), "incorrect gold broadcast eligibility");
-              require(inputs.stream().noneMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "gold inputs not consumed");
-              var reward = result.get(); require(reward.origin() == (origin == SkinInstance.Origin.ADMIN ? origin : SkinInstance.Origin.TRADE_IN), "gold origin wrong");
+              require(announced == (gold && origin == SkinInstance.Origin.CASE ? 1 : 0), "incorrect broadcast eligibility");
+              require(inputs.stream().noneMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "inputs not consumed");
+              var reward = result.get(); require(reward.origin() == (origin == SkinInstance.Origin.ADMIN ? origin : SkinInstance.Origin.TRADE_IN), "output origin wrong");
+              if (caseId.equals("glove_case")) require(ctx.catalog().skin(reward.skinId()).weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !reward.statTrak(), "glove contract output wrong");
               ctx.profiles().removeLoaded(player.getUniqueId(), reward.id()); ctx.repository().removeOwned(player.getUniqueId(), reward.id()); player.closeInventory();
           });
     }
     public static void queueRecovery(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) {
+        queueRecovery(plugin, sender, player, ctx, 2);
+    }
+    public static void queueRecovery(Plugin plugin, CommandSender sender, Player player, CasesContext ctx, int amount) {
         var source = ctx.catalog().caseDefinition("kilowatt_case");
         var before = ctx.profiles().get(player).all().stream().map(SkinInstance::id).collect(java.util.stream.Collectors.toSet());
-        player.closeInventory(); player.getInventory().setItem(0, ctx.caseItems().caseItem(source, 2, false, ctx.messages(player)));
-        player.getInventory().setItem(1, ctx.caseItems().keyItem(ctx.catalog().key(source.keyId()), 2, true, ctx.messages(player)));
-        ctx.openings().open(player, source, false, false); ctx.openings().open(player, source, false, false);
-        until(plugin, () -> ctx.profiles().get(player).all().stream().filter(s -> !before.contains(s.id()) && s.status() == SkinInstance.Status.PENDING).count() == 2)
-                .thenRun(() -> sender.sendMessage("READY RECOVERY: two persisted PENDING rewards; stop the server now, restart and reconnect to verify exact recovery."));
+        player.closeInventory(); player.getInventory().setItem(0, ctx.caseItems().caseItem(source, amount, false, ctx.messages(player)));
+        player.getInventory().setItem(1, ctx.caseItems().keyItem(ctx.catalog().key(source.keyId()), amount, true, ctx.messages(player)));
+        if (amount == 9) ctx.openings().openNine(player, source);
+        else for (int i = 0; i < amount; i++) ctx.openings().open(player, source, false, false);
+        until(plugin, () -> ctx.profiles().get(player).all().stream().filter(s -> !before.contains(s.id()) && s.status() == SkinInstance.Status.PENDING).count() == amount)
+                .thenRun(() -> { String message = "READY RECOVERY: " + amount + " persisted PENDING rewards; disconnect, restart and reconnect to verify exact recovery.";
+                    sender.sendMessage(message); plugin.getLogger().info(message); });
     }
     private static SkinInstance fixture(Player p, String skin) {
         return new SkinInstance(UUID.randomUUID(), p.getUniqueId(), skin, 0.012345, 271, 88123, true, 42, new PatternInfo("phase2", "Phase 2", "Pink Galaxy", 2, 0xff1234, 99.5), "chroma_case", SkinInstance.Origin.ADMIN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);

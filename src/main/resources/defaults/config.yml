@@ -53,7 +53,7 @@ rendering:
 opening:
   # Reel duration (20 ticks = 1 s). The strip decelerates along an ease-out curve.
   duration-ticks: 120
-  # cubic, quart, quint or expo
+  # cinematic (acceleration + smooth brake), cubic, quart, quint or expo
   easing: cinematic
   reel-length: 64
   # How long the result stays before the result buttons appear.
@@ -67,7 +67,8 @@ opening:
   filler: BLACK_STAINED_GLASS_PANE
   # Legacy setting retained for upgrades; openings no longer block commands.
   block-commands: false
-  max-active-per-player: 8
+  # Nine reserved sessions also include their held world results.
+  max-active-per-player: 9
   max-active-global: 64
   # Announce rare special drops to everyone.
   broadcast-rare: true
