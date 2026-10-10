@@ -12,7 +12,7 @@ public final class InspectProfileDefaults {
     private InspectProfileDefaults() { }
     public static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults) {
         boolean changed = false;
-        for (String baseline : java.util.List.of("v1", "v2")) changed |= upgrade(current, defaults, baseline);
+        for (String baseline : java.util.List.of("v1", "v2", "v3")) changed |= upgrade(current, defaults, baseline);
         return changed;
     }
     private static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults, String baseline) {

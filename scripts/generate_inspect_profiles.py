@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 weapons = yaml.safe_load((ROOT / 'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons']
 # Knife-specific grip pivots, axis, turn angle and weight (ticks). Three named actions each.
 KNIVES = {
- 'karambit': (.24719238, 'z', 360, 12, ['finger_roll', 'reverse_grip', 'ring_twirl']),
+ 'karambit': (.24609375, 'z', 360, 12, ['finger_roll', 'reverse_grip', 'ring_twirl']),
  'butterfly': (-.03, 'z', 360, 16, ['rollover', 'helix', 'fan']),
  'm9_bayonet': (-.22, 'x', 180, 18, ['sawback_check', 'heavy_roll', 'guard_flip']),
  'bayonet': (-.20, 'z', 360, 15, ['draw_flip', 'edge_check', 'grip_roll']),
@@ -19,7 +19,7 @@ KNIVES = {
  'navaja': (-.04, 'z', 180, 12, ['compact_flick', 'hinge_check', 'pocket_flip']),
  'stiletto': (-.03, 'z', 360, 11, ['spring_flick', 'finger_toss', 'needle_twirl']),
  'ursus': (-.16, 'z', 360, 14, ['palm_toss', 'catch_flip', 'blade_roll']),
- 'talon': (.29882812, 'z', 360, 18, ['free_ring_spin', 'reverse_catch', 'finger_loop']),
+ 'talon': (.27773438, 'z', 360, 18, ['free_ring_spin', 'reverse_catch', 'finger_loop']),
  'classic': (-.19, 'x', 180, 17, ['classic_turn', 'tip_check', 'grip_spin']),
  'paracord': (-.21, 'x', 180, 19, ['cord_check', 'field_roll', 'lanyard_turn']),
  'survival': (-.22, 'x', 180, 21, ['saw_check', 'field_flip', 'grip_inspect']),

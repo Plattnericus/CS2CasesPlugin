@@ -19,7 +19,7 @@ public final class TradeInMenu extends Menu {
     private int statTrakFilter; // 0 = all, 1 = normal, 2 = StatTrak
     public TradeInMenu(CasesContext ctx, Player p) { super(ctx, p); }
     @Override protected int rows() { return 6; }
-    @Override protected Component title() { return ctx.messages(viewer).get("tradein.title"); }
+    @Override protected Component title() { return GuiItems.brandedTitle(ctx, ctx.messages(viewer).get("tradein.title"), '\uE008'); }
     @Override protected boolean canClick(int slot) { return !ctx.tradeIns().busy(viewer); }
     @Override protected void build() {
         var profile = ctx.profiles().get(viewer); if (profile == null) return;

@@ -10,6 +10,8 @@ def main():
  weapons=yaml.safe_load((repo/'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons'];rc=Rcon(root/'server');manifest=[]
  if a.only:weapons={id:weapons[id] for id in a.only.split(',')}
  client(root,'observer','camera|FIRST_PERSON');client(root,'observer','chat|HIDDEN')
+ client(root,'client','chat|HIDDEN')
+ for folder in ['client','observer']:client(root,folder,'fov|70')
  for id in weapons:
   for hand in ['RIGHT','LEFT']:
    client(root,'client','hand|'+hand);time.sleep(.1)

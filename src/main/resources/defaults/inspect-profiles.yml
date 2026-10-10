@@ -4269,7 +4269,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 8, move: [-0.25, 0.035, 0.015], rotate: [-5, 17, 13], ease: out}
-        - {ticks: 12, move: [-0.50, 0.05, 0], rotate: [8, 39, 21], ease: inout}
+        - {ticks: 12, move: [-0.5, 0.05, 0], rotate: [8, 39, 21], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 12, rotate: [-4, -17, -13], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -4283,7 +4283,7 @@ animations:
         - {ticks: 10, rotate: *id001, ease: inout}
         parent: body
         pivot:
-        - 0.24719238
+        - 0.24609375
         - 0.01171875
         - 0
   karambit__reverse_grip:
@@ -4298,7 +4298,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 9, move: [-0.25, 0.035, 0.015], rotate: [-2, -17, -13], ease: out}
-        - {ticks: 12, move: [-0.50, 0.05, 0], rotate: [4, -39, -21], ease: inout}
+        - {ticks: 12, move: [-0.5, 0.05, 0], rotate: [4, -39, -21], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 12, rotate: [-4, 17, 13], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -4307,12 +4307,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id002 [0, 0, 180], ease: inout}
+        - {ticks: 12, rotate: [0, 0, 180], ease: inout}
         - {ticks: 34, ease: inout}
         - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
-        - 0.24719238
+        - 0.24609375
         - 0.01171875
         - 0
   karambit__ring_twirl:
@@ -4327,7 +4327,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 10, move: [-0.25, 0.035, 0.015], rotate: [1, 17, 13], ease: out}
-        - {ticks: 12, move: [-0.50, 0.05, 0], rotate: [0, 39, 21], ease: inout}
+        - {ticks: 12, move: [-0.5, 0.05, 0], rotate: [0, 39, 21], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 12, rotate: [-4, -17, -13], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -4336,12 +4336,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id003 [0, 0, -360], ease: inout}
+        - {ticks: 12, rotate: &id002 [0, 0, -360], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id003, ease: inout}
+        - {ticks: 10, rotate: *id002, ease: inout}
         parent: body
         pivot:
-        - 0.24719238
+        - 0.24609375
         - 0.01171875
         - 0
   karambit__blade_presentation:
@@ -4356,7 +4356,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 5, move: [0.018, -0.075, -0.01], rotate: [-4, 6, 8], ease: inout}
         - {ticks: 11, move: [-0.25, 0.045, 0.035], rotate: [12, -17, 17], ease: out}
-        - {ticks: 12, move: [-0.50, 0.065, 0.025], rotate: [4, 29, 13], ease: inout}
+        - {ticks: 12, move: [-0.5, 0.065, 0.025], rotate: [4, 29, 13], ease: inout}
         - {ticks: 24, ease: inout}
         - {ticks: 12, move: [0.015, -0.02, 0], rotate: [-6, -8.5, -6.5], ease: inout}
         - {ticks: 7, move: [-0.008, -0.03, 0.002], rotate: [2, 14, 16], ease: out}
@@ -4365,12 +4365,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id004 [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: &id003 [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id004, ease: inout}
+        - {ticks: 10, rotate: *id003, ease: inout}
         parent: body
         pivot:
-        - 0.24719238
+        - 0.24609375
         - 0.01171875
         - 0
   butterfly__rollover:
@@ -4394,9 +4394,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id005 [0, 0, 360], ease: inout}
+        - {ticks: 16, rotate: &id004 [0, 0, 360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id005, ease: inout}
+        - {ticks: 10, rotate: *id004, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4451,9 +4451,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id006 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id005 [0, 0, 0], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id006, ease: inout}
+        - {ticks: 10, rotate: *id005, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4508,9 +4508,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id007 [0, 0, -360], ease: inout}
+        - {ticks: 16, rotate: &id006 [0, 0, -360], ease: inout}
         - {ticks: 33, ease: inout}
-        - {ticks: 10, rotate: *id007, ease: inout}
+        - {ticks: 10, rotate: *id006, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4565,9 +4565,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id008 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id007 [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
-        - {ticks: 10, rotate: *id008, ease: inout}
+        - {ticks: 10, rotate: *id007, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4651,9 +4651,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id009 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id008 [0, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id009, ease: inout}
+        - {ticks: 10, rotate: *id008, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4680,9 +4680,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id010 [360, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id009 [360, 0, 0], ease: inout}
         - {ticks: 37, ease: inout}
-        - {ticks: 10, rotate: *id010, ease: inout}
+        - {ticks: 10, rotate: *id009, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4709,9 +4709,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id011 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id010 [0, 0, 0], ease: inout}
         - {ticks: 46, ease: inout}
-        - {ticks: 10, rotate: *id011, ease: inout}
+        - {ticks: 10, rotate: *id010, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4738,9 +4738,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id012 [0, 0, 360], ease: inout}
+        - {ticks: 15, rotate: &id011 [0, 0, 360], ease: inout}
         - {ticks: 34, ease: inout}
-        - {ticks: 10, rotate: *id012, ease: inout}
+        - {ticks: 10, rotate: *id011, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4767,9 +4767,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id013 [0, 0, 0], ease: inout}
+        - {ticks: 15, rotate: &id012 [0, 0, 0], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id013, ease: inout}
+        - {ticks: 10, rotate: *id012, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4796,9 +4796,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id014 [0, 0, -360], ease: inout}
+        - {ticks: 15, rotate: &id013 [0, 0, -360], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id014, ease: inout}
+        - {ticks: 10, rotate: *id013, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4825,9 +4825,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id015 [0, 0, 0], ease: inout}
+        - {ticks: 15, rotate: &id014 [0, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id015, ease: inout}
+        - {ticks: 10, rotate: *id014, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4896,9 +4896,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id016 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id015 [0, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id016, ease: inout}
+        - {ticks: 10, rotate: *id015, ease: inout}
         parent: body
         pivot:
         - 0
@@ -4938,9 +4938,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id017 [0, 0, 360], ease: inout}
+        - {ticks: 14, rotate: &id016 [0, 0, 360], ease: inout}
         - {ticks: 37, ease: inout}
-        - {ticks: 10, rotate: *id017, ease: inout}
+        - {ticks: 10, rotate: *id016, ease: inout}
         parent: body
         pivot:
         - 0
@@ -4980,9 +4980,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id018 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id017 [0, 0, 0], ease: inout}
         - {ticks: 46, ease: inout}
-        - {ticks: 10, rotate: *id018, ease: inout}
+        - {ticks: 10, rotate: *id017, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5038,9 +5038,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id019 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id018 [0, 0, 0], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id019, ease: inout}
+        - {ticks: 10, rotate: *id018, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5067,9 +5067,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id020 [360, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id019 [360, 0, 0], ease: inout}
         - {ticks: 33, ease: inout}
-        - {ticks: 10, rotate: *id020, ease: inout}
+        - {ticks: 10, rotate: *id019, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5096,9 +5096,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id021 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id020 [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
-        - {ticks: 10, rotate: *id021, ease: inout}
+        - {ticks: 10, rotate: *id020, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5154,9 +5154,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id022 [0, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id021 [0, 0, 0], ease: inout}
         - {ticks: 38, ease: inout}
-        - {ticks: 10, rotate: *id022, ease: inout}
+        - {ticks: 10, rotate: *id021, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5183,9 +5183,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id023 [360, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id022 [360, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id023, ease: inout}
+        - {ticks: 10, rotate: *id022, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5212,9 +5212,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id024 [0, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id023 [0, 0, 0], ease: inout}
         - {ticks: 48, ease: inout}
-        - {ticks: 10, rotate: *id024, ease: inout}
+        - {ticks: 10, rotate: *id023, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5241,9 +5241,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id025 [0, 0, 360], ease: inout}
+        - {ticks: 17, rotate: &id024 [0, 0, 360], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id025, ease: inout}
+        - {ticks: 10, rotate: *id024, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5325,9 +5325,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id026 [0, 0, -360], ease: inout}
+        - {ticks: 17, rotate: &id025 [0, 0, -360], ease: inout}
         - {ticks: 38, ease: inout}
-        - {ticks: 10, rotate: *id026, ease: inout}
+        - {ticks: 10, rotate: *id025, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5367,9 +5367,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id027 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id026 [0, 0, 0], ease: inout}
         - {ticks: 47, ease: inout}
-        - {ticks: 10, rotate: *id027, ease: inout}
+        - {ticks: 10, rotate: *id026, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5425,9 +5425,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id028 [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id027 [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id028, ease: inout}
+        - {ticks: 10, rotate: *id027, ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5454,9 +5454,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id029 [360, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id028 [360, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id029, ease: inout}
+        - {ticks: 10, rotate: *id028, ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5483,9 +5483,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id030 [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id029 [0, 0, 0], ease: inout}
         - {ticks: 54, ease: inout}
-        - {ticks: 10, rotate: *id030, ease: inout}
+        - {ticks: 10, rotate: *id029, ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5565,9 +5565,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id031 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id030 [0, 0, 0], ease: inout}
         - {ticks: 29, ease: inout}
-        - {ticks: 10, rotate: *id031, ease: inout}
+        - {ticks: 10, rotate: *id030, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5618,9 +5618,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id032 [0, 0, 360], ease: inout}
+        - {ticks: 13, rotate: &id031 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id032, ease: inout}
+        - {ticks: 10, rotate: *id031, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5671,9 +5671,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id033 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id032 [0, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id033, ease: inout}
+        - {ticks: 10, rotate: *id032, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5766,9 +5766,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id034 [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: &id033 [0, 0, 0], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id034, ease: inout}
+        - {ticks: 10, rotate: *id033, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -5808,9 +5808,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id035 [0, 0, 360], ease: inout}
+        - {ticks: 12, rotate: &id034 [0, 0, 360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id035, ease: inout}
+        - {ticks: 10, rotate: *id034, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -5850,9 +5850,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id036 [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: &id035 [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id036, ease: inout}
+        - {ticks: 10, rotate: *id035, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -5879,9 +5879,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id037 [0, 0, 360], ease: inout}
+        - {ticks: 11, rotate: &id036 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id037, ease: inout}
+        - {ticks: 10, rotate: *id036, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -5921,9 +5921,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id038 [0, 0, 0], ease: inout}
+        - {ticks: 11, rotate: &id037 [0, 0, 0], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id038, ease: inout}
+        - {ticks: 10, rotate: *id037, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -5963,9 +5963,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id039 [0, 0, -360], ease: inout}
+        - {ticks: 11, rotate: &id038 [0, 0, -360], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id039, ease: inout}
+        - {ticks: 10, rotate: *id038, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -6005,9 +6005,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id040 [0, 0, 0], ease: inout}
+        - {ticks: 11, rotate: &id039 [0, 0, 0], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id040, ease: inout}
+        - {ticks: 10, rotate: *id039, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -6025,7 +6025,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 8, move: [-0.25, 0.035, 0.015], rotate: [-5, 22, 17], ease: out}
-        - {ticks: 18, move: [-0.50, 0.05, 0], rotate: [8, 36, 25], ease: inout}
+        - {ticks: 18, move: [-0.5, 0.05, 0], rotate: [8, 36, 25], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 18, rotate: [-4, -22, -17], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -6034,12 +6034,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id041 [0, 0, 360], ease: inout}
+        - {ticks: 18, rotate: &id040 [0, 0, 360], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id041, ease: inout}
+        - {ticks: 10, rotate: *id040, ease: inout}
         parent: body
         pivot:
-        - 0.29882812
+        - 0.27773438
         - 0.017578125
         - 0
   talon__reverse_catch:
@@ -6054,7 +6054,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 9, move: [-0.25, 0.035, 0.015], rotate: [-2, -22, -17], ease: out}
-        - {ticks: 18, move: [-0.50, 0.05, 0], rotate: [4, -36, -25], ease: inout}
+        - {ticks: 18, move: [-0.5, 0.05, 0], rotate: [4, -36, -25], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 18, rotate: [-4, 22, 17], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -6063,12 +6063,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id042 [0, 0, 180], ease: inout}
+        - {ticks: 18, rotate: [0, 0, 180], ease: inout}
         - {ticks: 40, ease: inout}
         - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
-        - 0.29882812
+        - 0.27773438
         - 0.017578125
         - 0
   talon__finger_loop:
@@ -6083,7 +6083,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 4, move: [0.012, -0.065, -0.012], rotate: [-2, 7, 8], ease: inout}
         - {ticks: 10, move: [-0.25, 0.035, 0.015], rotate: [1, 22, 17], ease: out}
-        - {ticks: 18, move: [-0.50, 0.05, 0], rotate: [0, 36, 25], ease: inout}
+        - {ticks: 18, move: [-0.5, 0.05, 0], rotate: [0, 36, 25], ease: inout}
         - {ticks: 18, ease: inout}
         - {ticks: 18, rotate: [-4, -22, -17], ease: inout}
         - {ticks: 6, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: inout}
@@ -6092,12 +6092,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id043 [0, 0, -360], ease: inout}
+        - {ticks: 18, rotate: &id041 [0, 0, -360], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id043, ease: inout}
+        - {ticks: 10, rotate: *id041, ease: inout}
         parent: body
         pivot:
-        - 0.29882812
+        - 0.27773438
         - 0.017578125
         - 0
   talon__blade_presentation:
@@ -6112,7 +6112,7 @@ animations:
         - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
         - {ticks: 5, move: [0.018, -0.075, -0.01], rotate: [-4, 6, 8], ease: inout}
         - {ticks: 11, move: [-0.25, 0.045, 0.035], rotate: [12, -22, 21], ease: out}
-        - {ticks: 18, move: [-0.50, 0.065, 0.025], rotate: [4, 32, 17], ease: inout}
+        - {ticks: 18, move: [-0.5, 0.065, 0.025], rotate: [4, 32, 17], ease: inout}
         - {ticks: 24, ease: inout}
         - {ticks: 18, move: [0.015, -0.02, 0], rotate: [-6, -16.0, -8.5], ease: inout}
         - {ticks: 7, move: [-0.008, -0.03, 0.002], rotate: [2, 14, 16], ease: out}
@@ -6121,12 +6121,12 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id044 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id042 [0, 0, 0], ease: inout}
         - {ticks: 50, ease: inout}
-        - {ticks: 10, rotate: *id044, ease: inout}
+        - {ticks: 10, rotate: *id042, ease: inout}
         parent: body
         pivot:
-        - 0.29882812
+        - 0.27773438
         - 0.017578125
         - 0
   ursus__palm_toss:
@@ -6150,9 +6150,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id045 [0, 0, 360], ease: inout}
+        - {ticks: 14, rotate: &id043 [0, 0, 360], ease: inout}
         - {ticks: 29, ease: inout}
-        - {ticks: 10, rotate: *id045, ease: inout}
+        - {ticks: 10, rotate: *id043, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6179,9 +6179,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id046 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id044 [0, 0, 0], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id046, ease: inout}
+        - {ticks: 10, rotate: *id044, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6208,9 +6208,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id047 [0, 0, -360], ease: inout}
+        - {ticks: 14, rotate: &id045 [0, 0, -360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id047, ease: inout}
+        - {ticks: 10, rotate: *id045, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6237,9 +6237,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id048 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id046 [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id048, ease: inout}
+        - {ticks: 10, rotate: *id046, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6295,9 +6295,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id049 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id047 [0, 0, 0], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id049, ease: inout}
+        - {ticks: 10, rotate: *id047, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6324,9 +6324,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id050 [360, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id048 [360, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id050, ease: inout}
+        - {ticks: 10, rotate: *id048, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6353,9 +6353,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id051 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id049 [0, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id051, ease: inout}
+        - {ticks: 10, rotate: *id049, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6411,9 +6411,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id052 [0, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id050 [0, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id052, ease: inout}
+        - {ticks: 10, rotate: *id050, ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6440,9 +6440,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id053 [360, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id051 [360, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id053, ease: inout}
+        - {ticks: 10, rotate: *id051, ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6469,9 +6469,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id054 [0, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id052 [0, 0, 0], ease: inout}
         - {ticks: 49, ease: inout}
-        - {ticks: 10, rotate: *id054, ease: inout}
+        - {ticks: 10, rotate: *id052, ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6527,9 +6527,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id055 [0, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id053 [0, 0, 0], ease: inout}
         - {ticks: 43, ease: inout}
-        - {ticks: 10, rotate: *id055, ease: inout}
+        - {ticks: 10, rotate: *id053, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6556,9 +6556,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id056 [360, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id054 [360, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id056, ease: inout}
+        - {ticks: 10, rotate: *id054, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6585,9 +6585,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id057 [0, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id055 [0, 0, 0], ease: inout}
         - {ticks: 53, ease: inout}
-        - {ticks: 10, rotate: *id057, ease: inout}
+        - {ticks: 10, rotate: *id055, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6643,9 +6643,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id058 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id056 [0, 0, 0], ease: inout}
         - {ticks: 34, ease: inout}
-        - {ticks: 10, rotate: *id058, ease: inout}
+        - {ticks: 10, rotate: *id056, ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6672,9 +6672,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id059 [0, 0, 360], ease: inout}
+        - {ticks: 18, rotate: &id057 [0, 0, 360], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id059, ease: inout}
+        - {ticks: 10, rotate: *id057, ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6701,9 +6701,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id060 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id058 [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id060, ease: inout}
+        - {ticks: 10, rotate: *id058, ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6730,9 +6730,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id061 [0, 0, 360], ease: inout}
+        - {ticks: 13, rotate: &id059 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id061, ease: inout}
+        - {ticks: 10, rotate: *id059, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6759,9 +6759,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id062 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id060 [0, 0, 0], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id062, ease: inout}
+        - {ticks: 10, rotate: *id060, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6788,9 +6788,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id063 [0, 0, -360], ease: inout}
+        - {ticks: 13, rotate: &id061 [0, 0, -360], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id063, ease: inout}
+        - {ticks: 10, rotate: *id061, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6817,9 +6817,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id064 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id062 [0, 0, 0], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id064, ease: inout}
+        - {ticks: 10, rotate: *id062, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6875,9 +6875,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id065 [0, 0, 0], ease: inout}
+        - {ticks: 23, rotate: &id063 [0, 0, 0], ease: inout}
         - {ticks: 43, ease: inout}
-        - {ticks: 10, rotate: *id065, ease: inout}
+        - {ticks: 10, rotate: *id063, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -6904,9 +6904,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id066 [0, 0, 360], ease: inout}
+        - {ticks: 23, rotate: &id064 [0, 0, 360], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id066, ease: inout}
+        - {ticks: 10, rotate: *id064, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -6933,9 +6933,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id067 [0, 0, 0], ease: inout}
+        - {ticks: 23, rotate: &id065 [0, 0, 0], ease: inout}
         - {ticks: 53, ease: inout}
-        - {ticks: 10, rotate: *id067, ease: inout}
+        - {ticks: 10, rotate: *id065, ease: inout}
         parent: body
         pivot:
         - -0.2

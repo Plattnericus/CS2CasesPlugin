@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.2.2"
+version = "1.2.3"
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
@@ -61,6 +61,7 @@ val defaultsIndex by tasks.registering {
 
 sourceSets.main {
     resources.srcDir(layout.buildDirectory.dir("generated/defaults-index"))
+    resources.srcDir("resourcepack/artwork")
 }
 
 tasks.processResources {

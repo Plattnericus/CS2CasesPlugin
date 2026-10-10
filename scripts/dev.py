@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Isolated macOS Paper + Minecraft development session, owned by the desktop app.
+"""Isolated macOS Paper + Minecraft development session with optional persistent supervision.
 No account tokens or global Minecraft settings are read or changed.
 """
 import argparse, concurrent.futures, hashlib, json, os, platform, plistlib, re, shutil, signal, socket, subprocess, sys, time, uuid, urllib.request
@@ -98,6 +98,7 @@ def prepare():
  shutil.copy2(ROOT/'src/main/resources/defaults/inspect.yml',plugins/'inspect.yml')
  import yaml
  settings=yaml.safe_load((ROOT/'src/main/resources/defaults/config.yml').read_text())
+ settings['resource-pack']['enabled']=True
  settings['resource-pack']['distribution'].update({'enabled':True,'bind-address':'127.0.0.1','port':8165,'public-url':'http://127.0.0.1:8165'})
  (plugins/'config.yml').write_text(yaml.safe_dump(settings,sort_keys=False,allow_unicode=True))
  properties=SERVER/'server.properties'
@@ -107,6 +108,7 @@ def prepare():
  properties.write_text('''server-ip=127.0.0.1
 server-port=25565
 online-mode=false
+white-list=false
 enforce-secure-profile=false
 level-type=minecraft:flat
 generator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains"}
@@ -163,12 +165,14 @@ def client_command(username='DevTester'):
   '--uuid',str(uuid.UUID(bytes=bytes(ident))),'--accessToken','0','--clientId','MCCasesDev','--xuid','0','--versionType','release',
   '--width','1280','--height','720','--quickPlayMultiplayer','127.0.0.1:25565']
 
-def install_cleanup():
+def install_cleanup(persistent=False):
  AGENT.parent.mkdir(parents=True,exist_ok=True)
- AGENT.write_bytes(plistlib.dumps({'Label':LABEL,'ProgramArguments':[sys.executable,str(Path(__file__).resolve()),'cleanup-stale'],'RunAtLoad':True,'KeepAlive':False}))
+ arguments=['start','--persistent'] if persistent else ['cleanup-stale']
+ AGENT.write_bytes(plistlib.dumps({'Label':LABEL,'ProgramArguments':[sys.executable,str(Path(__file__).resolve()),*arguments],'RunAtLoad':True,'KeepAlive':False}))
  # The launch agent is picked up at the next login; no background polling job is installed.
 
 def cleanup_stale():
+ d={}
  if STATE.exists():
   try:d=json.loads(STATE.read_text())
   except (json.JSONDecodeError,UnicodeDecodeError):d={}
@@ -181,23 +185,27 @@ def cleanup_stale():
      if fingerprint(pid)!=identity:break
      time.sleep(.25)
     if fingerprint(pid)==identity:os.kill(pid,signal.SIGKILL)
- if RUNTIME.exists():shutil.rmtree(RUNTIME)
- AGENT.unlink(missing_ok=True)
+ if d.get('persistent'):
+  CONTROL.unlink(missing_ok=True)
+ else:
+  if RUNTIME.exists():shutil.rmtree(RUNTIME)
+  AGENT.unlink(missing_ok=True)
 
 def supervise(app_pid,app_identity):
+ persistent=app_pid==0
  RUNTIME.mkdir(parents=True,exist_ok=True)
  serverlog=(RUNTIME/'server.log').open('a');clientlog=(RUNTIME/'client.log').open('a');observerlog=(RUNTIME/'observer.log').open('a')
  log_start=(RUNTIME/'server.log').stat().st_size
  server=subprocess.Popen([str(JAVA),'-Xms512M','-Xmx2G','-jar',str(SERVER/'paper.jar'),'--nogui'],cwd=SERVER,stdin=subprocess.PIPE,stdout=serverlog,stderr=subprocess.STDOUT,text=True)
  client=None;observer=None;observer_requested=False;stop=False;ready=False
- state={'supervisor':os.getpid(),'fingerprint':fingerprint(os.getpid()),'server':server.pid,'serverFingerprint':fingerprint(server.pid),'app':app_pid,'appFingerprint':app_identity,'client':None}
+ state={'supervisor':os.getpid(),'fingerprint':fingerprint(os.getpid()),'server':server.pid,'serverFingerprint':fingerprint(server.pid),'app':app_pid,'appFingerprint':app_identity,'client':None,'persistent':persistent}
  write_state(state);CONTROL.unlink(missing_ok=True)
  control=socket.socket(socket.AF_UNIX);control.bind(str(CONTROL));os.chmod(CONTROL,0o600);control.listen(4);control.settimeout(1)
  def shutdown(signum=None,frame=None):
   nonlocal stop;stop=True
  signal.signal(signal.SIGTERM,shutdown);signal.signal(signal.SIGINT,shutdown)
  try:
-  while not stop and fingerprint(app_pid)==app_identity:
+  while not stop and (persistent or fingerprint(app_pid)==app_identity):
    if server.poll() is not None:
     print('Server exited unexpectedly; restarting the local session.',flush=True)
     for process in (client,observer):
@@ -262,19 +270,22 @@ def supervise(app_pid,app_identity):
     except subprocess.TimeoutExpired:process.kill();process.wait()
   serverlog.close();clientlog.close();observerlog.close()
   # Only this disposable runtime is deleted. Source, build outputs and the user's Minecraft remain.
-  if RUNTIME.exists():shutil.rmtree(RUNTIME)
+  if not persistent and RUNTIME.exists():shutil.rmtree(RUNTIME)
+  CONTROL.unlink(missing_ok=True)
   AGENT.unlink(missing_ok=True)
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','start','status','console','restart','observer','stop','cleanup-stale','supervise']);p.add_argument('arguments',nargs='*');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','start','status','console','restart','observer','stop','cleanup-stale','supervise']);p.add_argument('--persistent',action='store_true',help='Keep the server and client running independently of the desktop app; preserve the dev world.');p.add_argument('arguments',nargs='*');a=p.parse_args()
  if a.action=='prepare':prepare()
  elif a.action=='start':
-  if CONTROL.exists():print(request({'action':'status'}));return
+  if CONTROL.exists():
+   try:print(request({'action':'status'}));return
+   except (ConnectionError,OSError):cleanup_stale()
   if 'eula=true' not in (SERVER/'eula.txt').read_text():raise SystemExit('Minecraft EULA has not been accepted. Explicit user consent is required before eula=true.')
-  app_pid=int(a.arguments[0]);identity=fingerprint(app_pid)
-  if not identity:raise SystemExit('Watched application process not found')
+  app_pid=0 if a.persistent else int(a.arguments[0]);identity='' if a.persistent else fingerprint(app_pid)
+  if not a.persistent and not identity:raise SystemExit('Watched application process not found')
   # Check client inputs before starting a long-running session.
-  client_command();install_cleanup()
+  client_command();install_cleanup(a.persistent)
   with (RUNTIME/'supervisor.log').open('w') as out:
    process=subprocess.Popen([sys.executable,str(Path(__file__).resolve()),'supervise',str(app_pid),identity],start_new_session=True,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT)
   print('Dev supervisor started:',process.pid)

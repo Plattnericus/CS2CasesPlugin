@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.3 — 2026-10-10
+
+- Keep all 815 original Fusion skin sprites and 1,377 inspect layers as durable, hashed source artwork. Rebuild opaque geometry from the selected artwork so UVs and silhouette stay aligned.
+- Use solid inspect meshes for ordinary held items, anchor each grip at the palm and mirror left-hand geometry. Keep original sprites in inventory, ground and fixed display contexts.
+- Add restrained Vanilla 26.3 metal shading with simulated environment sheen on marked weapon faces, retaining the native fog, lighting and transparency pipeline.
+- Reuse immutable animation schedules and skip unnecessary stationary samples while preserving inherited motion and full turns.
+- Give menus a quieter frame and use the original pumpkin, deer and prosse glyphs in pack-enabled titles.
+- Add persistent local supervision: keep a dev server and client available independently of the desktop app, restart exited processes and preserve the dev world.
+
 ## 1.2.2 — 2026-10-10
 
 - Make Fusion HD the default build, embedded pack, development-client pack and runtime export. Store the supplied server font definition, seven glyph PNGs and pack icon permanently in the project with exact source hashes.

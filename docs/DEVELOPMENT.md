@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.2.jar` and `build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.2.zip`.
+`build/libs/MCCases-1.2.3.jar` and `build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.3.zip`.
 The Fusion pack ZIP and a small source-overlay ZIP are embedded in the plugin JAR.
 JDK 25 performs the entire merge; no Pillow, manual merge or Downloads path is needed.
 `resourcepack/fusion/` is the permanent source for the seven font textures, their
@@ -46,17 +46,20 @@ server catalogs and regenerates edited packs from the actual loaded catalog when
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.2.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.3.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Version 1.2.1 exports skin/inspect textures at 128px with binary silhouette coverage and
-fractional premultiplied alpha filtering. Karambit and Talon turn only at presentation time;
-pattern sampling and saved classifications retain their original UV coordinates.
-`scripts/generate_inspect_profiles.py` reproduces all 252 stock timelines. The v2 migration
-baseline recognizes unchanged 1.2.0 ring profiles; customized timelines remain editable.
+Version 1.2.3 uses the original Fusion sprites and inspect layers at 128px. Exported coverage
+is opaque, mesh boundaries follow the source silhouette and held models use native palm
+anchors in both hands. Karambit and Talon turn only at presentation time; pattern sampling
+and saved classifications retain their original UV coordinates. Their pivots match the
+original finger-ring holes. `scripts/generate_inspect_profiles.py` reproduces all 252 stock
+timelines. The v1/v2/v3 migration baselines recognize unchanged older stock profiles;
+customized timelines remain editable. The pack includes the Minecraft 26.3 item shader
+baseline with a reserved face tint for simulated metal sheen; this is not world reflection.
 Skin `traded` history is persisted separately from `origin` and `source` in schema 4.
 Recorded direct-trade instance IDs are backfilled; market purchases preserve the flag.
 `SkinPresentationChecks` covers real v3 migration, repeated trades/restarts and en/de/it source lore.
@@ -118,8 +121,16 @@ python3 scripts/dev.py prepare
 
 Before starting the server for the first time, read the Minecraft EULA and, after accepting it,
 set `eula=true` in `.dev/runtime/server/eula.txt`.
-The session watches the process ID of a running desktop app. When that process exits,
-the server and clients stop.
+Choose persistent mode to keep the local server and client running independently of
+the desktop app, including automatic restart if either process exits:
+
+```sh
+python3 scripts/dev.py start --persistent
+```
+
+Persistent mode preserves the world/database when stopped and installs a login starter.
+`stop` removes that login starter. For an app-bound disposable session instead, pass
+the process ID of a running desktop app; that mode stops when the app exits.
 
 ```sh
 python3 scripts/dev.py start <App-PID>
@@ -135,10 +146,11 @@ python3 scripts/dev.py stop
 | `prepare` | Prepare Paper, the current build, default files, pack and missing client assets |
 | `start <PID>` | Start the supervisor and connect the vanilla client after the server is ready |
 | `status` | Show process status and server readiness |
-| `observer` | Start a second isolated vanilla client, `DevObserver`, with French Minecraft settings |
+| `observer` | Start a second isolated vanilla client, `DevObserver`, with English Minecraft settings |
 | `console '<Command>'` | Send a command without its leading slash to the server console |
 | `restart` | Restart clients and server with the current build; preserve local player data |
-| `stop` | Stop the session and remove all of `.dev/runtime/` |
+| `start --persistent` | Keep the server and client running independently of an app; preserve dev data |
+| `stop` | Stop the session; preserve persistent data or remove disposable session data |
 | `cleanup-stale` | Remove leftovers from a session that is no longer running |
 
 The first profile is named `DevTester`. The server and pack web server bind to `127.0.0.1`;
@@ -146,9 +158,10 @@ the server uses offline mode for this local session. Launcher tokens and regular
 settings are not changed. Available assets are reused, and missing files are downloaded
 with checksum verification.
 
-A one-time LaunchAgent removes leftovers at the next login. Process fingerprints prevent
-reused PIDs from terminating unrelated processes. `stop` also removes the test world and
-database; source files, `build/` and `release/` are preserved.
+The app-bound mode installs a one-time cleanup LaunchAgent. Persistent mode installs a
+login starter instead. Process fingerprints prevent
+reused PIDs from terminating unrelated processes. `stop` removes the test world and
+database only in app-bound disposable mode; source files, `build/` and `release/` are preserved.
 
 The supervisor restarts server or client processes that exit unexpectedly while the selected
 desktop app remains open. It also watches the optional second client.
@@ -160,7 +173,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.2.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.3.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -265,7 +278,7 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use [the 1.2.2 Fusion report](RELEASE-1.2.2-VERIFICATION.md) for the current results.
+Use [the 1.2.3 verification report](RELEASE-1.2.3-VERIFICATION.md) for the current results.
 [The 1.2.1 report](RELEASE-1.2.1-VERIFICATION.md) and earlier 1.2 reports remain
 historical evidence.
 

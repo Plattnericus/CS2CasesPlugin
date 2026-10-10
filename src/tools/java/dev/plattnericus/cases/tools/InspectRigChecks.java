@@ -19,7 +19,15 @@ public final class InspectRigChecks {
         require(warnings.isEmpty(), "inspect warnings " + warnings);
         var soundConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "sounds.yml"));
         int frames = 0; double requiredForward = 0; String furthest = ""; Set<String> all = new HashSet<>(), motionSignatures = new HashSet<>();
+        var held = new InspectAnimation("stationary", Map.of("body", new InspectAnimation.Group("body", null, new Vector3f(), List.of(
+                new InspectAnimation.Keyframe(0,null,new Vector3f(),null,InspectAnimation.Ease.LINEAR),
+                new InspectAnimation.Keyframe(80,null,null,null,InspectAnimation.Ease.INOUT)))), Map.of(),4);
+        require(held.samples().equals(List.of(0,80)), "stationary hold sends unnecessary tween samples");
+        require(held.samples() == held.samples(), "per-tick sample list allocation");
+        try { held.samples().add(1); throw new AssertionError("mutable animation samples"); }
+        catch (UnsupportedOperationException expected) { /* immutable scene schedule */ }
         for (WeaponType weapon : catalog.weapons()) {
+            String artworkSkin = catalog.skins().stream().filter(s -> s.weapon().id().equals(weapon.id())).map(SkinDefinition::id).sorted().findFirst().orElseThrow();
             require(catalog.skins().stream().anyMatch(s -> s.weapon().id().equals(weapon.id())), "unobtainable weapon " + weapon.id());
             var pool = models.pool(weapon.id()); require(pool.size() == 4, "four individual variants required: " + weapon.id());
             var base = models.model(weapon.isKnife() ? weapon.id() : weapon.category().name().toLowerCase(Locale.ROOT));
@@ -38,8 +46,8 @@ public final class InspectRigChecks {
                 InspectAnimation animation = models.animation(id);
                 if (InspectRig.reverseGrip(weapon)) {
                     // A real ring spin must leave the ring center anchored to the parent body.
-                    Vector3f ring = weapon.id().equals("talon") ? new Vector3f(.29882812f, .017578125f, 0)
-                            : new Vector3f(.24719238f, .01171875f, 0);
+                    Vector3f ring = weapon.id().equals("talon") ? new Vector3f(.27773438f, .017578125f, 0)
+                            : new Vector3f(.24609375f, .01171875f, 0);
                     for (int tick = 0; tick <= animation.duration(); tick++) require(
                             animation.groupMatrix("roll", tick).transformPosition(new Vector3f(ring)).distance(
                                     animation.groupMatrix("body", tick).transformPosition(new Vector3f(ring))) < 1e-5,
@@ -61,7 +69,7 @@ public final class InspectRigChecks {
                             var first = InspectTransform.at(animation, part, 0, hand ? models.handModelScale() : models.modelScale(), left, hand);
                             var last = InspectTransform.at(animation, part, animation.duration(), hand ? models.handModelScale() : models.modelScale(), left, hand);
                             require(first.equals(last, .00003f), "joint does not return: " + id + "/" + part.id());
-                            var vertices = pack ? vertices(root, weapon, part) : cube();
+                            var vertices = pack ? vertices(root, weapon, part, artworkSkin) : cube();
                             for (int tick = 0; tick <= animation.duration(); tick++) {
                                 var matrix = InspectTransform.at(animation, part, tick, hand ? models.handModelScale() : models.modelScale(), left, hand);
                                 require(matrix.isFinite(), "nonfinite frame " + id);
@@ -142,7 +150,7 @@ public final class InspectRigChecks {
             var reloaded = new org.bukkit.configuration.file.YamlConfiguration(); reloaded.loadFromString(current.saveToString());
             require(reloaded.getStringList("animation-pools.ak47").equals(defaults.getStringList("animation-pools.ak47")), "migration not serializable");
             require(!InspectProfileDefaults.upgrade(reloaded, defaults), "profile upgrade not idempotent");
-            try (var recent = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-v2.yml")) {
+            for (String baseline : List.of("v2", "v3")) try (var recent = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-" + baseline + ".yml")) {
                 var stock = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(recent, java.nio.charset.StandardCharsets.UTF_8));
                 stock.set("animations.talon__blade_presentation.substeps", 2);
                 require(InspectProfileDefaults.upgrade(stock, defaults), "1.2.0 ring timeline upgrade did not run");
@@ -153,19 +161,27 @@ public final class InspectRigChecks {
             System.out.println("PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.");
         } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
-    private static List<Vector3f> vertices(File root, WeaponType weapon, ModelPart part) {
+    private static final Map<String, byte[]> ORIGINAL_LAYERS = originalLayers();
+    private static Map<String, byte[]> originalLayers() {
+        var result = new HashMap<String,byte[]>();
+        try (var input = InspectRigChecks.class.getResourceAsStream("/original-skins.zip");
+             var zip = new java.util.zip.ZipInputStream(Objects.requireNonNull(input))) {
+            java.util.zip.ZipEntry entry;
+            while ((entry = zip.getNextEntry()) != null) if (entry.getName().contains("/inspect/")) result.put(entry.getName(),zip.readAllBytes());
+            return Map.copyOf(result);
+        } catch (java.io.IOException error) { throw new IllegalStateException(error); }
+    }
+    private static List<Vector3f> vertices(File root, WeaponType weapon, ModelPart part, String skin) {
         try {
-            var original = dev.plattnericus.cases.render.ArgbImage.from(javax.imageio.ImageIO.read(new File(root, "textures/" + weapon.textureFolder() + "/base.png")));
-            var source = InspectRig.presentation(weapon, original).scaledTo(120, 120);
             var out = new ArrayList<Vector3f>(); String layer = part.material().substring(5);
+            var original = dev.plattnericus.cases.render.ArgbImage.from(javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(
+                    Objects.requireNonNull(ORIGINAL_LAYERS.get("assets/mccases/textures/item/inspect/" + skin + "/" + layer + ".png")))));
+            var source = InspectRig.presentation(weapon, original);
             float depth = (weapon.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2f : .45f) : 2.6f)/32;
             for (int yy=0;yy<128;yy++) {
                 int first=128,last=-1;
                 for (int xx=0;xx<128;xx++) {
-                    double x=(xx+.5-4)/120,y=(yy+.5-4)/120;
-                    if(x<0 || x>=1 || y<0 || y>=1)continue;
-                    if((source.get(xx-4, yy-4)>>>24)>=128
-                       && layer.equals(InspectRig.layerAt(weapon,InspectRig.reverseGrip(weapon)?1-x:x,InspectRig.reverseGrip(weapon)?1-y:y))) {first=Math.min(first,xx);last=xx;}
+                    if((source.get(xx, yy)>>>24)>=128) {first=Math.min(first,xx);last=xx;}
                 }
                 if(last>=first)for(int x:new int[]{first,last+1})for(int y:new int[]{yy,yy+1})for(float z:new float[]{-depth,depth})out.add(new Vector3f(x/128f-.5f,.5f-y/128f,z));
             }

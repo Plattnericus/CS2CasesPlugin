@@ -1,9 +1,25 @@
-import json, subprocess, sys, tempfile, unittest
+import json, plistlib, subprocess, sys, tempfile, unittest
 from pathlib import Path
 from unittest import mock
 import dev
 
 class CleanupTests(unittest.TestCase):
+ def test_persistent_login_job_starts_without_a_desktop_app(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   agent=Path(temporary)/'dev.plist'
+   with mock.patch.object(dev,'AGENT',agent):dev.install_cleanup(persistent=True)
+   settings=plistlib.loads(agent.read_bytes())
+   self.assertEqual(settings['ProgramArguments'][-2:],['start','--persistent'])
+   self.assertTrue(settings['RunAtLoad'])
+
+ def test_persistent_stale_cleanup_preserves_the_dev_world(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   runtime=Path(temporary)/'runtime';runtime.mkdir();state=runtime/'session.json';control=runtime/'control.sock';agent=Path(temporary)/'dev.plist'
+   state.write_text(json.dumps({'persistent':True}));control.write_text('stale socket');agent.write_text('login starter')
+   world=runtime/'world.dat';world.write_bytes(b'player testing data')
+   with mock.patch.multiple(dev,RUNTIME=runtime,STATE=state,CONTROL=control,AGENT=agent):dev.cleanup_stale()
+   self.assertEqual(world.read_bytes(),b'player testing data');self.assertTrue(agent.exists());self.assertFalse(control.exists())
+
  def test_build_uses_current_matching_plugin_pack_and_checks(self):
   with tempfile.TemporaryDirectory() as temporary:
    root=Path(temporary);(root/'build.gradle.kts').write_text('version = "1.2.0"\n')

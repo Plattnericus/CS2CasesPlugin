@@ -53,10 +53,12 @@ public abstract class Menu implements InventoryHolder {
         inventory.clear();
         build();
         ItemStack filler = GuiItems.filler(ctx.settings().opening().filler());
+        ItemStack frame = ctx.settings().opening().filler() == org.bukkit.Material.BLACK_STAINED_GLASS_PANE
+                ? GuiItems.filler(org.bukkit.Material.GRAY_STAINED_GLASS_PANE) : filler;
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack current = inventory.getItem(i);
             if (current == null || current.isEmpty()) {
-                inventory.setItem(i, filler);
+                inventory.setItem(i, rows() >= 3 && (i < 9 || i >= inventory.getSize() - 9) ? frame : filler);
             }
         }
     }
