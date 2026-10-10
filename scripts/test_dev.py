@@ -8,7 +8,7 @@ class CleanupTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as temporary:
    root=Path(temporary);(root/'build.gradle.kts').write_text('version = "1.2.0"\n')
    plugin=root/'build/libs/MCCases-1.2.0.jar';plugin.parent.mkdir(parents=True);plugin.write_bytes(b'current plugin')
-   pack=root/'build/distributions/MCCases-ResourcePack-1.2.0.zip';pack.parent.mkdir(parents=True);pack.write_bytes(b'current pack')
+   pack=root/'build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.0.zip';pack.parent.mkdir(parents=True);pack.write_bytes(b'current pack')
    (plugin.parent/'MCCases-1.1.0.jar').write_bytes(b'old plugin')
    with mock.patch.object(dev,'ROOT',root):
     actual=dev.build_artifacts()

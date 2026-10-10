@@ -62,11 +62,13 @@ references. Review uncertain content against its provenance and replace it with
 original designs where necessary. Calling something a fan project does not cure
 missing permission.
 
-The separately combined **Fusion-HD pack** contains additional artwork and fonts.
-Complete rights evidence is not available here. It is therefore not published as a
-freely licensed part of this public build. Private use is not automatic clearance
-either. Record each third-party asset's source, author, license, permitted use and
-required attribution. Editing artwork does not remove its underlying rights.
+The project now includes the **Fusion-HD server overlay** supplied for this server:
+seven bitmap-font images, their font definition and the pack icon. Their exact source
+archive and file hashes are recorded in [resourcepack/fusion/SOURCE.json](resourcepack/fusion/SOURCE.json).
+Current MCCases assets are regenerated; the supplied server assets remain unchanged.
+This records technical provenance, not an independent rights clearance or a new license.
+The operator must have the required rights to those assets and any additional artwork,
+fonts, logos or player skins. Editing or combining artwork does not remove its rights.
 
 Do not distribute Minecraft/Counter-Strike installations, extracted game textures,
 third-party sounds or client JARs as part of the plugin. The

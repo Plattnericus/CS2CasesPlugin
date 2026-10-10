@@ -24,8 +24,13 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.1.jar` and `build/distributions/MCCases-ResourcePack-1.2.1.zip`.
-The pack ZIP is also embedded in the plugin JAR.
+`build/libs/MCCases-1.2.2.jar` and `build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.2.zip`.
+The Fusion pack ZIP and a small source-overlay ZIP are embedded in the plugin JAR.
+JDK 25 performs the entire merge; no Pillow, manual merge or Downloads path is needed.
+`resourcepack/fusion/` is the permanent source for the seven font textures, their
+font definition and pack icon. The standard ZIP is only an intermediate build artifact.
+`PackDistribution` uses the same merge for runtime exports; startup preserves exported
+server catalogs and regenerates edited packs from the actual loaded catalog when needed.
 
 | Task | Purpose / output |
 | --- | --- |
@@ -33,12 +38,15 @@ The pack ZIP is also embedded in the plugin JAR.
 | `bash gradlew verifyPack` | Verify all exported sprites, rim UVs and both hand transforms |
 | `bash gradlew inspectRigPreview` | Software filmstrips of all 252 articulated variants |
 | `bash gradlew verifyFeatures` | Check catalog, reward selection, translations, inventory queries, journal and timelines |
-| `bash gradlew resourcePack` | Export the default catalog's pack |
+| `bash gradlew resourcePack` | Always generate current MCCases assets and merge the project Fusion overlay |
+| `bash gradlew fusionOverlay` | Package original custom font/icon sources without changing bytes |
+| `bash gradlew verifyFusionPack` | Check exact asset preservation, references, deterministic merging, upgrades and failure recovery |
+| `bash gradlew standardResourcePack` | Intermediate generated assets used as the input to Fusion |
 | `bash gradlew generateAssets` | Regenerate weapon layers and pattern PNGs in the default resources |
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.1.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.2.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
@@ -152,7 +160,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.1.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.2.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -257,8 +265,9 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use [the 1.2.1 report](RELEASE-1.2.1-VERIFICATION.md) and its versioned visual archive
-for the current results; earlier 1.2 reports remain historical evidence.
+Use [the 1.2.2 Fusion report](RELEASE-1.2.2-VERIFICATION.md) for the current results.
+[The 1.2.1 report](RELEASE-1.2.1-VERIFICATION.md) and earlier 1.2 reports remain
+historical evidence.
 
 Remove extra check JARs and test fixtures after validation; retain useful labeled test evidence.
 Keep source checks available for later development. The session's temporary world, database and

@@ -4,12 +4,12 @@
 
 Updated: October 10, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.2.2 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.1** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.2** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](images/skins.png)
 
@@ -48,7 +48,7 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.2.1.jar](../release/MCCases-1.2.1.jar) into `plugins/`.
+2. Copy [MCCases-1.2.2.jar](../release/MCCases-1.2.2.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
@@ -490,7 +490,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-1.2.1.zip](../release/MCCases-ResourcePack-1.2.1.zip).
+[release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip).
 
 ### Automatic distribution
 

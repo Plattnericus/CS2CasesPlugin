@@ -109,7 +109,7 @@ public final class CasesBootstrap {
         npcAnimator = new dev.plattnericus.cases.shop.ShopNpcAnimator(runtime);
         packDistribution = new dev.plattnericus.cases.pack.PackDistribution(plugin, runtime::settings);
         try {
-            packDistribution.extract();
+            packDistribution.extract(runtime.catalog(), render.engine().renderer());
         } catch (IOException e) {
             plugin.getLogger().log(Level.WARNING, "Could not extract the bundled resource pack", e);
         }
