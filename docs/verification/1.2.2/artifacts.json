@@ -1,0 +1,23 @@
+{
+  "version": "1.2.2",
+  "artifacts": [
+    {
+      "file": "MCCases-1.2.2.jar",
+      "bytes": 19415820,
+      "sha256": "a05262b8ef6550730d7ff085ce7f1ef9c42285d7d83abb9c857653b8a7d0ef09"
+    },
+    {
+      "file": "MCCases-ResourcePack-Fusion-HD-1.2.2.zip",
+      "bytes": 17324219,
+      "sha256": "b1e34bc62a77d1ee845eab601a0c55575edb69a0bcc89d6d7bd546395832894e"
+    }
+  ],
+  "productionClasses": 248,
+  "compilerClassesIdentical": true,
+  "embeddedPackIdentical": true,
+  "embeddedOverlayIdentical": true,
+  "legalDocumentsIdentical": true,
+  "originalCustomAssetsPreserved": 9,
+  "checkClassesIncluded": false,
+  "CRC": "PASS"
+}

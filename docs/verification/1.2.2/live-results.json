@@ -1,0 +1,81 @@
+[
+  {
+    "command": "mccasesdevcheck DevTester commands",
+    "seconds": 52.7,
+    "results": [
+      "[19:30:58] [Render thread/INFO]: [System] [CHAT] PASS ALL 155 COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester full",
+    "seconds": 9.86,
+    "results": [
+      "[19:30:59] [Render thread/INFO]: [System] [CHAT] PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.",
+      "[19:30:59] [Render thread/INFO]: [System] [CHAT] PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.",
+      "[19:30:59] [Render thread/INFO]: [System] [CHAT] PASS: command-only skin inventory; legacy marked stars/cursor/offhand removed; ordinary stars retained and former reserved slot usable.",
+      "[19:30:59] [Render thread/INFO]: [System] [CHAT] PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.",
+      "[19:30:59] [Render thread/INFO]: [System] [CHAT] PASS: journal mutations and malformed-entry recovery; case/shop/skin/list menus render and protect icons; dealer interaction and damage protection.",
+      "[19:31:00] [Render thread/INFO]: [System] [CHAT] PASS: /inventory allows hotbar scrolling/number keys in both sneak states and over targets without changing pages; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.",
+      "[19:31:01] [Render thread/INFO]: [System] [CHAT] PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.",
+      "[19:31:01] [Render thread/INFO]: [System] [CHAT] PASS: resource-pack item and map previews, asynchronous cancellation, callback and real inventory preserved.",
+      "[19:31:01] [Render thread/INFO]: [System] [CHAT] PASS: SQLite opening transaction/idempotency, PENDING recovery, favorite, concurrent StatTrak increments, equip persistence and offline profile snapshot.",
+      "[19:31:09] [Render thread/INFO]: [System] [CHAT] PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester observer DevObserver",
+    "seconds": 1.28,
+    "results": [
+      "[19:31:11] [Render thread/INFO]: [System] [CHAT] PASS TWO CLIENTS: actual locales en_US / en_US; plugin language en / en; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester commerce DevObserver",
+    "seconds": 14.94,
+    "results": [
+      "[19:31:26] [Render thread/INFO]: [System] [CHAT] PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester gold",
+    "seconds": 6.19,
+    "results": [
+      "[19:31:33] [Render thread/INFO]: [System] [CHAT] PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester tradein-ui",
+    "seconds": 2.3,
+    "results": [
+      "[19:31:36] [Render thread/INFO]: [System] [CHAT] PASS TRADEIN UI: 48 direct-admin grants selectable, five sorts update displayed order, pagination, direct weapon/rarity/StatTrak filters, ten matching inputs auto-filled excluding favorites, review/back/weapon navigation preserve selection, reset filters and clear selection, scrolling blocked."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester guide",
+    "seconds": 1.11,
+    "results": [
+      "[19:31:38] [Render thread/INFO]: [System] [CHAT] PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester nine",
+    "seconds": 11.5,
+    "results": [
+      "[19:31:50] [Render thread/INFO]: [System] [CHAT] PASS QUEUE 9: GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, 3.0x glass wheels; peak 153 item displays; receipt and world-entity cleanup. Inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester queue-controls",
+    "seconds": 1.08,
+    "results": [
+      "[19:31:52] [Render thread/INFO]: [System] [CHAT] PASS QUEUE CONTROLS: real GUI quantity 100, invalid numeric commands, cancel releases 91 reservations, teleport preserves 91 signed pairs and finalizes nine prepared rewards. Inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester spam",
+    "seconds": 12.22,
+    "results": [
+      "[19:32:05] [Render thread/INFO]: [System] [CHAT] PASS SPAM: single launch closes menu; repeated signed-item clicks add 1..9 sessions, same-tick duplicates ignored, excess clicks consume nothing, nine rewards and exactly nine signed pairs."
+    ]
+  }
+]

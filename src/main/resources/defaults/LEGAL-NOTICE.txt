@@ -18,6 +18,9 @@ No project-wide open-source license has been granted in this repository. Public 
 availability does not grant general reuse or redistribution rights. Contact the maintainer
 for permissions; third-party materials remain governed by their own rights and licenses.
 Custom textures, fonts, logos and player skins require appropriate permission.
+The default Fusion pack includes the supplied server font/icon overlay; its source
+archive and exact asset hashes are recorded in resourcepack/fusion/SOURCE.json.
+The generated MCCases namespace is refreshed together on every build/export.
 
 The server operator is responsible for server rules, lawful asset use and player privacy.
 The plugin stores player UUIDs, names, skin collections and transaction/opening records.

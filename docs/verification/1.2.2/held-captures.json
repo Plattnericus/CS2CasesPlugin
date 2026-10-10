@@ -1,0 +1,98 @@
+[
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "karambit_right_first_person.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "karambit_right_front_observer.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "karambit_right_third_person_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "karambit_right_third_person_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "karambit_left_first_person.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "karambit_left_front_observer.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "karambit_left_third_person_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "karambit_left_third_person_front.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "talon_right_first_person.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "talon_right_front_observer.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "talon_right_third_person_back.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "talon_right_third_person_front.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "talon_left_first_person.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "talon_left_front_observer.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "talon_left_third_person_back.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "talon_left_third_person_front.png"
+  }
+]

@@ -74,7 +74,7 @@ def build_artifacts():
  release=match.group(1)
  plugin=ROOT/f'build/libs/MCCases-{release}.jar'
  checks=ROOT/f'build/libs/MCCases-DevChecks-{release}.jar'
- pack=ROOT/f'build/distributions/MCCases-ResourcePack-{release}.zip'
+ pack=ROOT/f'build/distributions/MCCases-ResourcePack-Fusion-HD-{release}.zip'
  for artifact in (plugin,pack):
   if not artifact.is_file():raise FileNotFoundError(f'Build the current release first: {artifact}')
  return plugin,checks,pack

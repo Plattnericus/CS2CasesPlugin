@@ -637,8 +637,7 @@ public final class AdminCommand {
         ctx.messages().send(sender, "admin.export-start");
         ctx.render().submit(() -> {
             try {
-                return dev.plattnericus.cases.pack.PackExporter.export(ctx.catalog(), ctx.render().engine().renderer(),
-                        ctx.settings().resourcePack().namespace(), "Plattnericus", target);
+                return ctx.packDistribution().export(ctx.catalog(), ctx.render().engine().renderer());
             } catch (java.io.IOException e) {
                 throw new java.util.concurrent.CompletionException(e);
             }

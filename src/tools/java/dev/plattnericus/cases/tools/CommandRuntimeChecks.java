@@ -187,7 +187,7 @@ public final class CommandRuntimeChecks {
         flow=flow.thenCompose(v->check("scan skin metric count",Map.of("skin","ak47_case_hardened","metric","playside.blue","count",2),true,()->says("1.")));
         for(String type:List.of("","villager","mannequin"))flow=flow.thenCompose(v->check("shop spawn"+(type.isEmpty()?"":" "+type),Map.of(),false,()->!messages.isEmpty()))
             .thenCompose(v->check("shop remove",Map.of(),false,()->!messages.isEmpty()));
-        flow=flow.thenCompose(v->check("exportpack",Map.of(),true,()->says("skins exported")));
+        flow=flow.thenCompose(v->check("exportpack",Map.of(),true,()->says("skins exported"))).thenRun(this::fusionExport);
         flow=flow.thenCompose(v->check("reload",Map.of(),true,()->says("Reloaded in")));
         flow=flow.thenCompose(v->badReload());
         flow=flow.thenCompose(v->faults());
@@ -199,6 +199,24 @@ public final class CommandRuntimeChecks {
         flow.whenComplete((v,e)->{reset();try{Files.createDirectories(plugin.getDataFolder().toPath());Files.writeString(plugin.getDataFolder().toPath().resolve("command-audit.txt"),String.join("\n",passed)+"\n"+(e==null?"PASS ALL "+passed.size()+" COMMAND CHECKS":"FAIL "+e)+"\n");}catch(Exception x){plugin.getLogger().log(java.util.logging.Level.SEVERE,"Cannot save audit",x);return;}
             if(e!=null)plugin.getLogger().log(java.util.logging.Level.SEVERE,"COMMAND AUDIT FAILED",e);
             else{String result="PASS ALL "+passed.size()+" COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references.";reporter.sendMessage(result);plugin.getLogger().info(result);}});
+    }
+    private void fusionExport() {
+        try (var output = new java.util.zip.ZipFile(new java.io.File(ctx.plugin().getDataFolder(), "resourcepack/" + dev.plattnericus.cases.pack.PackDistribution.FILE_NAME));
+             var input = ctx.plugin().getResource(dev.plattnericus.cases.pack.FusionPack.OVERLAY_RESOURCE)) {
+            require(input != null, "production JAR missing Fusion overlay");
+            int preserved = 0;
+            try (var overlay = new java.util.zip.ZipInputStream(input)) {
+                for (var entry = overlay.getNextEntry(); entry != null; entry = overlay.getNextEntry()) if (!entry.isDirectory()) {
+                    var exported = output.getEntry(entry.getName()); require(exported != null, "export lost " + entry.getName());
+                    try (var data = output.getInputStream(exported)) {
+                        require(java.util.Arrays.equals(overlay.readAllBytes(), data.readAllBytes()), "export changed " + entry.getName());
+                    }
+                    preserved++;
+                }
+            }
+            require(preserved == 10 && output.getEntry(dev.plattnericus.cases.pack.FusionPack.MANIFEST) != null, "export did not produce the full Fusion pack");
+            pass("Fusion export preserves seven fonts, font definition, pack icon and source manifest");
+        } catch (java.io.IOException error) { throw new IllegalStateException("Fusion export verification failed", error); }
     }
     private CompletableFuture<Void>faults(){
         String skins=database().table("skins"),equipped=database().table("equipped");double original=knife.floatValue();

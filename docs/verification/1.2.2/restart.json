@@ -1,0 +1,10 @@
+{
+  "version": "1.2.2",
+  "method": "Actual Paper stop/start with final JAR after /csadmin exportpack",
+  "packSha256Before": "365c91dfb1aca5328e47040f07f9e487fb246182baaf06cfa0b2c4c498a7eeff",
+  "packSha256After": "365c91dfb1aca5328e47040f07f9e487fb246182baaf06cfa0b2c4c498a7eeff",
+  "packUnchanged": true,
+  "receiptUnchanged": true,
+  "pluginInfoVersionCorrect": true,
+  "serverStartup": "PASS"
+}

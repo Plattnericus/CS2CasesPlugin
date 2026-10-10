@@ -1,0 +1,112 @@
+{
+  "source": "MCCases-ResourcePack-Fusion-HD-1.2.0.zip",
+  "sourceSha256": "2081bf6540d20178427ea175300ce978015d7c0fbda3dd0cac95944eb1efeae8",
+  "originalZIPUnmodified": true,
+  "preservedFiles": [
+    {
+      "path": "assets/minecraft/font/default.json",
+      "bytes": 1087,
+      "sha256": "103436df6274ce87929551b717a6e12119543bd27561ff68a28e8e291d349a7b",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/globe.png",
+      "bytes": 6898,
+      "sha256": "b5d52089da1b2655c483ceed76abe4d88a68559216fe1468ceb1df6efe44b30d",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/hirsch.png",
+      "bytes": 56856,
+      "sha256": "206daa70574b3c7d090c3665c07672d09f85012d72addfe6a4ae2146a5666d5e",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/kirbis.png",
+      "bytes": 72550,
+      "sha256": "30d4da6cb90514db1ee8a6cfbc3cd52f07007ccf2ae2a54bb991be606281d9ba",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/logo.png",
+      "bytes": 17798,
+      "sha256": "c82effa605dbe1346cfe816c50aa77f2222402e5db30ceac2ab8c2b68156f074",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/prosse.png",
+      "bytes": 87056,
+      "sha256": "070696c3e00bc89e83c53db139993cd9b89e35a53151db372e97b641e6e130a3",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/tachometer.png",
+      "bytes": 5348,
+      "sha256": "95ab3c189db4a515faf77af90bca867875a1db82a6a47c33ad381a93bfb02124",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "assets/minecraft/textures/font/custom/user.png",
+      "bytes": 4443,
+      "sha256": "73cabed304c802e4653fce9912b4733dd1d72d7a49904f180d868261c96666a2",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    },
+    {
+      "path": "pack.png",
+      "bytes": 9109,
+      "sha256": "fd22f5f0731b8e773f28ad73dfebb7af60ba0231f6b32cdb84c82450cf0f4796",
+      "identicalIn": [
+        "supplied ZIP",
+        "tracked source",
+        "Fusion release",
+        "runtime export"
+      ]
+    }
+  ],
+  "managedAssets": 9090,
+  "managedAssetsIdenticalToCurrentGeneratorAnd1_2_1": true,
+  "runtimeExportAssets": 9090,
+  "fontProviders": 7,
+  "inputAndOutputCRCs": "PASS",
+  "runtimeManagedAssetsIdenticalToRelease": true
+}

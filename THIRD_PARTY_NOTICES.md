@@ -37,11 +37,13 @@ That describes provenance within the build; it does not establish ownership or
 permission for every underlying design. CS-inspired names and designs require their
 own assessment. See [LEGAL.md](LEGAL.md).
 
-Custom fonts, logo graphics and artwork from the separately supplied Fusion-HD
-pack are not part of the standard public release. Rights evidence for those files
-has not been established in this repository. Obtain permission for distribution
-and record any required attribution before publishing a combined pack.
-Configured NPC player skins require their own rights review as well.
+The supplied Fusion-HD server overlay is included in the default public build.
+It contains seven bitmap-font PNGs, `assets/minecraft/font/default.json` and the pack
+icon, preserved byte-for-byte. [The source manifest](resourcepack/fusion/SOURCE.json)
+records the original archive and individual file hashes. This is provenance rather
+than an independent rights grant. The operator remains responsible for permission
+and any required attribution for supplied artwork and fonts. Additional custom assets
+and configured NPC player skins require their own rights review.
 
 No project-wide open-source license is asserted. Existing third-party licenses,
 separate permissions and applicable statutory rights are unaffected.

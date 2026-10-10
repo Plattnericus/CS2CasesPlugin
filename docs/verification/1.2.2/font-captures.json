@@ -1,0 +1,36 @@
+{
+  "client": "Vanilla 26.3",
+  "pack": "MCCases-ResourcePack-Fusion-HD-1.2.2.zip",
+  "method": "Actual framebuffer capture after tellraw; original unmodified font PNGs",
+  "glyphs": [
+    {
+      "name": "logo",
+      "codepoint": "U+E002"
+    },
+    {
+      "name": "kirbis",
+      "codepoint": "U+E003"
+    },
+    {
+      "name": "hirsch",
+      "codepoint": "U+E004"
+    },
+    {
+      "name": "user",
+      "codepoint": "U+E005"
+    },
+    {
+      "name": "tachometer",
+      "codepoint": "U+E006"
+    },
+    {
+      "name": "globe",
+      "codepoint": "U+E007"
+    },
+    {
+      "name": "prosse",
+      "codepoint": "U+E008"
+    }
+  ],
+  "reply": ""
+}

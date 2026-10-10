@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.2 — 2026-10-10
+
+- Make Fusion HD the default build, embedded pack, development-client pack and runtime export. Store the supplied server font definition, seven glyph PNGs and pack icon permanently in the project with exact source hashes.
+- Regenerate the MCCases namespace together so current 128px textures, item models and ring-knife geometry stay compatible. Preserve custom server assets byte-for-byte.
+- Refresh old/edited installed packs from the actual server catalog, preserve custom catalog export receipts, skip unchanged restarts and keep the previous ZIP on incomplete exports or missing-font errors.
+- Verify all generated/preserved assets, model/texture references, fonts, deterministic merging and installation/failure recovery.
+
 ## 1.2.1 — 2026-10-10
 
 - Rebuild the standard pack with 128px skin and inspect textures, fractional premultiplied alpha filtering, clean cutout edges and an unclipped knife rotation canvas.

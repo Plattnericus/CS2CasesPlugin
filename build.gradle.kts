@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.2.1"
+version = "1.2.2"
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
@@ -77,11 +77,14 @@ tasks.jar {
     from(files("LEGAL.md", "THIRD_PARTY_NOTICES.md", "docs/PRIVACY-IT.md")) {
         into("META-INF/mccases")
     }
-    // the plugin ships its own resource pack (extracted to plugins/MCCases/resourcepack/)
-    dependsOn("resourcePack")
-    from(layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip")) {
+    // Every production JAR ships the Fusion pack and the overlay used by runtime exports.
+    dependsOn("resourcePack", "fusionOverlay")
+    from(layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip")) {
         into("pack")
         rename { "MCCases-ResourcePack.zip" }
+    }
+    from(layout.buildDirectory.file("distributions/MCCases-Fusion-Overlay.zip")) {
+        into("pack")
     }
 }
 
@@ -102,14 +105,46 @@ tasks.register<JavaExec>("previewSheet") {
     args(file("src/main/resources/defaults").absolutePath, layout.buildDirectory.dir("preview").get().asFile.absolutePath)
 }
 
-// Builds the optional, mergeable resource pack from the default catalog.
-tasks.register<JavaExec>("resourcePack") {
+// Generate managed assets first. The normal resourcePack/build path always applies Fusion.
+tasks.register<JavaExec>("standardResourcePack") {
     group = "mccases"
     classpath = sourceSets["tools"].runtimeClasspath
     mainClass.set("dev.plattnericus.cases.tools.PackBuilder")
     args(
         file("src/main/resources/defaults").absolutePath,
-        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-Standard-${project.version}.zip").get().asFile.absolutePath
+    )
+}
+
+tasks.register<Zip>("fusionOverlay") {
+    group = "mccases"
+    description = "Package the project's original custom fonts and icon without changing their bytes"
+    archiveFileName.set("MCCases-Fusion-Overlay.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("distributions"))
+    from("resourcepack/fusion") {
+        include("assets/**", "pack.png", "SOURCE.json")
+    }
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    doFirst {
+        check(file("resourcepack/fusion/assets/minecraft/font/default.json").isFile) {
+            "Fusion source is missing: restore resourcepack/fusion; builds never fall back to the standard pack"
+        }
+    }
+}
+
+tasks.register<JavaExec>("resourcePack") {
+    group = "mccases"
+    description = "Always merge current MCCases assets with the project's Fusion server textures"
+    dependsOn("standardResourcePack", "fusionOverlay")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.FusionPackBuilder")
+    args(
+        providers.gradleProperty("fusionCurrentPack").getOrElse(layout.buildDirectory.file("distributions/MCCases-ResourcePack-Standard-${project.version}.zip").get().asFile.absolutePath),
+        providers.gradleProperty("fusionBasePack").getOrElse(layout.buildDirectory.file("distributions/MCCases-Fusion-Overlay.zip").get().asFile.absolutePath),
+        providers.gradleProperty("fusionOutputPack").getOrElse(layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip").get().asFile.absolutePath),
+        project.version.toString()
     )
 }
 
@@ -129,7 +164,7 @@ tasks.register<JavaExec>("inspectFilmstrip") {
     mainClass.set("dev.plattnericus.cases.tools.InspectFilmstrip")
     jvmArgs("-Dmccases.filmstrip.movies=${providers.gradleProperty("filmstripMovies").getOrElse("true")}")
     args(file("src/main/resources/defaults/inspect.yml").absolutePath, layout.buildDirectory.dir("filmstrip").get().asFile.absolutePath,
-        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath)
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip").get().asFile.absolutePath)
 }
 
 val verifyFeatures by tasks.registering(JavaExec::class) {
@@ -147,11 +182,25 @@ val verifyPack by tasks.registering(JavaExec::class) {
     classpath = sourceSets["tools"].runtimeClasspath
     mainClass.set("dev.plattnericus.cases.tools.PackChecks")
     args(file("src/main/resources/defaults").absolutePath,
-        providers.gradleProperty("packToVerify").orElse(layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath).get(),
+        providers.gradleProperty("packToVerify").orElse(layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip").get().asFile.absolutePath).get(),
         layout.buildDirectory.dir("verification").get().asFile.absolutePath)
 }
 
 tasks.check { dependsOn(verifyPack) }
+
+val verifyFusionPack by tasks.registering(JavaExec::class) {
+    group = "verification"
+    dependsOn("resourcePack")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.FusionPackChecks")
+    args(
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-Standard-${project.version}.zip").get().asFile.absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-Fusion-Overlay.zip").get().asFile.absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip").get().asFile.absolutePath,
+        project.version.toString()
+    )
+}
+tasks.check { dependsOn(verifyFusionPack) }
 
 tasks.register<JavaExec>("inspectRigPreview") {
     group = "mccases"
@@ -159,7 +208,7 @@ tasks.register<JavaExec>("inspectRigPreview") {
     classpath = sourceSets["tools"].runtimeClasspath
     mainClass.set("dev.plattnericus.cases.tools.RigMotionPreview")
     args(file("src/main/resources/defaults").absolutePath,
-        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-Fusion-HD-${project.version}.zip").get().asFile.absolutePath,
         layout.buildDirectory.dir("verification/animations").get().asFile.absolutePath)
 }
 
