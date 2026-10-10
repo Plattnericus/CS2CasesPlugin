@@ -54,6 +54,7 @@ public final class TradeInChecks {
         require(adminTrade.origin().admin() && adminTrade.origin().tradeIn()
                 && !TradeInRules.eligible(catalog, adminTrade, false) && TradeInRules.eligible(catalog, adminTrade, true), "admin lineage lost after trade-in");
         require(InstanceCodec.decode(InstanceCodec.encode(adminTrade)).origin() == adminTrade.origin(), "journal dropped contract provenance");
+        randomRewards(catalog, owner);
         var messages = new Messages(new File(root, "messages_en.yml"), null, null);
         var formatter = new SkinFormatter(messages, catalog, 6, 8, "yyyy-MM-dd");
         for (SkinDefinition output : List.of(a, source.skins(catalog.raritiesOrdered().getLast()).getFirst())) {
@@ -65,6 +66,41 @@ public final class TradeInChecks {
             }
         }
         System.out.println("PASS: five stable trade-in sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE IN with retained admin lineage.");
+    }
+    private static void randomRewards(Catalog catalog, UUID owner) {
+        var first = catalog.caseDefinition("kilowatt_case");
+        var second = catalog.caseDefinition("glove_case");
+        var inputTier = catalog.raritiesOrdered().getFirst();
+        var target = catalog.raritiesOrdered().get(1);
+        for (boolean stat : List.of(false, true)) {
+            var inputs = new ArrayList<SkinInstance>();
+            for (int i = 0; i < 10; i++) {
+                var source = i < 7 ? first : second;
+                inputs.add(instance(owner, source.skins(inputTier).getFirst(), source.id(), .2, i, stat, SkinInstance.Origin.CASE));
+            }
+            TradeInRules.validate(catalog, inputs, false);
+            var chances = TradeInRules.chances(catalog, inputs, target);
+            require(chances.size() > 1 && Math.abs(chances.stream().mapToDouble(TradeInRules.Chance::probability).sum() - 1) < 1e-12,
+                    "random reward preview missing outcomes or not totaling 100%");
+            var firstPool = first.skins(target).stream().filter(s -> !stat || s.statTrakEligible()).toList();
+            var secondPool = second.skins(target).stream().filter(s -> !stat || s.statTrakEligible()).toList();
+            var counts = new HashMap<SkinDefinition, Integer>(); var random = new Random(124);
+            for (int i = 0; i < 6000; i++) {
+                var outcome = TradeInRules.roll(catalog, inputs, target, random);
+                var source = catalog.caseDefinition(outcome.sourceCase());
+                require(source.skins(target).contains(outcome.skin()) && (!stat || outcome.skin().statTrakEligible()), "random reward outside its legal source/tier/StatTrak pool");
+                counts.merge(outcome.skin(), 1, Integer::sum);
+            }
+            for (var chance : chances) {
+                double expected = (firstPool.contains(chance.skin()) ? .7 / firstPool.size() : 0)
+                        + (secondPool.contains(chance.skin()) ? .3 / secondPool.size() : 0);
+                require(Math.abs(chance.probability() - expected) < 1e-12, "preview does not weight cases by input count");
+                require(counts.containsKey(chance.skin()) && Math.abs(counts.get(chance.skin()) / 6000.0 - expected) < .03,
+                        "repeated random draws omit an eligible reward or disagree with preview odds");
+            }
+        }
+        require(TradeInRules.chances(catalog, List.of(), target).isEmpty(), "empty selection has reward odds");
+        System.out.println("PASS: 12,000 independent trade-up draws cover every eligible normal/StatTrak outcome; exact mixed-case odds total 100% and match observed frequencies.");
     }
     private static SkinInstance instance(UUID owner, SkinDefinition def, String source, double fl, long time, boolean stat, SkinInstance.Origin origin) {
         return new SkinInstance(UUID.randomUUID(), owner, def.id(), fl, 0, time, stat, 0, PatternInfo.NONE, source, origin, time, false, SkinInstance.Status.OWNED);

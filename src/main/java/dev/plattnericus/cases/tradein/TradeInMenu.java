@@ -54,20 +54,28 @@ public final class TradeInMenu extends Menu {
                 rarityFilter == null ? all : ctx.catalog().rarity(rarityFilter).name())), c -> {
             var choices = new java.util.ArrayList<String>(); choices.add(null);
             ctx.catalog().raritiesOrdered().stream().filter(r -> !r.rareSpecial()).forEach(r -> choices.add(r.id()));
-            rarityFilter = choices.get(Math.floorMod(choices.indexOf(rarityFilter) + (c.isRightClick() ? -1 : 1), choices.size()));
-            page = 0; playClick(); render();
+            filterChoice(choices, rarityFilter, value -> value == null ? all : ctx.catalog().rarity(value).name(), value -> rarityFilter = value);
         });
         set(3, GuiItems.icon(ctx.messages(viewer), Material.REDSTONE, "tradein.stattrak", Text.unparsed("value",
                 statTrakFilter == 0 ? all : statTrakFilter == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak")), c -> {
-            statTrakFilter = Math.floorMod(statTrakFilter + (c.isRightClick() ? -1 : 1), 3); page = 0; playClick(); render();
+            filterChoice(java.util.List.of(0, 1, 2), statTrakFilter,
+                    value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak", value -> statTrakFilter = value);
         });
         set(5, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradein.reset-filters"), c -> {
             weaponFilter = null; rarityFilter = null; statTrakFilter = 0; page = 0; playClick(); render();
         });
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradein.sort", Text.unparsed("sort",
                 ctx.messages(viewer).raw("tradein.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
-            var sorts = TradeInSelection.Sort.values();
-            sort = sorts[Math.floorMod(sort.ordinal() + (c.isRightClick() ? -1 : 1), sorts.length)]; page = 0; playClick(); render();
+            confirming = true;
+            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", java.util.List.of(TradeInSelection.Sort.values()), sort,
+                    value -> ctx.messages(viewer).raw("tradein.sorts." + value.name().toLowerCase(java.util.Locale.ROOT)),
+                    value -> { sort = value; page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).icons(value -> GuiItems.sortIcon(value.name())).open();
+        });
+        var chances = TradeInRules.chances(ctx.catalog(), inputs, target);
+        set(6, GuiItems.icon(ctx.messages(viewer), chances.isEmpty() ? Material.GRAY_DYE : Material.ENDER_EYE, "menus.rewards",
+                Text.unparsed("count", chances.size())), c -> {
+            if (chances.isEmpty()) { playError(); return; }
+            confirming = true; new RewardsMenu(ctx, viewer, this, chances).open();
         });
         set(7, GuiItems.icon(ctx.messages(viewer), Material.BUNDLE, "tradein.fill"), c -> {
             var fill = TradeInSelection.fill(ctx.catalog(), skins, inputs, ctx.tradeIns().allowAdmin());
@@ -92,6 +100,37 @@ public final class TradeInMenu extends Menu {
         set(53, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
     }
     @Override protected void onClose() { if (!confirming) ctx.tradeIns().cancel(viewer); }
+    private void returnToSelection() { confirming = false; open(); }
+    private <T> void filterChoice(java.util.List<T> values, T current, java.util.function.Function<T, String> label, java.util.function.Consumer<T> apply) {
+        confirming = true;
+        new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", values, current, label,
+                value -> { apply.accept(value); page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).open();
+    }
+
+    private static final class RewardsMenu extends Menu {
+        private final TradeInMenu source;
+        private final java.util.List<TradeInRules.Chance> chances;
+        private int page;
+        private boolean navigating;
+        RewardsMenu(CasesContext ctx, Player p, TradeInMenu source, java.util.List<TradeInRules.Chance> chances) {
+            super(ctx, p); this.source = source; this.chances = chances;
+        }
+        @Override protected int rows() { return 6; }
+        @Override protected Component title() { return ctx.messages(viewer).get("menus.rewards-title").colorIfAbsent(net.kyori.adventure.text.format.NamedTextColor.DARK_GRAY); }
+        @Override protected void build() {
+            int pages = GuiItems.pages(chances.size(), GuiItems.CONTENT.length);
+            for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < chances.size(); i++) {
+                var chance = chances.get(page * GuiItems.CONTENT.length + i);
+                set(GuiItems.CONTENT[i], SkinIcons.icon(chance.skin(), Component.text(chance.skin().displayName()),
+                        ctx.messages(viewer).itemList("menus.reward-chance", Text.unparsed("chance", String.format(java.util.Locale.ROOT, "%.2f", chance.probability() * 100))), ctx.settings(), false));
+            }
+            set(45, GuiItems.back(ctx.messages(viewer)), c -> { navigating = true; source.returnToSelection(); });
+            set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
+            set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
+            set(53, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
+        }
+        @Override protected void onClose() { if (!navigating) ctx.tradeIns().cancel(viewer); }
+    }
 
     /** A direct weapon choice avoids cycling through dozens of models to find an AK or AWP. */
     private static final class WeaponChooser extends Menu {

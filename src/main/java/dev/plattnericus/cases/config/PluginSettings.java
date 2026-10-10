@@ -165,7 +165,7 @@ public record PluginSettings(
                 new WorldReel(
                         c.getDouble("opening.world.distance", 3.0),
                         c.getDouble("opening.world.height", 0.35),
-                        Math.max(3, Math.min(15, c.getInt("opening.world.visible-items", 7) | 1)),
+                        Math.max(3, Math.min(15, c.getInt("opening.world.visible-items", 5) | 1)),
                         c.getDouble("opening.world.spacing", 0.62),
                         c.getDouble("opening.world.item-scale", 0.5),
                         clamp(c.getInt("opening.world.hold-ticks", 80), 20, 400),

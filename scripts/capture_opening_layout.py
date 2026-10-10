@@ -9,7 +9,7 @@ def main():
  root=a.root.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);rc=Rcon(root/'server')
  rc.command('mccasesdevcheck DevTester visual DevObserver stop')
  # Use a fresh location, away from dealer fixtures created by the runtime audits.
- rc.command('tp DevTester 100.5 100 100.5 0 0');rc.command('tp DevObserver 100.5 100 92.5 0 0')
+ rc.command('tp DevTester 100.5 -60 100.5 0 0');rc.command('tp DevObserver 100.5 -60 92.5 0 0')
  rc.command('clear DevTester');rc.command('csadmin givecase DevTester kilowatt_case 9 test');rc.command('csadmin givekey DevTester case_key 9 test')
  settings=yaml.safe_load((root/'server/plugins/MCCases/config.yml').read_text())['storage']
  database=root/'server/plugins/MCCases'/settings['sqlite-file'];table='"'+(settings['table-prefix']+'skins').replace('"','""')+'"'
@@ -19,6 +19,7 @@ def main():
  baseline=rewards()
  for folder in ('client','observer'):
   client(root,folder,'camera|FIRST_PERSON');client(root,folder,'chat|HIDDEN');client(root,folder,'fov|70')
+ time.sleep(.5)
  manifest=[]
  for amount in range(1,10):
   client(root,'client','command|cases open kilowatt_case 1');deadline=time.monotonic()+5
@@ -26,8 +27,14 @@ def main():
    if time.monotonic()>deadline:raise TimeoutError('Opening '+str(amount)+' did not persist')
    time.sleep(.025)
   time.sleep(.35)
+  transforms=out/f'grid-{amount}-displays.tsv';client(root,'client','displays|'+str(transforms))
+  rows=[line.split('\t') for line in transforms.read_text().splitlines()[1:]]
+  glass=[float(row[7]) for row in rows if row[1]=='BlockDisplay' and float(row[7])>1]
+  assert len(glass)==amount,('glass panel count',amount,len(glass))
+  assert max(glass)-min(glass)<1e-5,('unequal wheel scales',amount,glass)
+  if manifest:assert abs(glass[0]-manifest[0]['glassWidth'])<1e-5,('wheel resized',amount,glass)
   file=out/f'grid-{amount}.png';client(root,'client','shot|'+str(file))
-  manifest.append(dict(count=amount,file=file.name,viewer='owner',distance=3))
+  manifest.append(dict(count=amount,file=file.name,viewer='owner',distance=3,fov=70,glassWidth=glass[0],panels=len(glass)))
   file=out/f'grid-{amount}-overview.png';client(root,'observer','shot|'+str(file))
   manifest.append(dict(count=amount,file=file.name,viewer='observer',distance=11))
   print('CAPTURED GRID',amount,'owner and overview',flush=True)

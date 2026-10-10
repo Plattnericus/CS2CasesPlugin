@@ -43,9 +43,18 @@ public final class SkinPickerMenu extends Menu {
                 else new SellMenu(ctx, viewer, skin, Math.max(100, ctx.commerce().minPrice())).open();
             });
         }
-        set(1, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "browser.category", Text.unparsed("value", selection.category(ctx, viewer))), c -> { selection.category = (selection.category + 1) % (dev.plattnericus.cases.catalog.WeaponCategory.values().length + 1); selection.page = 0; render(); });
-        set(3, GuiItems.icon(ctx.messages(viewer), Material.AMETHYST_SHARD, "browser.rarity", Text.unparsed("value", selection.rarity(ctx, viewer))), c -> { selection.rarity = (selection.rarity + 1) % (ctx.catalog().raritiesOrdered().size() + 1); selection.page = 0; render(); });
-        set(5, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "browser.sort", Text.unparsed("value", ctx.messages(viewer).raw("browser.sorts." + selection.sort))), c -> { selection.sort = (selection.sort + 1) % 4; render(); });
+        set(1, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "browser.category", Text.unparsed("value", selection.category(ctx, viewer))), c -> filterChoice(dev.plattnericus.cases.catalog.WeaponCategory.values().length, selection.category,
+                value -> ctx.messages(viewer).raw("browser.categories." + (value == 0 ? "ALL" : dev.plattnericus.cases.catalog.WeaponCategory.values()[value - 1].name())),
+                value -> selection.category = value));
+        set(3, GuiItems.icon(ctx.messages(viewer), Material.AMETHYST_SHARD, "browser.rarity", Text.unparsed("value", selection.rarity(ctx, viewer))), c -> filterChoice(ctx.catalog().raritiesOrdered().size(), selection.rarity,
+                value -> value == 0 ? ctx.messages(viewer).raw("browser.all-rarities") : ctx.catalog().raritiesOrdered().get(value - 1).name(),
+                value -> selection.rarity = value));
+        set(5, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "browser.sort", Text.unparsed("value", ctx.messages(viewer).raw("browser.sorts." + selection.sort))), c -> {
+            navigating = true;
+            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", java.util.stream.IntStream.range(0, 4).boxed().toList(), selection.sort,
+                    value -> ctx.messages(viewer).raw("browser.sorts." + value), value -> { selection.sort = value; selection.page = 0; reopen(); }, this::reopen,
+                    () -> { if (trade != null) ctx.commerce().cancel(trade, "trade.cancelled"); }).relatedTo(trade).icons(value -> GuiItems.sortIcon(switch (value) { case 0 -> "RARITY"; case 1 -> "NAME"; case 2 -> "FLOAT"; default -> "NEWEST"; })).open();
+        });
         set(7, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "browser.search", Text.unparsed("query", selection.query)), c -> {
             if (c.isRightClick()) { selection.query = ""; render(); return; }
             navigating = true;
@@ -62,6 +71,15 @@ public final class SkinPickerMenu extends Menu {
         set(50, GuiItems.next(ctx.messages(viewer), selection.page, pages), c -> { if (selection.page + 1 < pages) { selection.page++; render(); } });
         if (trade != null) set(53, GuiItems.icon(ctx.messages(viewer), Material.BARRIER, "trade.cancel"), c -> ctx.commerce().cancel(viewer));
     }
-    private void reopen() { if (trade == null || ctx.commerce().trade(viewer.getUniqueId()) == trade && !trade.committing()) { open(); navigating = false; } }
+    private void filterChoice(int maximum, int current, java.util.function.Function<Integer, String> label, java.util.function.Consumer<Integer> apply) {
+        navigating = true;
+        new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", java.util.stream.IntStream.rangeClosed(0, maximum).boxed().toList(), current,
+                label, value -> { apply.accept(value); selection.page = 0; reopen(); }, this::reopen,
+                () -> { if (trade != null) ctx.commerce().cancel(trade, "trade.cancelled"); }).relatedTo(trade).open();
+    }
+    private void reopen() {
+        if (trade == null || ctx.commerce().trade(viewer.getUniqueId()) == trade && !trade.committing()) { open(); navigating = false; }
+        else viewer.closeInventory();
+    }
     @Override protected void onClose() { if (trade != null && !navigating) ctx.commerce().cancel(trade, "trade.cancelled"); }
 }

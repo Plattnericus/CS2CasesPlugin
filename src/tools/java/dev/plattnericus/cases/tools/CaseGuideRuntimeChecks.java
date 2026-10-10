@@ -24,15 +24,18 @@ public final class CaseGuideRuntimeChecks {
         // MenuListener deliberately ignores a second logical click in the same tick.
         // Exercise each action on a separate tick, as a real client would.
         List<Runnable> steps = new ArrayList<>();
-        steps.add(() -> { click(player, 0); long price = -1;
+        steps.add(() -> click(player, 0));
+        steps.add(() -> { click(player, 11); long price = -1;
         for (String id : ids(player)) {
             var m = ctx.caseGuide().measure(ctx.catalog().caseDefinition(id),ctx.catalog(),ctx.shop().offers());
             if(m.cost()!=null){ require(m.cost()>=price,"price order");price=m.cost(); }
         } });
-        steps.add(() -> { click(player, 2);
+        steps.add(() -> click(player, 2));
+        steps.add(() -> { click(player, 10);
         for (String id : ids(player)) require(ctx.caseGuide().measure(ctx.catalog().caseDefinition(id),ctx.catalog(),ctx.shop().offers()).favoriteChance()>0,"favorite filter");
         });
-        steps.add(() -> { click(player, 2);
+        steps.add(() -> click(player, 2));
+        steps.add(() -> { click(player, 11);
         for (String id : ids(player)) require(ctx.caseGuide().measure(ctx.catalog().caseDefinition(id),ctx.catalog(),ctx.shop().offers()).knives().containsKey("bayonet"),"specific knife filter");
         });
         List<String> beforePreview = new ArrayList<>();

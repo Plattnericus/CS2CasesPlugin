@@ -49,11 +49,31 @@ public final class TradeInRules {
         }
         return tier;
     }
-    public static SkinDefinition choose(Catalog catalog, List<SkinInstance> inputs, Rarity target, RandomGenerator random) {
+    public record Outcome(SkinDefinition skin, String sourceCase) { }
+    public static Outcome roll(Catalog catalog, List<SkinInstance> inputs, Rarity target, RandomGenerator random) {
         var input = inputs.get(random.nextInt(inputs.size()));
         var cases = sources(catalog, input, target); var source = cases.get(random.nextInt(cases.size()));
         var pool = source.skins(target).stream().filter(def -> !input.statTrak() || def.statTrakEligible()).toList();
-        return pool.get(random.nextInt(pool.size()));
+        return new Outcome(pool.get(random.nextInt(pool.size())), source.id());
+    }
+    public static SkinDefinition choose(Catalog catalog, List<SkinInstance> inputs, Rarity target, RandomGenerator random) {
+        return roll(catalog, inputs, target, random).skin();
+    }
+    public record Chance(SkinDefinition skin, double probability) { }
+    /** Exact probabilities of the same input -> source case -> skin draw used on confirmation. */
+    public static List<Chance> chances(Catalog catalog, List<SkinInstance> inputs, Rarity target) {
+        if (inputs.isEmpty() || target == null) return List.of();
+        var probabilities = new java.util.LinkedHashMap<SkinDefinition, Double>();
+        for (var input : inputs) {
+            var cases = sources(catalog, input, target);
+            for (var source : cases) {
+                var pool = source.skins(target).stream().filter(def -> !input.statTrak() || def.statTrakEligible()).toList();
+                double probability = 1.0 / inputs.size() / cases.size() / pool.size();
+                for (var skin : pool) probabilities.merge(skin, probability, Double::sum);
+            }
+        }
+        return probabilities.entrySet().stream().map(e -> new Chance(e.getKey(), e.getValue()))
+                .sorted(java.util.Comparator.comparing(c -> c.skin().displayName(), String.CASE_INSENSITIVE_ORDER)).toList();
     }
     public static double outputFloat(List<SkinInstance> inputs, SkinDefinition output) {
         double average = inputs.stream().mapToDouble(SkinInstance::floatValue).average().orElseThrow();

@@ -108,10 +108,10 @@ gui:
       - <dark_gray>You need the case and a <key>.
     queue-quantity:
       name: '<gold>Quantity: <amount>'
-      lore: ['<gray>Click: 9, 18, 25, 50, 90 or 100']
+      lore: ['<yellow>Click to choose your batch size.']
     queue-start:
-      name: '<green>Queue <amount> cases'
-      lore: ['<gray>Up to 9 centered roulettes at once.', '<gray>Requires <amount> cases and matching keys.']
+      name: '<green>Open <amount> cases'
+      lore: ['<gray>Up to 9 wheels open together.', '<gray>Requires <amount> cases and matching keys.']
     open-nine:
       name: <gold>Open 9 cases together
       lore:
@@ -177,15 +177,15 @@ gui:
     sort:
       name: '<white>Sort: <#e4ae39><sort>'
       lore:
-      - '<dark_gray>Left: next · Right: previous'
+      - '<dark_gray>Click to choose directly.'
     sorts:
-      rarity: Rarity
-      float: Float
-      name: Name
-      wear: Exterior
-      pattern: Pattern
-      newest: Newest
-      oldest: Oldest
+      rarity: Highest rarity first
+      float: Lowest float first
+      name: Name A–Z
+      wear: Best condition first
+      pattern: Pattern number
+      newest: Newest first
+      oldest: Oldest first
     info:
       name: <white><count> <gray>skins shown
       lore:
@@ -307,7 +307,7 @@ preview:
   hint: <gray>Sneak to close
 opening:
   missing-amount: '<prefix><red>You need <amount> available <case> cases and matching keys.'
-  queue-added: '<prefix><gray>Queued <amount> cases. <remaining> openings remain; one roulette in sequence.'
+  queue-added: '<prefix><gray>Queued <amount> cases. <remaining> openings remain.'
   queue-full: '<prefix><red>The queue accepts a total of 1 to 1000 openings.'
   queue-interrupted: '<prefix><yellow>Queue stopped: a case or key is missing or changed. Waiting items remain yours.'
   queue-cancelled: '<prefix><gray>Removed <amount> waiting openings. Prepared rewards will still be shown.'
@@ -603,7 +603,7 @@ market:
   publish: {name: '<green>List for <price> <currency>', lore: ['<gray>Confirm and publish this offer.']}
   withdraw: {name: '<yellow>Withdraw listing', lore: ['<gray>Return this skin to your collection.', '<gray>No charge.']}
   buy: {name: '<green>Buy for <price> <currency>', lore: ['<gray>Confirm this purchase.', '<gray>The skin is added to your collection.']}
-  sort: {name: '<white>Sort: <sort>', lore: ['<gray>Click to switch · Right click to go back.']}
+  sort: {name: '<white>Sort: <sort>', lore: ['<gray>Click to choose directly.']}
   filter: {name: '<white>Category: <category>', lore: ['<gray>Click to change category.']}
   currency: "Emeralds"
   emerald-usage: "<prefix><gray>/market · /market sell <ID> <price> · /market own · /market search <name> · /market balance · /market claims"
@@ -625,7 +625,7 @@ market:
   inspect: {"name": "<aqua>Preview this skin", "lore": ["<gray>Exact float and pattern from this listing."]}
   legacy-usage: "<prefix><gray>/market legacy <player>"
   legacy: "<prefix><gray>Archived Coin balance for <player>: <balance>. No Emerald conversion."
-  sorts: {"0": "Newest", "1": "Price ascending", "2": "Price descending", "3": "Lowest float", "4": "Rarity"}
+  sorts: {"0": "Newest first", "1": "Cheapest first", "2": "Most expensive first", "3": "Lowest float first", "4": "Highest rarity first"}
   categories: {"0": "All skins", "1": "Knives", "2": "Weapons", "3": "Pistols", "4": "SMGs", "5": "Rifles", "6": "Sniper", "7": "Heavy", "8": "Equipment", "9": "Knives", "10": "Gloves"}
 
 
@@ -640,7 +640,7 @@ browser:
   rarity: {"name": "<white>Rarity: <value>", "lore": []}
   sort: {"name": "<white>Sort: <value>", "lore": []}
   search: {"name": "<white>Search: <query>", "lore": ["<yellow>Click: type · Right click: clear"]}
-  sorts: {"0": "Rarity", "1": "Name", "2": "Float", "3": "Newest"}
+  sorts: {"0": "Highest rarity first", "1": "Name A–Z", "2": "Lowest float first", "3": "Newest first"}
   categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Gloves"}
 
 tradein:
@@ -650,26 +650,26 @@ tradein:
   weapon: {name: "<aqua>Weapon: <value>", lore: ["<gray>Click to choose a weapon directly.", "<gray>Already selected inputs stay in your contract."]}
   weapon-choice: {lore: ["<gray><count> matching available skins", "<yellow>Click to show this weapon."]}
   all-weapons: {name: "<white>All weapons", lore: ["<gray>Show every compatible weapon type."]}
-  rarity: {name: "<light_purple>Rarity: <value>", lore: ["<gray>Left: next · Right: previous"]}
-  stattrak: {name: "<gold>StatTrak: <value>", lore: ["<gray>All, normal or StatTrak.", "<gray>Left: next · Right: previous"]}
+  rarity: {name: "<light_purple>Rarity: <value>", lore: ["<gray>Click to choose directly."]}
+  stattrak: {name: "<gold>StatTrak: <value>", lore: ["<gray>All, normal or StatTrak.", "<gray>Click to choose directly."]}
   reset-filters: {name: "<yellow>Reset filters", lore: ["<gray>Show all compatible inputs; keep your selection."]}
   empty: {name: "<gray>No matching inputs", lore: ["<gray>Reset filters or clear the selected contract."]}
   choose-tier: "Choose a skin first"
-  sort: {name: "<aqua>Sort: <sort>", lore: ["<gray>Left: next · Right: previous", "<gray>Selection stays when sorting or changing pages."]}
+  sort: {name: "<aqua>Sort: <sort>", lore: ["<gray>Click to choose directly.", "<gray>Selection stays when sorting or changing pages."]}
   sorts:
     newest: "Newest first"
     name: "Weapon / skin name"
     rarity: "Highest rarity first"
     float_asc: "Lowest float first"
     float_desc: "Highest float first"
-  fill: {name: "<green>Fill matching inputs", lore: ["<gray>Uses the current sort order across all pages.", "<gray>Favorites stay out of automatic selection.", "<gray>Review the inputs before confirming."]}
+  fill: {name: "<green>Auto select skins", lore: ["<gray>Uses the current sort order across all pages.", "<gray>Favorites stay out of automatic selection.", "<gray>Review the inputs before confirming."]}
   clear: {name: "<yellow>Clear selection", lore: ["<gray>Choose a different rarity or StatTrak type."]}
   no-fill: "<prefix><yellow>Not enough matching non-favorite skins to fill a contract."
-  title: "Trade-in contract"
-  button: {"name": "<gold>Trade-in", "lore": ["<gray>Exchange skins for one from the next tier."]}
-  rules: {"name": "<gold>Contract rules", "lore": ["<gray>10 same-tier weapons → next rarity.", "<gold>5 Covert weapons → gold special item.", "<gray>All inputs must have matching StatTrak status.", "<gray>Output from an input case; average float remapped.", "<red>Confirmed inputs are consumed permanently."]}
-  confirm: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Inputs will be permanently exchanged for a new skin."]}
-  review: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Inputs will be permanently exchanged for a new skin."]}
+  title: "Trade-up"
+  button: {"name": "<gold>Trade-up", "lore": ["<gray>Exchange skins for one from the next tier."]}
+  rules: {"name": "<gold>Contract rules", "lore": ["<gray>10 same-tier weapons → next rarity.", "<gold>5 Covert weapons → gold special item.", "<gray>All inputs must have matching StatTrak status.", "<gray>One random reward from the input cases.", "<red>Confirmed inputs are consumed permanently."]}
+  confirm: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Confirm to exchange these skins for one random reward."]}
+  review: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Confirm to exchange these skins for one random reward."]}
   invalid: "<prefix><red>Use available same-tier skins with matching StatTrak from valid source cases."
   count: "<prefix><yellow>Use 10 matching weapons, or 5 Covert skins for gold."
   unavailable: "<prefix><yellow>Trade-in is currently unavailable."
@@ -680,21 +680,16 @@ tradein:
 case-guide:
   contents: <dark_gray><count> possible items
   info:
-    name: <gold>How the ranking works
+    name: <gold>How to open cases
     lore:
-    - <gray>Price includes the case and matching key.
-    - <gray>Value = expected reward points / price.
-    - '<gray>Points per tier: <tiers>*'
-    - '<gray>*Knives: ×(0.5 + preference / 100), then finish.'
-    - <gray>Server points; no promised sale proceeds.
-    - '<gray>Custom weights: case-guide.yml'
-    - '<gray>Preferences: curated snapshot <date>.'
-    - <gray>cs2.io/en/skins/knives · r/csmoneyofficial
-    - '<gray>Float, pattern and StatTrak: no point bonus.'
+    - <gray>Choose a case to see its possible rewards.
+    - <gray>Open one case, or a batch of nine together.
+    - <gray>Each opening uses one case and its matching key.
+    - <gray>Use sorting and filters to find a case.
   sort:
     name: '<aqua>Sort: <value>'
     lore:
-    - '<gray>Left: next · Right: previous'
+    - '<gray>Click to choose directly.'
   sorts:
     value: Best value
     price_asc: Cheapest first
@@ -706,7 +701,7 @@ case-guide:
     name: '<gold>Knife: <value>'
     lore:
     - <gray>All, favorites, or a specific knife model.
-    - '<gray>Left: next · Right: previous'
+    - '<gray>Click to choose directly.'
   knives:
     all: All
     favorites: Community favorites
@@ -739,11 +734,7 @@ case-guide:
   unavailable: Not sold
   metrics:
   - '<gray>Case + key: <white><cost> <currency>'
-  - '<gray>EV: <white><points> points'
-  - '<gray>Value: <green><value> points / <currency>'
-  - '<gray>Any knife: <gold><knives>%'
-  - '<gray>Favorite knife: <gold><favorites>%'
-  - '<gray>Knife preference: <white><community> / 100'
+  - '<gray>Knife chance: <gold><knives>%'
   target: '<gray><knife>: <gold><chance>% per opening'
 
 command:
@@ -763,3 +754,16 @@ skin-source:
   traded: "Traded (<source>)"
   knife-traded: "Knife traded (<source>)"
   trade-in: "TRADE IN"
+
+# Direct menu choices and transparent trade-up rewards.
+menus:
+  sort-title: "Choose sorting"
+  filter-title: "Choose a filter"
+  quantity-title: "Choose batch size"
+  choose: ["<yellow>Click to select."]
+  selected: ["<green>Currently selected", "<yellow>Click to keep this choice."]
+  rewards-title: "Possible trade-up rewards"
+  rewards:
+    name: "<gold>Possible rewards: <count>"
+    lore: ["<gray>Select a skin to see the possible outcomes.", "<gray>One eligible skin is drawn at random."]
+  reward-chance: ["<gray>Chance: <white><chance>%", "<gray>Based on the skins selected in your contract.", "<gray>The result is chosen when you confirm."]

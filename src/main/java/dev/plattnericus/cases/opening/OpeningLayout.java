@@ -1,6 +1,6 @@
 package dev.plattnericus.cases.opening;
 
-/** Centered rows for one through nine reels, with uniform whole-scene enlargement. */
+/** Centered rows with one fixed wheel size that also fits the complete nine-wheel grid. */
 public final class OpeningLayout {
     private OpeningLayout() { }
     public record Cell(double right, double up, double scale) { }
@@ -17,10 +17,11 @@ public final class OpeningLayout {
         int columns = (int) Math.ceil(Math.sqrt(count));
         int rows = (count + columns - 1) / columns;
         double gapX = .24, gapY = .20;
-        // The unit layout fits a 70-degree, 4:3 camera, even near a wall. Scale the
-        // entire layout afterwards so adding reels cannot cancel the requested enlargement.
-        double scale = Math.min(1, Math.min(distance * 1.55 / (columns * (width + gapX)),
-                distance * 1.02 / (rows * (height + gapY)))) * sceneScale;
+        // Size against the largest supported grid, not the number currently visible.
+        // This leaves camera margins at 70 degrees / 4:3 and prevents a single wheel
+        // growing to three times its batch size. The configured size is an upper bound.
+        double scale = Math.min(sceneScale, Math.min(distance * 1.55 / (3 * (width + gapX)),
+                distance * 1.02 / (3 * (height + gapY))));
         int row = index / columns;
         int inRow = Math.min(columns, count - row * columns);
         return new Cell((index % columns - (inRow - 1) / 2.0) * (width + gapX) * scale,

@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.3.jar` and `build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.3.zip`.
+`build/libs/MCCases-1.2.4.jar` and `build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.4.zip`.
 The Fusion pack ZIP and a small source-overlay ZIP are embedded in the plugin JAR.
 JDK 25 performs the entire merge; no Pillow, manual merge or Downloads path is needed.
 `resourcepack/fusion/` is the permanent source for the seven font textures, their
@@ -46,13 +46,13 @@ server catalogs and regenerates edited packs from the actual loaded catalog when
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.3.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.4.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Version 1.2.3 uses the original Fusion sprites and inspect layers at 128px. Exported coverage
+Version 1.2.4 uses the original Fusion sprites and inspect layers at 128px. Exported coverage
 is opaque, mesh boundaries follow the source silhouette and held models use native palm
 anchors in both hands. Karambit and Talon turn only at presentation time; pattern sampling
 and saved classifications retain their original UV coordinates. Their pivots match the
@@ -64,12 +64,12 @@ Skin `traded` history is persisted separately from `origin` and `source` in sche
 Recorded direct-trade instance IDs are backfilled; market purchases preserve the flag.
 `SkinPresentationChecks` covers real v3 migration, repeated trades/restarts and en/de/it source lore.
 
-World wheels use `opening.world.scene-scale: 3.0`, applied after the compact layout so
-reflow cannot cancel the enlargement. This scales all display transforms and interaction
-boxes uniformly for every grid size 1–9 without increasing the moving entity window.
-The enlarged world grid may extend beyond the opener’s camera; step back for an overview.
-Offline checks compare every enlarged cell against the compact geometry; the real-Paper
-audit validates settings fallback, scaled glass, bounded item displays and final cleanup.
+World wheels use `opening.world.scene-scale: 3.0` as an upper size limit. Camera
+fitting sizes every wheel against the complete 3×3 grid, with fixed scale for
+counts 1–9 at a given distance. Glass, icons, text and hitboxes share this scale.
+The default strip shows five icons. Offline checks cover centering, non-overlap,
+constant size and camera margins at distances 1.2, 3 and 6 blocks. Real-Paper
+checks verify nine simultaneous outcomes, glass geometry and entity cleanup.
 
 For focused two-client visual evidence on an accepted isolated test server:
 
@@ -173,7 +173,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.3.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.4.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -234,6 +234,8 @@ mccasesdevcheck DevTester gold
 mccasesdevcheck DevTester nine
 mccasesdevcheck DevTester spam
 mccasesdevcheck DevTester tradein-ui
+mccasesdevcheck DevTester choices
+mccasesdevcheck DevTester random-tradeup
 mccasesdevcheck DevTester guide
 mccasesdevcheck DevTester recovery
 ```
@@ -258,6 +260,10 @@ executes the actual service, checks atomic input consumption and rare-special ou
 the SQL announcement marker (zero for admin, one for the normal contract). Outputs are removed
 afterward. Inspect both clients' chat to verify that only the normal contract announces.
 
+`choices` checks direct inventory/gallery/market/sale sort lists and category/rarity return paths.
+`random-tradeup` runs 32 confirmed ten-input contracts through the real menus and SQL storage,
+checking legal reward pools, source retention and variation across independent draws.
+
 `guide` checks case-value/full-price sorting, favorite and individual knife filtering,
 preview/back state, zero budget, ID search, reset and hotbar protection. Menu clicks are
 spaced across ticks so they respect the production duplicate-click guard. Pack item models
@@ -278,7 +284,7 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use [the 1.2.3 verification report](RELEASE-1.2.3-VERIFICATION.md) for the current results.
+Use [the 1.2.4 verification report](RELEASE-1.2.4-VERIFICATION.md) for the current results.
 [The 1.2.1 report](RELEASE-1.2.1-VERIFICATION.md) and earlier 1.2 reports remain
 historical evidence.
 
