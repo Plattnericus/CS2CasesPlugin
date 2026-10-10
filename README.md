@@ -1,109 +1,114 @@
 # MCCases
 
-**Cases öffnen. Skins sammeln. Gemeinsam handeln.**
+**Open cases. Collect skins. Trade together.**
 
-Ein serverseitiges Plugin für Paper mit einer virtuellen Skin-Sammlung, animierten
-Öffnungen, individuellen Inspect-Animationen und einer Spielökonomie aus Minecraft-Items.
-Inspiriert von Counter-Strike 2 — für einen normalen Minecraft-Client, ohne Client-Mod.
+A server-side Paper plugin with a virtual skin collection, public opening animations,
+individual inspect motions and an economy built from Minecraft items. Inspired by
+Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.0** · **Paper 26.3, API Build 159 beta** · **Java 25** · **22 Cases · 815 Skins · 63 Modelle**
+**1.2.1** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Plugin herunterladen](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.0.jar) ·
-[Resource Pack herunterladen](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-1.2.0.zip) ·
-[Prüfsummen](release/SHA256SUMS-1.2.0) ·
-[Vollständige Referenz (English)](docs/REFERENCE.md)
+[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.1.jar) ·
+[Download resource pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-1.2.1.zip) ·
+[Checksums](release/SHA256SUMS-1.2.1) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
-> MCCases ist auch unabhängig von Valve. Kontakt: **info@plattnericus.dev**.
+> MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
 
-![Beispielgrafiken aus dem MCCases-Katalog](docs/images/skins.png)
+![Example artwork from the MCCases catalog](docs/images/skins.png)
 
-[Schnellstart](#schnellstart) · [Spielen](#spielen) · [Befehle](#befehle) ·
-[Resource Pack](#resource-pack) · [Konfiguration](#konfiguration) ·
-[Aktualisieren](#aktualisieren) · [Rechtliches](#rechtliches) · [Entwicklung](#entwicklung)
+[Quick start](#quick-start) · [Playing](#playing) · [Commands](#commands) ·
+[Resource pack](#resource-pack) · [Configuration](#configuration) ·
+[Updating](#updating) · [Legal information](#legal-information) · [Development](#development)
 
-## Was enthalten ist
+## Features
 
-| Funktion | Verhalten |
+| Feature | Behavior |
 | --- | --- |
-| Katalog | 22 Cases und 815 Skins für 35 Waffen, 20 Messer und acht Handschuhtypen |
-| Öffnungen | Bis zu neun öffentliche Roulettes gleichzeitig, automatisch zentriert; größere Mengen als Warteschlange |
-| Sammlung | Private 3D-Galerie oder Chest-Menü, Favoriten, Kategorien, Suche, Filter und Sortierung |
-| Inspects | 252 individuelle Varianten, bewegliche Modellteile, beide Hände und getrennte Ansichten für Besitzer und Beobachter |
-| Direktes Trading | Zwei Angebote, gemeinsame Reservierungen und Bestätigung beider Spieler nach der letzten Änderung |
-| Marktplatz | Bezahlung mit Emerald-Items, Such- und Sortierfunktionen, Auszahlung auch an zuvor offline gewesene Verkäufer |
-| Trade-in | Zehn kompatible Waffen zur nächsten Seltenheit; fünf Covert-Waffen für einen Gold-Gegenstand |
-| Skin-Eigenschaften | Float, Wear, Pattern, StatTrak, Herkunft und Erstellungsdatum; Doppler, Fade und Blue-Gem-Analyse |
-| Händler | Villager oder Mannequin, Kauf mit Diamanten, optional wechselnde Skins und Gesten |
-| Speicherung | SQLite standardmäßig; alternativ MySQL/MariaDB; Journal und Wiederherstellung unterbrochener Vorgänge |
-| Sprache | Englisch als Standard; 45 Sprachdateien, optional Auswahl anhand der Client-Sprache |
+| Catalog | 22 cases and 815 skins for 35 weapons, 20 knives and eight glove types |
+| Openings | Up to nine public wheels at once; glass backgrounds, a centered grid and a whole-wheel scale of 3× the previous size; larger requests are queued |
+| Collection | Private 3D gallery or chest menu, favorites, categories, search, filters and sorting |
+| Inspects | 252 individual variants, articulated models, both hands and separate owner/observer views |
+| Direct trading | Two offers, shared reservations and confirmation by both players; source reads “Knife traded (Case / TRADE IN)” |
+| Marketplace | Emerald-item payments, search, sorting and durable proceeds for offline sellers |
+| Trade-in | Ten compatible weapons for the next rarity; five Covert weapons for a gold item |
+| Skin properties | Float, wear, pattern, StatTrak, source and creation date; Doppler, Fade and Blue Gem analysis |
+| Dealer | Villager or mannequin, diamond payments, optional changing skins and gestures |
+| Storage | SQLite by default; optional MySQL/MariaDB; journals and interrupted-operation recovery |
+| Language | English for every client by default; 45 optional translation files |
 
-Skins sind kosmetisch. Schaden, Haltbarkeit und Verzauberungen bleiben erhalten.
-Handschuhe sind Sammel- und Inspect-Objekte; sie ersetzen keine getragene Rüstung.
+Skins are cosmetic. Damage, durability and enchantments remain intact. Gloves are
+collection/inspect objects; they do not replace worn armor.
 
-## Schnellstart
+## Quick start
 
-1. Einen **Paper-26.3-Server mit Java 25** vorbereiten und die Minecraft EULA selbst lesen und akzeptieren.
-2. [MCCases-1.2.0.jar](release/MCCases-1.2.0.jar) nach `plugins/` kopieren. Nur eine MCCases-Produktions-JAR installieren.
-3. Den Server starten. Die Dateien entstehen in `plugins/MCCases/`.
-4. Als Operator `/csadmin info` ausführen und mit `/csadmin shop spawn` einen Händler aufstellen.
-5. Das passende [Resource Pack](release/MCCases-ResourcePack-1.2.0.zip) im Client aktivieren
-   und anschließend `resource-pack.enabled: true` setzen; alternativ die automatische Verteilung verwenden.
+1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
+2. Copy [MCCases-1.2.1.jar](release/MCCases-1.2.1.jar) into `plugins/`. Install only one production MCCases JAR.
+3. Start the server. Defaults appear in `plugins/MCCases/`.
+4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
+5. Enable the matching [resource pack](release/MCCases-ResourcePack-1.2.1.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
-Für die ersten Cases, mit einem verbundenen Spieler statt `PlayerName`:
+Give a connected player their first nine signed pairs:
 
 ```text
 /csadmin givecase PlayerName kilowatt_case 9
 /csadmin givekey PlayerName case_key 9
 ```
 
-Der Spieler öffnet `/cases`, wählt die Case und **Open 9 cases together**.
-Jede Öffnung verbraucht eine signierte Case und den passenden Key.
+The player opens `/cases`, selects the case and chooses **Open 9 cases together**.
+Alternatively, use `/cases open kilowatt_case 9`. Each opening consumes one signed
+case and its matching key. All nine world animations run concurrently.
 
-Andere Plugins sind nicht erforderlich. Ohne Resource Pack funktionieren die Sammlung,
-Karten-/Hologramm-Vorschau und Blockdarstellungen; die Skin-Sprites benötigen das Pack.
-Die `MCCases-DevChecks`-JAR gehört ausschließlich auf einen Testserver.
+The whole wheel—including glass, markers, text, icons and click targets—is scaled
+**3×** at the same distance and grid count. The enlarged grid occupies more world
+space: step back to see all nine wheels, or look around to inspect them individually.
+`opening.world.scene-scale: 1.0` restores the earlier compact view.
 
-Die API-Version **26.3 Build 159 ist eine Beta**. Der Build ist auf diesen Stand ausgerichtet;
-andere Paper-Versionen und Serverkonfigurationen brauchen eigene Laufzeitprüfungen.
+No additional plugins are required. Without the pack, collection browsing and
+map/block previews still work; textured skin sprites require it.
+The `MCCases-DevChecks` JAR belongs only on a test server.
 
-## Spielen
+The pinned **Paper API build 159 is a beta**. Other versions and configurations need
+separate runtime testing.
 
-### Sammlung und Ausrüstung
+## Playing
 
-`/inventory` oder `/skins` öffnet die 3D-Galerie. `/inventory vanilla` öffnet deine
-Sammlung in einem normalen Chest-Menü. `/knife` zeigt Messer.
+### Collection and equipment
 
-| Eingabe in der Galerie | Aktion |
+`/inventory` or `/skins` opens your 3D gallery. `/inventory vanilla` opens a chest
+menu. `/knife` shows your knives.
+
+| Gallery input | Action |
 | --- | --- |
-| Auf einen Skin schauen | Name und Eigenschaften in der Actionbar |
-| Rechtsklick | Inspect-Menü öffnen |
-| Linksklick auf ein Messer | Messer ausrüsten oder ablegen |
-| Linksklick auf eine Waffe | Skin für den Bogen ausrüsten oder ablegen |
-| Schleichen + Linksklick auf eine Waffe | Skin für die Armbrust ausrüsten oder ablegen |
-| Schleichen + Rechtsklick | Favorit umschalten |
-| Scrollrad / Zahlentasten | Hotbar auswählen; die Galerieseite bleibt erhalten |
-| Seitenbuttons | Durch die Sammlung blättern |
-| Zehn Blöcke entfernen | Galerie schließen |
+| Look at a skin | Name and properties in the action bar |
+| Right-click | Open the inspect menu |
+| Left-click a knife | Equip or unequip it |
+| Left-click a weapon | Equip or unequip the bow skin |
+| Sneak + left-click a weapon | Equip or unequip the crossbow skin |
+| Sneak + right-click | Toggle favorite |
+| Scroll wheel / number keys | Select a hotbar slot without changing gallery pages |
+| Page buttons | Browse the collection |
+| Move ten blocks away | Close the gallery |
 
-Ein Skin kann jeweils einen der Slots `knife`, `bow` oder `crossbow` belegen.
-Die Skin-Sammlung ist virtuell; ein fallengelassenes Schwert überträgt keinen Skin.
-Andere bekannte Spieler lassen sich ansehen, sofern `mccases.view` erlaubt ist.
+A skin occupies one of `knife`, `bow` or `crossbow`. Collections are virtual;
+dropping a sword does not transfer its skin. Other known players can be viewed
+when `mccases.view` is allowed.
 
-### Inspect und Perspektive
+### Inspect and perspective
 
-- **F** oder `/inspect`: ausgerüsteten Skin inspizieren.
-- **Schleichen + F**: normal die Hände tauschen.
-- **Schleichen + Rechtsklick** mit einer Skin-Waffe: Inspect starten.
-- `/inspect hand`: Ansicht an der Körperhand, geeignet für F5.
-- `/inspect view`: Ansicht für die erste Person.
+- **F** or `/inspect`: inspect an equipped skin.
+- **Sneak + F**: swap hands normally.
+- **Sneak + right-click** a skinned weapon: start an inspect.
+- `/inspect hand`: use the body-hand view, suitable for F5.
+- `/inspect view`: use the first-person view.
 
-Minecraft meldet den F5-Kameramodus nicht an Paper; deshalb wird die Ansicht per Befehl gewählt.
-Die Modelle animieren eigene Display-Entities und ersetzen nicht die Minecraft-Arme.
+Minecraft does not report F5 camera mode to Paper, so choose the view with a command.
+Models animate display entities; they do not replace Minecraft's arms.
+Karambit and Talon use reversed presentation and animate around their finger rings.
 
-![Butterfly-Inspect im Minecraft-Client; Aufnahme der ursprünglichen 1.2-Prüfung](docs/images/inspect-butterfly-1.2.png)
+![Butterfly inspect in Minecraft; original 1.2 test capture](docs/images/inspect-butterfly-1.2.png)
 
-### Mehrere Cases öffnen
+### Opening multiple cases
 
 ```text
 /cases open kilowatt_case 100
@@ -111,77 +116,78 @@ Die Modelle animieren eigene Display-Entities und ersetzen nicht die Minecraft-A
 /cases cancel
 ```
 
-Mengen von **1 bis 1000** sind möglich. Im Weltmodus laufen bis zu neun Öffnungen
-parallel, weitere warten. Im GUI-Modus erscheinen Ergebnisse nacheinander.
-Der Server bestimmt jeden Gewinn vor seiner Animation. Wiederholte Klicks können
-nicht dasselbe Case-/Key-Paar zweimal reservieren.
+Requests accept **1–1000** cases. World mode shows up to nine simultaneous openings
+in a centered grid, including held results; further requests wait. GUI mode presents
+results sequentially. The server chooses each reward before its animation.
+Repeated clicks cannot reserve the same pair twice.
 
-`/cases cancel` entfernt wartende Anfragen. Bereits vorbereitete Gewinne werden
-abgeschlossen oder wiederhergestellt. Für bestehende Konfigurationen
-`opening.max-active-per-player: 9` setzen.
+`/cases cancel` releases waiting requests. Prepared rewards finish or are recovered.
+On existing servers, check `opening.max-active-per-player: 9` and
+`opening.display: world`. Rendering keeps a bounded moving window instead of spawning
+every reel entry, caches icons and shares a single audible tick track across the nine reels.
 
-### Trading, Markt und Trade-in
+### Trading, marketplace and trade-in
 
-| System | Einstieg | Bezahlung / Bestätigung |
+| System | Entry | Payment / confirmation |
 | --- | --- | --- |
-| Direktes Trading | `/trade PlayerName` | Beide Seiten bestätigen dasselbe aktuelle Angebot; Änderungen setzen die Bestätigungen zurück |
-| Marktplatz | `/market` | Emerald-Items aus dem Inventar; Verkäufer holen Erlöse mit `/market claims` ab |
-| Trade-in | `/tradein` oder `/tradeup` | Auswahl prüfen und separat bestätigen; Eingaben werden dauerhaft verbraucht |
+| Direct trading | `/trade PlayerName` | Both players confirm the same offer; edits reset confirmations |
+| Marketplace | `/market` | Emerald items; sellers collect proceeds with `/market claims` |
+| Trade-in | `/tradein` or `/tradeup` | Review and confirm separately; inputs are permanently consumed |
 
-Trade-in-Eingaben brauchen kompatible Seltenheit, denselben StatTrak-Status und eine
-gültige Quell-Case. Sortierung, Filter und Auswahl bleiben beim Blättern erhalten;
-automatisches Auffüllen lässt Favoriten aus. Ergebnisse zeigen **Source: TRADE IN**.
+Trade-in inputs need compatible rarity, the same StatTrak status and a valid source
+case. Sorting, filters and selections survive navigation; auto-fill excludes favorites.
+Outputs show **Source: TRADE IN**. Directly traded knives additionally show
+**Knife traded (original case)** or **Knife traded (TRADE IN)** without losing admin provenance.
 
-Offene Auszahlungen bleiben gespeichert. Ein volles Inventar wirft keine Erlöse auf
-den Boden. SQLite und Minecraft-Spielerdaten sind getrennte Speichersysteme;
-[Details zur Wiederherstellung](docs/UPGRADE-1.1.md) beschreiben die Grenzen.
+Proceeds remain stored when inventory space is unavailable; nothing is dropped on
+the ground. SQLite and Minecraft player files are separate storage systems. See
+[recovery details](docs/UPGRADE-1.1.md) for the practical limits.
 
-## Befehle
+## Commands
 
-| Spieler | Zweck |
+| Player command | Purpose |
 | --- | --- |
-| `/inventory`, `/skins`, `/inventory vanilla` | Sammlung anzeigen |
-| `/knife [Player]` | Messer anzeigen |
-| `/cases`, `/cases open <Case> <Amount>` | Cases und Öffnungen |
-| `/openings`, `/cases cancel` | Warteschlange und Ergebnisse |
-| `/inspect [hand\|view]` | Inspect starten und Perspektive wählen |
-| `/trade [Player]`, `/trade accept`, `/trade decline`, `/trade cancel` | Direktes Trading |
-| `/market`, `/market own`, `/market sell <Skin-ID> <Price>` | Marktplatz |
-| `/market search <Name>`, `/market balance`, `/market claims`, `/market recover` | Suche, Guthaben, Auszahlung und Wiederherstellung |
-| `/tradein`, `/tradeup` | Trade-in-Verträge |
+| `/inventory`, `/skins`, `/inventory vanilla` | View collections |
+| `/knife [Player]` | View knives |
+| `/cases`, `/cases open <Case> <Amount>` | Browse cases and start openings |
+| `/openings`, `/cases cancel` | Queue and results |
+| `/inspect [hand\|view]` | Inspect and select perspective |
+| `/trade [Player]`, `/trade accept`, `/trade decline`, `/trade cancel` | Direct trading |
+| `/market`, `/market own`, `/market sell <Skin-ID> <Price>` | Marketplace |
+| `/market search <Name>`, `/market balance`, `/market claims`, `/market recover` | Search, balance, proceeds and recovery |
+| `/tradein`, `/tradeup` | Trade-in contracts |
 
-| Operator | Zweck |
+| Operator command | Purpose |
 | --- | --- |
-| `/csadmin info` | Version und geladenen Katalog prüfen |
-| `/csadmin givecase <Player> <Case> [Amount]` | Cases vergeben |
-| `/csadmin givekey <Player> <Key> [Amount]` | Keys vergeben |
-| `/csadmin giveskin <Player> <Skin> [Float] [Pattern] [StatTrak]` | Skin vergeben |
-| `/csadmin manage <Player>` | Sammlung verwalten, auch bei bekannten Offline-Spielern |
-| `/csadmin shop spawn [villager\|mannequin]` | Händler aufstellen |
-| `/csadmin odds <Case>` | Tatsächliche konfigurierte Drop-Chancen anzeigen |
-| `/csadmin exportpack` | Pack für den aktuellen Serverkatalog erzeugen |
-| `/csadmin reload` | Konfiguration und Katalog neu laden |
+| `/csadmin info` | Check version and loaded catalog |
+| `/csadmin givecase <Player> <Case> [Amount]` | Give cases |
+| `/csadmin givekey <Player> <Key> [Amount]` | Give keys |
+| `/csadmin giveskin <Player> <Skin> [Float] [Pattern] [StatTrak]` | Give a skin |
+| `/csadmin manage <Player>` | Manage a collection, including known offline players |
+| `/csadmin shop spawn [villager\|mannequin]` | Create a dealer |
+| `/csadmin odds <Case>` | Show actual configured drop chances |
+| `/csadmin exportpack` | Export the current server catalog's pack |
+| `/csadmin reload` | Reload configuration and catalog |
 
-`<Argument>` ist erforderlich, `[Argument]` optional. Klammern nicht mit eingeben.
-Ungültige Argumente und gesperrte Aktionen melden den Grund im Chat. Unerwartete
-Befehlsfehler zeigen eine Referenznummer; die dazugehörigen Details stehen im Serverlog.
-Admin-Änderungen an Skins und Ausrüstung bestätigen den Erfolg nach dem Speichern.
-Instanz-IDs müssen mindestens acht Zeichen lang und eindeutig sein; `/csadmin list <Player>`
-zeigt die kurzen IDs der vorhandenen Skins.
-Die [vollständige Befehls- und Permission-Referenz](docs/REFERENCE.md#commands)
-enthält weitere Admin-, Pattern- und Ausrüstungsbefehle.
+`<Argument>` is required; `[Argument]` is optional. Do not type the brackets.
+Invalid arguments and denied actions explain the reason in chat, including hidden
+admin commands. Unexpected failures show a reference ID tied to the server log.
+Admin skin/equipment changes confirm success after persistence. Instance IDs need at
+least eight characters and must be unique; `/csadmin list <Player>` shows short IDs.
+See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 `mccases.use`, `mccases.inspect`, `mccases.view`, `mccases.shop`, `mccases.trade`,
-`mccases.market` und `mccases.tradein` sind standardmäßig für Spieler freigegeben.
-`mccases.admin` ist standardmäßig Operatoren vorbehalten.
+`mccases.market` and `mccases.tradein` are allowed to players by default.
+`mccases.admin` defaults to operators.
 
-## Resource Pack
+## Resource pack
 
-JAR und [Standard-ZIP](release/MCCases-ResourcePack-1.2.0.zip) gehören zusammen.
-Die JAR enthält genau dieses Pack und extrahiert es nach
+The JAR and [standard ZIP](release/MCCases-ResourcePack-1.2.1.zip) are a matched pair.
+The JAR embeds exactly this pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
+The rebuilt pack uses 128px skin sprites and inspect textures with clean cutout edges.
 
-Für automatische Verteilung die vorhandene `resource-pack`-Sektion bearbeiten:
+For automatic distribution, edit the existing `resource-pack` section:
 
 ```yaml
 resource-pack:
@@ -196,88 +202,92 @@ resource-pack:
     prompt: "<gray>MCCases skin textures"
 ```
 
-Die öffentliche URL muss Spieler über einen eingerichteten Proxy zum Pack-Webserver
-führen. Der eingebaute Server selbst verwendet HTTP; er stellt kein HTTPS-Zertifikat
-bereit. Alternativ eine erreichbare HTTP-Adresse mit Port angeben.
-Die aktive Verteilung schaltet auch die Item-Modelle ein.
+The public URL must route through your configured proxy to the pack webserver.
+The built-in server uses HTTP and does not provide an HTTPS certificate; alternatively,
+use a reachable HTTP address with its port. Distribution also enables item models.
 
-Für ein eigenes Serverpack `assets/mccases/` aus der **aktuellen ZIP** übernehmen,
-`resource-pack.enabled: true` setzen und die eigene Verteilung verwenden. Nach
-Katalogänderungen neu exportieren und das verteilte Pack aktualisieren.
-Ein separat kombiniertes Fusion-HD-Pack benötigt zusätzlich Rechte an dessen Grafiken
-und Fonts; es ist kein Bestandteil des Standard-Downloads.
+For a combined server pack, merge `assets/mccases/` from the **current ZIP**, set
+`resource-pack.enabled: true` and use your own distribution. Re-export after catalog
+changes. The separate Fusion-HD pack needs its own artwork/font rights and is not
+included in the standard download.
 
-## Konfiguration
+## Configuration
 
-| Datei / Einstellung | Verwendung |
+| File / setting | Purpose |
 | --- | --- |
-| `config.yml` | Anzeigen, Öffnungen, Sprache, Datenbank und Pack-Verteilung |
-| `shop.yml` | Händler, Case-/Key-Preise; Standardwährung `DIAMOND` |
-| `market.yml` | Emerald-Preise, Auszahlung, Listings und Trade-Limits |
-| `inspect.yml` | Modelle, Gelenke, Animationen und Kamerapositionen |
-| `catalog/` | Cases, Skins, Raritäten, Gewichte, Keys und Pattern |
-| `messages_*.yml` | Übersetzungen; Standard `language: en`, `client-language: false` |
-| `skin-inventory-item.enabled: false` | Kein dauerhafter Shortcut im Inventar |
-| `opening.max-active-per-player: 9` | Bis zu neun vorbereitete Öffnungen je Spieler |
+| `config.yml` | Displays, openings, language, database and pack distribution |
+| `shop.yml` | Dealer, case/key prices; default currency `DIAMOND` |
+| `market.yml` | Emerald prices, proceeds, listings and trade limits |
+| `inspect.yml`, `inspect-profiles.yml` | Models, joints, animations and camera positions |
+| `catalog/` | Cases, skins, rarities, weights, keys and patterns |
+| `messages_*.yml` | Optional translations |
+| `language: en`, `client-language: false` | English for every player, regardless of client locale |
+| `skin-inventory-item.enabled: false` | No permanent inventory shortcut |
+| `opening.max-active-per-player: 9` | Up to nine prepared openings per player |
+| `opening.world.scene-scale: 3.0` | Triple the whole wheel and its grid spacing |
 
-Vorhandene Dateien und Einstellungen bleiben bei Updates erhalten. Fehlende Standarddateien
-werden ergänzt. Datenbankwechsel erfordern einen Neustart.
-[Konfigurationsreferenz und eigene Inhalte](docs/REFERENCE.md#configuration).
+Existing settings survive updates; missing defaults are merged. Set the English
+language options above in an older configuration if it previously selected another
+language. Database changes require a restart. See the
+[configuration/custom-content reference](docs/REFERENCE.md#configuration).
 
-Die Standardgewichte sind **79,923 / 15,985 / 3,197 / 0,639 / 0,256** für
-Mil-Spec / Restricted / Classified / Covert / Gold. StatTrak beträgt für geeignete
-Items standardmäßig **10 %**. Maßgeblich sind die tatsächlich geladenen Gewichte
-und Inhalte; `/csadmin odds <Case>` zeigt die resultierenden Chancen.
+Default tier weights are **79.923 / 15.985 / 3.197 / 0.639 / 0.256** for
+Mil-Spec / Restricted / Classified / Covert / Gold. Eligible items have **10%** StatTrak
+chance. Actual loaded weights and pools determine the result; `/csadmin odds <Case>`
+shows those chances.
 
-## Aktualisieren
+## Updating
 
-1. Den Server sauber stoppen.
-2. `plugins/MCCases/`, Datenbank, Welt-/Spielerdaten, Journale und `secret.key` gemeinsam sichern.
-3. Die alte Produktions-JAR ersetzen und das passende Resource Pack aktualisieren.
-4. Starten, `/csadmin info` prüfen und vorhandene Einstellungen bewusst vergleichen.
+1. Stop the server cleanly.
+2. Back up `plugins/MCCases/`, the database, world/player data, journals and `secret.key` together.
+3. Replace the production JAR and update the matching resource pack.
+4. Start the server, check `/csadmin info` and compare existing settings.
 
-Die Dateinamen bleiben bei diesem Build **1.2.0**. Für den Stand vom 10. Oktober 2026
-sind deshalb die [SHA-256-Prüfsummen](release/SHA256SUMS-1.2.0) entscheidend.
+**1.2.1** includes the rebuilt pack, corrected ring knives, direct-trade source labels,
+3× glass wheels, English documentation and command error feedback. The database
+upgrades automatically to schema 4 and backfills recorded earlier direct trades.
+Unchanged stock inspect profiles upgrade; custom timelines remain intact.
+Compare custom Karambit/Talon timelines or model scales with the new ring pivots.
+Downgrading to schema 3 requires the complete pre-upgrade backup.
+Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.1).
 
-## Rechtliches
+## Legal information
 
-Der angegebene Betrieb in **Italien** nutzt ausschließlich kostenlos erworbene
-Spielwährung: keine Geldkäufe für Cases, Keys, Öffnungswährung oder Skins, keine
-Auszahlung, externe Verkäufe oder Sachpreise. Andere Plugins und Shops dürfen diesen
-Betrieb nicht indirekt verändern. Diese Regeln sind keine rechtliche Freigabe.
+The stated server operation in **Italy** uses exclusively free in-game currency:
+no money purchases for cases, keys, opening currency or skins; no cash-out, external
+sales or material prizes. Other plugins and shops must not introduce indirect purchases.
+These operating rules do not constitute legal approval.
 
-- [Rechtliche Hinweise und noch offene Betreiberangaben](LEGAL.md).
-- [Italienische Datenschutzvorlage — vor Verwendung vervollständigen](docs/PRIVACY-IT.md).
-- [Abhängigkeiten, Marken und Asset-Hinweise](THIRD_PARTY_NOTICES.md).
+- [Legal information and outstanding operator details](LEGAL.md).
+- [Italian privacy template—complete it before use](docs/PRIVACY-IT.md).
+- [Dependency, trademark and asset notices](THIRD_PARTY_NOTICES.md).
 
-Die Hinweise werden auch in der JAR, dem Pack und beim ersten Start im Datenordner
-mitgeliefert. Im Repository besteht **keine allgemeine Open-Source-Lizenz**; öffentliche
-Quelltexte allein erlauben keine beliebige Weiterverwendung. Rechteanfragen und
-Projektkontakt: **info@plattnericus.dev**.
+Notices are included in the JAR, pack and first-start data folder. The repository
+has **no general open-source license**; public source alone does not grant unrestricted
+reuse. Rights requests and project contact: **info@plattnericus.dev**.
 
-## Entwicklung
+## Development
 
-JDK 25 und der mitgelieferte Gradle Wrapper genügen:
+Use JDK 25 and the included Gradle wrapper:
 
 ```sh
 bash gradlew build
 ```
 
-Das erzeugt `build/libs/MCCases-1.2.0.jar` und
-`build/distributions/MCCases-ResourcePack-1.2.0.zip` und führt `verifyFeatures` sowie
-`verifyPack` aus. Für die Veröffentlichung werden geprüfte Dateien nach `release/`
-kopiert und deren Prüfsummen aktualisiert.
+This creates `build/libs/MCCases-1.2.1.jar` and
+`build/distributions/MCCases-ResourcePack-1.2.1.zip`, running `verifyFeatures` and
+`verifyPack`. Copy verified artifacts to `release/` and update their checksums.
 
-Der [Buildbericht vom 10. Oktober 2026](docs/BUILD-2026-10-10.md) dokumentiert diesen
-Upload. Die [aktuellen Befehls- und Live-Prüfungen](docs/COMMAND-VERIFICATION-2026-10-10.md)
-umfassen 135 Befehlschecks und zwei verbundene Minecraft-Clients. Frühere
-[Hotbar-/HD-Pack-Prüfungen](docs/HOTBAR-HD-VERIFICATION.md) und
-[Multi-Opening-/Trade-in-Prüfungen](docs/MULTI-OPENING-VERIFICATION.md) sind separat datiert.
+The [1.2.1 verification report](docs/RELEASE-1.2.1-VERIFICATION.md) documents the build,
+154 command checks, ten live suites and new client captures. The
+[earlier 1.2.0 command report](docs/COMMAND-VERIFICATION-2026-10-10.md) records 135 checks.
+Older [hotbar/HD-pack](docs/HOTBAR-HD-VERIFICATION.md) and
+[multiple-opening/trade-in](docs/MULTI-OPENING-VERIFICATION.md) evidence is dated separately.
 
-[Entwicklungsanleitung](docs/DEVELOPMENT.md) · [Vollständige Referenz](docs/REFERENCE.md) ·
-[Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues) · [Projektwebsite](https://plattnericus.dev)
+[Development guide](docs/DEVELOPMENT.md) · [Full reference](docs/REFERENCE.md) ·
+[Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues) · [Project website](https://plattnericus.dev)
 
-MySQL/MariaDB, hohe Spielerzahlen, andere Plugins und abweichende Client-/Serverversionen
-brauchen eigene Laufzeitprüfungen. Eigene Kameraeinstellungen und Gelände können die
-Display-Modelle verdecken. Reproduzierbare Fehler bitte mit Version, Konfiguration und
-bereinigtem Log melden; keine Datenbank, Passwörter oder `secret.key` öffentlich hochladen.
+MySQL/MariaDB, large player counts, other plugins and different client/server versions
+need their own runtime testing. Terrain and camera settings can obscure world displays.
+Report reproducible issues with version, configuration and a sanitized log; do not
+publish databases, passwords or `secret.key`.

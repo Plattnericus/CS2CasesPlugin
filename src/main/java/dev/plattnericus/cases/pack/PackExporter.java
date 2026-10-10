@@ -13,7 +13,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -38,6 +37,10 @@ public final class PackExporter {
     public static final int MIN_FORMAT = 88;
     public static final int MAX_FORMAT = 99;
     private static final int SPRITE = 64;
+    private static final int SKIN_SPRITE = 128;
+    private static final int RIG_INSET = 4;
+    private static final int RIG_CONTENT = SKIN_SPRITE - 2 * RIG_INSET;
+    private static final double TEXELS_PER_UNIT = SKIN_SPRITE / 16.0;
 
     public record Result(int skins, int cases, int keys, List<String> failures) {
     }
@@ -154,17 +157,19 @@ public final class PackExporter {
     /** Textured cuboids give the inspect asset thickness from every angle, with separate joints. */
     private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer) throws IOException, TextureException {
         double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
-        ArgbImage source = renderer.render(skin, 0, fl, 0).image();
-        BufferedImage canvas = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
+        ArgbImage source = dev.plattnericus.cases.inspect.InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
+        BufferedImage canvas = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = canvas.createGraphics();
         // Use alpha-aware area filtering instead of Graphics2D's nearest-neighbour reduction.
-        g.drawImage(source.scaledTo(60, 60).toBufferedImage(), 2, 2, null); g.dispose();
+        g.drawImage(source.scaledTo(RIG_CONTENT, RIG_CONTENT).toBufferedImage(), RIG_INSET, RIG_INSET, null); g.dispose();
         for (String layer : dev.plattnericus.cases.inspect.InspectRig.layers(skin.weapon()).stream().map(dev.plattnericus.cases.inspect.InspectRig.Layer::id).distinct().toList()) {
-            BufferedImage texture = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
-            boolean[][] mask = new boolean[SPRITE][SPRITE];
-            for (int y = 0; y < SPRITE; y++) for (int x = 0; x < SPRITE; x++) {
+            BufferedImage texture = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
+            boolean[][] mask = new boolean[SKIN_SPRITE][SKIN_SPRITE];
+            for (int y = 0; y < SKIN_SPRITE; y++) for (int x = 0; x < SKIN_SPRITE; x++) {
                 int pixel = canvas.getRGB(x, y);
-                if ((pixel >>> 24) >= 128 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), (x - 1.5) / 60, (y - 1.5) / 60))) {
+                double originalX = (x + .5 - RIG_INSET) / RIG_CONTENT, originalY = (y + .5 - RIG_INSET) / RIG_CONTENT;
+                if (dev.plattnericus.cases.inspect.InspectRig.reverseGrip(skin.weapon())) { originalX = 1 - originalX; originalY = 1 - originalY; }
+                if ((pixel >>> 24) >= 128 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), originalX, originalY))) {
                     // Geometry covers this texel completely. Partial alpha made the solid rim
                     // see-through and caused dark seams during spins.
                     texture.setRGB(x, y, pixel | 0xFF000000); mask[y][x] = true;
@@ -174,21 +179,21 @@ public final class PackExporter {
             png(zip, "assets/" + ns + "/textures/item/" + path + ".png", texture);
             List<String> elements = new ArrayList<>();
             double thickness = skin.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2 : .45) : 2.6;
-            for (int y = 0; y < SPRITE; y++) for (int x = 0; x < SPRITE; x++) {
+            for (int y = 0; y < SKIN_SPRITE; y++) for (int x = 0; x < SKIN_SPRITE; x++) {
                 if (!mask[y][x]) continue;
-                int right = x + 1; while (right < SPRITE && mask[y][right]) right++;
+                int right = x + 1; while (right < SKIN_SPRITE && mask[y][right]) right++;
                 int bottom = y + 1;
-                outer: while (bottom < SPRITE) { for (int xx = x; xx < right; xx++) if (!mask[bottom][xx]) break outer; bottom++; }
+                outer: while (bottom < SKIN_SPRITE) { for (int xx = x; xx < right; xx++) if (!mask[bottom][xx]) break outer; bottom++; }
                 for (int yy = y; yy < bottom; yy++) for (int xx = x; xx < right; xx++) mask[yy][xx] = false;
-                double x1 = x / 4.0, x2 = right / 4.0, y1 = y / 4.0, y2 = bottom / 4.0;
+                double x1 = x / TEXELS_PER_UNIT, x2 = right / TEXELS_PER_UNIT, y1 = y / TEXELS_PER_UNIT, y2 = bottom / TEXELS_PER_UNIT;
                 StringBuilder faces = new StringBuilder();
                 for (String face : List.of("north", "south", "east", "west", "up", "down")) {
                     if (!faces.isEmpty()) faces.append(',');
                     // Side faces sample just the corresponding boundary texels, rather than
                     // stretching the whole weapon face across its thickness. Half-texel insets
                     // keep every sample inside an opaque pixel, including one-pixel edges.
-                    double u1 = (x + .5) / 4, u2 = (right - .5) / 4;
-                    double v1 = (y + .5) / 4, v2 = (bottom - .5) / 4;
+                    double u1 = (x + .5) / TEXELS_PER_UNIT, u2 = (right - .5) / TEXELS_PER_UNIT;
+                    double v1 = (y + .5) / TEXELS_PER_UNIT, v2 = (bottom - .5) / TEXELS_PER_UNIT;
                     if (face.equals("north")) { double swap = u1; u1 = u2; u2 = swap; }
                     if (face.equals("east")) u1 = u2;
                     if (face.equals("west")) u2 = u1;
@@ -214,13 +219,16 @@ public final class PackExporter {
     /** Skin sprite: showcase render, cropped, knives turned to the vanilla sword diagonal. */
     static BufferedImage sprite(SkinRenderer renderer, SkinDefinition skin) throws TextureException {
         double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), 0.02));
-        ArgbImage img = renderer.render(skin, 0, fl, 0).image();
+        ArgbImage img = dev.plattnericus.cases.inspect.InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
         BufferedImage src = img.toBufferedImage();
         if (skin.isKnife()) {
-            BufferedImage rotated = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            int side = (int) Math.ceil(Math.hypot(src.getWidth(), src.getHeight()));
+            BufferedImage rotated = new BufferedImage(side, side, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = rotated.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g.setTransform(AffineTransform.getRotateInstance(Math.toRadians(-45), src.getWidth() / 2.0, src.getHeight() / 2.0));
+            g.translate(side / 2.0, side / 2.0);
+            g.rotate(Math.toRadians(-45));
+            g.translate(-src.getWidth() / 2.0, -src.getHeight() / 2.0);
             g.drawImage(src, 0, 0, null);
             g.dispose();
             src = rotated;
@@ -228,12 +236,15 @@ public final class PackExporter {
         ArgbImage cropped = crop(ArgbImage.from(src));
         int w = cropped.width();
         int h = cropped.height();
-        double scale = (SPRITE - 2.0) / Math.max(w, h);
+        double scale = (SKIN_SPRITE - 4.0) / Math.max(w, h);
         int tw = Math.max(1, (int) Math.round(w * scale));
         int th = Math.max(1, (int) Math.round(h * scale));
         ArgbImage fitted = cropped.scaledTo(tw, th);
-        BufferedImage out = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
-        out.setRGB((SPRITE - tw) / 2, (SPRITE - th) / 2, tw, th, fitted.pixels(), 0, tw);
+        // Minecraft extrudes every nonzero texel. Binary coverage avoids translucent edge spikes.
+        int[] pixels = fitted.pixels();
+        for (int i = 0; i < pixels.length; i++) pixels[i] = (pixels[i] >>> 24) >= 128 ? pixels[i] | 0xff000000 : 0;
+        BufferedImage out = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
+        out.setRGB((SKIN_SPRITE - tw) / 2, (SKIN_SPRITE - th) / 2, tw, th, pixels, 0, tw);
         return out;
     }
 
@@ -263,8 +274,9 @@ public final class PackExporter {
 
     /** GUI-only selection tile; the normal equipment sprite stays transparent. */
     static BufferedImage selectedSprite(BufferedImage sprite) {
-        BufferedImage out = new BufferedImage(SPRITE, SPRITE, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage out = new BufferedImage(sprite.getWidth(), sprite.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = out.createGraphics();
+        g.scale(sprite.getWidth() / (double) SPRITE, sprite.getHeight() / (double) SPRITE);
         g.setColor(new Color(0x286b2b));
         g.fillRect(0, 0, SPRITE, SPRITE);
         g.setColor(new Color(0x72c64a));
@@ -273,7 +285,7 @@ public final class PackExporter {
         g.setColor(new Color(0x184b1b));
         g.fillRect(0, SPRITE - 3, SPRITE, 3);
         g.fillRect(SPRITE - 3, 0, 3, SPRITE);
-        g.drawImage(sprite, 0, 0, null);
+        g.drawImage(sprite, 0, 0, SPRITE, SPRITE, null);
         g.dispose();
         return out;
     }

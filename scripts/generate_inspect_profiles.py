@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 weapons = yaml.safe_load((ROOT / 'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons']
 # Knife-specific grip pivots, axis, turn angle and weight (ticks). Three named actions each.
 KNIVES = {
- 'karambit': (-.30, 'z', 360, 12, ['finger_roll', 'reverse_grip', 'ring_twirl']),
+ 'karambit': (.24719238, 'z', 360, 12, ['finger_roll', 'reverse_grip', 'ring_twirl']),
  'butterfly': (-.03, 'z', 360, 16, ['rollover', 'helix', 'fan']),
  'm9_bayonet': (-.22, 'x', 180, 18, ['sawback_check', 'heavy_roll', 'guard_flip']),
  'bayonet': (-.20, 'z', 360, 15, ['draw_flip', 'edge_check', 'grip_roll']),
@@ -19,7 +19,7 @@ KNIVES = {
  'navaja': (-.04, 'z', 180, 12, ['compact_flick', 'hinge_check', 'pocket_flip']),
  'stiletto': (-.03, 'z', 360, 11, ['spring_flick', 'finger_toss', 'needle_twirl']),
  'ursus': (-.16, 'z', 360, 14, ['palm_toss', 'catch_flip', 'blade_roll']),
- 'talon': (-.28, 'z', 720, 18, ['free_ring_spin', 'reverse_catch', 'finger_loop']),
+ 'talon': (.29882812, 'z', 360, 18, ['free_ring_spin', 'reverse_catch', 'finger_loop']),
  'classic': (-.19, 'x', 180, 17, ['classic_turn', 'tip_check', 'grip_spin']),
  'paracord': (-.21, 'x', 180, 19, ['cord_check', 'field_roll', 'lanyard_turn']),
  'survival': (-.22, 'x', 180, 21, ['saw_check', 'field_flip', 'grip_inspect']),
@@ -92,15 +92,24 @@ for i,(id,w) in enumerate(weapons.items()):
   aid=f'{id}__{name}'; pool.append(aid)
   weight=KNIVES[id][3] if knife else (16 if w['category'] in ['sniper','heavy'] else 12)+(i%3)
   groups={'body':body(i,v,weight)}
+  if id in ['karambit','talon']:
+   for f in groups['body']['keyframes']:
+    move=f.get('move')
+    if move in [[-.07,.035,.015],[-.085,.045,.035]]: move[0]=-.25
+    if move in [[-.04,.05,0],[-.06,.065,.025]]: move[0]=-.50
+    if id=='talon' and 'rotate' in f:
+     f['rotate'][1]={32:22,-32:-22,54:36,-54:-36,44:32}.get(f['rotate'][1],f['rotate'][1])
   duration=sum(f['ticks'] for f in groups['body']['keyframes'])
   if knife:
    pivot,axis,angle,_,_=KNIVES[id]
    # Every gesture differs in grip axis, direction and turn count.
    turn=angle if v==0 else (-180 if v==1 else (360 if angle<360 else -angle)) if v==2 else 0
+   if id in ['karambit','talon'] and v==1: turn=180
    rotation=[0,0,0];rotation['xyz'.index(axis)]=turn
    # A completed full turn is already the held orientation. Do not unwind it backwards.
    recovery=rotation if turn % 360 == 0 else [0,0,0]
-   groups['roll']=group([frame(0,rotate=[0,0,0]),frame(14),frame(weight,rotate=rotation),frame(duration-14-weight-10),frame(10,rotate=recovery)], 'body',[pivot,0,0])
+   pivot_y=.01171875 if id=='karambit' else .017578125 if id=='talon' else 0
+   groups['roll']=group([frame(0,rotate=[0,0,0]),frame(14),frame(weight,rotate=rotation),frame(duration-14-weight-10),frame(10,rotate=recovery)], 'body',[pivot,pivot_y,0])
    if id=='butterfly':
     # Open handles swing independently around the common blade tang, never a single sprite.
     for side,sgn in [('handle_a',1),('handle_b',-1)]:

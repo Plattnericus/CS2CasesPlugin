@@ -27,7 +27,7 @@ public final class CommerceRuntimeChecks {
         var def = ctx.catalog().skins().stream().filter(s -> s.isKnife()).findFirst().orElseThrow();
         var fixtures = new java.util.ArrayList<SkinInstance>();
         for (int i = 0; i < 81; i++) fixtures.add(fixture(first, def.id()));
-        SkinInstance a = fixtures.get(0), sale = fixtures.get(1), b = fixture(second, def.id()); fixtures.add(b);
+        SkinInstance a = fixtures.get(0), sale = fixtures.get(1), b = fixture(second, def.id(), SkinInstance.Origin.ADMIN_TRADE_IN); fixtures.add(b);
         ItemStack[] savedFirst = snapshot(first), savedSecond = snapshot(second);
         long[] openingBaseline = new long[2];
         long claimBaseline = ctx.commerce().payments().pending(first.getUniqueId());
@@ -73,6 +73,11 @@ public final class CommerceRuntimeChecks {
             }).thenCompose(v -> until(plugin, () -> ctx.commerce().trade(first.getUniqueId()) == null))
             .thenRun(() -> {
                 require(ctx.profiles().get(second).get(a.id()) != null && ctx.profiles().get(first).get(b.id()) != null, "atomic exchange failed");
+                var caseSkin = ctx.profiles().get(second).get(a.id()); var tradeInSkin = ctx.profiles().get(first).get(b.id());
+                require(caseSkin.traded() && tradeInSkin.traded() && tradeInSkin.origin().admin(), "trade provenance/admin lineage lost");
+                String caseSource = ctx.catalog().caseDefinition(a.sourceCase()).name();
+                require(ctx.formatter(second).lore(def, caseSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (" + caseSource + ")")), "case source not visible after live trade");
+                require(ctx.formatter(first).lore(def, tradeInSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (TRADE IN)")), "trade-in source not visible after live trade");
                 ctx.commerce().list(first, sale, 320);
             }).thenCompose(v -> until(plugin, () -> ctx.commerce().listings().stream().anyMatch(l -> l.skin().id().equals(sale.id()))))
             .thenRun(() -> {
@@ -185,7 +190,10 @@ public final class CommerceRuntimeChecks {
                     sender.sendMessage(message); plugin.getLogger().info(message); });
     }
     private static SkinInstance fixture(Player p, String skin) {
-        return new SkinInstance(UUID.randomUUID(), p.getUniqueId(), skin, 0.012345, 271, 88123, true, 42, new PatternInfo("phase2", "Phase 2", "Pink Galaxy", 2, 0xff1234, 99.5), "chroma_case", SkinInstance.Origin.ADMIN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
+        return fixture(p, skin, SkinInstance.Origin.CASE);
+    }
+    private static SkinInstance fixture(Player p, String skin, SkinInstance.Origin origin) {
+        return new SkinInstance(UUID.randomUUID(), p.getUniqueId(), skin, 0.012345, 271, 88123, true, 42, new PatternInfo("phase2", "Phase 2", "Pink Galaxy", 2, 0xff1234, 99.5), "chroma_case", origin, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
     }
     private static ItemStack[] snapshot(Player p) { return java.util.Arrays.stream(p.getInventory().getContents()).map(i -> i == null ? null : i.clone()).toArray(ItemStack[]::new); }
     private static void click(Player p, int slot) { Bukkit.getPluginManager().callEvent(new InventoryClickEvent(p.getOpenInventory(), InventoryType.SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ALL)); }

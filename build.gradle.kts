@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.2.0"
+version = "1.2.1"
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 

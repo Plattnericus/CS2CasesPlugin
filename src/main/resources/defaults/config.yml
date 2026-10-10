@@ -81,6 +81,10 @@ opening:
   # gui   = CS2-style roulette in an inventory (only the opener sees it)
   display: world
   world:
+    # Enlarge the whole wheel, including glass, text, icons and click targets.
+    # 3.0 is three times the previous size at the same distance and grid count.
+    # Step back to see the entire enlarged grid; 1.0 restores the compact layout.
+    scene-scale: 3.0
     distance: 3.0
     height: 0.35
     visible-items: 7

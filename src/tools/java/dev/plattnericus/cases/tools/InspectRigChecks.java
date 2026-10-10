@@ -36,6 +36,19 @@ public final class InspectRigChecks {
             for (String id : pool) {
                 require(all.add(id) && id.startsWith(weapon.id() + "__"), "shared weapon timeline " + id);
                 InspectAnimation animation = models.animation(id);
+                if (InspectRig.reverseGrip(weapon)) {
+                    // A real ring spin must leave the ring center anchored to the parent body.
+                    Vector3f ring = weapon.id().equals("talon") ? new Vector3f(.29882812f, .017578125f, 0)
+                            : new Vector3f(.24719238f, .01171875f, 0);
+                    for (int tick = 0; tick <= animation.duration(); tick++) require(
+                            animation.groupMatrix("roll", tick).transformPosition(new Vector3f(ring)).distance(
+                                    animation.groupMatrix("body", tick).transformPosition(new Vector3f(ring))) < 1e-5,
+                            "ring orbits instead of spinning on the finger " + id + "/" + tick);
+                    require(animation.groupMatrix("roll", 0).equals(animation.groupMatrix("roll", animation.duration()), 1e-5f),
+                            "ring knife does not return to the held pose " + id);
+                    if (id.endsWith("reverse_grip") || id.endsWith("reverse_catch")) require(
+                            !animation.groupMatrix("roll", 26).equals(animation.groupMatrix("body", 26), 1e-3f), "reverse grip never turns " + id);
+                }
                 for (String cue : animation.sounds().values()) require(soundConfig.contains("sounds." + cue), "missing sound cue " + id + "/" + cue);
                 StringBuilder signature = new StringBuilder().append(animation.duration());
                 for (int sample=0;sample<=animation.duration();sample++) signature.append(animation.groupMatrix("body",sample).hashCode());
@@ -129,23 +142,32 @@ public final class InspectRigChecks {
             var reloaded = new org.bukkit.configuration.file.YamlConfiguration(); reloaded.loadFromString(current.saveToString());
             require(reloaded.getStringList("animation-pools.ak47").equals(defaults.getStringList("animation-pools.ak47")), "migration not serializable");
             require(!InspectProfileDefaults.upgrade(reloaded, defaults), "profile upgrade not idempotent");
+            try (var recent = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-v2.yml")) {
+                var stock = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(recent, java.nio.charset.StandardCharsets.UTF_8));
+                stock.set("animations.talon__blade_presentation.substeps", 2);
+                require(InspectProfileDefaults.upgrade(stock, defaults), "1.2.0 ring timeline upgrade did not run");
+                require(stock.getList("animations.karambit__finger_roll.groups.roll.pivot").equals(defaults.getList("animations.karambit__finger_roll.groups.roll.pivot")), "1.2.0 ring pivot not migrated");
+                require(stock.getInt("animations.talon__blade_presentation.substeps") == 2, "custom ring timeline overwritten");
+                require(!InspectProfileDefaults.upgrade(stock, defaults), "ring migration not idempotent");
+            }
             System.out.println("PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.");
         } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
     private static List<Vector3f> vertices(File root, WeaponType weapon, ModelPart part) {
         try {
-            var source = javax.imageio.ImageIO.read(new File(root, "textures/" + weapon.textureFolder() + "/base.png"));
+            var original = dev.plattnericus.cases.render.ArgbImage.from(javax.imageio.ImageIO.read(new File(root, "textures/" + weapon.textureFolder() + "/base.png")));
+            var source = InspectRig.presentation(weapon, original).scaledTo(120, 120);
             var out = new ArrayList<Vector3f>(); String layer = part.material().substring(5);
             float depth = (weapon.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2f : .45f) : 2.6f)/32;
-            for (int yy=0;yy<64;yy++) {
-                int first=64,last=-1;
-                for (int xx=0;xx<64;xx++) {
-                    double x=(xx-1.5)/60,y=(yy-1.5)/60;
+            for (int yy=0;yy<128;yy++) {
+                int first=128,last=-1;
+                for (int xx=0;xx<128;xx++) {
+                    double x=(xx+.5-4)/120,y=(yy+.5-4)/120;
                     if(x<0 || x>=1 || y<0 || y>=1)continue;
-                    if((source.getRGB(Math.min(source.getWidth()-1,(int)(x*source.getWidth())), Math.min(source.getHeight()-1,(int)(y*source.getHeight())))>>>24)>10
-                       && layer.equals(InspectRig.layerAt(weapon,x,y))) {first=Math.min(first,xx);last=xx;}
+                    if((source.get(xx-4, yy-4)>>>24)>=128
+                       && layer.equals(InspectRig.layerAt(weapon,InspectRig.reverseGrip(weapon)?1-x:x,InspectRig.reverseGrip(weapon)?1-y:y))) {first=Math.min(first,xx);last=xx;}
                 }
-                if(last>=first)for(int x:new int[]{first,last+1})for(int y:new int[]{yy,yy+1})for(float z:new float[]{-depth,depth})out.add(new Vector3f(x/64f-.5f,.5f-y/64f,z));
+                if(last>=first)for(int x:new int[]{first,last+1})for(int y:new int[]{yy,yy+1})for(float z:new float[]{-depth,depth})out.add(new Vector3f(x/128f-.5f,.5f-y/128f,z));
             }
             require(!out.isEmpty(), "empty rig layer " + weapon.id() + "/" + layer); return out;
         } catch(java.io.IOException failure){throw new IllegalStateException(failure);}

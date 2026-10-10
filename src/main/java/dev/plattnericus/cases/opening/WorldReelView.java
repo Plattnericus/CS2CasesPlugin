@@ -78,7 +78,7 @@ final class WorldReelView implements OpeningView {
         anchor = baseAnchor.clone();
         double width = cfg.visibleItems() * cfg.spacing() + 0.2;
         double half = cfg.itemScale() / 2;
-        all.add(block(Material.BLACK_CONCRETE, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
+        all.add(block(Material.BLACK_STAINED_GLASS, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
                 new Vector3f((float) width, (float) (cfg.itemScale() + 0.36), 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (half + 0.04), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (-half - 0.14), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
@@ -103,7 +103,7 @@ final class WorldReelView implements OpeningView {
         layoutIndex = index; layoutCount = count;
         double distance = baseAnchor.toVector().distance(session.origin.toVector());
         var cell = OpeningLayout.cell(index, count, cfg.visibleItems() * cfg.spacing() + .2,
-                cfg.itemScale() + .65, distance);
+                cfg.itemScale() + .65, distance, cfg.sceneScale());
         Vector right = baseAnchor.getDirection().multiply(-1).crossProduct(new Vector(0, 1, 0)).normalize();
         Location next = baseAnchor.clone().add(right.multiply(cell.right())).add(0, cell.up(), 0);
         double ratio = cell.scale() / sceneScale;

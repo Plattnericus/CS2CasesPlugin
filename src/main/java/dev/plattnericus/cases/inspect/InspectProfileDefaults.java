@@ -11,7 +11,12 @@ import java.util.Map;
 public final class InspectProfileDefaults {
     private InspectProfileDefaults() { }
     public static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults) {
-        try (var in = InspectProfileDefaults.class.getResourceAsStream("/migrations/inspect-profiles-v1.yml")) {
+        boolean changed = false;
+        for (String baseline : java.util.List.of("v1", "v2")) changed |= upgrade(current, defaults, baseline);
+        return changed;
+    }
+    private static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults, String baseline) {
+        try (var in = InspectProfileDefaults.class.getResourceAsStream("/migrations/inspect-profiles-" + baseline + ".yml")) {
             if (in == null) return false;
             var previous = YamlConfiguration.loadConfiguration(new InputStreamReader(in, StandardCharsets.UTF_8));
             boolean changed = false;

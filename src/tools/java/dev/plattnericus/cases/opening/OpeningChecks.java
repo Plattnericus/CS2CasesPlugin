@@ -16,6 +16,10 @@ import java.util.UUID;
 public final class OpeningChecks {
     private OpeningChecks() { }
     public static void run(File root) throws Exception {
+        var config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "config.yml"));
+        require(config.getString("language").equals("en") && !config.getBoolean("client-language"), "default interface must stay English for all clients");
+        require(config.getInt("opening.max-active-per-player") == 9, "default nine-opening capacity");
+        require(config.getDouble("opening.world.scene-scale") == 3, "default whole-wheel size");
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var def = catalog.caseDefinition("kilowatt_case");
         presentation(catalog, def);
@@ -98,6 +102,19 @@ public final class OpeningChecks {
                 require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + 2.27 * cell.scale() < distance * .78,
                         "reel clipped horizontally: " + count);
                 require(Math.abs(cell.up()) + .575 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
+            }
+            for (int i = 0; i < count; i++) {
+                var compact = cells.get(i);
+                var large = OpeningLayout.cell(i, count, 4.54, 1.15, distance, 3);
+                require(Math.abs(large.scale() - compact.scale() * 3) < 1e-9
+                        && Math.abs(large.right() - compact.right() * 3) < 1e-9
+                        && Math.abs(large.up() - compact.up() * 3) < 1e-9,
+                        "whole-wheel enlargement lost when the grid changed: " + count);
+                for (int j = 0; j < i; j++) {
+                    var other = OpeningLayout.cell(j, count, 4.54, 1.15, distance, 3);
+                    require(Math.abs(large.right() - other.right()) > 4.54 * large.scale()
+                            || Math.abs(large.up() - other.up()) > 1.15 * large.scale(), "enlarged wheels overlap");
+                }
             }
             for (int i = 0; i < cells.size(); i++) for (int j = i + 1; j < cells.size(); j++) {
                 var a = cells.get(i); var b = cells.get(j);

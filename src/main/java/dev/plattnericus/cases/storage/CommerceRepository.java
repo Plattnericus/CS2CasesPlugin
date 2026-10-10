@@ -86,7 +86,7 @@ public final class CommerceRepository {
                     throw new Rejected(Failure.INVALID);
                 SkinInstance skin = skin(c, t.instance(), t.from(), "OWNED");
                 if (skin.origin() == SkinInstance.Origin.TEST) throw new Rejected(Failure.INVALID);
-                move(c, t, "OWNED"); results.add(skin.transferTo(t.to()));
+                move(c, t, "OWNED", true); results.add(skin.tradedTo(t.to()));
             }
             audit(c, "TRADE", first, second, 0, snapshot.toString());
             return List.copyOf(results);
@@ -121,7 +121,11 @@ public final class CommerceRepository {
     }
 
     void move(Connection c, Transfer t, String status) throws SQLException {
-        requireUpdate(c, "UPDATE " + db.table("skins") + " SET owner=?, status='OWNED', favorite=0 WHERE instance_id=? AND owner=? AND status=?",
+        move(c, t, status, false);
+    }
+
+    private void move(Connection c, Transfer t, String status, boolean traded) throws SQLException {
+        requireUpdate(c, "UPDATE " + db.table("skins") + " SET owner=?, status='OWNED', favorite=0" + (traded ? ", traded=1" : "") + " WHERE instance_id=? AND owner=? AND status=?",
                 t.to(), t.instance(), t.from(), status);
         unequip(c, t.from(), t.instance());
     }

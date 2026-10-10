@@ -22,6 +22,7 @@ public final class SkinInstance {
     private final long wearSeed;
     private final String sourceCase;
     private final Origin origin;
+    private final boolean traded;
     private final long createdAt;
     private double floatValue;
     private int pattern;
@@ -34,6 +35,13 @@ public final class SkinInstance {
     public SkinInstance(UUID id, UUID owner, String skinId, double floatValue, int pattern, long wearSeed,
                         boolean statTrak, int kills, PatternInfo patternInfo, String sourceCase, Origin origin,
                         long createdAt, boolean favorite, Status status) {
+        this(id, owner, skinId, floatValue, pattern, wearSeed, statTrak, kills, patternInfo, sourceCase,
+                origin, createdAt, favorite, status, false);
+    }
+
+    public SkinInstance(UUID id, UUID owner, String skinId, double floatValue, int pattern, long wearSeed,
+                        boolean statTrak, int kills, PatternInfo patternInfo, String sourceCase, Origin origin,
+                        long createdAt, boolean favorite, Status status, boolean traded) {
         this.id = id;
         this.owner = owner;
         this.skinId = skinId;
@@ -45,6 +53,7 @@ public final class SkinInstance {
         this.patternInfo = patternInfo == null ? PatternInfo.NONE : patternInfo;
         this.sourceCase = sourceCase;
         this.origin = origin;
+        this.traded = traded;
         this.createdAt = createdAt;
         this.favorite = favorite;
         this.status = status;
@@ -99,6 +108,9 @@ public final class SkinInstance {
         return origin;
     }
 
+    /** Direct player trade history, independent of the original roll/admin provenance. */
+    public boolean traded() { return traded; }
+
     public long createdAt() {
         return createdAt;
     }
@@ -141,11 +153,16 @@ public final class SkinInstance {
 
     public SkinInstance copyWithStatus(Status newStatus) {
         return new SkinInstance(id, owner, skinId, floatValue, pattern, wearSeed, statTrak, kills, patternInfo,
-                sourceCase, origin, createdAt, favorite, newStatus);
+                sourceCase, origin, createdAt, favorite, newStatus, traded);
     }
 
     public SkinInstance transferTo(UUID newOwner) {
         return new SkinInstance(id, newOwner, skinId, floatValue, pattern, wearSeed, statTrak, kills, patternInfo,
-                sourceCase, origin, createdAt, false, Status.OWNED);
+                sourceCase, origin, createdAt, false, Status.OWNED, traded);
+    }
+
+    public SkinInstance tradedTo(UUID newOwner) {
+        return new SkinInstance(id, newOwner, skinId, floatValue, pattern, wearSeed, statTrak, kills, patternInfo,
+                sourceCase, origin, createdAt, false, Status.OWNED, true);
     }
 }
