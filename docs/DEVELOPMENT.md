@@ -11,7 +11,7 @@
 | `src/tools/java/` | Pack exporter, asset renderer and check tools |
 | `scripts/` | Local development server and cleanup checks |
 | `release/` | Plugin JAR and resource pack ZIP |
-| `resourcepack/` | Pack assets for merging into a server pack |
+| `resourcepack/` | Historical exported assets; merge from the current release ZIP |
 | `build/` | Generated output; new files ignored, historical tracked outputs retained |
 
 ## Build

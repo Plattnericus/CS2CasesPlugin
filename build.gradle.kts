@@ -74,6 +74,9 @@ tasks.processResources {
 
 tasks.jar {
     archiveFileName.set("MCCases-${project.version}.jar")
+    from(files("LEGAL.md", "THIRD_PARTY_NOTICES.md", "docs/PRIVACY-IT.md")) {
+        into("META-INF/mccases")
+    }
     // the plugin ships its own resource pack (extracted to plugins/MCCases/resourcepack/)
     dependsOn("resourcePack")
     from(layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip")) {

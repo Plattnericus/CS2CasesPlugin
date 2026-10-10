@@ -1,0 +1,57 @@
+> Task :compileJava
+> Task :defaultsIndex
+> Task :processResources
+> Task :classes
+> Task :compileToolsJava UP-TO-DATE
+> Task :processToolsResources NO-SOURCE
+> Task :toolsClasses UP-TO-DATE
+
+> Task :resourcePack
+Resource pack: 815 skins, 22 cases, 1 keys -> <project>/build/distributions/MCCases-ResourcePack-1.2.0.zip
+
+> Task :jar
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+
+> Task :verifyFeatures
+PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:<gradle-cache>/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+PASS: all 63 weapon/glove rigs / 252 individual timelines, 880360 finite joint frames in right/left eye/hand views, 70° 4:3 camera bounds; held-pose continuity, cyclic-rig rejection, full dealer price/overflow/unknown price and exact knife probabilities.
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.sqlite.SQLiteJDBCLoader in an unnamed module (file:<gradle-cache>/caches/modules-2/files-2.1/org.xerial/sqlite-jdbc/3.49.1.0/145d3a6819b86f3618728273329392269104c8c7/sqlite-jdbc-3.49.1.0.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+PASS: price bounds, item-payment prepare/complete/cancel, concurrent buyers, exact identity transfer, partial/repeated claims, injected SQL rollback/retry, reservations, restart recovery, v1/v2 legacy migration.
+PASS: nine simultaneous durable world presentations, out-of-order commit barrier, sequential GUI fallback; centered, non-overlapping 1–9 grids at 1.2/3/6 blocks.
+PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.
+PASS: five stable trade-in sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE IN with retained admin lineage.
+PASS: production chest menus protect all nine held-slot requests and release them on close (controlled Paper event/view proxies); live gallery checks cover normal hotbar selection.
+Verified 815 skins, 22 cases, 5500 rewards/reels, weighted odds, wear boundaries, inventory queries and journal recovery codec.
+Verified 45 language schemas, German/English commerce texts and English fallbacks, regional fallbacks, 46 animation timelines and reel easing.
+
+> Task :verifyPack
+PASS: all 815 exported skins / 1377 inspect layers / 101988 opaque rim faces, front/back UV orientation, unclipped sprites, both hands and first/third-person forward-facing blades/muzzles. Sheet: <project>/build/verification
+
+> Task :check
+> Task :build
+
+[Incubating] Problems report is available at: file://<project>/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 19s
+8 actionable tasks: 7 executed, 1 up-to-date

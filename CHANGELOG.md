@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 — refreshed build 2026-10-10
+
+- Package the current 815-skin/63-model catalog, 252 inspect variants, simultaneous 1–9 world openings and trade-in improvements in the public JAR and matching standard pack.
+- Replace the README with a German installation and player guide; retain the complete English command/configuration reference in `docs/REFERENCE.md`.
+- Include project contact, trademark/asset notices and the stated Italy/free-currency operating model in the JAR, exported packs and first-run defaults.
+- Add an Italian privacy template with explicit fields for operator identity, hosting and retention; document actual storage and disclosure behavior.
+- Preserve the existing project license status; document separately licensed build tooling and the unresolved rights of additional Fusion-HD artwork.
+- Refresh release checksums; historical visual evidence remains dated separately.
+
 ## 1.2.0 — 2026-10-08
 
 - CS20 Case with 17 weapons and 13 Classic Knife finishes; all 55 weapon IDs now have obtainable skins.

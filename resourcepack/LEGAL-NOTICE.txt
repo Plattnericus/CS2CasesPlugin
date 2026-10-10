@@ -1,0 +1,32 @@
+MCCases - project and server-use notice
+Maintainer: Plattnericus
+Contact: info@plattnericus.dev
+Project: https://github.com/Plattnericus/CS2CasesPlugin
+
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
+MCCases is also independent of Valve. Counter-Strike and Steam are Valve trademarks;
+other marks remain the property of their respective owners. No trademark rights are granted.
+
+The documented operator model is an Italian server using freely earned in-game items.
+Do not sell cases, keys, opening currency or resulting skins for money, including indirectly
+through ranks or donations. Do not offer cash-out, external sales, real-world prizes or
+cross-server currency conversion. Other plugins and external stores require separate review.
+Random rewards and cosmetic values do not represent monetary value or guaranteed profit.
+Publish the actual configured drop probabilities. These rules alone are not legal clearance.
+
+No project-wide open-source license has been granted in this repository. Public source
+availability does not grant general reuse or redistribution rights. Contact the maintainer
+for permissions; third-party materials remain governed by their own rights and licenses.
+Custom textures, fonts, logos and player skins require appropriate permission.
+
+The server operator is responsible for server rules, lawful asset use and player privacy.
+The plugin stores player UUIDs, names, skin collections and transaction/opening records.
+Collection viewing, public listings and rare-drop broadcasts may reveal gameplay data.
+Deleting an in-game skin does not erase its database history or backups.
+The Italian privacy template needs the operator's real identity, hosting and retention details.
+
+Full notices: LEGAL.md, THIRD_PARTY_NOTICES.md and docs/PRIVACY-IT.md in the project.
+The plugin JAR includes them under META-INF/mccases/.
+Minecraft rules: https://www.minecraft.net/en-us/usage-guidelines
+Minecraft EULA: https://www.minecraft.net/en-us/eula
+Valve trademarks: https://store.steampowered.com/legal
