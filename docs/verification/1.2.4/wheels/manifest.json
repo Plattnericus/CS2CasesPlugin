@@ -1,0 +1,137 @@
+[
+  {
+    "count": 1,
+    "file": "grid-1.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 1
+  },
+  {
+    "count": 1,
+    "file": "grid-1-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 2,
+    "file": "grid-2.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 2
+  },
+  {
+    "count": 2,
+    "file": "grid-2-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 3,
+    "file": "grid-3.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 3
+  },
+  {
+    "count": 3,
+    "file": "grid-3-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 4,
+    "file": "grid-4.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 4
+  },
+  {
+    "count": 4,
+    "file": "grid-4-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 5,
+    "file": "grid-5.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 5
+  },
+  {
+    "count": 5,
+    "file": "grid-5-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 6,
+    "file": "grid-6.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 6
+  },
+  {
+    "count": 6,
+    "file": "grid-6-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 7,
+    "file": "grid-7.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 7
+  },
+  {
+    "count": 7,
+    "file": "grid-7-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 8,
+    "file": "grid-8.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 8
+  },
+  {
+    "count": 8,
+    "file": "grid-8-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  },
+  {
+    "count": 9,
+    "file": "grid-9.png",
+    "viewer": "owner",
+    "distance": 3,
+    "fov": 70,
+    "glassWidth": 1.4547155,
+    "panels": 9
+  },
+  {
+    "count": 9,
+    "file": "grid-9-overview.png",
+    "viewer": "observer",
+    "distance": 11
+  }
+]

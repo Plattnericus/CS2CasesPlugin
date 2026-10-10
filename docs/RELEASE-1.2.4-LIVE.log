@@ -1,0 +1,865 @@
+[22:06:58 INFO]: DevTester issued server command: /mccasesdevcheck DevTester commands
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /trade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skintrade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /market
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /marketplace
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skinmarket
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skins
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /inventory
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /knife
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /knives
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /cases
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /tradein
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /tradeup
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /openings
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /inspect
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /csadmin
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases:csadmin
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases:mccases
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /CSADMIN
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /trade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /trade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /trade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skintrade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skintrade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skintrade
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /market
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /market
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /market
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /marketplace
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /marketplace
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /marketplace
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skinmarket
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skinmarket
+> 
+  
+[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skinmarket
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skins
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skins
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skins
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /inventory
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /inventory
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /inventory
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /knife
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /knife
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /knife
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /knives
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /knives
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /knives
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /cases
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /cases
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /cases
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /tradein
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /tradein
+> 
+  
+[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /tradein
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /tradeup
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /tradeup
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /tradeup
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /openings
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /openings
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /openings
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /inspect
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /inspect
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /inspect
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inspect[wrong]
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inspect[hand, extra]
+> 
+  
+[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inventory[vanilla, extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /knife[vanilla, extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /tradein[extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /tradeup[extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /openings[extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, 0]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, 1001]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, nope]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, bad_case, 1]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[cancel, extra]
+> 
+  
+[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[cancel, extra]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[decline, extra]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[accept, a, b]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[cancel]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[accept]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[decline]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[DefinitelyMissingPlayer]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[balance, extra]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[claims, extra]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[own, extra]
+> 
+  
+[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[recover, extra]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[search]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[sell, a]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[sell, missing-id, 1]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[unknown]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: committing trade acceptance feedback
+> 
+  
+[22:07:04 ERROR]: [MCCases] Command /audit-injected failed [2bae8996]
+java.lang.IllegalStateException: EXPECTED command audit injection
+	at MCCases-DevChecks.jar//dev.plattnericus.cases.tools.CommandRuntimeChecks$2.execute(CommandRuntimeChecks.java:143) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.command.CommandFeedback$1.execute(CommandFeedback.java:57) ~[?:?]
+	at MCCases-DevChecks.jar//dev.plattnericus.cases.tools.CommandRuntimeChecks.lambda$run$5(CommandRuntimeChecks.java:144) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniRun.tryFire(CompletableFuture.java:808) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[?:?]
+	at MCCases-DevChecks.jar//dev.plattnericus.cases.tools.CommandRuntimeChecks.lambda$later$0(CommandRuntimeChecks.java:69) ~[?:?]
+	at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1749) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1602) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:404) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.processPacketsAndTick(MinecraftServer.java:1660) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1330) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:298) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: synchronous exception guard
+> 
+  
+[22:07:04 ERROR]: [MCCases] Command /audit-injected-async failed [d1bccb67]
+java.lang.IllegalStateException: EXPECTED async audit injection
+	at MCCases-DevChecks.jar//dev.plattnericus.cases.tools.CommandRuntimeChecks.lambda$run$6(CommandRuntimeChecks.java:146) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1171) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[?:?]
+	at MCCases-DevChecks.jar//dev.plattnericus.cases.tools.CommandRuntimeChecks.lambda$later$0(CommandRuntimeChecks.java:69) ~[?:?]
+	at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1749) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1602) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:404) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.processPacketsAndTick(MinecraftServer.java:1660) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1330) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:298) ~[paper-26.3.jar:26.3-159-a4b87cf]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: asynchronous exception guard
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin 
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin info
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin givecase player case
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin givekey player key
+> 
+  
+[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin float pattern stattrak
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin list player
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: unsafe skin ID prefix rejected
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin history player
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin odds case
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin equip player id
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin equipslot player id slot
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: skin float range rejection
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin float pattern stattrak
+> 
+  
+[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: unsupported StatTrak rejection
+> 
+  
+[22:07:06 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect 
+> 
+  
+[22:07:06 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect hand
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect view
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect cooldown feedback
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setpattern player id value
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setstattrak player id value
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: invalid slot feedback to invoking admin
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin manage name
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin preview skin
+> 
+  
+[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin pattern skin pattern
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin browser skin
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market own
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market search doppler
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market sell
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market sell 98d1d904 64
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /trade
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /cases
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /openings
+> 
+  
+[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /tradein
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin scan skin
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin scan skin metric count
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop remove
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn villager
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop remove
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn mannequin
+> 
+  
+[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop remove
+> 
+  
+[22:07:22 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin exportpack
+> 
+  
+[22:07:22 INFO]: [MCCasesDevChecks] PASS COMMAND: Fusion export preserves seven fonts, font definition, pack icon and source manifest
+> 
+  
+[22:07:26 INFO]: [MCCases] Serving the resource pack on port 8165 as http://127.0.0.1:8165/MCCases-ResourcePack.zip?v=352bac81ba42d018898895888ce05545b6980e92
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin reload
+> 
+  
+[22:07:26 ERROR]: [MCCases] Reload failed; previous configuration kept
+java.util.concurrent.CompletionException: Cannot read config.yml
+	at MCCases.jar//dev.plattnericus.cases.core.CasesRuntime.loadState(CasesRuntime.java:92) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.core.CasesRuntime.lambda$reload$0(CasesRuntime.java:144) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1781) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:511) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1450) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:2019) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187) ~[?:?]
+Caused by: org.bukkit.configuration.InvalidConfigurationException: while parsing a flow sequence
+ in 'reader', line 1, column 10:
+    inspect: [invalid yaml
+             ^
+expected ',' or ']', but got <stream end>
+ in 'reader', line 2, column 1:
+    
+    ^
+
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:112) ~[paper-api-26.3.build.159-beta.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:160) ~[paper-api-26.3.build.159-beta.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:128) ~[paper-api-26.3.build.159-beta.jar:?]
+	at MCCases.jar//dev.plattnericus.cases.core.CasesRuntime.loadState(CasesRuntime.java:90) ~[?:?]
+	... 7 more
+Caused by: while parsing a flow sequence
+ in 'reader', line 1, column 10:
+    inspect: [invalid yaml
+             ^
+expected ',' or ']', but got <stream end>
+ in 'reader', line 2, column 1:
+    
+    ^
+
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseFlowSequenceEntry.produce(ParserImpl.java:772) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:277) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:207) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getSingleNode(Composer.java:157) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.Yaml.compose(Yaml.java:575) ~[snakeyaml-2.2.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:105) ~[paper-api-26.3.build.159-beta.jar:?]
+	... 10 more
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin reload
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: invalid config reload preserves previous catalog
+> 
+  
+[22:07:26 ERROR]: [MCCases] Command /csadmin edit failed [283cea67]
+java.util.concurrent.CompletionException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit SQL update)
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:106) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit SQL update)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.execute(DB.java:985) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.executeUpdate(DB.java:1054) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.lambda$executeLargeUpdate$2(JDBC3PreparedStatement.java:129) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:458) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeLargeUpdate(JDBC3PreparedStatement.java:124) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:105) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.SkinRepository.lambda$update$0(SkinRepository.java:278) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:104) ~[?:?]
+	... 4 more
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL update failure preserves memory
+> 
+  
+[22:07:26 ERROR]: [MCCases] Command /csadmin removeskin failed [7bdc0d05]
+java.util.concurrent.CompletionException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit SQL update)
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:106) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit SQL update)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.execute(DB.java:985) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.executeUpdate(DB.java:1054) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.lambda$executeLargeUpdate$2(JDBC3PreparedStatement.java:129) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:458) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeLargeUpdate(JDBC3PreparedStatement.java:124) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:105) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.SkinRepository.lambda$removeOwnedAndUnequip$0(SkinRepository.java:211) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$transaction$0(Database.java:117) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:104) ~[?:?]
+	... 4 more
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL deletion failure preserves skin
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: concurrent equipment rejected
+> 
+  
+[22:07:26 ERROR]: [MCCases] Command /equip failed [76898d8d]
+java.util.concurrent.CompletionException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit equipment)
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:106) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit equipment)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.execute(DB.java:985) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.executeUpdate(DB.java:1054) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.lambda$executeLargeUpdate$2(JDBC3PreparedStatement.java:129) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:458) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeLargeUpdate(JDBC3PreparedStatement.java:124) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:105) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.SkinRepository.lambda$equipOwned$0(SkinRepository.java:261) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$transaction$0(Database.java:117) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:104) ~[?:?]
+	... 4 more
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL equipment failure restores slots
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL equipment rollback preserves persistent slot
+> 
+  
+[22:07:26 ERROR]: [MCCases] Command /csadmin giveskin failed [140d6710]
+java.util.concurrent.CompletionException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit insert)
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:106) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[?:?]
+Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_TRIGGER] A RAISE function within a trigger fired, causing the SQL statement to abort (EXPECTED command audit insert)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.execute(DB.java:985) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.core.DB.executeUpdate(DB.java:1054) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.lambda$executeLargeUpdate$2(JDBC3PreparedStatement.java:129) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:458) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeLargeUpdate(JDBC3PreparedStatement.java:124) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:105) ~[sqlite-jdbc-3.49.1.0.jar:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.SkinRepository.insert(SkinRepository.java:194) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.SkinRepository.lambda$insert$0(SkinRepository.java:161) ~[?:?]
+	at MCCases.jar//dev.plattnericus.cases.storage.Database.lambda$run$0(Database.java:104) ~[?:?]
+	... 4 more
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin
+> 
+  
+[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL grant failure preserves collection
+> 
+  
+[22:07:27 INFO]: [MCCases] DevTester opened kilowatt_case -> XM1014 | Irezumi (FT 0.216595, #152) [d4f0ca53]
+> 
+  
+[22:07:35 INFO]: [MCCasesDevChecks] PASS COMMAND: live /cases open and reward completion
+> 
+  
+[22:07:44 INFO]: [MCCasesDevChecks] PASS COMMAND: testcase temporary
+> 
+  
+[22:07:44 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (FT 0.264727, #414) [af305d05]
+> 
+  
+[22:07:53 INFO]: [MCCasesDevChecks] PASS COMMAND: testcase keep
+> 
+  
+[22:07:53 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id
+> 
+  
+[22:07:53 INFO]: [MCCasesDevChecks] PASS ALL 155 COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references.
+> 
+  
+[22:07:53 INFO]: DevTester issued server command: /mccasesdevcheck DevTester full
+> 
+  
+[22:07:54 INFO]: [MCCasesDevChecks] PASS INVENTORY INPUT: hotbar selection allowed in both sneak states and over targets, no wheel paging, distance/cancellation cleanup and inspect held-slot transitions.
+> 
+  
+[22:07:55 INFO]: [MCCases] DevTester opened kilowatt_case -> Tec-9 | Slag (FT 0.250961, #39) [90c7cbd9]
+> 
+  
+[22:07:55 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (FT 0.246054, #896) [602cec3d]
+> 
+  
+[22:08:03 INFO]: DevTester issued server command: /mccasesdevcheck DevTester observer DevObserver
+> 
+  
+
+Remaining live suites:
+
+  
+[22:10:24 INFO]: DevTester issued server command: /mccasesdevcheck DevTester commerce DevObserver
+> 
+  
+[22:10:29 INFO]: [MCCases] DevTester opened kilowatt_case -> SSG 08 | Dezastre (MW 0.083265, #61) [44742458]
+> 
+  
+[22:10:29 INFO]: [MCCases] DevTester opened kilowatt_case -> SSG 08 | Dezastre (BS 0.592119, #277) [887ac4aa]
+> 
+  
+[22:10:29 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (FT 0.246934, #830) [e17f16ec]
+> 
+  
+[22:10:29 INFO]: [MCCases] DevObserver opened kilowatt_case -> Nova | Dark Sigil (BS 0.698563, #497) [33e42e65]
+> 
+  
+[22:10:29 INFO]: [MCCases] DevObserver opened kilowatt_case -> Nova | Dark Sigil (BS 0.536816, #168, StatTrak) [6c8bda23]
+> 
+  
+[22:10:29 INFO]: [MCCases] DevObserver opened kilowatt_case -> MAC-10 | Light Box (FT 0.289413, #368) [061e994b]
+> 
+  
+[22:10:41 INFO]: DevTester issued server command: /mccasesdevcheck DevTester gold
+> 
+  
+[22:10:47 INFO]: [MCCasesDevChecks] PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract.
+> 
+  
+[22:10:47 INFO]: DevTester issued server command: /mccasesdevcheck DevTester tradein-ui
+> 
+  
+[22:10:51 INFO]: [MCCasesDevChecks] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.
+> 
+  
+[22:10:51 INFO]: DevTester issued server command: /mccasesdevcheck DevTester choices
+> 
+  
+[22:10:55 INFO]: [MCCasesDevChecks] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths.
+> 
+  
+[22:10:56 INFO]: DevTester issued server command: /mccasesdevcheck DevTester random-tradeup
+> 
+  
+[22:11:56 INFO]: [MCCasesDevChecks] PASS RANDOM TRADEUP: 32 real ten-input contracts through selection and confirmation; 2 different eligible skins, correct provenance and atomic SQL consumption for every result.
+> 
+  
+[22:11:57 INFO]: DevTester issued server command: /mccasesdevcheck DevTester guide
+> 
+  
+[22:11:58 INFO]: DevTester issued server command: /mccasesdevcheck DevTester nine
+> 
+  
+[22:11:59 INFO]: [MCCasesDevChecks] QUEUE READY 9: nine prepared slots; insufficient and duplicate requests rejected.
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> Nova | Dark Sigil (WW 0.403808, #552, StatTrak) [edea3f91]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (BS 0.965270, #156) [8c41b273]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> M4A4 | Etch Lord (BS 0.633332, #299) [6f8687c1]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> Glock-18 | Block-18 (BS 0.468072, #833, StatTrak) [d46e9825]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> MAC-10 | Light Box (MW 0.141074, #533) [5bdb4a85]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (BS 0.486468, #557) [be03742b]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (BS 0.777944, #779) [3fdd9d02]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> Nova | Dark Sigil (FT 0.210145, #805) [570eeba8]
+> 
+  
+[22:11:59 INFO]: [MCCases] DevTester opened kilowatt_case -> Nova | Dark Sigil (BS 0.573018, #672) [4dc03bf4]
+> 
+  
+[22:12:10 INFO]: [MCCasesDevChecks] PASS QUEUE 9: GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, fixed-size camera-fitted glass wheels; peak 135 item displays; receipt and world-entity cleanup. Inventory restored.
+> 
+  
+[22:12:10 INFO]: DevTester issued server command: /mccasesdevcheck DevTester queue-controls
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (FT 0.169020, #205) [30e4eb8a]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (FT 0.306321, #755) [8553fa00]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> MAC-10 | Light Box (MW 0.094766, #305) [f7d37d0c]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> MAC-10 | Light Box (BS 0.586934, #494) [64af1b77]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> SSG 08 | Dezastre (BS 0.640650, #358) [a3fbea2f]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> SSG 08 | Dezastre (BS 0.843088, #284) [0c924185]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (FT 0.196111, #181) [8c3e8b6a]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (BS 0.829950, #979) [dddab7f3]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> Tec-9 | Slag (MW 0.123591, #952) [2f0e9676]
+> 
+  
+[22:12:11 INFO]: [MCCasesDevChecks] PASS QUEUE CONTROLS: real GUI quantity 100, invalid numeric commands, cancel releases 91 reservations, teleport preserves 91 signed pairs and finalizes nine prepared rewards. Inventory restored.
+> 
+  
+[22:12:11 INFO]: DevTester issued server command: /mccasesdevcheck DevTester spam
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (FT 0.362497, #535) [031729ce]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> MAC-10 | Light Box (WW 0.383828, #234, StatTrak) [8b1aaf34]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> Glock-18 | Block-18 (BS 0.866044, #710, StatTrak) [c77d069a]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> M4A4 | Etch Lord (BS 0.631651, #488) [820d3fdb]
+> 
+  
+[22:12:11 INFO]: [MCCases] DevTester opened kilowatt_case -> Tec-9 | Slag (BS 0.754345, #992) [791d1f8b]
+> 
+  
+[22:12:12 INFO]: [MCCases] DevTester opened kilowatt_case -> M4A4 | Etch Lord (BS 0.795555, #761, StatTrak) [7eb7cec8]
+> 
+  
+[22:12:12 INFO]: [MCCases] DevTester opened kilowatt_case -> XM1014 | Irezumi (WW 0.384132, #394) [a9844fc2]
+> 
+  
+[22:12:12 INFO]: [MCCases] DevTester opened kilowatt_case -> Dual Berettas | Hideout (FT 0.150492, #440, StatTrak) [7253a060]
+> 
+  
+[22:12:12 INFO]: [MCCases] DevTester opened kilowatt_case -> Sawed-Off | Analog Input (BS 0.672396, #539) [380b3fa3]
+> 
+  
+[22:12:23 INFO]: [MCCasesDevChecks] PASS SPAM: single launch closes menu; repeated signed-item clicks add 1..9 sessions, same-tick duplicates ignored, excess clicks consume nothing, nine rewards and exactly nine signed pairs.
+> 
+Final GUI verification:
+
+  
+[22:19:38 INFO]: DevTester issued server command: /mccasesdevcheck DevTester commerce DevObserver
+> 
+  
+[22:19:43 INFO]: [MCCases] DevTester opened kilowatt_case -> Nova | Dark Sigil (BS 0.890818, #280) [95228da2]
+> 
+  
+[22:19:43 INFO]: [MCCases] DevTester opened kilowatt_case -> Five-SeveN | Hybrid (FT 0.150519, #765) [907a1757]
+> 
+  
+[22:19:43 INFO]: [MCCases] DevTester opened kilowatt_case -> UMP-45 | Motorized (BS 0.650601, #30) [24c5c4b8]
+> 
+  
+[22:19:43 INFO]: [MCCases] DevObserver opened kilowatt_case -> Tec-9 | Slag (WW 0.439057, #959) [3fb29f77]
+> 
+  
+[22:19:43 INFO]: [MCCases] DevObserver opened kilowatt_case -> Dual Berettas | Hideout (WW 0.381881, #352) [4d8cdf88]
+> 
+  
+[22:19:43 INFO]: [MCCases] DevObserver opened kilowatt_case -> M4A4 | Etch Lord (BS 0.916802, #457) [a01795ab]
+> 
+  
+[22:19:55 INFO]: DevTester issued server command: /mccasesdevcheck DevTester tradein-ui
+> 
+  
+[22:19:59 INFO]: [MCCasesDevChecks] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.
+> 
+  
+[22:19:59 INFO]: DevTester issued server command: /mccasesdevcheck DevTester choices
+> 
+  
+[22:20:03 INFO]: [MCCasesDevChecks] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths.
+> 
+  
+[22:20:03 INFO]: DevTester issued server command: /mccasesdevcheck DevTester guide
+> 

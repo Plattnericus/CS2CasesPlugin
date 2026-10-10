@@ -15,6 +15,26 @@ import java.util.List;
 /** Shared icon builders so every menu looks the same. */
 public final class GuiItems {
 
+    /** Familiar Vanilla symbols make sort choices distinguishable before hovering. */
+    public static Material sortIcon(String key) {
+        return switch (key) {
+            case "RARITY" -> Material.AMETHYST_SHARD;
+            case "FLOAT", "FLOAT_ASC" -> Material.WATER_BUCKET;
+            case "FLOAT_DESC" -> Material.LAVA_BUCKET;
+            case "NAME" -> Material.NAME_TAG;
+            case "WEAR" -> Material.DIAMOND_CHESTPLATE;
+            case "PATTERN" -> Material.PAINTING;
+            case "NEWEST" -> Material.CLOCK;
+            case "OLDEST" -> Material.COMPASS;
+            case "PRICE_ASC" -> Material.IRON_NUGGET;
+            case "PRICE_DESC" -> Material.GOLD_NUGGET;
+            case "VALUE" -> Material.EMERALD;
+            case "COMMUNITY" -> Material.PLAYER_HEAD;
+            case "OWNED" -> Material.CHEST;
+            default -> Material.PAPER;
+        };
+    }
+
     /** Fixed navigation positions in 6-row menus. */
     public static final int SLOT_BACK = 45;
     public static final int SLOT_SORT = 47;

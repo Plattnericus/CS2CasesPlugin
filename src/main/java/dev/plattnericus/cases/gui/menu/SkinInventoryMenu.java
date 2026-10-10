@@ -136,11 +136,9 @@ public final class SkinInventoryMenu extends Menu {
         });
         set(GuiItems.SLOT_SORT, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "gui.skins.sort",
                 Text.unparsed("sort", ctx.messages(viewer).raw("gui.skins.sorts." + state.sort.name().toLowerCase(Locale.ROOT)))), c -> {
-            MenuStates.Sort[] sorts = MenuStates.Sort.values();
-            int dir = c.isRightClick() ? -1 : 1;
-            state.sort = sorts[Math.floorMod(state.sort.ordinal() + dir, sorts.length)];
-            playClick();
-            render();
+            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", List.of(MenuStates.Sort.values()), state.sort,
+                    value -> ctx.messages(viewer).raw("gui.skins.sorts." + value.name().toLowerCase(Locale.ROOT)),
+                    value -> { state.sort = value; state.page = 0; open(); }, this::open, () -> { }).icons(value -> GuiItems.sortIcon(value.name())).open();
         });
         set(GuiItems.SLOT_PREV, GuiItems.previous(ctx.messages(viewer), state.page, pages), c -> {
             if (state.page > 0) {

@@ -104,12 +104,12 @@ public final class OpeningChecks {
                 require(Math.abs(cell.up()) + .575 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
             }
             for (int i = 0; i < count; i++) {
-                var compact = cells.get(i);
                 var large = OpeningLayout.cell(i, count, 4.54, 1.15, distance, 3);
-                require(Math.abs(large.scale() - compact.scale() * 3) < 1e-9
-                        && Math.abs(large.right() - compact.right() * 3) < 1e-9
-                        && Math.abs(large.up() - compact.up() * 3) < 1e-9,
-                        "whole-wheel enlargement lost when the grid changed: " + count);
+                require(Math.abs(large.scale() - OpeningLayout.cell(0, 9, 4.54, 1.15, distance, 3).scale()) < 1e-9,
+                        "wheel changed size when the grid changed: " + count);
+                require(Math.abs(large.right()) + 2.27 * large.scale() < distance * .78
+                        && Math.abs(large.up()) + .575 * large.scale() < distance * .52,
+                        "complete grid left the camera bounds: " + count);
                 for (int j = 0; j < i; j++) {
                     var other = OpeningLayout.cell(j, count, 4.54, 1.15, distance, 3);
                     require(Math.abs(large.right() - other.right()) > 4.54 * large.scale()

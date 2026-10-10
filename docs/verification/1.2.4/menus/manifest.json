@@ -1,0 +1,62 @@
+[
+  {
+    "file": "cases-menu.png",
+    "description": "Original pumpkin branding and simplified help",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "case-sorting.png",
+    "description": "Six direct case sort choices",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "case-preview.png",
+    "description": "Single opening and one batch start, default nine",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "batch-quantity.png",
+    "description": "Direct quantities, with nine selected",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "inventory-menu.png",
+    "description": "Original deer branding and collection",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "inventory-sorting.png",
+    "description": "Seven direct collection sort choices",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "market-sorting.png",
+    "description": "Direct marketplace sort choices",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "tradeup-selection.png",
+    "description": "Original prosse branding and auto selection",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "tradeup-sorting.png",
+    "description": "Direct trade-up sort choices",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "tradeup-selected.png",
+    "description": "Ten compatible skins selected, review before confirmation",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "tradeup-rewards.png",
+    "description": "Every eligible output in the selected case pool",
+    "client": "Vanilla 26.3"
+  },
+  {
+    "file": "tradeup-odds.png",
+    "description": "Reward odds tooltip",
+    "client": "Vanilla 26.3"
+  }
+]

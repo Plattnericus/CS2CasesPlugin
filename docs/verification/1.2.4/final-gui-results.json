@@ -1,0 +1,32 @@
+[
+  {
+    "command": "mccasesdevcheck DevTester commerce DevObserver",
+    "seconds": 16.64,
+    "results": [
+      "[22:19:54] [Render thread/INFO]: [System] [CHAT] PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester tradein-ui",
+    "seconds": 3.91,
+    "results": [
+      "[22:19:59 INFO]: [MCCasesDevChecks] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.",
+      "[22:19:59] [Render thread/INFO]: [System] [CHAT] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester choices",
+    "seconds": 4.22,
+    "results": [
+      "[22:20:03 INFO]: [MCCasesDevChecks] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths.",
+      "[22:20:03] [Render thread/INFO]: [System] [CHAT] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester guide",
+    "seconds": 1.27,
+    "results": [
+      "[22:20:05] [Render thread/INFO]: [System] [CHAT] PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection."
+    ]
+  }
+]

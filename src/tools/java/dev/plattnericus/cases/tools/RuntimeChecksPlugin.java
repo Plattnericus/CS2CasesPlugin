@@ -34,6 +34,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     RuntimeUiChecks.spam(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("tradein-ui")) {
                     RuntimeUiChecks.tradeIn(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("choices")) {
+                    RuntimeUiChecks.choices(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("queue-controls")) {
                     queueControls(sender, player, ctx);
                 } else if (args.length > 1 && args[1].equalsIgnoreCase("hundred")) {
@@ -44,6 +46,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     VisualRuntimeChecks.frame(sender, player, ctx, args);
                 } else if (args.length == 2 && args[1].equals("gold")) {
                     CommerceRuntimeChecks.gold(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("random-tradeup")) {
+                    CommerceRuntimeChecks.randomTradeUps(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("recovery")) {
                     CommerceRuntimeChecks.queueRecovery(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("recovery-nine")) {
@@ -706,9 +710,10 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
             @Override public void run() {
                 try {
                     require(player.isOnline() && elapsed++ < 300, "queue controls timed out");
-                    if (step < 5) { CaseGuideRuntimeChecks.click(player, 47); step++; return; }
-                    if (step == 5) {
-                        CaseGuideRuntimeChecks.click(player, 52); step++;
+                    if (step == 0) { CaseGuideRuntimeChecks.click(player, 47); step++; return; }
+                    if (step == 1) { CaseGuideRuntimeChecks.click(player, 15); step++; return; }
+                    if (step == 2) {
+                        CaseGuideRuntimeChecks.click(player, 51); step++;
                         require(ctx.openings().activeCount(player) == 9 && ctx.openings().queuedCount(player) == 91, "GUI quantity 100 not queued");
                         for (String input : java.util.List.of("0", "-1", "1001", "99999999999999999", "bad")) Bukkit.dispatchCommand(player, "cases open " + def.id() + " " + input);
                         require(ctx.openings().queuedCount(player) == 91, "invalid command mutated queue");
@@ -844,7 +849,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                                 if (error != null) report(new IllegalStateException("nine-case durability failed", error));
                                 else {
                                     String result = "PASS QUEUE " + amount + ": GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, "
-                                            + ctx.settings().opening().world().sceneScale() + "x glass wheels; peak " + peakItems + " item displays; receipt and world-entity cleanup. Inventory restored.";
+                                            + "fixed-size camera-fitted glass wheels; peak " + peakItems + " item displays; receipt and world-entity cleanup. Inventory restored.";
                                     sender.sendMessage(result); getLogger().info(result);
                                 }
                             }));

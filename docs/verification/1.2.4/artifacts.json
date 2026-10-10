@@ -1,0 +1,19 @@
+{
+  "unchanged_asset_files": 9100,
+  "production_classes_matching_build": 253,
+  "crc_valid": true,
+  "integration_classes_in_production": false,
+  "embedded_inputs_exact": true,
+  "artifacts": [
+    {
+      "file": "MCCases-1.2.4.jar",
+      "bytes": 25847627,
+      "sha256": "6de42fe95f0ba8ad5460875ad5247d08963a98166b575fc9eecae32fa412b07b"
+    },
+    {
+      "file": "MCCases-ResourcePack-Fusion-HD-1.2.4.zip",
+      "bytes": 15725084,
+      "sha256": "436042b78797560d34e6680e13219dc1a8ced8791ef3d35568b71c6155954ab5"
+    }
+  ]
+}

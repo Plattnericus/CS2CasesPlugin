@@ -237,7 +237,8 @@ public final class CommerceService implements Listener {
         for (UUID id : List.of(trade.first(), trade.second())) {
             Player p = Bukkit.getPlayer(id);
             if (p != null && (p.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeMenu menu && menu.belongsTo(trade)
-                    || p.getOpenInventory().getTopInventory().getHolder(false) instanceof SkinPickerMenu picker && picker.belongsTo(trade))) p.closeInventory();
+                    || p.getOpenInventory().getTopInventory().getHolder(false) instanceof SkinPickerMenu picker && picker.belongsTo(trade)
+                    || p.getOpenInventory().getTopInventory().getHolder(false) instanceof dev.plattnericus.cases.gui.ChoiceMenu<?> choices && choices.belongsTo(trade))) p.closeInventory();
         }
     }
     private void refreshTrade(TradeSession trade) {

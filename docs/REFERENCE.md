@@ -4,12 +4,12 @@
 
 Updated: October 10, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2.3 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.2.4 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.3** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.4** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](images/skins.png)
 
@@ -48,7 +48,7 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.2.3.jar](../release/MCCases-1.2.3.jar) into `plugins/`.
+2. Copy [MCCases-1.2.4.jar](../release/MCCases-1.2.4.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
@@ -144,8 +144,8 @@ Requests expire after 60 seconds by default.
 
 The 54-slot main menu shows your own offer on the left and your partner's offer on the right,
 with actual player heads and confirmation status. **Open full collection** opens a separate
-54-slot browser with 36 skin entries per page. Search privately through chat, cycle weapon-category
-and rarity filters, or sort by rarity, name, float and newest. Right-click the search button to clear it.
+54-slot browser with 36 skin entries per page. Search privately through chat, choose weapon-category
+and rarity filters directly, or pick a sort order: rarity, name, float or newest. Right-click the search button to clear it.
 
 Click a skin to add or remove it. Your selected skins show green pack sprites, glint and a **✓**;
 selection survives paging, filtering, search and navigation back to the main offer. Reserved and listed
@@ -224,8 +224,12 @@ exactly one signed case and matching key. **Open 9 cases together** in the case 
 starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
 `/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-Up to nine world roulettes run simultaneously in centered rows. Version 1.2.1 scales the entire wheel and grid spacing by 3× compared with the previous layout at the same distance/count. Step back for an overview; `opening.world.scene-scale: 1.0` restores the compact view. Rows and scale adjust whenever
-a reel appears or disappears, including incomplete rows and scenes pulled closer by a wall.
+Up to nine world roulettes run simultaneously in centered rows. Version 1.2.4 sizes
+every wheel against the complete 3×3 grid, so one through nine wheels use the same
+scale at a given distance and fit the tested 70° / 4:3 camera bounds. Glass, icons,
+text and click targets share this scale. `opening.world.scene-scale` is an upper
+size limit; camera fitting takes priority. Incomplete rows remain centered when a
+reel appears or disappears. The default moving window contains five icons.
 The launcher closes after a valid request. Right-clicking more case items while a world opening
 is active adds reels up to the nine-slot limit; explicit quantity commands support larger queues.
 The default global preparation limit is 64. Repeated clicks reserve cases and shared keys, so
@@ -263,8 +267,11 @@ is uniform in that case's target tier. Average input float is mapped into the ou
 Pattern and wear seeds are server-generated. Inputs and the result exchange in one SQL transaction,
 with a dedicated contract UUID. A final yes/no confirmation permanently consumes the selected skins.
 
-Choose a weapon directly, filter by rarity and StatTrak, and sort by newest, name, rarity or float
-in either direction. The first selected input limits candidates to compatible skins. Selection
+Choose a weapon, rarity, StatTrak status or sort order from a direct choice list.
+**Possible rewards** displays all output skins and exact probabilities based on the currently
+selected inputs. Previewing does not consume inputs or advance the random generator. Every
+confirmation draws independently; repeats remain possible, and single-output pools are
+deterministic. Sort by newest, name, rarity or float in either direction. The first selected input limits candidates to compatible skins. Selection
 survives sorting, filtering and paging. Automatic filling follows the current filters and sort
 across every page, excluding favorites. Clear selection and reset filters are separate controls.
 Results show **Source: TRADE IN** in both collection views while retaining their source case for
@@ -419,7 +426,7 @@ Default files are stored in `plugins/MCCases/`. Values below refer to the bundle
 | `opening.duration-ticks` | `120` | Roulette movement duration; 20 ticks equal one second |
 | `opening.easing` | `cinematic` | Deceleration curve |
 | `opening.max-active-per-player` | `9` | Sessions per player, capped at nine; centered simultaneous world roulettes |
-| `opening.world.scene-scale` | `3.0` | Whole-wheel scale, including glass, icons, text and hitboxes; accepted range 0.25–6 |
+| `opening.world.scene-scale` | `3.0` | Upper limit for the whole wheel; fixed nine-grid camera fitting may reduce it; range 0.25–6 |
 | `opening.max-active-global` | `64` | Global animation capacity |
 | `trade-in.broadcast-gold` | `true` | Gold contract broadcasts |
 | `trade-in.broadcast-admin` | `false` | Allow administrator-input broadcasts explicitly |
@@ -490,7 +497,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip).
+[release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip).
 
 ### Automatic distribution
 

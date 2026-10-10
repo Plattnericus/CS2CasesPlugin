@@ -6,11 +6,11 @@ A server-side Paper plugin with a virtual skin collection, public opening animat
 individual inspect motions and an economy built from Minecraft items. Inspired by
 Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.3** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
+**1.2.4** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.3.jar) ·
-[Download Fusion HD pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) ·
-[Checksums](release/SHA256SUMS-1.2.3) · [Full reference](docs/REFERENCE.md)
+[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.4.jar) ·
+[Download Fusion HD pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) ·
+[Checksums](release/SHA256SUMS-1.2.4) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
 > MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
@@ -26,7 +26,7 @@ Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 | Feature | Behavior |
 | --- | --- |
 | Catalog | 22 cases and 815 skins for 35 weapons, 20 knives and eight glove types |
-| Openings | Up to nine public wheels at once; glass backgrounds, a centered grid and a whole-wheel scale of 3× the previous size; larger requests are queued |
+| Openings | Up to nine public wheels at once; fixed size, glass backgrounds and a centered grid that fits the opener’s view; larger requests are queued |
 | Collection | Private 3D gallery or chest menu, favorites, categories, search, filters and sorting |
 | Inspects | 252 individual variants, articulated models, both hands and separate owner/observer views |
 | Direct trading | Two offers, shared reservations and confirmation by both players; source reads “Knife traded (Case / TRADE IN)” |
@@ -43,10 +43,10 @@ collection/inspect objects; they do not replace worn armor.
 ## Quick start
 
 1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
-2. Copy [MCCases-1.2.3.jar](release/MCCases-1.2.3.jar) into `plugins/`. Install only one production MCCases JAR.
+2. Copy [MCCases-1.2.4.jar](release/MCCases-1.2.4.jar) into `plugins/`. Install only one production MCCases JAR.
 3. Start the server. Defaults appear in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
-5. Enable the matching [resource pack](release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
+5. Enable the matching [resource pack](release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
 Give a connected player their first nine signed pairs:
 
@@ -59,10 +59,10 @@ The player opens `/cases`, selects the case and chooses **Open 9 cases together*
 Alternatively, use `/cases open kilowatt_case 9`. Each opening consumes one signed
 case and its matching key. All nine world animations run concurrently.
 
-The whole wheel—including glass, markers, text, icons and click targets—is scaled
-**3×** at the same distance and grid count. The enlarged grid occupies more world
-space: step back to see all nine wheels, or look around to inspect them individually.
-`opening.world.scene-scale: 1.0` restores the earlier compact view.
+Each wheel keeps the same size from one to nine openings. The complete 3×3 grid,
+including its glass frames, fits the opener’s view at the tested 70° field of view.
+The layout centers incomplete rows and uses five visible skin icons per wheel.
+`opening.world.scene-scale` sets an upper size limit; camera fitting may reduce it.
 
 No additional plugins are required. Without the pack, collection browsing and
 map/block previews still work; textured skin sprites require it.
@@ -135,7 +135,11 @@ every reel entry, caches icons and shares a single audible tick track across the
 | Trade-in | `/tradein` or `/tradeup` | Review and confirm separately; inputs are permanently consumed |
 
 Trade-in inputs need compatible rarity, the same StatTrak status and a valid source
-case. Sorting, filters and selections survive navigation; auto-fill excludes favorites.
+case. Sorting and key filters open direct choice lists, with the current choice marked.
+Selections survive navigation; **Auto select skins** excludes favorites.
+**Possible rewards** shows every eligible output and its chance before confirmation.
+Each confirmed contract makes a fresh random draw, weighted by its input cases.
+Repeated results are possible, and a pool with only one eligible skin always returns it.
 Outputs show **Source: TRADE IN**. Directly traded knives additionally show
 **Knife traded (original case)** or **Knife traded (TRADE IN)** without losing admin provenance.
 
@@ -182,7 +186,7 @@ See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 ## Resource pack
 
-The JAR and [Fusion HD ZIP](release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) are a matched pair.
+The JAR and [Fusion HD ZIP](release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) are a matched pair.
 The JAR embeds exactly this pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
 Every build uses the 815 skin sprites and 1,377 inspect layers from your original Fusion HD
@@ -248,7 +252,7 @@ shader files. Custom shader packs that replace the same programs need a manual m
 | `language: en`, `client-language: false` | English for every player, regardless of client locale |
 | `skin-inventory-item.enabled: false` | No permanent inventory shortcut |
 | `opening.max-active-per-player: 9` | Up to nine prepared openings per player |
-| `opening.world.scene-scale: 3.0` | Triple the whole wheel and its grid spacing |
+| `opening.world.scene-scale: 3.0` | Upper size limit; the whole nine-wheel grid stays camera-fitted |
 
 Existing settings survive updates; missing defaults are merged. Set the English
 language options above in an older configuration if it previously selected another
@@ -267,14 +271,16 @@ shows those chances.
 3. Replace the production JAR and update the matching resource pack.
 4. Start the server, check `/csadmin info` and compare existing settings.
 
-**1.2.3** makes Fusion HD the mandatory build/export path and preserves the server
-font/texture overlay. It also includes the rebuilt pack, corrected ring knives, direct-trade source labels,
-3× glass wheels, English documentation and command error feedback. The database
-upgrades automatically to schema 4 and backfills recorded earlier direct trades.
-Unchanged stock inspect profiles upgrade; custom timelines remain intact.
-Compare custom Karambit/Talon timelines or model scales with the new ring pivots.
-Downgrading to schema 3 requires the complete pre-upgrade backup.
-Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.3).
+**1.2.4** fits all nine glass wheels into the opener’s view while keeping every wheel
+at a constant size. Case batches default to nine, with a direct quantity selector.
+Sorting and key filters use explicit choice menus, and trade-ups show exact reward
+odds using the same random draw as confirmation. The original artwork and Vanilla
+held-item models from 1.2.3 remain unchanged. Existing limits and custom settings
+remain in place; set `opening.max-active-per-player: 9` and `visible-items: 5` to use
+the default layout. New language keys merge automatically. Back up and replace
+an unchanged `messages_en.yml` with the bundled default to refresh older button
+wording; edited translations remain yours. The database remains at schema 4.
+Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.4).
 
 ## Legal information
 
@@ -305,13 +311,15 @@ Use JDK 25 and the included Gradle wrapper:
 bash gradlew build
 ```
 
-This creates `build/libs/MCCases-1.2.3.jar` and
-`build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.3.zip`, running `verifyFeatures` and
+This creates `build/libs/MCCases-1.2.4.jar` and
+`build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.4.zip`, running `verifyFeatures` and
 `verifyPack` plus `verifyFusionPack`. Copy verified artifacts to `release/` and update
 their checksums.
 
-The [1.2.3 Fusion verification report](docs/RELEASE-1.2.3-VERIFICATION.md) documents
-asset preservation, resource references, server export and actual client rendering.
+The [1.2.4 verification report](docs/RELEASE-1.2.4-VERIFICATION.md) documents
+random contracts, direct choice menus, fitted wheels and actual client rendering.
+[1.2.3 artwork and animation evidence](docs/RELEASE-1.2.3-VERIFICATION.md) records
+all held models and animations retained byte-for-byte in this release.
 The [1.2.1 report](docs/RELEASE-1.2.1-VERIFICATION.md) records the earlier 154 command
 checks, ten live suites and inspect/wheel captures. The
 [earlier 1.2.0 command report](docs/COMMAND-VERIFICATION-2026-10-10.md) records 135 checks.

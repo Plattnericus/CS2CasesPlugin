@@ -80,13 +80,17 @@ public final class CasesMenu extends Menu {
                 Text.unparsed("tiers", ctx.catalog().raritiesOrdered().stream().map(r -> java.math.BigDecimal.valueOf(guide.tierPoints(r.id())).stripTrailingZeros().toPlainString()).collect(java.util.stream.Collectors.joining(" / "))),
                 Text.unparsed("threshold", guide.favoriteThreshold())));
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "case-guide.sort", Text.component("value", ctx.messages(viewer).item("case-guide.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
-            sort = Sort.values()[(sort.ordinal() + (c.isRightClick() ? Sort.values().length - 1 : 1)) % Sort.values().length]; page = 0; playClick(); render();
+            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", List.of(Sort.values()), sort,
+                    value -> ctx.messages(viewer).raw("case-guide.sorts." + value.name().toLowerCase(java.util.Locale.ROOT)),
+                    value -> { sort = value; page = 0; open(); }, this::open, () -> { }).icons(value -> GuiItems.sortIcon(value.name())).open();
         });
         String knifeName = knife.equals("all") || knife.equals("favorites") ? ctx.messages(viewer).raw("case-guide.knives." + knife) : ctx.catalog().weapon(knife) == null ? knife : ctx.catalog().weapon(knife).name();
         set(2, GuiItems.icon(ctx.messages(viewer), Material.IRON_SWORD, "case-guide.knife", Text.unparsed("value", knifeName)), c -> {
             List<String> choices = new ArrayList<>(List.of("all", "favorites"));
             ctx.catalog().weapons().stream().filter(dev.plattnericus.cases.catalog.WeaponType::isKnife).sorted(Comparator.comparing(dev.plattnericus.cases.catalog.WeaponType::name)).forEach(w -> choices.add(w.id()));
-            int index = Math.max(0, choices.indexOf(knife)); knife = choices.get((index + (c.isRightClick() ? choices.size() - 1 : 1)) % choices.size()); page = 0; playClick(); render();
+            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", choices, knife,
+                    value -> value.equals("all") || value.equals("favorites") ? ctx.messages(viewer).raw("case-guide.knives." + value) : ctx.catalog().weapon(value).name(),
+                    value -> { knife = value; page = 0; open(); }, this::open, () -> { }).open();
         });
         String currency = ctx.shop().currency().name();
         set(6, GuiItems.icon(ctx.messages(viewer), Material.DIAMOND, "case-guide.budget", Text.unparsed("value", budget == Long.MAX_VALUE ? ctx.messages(viewer).raw("case-guide.unlimited") : budget), Text.unparsed("currency", currency)), c -> {

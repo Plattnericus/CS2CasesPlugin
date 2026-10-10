@@ -506,3 +506,16 @@ skin-source:
   traded: "Traded (<source>)"
   knife-traded: "Knife traded (<source>)"
   trade-in: "TRADE IN"
+
+# Direct menu choices and transparent trade-up rewards.
+menus:
+  sort-title: "Choose sorting"
+  filter-title: "Choose a filter"
+  quantity-title: "Choose batch size"
+  choose: ["<yellow>Click to select."]
+  selected: ["<green>Currently selected", "<yellow>Click to keep this choice."]
+  rewards-title: "Possible trade-up rewards"
+  rewards:
+    name: "<gold>Possible rewards: <count>"
+    lore: ["<gray>Select a skin to see the possible outcomes.", "<gray>One eligible skin is drawn at random."]
+  reward-chance: ["<gray>Chance: <white><chance>%", "<gray>Based on the skins selected in your contract.", "<gray>The result is chosen when you confirm."]

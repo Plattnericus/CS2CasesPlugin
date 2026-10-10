@@ -35,7 +35,9 @@ public final class MarketMenu extends Menu {
         long balance = service.inventoryBalance(viewer);
         set(7, GuiItems.icon(ctx.messages(viewer), Material.EMERALD, "market.emerald-wallet", Text.unparsed("balance", balance), Text.unparsed("currency", service.currency())), c -> service.refreshBalance(viewer, this::render));
         set(0, GuiItems.icon(ctx.messages(viewer), Material.EMERALD_BLOCK, "market.claims-button", Text.unparsed("amount", service.payments().pending(viewer.getUniqueId()))), c -> service.payments().claim(viewer));
-        set(8, GuiItems.icon(ctx.messages(viewer), Material.AMETHYST_SHARD, "browser.rarity", Text.unparsed("value", rarity == 0 ? ctx.messages(viewer).raw("browser.all-rarities") : ctx.catalog().raritiesOrdered().get(rarity - 1).name())), c -> { rarity = (rarity + 1) % (ctx.catalog().raritiesOrdered().size() + 1); page = 0; render(); });
+        set(8, GuiItems.icon(ctx.messages(viewer), Material.AMETHYST_SHARD, "browser.rarity", Text.unparsed("value", rarity == 0 ? ctx.messages(viewer).raw("browser.all-rarities") : ctx.catalog().raritiesOrdered().get(rarity - 1).name())), c -> new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", java.util.stream.IntStream.rangeClosed(0, ctx.catalog().raritiesOrdered().size()).boxed().toList(), rarity,
+                value -> value == 0 ? ctx.messages(viewer).raw("browser.all-rarities") : ctx.catalog().raritiesOrdered().get(value - 1).name(),
+                value -> { rarity = value; page = 0; open(); }, this::open, () -> { }).open());
         Comparator<Listing> comparator = switch (sort) {
             case 1 -> Comparator.comparingLong(Listing::price); case 2 -> Comparator.comparingLong(Listing::price).reversed();
             case 3 -> Comparator.comparingDouble(l -> l.skin().floatValue()); case 4 -> Comparator.<Listing>comparingInt(l -> { var def = ctx.catalog().skin(l.skin().skinId()); return def == null ? -1 : def.rarity().order(); }).reversed(); default -> Comparator.comparingLong(Listing::createdAt).reversed();
@@ -55,11 +57,14 @@ public final class MarketMenu extends Menu {
             set(GuiItems.CONTENT[i], listingIcon(ctx, viewer, listing, true), c -> new ListingMenu(ctx, viewer, listing).open());
         }
         set(45, GuiItems.icon(ctx.messages(viewer), Material.CHEST_MINECART, "gui.cases.to-skins"), c -> ctx.gallery().open(viewer, null));
-        set(47, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "market.sort", Text.unparsed("sort", ctx.messages(viewer).raw("market.sorts." + sort))), c -> { sort = Math.floorMod(sort + (c.isRightClick() ? -1 : 1), 5); page = 0; render(); });
+        set(47, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "market.sort", Text.unparsed("sort", ctx.messages(viewer).raw("market.sorts." + sort))), c ->
+                new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", java.util.stream.IntStream.range(0, 5).boxed().toList(), sort,
+                        value -> ctx.messages(viewer).raw("market.sorts." + value), value -> { sort = value; page = 0; open(); }, this::open, () -> { }).icons(value -> GuiItems.sortIcon(switch (value) { case 0 -> "NEWEST"; case 1 -> "PRICE_ASC"; case 2 -> "PRICE_DESC"; case 3 -> "FLOAT"; default -> "RARITY"; })).open());
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(49, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
         set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
-        set(51, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "market.filter", Text.unparsed("category", ctx.messages(viewer).raw("market.categories." + category))), c -> { category = (category + 1) % (3 + dev.plattnericus.cases.catalog.WeaponCategory.values().length); page = 0; render(); });
+        set(51, GuiItems.icon(ctx.messages(viewer), Material.SPYGLASS, "market.filter", Text.unparsed("category", ctx.messages(viewer).raw("market.categories." + category))), c -> new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", java.util.stream.IntStream.range(0, 3 + dev.plattnericus.cases.catalog.WeaponCategory.values().length).boxed().toList(), category,
+                value -> ctx.messages(viewer).raw("market.categories." + value), value -> { category = value; page = 0; open(); }, this::open, () -> { }).open());
         set(53, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "market.emerald-search", Text.unparsed("query", query)), c -> { if (c.isRightClick()) { query = ""; page = 0; render(); } else ctx.commerce().input().ask(viewer, "input.search", text -> { search(text); page = 0; open(); }, this::open); });
     }
     public static org.bukkit.inventory.ItemStack listingIcon(CasesContext ctx, Player viewer, Listing listing, boolean hint) {

@@ -124,18 +124,20 @@ public final class CasePreviewMenu extends Menu {
             ctx.openings().open(viewer, def, false, false);
             render();
         });
-        set(GuiItems.SLOT_FILTER, GuiItems.icon(ctx.messages(viewer), available >= 9 ? Material.ENDER_CHEST : Material.GRAY_DYE,
-                "gui.preview.open-nine", Text.unparsed("owned", owned), Text.unparsed("keys", keys),
+        int quantity = QUANTITIES[quantityIndex];
+        set(GuiItems.SLOT_FILTER, GuiItems.icon(ctx.messages(viewer), available >= quantity ? Material.ENDER_CHEST : Material.GRAY_DYE,
+                quantityIndex == 0 ? "gui.preview.open-nine" : "gui.preview.queue-start", Text.unparsed("amount", QUANTITIES[quantityIndex]),
+                Text.unparsed("owned", owned), Text.unparsed("keys", keys),
                 Text.unparsed("available", available), Text.unparsed("key", keyName)), c -> {
             playClick();
-            ctx.openings().openNine(viewer, def);
+            ctx.openings().queue(viewer, def, QUANTITIES[quantityIndex]);
             render();
         });
-        int quantity = QUANTITIES[quantityIndex];
         set(47, GuiItems.icon(ctx.messages(viewer), Material.COMPARATOR, "gui.preview.queue-quantity",
-                Text.unparsed("amount", quantity)), c -> { quantityIndex = (quantityIndex + 1) % QUANTITIES.length; playClick(); render(); });
-        set(52, GuiItems.icon(ctx.messages(viewer), available >= quantity ? Material.LIME_DYE : Material.GRAY_DYE,
-                "gui.preview.queue-start", Text.unparsed("amount", quantity)), c -> { playClick(); ctx.openings().queue(viewer, def, quantity); render(); });
+                Text.unparsed("amount", quantity)), c -> new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.quantity-title",
+                java.util.Arrays.stream(QUANTITIES).boxed().toList(), quantity, value -> value + " cases",
+                value -> { for (int i = 0; i < QUANTITIES.length; i++) if (QUANTITIES[i] == value) quantityIndex = i; open(); },
+                this::open, () -> { }).open());
         set(GuiItems.SLOT_EXTRA, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
     }
 

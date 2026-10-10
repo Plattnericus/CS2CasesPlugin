@@ -4,6 +4,7 @@ import dev.plattnericus.cases.catalog.SkinDefinition;
 import dev.plattnericus.cases.config.PluginSettings;
 import dev.plattnericus.cases.core.CasesContext;
 import dev.plattnericus.cases.gui.MenuStates;
+import dev.plattnericus.cases.gui.GuiItems;
 import dev.plattnericus.cases.gui.SkinQuery;
 import dev.plattnericus.cases.gui.menu.FilterMenu;
 import dev.plattnericus.cases.gui.menu.SkinInspectMenu;
@@ -518,9 +519,13 @@ public final class SkinGallery implements Listener {
 
     private void cycleSort(Player player) {
         MenuStates.State s = ctx.menuStates().get(player.getUniqueId());
-        MenuStates.Sort[] all = MenuStates.Sort.values();
-        s.sort = all[(s.sort.ordinal() + 1) % all.length];
-        rebuild(player);
+        View previous = views.get(player.getUniqueId());
+        if (previous == null) return;
+        close(player);
+        Runnable back = () -> { player.closeInventory(); open(player, previous.owner, previous.ownerName, previous.readOnly, s.category); };
+        new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, player, "menus.sort-title", List.of(MenuStates.Sort.values()), s.sort,
+                value -> ctx.messages(player).raw("gui.skins.sorts." + value.name().toLowerCase(Locale.ROOT)),
+                value -> { s.sort = value; s.page = 0; back.run(); }, back, () -> { }).icons(value -> GuiItems.sortIcon(value.name())).open();
     }
 
     /** Rebuilds the contents in exactly the same place. */

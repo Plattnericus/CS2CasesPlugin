@@ -57,17 +57,14 @@ public final class TradeInService implements Listener {
         catch (IllegalArgumentException invalid) { ctx.messages(p).send(p, invalid.getMessage()); return; }
         committing.add(p.getUniqueId());
         UUID owner = p.getUniqueId(); UUID contract = UUID.randomUUID(); var rng = ctx.openings().roller().random();
-        var source = inputs.get(rng.nextInt(inputs.size()));
-        var sources = TradeInRules.sources(catalog, source, target);
-        var sourceCase = sources.get(rng.nextInt(sources.size()));
-        var outputPool = sourceCase.skins(target).stream().filter(def -> !source.statTrak() || def.statTrakEligible()).toList();
-        var def = outputPool.get(rng.nextInt(outputPool.size()));
+        var outcome = TradeInRules.roll(catalog, inputs, target, rng);
+        var def = outcome.skin();
         int pattern = catalog.patterns().seedMin() + rng.nextInt(catalog.patterns().seedMax() - catalog.patterns().seedMin() + 1);
         double fl = TradeInRules.outputFloat(inputs, def); long seed = rng.nextLong();
         boolean admin = inputs.stream().anyMatch(s -> s.origin().admin());
         ctx.render().report(def, pattern).thenCompose(report -> {
             var result = new SkinInstance(UUID.randomUUID(), owner, def.id(), fl, pattern, seed,
-                    inputs.getFirst().statTrak() && def.statTrakEligible(), 0, PatternInfo.of(report), sourceCase.id(),
+                    inputs.getFirst().statTrak() && def.statTrakEligible(), 0, PatternInfo.of(report), outcome.sourceCase(),
                     admin ? SkinInstance.Origin.ADMIN_TRADE_IN : SkinInstance.Origin.TRADE_IN, System.currentTimeMillis(), false, SkinInstance.Status.OWNED);
             return repository.commit(contract, owner, inputs, result);
         }).whenComplete((result, error) -> main(() -> {

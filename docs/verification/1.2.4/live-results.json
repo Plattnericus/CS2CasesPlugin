@@ -1,0 +1,253 @@
+[
+  {
+    "command": "mccasesdevcheck DevTester commands",
+    "seconds": 55.32,
+    "results": [
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /trade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skintrade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /market",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /marketplace",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skinmarket",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /skins",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /inventory",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /knife",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /knives",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /cases",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /tradein",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /tradeup",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /openings",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /inspect",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /csadmin",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases:csadmin",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /mccases:mccases",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: network permission /CSADMIN",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /trade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /trade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /trade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skintrade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skintrade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skintrade",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /market",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /market",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /market",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /marketplace",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /marketplace",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /marketplace",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skinmarket",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skinmarket",
+      "[22:06:58 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skinmarket",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /skins",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /skins",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /skins",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /inventory",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /inventory",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /inventory",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /knife",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /knife",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /knife",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /knives",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /knives",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /knives",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /cases",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /cases",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /cases",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /tradein",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: console /tradein",
+      "[22:07:00 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /tradein",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /tradeup",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /tradeup",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /tradeup",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /openings",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /openings",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /openings",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: registered /inspect",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: console /inspect",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: permission /inspect",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inspect[wrong]",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inspect[hand, extra]",
+      "[22:07:01 INFO]: [MCCasesDevChecks] PASS COMMAND: error /inventory[vanilla, extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /knife[vanilla, extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /tradein[extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /tradeup[extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /openings[extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, 0]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, 1001]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, kilowatt_case, nope]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[open, bad_case, 1]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /cases[cancel, extra]",
+      "[22:07:02 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[cancel, extra]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[decline, extra]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[accept, a, b]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[cancel]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[accept]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[decline]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /trade[DefinitelyMissingPlayer]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[balance, extra]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[claims, extra]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[own, extra]",
+      "[22:07:03 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[recover, extra]",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[search]",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[sell, a]",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[sell, missing-id, 1]",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: error /market[unknown]",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: committing trade acceptance feedback",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: synchronous exception guard",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: asynchronous exception guard",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin ",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin info",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin givecase player case",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin givekey player key",
+      "[22:07:04 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin float pattern stattrak",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin list player",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: unsafe skin ID prefix rejected",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin history player",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin odds case",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin equip player id",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin equipslot player id slot",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: skin float range rejection",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin float pattern stattrak",
+      "[22:07:05 INFO]: [MCCasesDevChecks] PASS COMMAND: unsupported StatTrak rejection",
+      "[22:07:06 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect ",
+      "[22:07:06 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect hand",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect view",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: inspect cooldown feedback",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setpattern player id value",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setstattrak player id value",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: invalid slot feedback to invoking admin",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin manage name",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin preview skin",
+      "[22:07:07 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin pattern skin pattern",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin browser skin",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market own",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market search doppler",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market sell",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /market sell 98d1d904 64",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /trade",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /cases",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /openings",
+      "[22:07:08 INFO]: [MCCasesDevChecks] PASS COMMAND: live menu /tradein",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin scan skin",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin scan skin metric count",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop remove",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn villager",
+      "[22:07:09 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin shop spawn mannequin",
+      "[22:07:22 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin exportpack",
+      "[22:07:22 INFO]: [MCCasesDevChecks] PASS COMMAND: Fusion export preserves seven fonts, font definition, pack icon and source manifest",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin reload",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: invalid config reload preserves previous catalog",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin setfloat player id value",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL update failure preserves memory",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL deletion failure preserves skin",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: concurrent equipment rejected",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL equipment failure restores slots",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL equipment rollback preserves persistent slot",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin giveskin player skin",
+      "[22:07:26 INFO]: [MCCasesDevChecks] PASS COMMAND: SQL grant failure preserves collection",
+      "[22:07:35 INFO]: [MCCasesDevChecks] PASS COMMAND: live /cases open and reward completion",
+      "[22:07:44 INFO]: [MCCasesDevChecks] PASS COMMAND: testcase temporary",
+      "[22:07:53 INFO]: [MCCasesDevChecks] PASS COMMAND: testcase keep",
+      "[22:07:53 INFO]: [MCCasesDevChecks] PASS COMMAND: /csadmin removeskin player id",
+      "[22:07:53 INFO]: [MCCasesDevChecks] PASS ALL 155 COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS ALL 155 COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester full",
+    "seconds": 9.74,
+    "results": [
+      "[22:07:54 INFO]: [MCCasesDevChecks] PASS INVENTORY INPUT: hotbar selection allowed in both sneak states and over targets, no wheel paging, distance/cancellation cleanup and inspect held-slot transitions.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS: command-only skin inventory; legacy marked stars/cursor/offhand removed; ordinary stars retained and former reserved slot usable.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.",
+      "[22:07:53] [Render thread/INFO]: [System] [CHAT] PASS: journal mutations and malformed-entry recovery; case/shop/skin/list menus render and protect icons; dealer interaction and damage protection.",
+      "[22:07:54] [Render thread/INFO]: [System] [CHAT] PASS: /inventory allows hotbar scrolling/number keys in both sneak states and over targets without changing pages; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.",
+      "[22:07:55] [Render thread/INFO]: [System] [CHAT] PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.",
+      "[22:07:55] [Render thread/INFO]: [System] [CHAT] PASS: resource-pack item and map previews, asynchronous cancellation, callback and real inventory preserved.",
+      "[22:07:55] [Render thread/INFO]: [System] [CHAT] PASS: SQLite opening transaction/idempotency, PENDING recovery, favorite, concurrent StatTrak increments, equip persistence and offline profile snapshot.",
+      "[22:08:03] [Render thread/INFO]: [System] [CHAT] PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester observer DevObserver",
+    "seconds": 1.38,
+    "results": [
+      "[22:08:04] [Render thread/INFO]: [System] [CHAT] PASS TWO CLIENTS: actual locales en_US / en_US; plugin language en / en; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester commerce DevObserver",
+    "seconds": 16.7,
+    "results": [
+      "[22:10:40] [Render thread/INFO]: [System] [CHAT] PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester gold",
+    "seconds": 6.18,
+    "results": [
+      "[22:10:47 INFO]: [MCCasesDevChecks] PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract.",
+      "[22:10:47] [Render thread/INFO]: [System] [CHAT] PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester tradein-ui",
+    "seconds": 3.93,
+    "results": [
+      "[22:10:51 INFO]: [MCCasesDevChecks] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.",
+      "[22:10:51] [Render thread/INFO]: [System] [CHAT] PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester choices",
+    "seconds": 4.21,
+    "results": [
+      "[22:10:55 INFO]: [MCCasesDevChecks] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths.",
+      "[22:10:55] [Render thread/INFO]: [System] [CHAT] PASS CHOICE MENUS: all inventory/gallery/market/sale sort choices, direct category/rarity filters and safe return paths."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester random-tradeup",
+    "seconds": 60.85,
+    "results": [
+      "[22:11:56 INFO]: [MCCasesDevChecks] PASS RANDOM TRADEUP: 32 real ten-input contracts through selection and confirmation; 2 different eligible skins, correct provenance and atomic SQL consumption for every result.",
+      "[22:11:56] [Render thread/INFO]: [System] [CHAT] PASS RANDOM TRADEUP: 32 real ten-input contracts through selection and confirmation; 2 different eligible skins, correct provenance and atomic SQL consumption for every result."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester guide",
+    "seconds": 1.3,
+    "results": [
+      "[22:11:58] [Render thread/INFO]: [System] [CHAT] PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester nine",
+    "seconds": 11.51,
+    "results": [
+      "[22:12:10 INFO]: [MCCasesDevChecks] PASS QUEUE 9: GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, fixed-size camera-fitted glass wheels; peak 135 item displays; receipt and world-entity cleanup. Inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester queue-controls",
+    "seconds": 0.55,
+    "results": [
+      "[22:12:11 INFO]: [MCCasesDevChecks] PASS QUEUE CONTROLS: real GUI quantity 100, invalid numeric commands, cancel releases 91 reservations, teleport preserves 91 signed pairs and finalizes nine prepared rewards. Inventory restored."
+    ]
+  },
+  {
+    "command": "mccasesdevcheck DevTester spam",
+    "seconds": 12.28,
+    "results": [
+      "[22:12:23 INFO]: [MCCasesDevChecks] PASS SPAM: single launch closes menu; repeated signed-item clicks add 1..9 sessions, same-tick duplicates ignored, excess clicks consume nothing, nine rewards and exactly nine signed pairs."
+    ]
+  }
+]
