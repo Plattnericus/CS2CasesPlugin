@@ -72,6 +72,10 @@ public final class PackExporter {
                     only when every player has this pack loaded; otherwise the items show
                     the missing-model texture.
                     """.formatted(namespace));
+            try (var notice = PackExporter.class.getResourceAsStream("/defaults/LEGAL-NOTICE.txt")) {
+                if (notice == null) throw new IOException("Missing bundled legal notice");
+                text(zip, "LEGAL-NOTICE.txt", new String(notice.readAllBytes(), StandardCharsets.UTF_8));
+            }
             BufferedImage logo = null;
             for (SkinDefinition skin : catalog.skins().stream().sorted(Comparator.comparing(SkinDefinition::id)).toList()) {
                 BufferedImage sprite;
