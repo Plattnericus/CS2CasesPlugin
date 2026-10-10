@@ -33,6 +33,7 @@ public final class KnifeService implements Listener {
 
     private final CasesContext ctx;
     private final KnifeCosmetics cosmetics;
+    private final java.util.Set<UUID> equipping = new java.util.HashSet<>();
 
     public KnifeService(CasesContext ctx, KnifeCosmetics cosmetics) {
         this.ctx = ctx;
@@ -50,40 +51,67 @@ public final class KnifeService implements Listener {
     }
 
     public boolean equip(Player player, SkinInstance instance, EquipSlot slot) {
+        return equip(player, instance, slot, success -> { });
+    }
+
+    /** Completion feedback is emitted only after the equipment transaction has committed. */
+    public boolean equip(Player player, SkinInstance instance, EquipSlot slot, java.util.function.Consumer<Boolean> done) {
         PlayerProfile profile = ctx.profiles().get(player);
         if (profile == null) {
             ctx.messages(player).send(player, "profile.loading");
+            done.accept(false);
             return false;
         }
         SkinDefinition def = ctx.catalog().skin(instance.skinId());
         // ownership check against the authoritative in-memory copy, never against the client
         if (ctx.commerce().locked(instance.id())) {
-            ctx.messages(player).send(player, "commerce.locked"); return false;
+            ctx.messages(player).send(player, "commerce.locked"); done.accept(false); return false;
         }
         if (def == null || profile.get(instance.id()) != instance || instance.status() != SkinInstance.Status.OWNED
                 || !instance.owner().equals(player.getUniqueId())) {
             ctx.messages(player).send(player, "knife.not-owned");
             ctx.sounds().play(player, "gui.error");
+            done.accept(false);
             return false;
         }
         if (!slot.accepts(def) || !slot.enabled(ctx.settings())) {
             ctx.messages(player).send(player, "equip.wrong-slot");
             ctx.sounds().play(player, "gui.error");
+            done.accept(false);
             return false;
+        }
+        if (!ctx.commerce().reserveMutation(instance.id())) { ctx.messages(player).send(player, "commerce.locked"); done.accept(false); return false; }
+        if (!equipping.add(player.getUniqueId())) {
+            ctx.commerce().releaseMutation(instance.id());
+            ctx.messages(player).send(player, "commerce.locked"); done.accept(false); return false;
         }
         ctx.inspect().stop(player);
         // one instance can only sit in one slot
         EquipSlot previous = profile.slotOf(instance.id());
         if (previous != null && previous != slot) {
             profile.setEquipped(previous, null);
-            ctx.repository().setEquipped(player.getUniqueId(), previous.id(), null);
             strip(player, previous);
         }
+        UUID displaced = profile.equipped(slot);
         profile.setEquipped(slot, instance.id());
-        ctx.repository().setEquipped(player.getUniqueId(), slot.id(), instance.id());
         refreshHeld(player);
-        ctx.messages(player).send(player, "equip.equipped." + slot.id(), Text.component("skin", ctx.formatter(player).fullName(def, instance)));
-        ctx.sounds().play(player, "knife.equip");
+        ctx.repository().equipOwned(player.getUniqueId(), slot.id(), instance.id()).whenComplete((count, error) ->
+                dev.plattnericus.cases.command.CommandFeedback.main(ctx, player, "equip", () -> {
+                    ctx.commerce().releaseMutation(instance.id());
+                    equipping.remove(player.getUniqueId());
+                    if (error != null || count != 1) {
+                        // Roll back only the presentation changed by this request.
+                        if (instance.id().equals(profile.equipped(slot))) profile.setEquipped(slot, displaced);
+                        if (previous != null && previous != slot && profile.equipped(previous) == null) profile.setEquipped(previous, instance.id());
+                        refreshHeld(player);
+                        if (error != null) dev.plattnericus.cases.command.CommandFeedback.failure(ctx, player, "equip", error);
+                        else ctx.messages(player).send(player, "command.state-changed");
+                        done.accept(false); return;
+                    }
+                    ctx.messages(player).send(player, "equip.equipped." + slot.id(), Text.component("skin", ctx.formatter(player).fullName(def, instance)));
+                    ctx.sounds().play(player, "knife.equip");
+                    done.accept(true);
+                }));
         return true;
     }
 
@@ -92,6 +120,7 @@ public final class KnifeService implements Listener {
     }
 
     public void unequip(Player player, EquipSlot slot) {
+        if (equipping.contains(player.getUniqueId())) { ctx.messages(player).send(player, "commerce.locked"); return; }
         PlayerProfile profile = ctx.profiles().get(player);
         if (profile == null || profile.equipped(slot) == null) {
             return;

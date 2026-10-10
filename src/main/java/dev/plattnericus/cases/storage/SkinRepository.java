@@ -202,6 +202,20 @@ public final class SkinRepository {
         return update("UPDATE " + skins + " SET status='REMOVED' WHERE instance_id=? AND owner=? AND status='OWNED'", id.toString(), owner.toString());
     }
 
+    /** A confirmed admin removal cannot leave a persistent equipped reference behind. */
+    public CompletableFuture<Integer> removeOwnedAndUnequip(UUID owner, UUID id) {
+        return db.transaction(c -> {
+            int changed;
+            try (var ps = c.prepareStatement("UPDATE " + skins + " SET status='REMOVED' WHERE instance_id=? AND owner=? AND status='OWNED'")) {
+                ps.setString(1, id.toString()); ps.setString(2, owner.toString()); changed = ps.executeUpdate();
+            }
+            if (changed == 1) try (var ps = c.prepareStatement("DELETE FROM " + equipped + " WHERE owner=? AND instance_id=?")) {
+                ps.setString(1, owner.toString()); ps.setString(2, id.toString()); ps.executeUpdate();
+            }
+            return changed;
+        });
+    }
+
     /** Marks pending rows of a player as owned; returns the number of recovered rows. */
     public CompletableFuture<Integer> finalizePending(UUID owner) {
         return update("UPDATE " + skins + " SET status = 'OWNED' WHERE owner = ? AND status = 'PENDING'", owner.toString());
@@ -230,6 +244,23 @@ public final class SkinRepository {
             return update("DELETE FROM " + equipped + " WHERE owner = ? AND slot = ?", owner.toString(), slot);
         }
         return update(db.dialect().upsertEquipped(equipped), owner.toString(), slot, instance.toString());
+    }
+
+    /** Validate ownership and move a single skin between equipment slots atomically. */
+    public CompletableFuture<Integer> equipOwned(UUID owner, String slot, UUID instance) {
+        return db.transaction(c -> {
+            try (var ps = c.prepareStatement("SELECT instance_id FROM " + skins + " WHERE instance_id=? AND owner=? AND status='OWNED'")) {
+                ps.setString(1, instance.toString()); ps.setString(2, owner.toString());
+                try (var rs = ps.executeQuery()) { if (!rs.next()) return 0; }
+            }
+            try (var ps = c.prepareStatement("DELETE FROM " + equipped + " WHERE owner=? AND instance_id=?")) {
+                ps.setString(1, owner.toString()); ps.setString(2, instance.toString()); ps.executeUpdate();
+            }
+            try (var ps = c.prepareStatement(db.dialect().upsertEquipped(equipped))) {
+                ps.setString(1, owner.toString()); ps.setString(2, slot); ps.setString(3, instance.toString()); ps.executeUpdate();
+            }
+            return 1;
+        });
     }
 
     private CompletableFuture<Integer> update(String sql, Object... args) {

@@ -147,7 +147,7 @@ den Boden. SQLite und Minecraft-Spielerdaten sind getrennte Speichersysteme;
 | `/inspect [hand\|view]` | Inspect starten und Perspektive wählen |
 | `/trade [Player]`, `/trade accept`, `/trade decline`, `/trade cancel` | Direktes Trading |
 | `/market`, `/market own`, `/market sell <Skin-ID> <Price>` | Marktplatz |
-| `/market search <Name>`, `/market claims`, `/market recover` | Suche, Auszahlung und Wiederherstellung |
+| `/market search <Name>`, `/market balance`, `/market claims`, `/market recover` | Suche, Guthaben, Auszahlung und Wiederherstellung |
 | `/tradein`, `/tradeup` | Trade-in-Verträge |
 
 | Operator | Zweck |
@@ -163,6 +163,11 @@ den Boden. SQLite und Minecraft-Spielerdaten sind getrennte Speichersysteme;
 | `/csadmin reload` | Konfiguration und Katalog neu laden |
 
 `<Argument>` ist erforderlich, `[Argument]` optional. Klammern nicht mit eingeben.
+Ungültige Argumente und gesperrte Aktionen melden den Grund im Chat. Unerwartete
+Befehlsfehler zeigen eine Referenznummer; die dazugehörigen Details stehen im Serverlog.
+Admin-Änderungen an Skins und Ausrüstung bestätigen den Erfolg nach dem Speichern.
+Instanz-IDs müssen mindestens acht Zeichen lang und eindeutig sein; `/csadmin list <Player>`
+zeigt die kurzen IDs der vorhandenen Skins.
 Die [vollständige Befehls- und Permission-Referenz](docs/REFERENCE.md#commands)
 enthält weitere Admin-, Pattern- und Ausrüstungsbefehle.
 
@@ -264,9 +269,10 @@ Das erzeugt `build/libs/MCCases-1.2.0.jar` und
 kopiert und deren Prüfsummen aktualisiert.
 
 Der [Buildbericht vom 10. Oktober 2026](docs/BUILD-2026-10-10.md) dokumentiert diesen
-Upload. Frühere [Live-Prüfungen für Hotbar und HD-Pack](docs/HOTBAR-HD-VERIFICATION.md)
-und [Multi-Opening/Trade-in](docs/MULTI-OPENING-VERIFICATION.md) sind separat datiert;
-sie sind keine neu ausgeführten Client-Tests dieses Builds.
+Upload. Die [aktuellen Befehls- und Live-Prüfungen](docs/COMMAND-VERIFICATION-2026-10-10.md)
+umfassen 135 Befehlschecks und zwei verbundene Minecraft-Clients. Frühere
+[Hotbar-/HD-Pack-Prüfungen](docs/HOTBAR-HD-VERIFICATION.md) und
+[Multi-Opening-/Trade-in-Prüfungen](docs/MULTI-OPENING-VERIFICATION.md) sind separat datiert.
 
 [Entwicklungsanleitung](docs/DEVELOPMENT.md) · [Vollständige Referenz](docs/REFERENCE.md) ·
 [Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues) · [Projektwebsite](https://plattnericus.dev)

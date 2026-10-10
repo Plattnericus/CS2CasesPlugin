@@ -84,29 +84,32 @@ public final class AdminCommand {
 
         root.then(instanceCommand("removeskin", null, (c, p, inst) -> removeSkin(c.getSource().getSender(), p, inst)));
         root.then(instanceCommand("equip", null, (c, p, inst) -> {
-            ctx.knives().equip(p, inst);
-            return ok(c.getSource().getSender());
+            SkinDefinition def = ctx.catalog().skin(inst.skinId());
+            return equip(c.getSource().getSender(), p, inst, def != null && def.isKnife() ? EquipSlot.KNIFE : EquipSlot.BOW);
         }));
         root.then(instanceCommand("equipslot", Commands.argument("slot", StringArgumentType.word())
                 .suggests(suggest(() -> List.of("knife", "bow", "crossbow"))), (c, p, inst) -> {
             EquipSlot slot = EquipSlot.byId(StringArgumentType.getString(c, "slot"));
             if (slot == null) {
-                ctx.messages(p).send(p, "equip.wrong-slot");
+                ctx.messages(c.getSource().getSender()).send(c.getSource().getSender(), "equip.wrong-slot");
                 return 0;
             }
-            return ctx.knives().equip(p, inst, slot) ? ok(c.getSource().getSender()) : 0;
+            return equip(c.getSource().getSender(), p, inst, slot);
         }));
         root.then(instanceCommand("setfloat", Commands.argument("value", DoubleArgumentType.doubleArg(0, 1)), (c, p, inst) -> {
-            inst.setFloatValue(DoubleArgumentType.getDouble(c, "value"));
-            return saveRoll(c.getSource().getSender(), p, inst, false);
+            var changed = inst.copyWithStatus(inst.status());
+            changed.setFloatValue(DoubleArgumentType.getDouble(c, "value"));
+            return saveRoll(c.getSource().getSender(), p, inst, changed, false);
         }));
         root.then(instanceCommand("setpattern", Commands.argument("value", IntegerArgumentType.integer(0, 99999)), (c, p, inst) -> {
-            inst.setPattern(IntegerArgumentType.getInteger(c, "value"));
-            return saveRoll(c.getSource().getSender(), p, inst, true);
+            var changed = inst.copyWithStatus(inst.status());
+            changed.setPattern(IntegerArgumentType.getInteger(c, "value"));
+            return saveRoll(c.getSource().getSender(), p, inst, changed, true);
         }));
         root.then(instanceCommand("setstattrak", Commands.argument("value", BoolArgumentType.bool()), (c, p, inst) -> {
-            inst.setStatTrak(BoolArgumentType.getBool(c, "value"));
-            return saveRoll(c.getSource().getSender(), p, inst, false);
+            var changed = inst.copyWithStatus(inst.status());
+            changed.setStatTrak(BoolArgumentType.getBool(c, "value"));
+            return saveRoll(c.getSource().getSender(), p, inst, changed, false);
         }));
 
         root.then(Commands.literal("manage").then(Commands.argument("name", StringArgumentType.word())
@@ -166,7 +169,7 @@ public final class AdminCommand {
         root.then(Commands.literal("exportpack").executes(c -> exportPack(c.getSource().getSender())));
         root.then(Commands.literal("info").executes(c -> info(c.getSource().getSender())));
 
-        commands.register(root.build(), "MCCases administration", List.of("mccases"));
+        commands.register((com.mojang.brigadier.tree.LiteralCommandNode<CommandSourceStack>) CommandFeedback.guardTree(ctx, root.build()), "MCCases administration", List.of("mccases"));
     }
 
     // ------------------------------------------------------------------ helpers
@@ -188,10 +191,11 @@ public final class AdminCommand {
                 return 0;
             }
             SkinInstance inst = profile.find(StringArgumentType.getString(c, "id"));
-            if (inst == null || ctx.commerce().locked(inst.id())) {
+            if (inst == null) {
                 ctx.messages().send(c.getSource().getSender(), "admin.instance-unknown");
                 return 0;
             }
+            if (ctx.commerce().locked(inst.id())) { ctx.messages().send(c.getSource().getSender(), "commerce.locked"); return 0; }
             return action.run(c, p, inst);
         };
         if (valueArg == null) {
@@ -323,65 +327,88 @@ public final class AdminCommand {
             ctx.messages().send(sender, "profile.loading");
             return 0;
         }
+        if (!validProperties(sender, skin, fl, Boolean.TRUE.equals(statTrak))) return 0;
         RewardRoller roller = ctx.openings().roller();
         double floatValue = fl != null ? fl : skin.minFloat() + roller.random().nextDouble() * (skin.maxFloat() - skin.minFloat());
         int seed = pattern != null ? pattern : ctx.catalog().patterns().seedMin()
                 + roller.random().nextInt(ctx.catalog().patterns().seedMax() - ctx.catalog().patterns().seedMin() + 1);
         boolean st = statTrak != null ? statTrak && skin.weapon().statTrak() : false;
         long wearSeed = roller.random().nextLong();
-        ctx.render().report(skin, seed).exceptionally(e -> PatternReport.none(null, null)).thenAccept(report ->
-                Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+        CommandFeedback.complete(ctx, sender, "csadmin giveskin", ctx.render().report(skin, seed), report -> {
                     SkinInstance inst = new SkinInstance(UUID.randomUUID(), p.getUniqueId(), skin.id(), floatValue, seed, wearSeed,
                             st, 0, PatternInfo.of(report), "admin", SkinInstance.Origin.ADMIN, System.currentTimeMillis(), false,
                             SkinInstance.Status.OWNED);
-                    ctx.repository().insert(inst).whenComplete((v, error) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
-                        if (error != null) {
-                            ctx.messages().send(sender, "opening.storage-error");
-                            return;
-                        }
+                    CommandFeedback.complete(ctx, sender, "csadmin giveskin", ctx.repository().insert(inst), v -> {
                         ctx.profiles().addLoaded(p.getUniqueId(), inst);
                         ctx.messages().send(sender, "admin.skin-given", Text.component("skin", ctx.formatter(sender).fullName(skin, inst)),
                                 Text.unparsed("player", p.getName()), Text.unparsed("id", inst.shortId()));
-                    }));
-                }));
+                    });
+                });
         return Command.SINGLE_SUCCESS;
     }
 
     private int removeSkin(CommandSender sender, Player p, SkinInstance inst) {
+        if (!ctx.commerce().reserveMutation(inst.id())) { ctx.messages(sender).send(sender, "commerce.locked"); return 0; }
         PlayerProfile profile = ctx.profiles().get(p);
-        dev.plattnericus.cases.profile.EquipSlot slot = profile.slotOf(inst.id());
-        if (slot != null) {
-            ctx.knives().unequip(p, slot);
-        }
-        inst.setStatus(SkinInstance.Status.REMOVED);
-        profile.remove(inst.id());
-        ctx.repository().removeOwned(profile.owner(), inst.id());
-        return ok(sender);
+        ctx.repository().removeOwnedAndUnequip(profile.owner(), inst.id()).whenComplete((count, error) ->
+                CommandFeedback.main(ctx, sender, "csadmin removeskin", () -> {
+                    ctx.commerce().releaseMutation(inst.id());
+                    if (error != null) { CommandFeedback.failure(ctx, sender, "csadmin removeskin", error); return; }
+                    if (count != 1) { ctx.messages(sender).send(sender, "command.state-changed"); return; }
+                    var slot = profile.slotOf(inst.id());
+                    if (slot != null) ctx.knives().unequip(p, slot);
+                    inst.setStatus(SkinInstance.Status.REMOVED);
+                    profile.remove(inst.id());
+                    ok(sender);
+                }));
+        return Command.SINGLE_SUCCESS;
     }
 
     /** Writes forced values; a pattern change re-runs the analysis first. */
-    private int saveRoll(CommandSender sender, Player p, SkinInstance inst, boolean reanalyse) {
-        if (!ctx.commerce().reserveMutation(inst.id())) return 0;
+    private int saveRoll(CommandSender sender, Player p, SkinInstance inst, SkinInstance changed, boolean reanalyse) {
         SkinDefinition skin = ctx.catalog().skin(inst.skinId());
         if (skin == null) {
-            ctx.commerce().releaseMutation(inst.id());
+            ctx.messages(sender).send(sender, "admin.instance-unknown");
             return 0;
         }
+        if (!validProperties(sender, skin, changed.floatValue(), changed.statTrak())) return 0;
+        if (!ctx.commerce().reserveMutation(inst.id())) { ctx.messages(sender).send(sender, "commerce.locked"); return 0; }
         Runnable store = () -> {
-            ctx.repository().updateRoll(inst);
-            ctx.commerce().releaseMutation(inst.id());
-            ctx.knives().refreshHeld(p);
-            ok(sender);
+            ctx.repository().updateRoll(changed).whenComplete((count, error) -> CommandFeedback.main(ctx, sender, "csadmin edit", () -> {
+                ctx.commerce().releaseMutation(inst.id());
+                if (error != null) { CommandFeedback.failure(ctx, sender, "csadmin edit", error); return; }
+                if (count != 1) { ctx.messages(sender).send(sender, "command.state-changed"); return; }
+                inst.setFloatValue(changed.floatValue()); inst.setPattern(changed.pattern());
+                inst.setStatTrak(changed.statTrak()); inst.setPatternInfo(changed.patternInfo());
+                if (p.isOnline()) ctx.knives().refreshHeld(p);
+                ok(sender);
+            }));
         };
         if (!reanalyse) {
             store.run();
             return Command.SINGLE_SUCCESS;
         }
-        ctx.render().report(skin, inst.pattern()).exceptionally(e -> PatternReport.none(null, null))
-                .thenAccept(r -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
-                    inst.setPatternInfo(PatternInfo.of(r));
+        ctx.render().report(skin, changed.pattern()).whenComplete((r, error) -> CommandFeedback.main(ctx, sender, "csadmin setpattern", () -> {
+                    if (error != null) { ctx.commerce().releaseMutation(inst.id()); CommandFeedback.failure(ctx, sender, "csadmin setpattern", error); return; }
+                    changed.setPatternInfo(PatternInfo.of(r));
                     store.run();
                 }));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private boolean validProperties(CommandSender sender, SkinDefinition skin, Double fl, boolean statTrak) {
+        if (fl != null && (!Double.isFinite(fl) || fl < skin.minFloat() || fl > skin.maxFloat())) {
+            ctx.messages(sender).send(sender, "command.float-range", Text.unparsed("min", skin.minFloat()), Text.unparsed("max", skin.maxFloat())); return false;
+        }
+        if (statTrak && !skin.weapon().statTrak()) { ctx.messages(sender).send(sender, "command.stattrak-unavailable"); return false; }
+        return true;
+    }
+
+    private int equip(CommandSender sender, Player player, SkinInstance inst, EquipSlot slot) {
+        ctx.knives().equip(player, inst, slot, success -> {
+            if (success) ok(sender);
+            else if (sender != player) ctx.messages(sender).send(sender, "command.equip-failed");
+        });
         return Command.SINGLE_SUCCESS;
     }
 
@@ -409,9 +436,9 @@ public final class AdminCommand {
         Player p = player(c);
         CommandSender sender = c.getSource().getSender();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM HH:mm").withZone(ZoneId.systemDefault());
-        ctx.repository().history(p.getUniqueId(), 15).whenComplete((rows, e) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+        ctx.repository().history(p.getUniqueId(), 15).whenComplete((rows, e) -> CommandFeedback.main(ctx, sender, "csadmin", () -> {
             if (e != null) {
-                ctx.messages().send(sender, "opening.storage-error");
+                CommandFeedback.failure(ctx, sender, "csadmin history", e);
                 return;
             }
             ctx.messages().send(sender, "admin.history-header", Text.unparsed("player", p.getName()));
@@ -441,8 +468,9 @@ public final class AdminCommand {
             return 0;
         }
         String shown = target.getName() == null ? name : target.getName();
-        ctx.profiles().snapshot(target.getUniqueId()).whenComplete((profile, error) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
-            if (error != null || profile == null || !viewer.isOnline()) {
+        ctx.profiles().snapshot(target.getUniqueId()).whenComplete((profile, error) -> CommandFeedback.main(ctx, viewer, "csadmin manage", () -> {
+            if (error != null) { CommandFeedback.failure(ctx, viewer, "csadmin manage", error); return; }
+            if (profile == null || !viewer.isOnline()) {
                 ctx.messages().send(viewer, "view.unknown", Text.unparsed("player", shown));
                 return;
             }
@@ -504,9 +532,9 @@ public final class AdminCommand {
             ctx.messages().send(sender, "admin.unknown", Text.unparsed("what", ctx.messages(c.getSource().getSender()).raw("admin.labels.skin")));
             return 0;
         }
-        ctx.render().report(skin, seed).whenComplete((r, e) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+        ctx.render().report(skin, seed).whenComplete((r, e) -> CommandFeedback.main(ctx, sender, "csadmin", () -> {
             if (e != null) {
-                ctx.messages().send(sender, "admin.debug.render-failed", Text.unparsed("error", e.getMessage()));
+                CommandFeedback.failure(ctx, sender, "csadmin pattern", e);
                 return;
             }
             ctx.messages().send(sender, "admin.debug.title", Text.unparsed("skin", skin.displayName()), Text.unparsed("seed", seed));
@@ -551,9 +579,9 @@ public final class AdminCommand {
             ctx.messages().send(sender, "admin.unknown", Text.unparsed("what", ctx.messages(c.getSource().getSender()).raw("admin.labels.skin")));
             return 0;
         }
-        PatternScanner.metrics(ctx.render(), skin).whenComplete((list, e) -> Bukkit.getScheduler().runTask(ctx.plugin(), () ->
-                ctx.messages().send(sender, "admin.debug.metrics", Text.unparsed("metrics", list == null || list.isEmpty()
-                        ? ctx.messages(sender).raw("admin.labels.none") : String.join(", ", list)))));
+        CommandFeedback.complete(ctx, sender, "csadmin scan", PatternScanner.metrics(ctx.render(), skin), list ->
+                ctx.messages().send(sender, "admin.debug.metrics", Text.unparsed("metrics", list.isEmpty()
+                        ? ctx.messages(sender).raw("admin.labels.none") : String.join(", ", list))));
         return Command.SINGLE_SUCCESS;
     }
 
@@ -567,9 +595,9 @@ public final class AdminCommand {
         }
         ctx.messages().send(sender, "admin.scan-start", Text.unparsed("skin", skin.displayName()), Text.unparsed("metric", metric));
         PatternScanner.scan(ctx.render(), skin, ctx.catalog().patterns().seedMin(), ctx.catalog().patterns().seedMax(), metric, count)
-                .whenComplete((hits, e) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+                .whenComplete((hits, e) -> CommandFeedback.main(ctx, sender, "csadmin", () -> {
                     if (e != null || hits == null) {
-                        ctx.messages().send(sender, "admin.debug.scan-failed");
+                        CommandFeedback.failure(ctx, sender, "csadmin scan", e != null ? e : new IllegalStateException("Missing scan result"));
                         return;
                     }
                     if (hits.isEmpty()) {
@@ -614,25 +642,26 @@ public final class AdminCommand {
             } catch (java.io.IOException e) {
                 throw new java.util.concurrent.CompletionException(e);
             }
-        }).whenComplete((result, e) -> Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+        }).whenComplete((result, e) -> CommandFeedback.main(ctx, sender, "csadmin", () -> {
             if (e != null) {
                 ctx.plugin().getLogger().log(java.util.logging.Level.WARNING, "Pack export failed", e);
                 ctx.messages().send(sender, "admin.debug.export-failed", Text.unparsed("error", e.getMessage()));
                 return;
             }
-            ctx.messages().send(sender, "admin.export-done", Text.unparsed("skins", result.skins()),
-                    Text.unparsed("file", target.getPath()));
+            if (!result.failures().isEmpty()) {
+                ctx.messages(sender).send(sender, "command.pack-incomplete", Text.unparsed("count", result.failures().size()));
+                result.failures().forEach(f -> ctx.plugin().getLogger().warning("Pack export skipped " + f));
+                return;
+            }
             if (ctx.packDistribution().running()) {
                 try {
                     ctx.packDistribution().reloadFile();
                     ctx.packDistribution().sendAll();
                 } catch (java.io.IOException io) {
-                    ctx.plugin().getLogger().warning("Could not reload the exported pack: " + io.getMessage());
+                    CommandFeedback.failure(ctx, sender, "csadmin exportpack", io); return;
                 }
             }
-            for (String f : result.failures()) {
-                ctx.plugin().getLogger().warning("Pack export skipped " + f);
-            }
+            ctx.messages().send(sender, "admin.export-done", Text.unparsed("skins", result.skins()), Text.unparsed("file", target.getPath()));
         }));
         return Command.SINGLE_SUCCESS;
     }

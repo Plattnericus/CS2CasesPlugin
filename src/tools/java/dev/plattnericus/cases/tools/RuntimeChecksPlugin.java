@@ -24,7 +24,9 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
             if (player == null) { sender.sendMessage("Player is not online."); return true; }
             try {
                 CasesContext ctx = context();
-                if (args.length == 2 && args[1].equals("guide")) {
+                if (args.length == 2 && args[1].equals("commands")) {
+                    CommandRuntimeChecks.run(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("guide")) {
                     CaseGuideRuntimeChecks.run(sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("nine")) {
                     queueAudit(sender, player, ctx, 9);

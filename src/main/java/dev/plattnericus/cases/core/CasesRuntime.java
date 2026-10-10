@@ -86,7 +86,11 @@ public final class CasesRuntime implements CasesContext {
     /** Loads every reloadable file; safe to call off the server thread. */
     State loadState(Consumer<String> warn) {
         File folder = plugin.getDataFolder();
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(folder, "config.yml"));
+        YamlConfiguration config = new YamlConfiguration();
+        try { config.load(new File(folder, "config.yml")); }
+        catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) {
+            throw new java.util.concurrent.CompletionException("Cannot read config.yml", error);
+        }
         var bundled = DefaultFiles.open(plugin, "config.yml");
         if (bundled != null) {
             config.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(bundled, StandardCharsets.UTF_8)));
@@ -138,7 +142,7 @@ public final class CasesRuntime implements CasesContext {
         long started = System.currentTimeMillis();
         List<String> warnings = java.util.Collections.synchronizedList(new ArrayList<>());
         CompletableFuture.supplyAsync(() -> loadState(warnings::add)).whenComplete((s, error) ->
-                Bukkit.getScheduler().runTask(plugin, () -> {
+                dev.plattnericus.cases.command.CommandFeedback.main(this, sender, "csadmin reload", () -> {
                     reloading.set(false);
                     if (error != null) {
                         plugin.getLogger().log(java.util.logging.Level.SEVERE, "Reload failed; previous configuration kept", error);
