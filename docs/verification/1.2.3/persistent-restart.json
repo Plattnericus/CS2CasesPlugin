@@ -1,0 +1,27 @@
+{
+  "persistent": true,
+  "app": 0,
+  "oldClient": 3936,
+  "newClient": 4246,
+  "clientAutoRestart": true,
+  "oldServer": 3896,
+  "newServer": 4277,
+  "serverAutoRestart": true,
+  "worldPreserved": true,
+  "clientReconnected": true,
+  "worldName": "dev-world",
+  "packHashBeforeStop": "ee6c3e21af022fe42ab9f3a809c86cc7158dbd8f309ddaea970a1df61c58c3ab",
+  "sentinel": "minecraft:gold_block at 10,-60,10",
+  "explicitStopPreservedWorldAndDatabase": true,
+  "sentinelAfterRestart": true,
+  "exportedPackPreservedAfterRestart": true,
+  "packHashAfterRestart": "ee6c3e21af022fe42ab9f3a809c86cc7158dbd8f309ddaea970a1df61c58c3ab",
+  "finalSession": {
+    "persistent": true,
+    "server": 5069,
+    "client": 5092,
+    "observer": null,
+    "loginStarter": true,
+    "address": "127.0.0.1:25565"
+  }
+}

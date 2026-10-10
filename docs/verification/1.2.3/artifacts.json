@@ -1,0 +1,47 @@
+{
+  "version": "1.2.3",
+  "sourceArchiveSha256": "2081bf6540d20178427ea175300ce978015d7c0fbda3dd0cac95944eb1efeae8",
+  "originalSkinPngs": 2192,
+  "customAssetsByteIdentical": [
+    "assets/minecraft/font/default.json",
+    "assets/minecraft/textures/font/custom/globe.png",
+    "assets/minecraft/textures/font/custom/hirsch.png",
+    "assets/minecraft/textures/font/custom/kirbis.png",
+    "assets/minecraft/textures/font/custom/logo.png",
+    "assets/minecraft/textures/font/custom/prosse.png",
+    "assets/minecraft/textures/font/custom/tachometer.png",
+    "assets/minecraft/textures/font/custom/user.png",
+    "pack.png"
+  ],
+  "runtimeAssetsByteIdentical": 9100,
+  "productionClasses": 249,
+  "compilerClassesIdentical": true,
+  "embeddedPackIdentical": true,
+  "embeddedOriginalSkinArchiveIdentical": true,
+  "checkClassesIncluded": false,
+  "CRC": "PASS",
+  "runtimePackSha256": "ee6c3e21af022fe42ab9f3a809c86cc7158dbd8f309ddaea970a1df61c58c3ab",
+  "artifacts": [
+    {
+      "file": "MCCases-1.2.3.jar",
+      "bytes": 25821204,
+      "sha256": "212b91af2a92c9dcc7b39b99a42bf4dd084c70bd3e08bdabeb189da18ee4c3f3"
+    },
+    {
+      "file": "MCCases-ResourcePack-Fusion-HD-1.2.3.zip",
+      "bytes": 15725082,
+      "sha256": "927cf305cfbd7bcae5600ecc50d3321becb9c6c08a3e48e74eb2136ea1307a83"
+    },
+    {
+      "file": "MCCases-Visual-Checks-1.2.3.zip",
+      "bytes": 83742717,
+      "sha256": "669b30bbedd3e16b5395eb6b6261cfbbe642b375c3a6896447dafed1a63bc313"
+    },
+    {
+      "file": "MCCases-Animation-Checks-1.2.3.zip",
+      "bytes": 43667925,
+      "sha256": "1173ad77727905375bff06f8dce1b763aa1b9ce7107bf441aee9fac9b8021fc5"
+    }
+  ],
+  "downloadsCopyByteIdentical": true
+}

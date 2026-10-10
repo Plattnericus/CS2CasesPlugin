@@ -6,11 +6,11 @@ A server-side Paper plugin with a virtual skin collection, public opening animat
 individual inspect motions and an economy built from Minecraft items. Inspired by
 Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.2** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
+**1.2.3** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.2.jar) ·
-[Download Fusion HD pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip) ·
-[Checksums](release/SHA256SUMS-1.2.2) · [Full reference](docs/REFERENCE.md)
+[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.3.jar) ·
+[Download Fusion HD pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) ·
+[Checksums](release/SHA256SUMS-1.2.3) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
 > MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
@@ -43,10 +43,10 @@ collection/inspect objects; they do not replace worn armor.
 ## Quick start
 
 1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
-2. Copy [MCCases-1.2.2.jar](release/MCCases-1.2.2.jar) into `plugins/`. Install only one production MCCases JAR.
+2. Copy [MCCases-1.2.3.jar](release/MCCases-1.2.3.jar) into `plugins/`. Install only one production MCCases JAR.
 3. Start the server. Defaults appear in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
-5. Enable the matching [resource pack](release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
+5. Enable the matching [resource pack](release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
 Give a connected player their first nine signed pairs:
 
@@ -182,11 +182,17 @@ See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 ## Resource pack
 
-The JAR and [Fusion HD ZIP](release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip) are a matched pair.
+The JAR and [Fusion HD ZIP](release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip) are a matched pair.
 The JAR embeds exactly this pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
-Every build combines the current 128px skins/inspect geometry with your server fonts and
-pack icon from `resourcepack/fusion/`. Those supplied assets retain their exact original bytes.
+Every build uses the 815 skin sprites and 1,377 inspect layers from your original Fusion HD
+1.2.0 archive, stored in `resourcepack/artwork/`. The supplied colours and patterns are retained;
+exported coverage is made opaque and ring-knife presentation is turned to match its grip.
+Held items use solid meshes with palm anchors for both hands, while menus use the original sprites.
+Pack models use the supplied fixed artwork per finish. Float and pattern remain stored
+properties; dynamic map previews use the configured renderer. New catalog IDs also use
+that renderer. Your server fonts and pack icon from
+`resourcepack/fusion/` retain their exact original bytes.
 The same Fusion overlay is embedded in the JAR and reapplied by `/csadmin exportpack`.
 An older or edited installed pack is refreshed while preserving its server artwork.
 
@@ -209,11 +215,25 @@ The public URL must route through your configured proxy to the pack webserver.
 The built-in server uses HTTP and does not provide an HTTPS certificate; alternatively,
 use a reachable HTTP address with its port. Distribution also enables item models.
 
-For a combined server pack, merge `assets/mccases/` from the **current Fusion ZIP**, set
+For a combined server pack, include the current Fusion ZIP's `assets/mccases/` and its two
+`assets/minecraft/shaders/core/item.*` programs. Set
 `resource-pack.enabled: true` and use your own distribution. Re-export after catalog
 changes. The Fusion HD pack is the default download. Keep custom server artwork outside
-`assets/mccases/`; that namespace is regenerated from the current catalog as a unit.
+`assets/mccases/`; that namespace and the two item shader programs are regenerated
+from the current catalog as a unit.
 See [Fusion sources and checks](resourcepack/fusion/README.md) before replacing assets.
+
+### Vanilla metal finish
+
+The matching pack includes a restrained, view-dependent metallic sheen on marked weapon
+faces in **vanilla Minecraft 26.3**. Handles, gloves and ordinary vanilla items keep their
+normal shading. No client mod or post-effect command is required. This approximates an
+environment reflection; it does not reflect actual nearby blocks or provide screen-space
+water/glass reflections. Skins and player interfaces remain readable.
+
+The shader baseline follows Minecraft 26.3's item pipeline, including lightmaps, fog and
+order-independent transparency. Use the matching pack rather than copying older core
+shader files. Custom shader packs that replace the same programs need a manual merge.
 
 ## Configuration
 
@@ -247,14 +267,14 @@ shows those chances.
 3. Replace the production JAR and update the matching resource pack.
 4. Start the server, check `/csadmin info` and compare existing settings.
 
-**1.2.2** makes Fusion HD the mandatory build/export path and preserves the server
+**1.2.3** makes Fusion HD the mandatory build/export path and preserves the server
 font/texture overlay. It also includes the rebuilt pack, corrected ring knives, direct-trade source labels,
 3× glass wheels, English documentation and command error feedback. The database
 upgrades automatically to schema 4 and backfills recorded earlier direct trades.
 Unchanged stock inspect profiles upgrade; custom timelines remain intact.
 Compare custom Karambit/Talon timelines or model scales with the new ring pivots.
 Downgrading to schema 3 requires the complete pre-upgrade backup.
-Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.2).
+Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.3).
 
 ## Legal information
 
@@ -273,18 +293,24 @@ reuse. Rights requests and project contact: **info@plattnericus.dev**.
 
 ## Development
 
+For a dev server and client that remain available after the desktop app closes, use
+`python3 scripts/dev.py start --persistent` after preparing the session. The supervisor
+restarts either process if it exits, starts again at login and preserves the local dev world.
+Use `python3 scripts/dev.py stop` to end the session.
+
+
 Use JDK 25 and the included Gradle wrapper:
 
 ```sh
 bash gradlew build
 ```
 
-This creates `build/libs/MCCases-1.2.2.jar` and
-`build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.2.zip`, running `verifyFeatures` and
+This creates `build/libs/MCCases-1.2.3.jar` and
+`build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.3.zip`, running `verifyFeatures` and
 `verifyPack` plus `verifyFusionPack`. Copy verified artifacts to `release/` and update
 their checksums.
 
-The [1.2.2 Fusion verification report](docs/RELEASE-1.2.2-VERIFICATION.md) documents
+The [1.2.3 Fusion verification report](docs/RELEASE-1.2.3-VERIFICATION.md) documents
 asset preservation, resource references, server export and actual client rendering.
 The [1.2.1 report](docs/RELEASE-1.2.1-VERIFICATION.md) records the earlier 154 command
 checks, ten live suites and inspect/wheel captures. The

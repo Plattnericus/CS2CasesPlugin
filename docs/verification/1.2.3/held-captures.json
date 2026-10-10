@@ -1,0 +1,3026 @@
+[
+  {
+    "weapon": "glock18",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "glock18_right_first_person.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "glock18_right_front_observer.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "glock18_right_third_person_back.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "glock18_right_third_person_front.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "glock18_left_first_person.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "glock18_left_front_observer.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "glock18_left_third_person_back.png"
+  },
+  {
+    "weapon": "glock18",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "glock18_left_third_person_front.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "usps_right_first_person.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "usps_right_front_observer.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "usps_right_third_person_back.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "usps_right_third_person_front.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "usps_left_first_person.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "usps_left_front_observer.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "usps_left_third_person_back.png"
+  },
+  {
+    "weapon": "usps",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "usps_left_third_person_front.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "p2000_right_first_person.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p2000_right_front_observer.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p2000_right_third_person_back.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p2000_right_third_person_front.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "p2000_left_first_person.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p2000_left_front_observer.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p2000_left_third_person_back.png"
+  },
+  {
+    "weapon": "p2000",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p2000_left_third_person_front.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "p250_right_first_person.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p250_right_front_observer.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p250_right_third_person_back.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p250_right_third_person_front.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "p250_left_first_person.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p250_left_front_observer.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p250_left_third_person_back.png"
+  },
+  {
+    "weapon": "p250",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p250_left_third_person_front.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "fiveseven_right_first_person.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "fiveseven_right_front_observer.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "fiveseven_right_third_person_back.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "fiveseven_right_third_person_front.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "fiveseven_left_first_person.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "fiveseven_left_front_observer.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "fiveseven_left_third_person_back.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "fiveseven_left_third_person_front.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "tec9_right_first_person.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "tec9_right_front_observer.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "tec9_right_third_person_back.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "tec9_right_third_person_front.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "tec9_left_first_person.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "tec9_left_front_observer.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "tec9_left_third_person_back.png"
+  },
+  {
+    "weapon": "tec9",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "tec9_left_third_person_front.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "cz75_right_first_person.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "cz75_right_front_observer.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "cz75_right_third_person_back.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "cz75_right_third_person_front.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "cz75_left_first_person.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "cz75_left_front_observer.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "cz75_left_third_person_back.png"
+  },
+  {
+    "weapon": "cz75",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "cz75_left_third_person_front.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "dual_berettas_right_first_person.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "dual_berettas_right_front_observer.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "dual_berettas_right_third_person_back.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "dual_berettas_right_third_person_front.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "dual_berettas_left_first_person.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "dual_berettas_left_front_observer.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "dual_berettas_left_third_person_back.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "dual_berettas_left_third_person_front.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "deagle_right_first_person.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "deagle_right_front_observer.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "deagle_right_third_person_back.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "deagle_right_third_person_front.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "deagle_left_first_person.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "deagle_left_front_observer.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "deagle_left_third_person_back.png"
+  },
+  {
+    "weapon": "deagle",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "deagle_left_third_person_front.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "r8_revolver_right_first_person.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "r8_revolver_right_front_observer.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "r8_revolver_right_third_person_back.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "r8_revolver_right_third_person_front.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "r8_revolver_left_first_person.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "r8_revolver_left_front_observer.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "r8_revolver_left_third_person_back.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "r8_revolver_left_third_person_front.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "mac10_right_first_person.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mac10_right_front_observer.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mac10_right_third_person_back.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mac10_right_third_person_front.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "mac10_left_first_person.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mac10_left_front_observer.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mac10_left_third_person_back.png"
+  },
+  {
+    "weapon": "mac10",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mac10_left_third_person_front.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "mp9_right_first_person.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp9_right_front_observer.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp9_right_third_person_back.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp9_right_third_person_front.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "mp9_left_first_person.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp9_left_front_observer.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp9_left_third_person_back.png"
+  },
+  {
+    "weapon": "mp9",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp9_left_third_person_front.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "mp7_right_first_person.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp7_right_front_observer.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp7_right_third_person_back.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp7_right_third_person_front.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "mp7_left_first_person.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp7_left_front_observer.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp7_left_third_person_back.png"
+  },
+  {
+    "weapon": "mp7",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp7_left_third_person_front.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "mp5sd_right_first_person.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp5sd_right_front_observer.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp5sd_right_third_person_back.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp5sd_right_third_person_front.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "mp5sd_left_first_person.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mp5sd_left_front_observer.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mp5sd_left_third_person_back.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mp5sd_left_third_person_front.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "ump45_right_first_person.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ump45_right_front_observer.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ump45_right_third_person_back.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ump45_right_third_person_front.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "ump45_left_first_person.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ump45_left_front_observer.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ump45_left_third_person_back.png"
+  },
+  {
+    "weapon": "ump45",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ump45_left_third_person_front.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "p90_right_first_person.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p90_right_front_observer.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p90_right_third_person_back.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p90_right_third_person_front.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "p90_left_first_person.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "p90_left_front_observer.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "p90_left_third_person_back.png"
+  },
+  {
+    "weapon": "p90",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "p90_left_third_person_front.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "ppbizon_right_first_person.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ppbizon_right_front_observer.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ppbizon_right_third_person_back.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ppbizon_right_third_person_front.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "ppbizon_left_first_person.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ppbizon_left_front_observer.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ppbizon_left_third_person_back.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ppbizon_left_third_person_front.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "ak47_right_first_person.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ak47_right_front_observer.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ak47_right_third_person_back.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ak47_right_third_person_front.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "ak47_left_first_person.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ak47_left_front_observer.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ak47_left_third_person_back.png"
+  },
+  {
+    "weapon": "ak47",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ak47_left_third_person_front.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "m4a4_right_first_person.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m4a4_right_front_observer.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m4a4_right_third_person_back.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m4a4_right_third_person_front.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "m4a4_left_first_person.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m4a4_left_front_observer.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m4a4_left_third_person_back.png"
+  },
+  {
+    "weapon": "m4a4",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m4a4_left_third_person_front.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "m4a1s_right_first_person.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m4a1s_right_front_observer.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m4a1s_right_third_person_back.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m4a1s_right_third_person_front.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "m4a1s_left_first_person.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m4a1s_left_front_observer.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m4a1s_left_third_person_back.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m4a1s_left_third_person_front.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "galil_right_first_person.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "galil_right_front_observer.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "galil_right_third_person_back.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "galil_right_third_person_front.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "galil_left_first_person.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "galil_left_front_observer.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "galil_left_third_person_back.png"
+  },
+  {
+    "weapon": "galil",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "galil_left_third_person_front.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "famas_right_first_person.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "famas_right_front_observer.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "famas_right_third_person_back.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "famas_right_third_person_front.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "famas_left_first_person.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "famas_left_front_observer.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "famas_left_third_person_back.png"
+  },
+  {
+    "weapon": "famas",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "famas_left_third_person_front.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "aug_right_first_person.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "aug_right_front_observer.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "aug_right_third_person_back.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "aug_right_third_person_front.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "aug_left_first_person.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "aug_left_front_observer.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "aug_left_third_person_back.png"
+  },
+  {
+    "weapon": "aug",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "aug_left_third_person_front.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "sg553_right_first_person.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sg553_right_front_observer.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sg553_right_third_person_back.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sg553_right_third_person_front.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "sg553_left_first_person.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sg553_left_front_observer.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sg553_left_third_person_back.png"
+  },
+  {
+    "weapon": "sg553",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sg553_left_third_person_front.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "ssg08_right_first_person.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ssg08_right_front_observer.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ssg08_right_third_person_back.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ssg08_right_third_person_front.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "ssg08_left_first_person.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ssg08_left_front_observer.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ssg08_left_third_person_back.png"
+  },
+  {
+    "weapon": "ssg08",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ssg08_left_third_person_front.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "awp_right_first_person.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "awp_right_front_observer.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "awp_right_third_person_back.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "awp_right_third_person_front.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "awp_left_first_person.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "awp_left_front_observer.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "awp_left_third_person_back.png"
+  },
+  {
+    "weapon": "awp",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "awp_left_third_person_front.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "scar20_right_first_person.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "scar20_right_front_observer.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "scar20_right_third_person_back.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "scar20_right_third_person_front.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "scar20_left_first_person.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "scar20_left_front_observer.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "scar20_left_third_person_back.png"
+  },
+  {
+    "weapon": "scar20",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "scar20_left_third_person_front.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "g3sg1_right_first_person.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "g3sg1_right_front_observer.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "g3sg1_right_third_person_back.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "g3sg1_right_third_person_front.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "g3sg1_left_first_person.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "g3sg1_left_front_observer.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "g3sg1_left_third_person_back.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "g3sg1_left_third_person_front.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "nova_right_first_person.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "nova_right_front_observer.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "nova_right_third_person_back.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "nova_right_third_person_front.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "nova_left_first_person.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "nova_left_front_observer.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "nova_left_third_person_back.png"
+  },
+  {
+    "weapon": "nova",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "nova_left_third_person_front.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "xm1014_right_first_person.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "xm1014_right_front_observer.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "xm1014_right_third_person_back.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "xm1014_right_third_person_front.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "xm1014_left_first_person.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "xm1014_left_front_observer.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "xm1014_left_third_person_back.png"
+  },
+  {
+    "weapon": "xm1014",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "xm1014_left_third_person_front.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "sawedoff_right_first_person.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sawedoff_right_front_observer.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sawedoff_right_third_person_back.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sawedoff_right_third_person_front.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "sawedoff_left_first_person.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sawedoff_left_front_observer.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sawedoff_left_third_person_back.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sawedoff_left_third_person_front.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "mag7_right_first_person.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mag7_right_front_observer.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mag7_right_third_person_back.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mag7_right_third_person_front.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "mag7_left_first_person.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "mag7_left_front_observer.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "mag7_left_third_person_back.png"
+  },
+  {
+    "weapon": "mag7",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "mag7_left_third_person_front.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "m249_right_first_person.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m249_right_front_observer.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m249_right_third_person_back.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m249_right_third_person_front.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "m249_left_first_person.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m249_left_front_observer.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m249_left_third_person_back.png"
+  },
+  {
+    "weapon": "m249",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m249_left_third_person_front.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "negev_right_first_person.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "negev_right_front_observer.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "negev_right_third_person_back.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "negev_right_third_person_front.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "negev_left_first_person.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "negev_left_front_observer.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "negev_left_third_person_back.png"
+  },
+  {
+    "weapon": "negev",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "negev_left_third_person_front.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "zeus_right_first_person.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "zeus_right_front_observer.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "zeus_right_third_person_back.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "zeus_right_third_person_front.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "zeus_left_first_person.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "zeus_left_front_observer.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "zeus_left_third_person_back.png"
+  },
+  {
+    "weapon": "zeus",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "zeus_left_third_person_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "karambit_right_first_person.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "karambit_right_front_observer.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "karambit_right_third_person_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "karambit_right_third_person_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "karambit_left_first_person.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "karambit_left_front_observer.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "karambit_left_third_person_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "karambit_left_third_person_front.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "butterfly_right_first_person.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "butterfly_right_front_observer.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "butterfly_right_third_person_back.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "butterfly_right_third_person_front.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "butterfly_left_first_person.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "butterfly_left_front_observer.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "butterfly_left_third_person_back.png"
+  },
+  {
+    "weapon": "butterfly",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "butterfly_left_third_person_front.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "m9_bayonet_right_first_person.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m9_bayonet_right_front_observer.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m9_bayonet_right_third_person_back.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m9_bayonet_right_third_person_front.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "m9_bayonet_left_first_person.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "m9_bayonet_left_front_observer.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "m9_bayonet_left_third_person_back.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "m9_bayonet_left_third_person_front.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "bayonet_right_first_person.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bayonet_right_front_observer.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bayonet_right_third_person_back.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bayonet_right_third_person_front.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "bayonet_left_first_person.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bayonet_left_front_observer.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bayonet_left_third_person_back.png"
+  },
+  {
+    "weapon": "bayonet",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bayonet_left_third_person_front.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "flip_right_first_person.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "flip_right_front_observer.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "flip_right_third_person_back.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "flip_right_third_person_front.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "flip_left_first_person.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "flip_left_front_observer.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "flip_left_third_person_back.png"
+  },
+  {
+    "weapon": "flip",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "flip_left_third_person_front.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "gut_right_first_person.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "gut_right_front_observer.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "gut_right_third_person_back.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "gut_right_third_person_front.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "gut_left_first_person.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "gut_left_front_observer.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "gut_left_third_person_back.png"
+  },
+  {
+    "weapon": "gut",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "gut_left_third_person_front.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "huntsman_right_first_person.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "huntsman_right_front_observer.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "huntsman_right_third_person_back.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "huntsman_right_third_person_front.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "huntsman_left_first_person.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "huntsman_left_front_observer.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "huntsman_left_third_person_back.png"
+  },
+  {
+    "weapon": "huntsman",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "huntsman_left_third_person_front.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "falchion_right_first_person.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "falchion_right_front_observer.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "falchion_right_third_person_back.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "falchion_right_third_person_front.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "falchion_left_first_person.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "falchion_left_front_observer.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "falchion_left_third_person_back.png"
+  },
+  {
+    "weapon": "falchion",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "falchion_left_third_person_front.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "bowie_right_first_person.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bowie_right_front_observer.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bowie_right_third_person_back.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bowie_right_third_person_front.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "bowie_left_first_person.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bowie_left_front_observer.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bowie_left_third_person_back.png"
+  },
+  {
+    "weapon": "bowie",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bowie_left_third_person_front.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "shadow_daggers_right_first_person.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "shadow_daggers_right_front_observer.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "shadow_daggers_right_third_person_back.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "shadow_daggers_right_third_person_front.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "shadow_daggers_left_first_person.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "shadow_daggers_left_front_observer.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "shadow_daggers_left_third_person_back.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "shadow_daggers_left_third_person_front.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "navaja_right_first_person.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "navaja_right_front_observer.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "navaja_right_third_person_back.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "navaja_right_third_person_front.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "navaja_left_first_person.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "navaja_left_front_observer.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "navaja_left_third_person_back.png"
+  },
+  {
+    "weapon": "navaja",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "navaja_left_third_person_front.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "stiletto_right_first_person.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "stiletto_right_front_observer.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "stiletto_right_third_person_back.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "stiletto_right_third_person_front.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "stiletto_left_first_person.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "stiletto_left_front_observer.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "stiletto_left_third_person_back.png"
+  },
+  {
+    "weapon": "stiletto",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "stiletto_left_third_person_front.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "talon_right_first_person.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "talon_right_front_observer.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "talon_right_third_person_back.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "talon_right_third_person_front.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "talon_left_first_person.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "talon_left_front_observer.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "talon_left_third_person_back.png"
+  },
+  {
+    "weapon": "talon",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "talon_left_third_person_front.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "ursus_right_first_person.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ursus_right_front_observer.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ursus_right_third_person_back.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ursus_right_third_person_front.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "ursus_left_first_person.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "ursus_left_front_observer.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "ursus_left_third_person_back.png"
+  },
+  {
+    "weapon": "ursus",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "ursus_left_third_person_front.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "classic_right_first_person.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "classic_right_front_observer.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "classic_right_third_person_back.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "classic_right_third_person_front.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "classic_left_first_person.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "classic_left_front_observer.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "classic_left_third_person_back.png"
+  },
+  {
+    "weapon": "classic",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "classic_left_third_person_front.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "paracord_right_first_person.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "paracord_right_front_observer.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "paracord_right_third_person_back.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "paracord_right_third_person_front.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "paracord_left_first_person.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "paracord_left_front_observer.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "paracord_left_third_person_back.png"
+  },
+  {
+    "weapon": "paracord",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "paracord_left_third_person_front.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "survival_right_first_person.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "survival_right_front_observer.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "survival_right_third_person_back.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "survival_right_third_person_front.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "survival_left_first_person.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "survival_left_front_observer.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "survival_left_third_person_back.png"
+  },
+  {
+    "weapon": "survival",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "survival_left_third_person_front.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "nomad_right_first_person.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "nomad_right_front_observer.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "nomad_right_third_person_back.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "nomad_right_third_person_front.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "nomad_left_first_person.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "nomad_left_front_observer.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "nomad_left_third_person_back.png"
+  },
+  {
+    "weapon": "nomad",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "nomad_left_third_person_front.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "skeleton_right_first_person.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "skeleton_right_front_observer.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "skeleton_right_third_person_back.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "skeleton_right_third_person_front.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "skeleton_left_first_person.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "skeleton_left_front_observer.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "skeleton_left_third_person_back.png"
+  },
+  {
+    "weapon": "skeleton",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "skeleton_left_third_person_front.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "kukri_right_first_person.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "kukri_right_front_observer.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "kukri_right_third_person_back.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "kukri_right_third_person_front.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "kukri_left_first_person.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "kukri_left_front_observer.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "kukri_left_third_person_back.png"
+  },
+  {
+    "weapon": "kukri",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "kukri_left_third_person_front.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "bloodhound_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bloodhound_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bloodhound_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bloodhound_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "bloodhound_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "bloodhound_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "bloodhound_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "bloodhound_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "hydra_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "hydra_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "hydra_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "hydra_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "hydra_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "hydra_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "hydra_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "hydra_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "broken_fang_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "broken_fang_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "broken_fang_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "broken_fang_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "broken_fang_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "broken_fang_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "broken_fang_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "broken_fang_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "sport_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sport_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sport_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sport_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "sport_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "sport_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "sport_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "sport_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "driver_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "driver_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "driver_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "driver_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "driver_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "driver_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "driver_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "driver_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "hand_wraps_right_first_person.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "hand_wraps_right_front_observer.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "hand_wraps_right_third_person_back.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "hand_wraps_right_third_person_front.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "hand_wraps_left_first_person.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "hand_wraps_left_front_observer.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "hand_wraps_left_third_person_back.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "hand_wraps_left_third_person_front.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "moto_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "moto_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "moto_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "moto_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "moto_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "moto_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "moto_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "moto_gloves_left_third_person_front.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "RIGHT",
+    "camera": "FIRST_PERSON",
+    "file": "specialist_gloves_right_first_person.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "RIGHT",
+    "camera": "FRONT_OBSERVER",
+    "file": "specialist_gloves_right_front_observer.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "specialist_gloves_right_third_person_back.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "RIGHT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "specialist_gloves_right_third_person_front.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "LEFT",
+    "camera": "FIRST_PERSON",
+    "file": "specialist_gloves_left_first_person.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "LEFT",
+    "camera": "FRONT_OBSERVER",
+    "file": "specialist_gloves_left_front_observer.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_BACK",
+    "file": "specialist_gloves_left_third_person_back.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "hand": "LEFT",
+    "camera": "THIRD_PERSON_FRONT",
+    "file": "specialist_gloves_left_third_person_front.png"
+  }
+]

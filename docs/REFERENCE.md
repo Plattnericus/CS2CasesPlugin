@@ -4,12 +4,12 @@
 
 Updated: October 10, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2.2 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.2.3 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.2** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.3** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](images/skins.png)
 
@@ -48,7 +48,7 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.2.2.jar](../release/MCCases-1.2.2.jar) into `plugins/`.
+2. Copy [MCCases-1.2.3.jar](../release/MCCases-1.2.3.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
@@ -490,7 +490,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.2.zip).
+[release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.3.zip).
 
 ### Automatic distribution
 
@@ -515,18 +515,23 @@ it on join. Active distribution also enables custom item models.
 
 ### Combining it with a server pack
 
-1. Copy `assets/mccases/` from the current release ZIP into your own pack.
+1. Copy `assets/mccases/`, the two `assets/minecraft/shaders/core/item.*` programs and the
+   original Fusion font assets from the current release ZIP into your own pack. Merge font
+   providers if your pack also defines `assets/minecraft/font/default.json`.
 2. Deliver the combined pack through your existing server pack distribution.
 3. Set `resource-pack.enabled: true` and leave built-in distribution disabled.
 
-No vanilla files are replaced. When custom models are enabled, the client must have the matching
+The two item shader programs use the Minecraft 26.3 pipeline to add simulated metallic sheen
+to marked weapon faces. This does not reflect nearby world geometry. Packs overriding those
+programs need a manual merge. When custom models are enabled, the client must have the matching
 pack loaded; otherwise missing models may appear. Re-export with `/csadmin exportpack` after
 catalog changes and update any manually distributed pack.
 
 The pack also contains separate green trade-selection sprites. These apply only to your selected
 icons in the trade menu. Normal collection icons and equipped weapons use the original sprites.
-Bundled packs are refreshed when their content changes, including within the same plugin version;
-manually exported or edited packs are preserved.
+Bundled packs are refreshed when their content changes, including within the same plugin version.
+Runtime exports preserve server artwork and custom catalogs through installation receipts;
+managed model, texture and item shader files are regenerated together.
 
 ## Drops and skin values
 

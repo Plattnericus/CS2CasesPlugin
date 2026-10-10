@@ -1,0 +1,86 @@
+[
+  {
+    "weapon": "karambit",
+    "variant": 0,
+    "animation": "karambit__finger_roll",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "karambit",
+    "variant": 1,
+    "animation": "karambit__reverse_grip",
+    "seconds": 3.5,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "karambit",
+    "variant": 2,
+    "animation": "karambit__ring_twirl",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "karambit",
+    "variant": 3,
+    "animation": "karambit__blade_presentation",
+    "seconds": 4.0,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "talon",
+    "variant": 0,
+    "animation": "talon__free_ring_spin",
+    "seconds": 4.05,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "talon",
+    "variant": 1,
+    "animation": "talon__reverse_catch",
+    "seconds": 4.1,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "talon",
+    "variant": 2,
+    "animation": "talon__finger_loop",
+    "seconds": 4.15,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "talon",
+    "variant": 3,
+    "animation": "talon__blade_presentation",
+    "seconds": 4.6,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "butterfly",
+    "variant": 0,
+    "animation": "butterfly__rollover",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "butterfly",
+    "variant": 1,
+    "animation": "butterfly__helix",
+    "seconds": 3.6,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "butterfly",
+    "variant": 2,
+    "animation": "butterfly__fan",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "butterfly",
+    "variant": 3,
+    "animation": "butterfly__blade_presentation",
+    "seconds": 4.1,
+    "naturalCleanup": true
+  }
+]

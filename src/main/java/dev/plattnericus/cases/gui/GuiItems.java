@@ -30,6 +30,13 @@ public final class GuiItems {
     private GuiItems() {
     }
 
+    /** Original server glyphs are available whenever the combined pack is enabled. */
+    public static Component brandedTitle(dev.plattnericus.cases.core.CasesContext ctx, Component title, char glyph) {
+        return ctx.settings().resourcePack().enabled()
+                ? Component.text(glyph + " ", net.kyori.adventure.text.format.NamedTextColor.WHITE)
+                .append(title.colorIfAbsent(net.kyori.adventure.text.format.NamedTextColor.DARK_GRAY)) : title;
+    }
+
     private static int[] range(int from, int to) {
         int[] r = new int[to - from];
         for (int i = 0; i < r.length; i++) {

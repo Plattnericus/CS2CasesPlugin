@@ -79,8 +79,8 @@ public final class SkinInventoryMenu extends Menu {
         if (admin) {
             return ctx.messages(viewer).get("admin.manage.title", dev.plattnericus.cases.util.Text.unparsed("player", ownerName));
         }
-        return readOnly ? ctx.messages(viewer).get("gui.skins.title-other", dev.plattnericus.cases.util.Text.unparsed("player", ownerName))
-                : ctx.messages(viewer).get("gui.skins.title");
+        return GuiItems.brandedTitle(ctx, readOnly ? ctx.messages(viewer).get("gui.skins.title-other", dev.plattnericus.cases.util.Text.unparsed("player", ownerName))
+                : ctx.messages(viewer).get("gui.skins.title"), '\uE004');
     }
 
     @Override

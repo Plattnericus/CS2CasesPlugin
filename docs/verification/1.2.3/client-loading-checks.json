@@ -1,0 +1,20 @@
+{
+  "production-1.2.3-visual-command-audit-client.log": {
+    "customShaderModelTextureFailures": 0
+  },
+  "production-1.2.3-functional-command-audit-client.log": {
+    "customShaderModelTextureFailures": 0
+  },
+  "final-persistent-client.log": {
+    "customShaderModelTextureFailures": 0
+  },
+  "production-1.2.3-visual-command-audit-observer.log": {
+    "customShaderModelTextureFailures": 0
+  },
+  "production-1.2.3-functional-command-audit-observer.log": {
+    "customShaderModelTextureFailures": 0
+  },
+  "final-persistent-observer.log": {
+    "customShaderModelTextureFailures": 0
+  }
+}

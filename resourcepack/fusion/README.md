@@ -13,7 +13,8 @@ Imported from the supplied `MCCases-ResourcePack-Fusion-HD-1.2.0.zip`:
 - The original `pack.png`.
 
 All nine asset files retain their exact bytes. `SOURCE.json` records provenance and
-SHA-256 hashes. Generated 1.2.0 MCCases models/skins are replaced as a unit by current
+SHA-256 hashes. The original skin and inspect PNGs are retained separately in `resourcepack/artwork`.
+Old 1.2.0 model definitions are replaced as a unit by current
 128px sprites and inspect geometry, including correct Karambit/Talon orientation.
 This prevents old textures from being paired with incompatible new UVs or pivots.
 

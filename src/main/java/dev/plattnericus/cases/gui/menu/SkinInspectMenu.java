@@ -54,7 +54,7 @@ public final class SkinInspectMenu extends Menu {
 
     @Override
     protected Component title() {
-        return ctx.messages(viewer).get("gui.inspect.title");
+        return GuiItems.brandedTitle(ctx, ctx.messages(viewer).get("gui.inspect.title"), '\uE008');
     }
 
     @Override

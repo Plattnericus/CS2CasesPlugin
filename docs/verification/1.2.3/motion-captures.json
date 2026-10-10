@@ -1,0 +1,443 @@
+[
+  {
+    "weapon": "glock18",
+    "variant": 0,
+    "animation": "glock18__slide_check",
+    "seconds": 3.15,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "usps",
+    "variant": 0,
+    "animation": "usps__suppressor_check",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "p2000",
+    "variant": 0,
+    "animation": "p2000__slide_peek",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "p250",
+    "variant": 0,
+    "animation": "p250__compact_peek",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "fiveseven",
+    "variant": 0,
+    "animation": "fiveseven__polymer_check",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "tec9",
+    "variant": 0,
+    "animation": "tec9__receiver_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "cz75",
+    "variant": 0,
+    "animation": "cz75__front_grip_check",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "dual_berettas",
+    "variant": 0,
+    "animation": "dual_berettas__paired_peek",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "deagle",
+    "variant": 0,
+    "animation": "deagle__finger_twirl",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "r8_revolver",
+    "variant": 0,
+    "animation": "r8_revolver__cylinder_check",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "mac10",
+    "variant": 0,
+    "animation": "mac10__strap_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "mp9",
+    "variant": 0,
+    "animation": "mp9__foregrip_check",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "mp7",
+    "variant": 0,
+    "animation": "mp7__stock_check",
+    "seconds": 3.15,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "mp5sd",
+    "variant": 0,
+    "animation": "mp5sd__suppressor_peek",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "ump45",
+    "variant": 0,
+    "animation": "ump45__magazine_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "p90",
+    "variant": 0,
+    "animation": "p90__top_magazine_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "ppbizon",
+    "variant": 0,
+    "animation": "ppbizon__drum_check",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "ak47",
+    "variant": 0,
+    "animation": "ak47__magazine_peek",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "m4a4",
+    "variant": 0,
+    "animation": "m4a4__rail_check",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "m4a1s",
+    "variant": 0,
+    "animation": "m4a1s__suppressor_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "galil",
+    "variant": 0,
+    "animation": "galil__foregrip_peek",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "famas",
+    "variant": 0,
+    "animation": "famas__bullpup_check",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "aug",
+    "variant": 0,
+    "animation": "aug__scope_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "sg553",
+    "variant": 0,
+    "animation": "sg553__optic_check",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "ssg08",
+    "variant": 0,
+    "animation": "ssg08__bolt_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "awp",
+    "variant": 0,
+    "animation": "awp__scope_peek",
+    "seconds": 3.75,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "scar20",
+    "variant": 0,
+    "animation": "scar20__optic_check",
+    "seconds": 3.95,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "g3sg1",
+    "variant": 0,
+    "animation": "g3sg1__scope_roll",
+    "seconds": 3.85,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "nova",
+    "variant": 0,
+    "animation": "nova__pump_check",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "xm1014",
+    "variant": 0,
+    "animation": "xm1014__tube_check",
+    "seconds": 3.85,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "sawedoff",
+    "variant": 0,
+    "animation": "sawedoff__short_barrel_check",
+    "seconds": 3.75,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "mag7",
+    "variant": 0,
+    "animation": "mag7__box_magazine_check",
+    "seconds": 3.95,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "m249",
+    "variant": 0,
+    "animation": "m249__belt_cover_check",
+    "seconds": 3.75,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "negev",
+    "variant": 0,
+    "animation": "negev__box_check",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "zeus",
+    "variant": 0,
+    "animation": "zeus__capacitor_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "karambit",
+    "variant": 0,
+    "animation": "karambit__finger_roll",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "butterfly",
+    "variant": 0,
+    "animation": "butterfly__rollover",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "m9_bayonet",
+    "variant": 0,
+    "animation": "m9_bayonet__sawback_check",
+    "seconds": 3.85,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "bayonet",
+    "variant": 0,
+    "animation": "bayonet__draw_flip",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "flip",
+    "variant": 0,
+    "animation": "flip__hinge_flick",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "gut",
+    "variant": 0,
+    "animation": "gut__hook_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "huntsman",
+    "variant": 0,
+    "animation": "huntsman__spine_check",
+    "seconds": 4.05,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "falchion",
+    "variant": 0,
+    "animation": "falchion__hinge_flip",
+    "seconds": 3.85,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "bowie",
+    "variant": 0,
+    "animation": "bowie__broadside_check",
+    "seconds": 4.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "shadow_daggers",
+    "variant": 0,
+    "animation": "shadow_daggers__cross_draw",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "navaja",
+    "variant": 0,
+    "animation": "navaja__compact_flick",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "stiletto",
+    "variant": 0,
+    "animation": "stiletto__spring_flick",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "talon",
+    "variant": 0,
+    "animation": "talon__free_ring_spin",
+    "seconds": 4.05,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "ursus",
+    "variant": 0,
+    "animation": "ursus__palm_toss",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "classic",
+    "variant": 0,
+    "animation": "classic__classic_turn",
+    "seconds": 3.75,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "paracord",
+    "variant": 0,
+    "animation": "paracord__cord_check",
+    "seconds": 4.05,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "survival",
+    "variant": 0,
+    "animation": "survival__saw_check",
+    "seconds": 4.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "nomad",
+    "variant": 0,
+    "animation": "nomad__thumb_open",
+    "seconds": 3.75,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "skeleton",
+    "variant": 0,
+    "animation": "skeleton__ring_flip",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "kukri",
+    "variant": 0,
+    "animation": "kukri__weighted_draw",
+    "seconds": 4.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "variant": 0,
+    "animation": "bloodhound_gloves__knuckle_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "hydra_gloves",
+    "variant": 0,
+    "animation": "hydra_gloves__knuckle_check",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "variant": 0,
+    "animation": "broken_fang_gloves__knuckle_check",
+    "seconds": 3.25,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "sport_gloves",
+    "variant": 0,
+    "animation": "sport_gloves__knuckle_check",
+    "seconds": 3.45,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "driver_gloves",
+    "variant": 0,
+    "animation": "driver_gloves__knuckle_check",
+    "seconds": 3.65,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "hand_wraps",
+    "variant": 0,
+    "animation": "hand_wraps__knuckle_check",
+    "seconds": 3.15,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "moto_gloves",
+    "variant": 0,
+    "animation": "moto_gloves__knuckle_check",
+    "seconds": 3.35,
+    "naturalCleanup": true
+  },
+  {
+    "weapon": "specialist_gloves",
+    "variant": 0,
+    "animation": "specialist_gloves__knuckle_check",
+    "seconds": 3.55,
+    "naturalCleanup": true
+  }
+]

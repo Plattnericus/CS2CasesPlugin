@@ -26,15 +26,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+import dev.plattnericus.cases.inspect.InspectRig;
 
 /**
- * Builds the optional resource pack: one item model and sprite per skin, case and key, all inside
- * a single namespace so the pack merges with any other pack by copying its {@code assets} folder.
- * It never overrides vanilla files. The plugin can distribute this pack to players.
+ * Builds sprites, joint meshes and Vanilla 26.3 item shading. The plugin distributes the
+ * resulting pack with the server's permanent Fusion artwork overlay.
  */
 public final class PackExporter {
 
-    public static final int MIN_FORMAT = 88;
+    public static final int MIN_FORMAT = 97;
     public static final int MAX_FORMAT = 99;
     private static final int SPRITE = 64;
     private static final int SKIN_SPRITE = 128;
@@ -50,6 +52,7 @@ public final class PackExporter {
 
     public static Result export(Catalog catalog, SkinRenderer renderer, String namespace, String author, File target) throws IOException {
         List<String> failures = new ArrayList<>();
+        OriginalSkinArtwork artwork = new OriginalSkinArtwork();
         int skins = 0;
         File parent = target.getAbsoluteFile().getParentFile();
         if (parent != null && !parent.isDirectory() && !parent.mkdirs()) {
@@ -60,16 +63,24 @@ public final class PackExporter {
                     {
                       "pack": {
                         "description": "MCCases skins by %s",
-                        "min_format": %d,
+                        "min_format": [%d, 1],
                         "max_format": %d
                       }
                     }
                     """.formatted(author, MIN_FORMAT, MAX_FORMAT));
+            for (String shader : List.of("item.vsh", "item.fsh")) {
+                try (var input = PackExporter.class.getResourceAsStream("/pack-shaders/" + shader)) {
+                    if (input == null) throw new IOException("Missing Vanilla 26.3 shader: " + shader);
+                    text(zip, "assets/minecraft/shaders/core/" + shader, new String(input.readAllBytes(), StandardCharsets.UTF_8));
+                }
+            }
             text(zip, "README.txt", """
                     MCCases resource pack (optional)
                     -----------------------------------
-                    Everything lives in assets/%1$s/ and no vanilla file is replaced.
-                    To merge with another pack, copy the assets/%1$s folder into that pack.
+                    Models and textures live in assets/%1$s/.
+                    The two assets/minecraft/shaders/core/item.* programs add metal shading
+                    for marked faces and require Vanilla Minecraft 26.3.
+                    Merge both the namespace and these shader programs into another pack.
 
                     Enable it in plugins/MCCases/config.yml -> resource-pack.enabled: true
                     only when every player has this pack loaded; otherwise the items show
@@ -83,7 +94,8 @@ public final class PackExporter {
             for (SkinDefinition skin : catalog.skins().stream().sorted(Comparator.comparing(SkinDefinition::id)).toList()) {
                 BufferedImage sprite;
                 try {
-                    sprite = sprite(renderer, skin);
+                    BufferedImage original = artwork.image("skin/" + skin.id());
+                    sprite = original == null ? sprite(renderer, skin) : originalSprite(original);
                 } catch (TextureException e) {
                     failures.add(skin.id() + ": " + e.getMessage());
                     continue;
@@ -93,16 +105,13 @@ public final class PackExporter {
                 }
                 String path = "skin/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", sprite);
-                if (skin.isKnife()) {
-                    model(zip, namespace, path, "minecraft:item/handheld", KNIFE_DISPLAY);
-                } else {
-                    model(zip, namespace, path, "minecraft:item/generated", GUN_DISPLAY);
-                }
+                model(zip, namespace, path, "minecraft:item/generated", FIXED_DISPLAY);
                 String selected = "trade/selected/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
                 model(zip, namespace, selected, "minecraft:item/generated", FIXED_DISPLAY);
-                try { rig(zip, namespace, skin, renderer); }
+                try { rig(zip, namespace, skin, renderer, artwork); }
                 catch (TextureException e) { throw new IOException("inspect rig " + skin.id(), e); }
+                heldItem(zip, namespace, skin);
                 skins++;
             }
             for (CaseDefinition c : catalog.cases().stream().sorted(Comparator.comparing(CaseDefinition::id)).toList()) {
@@ -122,32 +131,6 @@ public final class PackExporter {
         }
     }
 
-    /**
-     * Hand transforms for gun sprites (muzzle drawn on the right). The vanilla generated transform
-     * turns the texture's right side towards the camera, which made guns on bows and crossbows point
-     * at the shooter; these turn the muzzle forward and level instead.
-     */
-    private static final String GUN_DISPLAY = """
-              "display": {
-                "fixed": {"rotation": [0, 0, 0], "scale": [1, 1, 1]},
-                "firstperson_righthand": {"rotation": [0, 90, 5], "translation": [1.13, 3.2, 1.13], "scale": [0.75, 0.75, 0.75]},
-                "firstperson_lefthand": {"rotation": [0, -90, -5], "translation": [1.13, 3.2, 1.13], "scale": [0.75, 0.75, 0.75]},
-                "thirdperson_righthand": {"rotation": [0, 90, 0], "translation": [0, 3, 1], "scale": [0.65, 0.65, 0.65]},
-                "thirdperson_lefthand": {"rotation": [0, -90, 0], "translation": [0, 3, 1], "scale": [0.65, 0.65, 0.65]}
-              },
-            """;
-
-    // Vanilla generated/handheld models inherit a 180-degree FIXED turn and point +X towards
-    // the camera in the right hand. Our sprites already face right: explicitly face forward.
-    private static final String KNIFE_DISPLAY = """
-              "display": {
-                "fixed": {"rotation": [0, 0, 0], "scale": [1, 1, 1]},
-                "firstperson_righthand": {"rotation": [0, 90, -20], "translation": [1.13, 3.2, 1.13], "scale": [0.68, 0.68, 0.68]},
-                "firstperson_lefthand": {"rotation": [0, -90, 20], "translation": [1.13, 3.2, 1.13], "scale": [0.68, 0.68, 0.68]},
-                "thirdperson_righthand": {"rotation": [0, 90, -20], "translation": [0, 4, 0.5], "scale": [0.85, 0.85, 0.85]},
-                "thirdperson_lefthand": {"rotation": [0, -90, 20], "translation": [0, 4, 0.5], "scale": [0.85, 0.85, 0.85]}
-              },
-            """;
     private static final String FIXED_DISPLAY = "\"display\":{\"fixed\":{\"rotation\":[0,0,0],\"scale\":[1,1,1]}},\n";
 
     private static void model(ZipOutputStream zip, String ns, String path, String parent) throws IOException {
@@ -155,21 +138,26 @@ public final class PackExporter {
     }
 
     /** Textured cuboids give the inspect asset thickness from every angle, with separate joints. */
-    private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer) throws IOException, TextureException {
-        double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
-        ArgbImage source = dev.plattnericus.cases.inspect.InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
-        BufferedImage canvas = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = canvas.createGraphics();
-        // Use alpha-aware area filtering instead of Graphics2D's nearest-neighbour reduction.
-        g.drawImage(source.scaledTo(RIG_CONTENT, RIG_CONTENT).toBufferedImage(), RIG_INSET, RIG_INSET, null); g.dispose();
+    private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer, OriginalSkinArtwork artwork) throws IOException, TextureException {
+        BufferedImage canvas = null;
         for (String layer : dev.plattnericus.cases.inspect.InspectRig.layers(skin.weapon()).stream().map(dev.plattnericus.cases.inspect.InspectRig.Layer::id).distinct().toList()) {
             BufferedImage texture = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage original = artwork.image("inspect/" + skin.id() + "/" + layer);
+            if (original != null) original = InspectRig.presentation(skin.weapon(), ArgbImage.from(original)).toBufferedImage();
+            else if (canvas == null) {
+                double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
+                ArgbImage source = InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
+                canvas = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D graphics = canvas.createGraphics();
+                graphics.drawImage(source.scaledTo(RIG_CONTENT, RIG_CONTENT).toBufferedImage(), RIG_INSET, RIG_INSET, null);
+                graphics.dispose();
+            }
             boolean[][] mask = new boolean[SKIN_SPRITE][SKIN_SPRITE];
             for (int y = 0; y < SKIN_SPRITE; y++) for (int x = 0; x < SKIN_SPRITE; x++) {
-                int pixel = canvas.getRGB(x, y);
+                int pixel = (original == null ? canvas : original).getRGB(x, y);
                 double originalX = (x + .5 - RIG_INSET) / RIG_CONTENT, originalY = (y + .5 - RIG_INSET) / RIG_CONTENT;
                 if (dev.plattnericus.cases.inspect.InspectRig.reverseGrip(skin.weapon())) { originalX = 1 - originalX; originalY = 1 - originalY; }
-                if ((pixel >>> 24) >= 128 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), originalX, originalY))) {
+                if ((pixel >>> 24) >= 128 && (original != null || layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), originalX, originalY)))) {
                     // Geometry covers this texel completely. Partial alpha made the solid rim
                     // see-through and caused dark seams during spins.
                     texture.setRGB(x, y, pixel | 0xFF000000); mask[y][x] = true;
@@ -199,17 +187,72 @@ public final class PackExporter {
                     if (face.equals("west")) u2 = u1;
                     if (face.equals("up")) v2 = v1;
                     if (face.equals("down")) v1 = v2;
-                    faces.append("\"").append(face).append("\":{\"uv\":[").append(u1).append(',').append(v1).append(',').append(u2).append(',').append(v2).append("],\"texture\":\"#skin\"}");
+                    double centerX = (x + right) / 2.0 / SKIN_SPRITE;
+                    if (InspectRig.reverseGrip(skin.weapon())) centerX = 1 - centerX;
+                    var blade = skin.weapon().region("blade");
+                    boolean metal = skin.weapon().category() != dev.plattnericus.cases.catalog.WeaponCategory.GLOVE
+                            && (!skin.isKnife() || centerX >= (blade == null ? .46 : blade.x1()));
+                    faces.append("\"").append(face).append("\":{\"uv\":[").append(u1).append(',').append(v1).append(',').append(u2).append(',').append(v2).append("],\"texture\":\"#skin\"")
+                            .append(metal ? ",\"tintindex\":0" : "").append('}');
                 }
                 elements.add("{\"from\":[" + x1 + ',' + (16-y2) + ',' + (8-thickness/2) + "],\"to\":[" + x2 + ',' + (16-y1) + ',' + (8+thickness/2) + "],\"faces\":{" + faces + "}}");
             }
-            text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\"}}");
-            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false,\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\",\"particle\":\"#skin\"},\"elements\":[" + String.join(",", elements) + "]}");
+            text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":" + metalModel(ns, path) + "}");
+            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false," + heldDisplay(skin) + "\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\",\"particle\":\"#skin\"},\"elements\":[" + String.join(",", elements) + "]}");
         }
     }
 
+    /** The same opaque geometry is used in hand and during inspection; menus retain the original artwork. */
+    private static void heldItem(ZipOutputStream zip, String ns, SkinDefinition skin) throws IOException {
+        var parts = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct()
+                .map(layer -> metalModel(ns, "inspect/" + skin.id() + "/" + layer)).toList();
+        String held = "{\"type\":\"minecraft:composite\",\"models\":[" + String.join(",", parts) + "]}";
+        text(zip, "assets/" + ns + "/items/skin/" + skin.id() + ".json", "{\"model\":{\"type\":\"minecraft:select\",\"property\":\"minecraft:display_context\","
+                + "\"cases\":[{\"when\":[\"firstperson_righthand\",\"firstperson_lefthand\",\"thirdperson_righthand\",\"thirdperson_lefthand\"],\"model\":" + held + "}],"
+                + "\"fallback\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/skin/" + skin.id() + "\"}}}");
+    }
+
+    private static String metalModel(String ns, String path) {
+        return "{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\",\"tints\":[{\"type\":\"minecraft:constant\",\"value\":16711164}]}";
+    }
+
+    private static String heldDisplay(SkinDefinition skin) {
+        // ItemInHandLayer applies X=-90,Y=180 before these rotations. Compensating for that
+        // places the grip at the palm and presents the blade broadside, instead of through the arm.
+        boolean knife = skin.isKnife(), reverse = InspectRig.reverseGrip(skin.weapon());
+        double gripX = knife ? (reverse ? .72 : .29) : .36;
+        double gripY = knife ? .50 : .57;
+        float firstScale = knife ? .75f : .80f, thirdScale = knife ? .90f : .85f;
+        StringBuilder display = new StringBuilder("\"display\":{\"fixed\":{\"rotation\":[0,0,0],\"scale\":[1,1,1]}");
+        for (boolean first : List.of(true, false)) for (boolean left : List.of(false, true)) {
+            float firstYaw = knife ? 15 : skin.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE ? -20 : 40;
+            Vector3f angles = first ? new Vector3f(-5, firstYaw, 20) : new Vector3f(90, 135, 0);
+            float scale = first ? firstScale : thirdScale;
+            Vector3f grip = new Vector3f((float)(16 * (gripX - .5)), (float)(16 * (.5 - gripY)), 0).mul(scale)
+                    .rotate(new Quaternionf().rotationXYZ((float)Math.toRadians(angles.x), (float)Math.toRadians(angles.y), (float)Math.toRadians(angles.z)));
+            Vector3f translation = grip.negate();
+            if (first) translation.add(-1.5f, 3.2f, -3.5f);
+            // Native Y/Z and translation mirroring plus a mirrored mesh produce a true left-hand grip.
+            display.append(",\"").append(first ? "firstperson" : "thirdperson").append(left ? "_lefthand" : "_righthand")
+                    .append("\":{\"rotation\":[").append(angles.x).append(',').append(angles.y).append(',').append(angles.z)
+                    .append("],\"translation\":[").append(translation.x).append(',').append(translation.y).append(',').append(translation.z)
+                    .append("],\"scale\":[").append(left ? -scale : scale).append(',').append(scale).append(',').append(scale).append("]}");
+        }
+        return display.append("},").toString();
+    }
+
+    private static BufferedImage originalSprite(BufferedImage original) {
+        // Keep the supplied colours and pattern; normalize only coverage to prevent extruded alpha spikes.
+        BufferedImage out = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
+        for (int y = 1; y < SKIN_SPRITE - 1; y++) for (int x = 1; x < SKIN_SPRITE - 1; x++) {
+            int pixel = original.getRGB(x, y);
+            if ((pixel >>> 24) >= 128) out.setRGB(x, y, pixel | 0xff000000);
+        }
+        return out;
+    }
+
     private static void model(ZipOutputStream zip, String ns, String path, String parent, String display) throws IOException {
-        text(zip, "assets/" + ns + "/items/" + path + ".json",
+        if (!path.startsWith("skin/")) text(zip, "assets/" + ns + "/items/" + path + ".json",
                 "{\n  \"model\": {\n    \"type\": \"minecraft:model\",\n    \"model\": \"" + ns + ":item/" + path + "\"\n  }\n}\n");
         text(zip, "assets/" + ns + "/models/item/" + path + ".json",
                 "{\n  \"parent\": \"" + parent + "\",\n" + (display == null ? "" : display)

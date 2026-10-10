@@ -24,6 +24,8 @@ public final class FusionPackChecks {
             for (String name : FusionPack.entries(current).keySet()) if (name.startsWith("assets/mccases/")) {
                 require(Arrays.equals(bytes(current, name), bytes(fusion, name)), "stale generated asset: " + name); managed++;
             }
+            for (String shader : new String[]{"item.vsh", "item.fsh"}) require(Arrays.equals(
+                    bytes(current,"assets/minecraft/shaders/core/" + shader), bytes(fusion,"assets/minecraft/shaders/core/" + shader)), "stale item shader " + shader);
             for (String name : FusionPack.entries(base).keySet()) {
                 require(Arrays.equals(bytes(base, name), bytes(fusion, name)), "changed custom asset: " + name); preserved++;
             }
@@ -84,6 +86,13 @@ public final class FusionPackChecks {
             try (var z = new ZipFile(refreshed.toFile())) { require(z.getEntry("assets/mccases/models/item/obsolete.json") == null, "obsolete managed model survives merge"); }
             Path repeat = temp.resolve("repeat.zip"); FusionPack.merge(generated, overlay, repeat, "mccases", version);
             require(FusionPack.hash(repeat).equals(FusionPack.hash(combined)), "Fusion merge is not deterministic");
+            Path oldShader = temp.resolve("old-shader.zip"), shaderRefresh = temp.resolve("shader-refresh.zip");
+            String shaderPath = "assets/minecraft/shaders/core/item.fsh";
+            copy(overlay,oldShader,null,shaderPath,"obsolete shader".getBytes(StandardCharsets.UTF_8));
+            FusionPack.merge(generated,oldShader,shaderRefresh,"mccases",version);
+            try (var source = new ZipFile(generated.toFile()); var refreshedShader = new ZipFile(shaderRefresh.toFile())) {
+                require(Arrays.equals(bytes(source,shaderPath),bytes(refreshedShader,shaderPath)), "old server shader survived model upgrade");
+            }
         } finally { try (var paths = Files.walk(temp)) { for (var p : paths.sorted(Comparator.reverseOrder()).toList()) Files.delete(p); } }
         System.out.println("PASS FUSION: " + managed + " current managed assets, " + preserved + " exact overlay files, " + references
                 + " resolved resource references; seven bitmap fonts, deterministic output, first/old/edited installs, repeated restart, custom catalog receipts, missing-font failure and atomic preservation.");

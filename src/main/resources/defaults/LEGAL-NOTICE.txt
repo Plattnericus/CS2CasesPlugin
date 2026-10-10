@@ -20,7 +20,10 @@ for permissions; third-party materials remain governed by their own rights and l
 Custom textures, fonts, logos and player skins require appropriate permission.
 The default Fusion pack includes the supplied server font/icon overlay; its source
 archive and exact asset hashes are recorded in resourcepack/fusion/SOURCE.json.
-The generated MCCases namespace is refreshed together on every build/export.
+The original skin/inspect PNGs are retained with hashes in resourcepack/artwork/SOURCE.json.
+Current models and opaque edge geometry are rebuilt from the selected artwork.
+The two item shader programs adapt the Minecraft 26.3 baseline and remain subject to
+Mojang/Microsoft terms; the project does not assert independent rights to those portions.
 
 The server operator is responsible for server rules, lawful asset use and player privacy.
 The plugin stores player UUIDs, names, skin collections and transaction/opening records.

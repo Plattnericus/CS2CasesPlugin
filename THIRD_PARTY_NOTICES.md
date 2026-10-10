@@ -16,7 +16,11 @@ configuration, translations, rendered assets, resource pack and legal documentat
 It does not shade or bundle Paper, Bukkit, Adventure, JOML, Gson, SnakeYAML, SLF4J,
 SQLite JDBC, Minecraft client/server binaries or the development check plugin.
 References to vanilla model IDs and sounds are resolved by the installed game;
-the original game files are not copied into this build.
+Minecraft binaries are not copied into this build. The two item shader programs are
+adapted from the installed Minecraft 26.3 resource-pack shader baseline; their original
+lighting, fog and transparency logic remains present. These Minecraft-derived shader
+portions are subject to Mojang/Microsoft terms and are not asserted as independently
+owned or separately relicensed project code.
 
 | Component | Role in this repository | Redistribution status |
 | --- | --- | --- |
@@ -44,6 +48,12 @@ records the original archive and individual file hashes. This is provenance rath
 than an independent rights grant. The operator remains responsible for permission
 and any required attribution for supplied artwork and fonts. Additional custom assets
 and configured NPC player skins require their own rights review.
+
+The original Fusion skin artwork is also retained: 815 GUI sprites and 1,377 inspect
+layers, recorded in [the skin source manifest](resourcepack/artwork/SOURCE.json).
+These source PNGs are stored unchanged; exported masks and geometry are derived from
+them. This records the operator-supplied source and does not independently clear rights
+to CS-inspired artwork or designs.
 
 No project-wide open-source license is asserted. Existing third-party licenses,
 separate permissions and applicable statutory rights are unaffected.

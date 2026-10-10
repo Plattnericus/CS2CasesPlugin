@@ -96,7 +96,13 @@ public final class FeatureChecks {
             require(samples.getFirst() == 0 && samples.getLast() == animation.duration(), "animation endpoints " + id);
             for (int i = 1; i < samples.size(); i++) {
                 require(samples.get(i) > samples.get(i - 1), "duplicate samples " + id);
-                require(samples.get(i) - samples.get(i - 1) <= 2, "sparse interpolation " + id);
+                if (samples.get(i) - samples.get(i - 1) > 2) {
+                    for (String group : inspect.getConfigurationSection("animations." + id + ".groups").getKeys(false)) {
+                        Matrix4f start = animation.groupMatrix(group, samples.get(i - 1));
+                        for (int tick = samples.get(i - 1) + 1; tick <= samples.get(i); tick++)
+                            require(start.equals(animation.groupMatrix(group,tick),1e-6f), "sparse moving interpolation " + id + "/" + group);
+                    }
+                }
             }
             for (String group : inspect.getConfigurationSection("animations." + id + ".groups").getKeys(false)) {
                 for (int tick = 0; tick <= animation.duration(); tick++) {

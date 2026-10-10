@@ -1,0 +1,22 @@
+[
+  {
+    "command": "cases",
+    "file": "cases-menu.png",
+    "client": "Minecraft 26.3 Vanilla"
+  },
+  {
+    "command": "inventory vanilla",
+    "file": "inventory-menu.png",
+    "client": "Minecraft 26.3 Vanilla"
+  },
+  {
+    "command": "tradeup",
+    "file": "tradeup-menu.png",
+    "client": "Minecraft 26.3 Vanilla"
+  },
+  {
+    "command": "shop",
+    "file": "shop-menu.png",
+    "client": "Minecraft 26.3 Vanilla"
+  }
+]

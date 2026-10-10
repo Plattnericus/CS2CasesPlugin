@@ -1,0 +1,1262 @@
+[
+  {
+    "weapon": "glock18",
+    "viewer": "client",
+    "angle": 0,
+    "file": "glock18_client_angle0.png"
+  },
+  {
+    "weapon": "glock18",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "glock18_observer_angle0.png"
+  },
+  {
+    "weapon": "usps",
+    "viewer": "client",
+    "angle": 0,
+    "file": "usps_client_angle0.png"
+  },
+  {
+    "weapon": "usps",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "usps_observer_angle0.png"
+  },
+  {
+    "weapon": "p2000",
+    "viewer": "client",
+    "angle": 0,
+    "file": "p2000_client_angle0.png"
+  },
+  {
+    "weapon": "p2000",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "p2000_observer_angle0.png"
+  },
+  {
+    "weapon": "p250",
+    "viewer": "client",
+    "angle": 0,
+    "file": "p250_client_angle0.png"
+  },
+  {
+    "weapon": "p250",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "p250_observer_angle0.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "viewer": "client",
+    "angle": 0,
+    "file": "fiveseven_client_angle0.png"
+  },
+  {
+    "weapon": "fiveseven",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "fiveseven_observer_angle0.png"
+  },
+  {
+    "weapon": "tec9",
+    "viewer": "client",
+    "angle": 0,
+    "file": "tec9_client_angle0.png"
+  },
+  {
+    "weapon": "tec9",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "tec9_observer_angle0.png"
+  },
+  {
+    "weapon": "cz75",
+    "viewer": "client",
+    "angle": 0,
+    "file": "cz75_client_angle0.png"
+  },
+  {
+    "weapon": "cz75",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "cz75_observer_angle0.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "viewer": "client",
+    "angle": 0,
+    "file": "dual_berettas_client_angle0.png"
+  },
+  {
+    "weapon": "dual_berettas",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "dual_berettas_observer_angle0.png"
+  },
+  {
+    "weapon": "deagle",
+    "viewer": "client",
+    "angle": 0,
+    "file": "deagle_client_angle0.png"
+  },
+  {
+    "weapon": "deagle",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "deagle_observer_angle0.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "viewer": "client",
+    "angle": 0,
+    "file": "r8_revolver_client_angle0.png"
+  },
+  {
+    "weapon": "r8_revolver",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "r8_revolver_observer_angle0.png"
+  },
+  {
+    "weapon": "mac10",
+    "viewer": "client",
+    "angle": 0,
+    "file": "mac10_client_angle0.png"
+  },
+  {
+    "weapon": "mac10",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "mac10_observer_angle0.png"
+  },
+  {
+    "weapon": "mp9",
+    "viewer": "client",
+    "angle": 0,
+    "file": "mp9_client_angle0.png"
+  },
+  {
+    "weapon": "mp9",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "mp9_observer_angle0.png"
+  },
+  {
+    "weapon": "mp7",
+    "viewer": "client",
+    "angle": 0,
+    "file": "mp7_client_angle0.png"
+  },
+  {
+    "weapon": "mp7",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "mp7_observer_angle0.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "viewer": "client",
+    "angle": 0,
+    "file": "mp5sd_client_angle0.png"
+  },
+  {
+    "weapon": "mp5sd",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "mp5sd_observer_angle0.png"
+  },
+  {
+    "weapon": "ump45",
+    "viewer": "client",
+    "angle": 0,
+    "file": "ump45_client_angle0.png"
+  },
+  {
+    "weapon": "ump45",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "ump45_observer_angle0.png"
+  },
+  {
+    "weapon": "p90",
+    "viewer": "client",
+    "angle": 0,
+    "file": "p90_client_angle0.png"
+  },
+  {
+    "weapon": "p90",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "p90_observer_angle0.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "viewer": "client",
+    "angle": 0,
+    "file": "ppbizon_client_angle0.png"
+  },
+  {
+    "weapon": "ppbizon",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "ppbizon_observer_angle0.png"
+  },
+  {
+    "weapon": "ak47",
+    "viewer": "client",
+    "angle": 0,
+    "file": "ak47_client_angle0.png"
+  },
+  {
+    "weapon": "ak47",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "ak47_observer_angle0.png"
+  },
+  {
+    "weapon": "m4a4",
+    "viewer": "client",
+    "angle": 0,
+    "file": "m4a4_client_angle0.png"
+  },
+  {
+    "weapon": "m4a4",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "m4a4_observer_angle0.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "viewer": "client",
+    "angle": 0,
+    "file": "m4a1s_client_angle0.png"
+  },
+  {
+    "weapon": "m4a1s",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "m4a1s_observer_angle0.png"
+  },
+  {
+    "weapon": "galil",
+    "viewer": "client",
+    "angle": 0,
+    "file": "galil_client_angle0.png"
+  },
+  {
+    "weapon": "galil",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "galil_observer_angle0.png"
+  },
+  {
+    "weapon": "famas",
+    "viewer": "client",
+    "angle": 0,
+    "file": "famas_client_angle0.png"
+  },
+  {
+    "weapon": "famas",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "famas_observer_angle0.png"
+  },
+  {
+    "weapon": "aug",
+    "viewer": "client",
+    "angle": 0,
+    "file": "aug_client_angle0.png"
+  },
+  {
+    "weapon": "aug",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "aug_observer_angle0.png"
+  },
+  {
+    "weapon": "sg553",
+    "viewer": "client",
+    "angle": 0,
+    "file": "sg553_client_angle0.png"
+  },
+  {
+    "weapon": "sg553",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "sg553_observer_angle0.png"
+  },
+  {
+    "weapon": "ssg08",
+    "viewer": "client",
+    "angle": 0,
+    "file": "ssg08_client_angle0.png"
+  },
+  {
+    "weapon": "ssg08",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "ssg08_observer_angle0.png"
+  },
+  {
+    "weapon": "awp",
+    "viewer": "client",
+    "angle": 0,
+    "file": "awp_client_angle0.png"
+  },
+  {
+    "weapon": "awp",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "awp_observer_angle0.png"
+  },
+  {
+    "weapon": "scar20",
+    "viewer": "client",
+    "angle": 0,
+    "file": "scar20_client_angle0.png"
+  },
+  {
+    "weapon": "scar20",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "scar20_observer_angle0.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "viewer": "client",
+    "angle": 0,
+    "file": "g3sg1_client_angle0.png"
+  },
+  {
+    "weapon": "g3sg1",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "g3sg1_observer_angle0.png"
+  },
+  {
+    "weapon": "nova",
+    "viewer": "client",
+    "angle": 0,
+    "file": "nova_client_angle0.png"
+  },
+  {
+    "weapon": "nova",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "nova_observer_angle0.png"
+  },
+  {
+    "weapon": "xm1014",
+    "viewer": "client",
+    "angle": 0,
+    "file": "xm1014_client_angle0.png"
+  },
+  {
+    "weapon": "xm1014",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "xm1014_observer_angle0.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "viewer": "client",
+    "angle": 0,
+    "file": "sawedoff_client_angle0.png"
+  },
+  {
+    "weapon": "sawedoff",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "sawedoff_observer_angle0.png"
+  },
+  {
+    "weapon": "mag7",
+    "viewer": "client",
+    "angle": 0,
+    "file": "mag7_client_angle0.png"
+  },
+  {
+    "weapon": "mag7",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "mag7_observer_angle0.png"
+  },
+  {
+    "weapon": "m249",
+    "viewer": "client",
+    "angle": 0,
+    "file": "m249_client_angle0.png"
+  },
+  {
+    "weapon": "m249",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "m249_observer_angle0.png"
+  },
+  {
+    "weapon": "negev",
+    "viewer": "client",
+    "angle": 0,
+    "file": "negev_client_angle0.png"
+  },
+  {
+    "weapon": "negev",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "negev_observer_angle0.png"
+  },
+  {
+    "weapon": "zeus",
+    "viewer": "client",
+    "angle": 0,
+    "file": "zeus_client_angle0.png"
+  },
+  {
+    "weapon": "zeus",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "zeus_observer_angle0.png"
+  },
+  {
+    "weapon": "karambit",
+    "viewer": "client",
+    "angle": 0,
+    "file": "karambit_client_angle0.png"
+  },
+  {
+    "weapon": "karambit",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "karambit_observer_angle0.png"
+  },
+  {
+    "weapon": "karambit",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "karambit_observer_angle1.png"
+  },
+  {
+    "weapon": "karambit",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "karambit_observer_angle2.png"
+  },
+  {
+    "weapon": "karambit",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "karambit_observer_angle3.png"
+  },
+  {
+    "weapon": "butterfly",
+    "viewer": "client",
+    "angle": 0,
+    "file": "butterfly_client_angle0.png"
+  },
+  {
+    "weapon": "butterfly",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "butterfly_observer_angle0.png"
+  },
+  {
+    "weapon": "butterfly",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "butterfly_observer_angle1.png"
+  },
+  {
+    "weapon": "butterfly",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "butterfly_observer_angle2.png"
+  },
+  {
+    "weapon": "butterfly",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "butterfly_observer_angle3.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "viewer": "client",
+    "angle": 0,
+    "file": "m9_bayonet_client_angle0.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "m9_bayonet_observer_angle0.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "m9_bayonet_observer_angle1.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "m9_bayonet_observer_angle2.png"
+  },
+  {
+    "weapon": "m9_bayonet",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "m9_bayonet_observer_angle3.png"
+  },
+  {
+    "weapon": "bayonet",
+    "viewer": "client",
+    "angle": 0,
+    "file": "bayonet_client_angle0.png"
+  },
+  {
+    "weapon": "bayonet",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "bayonet_observer_angle0.png"
+  },
+  {
+    "weapon": "bayonet",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "bayonet_observer_angle1.png"
+  },
+  {
+    "weapon": "bayonet",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "bayonet_observer_angle2.png"
+  },
+  {
+    "weapon": "bayonet",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "bayonet_observer_angle3.png"
+  },
+  {
+    "weapon": "flip",
+    "viewer": "client",
+    "angle": 0,
+    "file": "flip_client_angle0.png"
+  },
+  {
+    "weapon": "flip",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "flip_observer_angle0.png"
+  },
+  {
+    "weapon": "flip",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "flip_observer_angle1.png"
+  },
+  {
+    "weapon": "flip",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "flip_observer_angle2.png"
+  },
+  {
+    "weapon": "flip",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "flip_observer_angle3.png"
+  },
+  {
+    "weapon": "gut",
+    "viewer": "client",
+    "angle": 0,
+    "file": "gut_client_angle0.png"
+  },
+  {
+    "weapon": "gut",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "gut_observer_angle0.png"
+  },
+  {
+    "weapon": "gut",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "gut_observer_angle1.png"
+  },
+  {
+    "weapon": "gut",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "gut_observer_angle2.png"
+  },
+  {
+    "weapon": "gut",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "gut_observer_angle3.png"
+  },
+  {
+    "weapon": "huntsman",
+    "viewer": "client",
+    "angle": 0,
+    "file": "huntsman_client_angle0.png"
+  },
+  {
+    "weapon": "huntsman",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "huntsman_observer_angle0.png"
+  },
+  {
+    "weapon": "huntsman",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "huntsman_observer_angle1.png"
+  },
+  {
+    "weapon": "huntsman",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "huntsman_observer_angle2.png"
+  },
+  {
+    "weapon": "huntsman",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "huntsman_observer_angle3.png"
+  },
+  {
+    "weapon": "falchion",
+    "viewer": "client",
+    "angle": 0,
+    "file": "falchion_client_angle0.png"
+  },
+  {
+    "weapon": "falchion",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "falchion_observer_angle0.png"
+  },
+  {
+    "weapon": "falchion",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "falchion_observer_angle1.png"
+  },
+  {
+    "weapon": "falchion",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "falchion_observer_angle2.png"
+  },
+  {
+    "weapon": "falchion",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "falchion_observer_angle3.png"
+  },
+  {
+    "weapon": "bowie",
+    "viewer": "client",
+    "angle": 0,
+    "file": "bowie_client_angle0.png"
+  },
+  {
+    "weapon": "bowie",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "bowie_observer_angle0.png"
+  },
+  {
+    "weapon": "bowie",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "bowie_observer_angle1.png"
+  },
+  {
+    "weapon": "bowie",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "bowie_observer_angle2.png"
+  },
+  {
+    "weapon": "bowie",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "bowie_observer_angle3.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "viewer": "client",
+    "angle": 0,
+    "file": "shadow_daggers_client_angle0.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "shadow_daggers_observer_angle0.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "shadow_daggers_observer_angle1.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "shadow_daggers_observer_angle2.png"
+  },
+  {
+    "weapon": "shadow_daggers",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "shadow_daggers_observer_angle3.png"
+  },
+  {
+    "weapon": "navaja",
+    "viewer": "client",
+    "angle": 0,
+    "file": "navaja_client_angle0.png"
+  },
+  {
+    "weapon": "navaja",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "navaja_observer_angle0.png"
+  },
+  {
+    "weapon": "navaja",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "navaja_observer_angle1.png"
+  },
+  {
+    "weapon": "navaja",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "navaja_observer_angle2.png"
+  },
+  {
+    "weapon": "navaja",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "navaja_observer_angle3.png"
+  },
+  {
+    "weapon": "stiletto",
+    "viewer": "client",
+    "angle": 0,
+    "file": "stiletto_client_angle0.png"
+  },
+  {
+    "weapon": "stiletto",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "stiletto_observer_angle0.png"
+  },
+  {
+    "weapon": "stiletto",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "stiletto_observer_angle1.png"
+  },
+  {
+    "weapon": "stiletto",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "stiletto_observer_angle2.png"
+  },
+  {
+    "weapon": "stiletto",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "stiletto_observer_angle3.png"
+  },
+  {
+    "weapon": "talon",
+    "viewer": "client",
+    "angle": 0,
+    "file": "talon_client_angle0.png"
+  },
+  {
+    "weapon": "talon",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "talon_observer_angle0.png"
+  },
+  {
+    "weapon": "talon",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "talon_observer_angle1.png"
+  },
+  {
+    "weapon": "talon",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "talon_observer_angle2.png"
+  },
+  {
+    "weapon": "talon",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "talon_observer_angle3.png"
+  },
+  {
+    "weapon": "ursus",
+    "viewer": "client",
+    "angle": 0,
+    "file": "ursus_client_angle0.png"
+  },
+  {
+    "weapon": "ursus",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "ursus_observer_angle0.png"
+  },
+  {
+    "weapon": "ursus",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "ursus_observer_angle1.png"
+  },
+  {
+    "weapon": "ursus",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "ursus_observer_angle2.png"
+  },
+  {
+    "weapon": "ursus",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "ursus_observer_angle3.png"
+  },
+  {
+    "weapon": "classic",
+    "viewer": "client",
+    "angle": 0,
+    "file": "classic_client_angle0.png"
+  },
+  {
+    "weapon": "classic",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "classic_observer_angle0.png"
+  },
+  {
+    "weapon": "classic",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "classic_observer_angle1.png"
+  },
+  {
+    "weapon": "classic",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "classic_observer_angle2.png"
+  },
+  {
+    "weapon": "classic",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "classic_observer_angle3.png"
+  },
+  {
+    "weapon": "paracord",
+    "viewer": "client",
+    "angle": 0,
+    "file": "paracord_client_angle0.png"
+  },
+  {
+    "weapon": "paracord",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "paracord_observer_angle0.png"
+  },
+  {
+    "weapon": "paracord",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "paracord_observer_angle1.png"
+  },
+  {
+    "weapon": "paracord",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "paracord_observer_angle2.png"
+  },
+  {
+    "weapon": "paracord",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "paracord_observer_angle3.png"
+  },
+  {
+    "weapon": "survival",
+    "viewer": "client",
+    "angle": 0,
+    "file": "survival_client_angle0.png"
+  },
+  {
+    "weapon": "survival",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "survival_observer_angle0.png"
+  },
+  {
+    "weapon": "survival",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "survival_observer_angle1.png"
+  },
+  {
+    "weapon": "survival",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "survival_observer_angle2.png"
+  },
+  {
+    "weapon": "survival",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "survival_observer_angle3.png"
+  },
+  {
+    "weapon": "nomad",
+    "viewer": "client",
+    "angle": 0,
+    "file": "nomad_client_angle0.png"
+  },
+  {
+    "weapon": "nomad",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "nomad_observer_angle0.png"
+  },
+  {
+    "weapon": "nomad",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "nomad_observer_angle1.png"
+  },
+  {
+    "weapon": "nomad",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "nomad_observer_angle2.png"
+  },
+  {
+    "weapon": "nomad",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "nomad_observer_angle3.png"
+  },
+  {
+    "weapon": "skeleton",
+    "viewer": "client",
+    "angle": 0,
+    "file": "skeleton_client_angle0.png"
+  },
+  {
+    "weapon": "skeleton",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "skeleton_observer_angle0.png"
+  },
+  {
+    "weapon": "skeleton",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "skeleton_observer_angle1.png"
+  },
+  {
+    "weapon": "skeleton",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "skeleton_observer_angle2.png"
+  },
+  {
+    "weapon": "skeleton",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "skeleton_observer_angle3.png"
+  },
+  {
+    "weapon": "kukri",
+    "viewer": "client",
+    "angle": 0,
+    "file": "kukri_client_angle0.png"
+  },
+  {
+    "weapon": "kukri",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "kukri_observer_angle0.png"
+  },
+  {
+    "weapon": "kukri",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "kukri_observer_angle1.png"
+  },
+  {
+    "weapon": "kukri",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "kukri_observer_angle2.png"
+  },
+  {
+    "weapon": "kukri",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "kukri_observer_angle3.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "bloodhound_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "bloodhound_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "bloodhound_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "bloodhound_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "bloodhound_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "bloodhound_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "hydra_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "hydra_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "hydra_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "hydra_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "hydra_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "hydra_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "broken_fang_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "broken_fang_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "broken_fang_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "broken_fang_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "broken_fang_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "broken_fang_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "sport_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "sport_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "sport_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "sport_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "sport_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "sport_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "driver_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "driver_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "driver_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "driver_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "driver_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "driver_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "viewer": "client",
+    "angle": 0,
+    "file": "hand_wraps_client_angle0.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "hand_wraps_observer_angle0.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "hand_wraps_observer_angle1.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "hand_wraps_observer_angle2.png"
+  },
+  {
+    "weapon": "hand_wraps",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "hand_wraps_observer_angle3.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "moto_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "moto_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "moto_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "moto_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "moto_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "moto_gloves_observer_angle3.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "viewer": "client",
+    "angle": 0,
+    "file": "specialist_gloves_client_angle0.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "viewer": "observer",
+    "angle": 0,
+    "file": "specialist_gloves_observer_angle0.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "viewer": "observer",
+    "angle": 1,
+    "file": "specialist_gloves_observer_angle1.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "viewer": "observer",
+    "angle": 2,
+    "file": "specialist_gloves_observer_angle2.png"
+  },
+  {
+    "weapon": "specialist_gloves",
+    "viewer": "observer",
+    "angle": 3,
+    "file": "specialist_gloves_observer_angle3.png"
+  }
+]

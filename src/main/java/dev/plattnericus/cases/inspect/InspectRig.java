@@ -93,8 +93,8 @@ public final class InspectRig {
             }
             else if (reverseGrip(weapon)) {
                 // Match the pack's turned silhouette and ring center, including Talon's longer grip.
-                Vector3f ring = weapon.id().equals("talon") ? new Vector3f(.29882812f, .017578125f, 0)
-                        : new Vector3f(.24719238f, .01171875f, 0);
+                Vector3f ring = weapon.id().equals("talon") ? new Vector3f(.27773438f, .017578125f, 0)
+                        : new Vector3f(.24609375f, .01171875f, 0);
                 Vector3f position = new Vector3f(p.position()).mul(-.75f, -.75f, .75f)
                         .add(ring.x - .2475f, ring.y, 0);
                 parts.add(new ModelPart(p.id(), p.type(), p.material(), position, new Vector3f(p.size()).mul(.75f),

@@ -35,7 +35,7 @@ public final class InspectAnimation {
     private final Map<Integer, String> sounds;
     private final int substeps;
     private final Map<String, List<Segment>> segments = new HashMap<>();
-    private final List<Integer> samples = new ArrayList<>();
+    private List<Integer> samples;
     private int duration;
 
     public InspectAnimation(String id, Map<String, Group> groups, Map<Integer, String> sounds, int substeps) {
@@ -56,7 +56,7 @@ public final class InspectAnimation {
     }
 
     public List<Integer> samples() {
-        return List.copyOf(samples);
+        return samples;
     }
 
     public Map<Integer, String> sounds() {
@@ -111,7 +111,7 @@ public final class InspectAnimation {
                 list.add(new Segment(t, end, current, next, k.ease()));
                 // Also sample inherited motion: sparse child keyframes otherwise interpolate a
                 // compound rotation along the shortest quaternion path and visibly cut a spin.
-                int splits = Math.min(end - t, Math.max((end - t + 1) / 2,
+                int splits = current.equals(next) ? 1 : Math.min(end - t, Math.max((end - t + 1) / 2,
                         Math.max(k.ease() == Ease.LINEAR ? 1 : substeps, (int) Math.ceil(current.maxAngleDelta(next) / 45f))));
                 for (int s = 0; s <= splits; s++) {
                     times.add(t + Math.round((end - t) * (s / (float) splits)));
@@ -142,7 +142,8 @@ public final class InspectAnimation {
                 }
             }
         } while (refined);
-        samples.addAll(times);
+        // Reused by every scene tick. Child holds still inherit all parent sample times.
+        samples = List.copyOf(times);
     }
 
     private float rotationTravel(Group group, int start, int end) {
