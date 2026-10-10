@@ -1,0 +1,44 @@
+[
+  {
+    "command": "market balance",
+    "replies": [
+      "[Cases] Emeralds in your inventory: 0"
+    ]
+  },
+  {
+    "command": "market claims",
+    "replies": [
+      "[Cases] Collected 255 Emerald items."
+    ]
+  },
+  {
+    "command": "market balance",
+    "replies": [
+      "[Cases] Emeralds in your inventory: 255"
+    ]
+  },
+  {
+    "command": "skintrade DevObserver",
+    "replies": [
+      "[Cases] Trade request sent to DevObserver. It expires in 60 seconds."
+    ]
+  },
+  {
+    "command": "trade cancel",
+    "replies": [
+      "[Cases] Trade cancelled. You keep all your skins."
+    ]
+  },
+  {
+    "command": "skinmarket unknown",
+    "replies": [
+      "[Cases] Invalid command. Usage: /market [sell|own|search|balance|claims|recover]"
+    ]
+  },
+  {
+    "command": "csadmin info",
+    "replies": [
+      "[Cases] You don't have permission to do that."
+    ]
+  }
+]

@@ -1,0 +1,834 @@
+# Stock 1.2.0 ring-knife profiles; used only to recognize unchanged timelines.
+animations:
+  karambit__finger_roll:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '57': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 8
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - -5
+          - 17
+          - 13
+          ease: out
+        - ticks: 12
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 8
+          - 39
+          - 21
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 12
+          rotate:
+          - -4
+          - -17
+          - -13
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 12
+          rotate: &id001
+          - 0
+          - 0
+          - 360
+          ease: inout
+        - ticks: 33
+          ease: inout
+        - ticks: 10
+          rotate: *id001
+          ease: inout
+        parent: body
+        pivot:
+        - -0.3
+        - 0
+        - 0
+  karambit__reverse_grip:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '58': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 9
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - -2
+          - -17
+          - -13
+          ease: out
+        - ticks: 12
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 4
+          - -39
+          - -21
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 12
+          rotate:
+          - -4
+          - 17
+          - 13
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 12
+          rotate: &id002
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 34
+          ease: inout
+        - ticks: 10
+          rotate: *id002
+          ease: inout
+        parent: body
+        pivot:
+        - -0.3
+        - 0
+        - 0
+  karambit__ring_twirl:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '59': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 10
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - 1
+          - 17
+          - 13
+          ease: out
+        - ticks: 12
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 0
+          - 39
+          - 21
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 12
+          rotate:
+          - -4
+          - -17
+          - -13
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 12
+          rotate: &id003
+          - 0
+          - 0
+          - -360
+          ease: inout
+        - ticks: 35
+          ease: inout
+        - ticks: 10
+          rotate: *id003
+          ease: inout
+        parent: body
+        pivot:
+        - -0.3
+        - 0
+        - 0
+  karambit__blade_presentation:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '68': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 5
+          move:
+          - 0.018
+          - -0.075
+          - -0.01
+          rotate:
+          - -4
+          - 6
+          - 8
+          ease: inout
+        - ticks: 11
+          move:
+          - -0.085
+          - 0.045
+          - 0.035
+          rotate:
+          - 12
+          - -17
+          - 17
+          ease: out
+        - ticks: 12
+          move:
+          - -0.06
+          - 0.065
+          - 0.025
+          rotate:
+          - 4
+          - 29
+          - 13
+          ease: inout
+        - ticks: 24
+          ease: inout
+        - ticks: 12
+          move:
+          - 0.015
+          - -0.02
+          - 0
+          rotate:
+          - -6
+          - -8.5
+          - -6.5
+          ease: inout
+        - ticks: 7
+          move:
+          - -0.008
+          - -0.03
+          - 0.002
+          rotate:
+          - 2
+          - 14
+          - 16
+          ease: out
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 12
+          rotate: &id004
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 44
+          ease: inout
+        - ticks: 10
+          rotate: *id004
+          ease: inout
+        parent: body
+        pivot:
+        - -0.3
+        - 0
+        - 0
+  talon__free_ring_spin:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '69': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 8
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - -5
+          - 32
+          - 17
+          ease: out
+        - ticks: 18
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 8
+          - 54
+          - 25
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 18
+          rotate:
+          - -4
+          - -32
+          - -17
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 18
+          rotate: &id005
+          - 0
+          - 0
+          - 720
+          ease: inout
+        - ticks: 39
+          ease: inout
+        - ticks: 10
+          rotate: *id005
+          ease: inout
+        parent: body
+        pivot:
+        - -0.28
+        - 0
+        - 0
+  talon__reverse_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '70': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 9
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - -2
+          - -32
+          - -17
+          ease: out
+        - ticks: 18
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 4
+          - -54
+          - -25
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 18
+          rotate:
+          - -4
+          - 32
+          - 17
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 18
+          rotate: &id006
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 40
+          ease: inout
+        - ticks: 10
+          rotate: *id006
+          ease: inout
+        parent: body
+        pivot:
+        - -0.28
+        - 0
+        - 0
+  talon__finger_loop:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '71': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 4
+          move:
+          - 0.012
+          - -0.065
+          - -0.012
+          rotate:
+          - -2
+          - 7
+          - 8
+          ease: inout
+        - ticks: 10
+          move:
+          - -0.07
+          - 0.035
+          - 0.015
+          rotate:
+          - 1
+          - 32
+          - 17
+          ease: out
+        - ticks: 18
+          move:
+          - -0.04
+          - 0.05
+          - 0
+          rotate:
+          - 0
+          - 54
+          - 25
+          ease: inout
+        - ticks: 18
+          ease: inout
+        - ticks: 18
+          rotate:
+          - -4
+          - -32
+          - -17
+          ease: inout
+        - ticks: 6
+          move:
+          - -0.006
+          - -0.032
+          - 0.003
+          rotate:
+          - 1
+          - 12
+          - 14
+          ease: inout
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 18
+          rotate: &id007
+          - 0
+          - 0
+          - -720
+          ease: inout
+        - ticks: 41
+          ease: inout
+        - ticks: 10
+          rotate: *id007
+          ease: inout
+        parent: body
+        pivot:
+        - -0.28
+        - 0
+        - 0
+  talon__blade_presentation:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '80': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - ticks: 0
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+        - ticks: 5
+          move:
+          - 0.018
+          - -0.075
+          - -0.01
+          rotate:
+          - -4
+          - 6
+          - 8
+          ease: inout
+        - ticks: 11
+          move:
+          - -0.085
+          - 0.045
+          - 0.035
+          rotate:
+          - 12
+          - -32
+          - 21
+          ease: out
+        - ticks: 18
+          move:
+          - -0.06
+          - 0.065
+          - 0.025
+          rotate:
+          - 4
+          - 44
+          - 17
+          ease: inout
+        - ticks: 24
+          ease: inout
+        - ticks: 18
+          move:
+          - 0.015
+          - -0.02
+          - 0
+          rotate:
+          - -6
+          - -16.0
+          - -8.5
+          ease: inout
+        - ticks: 7
+          move:
+          - -0.008
+          - -0.03
+          - 0.002
+          rotate:
+          - 2
+          - 14
+          - 16
+          ease: out
+        - ticks: 9
+          move:
+          - 0
+          - -0.04
+          - 0
+          rotate:
+          - 0
+          - 10
+          - 12
+          ease: inout
+      roll:
+        keyframes:
+        - ticks: 0
+          rotate:
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 14
+          ease: inout
+        - ticks: 18
+          rotate: &id008
+          - 0
+          - 0
+          - 0
+          ease: inout
+        - ticks: 50
+          ease: inout
+        - ticks: 10
+          rotate: *id008
+          ease: inout
+        parent: body
+        pivot:
+        - -0.28
+        - 0
+        - 0

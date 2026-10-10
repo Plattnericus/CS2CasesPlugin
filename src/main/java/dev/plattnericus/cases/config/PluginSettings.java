@@ -63,7 +63,7 @@ public record PluginSettings(
 
     /** Public in-world reel built from display entities. */
     public record WorldReel(double distance, double height, int visibleItems, double spacing, double itemScale,
-                            int holdTicks, double viewRange) {
+                            int holdTicks, double viewRange, double sceneScale) {
     }
 
     public record Items(Material caseMaterial, String caseModel, Material keyMaterial, String keyModel) {
@@ -169,7 +169,8 @@ public record PluginSettings(
                         c.getDouble("opening.world.spacing", 0.62),
                         c.getDouble("opening.world.item-scale", 0.5),
                         clamp(c.getInt("opening.world.hold-ticks", 80), 20, 400),
-                        c.getDouble("opening.world.view-range", 1.0)),
+                        c.getDouble("opening.world.view-range", 1.0),
+                        sceneScale(c.getDouble("opening.world.scene-scale", 3.0), warn)),
                 c.getBoolean("opening.speech-bubble.enabled", true),
                 clamp(c.getInt("opening.speech-bubble.duration-ticks", 60), 10, 400),
                 clamp(c.getInt("opening.max-active-per-player", 9), 1, 32),
@@ -264,6 +265,12 @@ public record PluginSettings(
 
     private static int clamp(int v, int min, int max) {
         return Math.max(min, Math.min(max, v));
+    }
+
+    private static double sceneScale(double value, Consumer<String> warn) {
+        if (Double.isFinite(value) && value >= 0.25 && value <= 6) return value;
+        warn.accept("config.yml: opening.world.scene-scale must be between 0.25 and 6 - using 3");
+        return 3;
     }
 
     private static int color(ConfigurationSection c, String path, int def, Consumer<String> warn) {

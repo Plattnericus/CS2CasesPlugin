@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.1 — 2026-10-10
+
+- Rebuild the standard pack with 128px skin and inspect textures, fractional premultiplied alpha filtering, clean cutout edges and an unclipped knife rotation canvas.
+- Turn Karambit and Talon presentation into reverse grip, spin around the actual finger ring, center the moving knife and restore the held pose after reverse catches. Upgrade unchanged stock timelines while preserving custom profiles.
+- Persist direct-trade history independently of CASE/TRADE_IN/admin provenance. Show “Knife traded (original source)” in normal and precise lore; backfill recorded older direct trades when upgrading to schema 4.
+- Add localized permission feedback before hidden command roots reject player input, including aliases and plugin namespaces.
+- Restore black stained glass and enlarge the complete wheel/grid by 3×, including icons, text, markers and click targets. Keep nine simultaneous openings, bounded display windows, cached icons and a shared tick track. Validate scale configuration with English error feedback.
+- Keep English as the fixed default for every client; publish the English README, current reference, release report and legal information with matching versioned downloads and verification evidence.
+
 ## 1.2.0 — refreshed build 2026-10-10
 
 - Package the current 815-skin/63-model catalog, 252 inspect variants, simultaneous 1–9 world openings and trade-in improvements in the public JAR and matching standard pack.

@@ -60,32 +60,35 @@ public final class ArgbImage {
      * fringes into the result.
      */
     public ArgbImage scaledTo(int newWidth, int newHeight) {
+        if (newWidth < 1 || newHeight < 1) throw new IllegalArgumentException("size must be positive");
         int[] out = new int[newWidth * newHeight];
         double sx = (double) width / newWidth;
         double sy = (double) height / newHeight;
         for (int y = 0; y < newHeight; y++) {
-            int y0 = (int) Math.floor(y * sy);
-            int y1 = Math.max(y0 + 1, (int) Math.floor((y + 1) * sy));
+            double top = y * sy, bottom = (y + 1) * sy;
+            int y0 = (int) Math.floor(top), y1 = (int) Math.ceil(bottom);
             for (int x = 0; x < newWidth; x++) {
-                int x0 = (int) Math.floor(x * sx);
-                int x1 = Math.max(x0 + 1, (int) Math.floor((x + 1) * sx));
+                double left = x * sx, right = (x + 1) * sx;
+                int x0 = (int) Math.floor(left), x1 = (int) Math.ceil(right);
                 double a = 0, r = 0, g = 0, b = 0;
-                int n = 0;
+                double coverage = 0;
                 for (int yy = y0; yy < Math.min(height, y1); yy++) {
                     for (int xx = x0; xx < Math.min(width, x1); xx++) {
                         int c = pixels[yy * width + xx];
-                        double ca = ((c >>> 24) & 0xFF) / 255.0;
+                        double weight = (Math.min(right, xx + 1) - Math.max(left, xx))
+                                * (Math.min(bottom, yy + 1) - Math.max(top, yy));
+                        double ca = ((c >>> 24) & 0xFF) / 255.0 * weight;
                         a += ca;
                         r += ((c >> 16) & 0xFF) * ca;
                         g += ((c >> 8) & 0xFF) * ca;
                         b += (c & 0xFF) * ca;
-                        n++;
+                        coverage += weight;
                     }
                 }
-                if (n == 0 || a <= 0) {
+                if (coverage <= 0 || a <= 0) {
                     continue;
                 }
-                int oa = (int) Math.round(a / n * 255);
+                int oa = (int) Math.round(a / coverage * 255);
                 out[y * newWidth + x] = (oa << 24) | ((int) Math.round(r / a) << 16) | ((int) Math.round(g / a) << 8) | (int) Math.round(b / a);
             }
         }

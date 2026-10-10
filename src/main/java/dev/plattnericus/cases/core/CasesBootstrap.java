@@ -119,7 +119,8 @@ public final class CasesBootstrap {
         register(new MenuListener(), profiles, previews, openings, knives, new StatTrakListener(runtime), inspect, commerce, commerce.input(), runtime.tradeIns(),
                 new ShopListener(runtime), reservedSlot, new ItemProtectionListener(caseItems), new CaseItemListener(runtime),
                 npcAnimator, packDistribution, runtime.gallery(),
-                new dev.plattnericus.cases.config.ClientLanguageListener(runtime, reservedSlot::ensure));
+                new dev.plattnericus.cases.config.ClientLanguageListener(runtime, reservedSlot::ensure),
+                new dev.plattnericus.cases.command.CommandAccessListener(runtime));
         npcAnimator.start();
 
         plugin.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {

@@ -757,3 +757,9 @@ command:
   state-changed: "<prefix><red>The skin changed or is no longer available. Refresh and try again; no success was confirmed."
   equip-failed: "<prefix><red>The skin could not be equipped. Check its ownership, slot and database; no success was confirmed."
   pack-incomplete: "<prefix><red>Pack export is incomplete: <count> assets failed. See the server log."
+
+# Original provenance remains visible after a direct player trade.
+skin-source:
+  traded: "Traded (<source>)"
+  knife-traded: "Knife traded (<source>)"
+  trade-in: "TRADE IN"

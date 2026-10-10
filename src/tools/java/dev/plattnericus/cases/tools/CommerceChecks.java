@@ -46,6 +46,7 @@ public final class CommerceChecks {
                 var delivered = emeralds.completePayment(tx, buyer).join();
                 require(emeralds.completePayment(tx, buyer).join().id().equals(delivered.id()), "completion not idempotent");
                 require(delivered.owner().equals(buyer) && delivered.id().equals(original.id()), "purchase identity/owner");
+                require(!delivered.traded(), "market purchase mislabeled as direct trade");
                 require(delivered.floatValue() == original.floatValue() && delivered.pattern() == original.pattern()
                         && delivered.wearSeed() == original.wearSeed() && delivered.kills() == 42 && delivered.statTrak()
                         && delivered.patternInfo().equals(original.patternInfo()) && delivered.origin() == original.origin()
@@ -78,9 +79,11 @@ public final class CommerceChecks {
                 skins.setEquipped(buyer, "knife", original.id()).join();
                 expect(market.trade(buyer, seller, List.of(new Transfer(original.id(), buyer, seller), new Transfer(UUID.randomUUID(), seller, buyer))), Failure.UNAVAILABLE);
                 require(skins.loadActive(buyer).join().stream().anyMatch(s -> s.id().equals(original.id())) && skins.equipped(buyer, "knife").join().orElseThrow().equals(original.id()), "partial trade was not rolled back");
+                require(!skins.loadActive(buyer).join().stream().filter(s -> s.id().equals(original.id())).findFirst().orElseThrow().traded(), "failed trade leaked provenance flag");
                 expect(market.trade(seller, buyer, List.of(new Transfer(third.id(), seller, buyer), new Transfer(third.id(), seller, buyer))), Failure.INVALID);
                 var exchanged = market.trade(seller, buyer, List.of(new Transfer(third.id(), seller, buyer), new Transfer(original.id(), buyer, seller))).join();
                 require(exchanged.size() == 2 && skins.equippedAll(buyer).join().isEmpty(), "trade did not transfer both sides");
+                require(exchanged.stream().allMatch(SkinInstance::traded), "direct trade marker missing");
                 db.run(c -> { try (var statement = c.createStatement()) {
                     statement.executeUpdate("INSERT INTO test_wallets (owner, balance) VALUES ('" + buyer + "', 12345)");
                     try (var rs = statement.executeQuery("SELECT COUNT(*) FROM test_commerce_log WHERE kind='BUY_EMERALD'")) { require(rs.next() && rs.getInt(1) == 1, "duplicate purchase audit"); }
@@ -151,7 +154,7 @@ public final class CommerceChecks {
             db.open(); var migrated = new SkinRepository(db).loadActive(original.owner()).join().getFirst();
             require(migrated.id().equals(original.id()) && migrated.floatValue() == original.floatValue() && migrated.patternInfo().equals(original.patternInfo()) && migrated.kills() == original.kills(), "v1 migration modified skin data");
             require(new CommerceRepository(db).listings().join().isEmpty(), "v1 created listings");
-            db.run(c -> { try (var s = c.createStatement(); var rs = s.executeQuery("SELECT version FROM test_schema")) { require(rs.next() && rs.getInt(1) == 3, "v1 did not migrate to v3"); } return null; }).join();
+            db.run(c -> { try (var s = c.createStatement(); var rs = s.executeQuery("SELECT version FROM test_schema")) { require(rs.next() && rs.getInt(1) == 4, "v1 did not migrate to v4"); } return null; }).join();
         }
     }
     private static void sessionChecks() {

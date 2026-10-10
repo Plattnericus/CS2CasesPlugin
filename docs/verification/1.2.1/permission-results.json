@@ -1,0 +1,22 @@
+[
+  {
+    "command": "csadmin info",
+    "visiblePermissionError": true
+  },
+  {
+    "command": "mccases info",
+    "visiblePermissionError": true
+  },
+  {
+    "command": "mccases:csadmin info",
+    "visiblePermissionError": true
+  },
+  {
+    "command": "mccases:mccases info",
+    "visiblePermissionError": true
+  },
+  {
+    "command": "CSADMIN info",
+    "visiblePermissionError": true
+  }
+]

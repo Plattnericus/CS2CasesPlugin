@@ -1,0 +1,15 @@
+{
+  "version": "1.2.1",
+  "classes": 247,
+  "jar": "01b267a35b193013a88e5650e432c767fc3b31b41df70dca9b272e217f62b95d",
+  "pack": "4ad9d4a475a48006c546628c26335742b66d65e2558091391718dedb2950497d",
+  "jarBytes": 19496190,
+  "packBytes": 17064783,
+  "crc": true,
+  "embeddedPackIdentical": true,
+  "compiledClassesIdentical": true,
+  "noToolsOrShadedDependencies": true,
+  "legalDocsIdentical": true,
+  "noVanillaOverrides": true,
+  "visualCaptureAssetsIdenticalToFinalPack": true
+}

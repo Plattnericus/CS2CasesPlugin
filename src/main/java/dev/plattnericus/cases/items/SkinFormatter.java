@@ -92,6 +92,10 @@ public final class SkinFormatter {
     private TagResolver[] resolvers(SkinDefinition def, SkinInstance inst, boolean precise) {
         PatternInfo p = inst == null ? PatternInfo.NONE : inst.patternInfo();
         CaseDefinition source = inst == null || inst.sourceCase() == null ? null : catalog.caseDefinition(inst.sourceCase());
+        String sourceText = inst != null && inst.origin().tradeIn() ? m.label("skin-source.trade-in", "TRADE IN")
+                : source == null ? (inst == null || inst.sourceCase() == null ? "-" : inst.sourceCase()) : source.name();
+        if (inst != null && inst.traded()) sourceText = Text.plain(m.get(def.isKnife() ? "skin-source.knife-traded" : "skin-source.traded",
+                Text.unparsed("source", sourceText)));
         return new TagResolver[]{
                 Text.color("rarity_color", def.rarity().color()),
                 Text.unparsed("rarity", m.label("rarity." + def.rarity().id(), def.rarity().name())),
@@ -107,8 +111,7 @@ public final class SkinFormatter {
                 Text.color("class_color", p.color() == 0 ? 0xFFFFFF : p.color()),
                 Text.unparsed("fade", p.fadePercent() == null ? "" : Text.formatFloat(p.fadePercent(), 1)),
                 Text.unparsed("kills", inst == null ? "0" : String.valueOf(inst.kills())),
-                Text.unparsed("case", inst != null && inst.origin().tradeIn() ? "TRADE IN"
-                        : source == null ? (inst == null || inst.sourceCase() == null ? "-" : inst.sourceCase()) : source.name()),
+                Text.unparsed("case", sourceText),
                 Text.unparsed("date", inst == null ? "" : dateFormat.format(Instant.ofEpochMilli(inst.createdAt()))),
                 Text.unparsed("id", inst == null ? "" : inst.shortId()),
                 Text.unparsed("min_float", Text.formatFloat(def.minFloat(), 2)),
@@ -142,7 +145,7 @@ public final class SkinFormatter {
         if (inst.statTrak()) {
             lore.add(m.item("skin.lore.stattrak", r));
         }
-        if (precise || inst.origin().tradeIn()) {
+        if (precise || inst.origin().tradeIn() || inst.traded()) {
             lore.add(m.item("skin.lore.source", r));
         }
         if (precise) {

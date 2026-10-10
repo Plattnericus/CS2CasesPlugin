@@ -93,6 +93,26 @@ public final class CommandRuntimeChecks {
 
     private void run(){
         register();require(ctx.profiles().get(player)!=null,"Profile unavailable");require(basics.size()==14,"Missing alias");
+        var access = new CommandAccessListener(ctx);
+        for (var entry : basics.entrySet()) {
+            String permission = entry.getValue().permission();
+            require(permission.equals(CommandAccessListener.permission("/" + entry.getKey())), "permission preflight differs from registered command " + entry.getKey());
+            denied.add(permission);
+            for (String label : List.of(entry.getKey(), "mccases:" + entry.getKey())) {
+                messages.clear();
+                var event = new org.bukkit.event.player.PlayerCommandPreprocessEvent(audience, "/" + label + " extra");
+                access.command(event);require(event.isCancelled() && says("permission"), "hidden command denial silent " + label);
+            }
+            denied.clear();pass("network permission /" + entry.getKey());
+        }
+        denied.add("mccases.admin");
+        for (String label : List.of("csadmin", "mccases", "mccases:csadmin", "mccases:mccases", "CSADMIN")) {
+            messages.clear();var event = new org.bukkit.event.player.PlayerCommandPreprocessEvent(audience, "/" + label + " info");
+            access.command(event);require(event.isCancelled() && says("permission"), "hidden admin denial silent " + label);pass("network permission /" + label);
+        }
+        denied.clear();
+        require(CommandAccessListener.permission("/minecraft:csadmin info") == null && CommandAccessListener.permission("/csadministrator") == null, "unrelated commands intercepted");
+        var allowed = new org.bukkit.event.player.PlayerCommandPreprocessEvent(audience, "/csadmin info");access.command(allowed);require(!allowed.isCancelled(), "allowed admin command intercepted");
         CompletableFuture<Void>flow=CompletableFuture.completedFuture(null);
         for(String name:basics.keySet())flow=flow.thenRun(()->{
             reset();require(Bukkit.dispatchCommand(player,name),"Unregistered /"+name);pass("registered /"+name);

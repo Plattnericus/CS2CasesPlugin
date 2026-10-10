@@ -20,6 +20,7 @@ public final class FeatureChecks {
         File root = new File(args[0]);
         InspectRigChecks.run(root);
         CommerceChecks.run();
+        SkinPresentationChecks.run(root);
         dev.plattnericus.cases.opening.OpeningChecks.run(root);
         TradeInChecks.run(root);
         InventoryInputChecks.run();

@@ -29,6 +29,12 @@ public final class PackChecks {
                 var sprite = png(zip, base + "textures/item/skin/" + skin.id() + ".png");
                 int size = sprite.getWidth();
                 require(size >= 64 && size == sprite.getHeight() && (size & (size - 1)) == 0, "sprite dimensions " + skin.id());
+                require(size == 128, "skin edge resolution " + skin.id());
+                for (int y = 0; y < size; y++) for (int x = 0; x < size; x++) {
+                    int pixel = sprite.getRGB(x, y), alpha = pixel >>> 24;
+                    require(alpha == 0 || alpha == 255, "translucent extruded edge " + skin.id());
+                    require(alpha != 0 || (pixel & 0xffffff) == 0, "hidden color fringe " + skin.id());
+                }
                 for (int i = 0; i < size; i++) require((sprite.getRGB(i, 0) >>> 24) == 0 && (sprite.getRGB(i, size - 1) >>> 24) == 0
                         && (sprite.getRGB(0, i) >>> 24) == 0 && (sprite.getRGB(size - 1, i) >>> 24) == 0, "sprite cropped at canvas boundary " + skin.id());
                 var model = json(zip, base + "models/item/skin/" + skin.id() + ".json");
@@ -38,15 +44,17 @@ public final class PackChecks {
                 for (String mode : java.util.List.of("firstperson", "thirdperson")) for (boolean left : java.util.List.of(false, true)) {
                     Vector3f angles = vec(display.getAsJsonObject(mode + (left ? "_lefthand" : "_righthand")).getAsJsonArray("rotation"));
                     if (left) angles.mul(1, -1, -1); // Minecraft's left-hand ItemTransform application.
-                    var tip = new Vector3f(1, skin.isKnife() ? 1 : 0, 0).rotateX((float)Math.toRadians(angles.x))
+                    boolean reverseGrip = InspectRig.reverseGrip(skin.weapon());
+                    var tip = new Vector3f(reverseGrip ? -1 : 1, skin.isKnife() ? (reverseGrip ? -1 : 1) : 0, 0).rotateX((float)Math.toRadians(angles.x))
                             .rotateZ((float)Math.toRadians(angles.z)).rotateY((float)Math.toRadians(angles.y));
-                    require(tip.z < -.1, "muzzle/blade points back at the player " + skin.id() + "/" + mode + "/" + left);
+                    require(reverseGrip ? tip.z > .1 : tip.z < -.1, "incorrect muzzle/blade grip direction " + skin.id() + "/" + mode + "/" + left);
                 }
                 var selected = json(zip, base + "models/item/trade/selected/" + skin.id() + ".json");
                 require(vec(selected.getAsJsonObject("display").getAsJsonObject("fixed").getAsJsonArray("rotation")).lengthSquared() == 0, "selected icon reversed");
                 for (String layer : InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().toList()) {
                     String path = "inspect/" + skin.id() + "/" + layer;
                     var texture = png(zip, base + "textures/item/" + path + ".png");
+                    require(texture.getWidth() == 128 && texture.getHeight() == 128, "inspect edge resolution " + path);
                     var rig = json(zip, base + "models/item/" + path + ".json");
                     require(rig.getAsJsonObject("textures").get("particle").getAsString().equals("#skin"), "missing particle texture " + path);
                     require(!rig.getAsJsonArray("elements").isEmpty(), "empty inspect layer " + path);
@@ -90,7 +98,7 @@ public final class PackChecks {
         }
         graphics.dispose(); File output = new File(args[2]); output.mkdirs(); ImageIO.write(sheet, "png", new File(output, "all-weapons.png"));
         System.out.println("PASS: all " + catalog.skins().size() + " exported skins / " + layers + " inspect layers / " + faces
-                + " opaque rim faces, front/back UV orientation, unclipped sprites, both hands and first/third-person forward-facing blades/muzzles. Sheet: " + output);
+                + " opaque rim faces, front/back UV orientation, unclipped sprites, both hands and first/third-person forward muzzles/blades or reverse-grip ring knives. Sheet: " + output);
     }
     private static BufferedImage png(ZipFile zip, String name) throws Exception {
         var entry = zip.getEntry(name); require(entry != null, "missing pack asset " + name);

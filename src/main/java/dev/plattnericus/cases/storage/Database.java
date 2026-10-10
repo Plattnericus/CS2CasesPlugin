@@ -27,7 +27,7 @@ public final class Database implements AutoCloseable {
         T run(Connection connection) throws SQLException;
     }
 
-    private static final int SCHEMA_VERSION = 3;
+    private static final int SCHEMA_VERSION = 4;
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor(r -> {
         Thread t = new Thread(r, "MCCases-Database");
@@ -222,6 +222,36 @@ public final class Database implements AutoCloseable {
                     s.executeUpdate("DELETE FROM " + table("market_listings"));
                     s.executeUpdate("DELETE FROM " + table("schema"));
                     s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (3)");
+                    c.commit();
+                } catch (SQLException error) { c.rollback(); throw error; }
+                finally { c.setAutoCommit(true); }
+            }
+
+            if (version < 4) {
+                // MySQL DDL commits implicitly: detect the column so interrupted upgrades retry safely.
+                boolean present;
+                try (var columns = c.getMetaData().getColumns(c.getCatalog(), null, table("skins"), "traded")) {
+                    present = columns.next();
+                }
+                if (!present) s.executeUpdate("ALTER TABLE " + table("skins") + " ADD COLUMN traded INTEGER NOT NULL DEFAULT 0");
+                c.setAutoCommit(false);
+                try {
+                    // Recover only skin IDs recorded by the actual direct-trade audit, never actor IDs.
+                    var pattern = java.util.regex.Pattern.compile("instance=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})");
+                    try (var update = c.prepareStatement("UPDATE " + table("skins") + " SET traded=1 WHERE instance_id=?");
+                         var rs = s.executeQuery("SELECT details FROM " + table("commerce_log") + " WHERE kind='TRADE'")) {
+                        int pending = 0;
+                        while (rs.next()) {
+                            var matches = pattern.matcher(rs.getString(1));
+                            while (matches.find()) {
+                                update.setString(1, matches.group(1)); update.addBatch();
+                                if (++pending == 256) { update.executeBatch(); update.clearBatch(); pending = 0; }
+                            }
+                        }
+                        if (pending > 0) update.executeBatch();
+                    }
+                    s.executeUpdate("DELETE FROM " + table("schema"));
+                    s.executeUpdate("INSERT INTO " + table("schema") + " (version) VALUES (4)");
                     c.commit();
                 } catch (SQLException error) { c.rollback(); throw error; }
                 finally { c.setAutoCommit(true); }

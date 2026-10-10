@@ -74,8 +74,9 @@ public final class RigMotionPreview {
                         y[i] = (int)Math.round(oy + height / 2.0 - (models.anchor().up() + point.y) * focal / z); depth += z;
                     }
                     var uv = face.getValue().getAsJsonObject().getAsJsonArray("uv");
-                    faces.add(new Face(new Polygon(x,y,4), depth / 4, mesh.texture(), new double[]{uv.get(0).getAsDouble()*4,
-                            uv.get(1).getAsDouble()*4, uv.get(2).getAsDouble()*4, uv.get(3).getAsDouble()*4}, x, y));
+                    double texels = mesh.texture().getWidth() / 16.0;
+                    faces.add(new Face(new Polygon(x,y,4), depth / 4, mesh.texture(), new double[]{uv.get(0).getAsDouble()*texels,
+                            uv.get(1).getAsDouble()*texels, uv.get(2).getAsDouble()*texels, uv.get(3).getAsDouble()*texels}, x, y));
                 }
             }
         }

@@ -1,0 +1,1058 @@
+[
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_0_8_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_0_8_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_0_22_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_0_22_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_0_40_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_0_40_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "karambit_0_side1.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "karambit_0_side2.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "karambit_0_side3.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_0_left.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_0_left_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "karambit_0_f5_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__finger_roll",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "karambit_0_f5_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_1_8_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_1_8_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_1_22_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_1_22_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_1_40_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_1_40_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "karambit_1_side1.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "karambit_1_side2.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "karambit_1_side3.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_1_left.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_1_left_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "karambit_1_f5_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__reverse_grip",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "karambit_1_f5_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_2_8_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_2_8_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_2_22_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_2_22_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_2_40_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_2_40_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "karambit_2_side1.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "karambit_2_side2.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "karambit_2_side3.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_2_left.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_2_left_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "karambit_2_f5_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__ring_twirl",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "karambit_2_f5_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_3_8_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_3_8_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_3_22_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_3_22_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_3_40_eye.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_3_40_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "karambit_3_side1.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "karambit_3_side2.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "karambit_3_side3.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "karambit_3_left.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "karambit_3_left_front.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "karambit_3_f5_back.png"
+  },
+  {
+    "weapon": "karambit",
+    "animation": "karambit__blade_presentation",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "karambit_3_f5_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_0_8_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_0_8_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_0_22_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_0_22_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_0_40_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_0_40_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "talon_0_side1.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "talon_0_side2.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "talon_0_side3.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_0_left.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_0_left_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "talon_0_f5_back.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__free_ring_spin",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "talon_0_f5_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_1_8_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_1_8_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_1_22_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_1_22_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_1_40_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_1_40_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "talon_1_side1.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "talon_1_side2.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "talon_1_side3.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_1_left.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_1_left_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "talon_1_f5_back.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__reverse_catch",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "talon_1_f5_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_2_8_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_2_8_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_2_22_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_2_22_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_2_40_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_2_40_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "talon_2_side1.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "talon_2_side2.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "talon_2_side3.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_2_left.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_2_left_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "talon_2_f5_back.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__finger_loop",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "talon_2_f5_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_3_8_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 8,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_3_8_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_3_22_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_3_22_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_3_40_eye.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 40,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_3_40_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 1,
+    "viewer": "observer",
+    "file": "talon_3_side1.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 2,
+    "viewer": "observer",
+    "file": "talon_3_side2.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "right",
+    "angle": 3,
+    "viewer": "observer",
+    "file": "talon_3_side3.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "client",
+    "file": "talon_3_left.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "eye",
+    "hand": "left",
+    "angle": 0,
+    "viewer": "observer",
+    "file": "talon_3_left_front.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_BACK",
+    "viewer": "client",
+    "file": "talon_3_f5_back.png"
+  },
+  {
+    "weapon": "talon",
+    "animation": "talon__blade_presentation",
+    "tick": 22,
+    "mode": "hand",
+    "hand": "left",
+    "angle": 1,
+    "camera": "THIRD_PERSON_FRONT",
+    "viewer": "client",
+    "file": "talon_3_f5_front.png"
+  }
+]

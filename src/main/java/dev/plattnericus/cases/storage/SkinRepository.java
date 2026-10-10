@@ -19,7 +19,7 @@ public final class SkinRepository {
 
     private static final String COLUMNS = "instance_id, owner, skin_id, float_value, pattern, wear_seed, stattrak, "
             + "stattrak_kills, variant, variant_name, classification, class_tier, class_color, fade_percent, source, "
-            + "origin, created_at, favorite, status";
+            + "origin, created_at, favorite, status, traded";
 
     private final Database db;
     private final String skins;
@@ -165,7 +165,7 @@ public final class SkinRepository {
 
     void insert(Connection c, SkinInstance i) throws SQLException {
         try (PreparedStatement ps = c.prepareStatement(db.dialect().insertIgnore() + skins + " (" + COLUMNS + ") "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             PatternInfo p = i.patternInfo();
             ps.setString(1, i.id().toString());
             ps.setString(2, i.owner().toString());
@@ -190,6 +190,7 @@ public final class SkinRepository {
             ps.setLong(17, i.createdAt());
             ps.setInt(18, i.favorite() ? 1 : 0);
             ps.setString(19, i.status().name());
+            ps.setInt(20, i.traded() ? 1 : 0);
             ps.executeUpdate();
         }
     }
@@ -294,6 +295,6 @@ public final class SkinRepository {
                 rs.getString("skin_id"), rs.getDouble("float_value"), rs.getInt("pattern"), rs.getLong("wear_seed"),
                 rs.getInt("stattrak") != 0, rs.getInt("stattrak_kills"), info, rs.getString("source"), origin,
                 rs.getLong("created_at"), rs.getInt("favorite") != 0,
-                SkinInstance.Status.valueOf(rs.getString("status")));
+                SkinInstance.Status.valueOf(rs.getString("status")), rs.getInt("traded") != 0);
     }
 }

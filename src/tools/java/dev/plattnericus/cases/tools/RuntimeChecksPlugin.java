@@ -739,6 +739,16 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
     }
 
     private void queueAudit(CommandSender sender, Player player, CasesContext ctx, int amount) {
+        // Full settings loading requires Paper's actual material registry, not an offline proxy.
+        var scaleConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.StringReader(ctx.plugin().getConfig().saveToString()));
+        var scaleWarnings = new java.util.ArrayList<String>();
+        scaleConfig.set("opening.world.scene-scale", null);
+        require(dev.plattnericus.cases.config.PluginSettings.load(scaleConfig, scaleWarnings::add).opening().world().sceneScale() == 3, "old configuration scale fallback");
+        for (double invalid : new double[]{Double.NaN, Double.POSITIVE_INFINITY, 0, -1, 100}) {
+            scaleWarnings.clear(); scaleConfig.set("opening.world.scene-scale", invalid);
+            require(dev.plattnericus.cases.config.PluginSettings.load(scaleConfig, scaleWarnings::add).opening().world().sceneScale() == 3
+                    && scaleWarnings.stream().anyMatch(s -> s.contains("opening.world.scene-scale")), "invalid scale must warn and fall back");
+        }
         require(ctx.openings().activeCount(player) == 0, "wait for held results to close before the nine audit");
         ctx.inspect().stop(player); ctx.gallery().close(player); player.closeInventory();
         ItemStack[] saved = snapshot(player);
@@ -774,6 +784,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 player.closeInventory();
                 new org.bukkit.scheduler.BukkitRunnable() {
                     private int elapsed;
+                    private int peakItems;
                     private final java.util.Map<java.util.UUID, String> reelModels = new java.util.HashMap<>();
                     @Override public void run() {
                         elapsed += 5;
@@ -789,6 +800,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                                         && e.getPersistentDataContainer().has(ctx.keys().displayEntity) && e.getLocation().distanceSquared(player.getLocation()) < 100)
                                         .map(e -> (org.bukkit.entity.ItemDisplay) e).toList();
                                 var positionsByReel = new java.util.HashMap<org.bukkit.Location, java.util.ArrayList<Float>>();
+                                peakItems = Math.max(peakItems, displays.size());
                                 for (var display : displays) {
                                     var stack = display.getItemStack(); String model = stack.getType() + ":" + stack.getItemMeta().getItemModel();
                                     String prior = reelModels.putIfAbsent(display.getUniqueId(), model);
@@ -799,6 +811,18 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                                 for (var positions : positionsByReel.values()) {
                                     positions.sort(Float::compare);
                                     for (int i = 1; i < positions.size(); i++) require(positions.get(i) - positions.get(i-1) > .01, "roulette items collapsed/overlapped");
+                                }
+                                double width = ctx.settings().opening().world().visibleItems() * ctx.settings().opening().world().spacing() + .2;
+                                int count = ctx.openings().visibleCount(player);
+                                var forward = player.getEyeLocation().getDirection().setY(0).normalize();
+                                for (var reelAnchor : positionsByReel.keySet()) {
+                                    double distance = Math.hypot(reelAnchor.toVector().subtract(player.getEyeLocation().toVector()).dot(forward), ctx.settings().opening().world().height());
+                                    double expectedWidth = width * dev.plattnericus.cases.opening.OpeningLayout.cell(0, count, width,
+                                            ctx.settings().opening().world().itemScale() + .65, distance, ctx.settings().opening().world().sceneScale()).scale();
+                                    require(player.getWorld().getEntitiesByClass(org.bukkit.entity.BlockDisplay.class).stream()
+                                        .anyMatch(d -> d.getLocation().equals(reelAnchor) && d.getBlock().getMaterial() == Material.BLACK_STAINED_GLASS
+                                                && Math.abs(d.getTransformation().getScale().x() - expectedWidth) < .01
+                                                && d.getTransformation().getScale().z() > 0), "roulette glass missing or whole-wheel scale incorrect");
                                 }
                                 require(displays.size() <= 9 * (ctx.settings().opening().world().visibleItems() + 32), "roulette entity window grew unbounded");
                             }
@@ -819,7 +843,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                             }).whenComplete((ok, error) -> Bukkit.getScheduler().runTask(RuntimeChecksPlugin.this, () -> {
                                 if (error != null) report(new IllegalStateException("nine-case durability failed", error));
                                 else {
-                                    String result = "PASS QUEUE " + amount + ": GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, receipt and world-entity cleanup. Inventory restored.";
+                                    String result = "PASS QUEUE " + amount + ": GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, "
+                                            + ctx.settings().opening().world().sceneScale() + "x glass wheels; peak " + peakItems + " item displays; receipt and world-entity cleanup. Inventory restored.";
                                     sender.sendMessage(result); getLogger().info(result);
                                 }
                             }));

@@ -1,15 +1,15 @@
-# MCCases — vollständige Referenz (English)
+# MCCases — complete reference
 
-[Zur deutschen README](../README.md) · [Rechtliche Hinweise](../LEGAL.md)
+[README](../README.md) · [Legal information](../LEGAL.md)
 
-Stand: 10. Oktober 2026. Historische Prüfberichte beschreiben den jeweils damaligen Build.
+Updated: October 10, 2026. Historical verification reports describe their respective builds.
 
 Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.1** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 ![Weapon and knife skins from the MCCases catalog](images/skins.png)
 
@@ -48,7 +48,7 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.2.0.jar](../release/MCCases-1.2.0.jar) into `plugins/`.
+2. Copy [MCCases-1.2.1.jar](../release/MCCases-1.2.1.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
@@ -224,7 +224,7 @@ exactly one signed case and matching key. **Open 9 cases together** in the case 
 starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
 `/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-Up to nine world roulettes run simultaneously in centered rows. Rows and scale adjust whenever
+Up to nine world roulettes run simultaneously in centered rows. Version 1.2.1 scales the entire wheel and grid spacing by 3× compared with the previous layout at the same distance/count. Step back for an overview; `opening.world.scene-scale: 1.0` restores the compact view. Rows and scale adjust whenever
 a reel appears or disappears, including incomplete rows and scenes pulled closer by a wall.
 The launcher closes after a valid request. Right-clicking more case items while a world opening
 is active adds reels up to the nine-slot limit; explicit quantity commands support larger queues.
@@ -419,6 +419,7 @@ Default files are stored in `plugins/MCCases/`. Values below refer to the bundle
 | `opening.duration-ticks` | `120` | Roulette movement duration; 20 ticks equal one second |
 | `opening.easing` | `cinematic` | Deceleration curve |
 | `opening.max-active-per-player` | `9` | Sessions per player, capped at nine; centered simultaneous world roulettes |
+| `opening.world.scene-scale` | `3.0` | Whole-wheel scale, including glass, icons, text and hitboxes; accepted range 0.25–6 |
 | `opening.max-active-global` | `64` | Global animation capacity |
 | `trade-in.broadcast-gold` | `true` | Gold contract broadcasts |
 | `trade-in.broadcast-admin` | `false` | Allow administrator-input broadcasts explicitly |
@@ -489,7 +490,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-1.2.0.zip](../release/MCCases-ResourcePack-1.2.0.zip).
+[release/MCCases-ResourcePack-1.2.1.zip](../release/MCCases-ResourcePack-1.2.1.zip).
 
 ### Automatic distribution
 

@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.0.jar` and `build/distributions/MCCases-ResourcePack-1.2.0.zip`.
+`build/libs/MCCases-1.2.1.jar` and `build/distributions/MCCases-ResourcePack-1.2.1.zip`.
 The pack ZIP is also embedded in the plugin JAR.
 
 | Task | Purpose / output |
@@ -38,11 +38,40 @@ The pack ZIP is also embedded in the plugin JAR.
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.0.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.1.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
+
+Version 1.2.1 exports skin/inspect textures at 128px with binary silhouette coverage and
+fractional premultiplied alpha filtering. Karambit and Talon turn only at presentation time;
+pattern sampling and saved classifications retain their original UV coordinates.
+`scripts/generate_inspect_profiles.py` reproduces all 252 stock timelines. The v2 migration
+baseline recognizes unchanged 1.2.0 ring profiles; customized timelines remain editable.
+Skin `traded` history is persisted separately from `origin` and `source` in schema 4.
+Recorded direct-trade instance IDs are backfilled; market purchases preserve the flag.
+`SkinPresentationChecks` covers real v3 migration, repeated trades/restarts and en/de/it source lore.
+
+World wheels use `opening.world.scene-scale: 3.0`, applied after the compact layout so
+reflow cannot cancel the enlargement. This scales all display transforms and interaction
+boxes uniformly for every grid size 1–9 without increasing the moving entity window.
+The enlarged world grid may extend beyond the opener’s camera; step back for an overview.
+Offline checks compare every enlarged cell against the compact geometry; the real-Paper
+audit validates settings fallback, scaled glass, bounded item displays and final cleanup.
+
+For focused two-client visual evidence on an accepted isolated test server:
+
+```sh
+python3 scripts/capture_inspect_audit.py --root <session> --output <captures> --only karambit,talon
+python3 scripts/capture_inspect_motion.py --root <session> --output <motion> --only karambit,talon --all-variants
+python3 scripts/capture_held_models.py --root <session> --output <held> --only karambit,talon
+python3 scripts/capture_opening_layout.py --root <session> --output <wheels>
+```
+
+These scripts require the local RCON/capture harness and two development clients. They operate
+on test fixtures and must not be pointed at a production world. Held-model captures wait for
+vanilla's re-equip animation before taking the screenshot.
 
 Feature checks cover the default catalog's 815 skins and 22 cases, 5,500 reward and reel checks,
 weighted drop chances, float limits, regional language fallbacks and 46 legacy animation timelines.
@@ -123,7 +152,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.0.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.1.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -228,7 +257,8 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use the shipped verification report and visual archive for the recorded 1.2 results.
+Use [the 1.2.1 report](RELEASE-1.2.1-VERIFICATION.md) and its versioned visual archive
+for the current results; earlier 1.2 reports remain historical evidence.
 
 Remove extra check JARs and test fixtures after validation; retain useful labeled test evidence.
 Keep source checks available for later development. The session's temporary world, database and
