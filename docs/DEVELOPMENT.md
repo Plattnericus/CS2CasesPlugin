@@ -179,6 +179,7 @@ Additional isolated-server commands:
 
 ```text
 mccasesdevcheck items
+mccasesdevcheck DevTester commands
 mccasesdevcheck DevTester gold
 mccasesdevcheck DevTester nine
 mccasesdevcheck DevTester spam
@@ -186,6 +187,16 @@ mccasesdevcheck DevTester tradein-ui
 mccasesdevcheck DevTester guide
 mccasesdevcheck DevTester recovery
 ```
+
+`commands` checks all player command roots/aliases, console and permission rejection,
+invalid arguments, the admin command handlers and real menu dispatch. It injects SQL
+failures for grants, edits, removals and equipment moves and verifies that errors are
+reported, failed writes retain the previous state, and concurrent equipment requests
+are rejected. It also checks malformed-config reload recovery, exports a server pack
+and opens three test cases. Use it only on a disposable server: it creates fixtures,
+modifies its local configuration temporarily and installs temporary SQLite triggers.
+Expected injected exceptions appear in the server log; the final result is saved in
+`plugins/MCCasesDevChecks/command-audit.txt`.
 
 `items` uses genuine Paper ItemStacks and PDC with controlled player/inventory proxies; it needs
 no connected player. It covers storage/offhand, armor exclusion, insufficient/negative/overflow

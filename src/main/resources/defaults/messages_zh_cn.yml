@@ -488,3 +488,15 @@ rarity:
 catalog:
   key:
     case_key: 案例钥匙
+
+command:
+  usage: "<prefix><red>Invalid command. Usage: <white><usage>"
+  failed: "<prefix><red>Command /<command> failed. Tell an admin the reference <white><reference><red>. Details are in the server log."
+  case-unknown: "<prefix><red>Unknown case: <white><case><red>. Use tab completion for valid IDs."
+  inspect-cooldown: "<prefix><red>Inspect is on cooldown. Try again shortly."
+  inspect-unavailable: "<prefix><red>No usable inspect model or animation is configured for this skin."
+  float-range: "<prefix><red>This skin requires a float from <min> to <max>. No change was saved."
+  stattrak-unavailable: "<prefix><red>This skin does not support StatTrak. No change was saved."
+  state-changed: "<prefix><red>The skin changed or is no longer available. Refresh and try again; no success was confirmed."
+  equip-failed: "<prefix><red>The skin could not be equipped. Check its ownership, slot and database; no success was confirmed."
+  pack-incomplete: "<prefix><red>Pack export is incomplete: <count> assets failed. See the server log."

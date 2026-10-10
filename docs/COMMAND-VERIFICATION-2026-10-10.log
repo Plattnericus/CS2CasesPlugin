@@ -1,0 +1,215 @@
+MCCases 1.2.0 — final command/live audit, 2026-10-10
+Paper 26.3 build 159 beta; Temurin 25.0.2; SQLite; two vanilla 26.3 clients
+Production JAR SHA-256: 97644f963b1ebd7d2867461788a263a373eb45d869116fe42cad13539b3b5df5
+
+COMMAND HANDLER SCENARIOS
+registered /trade
+console /trade
+permission /trade
+registered /skintrade
+console /skintrade
+permission /skintrade
+registered /market
+console /market
+permission /market
+registered /marketplace
+console /marketplace
+permission /marketplace
+registered /skinmarket
+console /skinmarket
+permission /skinmarket
+registered /skins
+console /skins
+permission /skins
+registered /inventory
+console /inventory
+permission /inventory
+registered /knife
+console /knife
+permission /knife
+registered /knives
+console /knives
+permission /knives
+registered /cases
+console /cases
+permission /cases
+registered /tradein
+console /tradein
+permission /tradein
+registered /tradeup
+console /tradeup
+permission /tradeup
+registered /openings
+console /openings
+permission /openings
+registered /inspect
+console /inspect
+permission /inspect
+error /inspect[wrong]
+error /inspect[hand, extra]
+error /inventory[vanilla, extra]
+error /knife[vanilla, extra]
+error /tradein[extra]
+error /tradeup[extra]
+error /openings[extra]
+error /cases[open, kilowatt_case, 0]
+error /cases[open, kilowatt_case, 1001]
+error /cases[open, kilowatt_case, nope]
+error /cases[open, bad_case, 1]
+error /cases[cancel, extra]
+error /trade[cancel, extra]
+error /trade[decline, extra]
+error /trade[accept, a, b]
+error /trade[cancel]
+error /trade[accept]
+error /trade[decline]
+error /trade[DefinitelyMissingPlayer]
+error /market[balance, extra]
+error /market[claims, extra]
+error /market[own, extra]
+error /market[recover, extra]
+error /market[search]
+error /market[sell, a]
+error /market[sell, missing-id, 1]
+error /market[unknown]
+committing trade acceptance feedback
+synchronous exception guard
+asynchronous exception guard
+/csadmin
+/csadmin info
+/csadmin givecase player case
+/csadmin givekey player key
+/csadmin giveskin player skin float pattern stattrak
+/csadmin giveskin player skin
+/csadmin list player
+/csadmin removeskin player id
+unsafe skin ID prefix rejected
+/csadmin history player
+/csadmin odds case
+/csadmin equip player id
+/csadmin equipslot player id slot
+/csadmin setfloat player id value
+skin float range rejection
+/csadmin giveskin player skin float pattern stattrak
+unsupported StatTrak rejection
+inspect
+inspect hand
+inspect view
+inspect cooldown feedback
+/csadmin setfloat player id value
+/csadmin setpattern player id value
+/csadmin setstattrak player id value
+invalid slot feedback to invoking admin
+/csadmin manage name
+/csadmin preview skin
+/csadmin pattern skin pattern
+/csadmin browser skin
+live menu /market
+live menu /market own
+live menu /market search doppler
+live menu /market sell
+live menu /market sell 30e063d8 64
+live menu /trade
+live menu /cases
+live menu /openings
+live menu /tradein
+/csadmin scan skin
+/csadmin scan skin metric count
+/csadmin shop spawn
+/csadmin shop remove
+/csadmin shop spawn villager
+/csadmin shop remove
+/csadmin shop spawn mannequin
+/csadmin shop remove
+/csadmin exportpack
+/csadmin reload
+/csadmin reload
+invalid config reload preserves previous catalog
+/csadmin setfloat player id value
+SQL update failure preserves memory
+/csadmin removeskin player id
+SQL deletion failure preserves skin
+concurrent equipment rejected
+SQL equipment failure restores slots
+SQL equipment rollback preserves persistent slot
+/csadmin giveskin player skin
+SQL grant failure preserves collection
+live /cases open and reward completion
+testcase temporary
+testcase keep
+/csadmin removeskin player id
+PASS ALL 135 COMMAND CHECKS
+
+ACTUAL CLIENT RESULTS
+mccasesdevcheck DevTester commands
+PASS ALL 135 COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references.
+mccasesdevcheck DevTester full
+PASS: signed items, forged markers, atomic pair consumption and workstation offhand protection.
+PASS: sword/bow/crossbow cosmetics preserve material, durability, enchantments and original metadata; equip guards.
+PASS: command-only skin inventory; legacy marked stars/cursor/offhand removed; ordinary stars retained and former reserved slot usable.
+PASS: shop quantity/payment/stacking, full inventory rollback, payment-freed slot, modified currency, overflow and stale offers; reserved-item guards.
+PASS: journal mutations and malformed-entry recovery; case/shop/skin/list menus render and protect icons; dealer interaction and damage protection.
+PASS: /inventory allows hotbar scrolling/number keys in both sneak states and over targets without changing pages; 8/9.999 blocks stay open, exactly 10 and beyond close with complete cleanup, cancelled moves ignored; crossbow -> bow / inspect slot changes preserve the selected weapon.
+PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.
+PASS: resource-pack item and map previews, asynchronous cancellation, callback and real inventory preserved.
+PASS: SQLite opening transaction/idempotency, PENDING recovery, favorite, concurrent StatTrak increments, equip persistence and offline profile snapshot.
+PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.
+mccasesdevcheck DevTester observer DevObserver
+PASS TWO CLIENTS: actual locales en_US / en_US; plugin language en / en; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup.
+mccasesdevcheck DevTester commerce DevObserver
+PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.
+mccasesdevcheck DevTester gold
+PASS TRADEUP RUNTIME: actual /tradeup command and protected selection/confirmation GUIs, ten normal inputs, five Covert inputs, knife and glove outputs, atomic SQL consumption, suppressed ADMIN announcement and exactly one claimed announcement for each eligible gold contract.
+mccasesdevcheck DevTester tradein-ui
+PASS TRADEIN UI: 48 direct-admin grants selectable, five sorts update displayed order, pagination, direct weapon/rarity/StatTrak filters, ten matching inputs auto-filled excluding favorites, review/back/weapon navigation preserve selection, reset filters and clear selection, scrolling blocked.
+mccasesdevcheck DevTester guide
+PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection.
+mccasesdevcheck DevTester nine
+PASS QUEUE 9: GUI batch, insufficient-key rejection, duplicate-request rejection, exact signed pairs, distinct OWNED SQL rewards/audits, receipt and world-entity cleanup. Inventory restored.
+mccasesdevcheck DevTester queue-controls
+PASS QUEUE CONTROLS: real GUI quantity 100, invalid numeric commands, cancel releases 91 reservations, teleport preserves 91 signed pairs and finalizes nine prepared rewards. Inventory restored.
+mccasesdevcheck DevTester spam
+PASS SPAM: single launch closes menu; repeated signed-item clicks add 1..9 sessions, same-tick duplicates ignored, excess clicks consume nothing, nine rewards and exactly nine signed pairs.
+
+ADDITIONAL NETWORK COMMAND RESPONSES
+/mccases info
+MCCases 1.2.0 by Plattnericus (plattnericus.dev)
+Skins: 815 Cases: 22 Weapons: 63
+Cached previews: 1 Resource pack mode: true
+Pack web server: off
+/csadmin givecase DevTester kilowatt_case 2
+[Cases] Gave 2× Kilowatt Case to DevTester.
+/csadmin givekey DevTester case_key 2
+[Cases] Gave 2× Case Key to DevTester.
+/csadmin givecase DevTester kilowatt_case 0
+Integer must not be less than 1: found 0\n...watt_case 0<--[HERE]
+/csadmin giveskin DevTester unknown_skin
+[Cases] Unknown skin.
+/csadmin removeskin DevTester z
+[Cases] No matching skin id found. /csadmin list <player>
+/market legacy DevTester
+[Cases] Archived Coin balance for DevTester: 0. No Emerald conversion.
+/market balance
+[Cases] Emeralds in your inventory: 190
+/market claims
+[Cases] Collected 320 Emerald items.
+/market balance
+[Cases] Emeralds in your inventory: 510
+/skintrade DevObserver
+[Cases] Trade request sent to DevObserver. It expires in 60 seconds.
+/trade cancel
+[Cases] Trade cancelled. You keep all your skins.
+/skinmarket unknown
+[Cases] Invalid command. Usage: /market [sell|own|search|balance|claims|recover]
+/market claims
+[Cases] No Emerald deliveries are pending.
+/csadmin info
+Unknown or incomplete command. See below for error\ncsadmin info<--[HERE]
+
+PASS ITEM RUNTIME: genuine Paper emerald stacks/PDC, storage+offhand payment, armor exclusion, negative/overflow/insufficient funds, full/partial inventory claims, idempotent receipts, 20 exact case/key pairs, test provenance and v1/v2 opening journals. Controlled player proxy; no connected-client gameplay test.
+
+ARTIFACT VERIFICATION
+PASS: 246 production classes match compiler output; no development or third-party classes bundled.
+PASS: JAR/pack ZIP CRCs; plugin.yml 1.2.0; embedded pack equals public ZIP; legal documents/index verified.
+PASS: 4758 texture/model/pack files unchanged; standard pack SHA-256 3ff1006677f903ad8be6d4df8dae02f929aea28a3003e052af7a660e9e745275
+PASS ALL LIVE SUITES; PASS REAL CLIENT COMMAND ROUTES

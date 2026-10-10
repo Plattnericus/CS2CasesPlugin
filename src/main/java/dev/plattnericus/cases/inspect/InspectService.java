@@ -84,6 +84,7 @@ public final class InspectService implements Listener {
         bodyHand = bodyHand && !reveal;
         SkinDefinition def = ctx.catalog().skin(instance.skinId());
         if (def == null || !player.hasPermission("mccases.inspect")) {
+            if (!reveal) ctx.messages(player).send(player, def == null ? "inspect.no-knife" : "general.no-permission");
             return false;
         }
         if (isInspecting(player)) {
@@ -95,6 +96,7 @@ public final class InspectService implements Listener {
         long now = Bukkit.getCurrentTick();
         Long until = cooldowns.get(player.getUniqueId());
         if (!reveal && until != null && now < until) {
+            ctx.messages(player).send(player, "command.inspect-cooldown");
             return false;
         }
         InspectModels m = models.get();
@@ -102,11 +104,13 @@ public final class InspectService implements Listener {
         KnifeModel model = m.model(modelId);
         if (!def.isKnife() && !m.hasModel(modelId)) model = m.model(def.weapon().category().name().toLowerCase(java.util.Locale.ROOT));
         if (model == null) {
+            if (!reveal) ctx.messages(player).send(player, "command.inspect-unavailable");
             return false;
         }
         InspectAnimation animation = reveal ? m.animation("reveal")
                 : m.chooseAnimation(def, model, lastAnimations.get(player.getUniqueId()));
         if (animation == null) {
+            if (!reveal) ctx.messages(player).send(player, "command.inspect-unavailable");
             return false;
         }
         if (!reveal) lastAnimations.put(player.getUniqueId(), animation.id());
@@ -156,6 +160,7 @@ public final class InspectService implements Listener {
             sessions.remove(player.getUniqueId());
             for (InspectSession.PartEntity part : spawned) part.entity().remove();
             ctx.plugin().getLogger().log(java.util.logging.Level.WARNING, "Cannot start inspect for " + def.weapon().id(), failure);
+            if (!reveal) dev.plattnericus.cases.command.CommandFeedback.failure(ctx, player, "inspect", failure);
             return false;
         }
     }

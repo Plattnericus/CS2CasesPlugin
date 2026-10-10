@@ -744,3 +744,15 @@ case-guide:
   - '<gray>Favoriten-Messer: <gold><favorites>%'
   - '<gray>Messerpräferenz: <white><community> / 100'
   target: '<gray><knife>: <gold><chance>% pro Öffnung'
+
+command:
+  usage: "<prefix><red>Ungültiger Befehl. Verwendung: <white><usage>"
+  failed: "<prefix><red>Befehl /<command> fehlgeschlagen. Melde einem Admin die Referenz <white><reference><red>. Details stehen im Serverlog."
+  case-unknown: "<prefix><red>Unbekannte Case: <white><case><red>. Gültige IDs stehen in der Tab-Vervollständigung."
+  inspect-cooldown: "<prefix><red>Inspect hat noch Cooldown. Versuche es gleich erneut."
+  inspect-unavailable: "<prefix><red>Für diesen Skin ist kein nutzbares Inspect-Modell oder keine Animation konfiguriert."
+  float-range: "<prefix><red>Dieser Skin benötigt einen Float von <min> bis <max>. Es wurde nichts geändert."
+  stattrak-unavailable: "<prefix><red>Dieser Skin unterstützt kein StatTrak. Es wurde nichts geändert."
+  state-changed: "<prefix><red>Der Skin wurde geändert oder ist nicht mehr verfügbar. Ansicht aktualisieren; es wurde kein Erfolg bestätigt."
+  equip-failed: "<prefix><red>Der Skin konnte nicht ausgerüstet werden. Besitz, Slot und Datenbank prüfen; es wurde kein Erfolg bestätigt."
+  pack-incomplete: "<prefix><red>Pack-Export unvollständig: <count> Assets fehlgeschlagen. Details stehen im Serverlog."

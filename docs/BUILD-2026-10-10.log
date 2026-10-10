@@ -1,16 +1,26 @@
-> Task :compileJava
-> Task :defaultsIndex
-> Task :processResources
-> Task :classes
-> Task :compileToolsJava UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :defaultsIndex UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :compileToolsJava
+/Users/nexor/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar(/org/joml/Matrix4f.class): warning: [classfile] RuntimeVisibleTypeAnnotations attribute introduced in version 52.0 class files is ignored in version 46.0 class files
+/Users/nexor/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar(/org/joml/Matrix4fc.class): warning: [classfile] RuntimeVisibleTypeAnnotations attribute introduced in version 52.0 class files is ignored in version 46.0 class files
+/Users/nexor/Github/CS2CasesPlugin/src/tools/java/dev/plattnericus/cases/tools/RuntimeChecksPlugin.java:551: warning: [removal] EntityDamageEvent(@org.jetbrains.annotations.NotNull Entity,@org.jetbrains.annotations.NotNull DamageCause,@org.jetbrains.annotations.NotNull DamageSource,double) in EntityDamageEvent has been deprecated and marked for removal
+            var damage = new org.bukkit.event.entity.EntityDamageEvent(dealer, org.bukkit.event.entity.EntityDamageEvent.DamageCause.CUSTOM,
+                         ^
+/Users/nexor/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar(/org/joml/Vector3f.class): warning: [classfile] RuntimeVisibleTypeAnnotations attribute introduced in version 52.0 class files is ignored in version 46.0 class files
+4 warnings
+
 > Task :processToolsResources NO-SOURCE
-> Task :toolsClasses UP-TO-DATE
+> Task :toolsClasses
 
 > Task :resourcePack
-Resource pack: 815 skins, 22 cases, 1 keys -> <project>/build/distributions/MCCases-ResourcePack-1.2.0.zip
+Resource pack: 815 skins, 22 cases, 1 keys -> /Users/nexor/Github/CS2CasesPlugin/build/distributions/MCCases-ResourcePack-1.2.0.zip
 
-> Task :jar
-> Task :assemble
+> Task :jar UP-TO-DATE
+> Task :assemble UP-TO-DATE
+> Task :devChecks
 > Task :compileTestJava NO-SOURCE
 > Task :processTestResources NO-SOURCE
 > Task :testClasses UP-TO-DATE
@@ -19,7 +29,7 @@ Resource pack: 815 skins, 22 cases, 1 keys -> <project>/build/distributions/MCCa
 > Task :verifyFeatures
 PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.
 WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
-WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:<gradle-cache>/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar)
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/Users/nexor/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.9/438e036486bad66b189bff385dd07dea4f74a146/joml-1.10.9.jar)
 WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
 WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 PASS: all 63 weapon/glove rigs / 252 individual timelines, 880360 finite joint frames in right/left eye/hand views, 70° 4:3 camera bounds; held-pose continuity, cyclic-rig rejection, full dealer price/overflow/unknown price and exact knife probabilities.
@@ -27,7 +37,7 @@ SLF4J(W): No SLF4J providers were found.
 SLF4J(W): Defaulting to no-operation (NOP) logger implementation
 SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
 WARNING: A restricted method in java.lang.System has been called
-WARNING: java.lang.System::load has been called by org.sqlite.SQLiteJDBCLoader in an unnamed module (file:<gradle-cache>/caches/modules-2/files-2.1/org.xerial/sqlite-jdbc/3.49.1.0/145d3a6819b86f3618728273329392269104c8c7/sqlite-jdbc-3.49.1.0.jar)
+WARNING: java.lang.System::load has been called by org.sqlite.SQLiteJDBCLoader in an unnamed module (file:/Users/nexor/.gradle/caches/modules-2/files-2.1/org.xerial/sqlite-jdbc/3.49.1.0/145d3a6819b86f3618728273329392269104c8c7/sqlite-jdbc-3.49.1.0.jar)
 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
@@ -40,18 +50,13 @@ Verified 815 skins, 22 cases, 5500 rewards/reels, weighted odds, wear boundaries
 Verified 45 language schemas, German/English commerce texts and English fallbacks, regional fallbacks, 46 animation timelines and reel easing.
 
 > Task :verifyPack
-PASS: all 815 exported skins / 1377 inspect layers / 101988 opaque rim faces, front/back UV orientation, unclipped sprites, both hands and first/third-person forward-facing blades/muzzles. Sheet: <project>/build/verification
+PASS: all 815 exported skins / 1377 inspect layers / 101988 opaque rim faces, front/back UV orientation, unclipped sprites, both hands and first/third-person forward-facing blades/muzzles. Sheet: /Users/nexor/Github/CS2CasesPlugin/build/verification
 
 > Task :check
 > Task :build
 
-[Incubating] Problems report is available at: file://<project>/build/reports/problems/problems-report.html
+[Incubating] Problems report is available at: file:///Users/nexor/Github/CS2CasesPlugin/build/reports/problems/problems-report.html
 
-Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
-
-You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
-
-For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
-
-BUILD SUCCESSFUL in 19s
-8 actionable tasks: 7 executed, 1 up-to-date
+BUILD SUCCESSFUL in 18s
+9 actionable tasks: 5 executed, 4 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html

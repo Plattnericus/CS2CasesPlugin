@@ -58,12 +58,15 @@ public final class PlayerProfile {
     /** Finds an owned instance by full id or by its 8-character short id. */
     public SkinInstance find(String idOrPrefix) {
         String needle = idOrPrefix.toLowerCase(java.util.Locale.ROOT);
+        if (needle.length() < 8) return null;
+        SkinInstance found = null;
         for (SkinInstance s : skins.values()) {
             if (s.status() == SkinInstance.Status.OWNED && s.id().toString().startsWith(needle)) {
-                return s;
+                if (found != null) return null;
+                found = s;
             }
         }
-        return null;
+        return found;
     }
 
     public UUID equipped(EquipSlot slot) {

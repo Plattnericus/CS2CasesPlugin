@@ -2,12 +2,15 @@ package dev.plattnericus.cases.tools;
 
 import dev.plattnericus.cases.config.Messages;
 import dev.plattnericus.cases.opening.Easing;
+import dev.plattnericus.cases.skin.SkinInstance;
+import dev.plattnericus.cases.skin.PatternInfo;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.joml.Matrix4f;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /** Regression checks that run without a Minecraft server or a test framework. */
 public final class FeatureChecks {
@@ -252,6 +255,15 @@ public final class FeatureChecks {
         var equipped = profile.owned().getFirst();
         profile.setEquipped(dev.plattnericus.cases.profile.EquipSlot.BOW, equipped.id()); profile.remove(equipped.id());
         require(profile.equipped(dev.plattnericus.cases.profile.EquipSlot.BOW) == null, "removing skin left equipped reference");
+        var collisions = new dev.plattnericus.cases.profile.PlayerProfile(sample.owner());
+        for (String id : List.of("aaaaaaaa-0000-0000-0000-000000000001", "aaaaaaaa-0000-0000-0000-000000000002")) {
+            collisions.put(new SkinInstance(UUID.fromString(id), sample.owner(), sample.skinId(), .03, 1, 1,
+                    false, 0, PatternInfo.NONE, "admin", SkinInstance.Origin.ADMIN, 1, false, SkinInstance.Status.OWNED));
+        }
+        require(collisions.find("a") == null && collisions.find("aaaaaaaa") == null,
+                "unsafe or ambiguous admin ID selected an arbitrary skin");
+        require(collisions.find("AAAAAAAA-0000-0000-0000-000000000001") != null,
+                "full UUID failed to disambiguate the skin");
         System.out.println("Verified " + catalog.skins().size() + " skins, " + catalog.cases().size() + " cases, " + rolls
                 + " rewards/reels, weighted odds, wear boundaries, inventory queries and journal recovery codec.");
     }

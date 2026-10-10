@@ -135,6 +135,7 @@ public final class CommerceService implements Listener {
     public void accept(Player target, String expectedSender) {
         TradeSession active = trade(target.getUniqueId());
         if (active != null) {
+            if (active.committing()) { ctx.messages(target).send(target, "trade.busy"); return; }
             Player partner = Bukkit.getPlayer(active.other(target.getUniqueId()));
             if (expectedSender == null || partner != null && partner.getName().equalsIgnoreCase(expectedSender)) confirm(target);
             else ctx.messages(target).send(target, "trade.no-request");
@@ -204,9 +205,15 @@ public final class CommerceService implements Listener {
         }, player, () -> { end(trade); closeTradeViews(trade); notifyPlayer(trade.first(), "trade.failed"); notifyPlayer(trade.second(), "trade.failed"); });
     }
     public void cancel(Player player) {
+        cancel(player, false);
+    }
+    /** Explicit command cancellation also acknowledges invitations and idle/no-op requests. */
+    public void cancel(Player player, boolean feedback) {
         TradeSession trade = trade(player.getUniqueId());
+        if (feedback && trade != null && trade.committing()) { ctx.messages(player).send(player, "trade.busy"); return; }
         if (trade != null) cancel(trade, "trade.cancelled");
-        invitations.entrySet().removeIf(e -> e.getKey().equals(player.getUniqueId()) || e.getValue().sender().equals(player.getUniqueId()));
+        boolean removed = invitations.entrySet().removeIf(e -> e.getKey().equals(player.getUniqueId()) || e.getValue().sender().equals(player.getUniqueId()));
+        if (feedback && trade == null) ctx.messages(player).send(player, removed ? "trade.cancelled" : "trade.no-request");
     }
     public void unconfirm(Player player, int expectedRevision) {
         TradeSession trade = trade(player.getUniqueId());

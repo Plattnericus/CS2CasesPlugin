@@ -28,10 +28,10 @@ public final class PlayerCommands {
     public static void register(Commands commands, CasesContext ctx) {
         dev.plattnericus.cases.commerce.CommerceCommands.register(commands, ctx);
         commands.register("skins", "Opens the skin gallery; vanilla opens the inventory menu", List.of("inventory"),
-                inventoryCommand(ctx, MenuStates.Category.ALL));
+                CommandFeedback.guard(ctx, "skins", inventoryCommand(ctx, MenuStates.Category.ALL)));
         commands.register("knife", "Opens your or another player's knife collection", List.of("knives"),
-                inventoryCommand(ctx, MenuStates.Category.KNIVES));
-        commands.register("cases", "Case contents and parallel opening queue", List.of(), new BasicCommand() {
+                CommandFeedback.guard(ctx, "knife", inventoryCommand(ctx, MenuStates.Category.KNIVES)));
+        commands.register("cases", "Case contents and parallel opening queue", List.of(), CommandFeedback.guard(ctx, "cases", new BasicCommand() {
             @Override public String permission() { return "mccases.use"; }
             @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
                 if (args.length <= 1) return List.of("open", "cancel");
@@ -47,19 +47,21 @@ public final class PlayerCommands {
                 }
                 if (args.length == 3 && args[0].equalsIgnoreCase("open")) {
                     var def = ctx.catalog().caseDefinition(args[1]);
+                    if (def == null) { ctx.messages(p).send(p, "command.case-unknown", Text.unparsed("case", args[1])); return; }
                     try { int amount = Integer.parseInt(args[2]);
                         if (def != null && amount > 0 && amount <= 1000) { ctx.openings().queue(p, def, amount); return; }
                     } catch (NumberFormatException ignored) { }
                 }
-                ctx.messages(p).send(p, "opening.queue-usage");
+                CommandFeedback.usage(ctx, p, "/cases open <Case-ID> <1–1000> | /cases cancel");
             }
-        });
-        commands.register("tradein", "CS2-inspired skin contracts", List.of("tradeup"), command(ctx, "mccases.tradein", p -> {
+        }));
+        commands.register("tradein", "CS2-inspired skin contracts", List.of("tradeup"), command(ctx, "tradein", "mccases.tradein", p -> {
+            if (ctx.profiles().get(p) == null) { ctx.messages(p).send(p, "profile.loading"); return; }
             if (ctx.tradeIns().enabled() && ctx.profiles().get(p) != null && ctx.commerce().trade(p.getUniqueId()) == null) new dev.plattnericus.cases.tradein.TradeInMenu(ctx, p).open();
             else ctx.messages(p).send(p, "tradein.unavailable");
         }));
-        commands.register("openings", "Active openings and recent results", List.of(), command(ctx, "mccases.use", p -> new dev.plattnericus.cases.opening.ActiveOpeningsMenu(ctx, p).open()));
-        commands.register("inspect", "Inspects your held weapon or equipped knife; hand places it at the skin hand in F5", List.of(), new BasicCommand() {
+        commands.register("openings", "Active openings and recent results", List.of(), command(ctx, "openings", "mccases.use", p -> new dev.plattnericus.cases.opening.ActiveOpeningsMenu(ctx, p).open()));
+        commands.register("inspect", "Inspects your held weapon or equipped knife; hand places it at the skin hand in F5", List.of(), CommandFeedback.guard(ctx, "inspect", new BasicCommand() {
             @Override public String permission() { return "mccases.inspect"; }
             @Override public Collection<String> suggest(CommandSourceStack source, String[] args) {
                 return args.length <= 1 ? List.of("hand", "view") : List.of();
@@ -68,6 +70,9 @@ public final class PlayerCommands {
                 if (!(source.getExecutor() instanceof Player p)) {
                     ctx.messages().send(source.getSender(), "general.player-only");
                     return;
+                }
+                if (args.length > 1 || args.length == 1 && !args[0].equalsIgnoreCase("hand") && !args[0].equalsIgnoreCase("view")) {
+                    CommandFeedback.usage(ctx, p, "/inspect [hand|view]"); return;
                 }
                 PlayerProfile profile = ctx.profiles().get(p);
                 if (profile == null) {
@@ -85,7 +90,7 @@ public final class PlayerCommands {
                     ctx.inspect().setBodyHandMode(p, args[0].equalsIgnoreCase("hand"));
                 ctx.inspect().start(p, knife, false);
             }
-        });
+        }));
     }
 
     /** Own gallery, own vanilla menu, or another player's read-only gallery. */
@@ -100,7 +105,7 @@ public final class PlayerCommands {
                 MenuStates.State state = ctx.menuStates().get(player.getUniqueId());
                 long requestVersion = ++state.inventoryRequestVersion;
                 if (args.length > 1) {
-                    ctx.messages().send(player, "inventory.usage");
+                    CommandFeedback.usage(ctx, player, "/inventory [vanilla|player] | /knife [vanilla|player]");
                     return;
                 }
                 if (args.length == 1 && args[0].equalsIgnoreCase("vanilla")) {
@@ -130,12 +135,15 @@ public final class PlayerCommands {
                 }
                 String name = target.getName() == null ? args[0] : target.getName();
                 ctx.profiles().snapshot(target.getUniqueId()).whenComplete((profile, error) ->
-                        Bukkit.getScheduler().runTask(ctx.plugin(), () -> {
+                        CommandFeedback.main(ctx, player, "inventory", () -> {
                             if (!player.isOnline() || ctx.menuStates().get(player.getUniqueId()) != state
                                     || state.inventoryRequestVersion != requestVersion) {
                                 return;
                             }
-                            if (error != null || profile == null) {
+                            if (error != null) {
+                                CommandFeedback.failure(ctx, player, "inventory", error); return;
+                            }
+                            if (profile == null) {
                                 ctx.messages().send(player, "view.unknown", Text.unparsed("player", name));
                                 return;
                             }
@@ -170,14 +178,15 @@ public final class PlayerCommands {
         };
     }
 
-    private static BasicCommand command(CasesContext ctx, String permission, java.util.function.Consumer<Player> action) {
-        return new BasicCommand() {
+    private static BasicCommand command(CasesContext ctx, String name, String permission, java.util.function.Consumer<Player> action) {
+        return CommandFeedback.guard(ctx, name, new BasicCommand() {
             @Override
             public void execute(CommandSourceStack source, String[] args) {
                 if (!(source.getExecutor() instanceof Player player)) {
                     ctx.messages().send(source.getSender(), "general.player-only");
                     return;
                 }
+                if (args.length != 0) { CommandFeedback.usage(ctx, player, "/" + name); return; }
                 action.accept(player);
             }
 
@@ -185,6 +194,6 @@ public final class PlayerCommands {
             public String permission() {
                 return permission;
             }
-        };
+        });
     }
 }

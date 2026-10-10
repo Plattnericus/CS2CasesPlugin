@@ -168,7 +168,7 @@ tasks.register<Jar>("devChecks") {
     dependsOn(tasks.named("toolsClasses"))
     archiveFileName.set("MCCases-DevChecks-${project.version}.jar")
     from(sourceSets["tools"].output) {
-        include("dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/RuntimeUiChecks*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
+        include("dev/plattnericus/cases/tools/CommandRuntimeChecks*.class", "dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/RuntimeUiChecks*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
     }
     val metadata = layout.buildDirectory.file("generated/dev-checks/plugin.yml")
     doFirst {

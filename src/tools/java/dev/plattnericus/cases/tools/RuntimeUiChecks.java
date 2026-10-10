@@ -68,6 +68,14 @@ public final class RuntimeUiChecks {
                 (i + 1) / 100.0, i, i, false, 0, PatternInfo.NONE, "admin", SkinInstance.Origin.ADMIN,
                 created + i, i < 3, SkinInstance.Status.OWNED));
         var weapon = defs.get(1).weapon();
+        // Filter/sort expectations concern these fixtures, not skins left by other audits.
+        var originalSkins = List.copyOf(ctx.profiles().get(player).all());
+        var originalEquipment = new EnumMap<dev.plattnericus.cases.profile.EquipSlot, UUID>(dev.plattnericus.cases.profile.EquipSlot.class);
+        for (var slot : dev.plattnericus.cases.profile.EquipSlot.values()) {
+            UUID id = ctx.profiles().get(player).equipped(slot);
+            if (id != null) originalEquipment.put(slot, id);
+        }
+        originalSkins.forEach(s -> ctx.profiles().removeLoaded(player.getUniqueId(), s.id()));
         CompletableFuture<Void> work = main(plugin, CompletableFuture.allOf(fixtures.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new)))
                 .thenRun(() -> {
                     fixtures.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
@@ -137,6 +145,8 @@ public final class RuntimeUiChecks {
         }).whenComplete((v, error) -> {
             player.closeInventory(); ctx.tradeIns().cancel(player);
             fixtures.forEach(s -> { ctx.profiles().removeLoaded(player.getUniqueId(), s.id()); ctx.repository().removeOwned(player.getUniqueId(), s.id()); });
+            originalSkins.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
+            originalEquipment.forEach((slot, id) -> ctx.profiles().get(player).setEquipped(slot, id));
             if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Trade-in UI audit failed", error);
         });
     }
