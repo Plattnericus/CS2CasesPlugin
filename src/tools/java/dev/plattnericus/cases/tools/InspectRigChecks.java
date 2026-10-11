@@ -31,13 +31,28 @@ public final class InspectRigChecks {
         Map<String, List<Vector3f>> packVertices = new HashMap<>();
         for (WeaponType weapon : catalog.weapons()) {
             SkinDefinition sourceSkin = catalog.skins().stream().filter(s -> s.weapon().id().equals(weapon.id())).sorted(Comparator.comparing(SkinDefinition::id)).findFirst().orElseThrow();
-            for (ModelPart part : InspectRig.packParts(weapon, models.packModelScale())) {
+            var packedParts = InspectRig.packParts(weapon, models.packModelScale());
+            var arms = packedParts.stream().filter(part -> part.material().startsWith("$arm:")).toList();
+            require(arms.size() == (weapon.category() == WeaponCategory.GLOVE ? 0 : 1), "animated first-person arm coverage " + weapon.id());
+            if (!arms.isEmpty()) {
+                String expectedStyle = weapon.isKnife() ? (InspectRig.reverseGrip(weapon) ? "knife-reverse" : "knife") : "gun";
+                String expectedGroup = switch (weapon.id()) {
+                    case "butterfly" -> "handle_a";
+                    case "shadow_daggers", "dual_berettas" -> "pair_a";
+                    default -> "body";
+                };
+                require(arms.get(0).material().equals("$arm:" + expectedStyle) && arms.get(0).group().equals(expectedGroup),
+                        "arm grip style/group " + weapon.id());
+            }
+            for (ModelPart part : packedParts) {
                 packVertices.put(weapon.id() + "/" + part.id(), vertices(renderer, weapon, part, sourceSkin));
             }
         }
         for (WeaponType weapon : catalog.weapons()) {
             require(catalog.skins().stream().anyMatch(s -> s.weapon().id().equals(weapon.id())), "unobtainable weapon " + weapon.id());
-            var pool = models.pool(weapon.id()); require(pool.size() == 4, "four individual variants required: " + weapon.id());
+            var pool = models.pool(weapon.id());
+            int expectedPoolSize = weapon.category() == WeaponCategory.GLOVE ? 4 : 6;
+            require(pool.size() == expectedPoolSize, expectedPoolSize + " individual variants required: " + weapon.id());
             var base = models.model(weapon.isKnife() ? weapon.id() : weapon.category().name().toLowerCase(Locale.ROOT));
             if (weapon.category() == WeaponCategory.GLOVE) {
                 var fallback = InspectRig.blockParts(weapon, base.parts());
@@ -95,7 +110,7 @@ public final class InspectRigChecks {
                                     double y = models.anchor().up() + point.y;
                                     double halfHeight = Math.tan(Math.toRadians(70)/2) * depth;
                                     double required = Math.max(Math.abs(y)/Math.tan(Math.toRadians(70)/2), Math.abs(x)/(Math.tan(Math.toRadians(70)/2)*4/3)) - point.z;
-                                    if (required > requiredForward) { requiredForward = required; furthest = id + "/" + part.id() + " tick=" + tick + " pack=" + pack; }
+                                    if (required > requiredForward) { requiredForward = required; furthest = id + "/" + part.id() + " tick=" + tick + " pack=" + pack + " point=" + point + " screen=" + x + "," + y + " depth=" + point.z; }
                                 }
                                 frames++;
                             }
@@ -105,7 +120,8 @@ public final class InspectRigChecks {
             }
         }
         require(models.anchor().forward() >= requiredForward + .015, "camera requires forward >= " + (requiredForward + .015) + " at " + furthest);
-        require(all.size() == catalog.weapons().size() * 4, "weapon coverage");
+        int expectedTimelines = catalog.weapons().stream().mapToInt(w -> w.category() == WeaponCategory.GLOVE ? 4 : 6).sum();
+        require(all.size() == expectedTimelines, "weapon coverage");
         var spin = List.of(new InspectAnimation.Keyframe(0, null, new Vector3f(), null, InspectAnimation.Ease.LINEAR),
                 new InspectAnimation.Keyframe(12, null, new Vector3f(0,0,360), null, InspectAnimation.Ease.LINEAR));
         var compound = new InspectAnimation("compound", Map.of(
@@ -154,22 +170,42 @@ public final class InspectRigChecks {
             require(InspectProfileDefaults.upgrade(current, defaults), "stock upgrade did not run");
             require(current.getInt("animations." + custom + ".substeps") == 2
                     && current.getStringList("animation-pools.karambit").equals(java.util.List.of(custom)), "custom animation/pool overwritten");
-            require(current.getStringList("animation-pools.ak47").size() == 4, "existing stock server did not receive fourth variant");
+            require(current.getStringList("animation-pools.ak47").size() == 6, "existing stock server did not receive new weapon variants");
             var reloaded = new org.bukkit.configuration.file.YamlConfiguration(); reloaded.loadFromString(current.saveToString());
             require(reloaded.getStringList("animation-pools.ak47").equals(defaults.getStringList("animation-pools.ak47")), "migration not serializable");
             require(!InspectProfileDefaults.upgrade(reloaded, defaults), "profile upgrade not idempotent");
-            for (String baseline : List.of("v2", "v3")) try (var recent = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-" + baseline + ".yml")) {
+            for (String baseline : List.of("v2", "v3", "v4")) try (var recent = InspectRigChecks.class.getResourceAsStream("/migrations/inspect-profiles-" + baseline + ".yml")) {
                 var stock = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(recent, java.nio.charset.StandardCharsets.UTF_8));
+                boolean hadPool = !stock.getStringList("animation-pools.ak47").isEmpty();
                 stock.set("animations.talon__blade_presentation.substeps", 2);
                 require(InspectProfileDefaults.upgrade(stock, defaults), "1.2.0 ring timeline upgrade did not run");
                 require(stock.getList("animations.karambit__finger_roll.groups.roll.pivot").equals(defaults.getList("animations.karambit__finger_roll.groups.roll.pivot")), "1.2.0 ring pivot not migrated");
                 require(stock.getInt("animations.talon__blade_presentation.substeps") == 2, "custom ring timeline overwritten");
-                require(!InspectProfileDefaults.upgrade(stock, defaults), "ring migration not idempotent");
+                require(!hadPool || stock.getStringList("animation-pools.ak47").size() == 6,
+                        "stock pool was not expanded from " + baseline);
+                require(!InspectProfileDefaults.upgrade(stock, defaults), "profile migration not idempotent");
             }
-            System.out.println("PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.");
+            System.out.println("PASS: existing stock inspect profiles upgrade to six weapon/knife variants; custom timelines/pools survive and migration is idempotent.");
         } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
     private static List<Vector3f> vertices(SkinRenderer renderer, WeaponType weapon, ModelPart part, SkinDefinition skin) throws TextureException {
+        if (part.material().startsWith("$arm:")) {
+            double gripX = weapon.isKnife() ? (InspectRig.reverseGrip(weapon) ? .72 : .29) : .36;
+            double gripY = weapon.isKnife() ? .50 : .57;
+            double x = gripX * 16, y = gripY * 16;
+            double[][] boxes = {
+                    {x - 2.1, y - 2.0, 7.5, x + 2.1, y + 2.0, 10},
+                    {x - 2.2, y - 2.1, 10, x + 2.2, y + 2.1, 11.25},
+                    {x - 2.0, y - 1.9, 11.25, x + 2.0, y + 1.9, 15}
+            };
+            var points = new ArrayList<Vector3f>(boxes.length * 8);
+            for (double[] box : boxes) for (int bits = 0; bits < 8; bits++) {
+                points.add(new Vector3f((float)((box[(bits & 1) == 0 ? 0 : 3] / 16) - .5),
+                        (float)((box[(bits & 2) == 0 ? 1 : 4] / 16) - .5),
+                        (float)((box[(bits & 4) == 0 ? 2 : 5] / 16) - .5)));
+            }
+            return points;
+        }
         String layer = part.material().substring(5);
         double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
         var source = InspectRig.presentation(weapon, renderer.render(skin, 0, fl, 0).image()).scaledTo(120, 120);

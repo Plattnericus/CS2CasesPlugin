@@ -67,7 +67,39 @@ public final class PackChecks {
                 var item = json(zip, base + "items/skin/" + skin.id() + ".json").getAsJsonObject("model");
                 require(item.get("type").getAsString().equals("minecraft:select"), "held geometry selector " + skin.id());
                 require(item.get("property").getAsString().equals("minecraft:display_context"), "held context " + skin.id());
-                require(item.getAsJsonArray("cases").get(0).getAsJsonObject().getAsJsonObject("model").get("type").getAsString().equals("minecraft:composite"), "missing held joints " + skin.id());
+                var cases = item.getAsJsonArray("cases");
+                boolean glove = skin.weapon().category() == WeaponCategory.GLOVE;
+                require(cases.size() == (glove ? 1 : 2), "held display-context coverage " + skin.id());
+                var first = cases.get(0).getAsJsonObject();
+                var firstModels = first.getAsJsonObject("model").getAsJsonArray("models");
+                require(first.getAsJsonObject("model").get("type").getAsString().equals("minecraft:composite"), "missing held joints " + skin.id());
+                long layerCount = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().count();
+                if (glove) {
+                    require(firstModels.size() == layerCount, "glove held composite changed " + skin.id());
+                } else {
+                    require(first.getAsJsonArray("when").toString().contains("firstperson_"), "arm is not limited to first person " + skin.id());
+                    require(firstModels.size() == layerCount + 1, "first-person arm missing from held composite " + skin.id());
+                    var third = cases.get(1).getAsJsonObject();
+                    require(third.getAsJsonArray("when").toString().contains("thirdperson_")
+                            && third.getAsJsonObject("model").getAsJsonArray("models").size() == layerCount,
+                            "third-person composite must keep the vanilla player arm " + skin.id());
+                    String armStyle = skin.isKnife()
+                            ? InspectRig.reverseGrip(skin.weapon()) ? "knife-reverse" : "knife"
+                            : "gun";
+                    String armPath = "held/arm/" + armStyle;
+                    var armItem = json(zip, base + "items/" + armPath + ".json").getAsJsonObject("model");
+                    require(armItem.get("type").getAsString().equals("minecraft:model")
+                            && armItem.get("model").getAsString().equals("mccases:item/" + armPath), "first-person arm item model " + skin.id());
+                    require(firstModels.get(0).getAsJsonObject().get("model").getAsString().equals("mccases:item/" + armPath), "first-person arm ordering " + skin.id());
+                    var armModel = json(zip, base + "models/item/" + armPath + ".json");
+                    checkGrip(skin, armModel.getAsJsonObject("display"));
+                    require(armModel.getAsJsonArray("elements").size() == 3, "arm and sleeve geometry missing " + skin.id());
+                    for (var element : armModel.getAsJsonArray("elements")) {
+                        var from = vec(element.getAsJsonObject().getAsJsonArray("from"));
+                        var to = vec(element.getAsJsonObject().getAsJsonArray("to"));
+                        require(to.x > from.x && to.y > from.y && to.z > from.z, "invalid arm geometry " + skin.id());
+                    }
+                }
                 var selected = json(zip, base + "models/item/trade/selected/" + skin.id() + ".json");
                 require(vec(selected.getAsJsonObject("display").getAsJsonObject("fixed").getAsJsonArray("rotation")).lengthSquared() == 0, "selected icon reversed");
                 for (String layer : InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().toList()) {
@@ -114,6 +146,8 @@ public final class PackChecks {
                 }
                 examples.merge(skin.weapon().id(), skin, (a,b) -> a.id().compareTo(b.id()) < 0 ? a : b);
             }
+            require(entries.keySet().stream().filter(n -> n.matches("assets/mccases/models/item/held/arm/(gun|knife|knife-reverse)\\.json")).count() == 3,
+                    "first-person arm models should share the three grip profiles");
             require(entries.keySet().stream().filter(n -> n.startsWith("assets/mccases/textures/item/skin/") && n.endsWith(".png")).count() == catalog.skins().size(), "exported skin texture count");
             require(entries.keySet().stream().filter(n -> n.startsWith("assets/mccases/textures/item/case/") && n.endsWith(".png")).count() == catalog.cases().size(), "exported case texture count");
             for (var caseDef : catalog.cases()) {
@@ -140,7 +174,7 @@ public final class PackChecks {
         graphics.dispose(); File output = new File(args[2]); output.mkdirs(); ImageIO.write(sheet, "png", new File(output, "all-weapons.png"));
         System.out.println("PASS: all " + catalog.skins().size() + " exported skins / " + layers + " inspect layers / " + faces
                 + " opaque rim faces, front/back UV orientation, catalog-rendered skins and articulated layers, all " + catalog.cases().size()
-                + " detailed case textures, unclipped sprites, solid held composites and native first/third-person palm anchors in both hands. Sheet: " + output);
+                + " detailed case textures, unclipped sprites, three shared pixel-arm profiles, solid held composites and native first/third-person palm anchors in both hands. Sheet: " + output);
     }
 
     private static BufferedImage expectedLayer(SkinRenderer renderer, SkinDefinition skin, String layer) throws TextureException {
@@ -208,6 +242,12 @@ public final class PackChecks {
             var rotation = vec(transform.getAsJsonArray("rotation"));
             var translation = vec(transform.getAsJsonArray("translation")).div(16);
             var scale = vec(transform.getAsJsonArray("scale"));
+            float expectedScale = skin.weapon().category() == WeaponCategory.GLOVE
+                    ? first ? .80f : .85f
+                    : skin.isKnife() ? first ? .62f : 1.05f : first ? .58f : 1.0f;
+            require(Math.abs(Math.abs(scale.x) - expectedScale) < .001
+                    && Math.abs(scale.y - expectedScale) < .001 && Math.abs(scale.z - expectedScale) < .001,
+                    "unexpected held-model scale " + skin.id() + "/" + context);
             if (left) { translation.x = -translation.x; rotation.mul(1, -1, -1); }
             var model = new Matrix4f().translation(translation).rotateXYZ((float)Math.toRadians(rotation.x), (float)Math.toRadians(rotation.y), (float)Math.toRadians(rotation.z)).scale(scale);
             var anchored = model.transformPosition(new Vector3f(grip));

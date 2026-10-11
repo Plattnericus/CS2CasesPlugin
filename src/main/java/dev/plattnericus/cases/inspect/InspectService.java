@@ -304,6 +304,13 @@ public final class InspectService implements Listener {
                     if (base != null) meta.setItemModel(new org.bukkit.NamespacedKey(base.getNamespace(),
                             "inspect/" + base.getKey().replaceFirst("^skin/", "") + "/" + part.material().substring(5)));
                 });
+            } else if (part.material().startsWith("$arm:")) {
+                item = skinItem.clone();
+                item.editMeta(meta -> {
+                    org.bukkit.NamespacedKey base = meta.getItemModel();
+                    if (base != null) meta.setItemModel(new org.bukkit.NamespacedKey(base.getNamespace(),
+                            "held/arm/" + part.material().substring(5)));
+                });
             } else {
                 Material mat = material(part.material(), resolved, Material.IRON_SWORD);
                 item = new ItemStack(mat.isItem() ? mat : Material.IRON_SWORD);

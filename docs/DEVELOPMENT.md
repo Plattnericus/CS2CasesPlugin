@@ -24,17 +24,17 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.5.jar` and `build/distributions/MCCases-ResourcePack-1.2.5.zip`.
+`build/libs/MCCases-1.2.6.jar` and `build/distributions/MCCases-ResourcePack-1.2.6.zip`.
 The generated pack is embedded in the plugin JAR. Skin and inspect images use the current
 renderer; only the 22 documented case images are supplied bitmaps. `PackDistribution` merges
 the generated catalog into an existing pack at runtime, preserves other server assets and
-removes the three retired Fusion glyphs/providers from legacy installations.
+removes retired custom-font glyphs/providers from legacy installations.
 
 | Task | Purpose / output |
 | --- | --- |
 | `bash gradlew build` | Build the plugin and run feature checks |
-| `bash gradlew verifyPack` | Verify all rendered skins and inspect layers, 22 case images, rim UVs and both hand transforms |
-| `bash gradlew inspectRigPreview` | Software filmstrips of all 252 articulated variants |
+| `bash gradlew verifyPack` | Verify all rendered skins and inspect layers, 22 case images, rim UVs, held-arm assets and both hand transforms |
+| `bash gradlew inspectRigPreview` | Software filmstrips of all 362 articulated variants |
 | `bash gradlew verifyFeatures` | Check catalog, reward selection, translations, inventory queries, journal and timelines |
 | `bash gradlew resourcePack` | Render every catalog skin and build the generated MCCases pack |
 | `bash gradlew verifyResourcePackInstaller` | Check legacy glyph removal, server asset preservation and atomic updates |
@@ -42,25 +42,25 @@ removes the three retired Fusion glyphs/providers from legacy installations.
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.5.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.6.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Version 1.2.5 renders the catalog sprites and inspect layers at 128px from bundled weapon maps.
+Version 1.2.6 renders the catalog sprites and inspect layers at 128px from bundled weapon maps.
 Exported coverage is opaque, mesh boundaries follow the source silhouette and held models use native palm
-anchors in both hands. Karambit and Talon turn only at presentation time; pattern sampling
+anchors in both hands. Three shared block-style forearm models cover first-person firearms, normal-grip knives and reversed-grip knives; third-person keeps the player model's own arm. Karambit and Talon turn only at presentation time; pattern sampling
 and saved classifications retain their original UV coordinates. Their pivots match the
-original finger-ring holes. `scripts/generate_inspect_profiles.py` reproduces all 252 stock
-timelines. The v1/v2/v3 migration baselines recognize unchanged older stock profiles;
+original finger-ring holes. `scripts/generate_inspect_profiles.py` reproduces all 362 stock
+timelines. The v1/v2/v3/v4 migration baselines recognize unchanged older stock profiles;
 customized timelines remain editable. The pack includes the Minecraft 26.3 item shader
 baseline with a reserved face tint for simulated metal sheen; this is not world reflection.
 Skin `traded` history is persisted separately from `origin` and `source` in schema 4.
 Recorded direct-trade instance IDs are backfilled; market purchases preserve the flag.
 `SkinPresentationChecks` covers real v3 migration, repeated trades/restarts and en/de/it source lore.
 
-World wheels use `opening.world.scene-scale: 3.0` as an upper size limit. Camera
+World wheels use 1.5× the previous icon scale and spacing. `opening.world.scene-scale: 3.0` remains an upper size limit. Camera
 fitting sizes every wheel against the complete 3×3 grid, with fixed scale for
 counts 1–9 at a given distance. Glass, icons, text and hitboxes share this scale.
 The default strip shows five icons. Offline checks cover centering, non-overlap,
@@ -82,7 +82,7 @@ vanilla's re-equip animation before taking the screenshot.
 
 Feature checks cover the default catalog's 815 skins and 22 cases, 5,500 reward and reel checks,
 weighted drop chances, float limits, regional language fallbacks and 46 legacy animation timelines.
-They also validate all 252 individual profiles/63 rigs, full-timeline 70°/4:3 framing in both hands
+They also validate all 362 individual profiles/63 rigs, full-timeline 70°/4:3 framing in both hands
 with pack/fallback geometry, joint continuity, invalid configuration and case-guide probabilities.
 Filmstrips check each tick for clipped models at a 70° vertical field of view and 16:9 aspect ratio.
 `hand_pack_*` uses a geometric avatar reference. These render views are not Minecraft client
@@ -169,7 +169,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.5.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.2.6.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -277,7 +277,7 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use [the 1.2.5 verification report](RELEASE-1.2.5-VERIFICATION.md) for the current results.
+Use [the 1.2.6 verification report](RELEASE-1.2.6-VERIFICATION.md) for the current results.
 
 Remove extra check JARs and test fixtures after validation; retain useful labeled test evidence.
 Keep source checks available for later development. The session's temporary world, database and

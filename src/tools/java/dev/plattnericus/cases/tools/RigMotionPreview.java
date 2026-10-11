@@ -29,6 +29,9 @@ public final class RigMotionPreview {
                         .sorted(Comparator.comparing(SkinDefinition::id)).findFirst().orElseThrow();
                 var meshes = new ArrayList<Mesh>();
                 for (var part : InspectRig.packParts(weapon, models.packModelScale())) {
+                    // The software filmstrip verifies weapon skin layers; the animated first-person
+                    // arm is checked in the exported model and in the live Minecraft capture.
+                    if (!part.material().startsWith("$rig:")) continue;
                     String path = "inspect/" + skin.id() + "/" + part.material().substring(5);
                     try (var png = zip.getInputStream(zip.getEntry("assets/mccases/textures/item/" + path + ".png"));
                          var json = zip.getInputStream(zip.getEntry("assets/mccases/models/item/" + path + ".json"))) {
@@ -37,7 +40,7 @@ public final class RigMotionPreview {
                     }
                 }
                 int width = 176, height = 132, header = 24;
-                var image = new BufferedImage(width * 8, (height + header) * 4, BufferedImage.TYPE_INT_RGB);
+                var image = new BufferedImage(width * 8, (height + header) * models.pool(weapon.id()).size(), BufferedImage.TYPE_INT_RGB);
                 var graphics = image.createGraphics(); graphics.setColor(new Color(0x20242b)); graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
                 graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
                 int row = 0;
@@ -55,7 +58,9 @@ public final class RigMotionPreview {
                 graphics.dispose(); ImageIO.write(image, "png", new File(output, weapon.id() + ".png"));
             }
         }
-        System.out.println("Rendered all 63 articulated inspect filmstrips / 252 variants from the exported pack into " + output + ". Software evidence, not Minecraft captures.");
+        int variants = catalog.weapons().stream().mapToInt(weapon -> models.pool(weapon.id()).size()).sum();
+        System.out.println("Rendered all " + catalog.weapons().size() + " articulated inspect filmstrips / " + variants
+                + " variants from the exported pack into " + output + ". Software evidence, not Minecraft captures.");
     }
     private static void draw(Graphics2D graphics, List<Mesh> meshes, InspectAnimation animation, int tick,
                              InspectModels models, boolean paired, int ox, int oy, int width, int height) {

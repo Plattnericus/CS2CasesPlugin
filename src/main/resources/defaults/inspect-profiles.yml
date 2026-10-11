@@ -126,6 +126,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  glock18__front_sight_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 19], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  glock18__grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -27], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   usps__suppressor_check:
     substeps: 4
     sounds:
@@ -241,6 +300,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  usps__suppressor_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 21], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  usps__slide_release:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -29], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -366,6 +484,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  p2000__sightline_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 23], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  p2000__frame_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -31], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   p250__compact_peek:
     substeps: 4
     sounds:
@@ -481,6 +658,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  p250__sightline_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 25], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  p250__grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -33], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -606,6 +842,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  fiveseven__rail_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 27], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  fiveseven__slide_release:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -35], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   tec9__receiver_check:
     substeps: 4
     sounds:
@@ -726,6 +1021,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  tec9__receiver_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 19], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  tec9__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -27], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   cz75__front_grip_check:
     substeps: 4
     sounds:
@@ -841,6 +1195,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  cz75__front_grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 21], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  cz75__slide_release:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -29], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -1006,6 +1419,85 @@ animations:
         - 0.25
         - -0.03
         - 0
+  dual_berettas__paired_sightline:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 23], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      pair_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 12], move: [0.04, 0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 25], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 19, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.29
+        - 0.03
+        - 0
+      pair_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -12], move: [-0.04, -0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -25], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 19, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.25
+        - -0.03
+        - 0
+  dual_berettas__crossed_ready:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -31], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      pair_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: [0, 75, 12], move: [0.04, 0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 25], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 36, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.29
+        - 0.03
+        - 0
+      pair_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: [0, -75, -12], move: [-0.04, -0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -25], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 36, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.25
+        - -0.03
+        - 0
   deagle__finger_twirl:
     substeps: 4
     sounds:
@@ -1137,6 +1629,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  deagle__barrel_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 25], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  deagle__heavy_grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -33], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   r8_revolver__cylinder_check:
     substeps: 4
     sounds:
@@ -1252,6 +1803,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  r8_revolver__cylinder_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 27], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  r8_revolver__barrel_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -35], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -1377,6 +1987,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  mac10__strap_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 19], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mac10__receiver_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -27], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   mp9__foregrip_check:
     substeps: 4
     sounds:
@@ -1492,6 +2161,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 48, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mp9__foregrip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 21], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mp9__sightline_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -29], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -1617,6 +2345,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  mp7__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 23], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mp7__receiver_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -31], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   mp5sd__suppressor_peek:
     substeps: 4
     sounds:
@@ -1732,6 +2519,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mp5sd__suppressor_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 25], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mp5sd__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -33], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -1857,6 +2703,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  ump45__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 27], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  ump45__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -35], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   p90__top_magazine_check:
     substeps: 4
     sounds:
@@ -1972,6 +2877,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  p90__top_magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 19], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  p90__sightline_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -27], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -2097,6 +3061,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  ppbizon__drum_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 21], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  ppbizon__receiver_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -29], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   ak47__magazine_peek:
     substeps: 4
     sounds:
@@ -2212,6 +3235,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  ak47__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 23], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  ak47__sightline_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -31], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -2337,6 +3419,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  m4a4__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 25], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  m4a4__rail_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -33], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   m4a1s__suppressor_check:
     substeps: 4
     sounds:
@@ -2452,6 +3593,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 46, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  m4a1s__suppressor_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 27], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  m4a1s__rail_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -35], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -2577,6 +3777,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  galil__foregrip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 19], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  galil__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -27], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   famas__bullpup_check:
     substeps: 4
     sounds:
@@ -2692,6 +3951,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  famas__carry_handle_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 21], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  famas__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -29], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -2817,6 +4135,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  aug__scope_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 23], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  aug__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -31], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   sg553__optic_check:
     substeps: 4
     sounds:
@@ -2932,6 +4309,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 48, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  sg553__optic_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 25], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  sg553__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -33], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -3057,6 +4493,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  ssg08__bolt_return:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 27], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  ssg08__scope_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -35], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   awp__scope_peek:
     substeps: 4
     sounds:
@@ -3172,6 +4667,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 50, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  awp__scope_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 19], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  awp__bolt_return:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -27], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -3297,6 +4851,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  scar20__optic_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 21], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  scar20__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -29], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   g3sg1__scope_roll:
     substeps: 4
     sounds:
@@ -3412,6 +5025,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 52, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  g3sg1__scope_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 23], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  g3sg1__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -31], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -3537,6 +5209,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  nova__pump_return:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 25], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  nova__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -33], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   xm1014__tube_check:
     substeps: 4
     sounds:
@@ -3652,6 +5383,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 52, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  xm1014__tube_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 27], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  xm1014__stock_settle:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -35], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -3777,6 +5567,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  sawedoff__grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 19], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [-0.07200000000000001, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  sawedoff__barrel_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -27], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [-0.08, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   mag7__box_magazine_check:
     substeps: 4
     sounds:
@@ -3892,6 +5741,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 54, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mag7__magazine_seat:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 21], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  mag7__receiver_align:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -29], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 35, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -4017,6 +5925,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  m249__belt_cover_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 23], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 20, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  m249__support_grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -31], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   negev__box_check:
     substeps: 4
     sounds:
@@ -4132,6 +6099,65 @@ animations:
         - {ticks: 9, ease: inout}
         - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
         - {ticks: 48, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  negev__belt_cover_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 25], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  negev__support_grip_reset:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -33], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -24], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -4257,6 +6283,65 @@ animations:
         - -0.04
         - 0.06
         - 0
+  zeus__coil_charge:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '21': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 27], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 5, move: [0, -0.049, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 19, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
+  zeus__contact_ready:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.mech
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -35], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 5, move: [0, -0.055, 0], rotate: [0, 0, -7], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0.06
+        - 0
   karambit__finger_roll:
     substeps: 4
     sounds:
@@ -4373,6 +6458,63 @@ animations:
         - 0.24609375
         - 0.01171875
         - 0
+  karambit__ring_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 19], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 22, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.24609375
+        - 0.01171875
+        - 0
+  karambit__reverse_edge_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -27], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, rotate: &id004 [0, 0, 0], ease: inout}
+        - {ticks: 39, ease: inout}
+        - {ticks: 10, rotate: *id004, ease: inout}
+        parent: body
+        pivot:
+        - 0.24609375
+        - 0.01171875
+        - 0
   butterfly__rollover:
     substeps: 4
     sounds:
@@ -4394,9 +6536,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id004 [0, 0, 360], ease: inout}
+        - {ticks: 16, rotate: &id005 [0, 0, 360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id004, ease: inout}
+        - {ticks: 10, rotate: *id005, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4451,9 +6593,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id005 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id006 [0, 0, 0], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id005, ease: inout}
+        - {ticks: 10, rotate: *id006, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4508,9 +6650,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id006 [0, 0, -360], ease: inout}
+        - {ticks: 16, rotate: &id007 [0, 0, -360], ease: inout}
         - {ticks: 33, ease: inout}
-        - {ticks: 10, rotate: *id006, ease: inout}
+        - {ticks: 10, rotate: *id007, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4565,9 +6707,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id007 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id008 [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
-        - {ticks: 10, rotate: *id007, ease: inout}
+        - {ticks: 10, rotate: *id008, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -4596,6 +6738,119 @@ animations:
         - {ticks: 6, rotate: [0, 0, 0], ease: inout}
         - {ticks: 8, rotate: [0, 0, 0], ease: inout}
         - {ticks: 49, rotate: [0, 0, 0], ease: inout}
+        parent: roll
+        pivot:
+        - 0.005
+        - 0.009
+        - 0
+  butterfly__handle_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 21], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 16, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.03
+        - 0
+        - 0
+      handle_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 7, ease: inout}
+        - {ticks: 6, rotate: [0, 0, 210], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 80], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: [0, 0, 0], ease: inout}
+        parent: roll
+        pivot:
+        - 0.005
+        - 0.009
+        - 0
+      handle_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 7, ease: inout}
+        - {ticks: 6, rotate: [0, 0, -210], ease: inout}
+        - {ticks: 7, rotate: [0, 0, -80], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: [0, 0, 0], ease: inout}
+        parent: roll
+        pivot:
+        - 0.005
+        - 0.009
+        - 0
+  butterfly__cross_handle_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -29], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 16, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 32, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.03
+        - 0
+        - 0
+      handle_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, ease: inout}
+        - {ticks: 6, rotate: [0, 0, 220], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 80], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 37, rotate: [0, 0, 0], ease: inout}
+        parent: roll
+        pivot:
+        - 0.005
+        - 0.009
+        - 0
+      handle_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, ease: inout}
+        - {ticks: 6, rotate: [0, 0, -220], ease: inout}
+        - {ticks: 7, rotate: [0, 0, -80], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 37, rotate: [0, 0, 0], ease: inout}
         parent: roll
         pivot:
         - 0.005
@@ -4651,9 +6906,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id008 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id009 [0, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id008, ease: inout}
+        - {ticks: 10, rotate: *id009, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4680,9 +6935,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id009 [360, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id010 [360, 0, 0], ease: inout}
         - {ticks: 37, ease: inout}
-        - {ticks: 10, rotate: *id009, ease: inout}
+        - {ticks: 10, rotate: *id010, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4709,9 +6964,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id010 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id011 [0, 0, 0], ease: inout}
         - {ticks: 46, ease: inout}
-        - {ticks: 10, rotate: *id010, ease: inout}
+        - {ticks: 10, rotate: *id011, ease: inout}
+        parent: body
+        pivot:
+        - -0.22
+        - 0
+        - 0
+  m9_bayonet__guard_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 23], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.22
+        - 0
+        - 0
+  m9_bayonet__sawback_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -31], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 31, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -4738,9 +7050,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id011 [0, 0, 360], ease: inout}
+        - {ticks: 15, rotate: &id012 [0, 0, 360], ease: inout}
         - {ticks: 34, ease: inout}
-        - {ticks: 10, rotate: *id011, ease: inout}
+        - {ticks: 10, rotate: *id012, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4767,9 +7079,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id012 [0, 0, 0], ease: inout}
+        - {ticks: 15, rotate: &id013 [0, 0, 0], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id012, ease: inout}
+        - {ticks: 10, rotate: *id013, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4796,9 +7108,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id013 [0, 0, -360], ease: inout}
+        - {ticks: 15, rotate: &id014 [0, 0, -360], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id013, ease: inout}
+        - {ticks: 10, rotate: *id014, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4825,9 +7137,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 15, rotate: &id014 [0, 0, 0], ease: inout}
+        - {ticks: 15, rotate: &id015 [0, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id014, ease: inout}
+        - {ticks: 10, rotate: *id015, ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  bayonet__edge_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 25], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 15, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 19, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  bayonet__pommel_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -33], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 15, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 35, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -4896,9 +7265,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id015 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id016 [0, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id015, ease: inout}
+        - {ticks: 10, rotate: *id016, ease: inout}
         parent: body
         pivot:
         - 0
@@ -4938,9 +7307,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id016 [0, 0, 360], ease: inout}
+        - {ticks: 14, rotate: &id017 [0, 0, 360], ease: inout}
         - {ticks: 37, ease: inout}
-        - {ticks: 10, rotate: *id016, ease: inout}
+        - {ticks: 10, rotate: *id017, ease: inout}
         parent: body
         pivot:
         - 0
@@ -4980,12 +7349,95 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id017 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id018 [0, 0, 0], ease: inout}
         - {ticks: 46, ease: inout}
-        - {ticks: 10, rotate: *id017, ease: inout}
+        - {ticks: 10, rotate: *id018, ease: inout}
         parent: body
         pivot:
         - 0
+        - 0
+        - 0
+  flip__hinge_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 27], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 14, rotate: [0, 0, 135], ease: inout}
+        - {ticks: 18, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 40, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0211
+        - 0
+        - 0
+  flip__spine_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -35], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 14, rotate: [0, 0, -75], ease: inout}
+        - {ticks: 37, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 59, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0211
         - 0
         - 0
   gut__hook_check:
@@ -5038,9 +7490,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id018 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id019 [0, 0, 0], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id018, ease: inout}
+        - {ticks: 10, rotate: *id019, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5067,9 +7519,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id019 [360, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id020 [360, 0, 0], ease: inout}
         - {ticks: 33, ease: inout}
-        - {ticks: 10, rotate: *id019, ease: inout}
+        - {ticks: 10, rotate: *id020, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5096,9 +7548,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 16, rotate: &id020 [0, 0, 0], ease: inout}
+        - {ticks: 16, rotate: &id021 [0, 0, 0], ease: inout}
         - {ticks: 42, ease: inout}
-        - {ticks: 10, rotate: *id020, ease: inout}
+        - {ticks: 10, rotate: *id021, ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  gut__hook_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 19], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 16, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  gut__belly_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -27], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 16, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -5154,9 +7663,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id021 [0, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id022 [0, 0, 0], ease: inout}
         - {ticks: 38, ease: inout}
-        - {ticks: 10, rotate: *id021, ease: inout}
+        - {ticks: 10, rotate: *id022, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5183,9 +7692,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id022 [360, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id023 [360, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id022, ease: inout}
+        - {ticks: 10, rotate: *id023, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5212,9 +7721,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 20, rotate: &id023 [0, 0, 0], ease: inout}
+        - {ticks: 20, rotate: &id024 [0, 0, 0], ease: inout}
         - {ticks: 48, ease: inout}
-        - {ticks: 10, rotate: *id023, ease: inout}
+        - {ticks: 10, rotate: *id024, ease: inout}
+        parent: body
+        pivot:
+        - -0.19
+        - 0
+        - 0
+  huntsman__spine_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '24': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 21], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 20, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.19
+        - 0
+        - 0
+  huntsman__weight_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '24': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -29], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 20, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 29, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -5241,9 +7807,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id024 [0, 0, 360], ease: inout}
+        - {ticks: 17, rotate: &id025 [0, 0, 360], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id024, ease: inout}
+        - {ticks: 10, rotate: *id025, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5325,9 +7891,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id025 [0, 0, -360], ease: inout}
+        - {ticks: 17, rotate: &id026 [0, 0, -360], ease: inout}
         - {ticks: 38, ease: inout}
-        - {ticks: 10, rotate: *id025, ease: inout}
+        - {ticks: 10, rotate: *id026, ease: inout}
         parent: body
         pivot:
         - 0
@@ -5367,12 +7933,95 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id026 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id027 [0, 0, 0], ease: inout}
         - {ticks: 47, ease: inout}
-        - {ticks: 10, rotate: *id026, ease: inout}
+        - {ticks: 10, rotate: *id027, ease: inout}
         parent: body
         pivot:
         - 0
+        - 0
+        - 0
+  falchion__balance_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 23], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 17, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 40, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0422
+        - 0
+        - 0
+  falchion__curve_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -31], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 17, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 33, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 58, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0422
         - 0
         - 0
   bowie__broadside_check:
@@ -5425,9 +8074,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id027 [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id028 [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id027, ease: inout}
+        - {ticks: 10, rotate: *id028, ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5454,9 +8103,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id028 [360, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id029 [360, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id028, ease: inout}
+        - {ticks: 10, rotate: *id029, ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5483,9 +8132,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 22, rotate: &id029 [0, 0, 0], ease: inout}
+        - {ticks: 22, rotate: &id030 [0, 0, 0], ease: inout}
         - {ticks: 54, ease: inout}
-        - {ticks: 10, rotate: *id029, ease: inout}
+        - {ticks: 10, rotate: *id030, ease: inout}
+        parent: body
+        pivot:
+        - -0.23
+        - 0
+        - 0
+  bowie__heavy_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '25': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 25], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 22, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.23
+        - 0
+        - 0
+  bowie__edge_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '25': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -33], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 22, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 29, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.23
@@ -5565,9 +8271,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id030 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id031 [0, 0, 0], ease: inout}
         - {ticks: 29, ease: inout}
-        - {ticks: 10, rotate: *id030, ease: inout}
+        - {ticks: 10, rotate: *id031, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5618,9 +8324,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id031 [0, 0, 360], ease: inout}
+        - {ticks: 13, rotate: &id032 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id031, ease: inout}
+        - {ticks: 10, rotate: *id032, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5671,9 +8377,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id032 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id033 [0, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id032, ease: inout}
+        - {ticks: 10, rotate: *id033, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -5698,6 +8404,111 @@ animations:
         - {ticks: 13, rotate: [0, -65, -180], ease: inout}
         - {ticks: 12, ease: inout}
         - {ticks: 39, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.25
+        - -0.03
+        - 0
+  shadow_daggers__crossed_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 27], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 13, rotate: [0, 0, 135], ease: inout}
+        - {ticks: 21, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+      pair_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 12], move: [0.04, 0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 180], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 20, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.29
+        - 0.03
+        - 0
+      pair_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -12], move: [-0.04, -0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -180], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 20, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.25
+        - -0.03
+        - 0
+  shadow_daggers__paired_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -35], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 13, rotate: [0, 0, -75], ease: inout}
+        - {ticks: 35, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+      pair_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: [0, 75, 12], move: [0.04, 0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, 65, 180], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 33, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.29
+        - 0.03
+        - 0
+      pair_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: [0, -75, -12], move: [-0.04, -0.035, 0], ease: inout}
+        - {ticks: 13, rotate: [0, -65, -180], ease: inout}
+        - {ticks: 12, ease: inout}
+        - {ticks: 33, rotate: [0, 0, 0], move: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - 0.25
@@ -5766,9 +8577,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id033 [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: &id034 [0, 0, 0], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id033, ease: inout}
+        - {ticks: 10, rotate: *id034, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -5808,9 +8619,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id034 [0, 0, 360], ease: inout}
+        - {ticks: 12, rotate: &id035 [0, 0, 360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id034, ease: inout}
+        - {ticks: 10, rotate: *id035, ease: inout}
         parent: body
         pivot:
         - -0.04
@@ -5850,12 +8661,95 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 12, rotate: &id035 [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: &id036 [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id035, ease: inout}
+        - {ticks: 10, rotate: *id036, ease: inout}
         parent: body
         pivot:
         - -0.04
+        - 0
+        - 0
+  navaja__hinge_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 19], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, rotate: [0, 0, 135], ease: inout}
+        - {ticks: 20, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 40, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0492
+        - 0
+        - 0
+  navaja__compact_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -27], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, rotate: [0, 0, -75], ease: inout}
+        - {ticks: 37, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.04
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 57, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0492
         - 0
         - 0
   stiletto__spring_flick:
@@ -5879,9 +8773,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id036 [0, 0, 360], ease: inout}
+        - {ticks: 11, rotate: &id037 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id036, ease: inout}
+        - {ticks: 10, rotate: *id037, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -5921,9 +8815,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id037 [0, 0, 0], ease: inout}
+        - {ticks: 11, rotate: &id038 [0, 0, 0], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id037, ease: inout}
+        - {ticks: 10, rotate: *id038, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -5963,9 +8857,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id038 [0, 0, -360], ease: inout}
+        - {ticks: 11, rotate: &id039 [0, 0, -360], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id038, ease: inout}
+        - {ticks: 10, rotate: *id039, ease: inout}
         parent: body
         pivot:
         - -0.03
@@ -6005,12 +8899,95 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 11, rotate: &id039 [0, 0, 0], ease: inout}
+        - {ticks: 11, rotate: &id040 [0, 0, 0], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id039, ease: inout}
+        - {ticks: 10, rotate: *id040, ease: inout}
         parent: body
         pivot:
         - -0.03
+        - 0
+        - 0
+  stiletto__spring_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '19': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 21], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 11, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 22, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.03
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -175], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 41, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0211
+        - 0
+        - 0
+  stiletto__needle_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '19': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -29], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 11, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 39, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.03
+        - 0
+        - 0
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, -175], ease: inout}
+        - {ticks: 3, ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 58, ease: inout}
+        parent: roll
+        pivot:
+        - -0.0211
         - 0
         - 0
   talon__free_ring_spin:
@@ -6034,9 +9011,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id040 [0, 0, 360], ease: inout}
+        - {ticks: 18, rotate: &id041 [0, 0, 360], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id040, ease: inout}
+        - {ticks: 10, rotate: *id041, ease: inout}
         parent: body
         pivot:
         - 0.27773438
@@ -6092,9 +9069,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id041 [0, 0, -360], ease: inout}
+        - {ticks: 18, rotate: &id042 [0, 0, -360], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id041, ease: inout}
+        - {ticks: 10, rotate: *id042, ease: inout}
         parent: body
         pivot:
         - 0.27773438
@@ -6121,9 +9098,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id042 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id043 [0, 0, 0], ease: inout}
         - {ticks: 50, ease: inout}
-        - {ticks: 10, rotate: *id042, ease: inout}
+        - {ticks: 10, rotate: *id043, ease: inout}
+        parent: body
+        pivot:
+        - 0.27773438
+        - 0.017578125
+        - 0
+  talon__ring_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 23], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - 0.27773438
+        - 0.017578125
+        - 0
+  talon__reverse_edge_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -22, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -31], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: &id044 [0, 0, 0], ease: inout}
+        - {ticks: 33, ease: inout}
+        - {ticks: 10, rotate: *id044, ease: inout}
         parent: body
         pivot:
         - 0.27773438
@@ -6150,9 +9184,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id043 [0, 0, 360], ease: inout}
+        - {ticks: 14, rotate: &id045 [0, 0, 360], ease: inout}
         - {ticks: 29, ease: inout}
-        - {ticks: 10, rotate: *id043, ease: inout}
+        - {ticks: 10, rotate: *id045, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6179,9 +9213,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id044 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id046 [0, 0, 0], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id044, ease: inout}
+        - {ticks: 10, rotate: *id046, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6208,9 +9242,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id045 [0, 0, -360], ease: inout}
+        - {ticks: 14, rotate: &id047 [0, 0, -360], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id045, ease: inout}
+        - {ticks: 10, rotate: *id047, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6237,9 +9271,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 14, rotate: &id046 [0, 0, 0], ease: inout}
+        - {ticks: 14, rotate: &id048 [0, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id046, ease: inout}
+        - {ticks: 10, rotate: *id048, ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+  ursus__palm_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 43, 25], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 48, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -17.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 14, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 18, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+  ursus__edge_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '21': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -35, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -49, -33], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 17.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 14, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 34, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6295,9 +9386,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id047 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id049 [0, 0, 0], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id047, ease: inout}
+        - {ticks: 10, rotate: *id049, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6324,9 +9415,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id048 [360, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id050 [360, 0, 0], ease: inout}
         - {ticks: 36, ease: inout}
-        - {ticks: 10, rotate: *id048, ease: inout}
+        - {ticks: 10, rotate: *id050, ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6353,9 +9444,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 17, rotate: &id049 [0, 0, 0], ease: inout}
+        - {ticks: 17, rotate: &id051 [0, 0, 0], ease: inout}
         - {ticks: 45, ease: inout}
-        - {ticks: 10, rotate: *id049, ease: inout}
+        - {ticks: 10, rotate: *id051, ease: inout}
+        parent: body
+        pivot:
+        - -0.19
+        - 0
+        - 0
+  classic__grip_recenter:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 25, 27], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 30, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -8.5, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 17, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.19
+        - 0
+        - 0
+  classic__spine_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '22': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -17, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -31, -35], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 8.5, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 17, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.19
@@ -6411,9 +9559,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id050 [0, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id052 [0, 0, 0], ease: inout}
         - {ticks: 39, ease: inout}
-        - {ticks: 10, rotate: *id050, ease: inout}
+        - {ticks: 10, rotate: *id052, ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6440,9 +9588,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id051 [360, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id053 [360, 0, 0], ease: inout}
         - {ticks: 40, ease: inout}
-        - {ticks: 10, rotate: *id051, ease: inout}
+        - {ticks: 10, rotate: *id053, ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6469,9 +9617,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 19, rotate: &id052 [0, 0, 0], ease: inout}
+        - {ticks: 19, rotate: &id054 [0, 0, 0], ease: inout}
         - {ticks: 49, ease: inout}
-        - {ticks: 10, rotate: *id052, ease: inout}
+        - {ticks: 10, rotate: *id054, ease: inout}
+        parent: body
+        pivot:
+        - -0.21
+        - 0
+        - 0
+  paracord__cord_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 28, 19], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 33, 21], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -10.0, -6.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 19, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.21
+        - 0
+        - 0
+  paracord__lanyard_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -20, 19], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -34, -27], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 10.0, 6.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 19, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 31, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.21
@@ -6527,9 +9732,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id053 [0, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id055 [0, 0, 0], ease: inout}
         - {ticks: 43, ease: inout}
-        - {ticks: 10, rotate: *id053, ease: inout}
+        - {ticks: 10, rotate: *id055, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6556,9 +9761,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id054 [360, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id056 [360, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id054, ease: inout}
+        - {ticks: 10, rotate: *id056, ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6585,9 +9790,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 21, rotate: &id055 [0, 0, 0], ease: inout}
+        - {ticks: 21, rotate: &id057 [0, 0, 0], ease: inout}
         - {ticks: 53, ease: inout}
-        - {ticks: 10, rotate: *id055, ease: inout}
+        - {ticks: 10, rotate: *id057, ease: inout}
+        parent: body
+        pivot:
+        - -0.22
+        - 0
+        - 0
+  survival__field_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '24': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 31, 21], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 36, 23], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -11.5, -7.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 21, rotate: [135, 0, 0], ease: inout}
+        - {ticks: 11, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.22
+        - 0
+        - 0
+  survival__sawback_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '63': inspect.end
+      '24': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -23, 21], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -37, -29], ease: inout}
+        - {ticks: 17, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 11.5, 7.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 21, rotate: [-75, 0, 0], ease: inout}
+        - {ticks: 30, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.22
@@ -6643,9 +9905,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id056 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id058 [0, 0, 0], ease: inout}
         - {ticks: 34, ease: inout}
-        - {ticks: 10, rotate: *id056, ease: inout}
+        - {ticks: 10, rotate: *id058, ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6672,9 +9934,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id057 [0, 0, 360], ease: inout}
+        - {ticks: 18, rotate: &id059 [0, 0, 360], ease: inout}
         - {ticks: 35, ease: inout}
-        - {ticks: 10, rotate: *id057, ease: inout}
+        - {ticks: 10, rotate: *id059, ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6701,9 +9963,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 18, rotate: &id058 [0, 0, 0], ease: inout}
+        - {ticks: 18, rotate: &id060 [0, 0, 0], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id058, ease: inout}
+        - {ticks: 10, rotate: *id060, ease: inout}
+        parent: body
+        pivot:
+        - -0.17
+        - 0
+        - 0
+  nomad__thumb_lock:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '45': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 34, 23], ease: out}
+        - {ticks: 15, move: [-0.047, 0.044, 0.004], rotate: [3, 39, 25], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -13.0, -8.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: [0, 0, 135], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.17
+        - 0
+        - 0
+  nomad__field_grip_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '60': inspect.end
+      '23': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -26, 23], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -40, -31], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 13.0, 8.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 18, rotate: [0, 0, -75], ease: inout}
+        - {ticks: 30, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.17
@@ -6730,9 +10049,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id059 [0, 0, 360], ease: inout}
+        - {ticks: 13, rotate: &id061 [0, 0, 360], ease: inout}
         - {ticks: 30, ease: inout}
-        - {ticks: 10, rotate: *id059, ease: inout}
+        - {ticks: 10, rotate: *id061, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6759,9 +10078,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id060 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id062 [0, 0, 0], ease: inout}
         - {ticks: 31, ease: inout}
-        - {ticks: 10, rotate: *id060, ease: inout}
+        - {ticks: 10, rotate: *id062, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6788,9 +10107,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id061 [0, 0, -360], ease: inout}
+        - {ticks: 13, rotate: &id063 [0, 0, -360], ease: inout}
         - {ticks: 32, ease: inout}
-        - {ticks: 10, rotate: *id061, ease: inout}
+        - {ticks: 10, rotate: *id063, ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6817,9 +10136,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 13, rotate: &id062 [0, 0, 0], ease: inout}
+        - {ticks: 13, rotate: &id064 [0, 0, 0], ease: inout}
         - {ticks: 41, ease: inout}
-        - {ticks: 10, rotate: *id062, ease: inout}
+        - {ticks: 10, rotate: *id064, ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+  skeleton__ring_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '46': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 37, 25], ease: out}
+        - {ticks: 16, move: [-0.047, 0.044, 0.004], rotate: [3, 42, 27], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -14.5, -9.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 13, rotate: [0, 0, 270], ease: inout}
+        - {ticks: 21, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.16
+        - 0
+        - 0
+  skeleton__frame_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '61': inspect.end
+      '20': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -29, 25], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -43, -33], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 14.5, 9.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 13, rotate: [0, 0, -150], ease: inout}
+        - {ticks: 36, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.16
@@ -6875,9 +10251,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id063 [0, 0, 0], ease: inout}
+        - {ticks: 23, rotate: &id065 [0, 0, 0], ease: inout}
         - {ticks: 43, ease: inout}
-        - {ticks: 10, rotate: *id063, ease: inout}
+        - {ticks: 10, rotate: *id065, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -6904,9 +10280,9 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id064 [0, 0, 360], ease: inout}
+        - {ticks: 23, rotate: &id066 [0, 0, 360], ease: inout}
         - {ticks: 44, ease: inout}
-        - {ticks: 10, rotate: *id064, ease: inout}
+        - {ticks: 10, rotate: *id066, ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -6933,9 +10309,66 @@ animations:
         keyframes:
         - {ticks: 0, rotate: [0, 0, 0], ease: inout}
         - {ticks: 14, ease: inout}
-        - {ticks: 23, rotate: &id065 [0, 0, 0], ease: inout}
+        - {ticks: 23, rotate: &id067 [0, 0, 0], ease: inout}
         - {ticks: 53, ease: inout}
-        - {ticks: 10, rotate: *id065, ease: inout}
+        - {ticks: 10, rotate: *id067, ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  kukri__curve_catch:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '44': inspect.end
+      '25': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 5, move: [0.014, -0.057, -0.005], rotate: [-3, 7, 9], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.02, 0.012], rotate: [7, 40, 27], ease: out}
+        - {ticks: 14, move: [-0.047, 0.044, 0.004], rotate: [3, 45, 29], ease: inout}
+        - {ticks: 10, move: [-0.012, 0.028, 0.006], rotate: [-6, -16.0, -10.5], ease: inout}
+        - {ticks: 7, move: [-0.004, -0.028, 0.002], rotate: [1, 9, 11], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 23, rotate: [0, 0, 135], ease: inout}
+        - {ticks: 9, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
+        parent: body
+        pivot:
+        - -0.2
+        - 0
+        - 0
+  kukri__heavy_edge_sweep:
+    substeps: 4
+    sounds:
+      '12': inspect.swipe
+      '62': inspect.end
+      '25': inspect.spin
+    groups:
+      body:
+        keyframes:
+        - {ticks: 0, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+        - {ticks: 6, move: [0.02, -0.072, -0.008], rotate: [-5, 5, 9], ease: inout}
+        - {ticks: 13, move: [-0.09, 0.025, 0.018], rotate: [13, -32, 27], ease: out}
+        - {ticks: 10, move: [-0.03, 0.07, 0.01], rotate: [-4, -46, -35], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 12, move: [0.018, -0.01, 0], rotate: [6, 16.0, 10.5], ease: inout}
+        - {ticks: 8, move: [-0.006, -0.032, 0.003], rotate: [1, 12, 14], ease: out}
+        - {ticks: 9, move: [0, -0.04, 0], rotate: [0, 10, 12], ease: inout}
+      roll:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, ease: inout}
+        - {ticks: 23, rotate: [0, 0, -75], ease: inout}
+        - {ticks: 27, ease: inout}
+        - {ticks: 10, rotate: [0, 0, 0], ease: inout}
         parent: body
         pivot:
         - -0.2
@@ -8227,276 +11660,386 @@ animation-pools:
   - glock18__compact_roll
   - glock18__frame_inspect
   - glock18__broadside_check
+  - glock18__front_sight_align
+  - glock18__grip_reset
   usps:
   - usps__suppressor_check
   - usps__slide_roll
   - usps__tactical_peek
   - usps__broadside_check
+  - usps__suppressor_align
+  - usps__slide_release
   p2000:
   - p2000__slide_peek
   - p2000__frame_roll
   - p2000__sight_check
   - p2000__broadside_check
+  - p2000__sightline_align
+  - p2000__frame_reset
   p250:
   - p250__compact_peek
   - p250__slide_turn
   - p250__grip_inspect
   - p250__broadside_check
+  - p250__sightline_align
+  - p250__grip_reset
   fiveseven:
   - fiveseven__polymer_check
   - fiveseven__slide_peek
   - fiveseven__sight_roll
   - fiveseven__broadside_check
+  - fiveseven__rail_align
+  - fiveseven__slide_release
   tec9:
   - tec9__receiver_check
   - tec9__magazine_peek
   - tec9__barrel_roll
   - tec9__broadside_check
+  - tec9__receiver_align
+  - tec9__magazine_seat
   cz75:
   - cz75__front_grip_check
   - cz75__compact_turn
   - cz75__magazine_peek
   - cz75__broadside_check
+  - cz75__front_grip_reset
+  - cz75__slide_release
   dual_berettas:
   - dual_berettas__paired_peek
   - dual_berettas__crossed_roll
   - dual_berettas__alternating_check
   - dual_berettas__paired_presentation
+  - dual_berettas__paired_sightline
+  - dual_berettas__crossed_ready
   deagle:
   - deagle__finger_twirl
   - deagle__heavy_slide_check
   - deagle__palm_flip
   - deagle__broadside_check
+  - deagle__barrel_align
+  - deagle__heavy_grip_reset
   r8_revolver:
   - r8_revolver__cylinder_check
   - r8_revolver__barrel_turn
   - r8_revolver__trigger_roll
   - r8_revolver__broadside_check
+  - r8_revolver__cylinder_lock
+  - r8_revolver__barrel_align
   mac10:
   - mac10__strap_check
   - mac10__receiver_roll
   - mac10__compact_peek
   - mac10__broadside_check
+  - mac10__strap_settle
+  - mac10__receiver_align
   mp9:
   - mp9__foregrip_check
   - mp9__compact_turn
   - mp9__sight_peek
   - mp9__broadside_check
+  - mp9__foregrip_reset
+  - mp9__sightline_align
   mp7:
   - mp7__stock_check
   - mp7__receiver_turn
   - mp7__foregrip_roll
   - mp7__broadside_check
+  - mp7__stock_settle
+  - mp7__receiver_align
   mp5sd:
   - mp5sd__suppressor_peek
   - mp5sd__receiver_roll
   - mp5sd__stock_check
   - mp5sd__broadside_check
+  - mp5sd__suppressor_align
+  - mp5sd__stock_settle
   ump45:
   - ump45__magazine_check
   - ump45__stock_roll
   - ump45__receiver_peek
   - ump45__broadside_check
+  - ump45__magazine_seat
+  - ump45__stock_settle
   p90:
   - p90__top_magazine_check
   - p90__bullpup_turn
   - p90__receiver_roll
   - p90__broadside_check
+  - p90__top_magazine_seat
+  - p90__sightline_align
   ppbizon:
   - ppbizon__drum_check
   - ppbizon__receiver_roll
   - ppbizon__stock_peek
   - ppbizon__broadside_check
+  - ppbizon__drum_lock
+  - ppbizon__receiver_align
   ak47:
   - ak47__magazine_peek
   - ak47__receiver_roll
   - ak47__wood_check
   - ak47__broadside_check
+  - ak47__magazine_seat
+  - ak47__sightline_align
   m4a4:
   - m4a4__rail_check
   - m4a4__receiver_turn
   - m4a4__stock_peek
   - m4a4__broadside_check
+  - m4a4__stock_settle
+  - m4a4__rail_align
   m4a1s:
   - m4a1s__suppressor_check
   - m4a1s__receiver_roll
   - m4a1s__rail_peek
   - m4a1s__broadside_check
+  - m4a1s__suppressor_align
+  - m4a1s__rail_align
   galil:
   - galil__foregrip_peek
   - galil__receiver_roll
   - galil__magazine_check
   - galil__broadside_check
+  - galil__foregrip_reset
+  - galil__magazine_seat
   famas:
   - famas__bullpup_check
   - famas__carry_handle_peek
   - famas__receiver_roll
   - famas__broadside_check
+  - famas__carry_handle_align
+  - famas__stock_settle
   aug:
   - aug__scope_check
   - aug__bullpup_roll
   - aug__stock_peek
   - aug__broadside_check
+  - aug__scope_align
+  - aug__stock_settle
   sg553:
   - sg553__optic_check
   - sg553__receiver_roll
   - sg553__magazine_peek
   - sg553__broadside_check
+  - sg553__optic_align
+  - sg553__magazine_seat
   ssg08:
   - ssg08__bolt_check
   - ssg08__scope_roll
   - ssg08__stock_peek
   - ssg08__broadside_check
+  - ssg08__bolt_return
+  - ssg08__scope_align
   awp:
   - awp__scope_peek
   - awp__long_barrel_roll
   - awp__bolt_check
   - awp__broadside_check
+  - awp__scope_align
+  - awp__bolt_return
   scar20:
   - scar20__optic_check
   - scar20__magazine_roll
   - scar20__receiver_peek
   - scar20__broadside_check
+  - scar20__optic_align
+  - scar20__magazine_seat
   g3sg1:
   - g3sg1__scope_roll
   - g3sg1__stock_peek
   - g3sg1__receiver_check
   - g3sg1__broadside_check
+  - g3sg1__scope_align
+  - g3sg1__stock_settle
   nova:
   - nova__pump_check
   - nova__tube_roll
   - nova__stock_peek
   - nova__broadside_check
+  - nova__pump_return
+  - nova__stock_settle
   xm1014:
   - xm1014__tube_check
   - xm1014__receiver_roll
   - xm1014__stock_peek
   - xm1014__broadside_check
+  - xm1014__tube_seat
+  - xm1014__stock_settle
   sawedoff:
   - sawedoff__short_barrel_check
   - sawedoff__grip_roll
   - sawedoff__tube_peek
   - sawedoff__broadside_check
+  - sawedoff__grip_reset
+  - sawedoff__barrel_align
   mag7:
   - mag7__box_magazine_check
   - mag7__compact_roll
   - mag7__receiver_peek
   - mag7__broadside_check
+  - mag7__magazine_seat
+  - mag7__receiver_align
   m249:
   - m249__belt_cover_check
   - m249__support_roll
   - m249__barrel_peek
   - m249__broadside_check
+  - m249__belt_cover_lock
+  - m249__support_grip_reset
   negev:
   - negev__box_check
   - negev__belt_cover_roll
   - negev__support_peek
   - negev__broadside_check
+  - negev__belt_cover_lock
+  - negev__support_grip_reset
   zeus:
   - zeus__capacitor_check
   - zeus__contact_peek
   - zeus__compact_roll
   - zeus__broadside_check
+  - zeus__coil_charge
+  - zeus__contact_ready
   karambit:
   - karambit__finger_roll
   - karambit__reverse_grip
   - karambit__ring_twirl
   - karambit__blade_presentation
+  - karambit__ring_catch
+  - karambit__reverse_edge_sweep
   butterfly:
   - butterfly__rollover
   - butterfly__helix
   - butterfly__fan
   - butterfly__blade_presentation
+  - butterfly__handle_lock
+  - butterfly__cross_handle_catch
   m9_bayonet:
   - m9_bayonet__sawback_check
   - m9_bayonet__heavy_roll
   - m9_bayonet__guard_flip
   - m9_bayonet__blade_presentation
+  - m9_bayonet__guard_recenter
+  - m9_bayonet__sawback_sweep
   bayonet:
   - bayonet__draw_flip
   - bayonet__edge_check
   - bayonet__grip_roll
   - bayonet__blade_presentation
+  - bayonet__edge_recenter
+  - bayonet__pommel_catch
   flip:
   - flip__hinge_flick
   - flip__blade_check
   - flip__reverse_fold
   - flip__blade_presentation
+  - flip__hinge_lock
+  - flip__spine_sweep
   gut:
   - gut__hook_check
   - gut__grip_flip
   - gut__hook_roll
   - gut__blade_presentation
+  - gut__hook_recenter
+  - gut__belly_sweep
   huntsman:
   - huntsman__spine_check
   - huntsman__weighted_roll
   - huntsman__grip_turn
   - huntsman__blade_presentation
+  - huntsman__spine_recenter
+  - huntsman__weight_catch
   falchion:
   - falchion__hinge_flip
   - falchion__balance
   - falchion__palm_spin
   - falchion__blade_presentation
+  - falchion__balance_catch
+  - falchion__curve_sweep
   bowie:
   - bowie__broadside_check
   - bowie__heavy_flip
   - bowie__edge_roll
   - bowie__blade_presentation
+  - bowie__heavy_recenter
+  - bowie__edge_catch
   shadow_daggers:
   - shadow_daggers__cross_draw
   - shadow_daggers__paired_roll
   - shadow_daggers__alternating_flip
   - shadow_daggers__blade_presentation
+  - shadow_daggers__crossed_catch
+  - shadow_daggers__paired_sweep
   navaja:
   - navaja__compact_flick
   - navaja__hinge_check
   - navaja__pocket_flip
   - navaja__blade_presentation
+  - navaja__hinge_lock
+  - navaja__compact_catch
   stiletto:
   - stiletto__spring_flick
   - stiletto__finger_toss
   - stiletto__needle_twirl
   - stiletto__blade_presentation
+  - stiletto__spring_catch
+  - stiletto__needle_sweep
   talon:
   - talon__free_ring_spin
   - talon__reverse_catch
   - talon__finger_loop
   - talon__blade_presentation
+  - talon__ring_catch
+  - talon__reverse_edge_sweep
   ursus:
   - ursus__palm_toss
   - ursus__catch_flip
   - ursus__blade_roll
   - ursus__blade_presentation
+  - ursus__palm_catch
+  - ursus__edge_sweep
   classic:
   - classic__classic_turn
   - classic__tip_check
   - classic__grip_spin
   - classic__blade_presentation
+  - classic__grip_recenter
+  - classic__spine_sweep
   paracord:
   - paracord__cord_check
   - paracord__field_roll
   - paracord__lanyard_turn
   - paracord__blade_presentation
+  - paracord__cord_catch
+  - paracord__lanyard_sweep
   survival:
   - survival__saw_check
   - survival__field_flip
   - survival__grip_inspect
   - survival__blade_presentation
+  - survival__field_catch
+  - survival__sawback_sweep
   nomad:
   - nomad__thumb_open
   - nomad__palm_check
   - nomad__grip_catch
   - nomad__blade_presentation
+  - nomad__thumb_lock
+  - nomad__field_grip_catch
   skeleton:
   - skeleton__ring_flip
   - skeleton__extended_spin
   - skeleton__toss_catch
   - skeleton__blade_presentation
+  - skeleton__ring_catch
+  - skeleton__frame_sweep
   kukri:
   - kukri__weighted_draw
   - kukri__curve_check
   - kukri__palm_roll
   - kukri__blade_presentation
+  - kukri__curve_catch
+  - kukri__heavy_edge_sweep
   bloodhound_gloves:
   - bloodhound_gloves__knuckle_check
   - bloodhound_gloves__palm_turn

@@ -5,3 +5,5 @@ build/
 logs/
 __pycache__/
 *.pyc
+release/MCCases-*.jar
+release/MCCases-ResourcePack-*.zip

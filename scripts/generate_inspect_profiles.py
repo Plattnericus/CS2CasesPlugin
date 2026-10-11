@@ -4,7 +4,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 weapons = yaml.safe_load((ROOT / 'src/main/resources/defaults/catalog/weapons.yml').read_text())['weapons']
-# Knife-specific grip pivots, axis, turn angle and weight (ticks). Three named actions each.
+# Knife-specific grip pivots, axis, turn angle and timing weight.
 KNIVES = {
  'karambit': (.24609375, 'z', 360, 12, ['finger_roll', 'reverse_grip', 'ring_twirl']),
  'butterfly': (-.03, 'z', 360, 16, ['rollover', 'helix', 'fan']),
@@ -27,6 +27,18 @@ KNIVES = {
  'skeleton': (-.16, 'z', 360, 13, ['ring_flip', 'extended_spin', 'toss_catch']),
  'kukri': (-.20, 'z', 180, 23, ['weighted_draw', 'curve_check', 'palm_roll']),
 }
+KNIFE_EXTRAS = {
+ 'karambit':['ring_catch','reverse_edge_sweep'], 'butterfly':['handle_lock','cross_handle_catch'],
+ 'm9_bayonet':['guard_recenter','sawback_sweep'], 'bayonet':['edge_recenter','pommel_catch'],
+ 'flip':['hinge_lock','spine_sweep'], 'gut':['hook_recenter','belly_sweep'],
+ 'huntsman':['spine_recenter','weight_catch'], 'falchion':['balance_catch','curve_sweep'],
+ 'bowie':['heavy_recenter','edge_catch'], 'shadow_daggers':['crossed_catch','paired_sweep'],
+ 'navaja':['hinge_lock','compact_catch'], 'stiletto':['spring_catch','needle_sweep'],
+ 'ursus':['palm_catch','edge_sweep'], 'talon':['ring_catch','reverse_edge_sweep'],
+ 'classic':['grip_recenter','spine_sweep'], 'paracord':['cord_catch','lanyard_sweep'],
+ 'survival':['field_catch','sawback_sweep'], 'nomad':['thumb_lock','field_grip_catch'],
+ 'skeleton':['ring_catch','frame_sweep'], 'kukri':['curve_catch','heavy_edge_sweep'],
+}
 GUNS = {
  'glock18': ['slide_check','compact_roll','frame_inspect'], 'usps':['suppressor_check','slide_roll','tactical_peek'],
  'p2000':['slide_peek','frame_roll','sight_check'], 'p250':['compact_peek','slide_turn','grip_inspect'],
@@ -46,6 +58,26 @@ GUNS = {
  'sawedoff':['short_barrel_check','grip_roll','tube_peek'], 'mag7':['box_magazine_check','compact_roll','receiver_peek'],
  'm249':['belt_cover_check','support_roll','barrel_peek'], 'negev':['box_check','belt_cover_roll','support_peek'],
  'zeus':['capacitor_check','contact_peek','compact_roll'],
+}
+GUN_EXTRAS = {
+ 'glock18':['front_sight_align','grip_reset'], 'usps':['suppressor_align','slide_release'],
+ 'p2000':['sightline_align','frame_reset'], 'p250':['sightline_align','grip_reset'],
+ 'fiveseven':['rail_align','slide_release'], 'tec9':['receiver_align','magazine_seat'],
+ 'cz75':['front_grip_reset','slide_release'], 'dual_berettas':['paired_sightline','crossed_ready'],
+ 'deagle':['barrel_align','heavy_grip_reset'], 'r8_revolver':['cylinder_lock','barrel_align'],
+ 'mac10':['strap_settle','receiver_align'], 'mp9':['foregrip_reset','sightline_align'],
+ 'mp7':['stock_settle','receiver_align'], 'mp5sd':['suppressor_align','stock_settle'],
+ 'ump45':['magazine_seat','stock_settle'], 'p90':['top_magazine_seat','sightline_align'],
+ 'ppbizon':['drum_lock','receiver_align'], 'ak47':['magazine_seat','sightline_align'],
+ 'm4a4':['stock_settle','rail_align'], 'm4a1s':['suppressor_align','rail_align'],
+ 'galil':['foregrip_reset','magazine_seat'], 'famas':['carry_handle_align','stock_settle'],
+ 'aug':['scope_align','stock_settle'], 'sg553':['optic_align','magazine_seat'],
+ 'ssg08':['bolt_return','scope_align'], 'awp':['scope_align','bolt_return'],
+ 'scar20':['optic_align','magazine_seat'], 'g3sg1':['scope_align','stock_settle'],
+ 'nova':['pump_return','stock_settle'], 'xm1014':['tube_seat','stock_settle'],
+ 'sawedoff':['grip_reset','barrel_align'], 'mag7':['magazine_seat','receiver_align'],
+ 'm249':['belt_cover_lock','support_grip_reset'], 'negev':['belt_cover_lock','support_grip_reset'],
+ 'zeus':['coil_charge','contact_ready'],
 }
 GLOVES = {id: ['knuckle_check', 'palm_turn', 'cuff_inspect'] for id, w in weapons.items() if w['category'] == 'glove'}
 
@@ -73,6 +105,25 @@ def body(i, variant, weight):
     frame(hold+6),frame(weight,move=[.015,-.02,0],rotate=[-6,-yaw/2,-bank/2]),
     frame(7,ease='out',move=[-.008,-.03,.002],rotate=[2,14,16]),
     frame(9,move=[0,-.04,0],rotate=[0,10,12])])
+ if variant == 4:
+  # A measured broadside check with a short, clean return to the firing grip.
+  return group([frame(0,move=[0,-.04,0],rotate=[0,10,12]),
+    frame(5,move=[.014,-.057,-.005],rotate=[-3,7,9]),
+    frame(11,ease='out',move=[-.055,.02,.012],rotate=[7,yaw+8,bank+6]),
+    frame(14 + i % 3,move=[-.047,.044,.004],rotate=[3,yaw+13,bank+8]),
+    frame(10,move=[-.012,.028,.006],rotate=[-6,-yaw/2,-bank/2]),
+    frame(7,ease='out',move=[-.004,-.028,.002],rotate=[1,9,11]),
+    frame(9,move=[0,-.04,0],rotate=[0,10,12])])
+ if variant == 5:
+  # Lift, inspect the sight line, then lower the weapon without a sharp snap.
+  return group([frame(0,move=[0,-.04,0],rotate=[0,10,12]),
+    frame(6,move=[.02,-.072,-.008],rotate=[-5,5,9]),
+    frame(13,ease='out',move=[-.09,.025,.018],rotate=[13,-yaw,bank+6]),
+    frame(10,move=[-.03,.07,.01],rotate=[-4,-(yaw+14),-(bank+14)]),
+    frame(14 + i % 4),
+    frame(12,move=[.018,-.01,0],rotate=[6,yaw/2,bank/2]),
+    frame(8,ease='out',move=[-.006,-.032,.003],rotate=[1,12,14]),
+    frame(9,move=[0,-.04,0],rotate=[0,10,12])])
  return group([frame(0,move=[0,-.04,0],rotate=[0,10,12]),
    frame(4,move=[.012,-.065,-.012],rotate=[-2,7,8]),
    frame(8+variant,ease='out',move=[-.07,.035,.015],rotate=[-5+variant*3,sign*yaw,sign*bank]),
@@ -85,8 +136,9 @@ out={'enabled':True,'anchor':{'forward':1.75,'right':.43,'up':-.07},'animations'
 for i,(id,w) in enumerate(weapons.items()):
  knife=id in KNIVES
  glove=id in GLOVES
- names=KNIVES[id][4] if knife else GLOVES[id] if glove else GUNS[id]
- names=names+(['blade_presentation'] if knife else ['paired_presentation'] if glove or id=='dual_berettas' else ['broadside_check'])
+ names=(KNIVES[id][4] + ['blade_presentation'] + KNIFE_EXTRAS[id] if knife
+        else GLOVES[id] + ['paired_presentation'] if glove
+        else GUNS[id] + ['paired_presentation' if id=='dual_berettas' else 'broadside_check'] + GUN_EXTRAS[id])
  pool=[]
  for v,name in enumerate(names):
   aid=f'{id}__{name}'; pool.append(aid)
@@ -104,6 +156,8 @@ for i,(id,w) in enumerate(weapons.items()):
    pivot,axis,angle,_,_=KNIVES[id]
    # Every gesture differs in grip axis, direction and turn count.
    turn=angle if v==0 else (-180 if v==1 else (360 if angle<360 else -angle)) if v==2 else 0
+   if v==4: turn=270 if angle==360 else 135
+   if v==5: turn=(0 if id in ['karambit','talon'] else (-150 if angle==360 else -75))
    if id in ['karambit','talon'] and v==1: turn=180
    rotation=[0,0,0];rotation['xyz'.index(axis)]=turn
    # A completed full turn is already the held orientation. Do not unwind it backwards.

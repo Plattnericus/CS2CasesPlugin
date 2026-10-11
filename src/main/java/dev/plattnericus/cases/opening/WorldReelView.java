@@ -289,7 +289,9 @@ final class WorldReelView implements OpeningView {
         float boundedX = (float) Math.clamp(x, -window, window);
         double edge = Math.min(1, Math.abs(x) / window);
         float lift = (float) (0.075 * Math.sin(Math.PI * (1 - edge)) * visibility(x));
-        return scaled(new Transformation(new Vector3f(boundedX, lift, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION));
+        float angle = (float) Math.toRadians(7 * Math.sin(x / cfg.spacing() * .65) * visibility(x));
+        return scaled(new Transformation(new Vector3f(boundedX, lift, 0), new AxisAngle4f(angle, 0, 0, 1),
+                new Vector3f(scale), NO_ROTATION));
     }
     private Transformation barPose(int index, double center) {
         float x = (float) ((index - center) * cfg.spacing());

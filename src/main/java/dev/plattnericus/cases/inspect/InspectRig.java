@@ -71,6 +71,16 @@ public final class InspectRig {
         List<ModelPart> parts = new ArrayList<>();
         for (Layer layer : layers(weapon)) parts.add(new ModelPart(layer.group(), ModelPart.Type.ITEM, "$rig:" + layer.id(),
                 new Vector3f(layer.position()), new Vector3f(scale), new Vector3f(), layer.group(), false));
+        if (weapon.category() != dev.plattnericus.cases.catalog.WeaponCategory.GLOVE) {
+            String arm = weapon.isKnife() ? (reverseGrip(weapon) ? "knife-reverse" : "knife") : "gun";
+            String group = switch (weapon.id()) {
+                case "butterfly" -> "handle_a";
+                case "shadow_daggers", "dual_berettas" -> "pair_a";
+                default -> "body";
+            };
+            parts.add(new ModelPart("hand_arm", ModelPart.Type.ITEM, "$arm:" + arm,
+                    new Vector3f(), new Vector3f(scale), new Vector3f(), group, false));
+        }
         return List.copyOf(parts);
     }
 

@@ -63,7 +63,7 @@ public final class OpeningChecks {
         registry.remove(sessions.getFirst().openingId, sessions.get(1)); require(registry.size() == 11, "wrong session removed another result");
         registry.remove(sessions.getFirst().openingId, sessions.getFirst()); require(registry.size() == 10, "cleanup failed");
         var replacement = new OpeningSession(a, def, catalog, false, false); require(registry.add(replacement, 9, 11) && replacement.lane == 0, "released lane was not reusable");
-        layout();
+        layout(config);
         var directory = Files.createTempDirectory("mccases-openings-");
         var settings = new PluginSettings.Storage("sqlite", "opening.db", "", 0, "", "", "", "test_");
         var roller = new RewardRoller(); var outcomes = new java.util.ArrayList<SkinInstance>();
@@ -90,35 +90,41 @@ public final class OpeningChecks {
         } finally { try (var paths = Files.walk(directory)) { for (var p : paths.sorted(java.util.Comparator.reverseOrder()).toList()) Files.delete(p); } }
         System.out.println("PASS: independent opening IDs/lanes, player/global limits, 20 concurrent persisted outcomes, idempotent interrupted-opening recovery, normal/gold contract rules and atomic SQL consumption.");
     }
-    private static void layout() {
+    private static void layout(org.bukkit.configuration.file.FileConfiguration defaults) {
+        double spacing = defaults.getDouble("opening.world.spacing", .62);
+        double itemScale = defaults.getDouble("opening.world.item-scale", .5);
+        require(Math.abs(spacing - .93) < 1e-9 && Math.abs(itemScale - .75) < 1e-9,
+                "opening roulette icon spacing and size defaults");
+        double width = defaults.getInt("opening.world.visible-items", 5) * spacing + .2;
+        double height = itemScale + .65;
         for (double distance : new double[]{1.2, 3, 6}) for (int count = 1; count <= 9; count++) {
             int size = count;
-            var cells = java.util.stream.IntStream.range(0, count).mapToObj(i -> OpeningLayout.cell(i, size, 4.54, 1.15, distance)).toList();
-            double minY = cells.stream().mapToDouble(c -> c.up() - .575 * c.scale()).min().orElseThrow();
-            double maxY = cells.stream().mapToDouble(c -> c.up() + .575 * c.scale()).max().orElseThrow();
+            var cells = java.util.stream.IntStream.range(0, count).mapToObj(i -> OpeningLayout.cell(i, size, width, height, distance)).toList();
+            double minY = cells.stream().mapToDouble(c -> c.up() - height / 2 * c.scale()).min().orElseThrow();
+            double maxY = cells.stream().mapToDouble(c -> c.up() + height / 2 * c.scale()).max().orElseThrow();
             require(Math.abs(minY + maxY) < 1e-9, "partial reel rows not vertically centered: " + count);
             require(Math.abs(cells.stream().mapToDouble(OpeningLayout.Cell::right).sum()) < 1e-9, "partial reel row not horizontally centered");
             for (var cell : cells) {
-                require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + 2.27 * cell.scale() < distance * .78,
+                require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + width / 2 * cell.scale() < distance * .85,
                         "reel clipped horizontally: " + count);
-                require(Math.abs(cell.up()) + .575 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
+                require(Math.abs(cell.up()) + height / 2 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
             }
             for (int i = 0; i < count; i++) {
-                var large = OpeningLayout.cell(i, count, 4.54, 1.15, distance, 3);
-                require(Math.abs(large.scale() - OpeningLayout.cell(0, 9, 4.54, 1.15, distance, 3).scale()) < 1e-9,
+                var large = OpeningLayout.cell(i, count, width, height, distance, 3);
+                require(Math.abs(large.scale() - OpeningLayout.cell(0, 9, width, height, distance, 3).scale()) < 1e-9,
                         "wheel changed size when the grid changed: " + count);
-                require(Math.abs(large.right()) + 2.27 * large.scale() < distance * .78
-                        && Math.abs(large.up()) + .575 * large.scale() < distance * .52,
+                require(Math.abs(large.right()) + width / 2 * large.scale() < distance * .85
+                        && Math.abs(large.up()) + height / 2 * large.scale() < distance * .52,
                         "complete grid left the camera bounds: " + count);
                 for (int j = 0; j < i; j++) {
-                    var other = OpeningLayout.cell(j, count, 4.54, 1.15, distance, 3);
-                    require(Math.abs(large.right() - other.right()) > 4.54 * large.scale()
-                            || Math.abs(large.up() - other.up()) > 1.15 * large.scale(), "enlarged wheels overlap");
+                    var other = OpeningLayout.cell(j, count, width, height, distance, 3);
+                    require(Math.abs(large.right() - other.right()) > width * large.scale()
+                            || Math.abs(large.up() - other.up()) > height * large.scale(), "enlarged wheels overlap");
                 }
             }
             for (int i = 0; i < cells.size(); i++) for (int j = i + 1; j < cells.size(); j++) {
                 var a = cells.get(i); var b = cells.get(j);
-                require(Math.abs(a.right() - b.right()) > 4.54 * a.scale() || Math.abs(a.up() - b.up()) > 1.15 * a.scale(), "reels overlap");
+                require(Math.abs(a.right() - b.right()) > width * a.scale() || Math.abs(a.up() - b.up()) > height * a.scale(), "reels overlap");
             }
         }
         var queue = new OpeningQueue(); UUID owner = UUID.randomUUID();

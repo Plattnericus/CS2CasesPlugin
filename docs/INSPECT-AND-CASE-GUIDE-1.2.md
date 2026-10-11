@@ -1,6 +1,9 @@
 # MCCases 1.2: weapon rigs and case guide
 
-All 55 catalog weapons have three individually named inspect timelines: 20 knife models and 35 weapons, 165 profiles in total. The 713 existing skins and 21 cases keep their IDs and pools. The CS20 Case adds 17 weapon skins and 13 Classic Knife finishes, bringing the catalog to 743 skins in 22 cases. Each normal inspect randomly selects a variant and avoids the previous variant. Gold-drop showcases keep their short reveal animation.
+Historical guide for the 1.2 feature release. Current version 1.2.6 adds six inspect variants
+for each firearm and knife while retaining the articulated rig behavior described below.
+
+The catalog has six individually named inspect timelines for each of its 20 knives and 35 firearms, plus four for each of eight glove types: 362 variants across 63 models. The current catalog contains 815 skins in 22 cases. Each normal inspect randomly selects a variant and avoids the previous variant. Gold-drop showcases keep their short reveal animation.
 
 ## Models and joints
 
@@ -18,7 +21,7 @@ The inspecting player gets a private view-relative scene; other players get the 
 
 The new default eye anchor is 1.75 blocks forward and 0.43 to the player's right. Frame checks cover the entire timeline at the default 70-degree FOV, including a 4:3 screen, in both hands and with/without the pack. The loader applies this anchor only to the old stock `1.25 / 0.57 / -0.07` values. Explicit server anchor edits remain unchanged. Disable profiles with `inspect-profiles.yml -> enabled: false` to use the existing `inspect.yml` animation pools and anchor.
 
-These are world display entities, so terrain can occlude them. Arbitrary client zoom, custom anchors and custom resource packs are outside the default framing check. Rigs do not replace Minecraft's first-person arms. Display cleanup covers normal completion, quit, death, teleport, world/slot changes, disable and interrupted scene creation. Invalid scale, brightness, nonfinite transforms, cyclic joints and oversized timelines are rejected or bounded before a scene starts.
+These are world display entities, so terrain can occlude them. Arbitrary client zoom, custom anchors and custom resource packs are outside the default framing check. Held weapon and knife models include a compact block-style arm in first-person; third-person uses Minecraft's normal player arm. Inspect scenes remain separate from held-item models. Display cleanup covers normal completion, quit, death, teleport, world/slot changes, disable and interrupted scene creation. Invalid scale, brightness, nonfinite transforms, cyclic joints and oversized timelines are rejected or bounded before a scene starts.
 
 ## Case filters
 
@@ -47,6 +50,6 @@ The top-six preset follows the publisher's demand order in the [CS2.IO knife cat
 
 ## Install
 
-Use `release/MCCases-1.2.0.jar` with `release/MCCases-ResourcePack-1.2.0.zip`. Update both together: the new inspect meshes require the new pack. Enable `resource-pack.enabled: true` only after clients receive that pack, or configure the built-in distribution as described in the README. Without the pack, articulated block models remain available. The pack stays within the configured namespace and does not replace vanilla files. Existing admin config files and catalog data are preserved; new profile/guide files and missing language entries are added. `inspect-profiles.yml` supplies the new individual pools independently of the old file.
+Use the JAR and matching resource pack from the [1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6). Update both together: the held-item and inspect models require the matching pack. Enable `resource-pack.enabled: true` only after clients receive that pack, or configure the built-in distribution as described in the README. Without the pack, articulated block models remain available. The pack stays within the configured namespace and does not replace vanilla files. Existing admin config files and catalog data are preserved; new profile/guide files and missing language entries are added. `inspect-profiles.yml` supplies the new individual pools independently of the old file.
 
 As in 1.1, stop the server and back up the plugin data folder, database and player files together before replacing the plugin. The development checks JAR and client capture harness are audit tools; install neither on the production server.

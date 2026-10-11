@@ -6,11 +6,11 @@ A server-side Paper plugin with a virtual skin collection, public opening animat
 individual inspect motions and an economy built from Minecraft items. Inspired by
 Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.5** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
+**1.2.6** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Download plugin](release/MCCases-1.2.5.jar) ·
-[Download resource pack](release/MCCases-ResourcePack-1.2.5.zip) ·
-[Checksums](release/SHA256SUMS-1.2.5) · [Full reference](docs/REFERENCE.md)
+[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) ·
+[Download resource pack](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) ·
+[Checksums](release/SHA256SUMS-1.2.6) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
 > MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
@@ -24,10 +24,10 @@ Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 | Feature | Behavior |
 | --- | --- |
 | Catalog | 22 cases and 815 skins for 35 weapons, 20 knives and eight glove types |
-| Openings | Up to nine public wheels at once; fixed size, glass backgrounds and a centered grid that fits the opener’s view; larger requests are queued |
+| Openings | Up to nine public wheels at once; larger, more widely spaced skin models; a centered 3×3 grid that fits the opener’s view |
 | Collection | Private 3D gallery or chest menu, favorites, categories, search, filters and sorting |
-| Inspects | 252 individual variants, articulated models, both hands and separate owner/observer views |
-| Direct trading | Two offers, shared reservations and confirmation by both players; source reads “Knife traded (Case / TRADE IN)” |
+| Inspects | 362 individual variants across 63 articulated models, both hands and separate owner/observer views |
+| Direct trading | Two offers, shared reservations and confirmation by both players |
 | Marketplace | Emerald-item payments, search, sorting and durable proceeds for offline sellers |
 | Trade-in | Ten compatible weapons for the next rarity; five Covert weapons for a gold item |
 | Skin properties | Float, wear, pattern, StatTrak, source and creation date; Doppler, Fade and Blue Gem analysis |
@@ -41,10 +41,10 @@ collection/inspect objects; they do not replace worn armor.
 ## Quick start
 
 1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
-2. Copy [MCCases-1.2.5.jar](release/MCCases-1.2.5.jar) into `plugins/`. Install only one production MCCases JAR.
+2. Download [MCCases 1.2.6](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6), then copy its JAR into `plugins/`. Install only one production MCCases JAR.
 3. Start the server. Defaults appear in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
-5. Enable the matching [resource pack](release/MCCases-ResourcePack-1.2.5.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
+5. Enable the matching resource pack from the [1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
 Give a connected player their first nine signed pairs:
 
@@ -57,9 +57,8 @@ The player opens `/cases`, selects the case and chooses **Open 9 cases together*
 Alternatively, use `/cases open kilowatt_case 9`. Each opening consumes one signed
 case and its matching key. All nine world animations run concurrently.
 
-Each wheel keeps the same size from one to nine openings. The complete 3×3 grid,
-including its glass frames, fits the opener’s view at the tested 70° field of view.
-The layout centers incomplete rows and uses five visible skin icons per wheel.
+The roulette shows five skin models at 1.5× the previous size and spacing.
+The complete 3×3 grid remains centered and fits the tested 70° field of view.
 `opening.world.scene-scale` sets an upper size limit; camera fitting may reduce it.
 
 No additional plugins are required. Without the pack, collection browsing and
@@ -101,7 +100,10 @@ when `mccases.view` is allowed.
 - `/inspect view`: use the first-person view.
 
 Minecraft does not report F5 camera mode to Paper, so choose the view with a command.
-Models animate display entities; they do not replace Minecraft's arms.
+The resource-pack models use separate first- and third-person hand transforms. Their grip point
+stays at the palm. First-person weapons and knives include a compact block-style arm; the inspect
+animation carries that arm with the handle so the item stays visibly in the hand. Third-person
+views use Minecraft's normal player arm.
 Karambit and Talon use reversed presentation and animate around their finger rings.
 
 ### Opening multiple cases
@@ -182,17 +184,18 @@ See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 ## Resource pack
 
-The JAR and [resource pack](release/MCCases-ResourcePack-1.2.5.zip) are a matched pair.
+The JAR and resource pack from the [1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) are a matched pair.
 The JAR embeds the generated pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
 Every skin sprite and inspect layer is rendered from the active catalog, bundled weapon maps,
-patterns and palettes. Held items use solid meshes with palm anchors in both hands; menus use
+patterns and palettes. Held items use solid meshes with palm anchors in both hands. First-person
+composites include a compact block-style arm; third-person uses the player's normal arm. Menus use
 the same renderer output. Case icons use the 22 detailed images from the supplied reference
 archive; their source and per-file checksums are included in the pack. The large reference pack,
 its skin archive and its custom font overlay are not bundled. Float and pattern remain stored
 properties; dynamic map previews use the same configured renderer.
 At startup and `/csadmin exportpack`, MCCases updates its namespace while retaining unrelated
-server assets. Legacy prosse, kirbis and hirsch glyph images and their font providers are removed.
+server assets. Retired custom-font glyphs and their providers are removed during pack upgrades.
 
 For automatic distribution, edit the existing `resource-pack` section:
 
@@ -265,10 +268,10 @@ shows those chances.
 3. Replace the production JAR and update the matching resource pack.
 4. Start the server, check `/csadmin info` and compare existing settings.
 
-**1.2.5** replaces the old Fusion bundle with a compact catalog-rendered pack, restores
-all 22 detailed case images from the supplied reference, and adds a restrained lift and
-settle to the winning case icon. It keeps the nine-opening layout and existing data schema.
-Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.5).
+**1.2.6** adds two inspect motions to every weapon and knife, refines the first- and
+third-person grip transforms, and enlarges the five-item roulette while preserving the
+camera-fitted nine-opening layout. Replace the JAR and pack together and compare
+[checksums](release/SHA256SUMS-1.2.6).
 
 ## Legal information
 
@@ -299,12 +302,12 @@ Use JDK 25 and the included Gradle wrapper:
 bash gradlew build
 ```
 
-This creates `build/libs/MCCases-1.2.5.jar` and
-`build/distributions/MCCases-ResourcePack-1.2.5.zip`, running feature, pack, installer,
+This creates `build/libs/MCCases-1.2.6.jar` and
+`build/distributions/MCCases-ResourcePack-1.2.6.zip`, running feature, pack, installer,
 animation and runtime checks. Copy verified artifacts to `release/` and update their checksums.
 
-The [1.2.5 verification report](docs/RELEASE-1.2.5-VERIFICATION.md) records the clean build,
-full pack checks and twelve live Paper suites.
+The [1.2.6 verification report](docs/RELEASE-1.2.6-VERIFICATION.md) records the build,
+pack checks, client captures and live Paper suites.
 
 [Development guide](docs/DEVELOPMENT.md) · [Full reference](docs/REFERENCE.md) ·
 [Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues) · [Project website](https://plattnericus.dev)
