@@ -11,8 +11,10 @@ import java.util.*;
 /** Coverage, joint continuity, hostile configuration and actual camera-space geometry checks. */
 public final class InspectRigChecks {
     private InspectRigChecks() { }
-    public static void run(File root) {
-        Catalog catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
+    public static void run(File root) throws TextureException {
+        TextureStore textures = new TextureStore(new File(root, "textures"));
+        Catalog catalog = new CatalogLoader(new File(root, "catalog"), textures).load(1).catalog();
+        SkinRenderer renderer = new SkinRenderer(textures, RenderSettings.defaults());
         var warnings = new ArrayList<String>();
         InspectModels models = new InspectModels(new File(root, "inspect.yml"), warnings::add);
         profileUpgrade(root);
@@ -26,8 +28,14 @@ public final class InspectRigChecks {
         require(held.samples() == held.samples(), "per-tick sample list allocation");
         try { held.samples().add(1); throw new AssertionError("mutable animation samples"); }
         catch (UnsupportedOperationException expected) { /* immutable scene schedule */ }
+        Map<String, List<Vector3f>> packVertices = new HashMap<>();
         for (WeaponType weapon : catalog.weapons()) {
-            String artworkSkin = catalog.skins().stream().filter(s -> s.weapon().id().equals(weapon.id())).map(SkinDefinition::id).sorted().findFirst().orElseThrow();
+            SkinDefinition sourceSkin = catalog.skins().stream().filter(s -> s.weapon().id().equals(weapon.id())).sorted(Comparator.comparing(SkinDefinition::id)).findFirst().orElseThrow();
+            for (ModelPart part : InspectRig.packParts(weapon, models.packModelScale())) {
+                packVertices.put(weapon.id() + "/" + part.id(), vertices(renderer, weapon, part, sourceSkin));
+            }
+        }
+        for (WeaponType weapon : catalog.weapons()) {
             require(catalog.skins().stream().anyMatch(s -> s.weapon().id().equals(weapon.id())), "unobtainable weapon " + weapon.id());
             var pool = models.pool(weapon.id()); require(pool.size() == 4, "four individual variants required: " + weapon.id());
             var base = models.model(weapon.isKnife() ? weapon.id() : weapon.category().name().toLowerCase(Locale.ROOT));
@@ -69,7 +77,7 @@ public final class InspectRigChecks {
                             var first = InspectTransform.at(animation, part, 0, hand ? models.handModelScale() : models.modelScale(), left, hand);
                             var last = InspectTransform.at(animation, part, animation.duration(), hand ? models.handModelScale() : models.modelScale(), left, hand);
                             require(first.equals(last, .00003f), "joint does not return: " + id + "/" + part.id());
-                            var vertices = pack ? vertices(root, weapon, part, artworkSkin) : cube();
+                            var vertices = pack ? packVertices.get(weapon.id() + "/" + part.id()) : cube();
                             for (int tick = 0; tick <= animation.duration(); tick++) {
                                 var matrix = InspectTransform.at(animation, part, tick, hand ? models.handModelScale() : models.modelScale(), left, hand);
                                 require(matrix.isFinite(), "nonfinite frame " + id);
@@ -161,32 +169,28 @@ public final class InspectRigChecks {
             System.out.println("PASS: existing stock inspect profiles upgrade to four variants; custom timelines/pools survive and migration is idempotent.");
         } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
-    private static final Map<String, byte[]> ORIGINAL_LAYERS = originalLayers();
-    private static Map<String, byte[]> originalLayers() {
-        var result = new HashMap<String,byte[]>();
-        try (var input = InspectRigChecks.class.getResourceAsStream("/original-skins.zip");
-             var zip = new java.util.zip.ZipInputStream(Objects.requireNonNull(input))) {
-            java.util.zip.ZipEntry entry;
-            while ((entry = zip.getNextEntry()) != null) if (entry.getName().contains("/inspect/")) result.put(entry.getName(),zip.readAllBytes());
-            return Map.copyOf(result);
-        } catch (java.io.IOException error) { throw new IllegalStateException(error); }
-    }
-    private static List<Vector3f> vertices(File root, WeaponType weapon, ModelPart part, String skin) {
-        try {
-            var out = new ArrayList<Vector3f>(); String layer = part.material().substring(5);
-            var original = dev.plattnericus.cases.render.ArgbImage.from(javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(
-                    Objects.requireNonNull(ORIGINAL_LAYERS.get("assets/mccases/textures/item/inspect/" + skin + "/" + layer + ".png")))));
-            var source = InspectRig.presentation(weapon, original);
-            float depth = (weapon.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2f : .45f) : 2.6f)/32;
-            for (int yy=0;yy<128;yy++) {
-                int first=128,last=-1;
-                for (int xx=0;xx<128;xx++) {
-                    if((source.get(xx, yy)>>>24)>=128) {first=Math.min(first,xx);last=xx;}
+    private static List<Vector3f> vertices(SkinRenderer renderer, WeaponType weapon, ModelPart part, SkinDefinition skin) throws TextureException {
+        String layer = part.material().substring(5);
+        double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
+        var source = InspectRig.presentation(weapon, renderer.render(skin, 0, fl, 0).image()).scaledTo(120, 120);
+        boolean reverse = InspectRig.reverseGrip(weapon);
+        float depth = (weapon.isKnife() ? (layer.startsWith("handle") || layer.equals("body") ? 1.2f : .45f) : 2.6f) / 32;
+        var out = new ArrayList<Vector3f>();
+        for (int y = 0; y < 128; y++) {
+            int first = 128, last = -1;
+            for (int x = 0; x < 128; x++) {
+                if (x < 4 || x >= 124 || y < 4 || y >= 124) continue;
+                double originalX = (x + .5 - 4) / 120, originalY = (y + .5 - 4) / 120;
+                if (reverse) { originalX = 1 - originalX; originalY = 1 - originalY; }
+                if ((source.get(x - 4, y - 4) >>> 24) >= 128 && layer.equals(InspectRig.layerAt(weapon, originalX, originalY))) {
+                    first = Math.min(first, x); last = x;
                 }
-                if(last>=first)for(int x:new int[]{first,last+1})for(int y:new int[]{yy,yy+1})for(float z:new float[]{-depth,depth})out.add(new Vector3f(x/128f-.5f,.5f-y/128f,z));
             }
-            require(!out.isEmpty(), "empty rig layer " + weapon.id() + "/" + layer); return out;
-        } catch(java.io.IOException failure){throw new IllegalStateException(failure);}
+            if (last >= first) for (int x : new int[]{first, last + 1}) for (int yy : new int[]{y, y + 1})
+                for (float z : new float[]{-depth, depth}) out.add(new Vector3f(x / 128f - .5f, .5f - yy / 128f, z));
+        }
+        require(!out.isEmpty(), "empty rendered rig layer " + weapon.id() + "/" + layer + "/" + skin.id());
+        return out;
     }
     private static void require(boolean condition, String message) { if (!condition) throw new AssertionError(message); }
 }

@@ -3,6 +3,10 @@ package dev.plattnericus.cases.tools;
 import com.google.gson.*;
 import dev.plattnericus.cases.catalog.*;
 import dev.plattnericus.cases.inspect.InspectRig;
+import dev.plattnericus.cases.pack.PackExporter;
+import dev.plattnericus.cases.render.RenderSettings;
+import dev.plattnericus.cases.render.SkinRenderer;
+import dev.plattnericus.cases.render.TextureException;
 import dev.plattnericus.cases.render.TextureStore;
 import org.joml.Vector3f;
 import org.joml.Matrix4f;
@@ -10,46 +14,50 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.*;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 /** Inspect the actual exported assets, including every side-face UV and both hand transforms. */
 public final class PackChecks {
     private PackChecks() { }
     public static void main(String[] args) throws Exception {
         File root = new File(args[0]);
-        var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
+        var textures = new TextureStore(new File(root, "textures"));
+        var catalog = new CatalogLoader(new File(root, "catalog"), textures).load(1).catalog();
+        var renderer = new SkinRenderer(textures, RenderSettings.defaults());
         int faces = 0, layers = 0;
-        Map<String, BufferedImage> originals = new HashMap<>();
-        try (var input = PackChecks.class.getResourceAsStream("/original-skins.zip"); var source = new ZipInputStream(Objects.requireNonNull(input))) {
-            java.util.zip.ZipEntry entry;
-            while ((entry = source.getNextEntry()) != null) {
-                if (!entry.isDirectory()) originals.put(entry.getName(), ImageIO.read(new java.io.ByteArrayInputStream(source.readAllBytes())));
-            }
-        }
-        require(originals.size() == 2192, "incomplete original source artwork");
         var examples = new TreeMap<String, SkinDefinition>();
         int rows = (catalog.weapons().size() + 7) / 8;
         var sheet = new BufferedImage(8 * 180, rows * 150, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = sheet.createGraphics(); graphics.setColor(new Color(0x20242b)); graphics.fillRect(0, 0, sheet.getWidth(), sheet.getHeight());
         try (var zip = new ZipFile(args[1])) {
+            var entries = dev.plattnericus.cases.pack.ResourcePackInstaller.entries(zip);
+            Map<String, String> sourceHashes = caseSourceHashes();
+            require(sourceHashes.size() == catalog.cases().size(), "case artwork source table is incomplete");
+            require(text(zip, "case-art/SOURCE.md").equals(sourceRecord()), "case artwork source record differs from the plugin source");
+            for (String forbidden : java.util.List.of("assets/minecraft/textures/font/custom/prosse.png",
+                    "assets/minecraft/textures/font/custom/kirbis.png", "assets/minecraft/textures/font/custom/hirsch.png",
+                    "FUSION-MANIFEST.json")) require(!entries.containsKey(forbidden), "retired Fusion asset survived: " + forbidden);
             for (var skin : catalog.skins()) {
                 String base = "assets/mccases/";
                 var sprite = png(zip, base + "textures/item/skin/" + skin.id() + ".png");
-                var originalSprite = originals.get(base + "textures/item/skin/" + skin.id() + ".png");
-                require(originalSprite != null, "missing stock source sprite " + skin.id());
                 int size = sprite.getWidth();
                 require(size >= 64 && size == sprite.getHeight() && (size & (size - 1)) == 0, "sprite dimensions " + skin.id());
                 require(size == 128, "skin edge resolution " + skin.id());
+                var expectedSprite = PackExporter.sprite(renderer, skin);
+                int opaquePixels = 0;
                 for (int y = 0; y < size; y++) for (int x = 0; x < size; x++) {
                     int pixel = sprite.getRGB(x, y), alpha = pixel >>> 24;
                     require(alpha == 0 || alpha == 255, "translucent extruded edge " + skin.id());
                     require(alpha != 0 || (pixel & 0xffffff) == 0, "hidden color fringe " + skin.id());
-                    int supplied = originalSprite.getRGB(x,y);
-                    int expected = x > 0 && y > 0 && x < size-1 && y < size-1 && (supplied >>> 24) >= 128 ? supplied | 0xff000000 : 0;
-                    require(pixel == expected, "original skin colours/pattern changed " + skin.id());
+                    if (alpha == 255) opaquePixels++;
+                    require(pixel == expectedSprite.getRGB(x, y), "skin renderer output/source mismatch " + skin.id());
                 }
+                require(opaquePixels >= 64, "empty generated skin " + skin.id());
                 for (int i = 0; i < size; i++) require((sprite.getRGB(i, 0) >>> 24) == 0 && (sprite.getRGB(i, size - 1) >>> 24) == 0
                         && (sprite.getRGB(0, i) >>> 24) == 0 && (sprite.getRGB(size - 1, i) >>> 24) == 0, "sprite cropped at canvas boundary " + skin.id());
                 var model = json(zip, base + "models/item/skin/" + skin.id() + ".json");
@@ -65,12 +73,14 @@ public final class PackChecks {
                 for (String layer : InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().toList()) {
                     String path = "inspect/" + skin.id() + "/" + layer;
                     var texture = png(zip, base + "textures/item/" + path + ".png");
-                    var supplied = originals.get(base + "textures/item/" + path + ".png");
-                    require(supplied != null, "missing original inspect layer " + path);
+                    var expectedLayer = expectedLayer(renderer, skin, layer);
+                    int layerPixels = 0;
                     for (int y=0;y<128;y++) for (int x=0;x<128;x++) {
-                        int pixel = supplied.getRGB(InspectRig.reverseGrip(skin.weapon()) ? 127-x : x, InspectRig.reverseGrip(skin.weapon()) ? 127-y : y);
-                        require(texture.getRGB(x,y) == ((pixel >>> 24) >= 128 ? pixel | 0xff000000 : 0), "original inspect artwork changed " + path);
+                        int pixel = texture.getRGB(x,y);
+                        require(pixel == expectedLayer.getRGB(x,y), "inspect renderer output/source mismatch " + path);
+                        if ((pixel >>> 24) == 255) layerPixels++;
                     }
+                    require(layerPixels >= 8, "empty inspect texture " + path);
                     require(texture.getWidth() == 128 && texture.getHeight() == 128, "inspect edge resolution " + path);
                     var rig = json(zip, base + "models/item/" + path + ".json");
                     checkGrip(skin, rig.getAsJsonObject("display"));
@@ -104,6 +114,19 @@ public final class PackChecks {
                 }
                 examples.merge(skin.weapon().id(), skin, (a,b) -> a.id().compareTo(b.id()) < 0 ? a : b);
             }
+            require(entries.keySet().stream().filter(n -> n.startsWith("assets/mccases/textures/item/skin/") && n.endsWith(".png")).count() == catalog.skins().size(), "exported skin texture count");
+            require(entries.keySet().stream().filter(n -> n.startsWith("assets/mccases/textures/item/case/") && n.endsWith(".png")).count() == catalog.cases().size(), "exported case texture count");
+            for (var caseDef : catalog.cases()) {
+                byte[] sourcePng = caseArtBytes(caseDef.id());
+                var expectedCase = ImageIO.read(new java.io.ByteArrayInputStream(sourcePng));
+                var actualCase = png(zip, "assets/mccases/textures/item/case/" + caseDef.id() + ".png");
+                require(expectedCase.getWidth() == 128 && expectedCase.getHeight() == 128, "case art edge resolution " + caseDef.id());
+                require(imagesEqual(expectedCase, actualCase), "case art source mismatch " + caseDef.id());
+                String hash = java.util.HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(sourcePng));
+                require(hash.equals(sourceHashes.get(caseDef.id() + ".png")), "case art source hash mismatch " + caseDef.id());
+                require(java.util.Arrays.equals(sourcePng, assetBytes(zip, "assets/mccases/textures/item/case/" + caseDef.id() + ".png")),
+                        "case art bytes changed during export " + caseDef.id());
+            }
             int i = 0;
             for (var skin : examples.values()) {
                 int x = i % 8 * 180, y = i / 8 * 150;
@@ -116,7 +139,63 @@ public final class PackChecks {
         }
         graphics.dispose(); File output = new File(args[2]); output.mkdirs(); ImageIO.write(sheet, "png", new File(output, "all-weapons.png"));
         System.out.println("PASS: all " + catalog.skins().size() + " exported skins / " + layers + " inspect layers / " + faces
-                + " opaque rim faces, front/back UV orientation, original GUI artwork, unclipped sprites, solid held composites and native first/third-person palm anchors in both hands. Sheet: " + output);
+                + " opaque rim faces, front/back UV orientation, catalog-rendered skins and articulated layers, all " + catalog.cases().size()
+                + " detailed case textures, unclipped sprites, solid held composites and native first/third-person palm anchors in both hands. Sheet: " + output);
+    }
+
+    private static BufferedImage expectedLayer(SkinRenderer renderer, SkinDefinition skin, String layer) throws TextureException {
+        int inset = 4, content = 120;
+        var source = InspectRig.presentation(skin.weapon(), renderer.render(skin, 0,
+                Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02)), 0).image());
+        var canvas = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
+        var graphics = canvas.createGraphics();
+        graphics.drawImage(source.scaledTo(content, content).toBufferedImage(), inset, inset, null);
+        graphics.dispose();
+        var result = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
+        boolean reverse = InspectRig.reverseGrip(skin.weapon());
+        for (int y = 0; y < 128; y++) for (int x = 0; x < 128; x++) {
+            double originalX = (x + .5 - inset) / content, originalY = (y + .5 - inset) / content;
+            if (reverse) { originalX = 1 - originalX; originalY = 1 - originalY; }
+            int pixel = canvas.getRGB(x, y);
+            if ((pixel >>> 24) >= 128 && layer.equals(InspectRig.layerAt(skin.weapon(), originalX, originalY))) result.setRGB(x, y, pixel | 0xff000000);
+        }
+        return result;
+    }
+
+    private static byte[] caseArtBytes(String id) throws java.io.IOException {
+        try (var input = PackChecks.class.getResourceAsStream("/case-art/" + id + ".png")) {
+            require(input != null, "missing source case artwork " + id);
+            return input.readAllBytes();
+        }
+    }
+
+    private static Map<String, String> caseSourceHashes() throws java.io.IOException {
+        var result = new TreeMap<String, String>();
+        Matcher matcher = Pattern.compile("^\\| `([^`]+\\.png)` \\| `([0-9a-f]{64})` \\|$", Pattern.MULTILINE).matcher(sourceRecord());
+        while (matcher.find()) require(result.putIfAbsent(matcher.group(1), matcher.group(2)) == null, "duplicate case source hash " + matcher.group(1));
+        return result;
+    }
+
+    private static String sourceRecord() throws java.io.IOException {
+        try (var input = PackChecks.class.getResourceAsStream("/case-art/SOURCE.md")) {
+            require(input != null, "missing case art source record");
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+
+    private static String text(ZipFile zip, String name) throws java.io.IOException {
+        return new String(assetBytes(zip, name), StandardCharsets.UTF_8);
+    }
+
+    private static byte[] assetBytes(ZipFile zip, String name) throws java.io.IOException {
+        var entry = zip.getEntry(name); require(entry != null, "missing pack asset " + name);
+        try (var input = zip.getInputStream(entry)) { return input.readAllBytes(); }
+    }
+
+    private static boolean imagesEqual(BufferedImage a, BufferedImage b) {
+        if (a.getWidth() != b.getWidth() || a.getHeight() != b.getHeight()) return false;
+        for (int y = 0; y < a.getHeight(); y++) for (int x = 0; x < a.getWidth(); x++) if (a.getRGB(x,y) != b.getRGB(x,y)) return false;
+        return true;
     }
     private static void checkGrip(SkinDefinition skin, JsonObject display) {
         boolean reverse = InspectRig.reverseGrip(skin.weapon());

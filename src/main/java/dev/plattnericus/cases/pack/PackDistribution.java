@@ -61,44 +61,38 @@ public final class PackDistribution implements Listener {
         return file;
     }
 
-    /** Upgrade generated assets while retaining installed server fonts/artwork. */
+    /** Upgrade generated assets while retaining installed server-owned assets. */
     public void extract(dev.plattnericus.cases.catalog.Catalog catalog,
                         dev.plattnericus.cases.render.SkinRenderer renderer) throws IOException {
         try (InputStream in = plugin.getResource(BUNDLED)) {
-            if (in == null) throw new IOException("The plugin JAR has no bundled Fusion resource pack: " + BUNDLED);
+            if (in == null) throw new IOException("The plugin JAR has no bundled resource pack: " + BUNDLED);
             byte[] bundled = in.readAllBytes();
-            if (FusionPack.customNeedsRefresh(bundled, file.toPath())) {
+            if (ResourcePackInstaller.customNeedsRefresh(bundled, file.toPath())) {
                 var result = export(catalog, renderer);
-                if (!result.failures().isEmpty()) throw new IOException("Fusion upgrade has " + result.failures().size() + " incomplete skin exports; previous pack retained");
-            } else FusionPack.install(bundled, file.toPath(), settings.get().resourcePack().namespace(), plugin.getPluginMeta().getVersion());
+                if (!result.failures().isEmpty()) throw new IOException("Resource pack upgrade has " + result.failures().size() + " incomplete skin exports; previous pack retained");
+            } else ResourcePackInstaller.install(bundled, file.toPath(), settings.get().resourcePack().namespace(), plugin.getPluginMeta().getVersion());
         }
     }
 
-    /** Runtime export follows the same Fusion recipe as Gradle; incomplete exports keep the previous pack. */
+    /** Runtime export uses the live server catalog and retains unrelated server-owned assets. */
     public PackExporter.Result export(dev.plattnericus.cases.catalog.Catalog catalog,
                                       dev.plattnericus.cases.render.SkinRenderer renderer) throws IOException {
         Files.createDirectories(file.getParentFile().toPath());
         Path generated = Files.createTempFile(file.getParentFile().toPath(), ".mccases-generated-", ".zip");
-        Path overlay = Files.createTempFile(file.getParentFile().toPath(), ".mccases-overlay-", ".zip");
-        Path combined = Files.createTempFile(file.getParentFile().toPath(), ".mccases-export-", ".zip");
+        Path combined = Files.createTempFile(file.getParentFile().toPath(), ".mccases-resourcepack-", ".zip");
         try {
             var result = PackExporter.export(catalog, renderer, settings.get().resourcePack().namespace(), "Plattnericus", generated.toFile());
             if (!result.failures().isEmpty()) return result;
-            try (InputStream in = plugin.getResource(FusionPack.OVERLAY_RESOURCE)) {
-                if (in == null) throw new IOException("The plugin JAR has no Fusion overlay; refusing a standard-only export");
-                Files.copy(in, overlay, StandardCopyOption.REPLACE_EXISTING);
-            }
-            FusionPack.merge(generated, overlay, combined, settings.get().resourcePack().namespace(), plugin.getPluginMeta().getVersion());
-            // Include server edits made after installation as well as the bundled overlay.
-            if (file.isFile()) FusionPack.merge(combined, file.toPath(), overlay, settings.get().resourcePack().namespace(), plugin.getPluginMeta().getVersion());
-            else Files.copy(combined, overlay, StandardCopyOption.REPLACE_EXISTING);
+            if (file.isFile()) ResourcePackInstaller.merge(generated, file.toPath(), combined,
+                    settings.get().resourcePack().namespace(), plugin.getPluginMeta().getVersion());
+            else Files.copy(generated, combined, StandardCopyOption.REPLACE_EXISTING);
             try (InputStream in = plugin.getResource(BUNDLED)) {
-                if (in == null) throw new IOException("The plugin JAR has no bundled Fusion pack");
-                FusionPack.saveExport(in.readAllBytes(), overlay, file.toPath(), plugin.getPluginMeta().getVersion());
+                if (in == null) throw new IOException("The plugin JAR has no bundled resource pack");
+                ResourcePackInstaller.saveExport(in.readAllBytes(), combined, file.toPath(), plugin.getPluginMeta().getVersion());
             }
             return result;
         } finally {
-            Files.deleteIfExists(generated); Files.deleteIfExists(overlay); Files.deleteIfExists(combined);
+            Files.deleteIfExists(generated); Files.deleteIfExists(combined);
         }
     }
 

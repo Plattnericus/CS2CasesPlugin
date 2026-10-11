@@ -62,13 +62,14 @@ references. Review uncertain content against its provenance and replace it with
 original designs where necessary. Calling something a fan project does not cure
 missing permission.
 
-The project now includes the **Fusion-HD server overlay** supplied for this server:
-seven bitmap-font images, their font definition and the pack icon. Their exact source
-archive and file hashes are recorded in [resourcepack/fusion/SOURCE.json](resourcepack/fusion/SOURCE.json).
-Current MCCases assets are regenerated; the supplied server assets remain unchanged.
-This records technical provenance, not an independent rights clearance or a new license.
-The operator must have the required rights to those assets and any additional artwork,
-fonts, logos or player skins. Editing or combining artwork does not remove its rights.
+The generated resource pack contains only the 22 case PNGs listed in
+[case-art/SOURCE.md](src/main/resources/case-art/SOURCE.md), extracted from the user-supplied
+`MCCases-ResourcePack-Fusion-HD.zip`. Its README says the case and key art were generated with
+ImageGen. This project did not generate new artwork and did not copy that archive's skin sprites,
+inspect layers, custom fonts or pack icon. The record preserves the supplied archive hash and
+individual image hashes; it is technical provenance, not a rights clearance or license grant.
+The operator must have the rights needed to use and distribute the included case images and any
+additional artwork, fonts, logos or player skins.
 
 Do not distribute Minecraft/Counter-Strike installations, extracted game textures,
 third-party sounds or client JARs as part of the plugin. The

@@ -61,6 +61,7 @@ final class WorldReelView implements OpeningView {
     private double lastKeyframe = Double.NaN;
     private int ticksSinceKeyframe = STEP;
     private BukkitTask cleanup;
+    private BukkitTask flourish;
     private boolean closed;
 
     WorldReelView(CasesContext ctx, Player player, OpeningSession session, OpeningService service) {
@@ -286,7 +287,9 @@ final class WorldReelView implements OpeningView {
         // Both endpoints stay inside the strip, including when a fast keyframe crosses its
         // boundary. Client interpolation must never carry a still-visible sprite beyond it.
         float boundedX = (float) Math.clamp(x, -window, window);
-        return scaled(new Transformation(new Vector3f(boundedX, 0, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION));
+        double edge = Math.min(1, Math.abs(x) / window);
+        float lift = (float) (0.075 * Math.sin(Math.PI * (1 - edge)) * visibility(x));
+        return scaled(new Transformation(new Vector3f(boundedX, lift, 0), NO_ROTATION, new Vector3f(scale), NO_ROTATION));
     }
     private Transformation barPose(int index, double center) {
         float x = (float) ((index - center) * cfg.spacing());
@@ -317,11 +320,20 @@ final class WorldReelView implements OpeningView {
         if (reward.rarity().rareSpecial()) {
             winner.setItemStack(icon(reward, true));
         }
+        float overshoot = (float) (cfg.itemScale() * 1.78);
         float big = (float) (cfg.itemScale() * 1.6);
         winner.setInterpolationDelay(0);
-        winner.setInterpolationDuration(8);
-        winner.setTransformation(scaled(new Transformation(new Vector3f(0, 0.04f, 0.08f), NO_ROTATION,
-                new Vector3f(big, big, big), NO_ROTATION)));
+        winner.setInterpolationDuration(6);
+        winner.setTransformation(scaled(new Transformation(new Vector3f(0, 0.09f, 0.08f), NO_ROTATION,
+                new Vector3f(overshoot, overshoot, overshoot), NO_ROTATION)));
+        flourish = Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> {
+            if (closed || !winner.isValid()) return;
+            winner.setInterpolationDelay(0);
+            winner.setInterpolationDuration(5);
+            winner.setTransformation(scaled(new Transformation(new Vector3f(0, 0.04f, 0.08f), NO_ROTATION,
+                    new Vector3f(big, big, big), NO_ROTATION)));
+            flourish = null;
+        }, 6L);
         winner.setGlowColorOverride(Color.fromRGB(reward.rarity().color() & 0xFFFFFF));
         winner.setGlowing(true);
         title.text(ctx.formatter(player).fullName(reward, session.instance));
@@ -350,6 +362,10 @@ final class WorldReelView implements OpeningView {
         closed = true;
         if (cleanup != null) {
             cleanup.cancel();
+        }
+        if (flourish != null) {
+            flourish.cancel();
+            flourish = null;
         }
         for (org.bukkit.entity.Interaction box : hitboxes) {
             service.unregisterReelHitbox(box.getUniqueId());

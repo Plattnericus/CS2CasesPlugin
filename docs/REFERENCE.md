@@ -4,14 +4,12 @@
 
 Updated: October 10, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2.4 always builds and exports the Fusion HD pack with the server font/icon overlay. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.2.5 renders skin textures from the active catalog, bundles 22 attributed case images and removes legacy Fusion fonts during pack upgrades. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.4** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
-
-![Weapon and knife skins from the MCCases catalog](images/skins.png)
+**Version 1.2.5** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 MCCases runs on the server as a Paper plugin. Players use a normal Minecraft client.
 The bundled resource pack adds skin sprites to items; maps, holograms and block models
@@ -48,13 +46,13 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Copy [MCCases-1.2.4.jar](../release/MCCases-1.2.4.jar) into `plugins/`.
+2. Copy [MCCases-1.2.5.jar](../release/MCCases-1.2.5.jar) into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
 
 No other plugins are required. The build targets Paper 26.3 Build 159 beta with Java 25. Paper 26.3 is currently a beta release.
-See [verification](VERIFICATION-1.2.md) for the checks actually performed.
+See [the 1.2.5 verification report](RELEASE-1.2.5-VERIFICATION.md) for the checks actually performed.
 Check your server configuration before using another Paper version.
 The development check plugin is separate and is not part of the release installation.
 
@@ -224,7 +222,7 @@ exactly one signed case and matching key. **Open 9 cases together** in the case 
 starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
 `/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-Up to nine world roulettes run simultaneously in centered rows. Version 1.2.4 sizes
+Up to nine world roulettes run simultaneously in centered rows. Version 1.2.5 sizes
 every wheel against the complete 3×3 grid, so one through nine wheels use the same
 scale at a given distance and fit the tested 70° / 4:3 camera bounds. Glass, icons,
 text and click targets share this scale. `opening.world.scene-scale` is an upper
@@ -497,7 +495,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip](../release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip).
+[release/MCCases-ResourcePack-1.2.5.zip](../release/MCCases-ResourcePack-1.2.5.zip).
 
 ### Automatic distribution
 
@@ -522,9 +520,9 @@ it on join. Active distribution also enables custom item models.
 
 ### Combining it with a server pack
 
-1. Copy `assets/mccases/`, the two `assets/minecraft/shaders/core/item.*` programs and the
-   original Fusion font assets from the current release ZIP into your own pack. Merge font
-   providers if your pack also defines `assets/minecraft/font/default.json`.
+1. Copy `assets/mccases/` and the two `assets/minecraft/shaders/core/item.*` programs from the
+   current release ZIP into your own pack. Merge any of your own font providers if your pack
+   also defines `assets/minecraft/font/default.json`.
 2. Deliver the combined pack through your existing server pack distribution.
 3. Set `resource-pack.enabled: true` and leave built-in distribution disabled.
 

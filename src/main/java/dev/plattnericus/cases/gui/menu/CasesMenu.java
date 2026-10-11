@@ -36,7 +36,7 @@ public final class CasesMenu extends Menu {
 
     @Override
     protected Component title() {
-        return GuiItems.brandedTitle(ctx, ctx.messages(viewer).get("gui.cases.title"), '\uE003');
+        return ctx.messages(viewer).get("gui.cases.title");
     }
 
     @Override

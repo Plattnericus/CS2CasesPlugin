@@ -41,19 +41,13 @@ That describes provenance within the build; it does not establish ownership or
 permission for every underlying design. CS-inspired names and designs require their
 own assessment. See [LEGAL.md](LEGAL.md).
 
-The supplied Fusion-HD server overlay is included in the default public build.
-It contains seven bitmap-font PNGs, `assets/minecraft/font/default.json` and the pack
-icon, preserved byte-for-byte. [The source manifest](resourcepack/fusion/SOURCE.json)
-records the original archive and individual file hashes. This is provenance rather
-than an independent rights grant. The operator remains responsible for permission
-and any required attribution for supplied artwork and fonts. Additional custom assets
-and configured NPC player skins require their own rights review.
-
-The original Fusion skin artwork is also retained: 815 GUI sprites and 1,377 inspect
-layers, recorded in [the skin source manifest](resourcepack/artwork/SOURCE.json).
-These source PNGs are stored unchanged; exported masks and geometry are derived from
-them. This records the operator-supplied source and does not independently clear rights
-to CS-inspired artwork or designs.
+The resource pack includes only the 22 case PNGs listed in
+[the source manifest](src/main/resources/case-art/SOURCE.md), taken from a user-provided
+reference archive. That archive README says the case and key art were generated with
+ImageGen. No skin images, inspect layers, fonts or pack icon from that archive are bundled.
+The manifest records source and image hashes; it does not grant rights. The operator remains
+responsible for permission and any required attribution for case art, custom assets and
+configured NPC player skins.
 
 No project-wide open-source license is asserted. Existing third-party licenses,
 separate permissions and applicable statutory rights are unaffected.

@@ -187,7 +187,7 @@ public final class CommandRuntimeChecks {
         flow=flow.thenCompose(v->check("scan skin metric count",Map.of("skin","ak47_case_hardened","metric","playside.blue","count",2),true,()->says("1.")));
         for(String type:List.of("","villager","mannequin"))flow=flow.thenCompose(v->check("shop spawn"+(type.isEmpty()?"":" "+type),Map.of(),false,()->!messages.isEmpty()))
             .thenCompose(v->check("shop remove",Map.of(),false,()->!messages.isEmpty()));
-        flow=flow.thenCompose(v->check("exportpack",Map.of(),true,()->says("skins exported"))).thenRun(this::fusionExport);
+        flow=flow.thenCompose(v->check("exportpack",Map.of(),true,()->says("skins exported"))).thenRun(this::resourcePackExport);
         flow=flow.thenCompose(v->check("reload",Map.of(),true,()->says("Reloaded in")));
         flow=flow.thenCompose(v->badReload());
         flow=flow.thenCompose(v->faults());
@@ -200,23 +200,20 @@ public final class CommandRuntimeChecks {
             if(e!=null)plugin.getLogger().log(java.util.logging.Level.SEVERE,"COMMAND AUDIT FAILED",e);
             else{String result="PASS ALL "+passed.size()+" COMMAND CHECKS: roots/aliases, live handlers, invalid input, permissions, console, SQL rollback and error references.";reporter.sendMessage(result);plugin.getLogger().info(result);}});
     }
-    private void fusionExport() {
-        try (var output = new java.util.zip.ZipFile(new java.io.File(ctx.plugin().getDataFolder(), "resourcepack/" + dev.plattnericus.cases.pack.PackDistribution.FILE_NAME));
-             var input = ctx.plugin().getResource(dev.plattnericus.cases.pack.FusionPack.OVERLAY_RESOURCE)) {
-            require(input != null, "production JAR missing Fusion overlay");
-            int preserved = 0;
-            try (var overlay = new java.util.zip.ZipInputStream(input)) {
-                for (var entry = overlay.getNextEntry(); entry != null; entry = overlay.getNextEntry()) if (!entry.isDirectory()) {
-                    var exported = output.getEntry(entry.getName()); require(exported != null, "export lost " + entry.getName());
-                    try (var data = output.getInputStream(exported)) {
-                        require(java.util.Arrays.equals(overlay.readAllBytes(), data.readAllBytes()), "export changed " + entry.getName());
-                    }
-                    preserved++;
-                }
-            }
-            require(preserved == 10 && output.getEntry(dev.plattnericus.cases.pack.FusionPack.MANIFEST) != null, "export did not produce the full Fusion pack");
-            pass("Fusion export preserves seven fonts, font definition, pack icon and source manifest");
-        } catch (java.io.IOException error) { throw new IllegalStateException("Fusion export verification failed", error); }
+    private void resourcePackExport() {
+        try (var output = new java.util.zip.ZipFile(new java.io.File(ctx.plugin().getDataFolder(), "resourcepack/" + dev.plattnericus.cases.pack.PackDistribution.FILE_NAME))) {
+            var entries = dev.plattnericus.cases.pack.ResourcePackInstaller.entries(output);
+            long skins = entries.keySet().stream().filter(name -> name.matches("assets/mccases/textures/item/skin/[^/]+\\.png")).count();
+            long cases = entries.keySet().stream().filter(name -> name.matches("assets/mccases/textures/item/case/[^/]+\\.png")).count();
+            require(skins == ctx.catalog().skins().size(), "exported skin coverage " + skins + "/" + ctx.catalog().skins().size());
+            require(cases == ctx.catalog().cases().size(), "exported case coverage " + cases + "/" + ctx.catalog().cases().size());
+            for (String retired : java.util.List.of("assets/minecraft/textures/font/custom/prosse.png",
+                    "assets/minecraft/textures/font/custom/kirbis.png", "assets/minecraft/textures/font/custom/hirsch.png",
+                    "FUSION-MANIFEST.json")) require(!entries.containsKey(retired), "retired Fusion asset survived export: " + retired);
+            require(entries.containsKey(dev.plattnericus.cases.pack.ResourcePackInstaller.MANIFEST), "resource pack export receipt missing");
+            dev.plattnericus.cases.pack.ResourcePackInstaller.validateFonts(java.nio.file.Path.of(output.getName()));
+            pass("resource pack export includes every catalog skin and case, preserves source manifest, and removes retired Fusion glyphs");
+        } catch (java.io.IOException error) { throw new IllegalStateException("Resource pack export verification failed", error); }
     }
     private CompletableFuture<Void>faults(){
         String skins=database().table("skins"),equipped=database().table("equipped");double original=knife.floatValue();

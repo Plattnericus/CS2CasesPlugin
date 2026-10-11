@@ -18,10 +18,10 @@ No project-wide open-source license has been granted in this repository. Public 
 availability does not grant general reuse or redistribution rights. Contact the maintainer
 for permissions; third-party materials remain governed by their own rights and licenses.
 Custom textures, fonts, logos and player skins require appropriate permission.
-The default Fusion pack includes the supplied server font/icon overlay; its source
-archive and exact asset hashes are recorded in resourcepack/fusion/SOURCE.json.
-The original skin/inspect PNGs are retained with hashes in resourcepack/artwork/SOURCE.json.
-Current models and opaque edge geometry are rebuilt from the selected artwork.
+The generated resource pack renders skin/inspect textures from bundled weapon maps and the
+active catalog. Its 22 case PNGs are recorded with hashes in case-art/SOURCE.md and were
+extracted from a user-supplied reference pack whose README attributes them to ImageGen.
+No other textures, skins, fonts or pack icons from that archive are included.
 The two item shader programs adapt the Minecraft 26.3 baseline and remain subject to
 Mojang/Microsoft terms; the project does not assert independent rights to those portions.
 

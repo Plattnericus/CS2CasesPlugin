@@ -14,9 +14,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,8 +31,7 @@ import org.joml.Vector3f;
 import dev.plattnericus.cases.inspect.InspectRig;
 
 /**
- * Builds sprites, joint meshes and Vanilla 26.3 item shading. The plugin distributes the
- * resulting pack with the server's permanent Fusion artwork overlay.
+ * Builds generated skin sprites, inspect meshes and Vanilla 26.3 item shading.
  */
 public final class PackExporter {
 
@@ -52,7 +51,6 @@ public final class PackExporter {
 
     public static Result export(Catalog catalog, SkinRenderer renderer, String namespace, String author, File target) throws IOException {
         List<String> failures = new ArrayList<>();
-        OriginalSkinArtwork artwork = new OriginalSkinArtwork();
         int skins = 0;
         File parent = target.getAbsoluteFile().getParentFile();
         if (parent != null && !parent.isDirectory() && !parent.mkdirs()) {
@@ -78,6 +76,8 @@ public final class PackExporter {
                     MCCases resource pack (optional)
                     -----------------------------------
                     Models and textures live in assets/%1$s/.
+                    Skin textures are rendered from the active MCCases catalog and bundled weapon maps.
+                    Case artwork source and hashes are included in case-art/SOURCE.md.
                     The two assets/minecraft/shaders/core/item.* programs add metal shading
                     for marked faces and require Vanilla Minecraft 26.3.
                     Merge both the namespace and these shader programs into another pack.
@@ -90,12 +90,15 @@ public final class PackExporter {
                 if (notice == null) throw new IOException("Missing bundled legal notice");
                 text(zip, "LEGAL-NOTICE.txt", new String(notice.readAllBytes(), StandardCharsets.UTF_8));
             }
+            try (var source = PackExporter.class.getResourceAsStream("/case-art/SOURCE.md")) {
+                if (source == null) throw new IOException("Missing case artwork source record");
+                text(zip, "case-art/SOURCE.md", new String(source.readAllBytes(), StandardCharsets.UTF_8));
+            }
             BufferedImage logo = null;
             for (SkinDefinition skin : catalog.skins().stream().sorted(Comparator.comparing(SkinDefinition::id)).toList()) {
                 BufferedImage sprite;
                 try {
-                    BufferedImage original = artwork.image("skin/" + skin.id());
-                    sprite = original == null ? sprite(renderer, skin) : originalSprite(original);
+                    sprite = sprite(renderer, skin);
                 } catch (TextureException e) {
                     failures.add(skin.id() + ": " + e.getMessage());
                     continue;
@@ -109,14 +112,14 @@ public final class PackExporter {
                 String selected = "trade/selected/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
                 model(zip, namespace, selected, "minecraft:item/generated", FIXED_DISPLAY);
-                try { rig(zip, namespace, skin, renderer, artwork); }
+                try { rig(zip, namespace, skin, renderer); }
                 catch (TextureException e) { throw new IOException("inspect rig " + skin.id(), e); }
                 heldItem(zip, namespace, skin);
                 skins++;
             }
             for (CaseDefinition c : catalog.cases().stream().sorted(Comparator.comparing(CaseDefinition::id)).toList()) {
                 String path = "case/" + c.id();
-                png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", caseSprite(c.color()));
+                pngBytes(zip, "assets/" + namespace + "/textures/item/" + path + ".png", caseTexture(c.id()));
                 model(zip, namespace, path, "minecraft:item/generated");
             }
             for (KeyDefinition k : catalog.keys().stream().sorted(Comparator.comparing(KeyDefinition::id)).toList()) {
@@ -138,13 +141,11 @@ public final class PackExporter {
     }
 
     /** Textured cuboids give the inspect asset thickness from every angle, with separate joints. */
-    private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer, OriginalSkinArtwork artwork) throws IOException, TextureException {
+    private static void rig(ZipOutputStream zip, String ns, SkinDefinition skin, SkinRenderer renderer) throws IOException, TextureException {
         BufferedImage canvas = null;
         for (String layer : dev.plattnericus.cases.inspect.InspectRig.layers(skin.weapon()).stream().map(dev.plattnericus.cases.inspect.InspectRig.Layer::id).distinct().toList()) {
             BufferedImage texture = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
-            BufferedImage original = artwork.image("inspect/" + skin.id() + "/" + layer);
-            if (original != null) original = InspectRig.presentation(skin.weapon(), ArgbImage.from(original)).toBufferedImage();
-            else if (canvas == null) {
+            if (canvas == null) {
                 double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
                 ArgbImage source = InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
                 canvas = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
@@ -154,10 +155,10 @@ public final class PackExporter {
             }
             boolean[][] mask = new boolean[SKIN_SPRITE][SKIN_SPRITE];
             for (int y = 0; y < SKIN_SPRITE; y++) for (int x = 0; x < SKIN_SPRITE; x++) {
-                int pixel = (original == null ? canvas : original).getRGB(x, y);
+                int pixel = canvas.getRGB(x, y);
                 double originalX = (x + .5 - RIG_INSET) / RIG_CONTENT, originalY = (y + .5 - RIG_INSET) / RIG_CONTENT;
                 if (dev.plattnericus.cases.inspect.InspectRig.reverseGrip(skin.weapon())) { originalX = 1 - originalX; originalY = 1 - originalY; }
-                if ((pixel >>> 24) >= 128 && (original != null || layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), originalX, originalY)))) {
+                if ((pixel >>> 24) >= 128 && layer.equals(dev.plattnericus.cases.inspect.InspectRig.layerAt(skin.weapon(), originalX, originalY))) {
                     // Geometry covers this texel completely. Partial alpha made the solid rim
                     // see-through and caused dark seams during spins.
                     texture.setRGB(x, y, pixel | 0xFF000000); mask[y][x] = true;
@@ -202,7 +203,7 @@ public final class PackExporter {
         }
     }
 
-    /** The same opaque geometry is used in hand and during inspection; menus retain the original artwork. */
+    /** The same opaque geometry is used in hand and during inspection. */
     private static void heldItem(ZipOutputStream zip, String ns, SkinDefinition skin) throws IOException {
         var parts = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct()
                 .map(layer -> metalModel(ns, "inspect/" + skin.id() + "/" + layer)).toList();
@@ -241,16 +242,6 @@ public final class PackExporter {
         return display.append("},").toString();
     }
 
-    private static BufferedImage originalSprite(BufferedImage original) {
-        // Keep the supplied colours and pattern; normalize only coverage to prevent extruded alpha spikes.
-        BufferedImage out = new BufferedImage(SKIN_SPRITE, SKIN_SPRITE, BufferedImage.TYPE_INT_ARGB);
-        for (int y = 1; y < SKIN_SPRITE - 1; y++) for (int x = 1; x < SKIN_SPRITE - 1; x++) {
-            int pixel = original.getRGB(x, y);
-            if ((pixel >>> 24) >= 128) out.setRGB(x, y, pixel | 0xff000000);
-        }
-        return out;
-    }
-
     private static void model(ZipOutputStream zip, String ns, String path, String parent, String display) throws IOException {
         if (!path.startsWith("skin/")) text(zip, "assets/" + ns + "/items/" + path + ".json",
                 "{\n  \"model\": {\n    \"type\": \"minecraft:model\",\n    \"model\": \"" + ns + ":item/" + path + "\"\n  }\n}\n");
@@ -260,7 +251,7 @@ public final class PackExporter {
     }
 
     /** Skin sprite: showcase render, cropped, knives turned to the vanilla sword diagonal. */
-    static BufferedImage sprite(SkinRenderer renderer, SkinDefinition skin) throws TextureException {
+    public static BufferedImage sprite(SkinRenderer renderer, SkinDefinition skin) throws TextureException {
         double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), 0.02));
         ArgbImage img = dev.plattnericus.cases.inspect.InspectRig.presentation(skin.weapon(), renderer.render(skin, 0, fl, 0).image());
         BufferedImage src = img.toBufferedImage();
@@ -333,25 +324,17 @@ public final class PackExporter {
         return out;
     }
 
-    static BufferedImage caseSprite(int rgb) {
-        BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = img.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Color base = new Color(rgb);
-        g.setColor(base.darker().darker());
-        g.fill(new RoundRectangle2D.Double(2, 7, 28, 21, 5, 5));
-        g.setColor(base);
-        g.fill(new RoundRectangle2D.Double(3, 8, 26, 19, 4, 4));
-        g.setColor(base.brighter());
-        g.fillRect(3, 8, 26, 4);
-        g.setColor(new Color(0x2a2d33));
-        g.fillRect(3, 15, 26, 3);
-        g.setColor(new Color(0xd8dce2));
-        g.fill(new RoundRectangle2D.Double(13, 13, 6, 7, 2, 2));
-        g.setColor(new Color(0x2a2d33));
-        g.fillRect(15, 16, 2, 2);
-        g.dispose();
-        return img;
+    private static byte[] caseTexture(String id) throws IOException {
+        String resource = "/case-art/" + id + ".png";
+        try (var input = PackExporter.class.getResourceAsStream(resource)) {
+            if (input == null) throw new IOException("Missing bundled case artwork: " + resource);
+            byte[] data = input.readAllBytes();
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+            if (image == null || image.getWidth() != 128 || image.getHeight() != 128) {
+                throw new IOException("Invalid bundled case artwork: " + resource);
+            }
+            return data;
+        }
     }
 
     static BufferedImage keySprite(int rgb) {
@@ -387,6 +370,13 @@ public final class PackExporter {
         ZipEntry entry = new ZipEntry(name); entry.setTime(0);
         zip.putNextEntry(entry);
         zip.write(bytes.toByteArray());
+        zip.closeEntry();
+    }
+
+    private static void pngBytes(ZipOutputStream zip, String name, byte[] image) throws IOException {
+        ZipEntry entry = new ZipEntry(name); entry.setTime(0);
+        zip.putNextEntry(entry);
+        zip.write(image);
         zip.closeEntry();
     }
 }

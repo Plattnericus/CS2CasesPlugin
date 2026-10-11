@@ -6,16 +6,14 @@ A server-side Paper plugin with a virtual skin collection, public opening animat
 individual inspect motions and an economy built from Minecraft items. Inspired by
 Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.4** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
+**1.2.5** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-1.2.4.jar) ·
-[Download Fusion HD pack](https://github.com/Plattnericus/CS2CasesPlugin/raw/refs/heads/main/release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) ·
-[Checksums](release/SHA256SUMS-1.2.4) · [Full reference](docs/REFERENCE.md)
+[Download plugin](release/MCCases-1.2.5.jar) ·
+[Download resource pack](release/MCCases-ResourcePack-1.2.5.zip) ·
+[Checksums](release/SHA256SUMS-1.2.5) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
 > MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
-
-![Example artwork from the MCCases catalog](docs/images/skins.png)
 
 [Quick start](#quick-start) · [Playing](#playing) · [Commands](#commands) ·
 [Resource pack](#resource-pack) · [Configuration](#configuration) ·
@@ -43,10 +41,10 @@ collection/inspect objects; they do not replace worn armor.
 ## Quick start
 
 1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
-2. Copy [MCCases-1.2.4.jar](release/MCCases-1.2.4.jar) into `plugins/`. Install only one production MCCases JAR.
+2. Copy [MCCases-1.2.5.jar](release/MCCases-1.2.5.jar) into `plugins/`. Install only one production MCCases JAR.
 3. Start the server. Defaults appear in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
-5. Enable the matching [resource pack](release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
+5. Enable the matching [resource pack](release/MCCases-ResourcePack-1.2.5.zip) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
 Give a connected player their first nine signed pairs:
 
@@ -105,8 +103,6 @@ when `mccases.view` is allowed.
 Minecraft does not report F5 camera mode to Paper, so choose the view with a command.
 Models animate display entities; they do not replace Minecraft's arms.
 Karambit and Talon use reversed presentation and animate around their finger rings.
-
-![Butterfly inspect in Minecraft; original 1.2 test capture](docs/images/inspect-butterfly-1.2.png)
 
 ### Opening multiple cases
 
@@ -186,19 +182,17 @@ See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 ## Resource pack
 
-The JAR and [Fusion HD ZIP](release/MCCases-ResourcePack-Fusion-HD-1.2.4.zip) are a matched pair.
-The JAR embeds exactly this pack and extracts it to
+The JAR and [resource pack](release/MCCases-ResourcePack-1.2.5.zip) are a matched pair.
+The JAR embeds the generated pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
-Every build uses the 815 skin sprites and 1,377 inspect layers from your original Fusion HD
-1.2.0 archive, stored in `resourcepack/artwork/`. The supplied colours and patterns are retained;
-exported coverage is made opaque and ring-knife presentation is turned to match its grip.
-Held items use solid meshes with palm anchors for both hands, while menus use the original sprites.
-Pack models use the supplied fixed artwork per finish. Float and pattern remain stored
-properties; dynamic map previews use the configured renderer. New catalog IDs also use
-that renderer. Your server fonts and pack icon from
-`resourcepack/fusion/` retain their exact original bytes.
-The same Fusion overlay is embedded in the JAR and reapplied by `/csadmin exportpack`.
-An older or edited installed pack is refreshed while preserving its server artwork.
+Every skin sprite and inspect layer is rendered from the active catalog, bundled weapon maps,
+patterns and palettes. Held items use solid meshes with palm anchors in both hands; menus use
+the same renderer output. Case icons use the 22 detailed images from the supplied reference
+archive; their source and per-file checksums are included in the pack. The large reference pack,
+its skin archive and its custom font overlay are not bundled. Float and pattern remain stored
+properties; dynamic map previews use the same configured renderer.
+At startup and `/csadmin exportpack`, MCCases updates its namespace while retaining unrelated
+server assets. Legacy prosse, kirbis and hirsch glyph images and their font providers are removed.
 
 For automatic distribution, edit the existing `resource-pack` section:
 
@@ -219,13 +213,13 @@ The public URL must route through your configured proxy to the pack webserver.
 The built-in server uses HTTP and does not provide an HTTPS certificate; alternatively,
 use a reachable HTTP address with its port. Distribution also enables item models.
 
-For a combined server pack, include the current Fusion ZIP's `assets/mccases/` and its two
+For a combined server pack, include the current ZIP's `assets/mccases/` and its two
 `assets/minecraft/shaders/core/item.*` programs. Set
 `resource-pack.enabled: true` and use your own distribution. Re-export after catalog
-changes. The Fusion HD pack is the default download. Keep custom server artwork outside
+changes. Keep custom server artwork outside
 `assets/mccases/`; that namespace and the two item shader programs are regenerated
 from the current catalog as a unit.
-See [Fusion sources and checks](resourcepack/fusion/README.md) before replacing assets.
+See the [case-art source record](src/main/resources/case-art/SOURCE.md) for case image provenance.
 
 ### Vanilla metal finish
 
@@ -271,16 +265,10 @@ shows those chances.
 3. Replace the production JAR and update the matching resource pack.
 4. Start the server, check `/csadmin info` and compare existing settings.
 
-**1.2.4** fits all nine glass wheels into the opener’s view while keeping every wheel
-at a constant size. Case batches default to nine, with a direct quantity selector.
-Sorting and key filters use explicit choice menus, and trade-ups show exact reward
-odds using the same random draw as confirmation. The original artwork and Vanilla
-held-item models from 1.2.3 remain unchanged. Existing limits and custom settings
-remain in place; set `opening.max-active-per-player: 9` and `visible-items: 5` to use
-the default layout. New language keys merge automatically. Back up and replace
-an unchanged `messages_en.yml` with the bundled default to refresh older button
-wording; edited translations remain yours. The database remains at schema 4.
-Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.4).
+**1.2.5** replaces the old Fusion bundle with a compact catalog-rendered pack, restores
+all 22 detailed case images from the supplied reference, and adds a restrained lift and
+settle to the winning case icon. It keeps the nine-opening layout and existing data schema.
+Replace JAR and pack together and compare [checksums](release/SHA256SUMS-1.2.5).
 
 ## Legal information
 
@@ -311,20 +299,12 @@ Use JDK 25 and the included Gradle wrapper:
 bash gradlew build
 ```
 
-This creates `build/libs/MCCases-1.2.4.jar` and
-`build/distributions/MCCases-ResourcePack-Fusion-HD-1.2.4.zip`, running `verifyFeatures` and
-`verifyPack` plus `verifyFusionPack`. Copy verified artifacts to `release/` and update
-their checksums.
+This creates `build/libs/MCCases-1.2.5.jar` and
+`build/distributions/MCCases-ResourcePack-1.2.5.zip`, running feature, pack, installer,
+animation and runtime checks. Copy verified artifacts to `release/` and update their checksums.
 
-The [1.2.4 verification report](docs/RELEASE-1.2.4-VERIFICATION.md) documents
-random contracts, direct choice menus, fitted wheels and actual client rendering.
-[1.2.3 artwork and animation evidence](docs/RELEASE-1.2.3-VERIFICATION.md) records
-all held models and animations retained byte-for-byte in this release.
-The [1.2.1 report](docs/RELEASE-1.2.1-VERIFICATION.md) records the earlier 154 command
-checks, ten live suites and inspect/wheel captures. The
-[earlier 1.2.0 command report](docs/COMMAND-VERIFICATION-2026-10-10.md) records 135 checks.
-Older [hotbar/HD-pack](docs/HOTBAR-HD-VERIFICATION.md) and
-[multiple-opening/trade-in](docs/MULTI-OPENING-VERIFICATION.md) evidence is dated separately.
+The [1.2.5 verification report](docs/RELEASE-1.2.5-VERIFICATION.md) records the clean build,
+full pack checks and twelve live Paper suites.
 
 [Development guide](docs/DEVELOPMENT.md) · [Full reference](docs/REFERENCE.md) ·
 [Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues) · [Project website](https://plattnericus.dev)
