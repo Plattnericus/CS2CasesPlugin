@@ -317,6 +317,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
 
     /** Two vanilla clients: verify the actual client locales and Paper's per-player entity visibility. */
     private void observerAudit(CommandSender sender, Player owner, Player observer, CasesContext ctx) {
+        getLogger().info("Two-client audit start: " + owner.getName() + " / " + observer.getName());
         require(!ctx.openings().isOpening(owner), "wait until the current opening finishes");
         boolean fixedEnglish = ctx.messages().language().equals("en")
                 && ctx.messages(owner) == ctx.messages() && ctx.messages(observer) == ctx.messages();
@@ -361,7 +362,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 var eyeAnchor = (org.bukkit.Location) field(session, "lastAnchor");
                 var handAnchor = (org.bukkit.Location) field(session, "lastHandAnchor");
                 require(eyeAnchor.distance(handAnchor) > .5, "observer is using the owner's eye view");
-                require(handAnchor.getPitch() == 0 && Math.abs(handAnchor.getY() - owner.getEyeLocation().getY() + .8) < .00001
+                require(handAnchor.getPitch() == 0 && Math.abs(handAnchor.getY() - owner.getEyeLocation().getY() + .48) < .00001
                         && Math.abs(handAnchor.getYaw() - owner.getBodyYaw()) < .00001, "observer scene is not body-hand anchored");
                 require(Math.abs((Float) field(session, "scale") - 1.24f) < .00001
                         && Math.abs((Float) field(session, "handScale") - 1.3f) < .00001, "asset scales are not doubled");
@@ -378,14 +379,17 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     if (publicScene) publicParts++; else privateParts++;
                 }
                 require(privateParts > 0 && privateParts == publicParts, "observer scene parts missing");
+                getLogger().info("Two-client audit scenes ready: private=" + privateParts + ", public=" + publicParts);
                 Bukkit.getScheduler().runTaskLater(this, () -> {
                     try {
                         require(ctx.inspect().isInspecting(owner), "inspect stopped before interpolation check");
                         ctx.inspect().stop(owner);
                         require(displays.stream().noneMatch(org.bukkit.entity.Entity::isValid), "display scene leaked after stop");
-                        sender.sendMessage("PASS TWO CLIENTS: actual locales " + owner.locale() + " / " + observer.locale()
+                        String result = "PASS TWO CLIENTS: actual locales " + owner.locale() + " / " + observer.locale()
                                 + "; plugin language " + ctx.messages(owner).language() + " / " + ctx.messages(observer).language()
-                                + "; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup.");
+                                + "; menu and signed key refresh; inventory shortcut setting respected; doubled owner/observer scales; separate visible scenes, body yaw/hand anchor, interpolation and complete cleanup.";
+                        sender.sendMessage(result);
+                        getLogger().info(result);
                     } catch (Exception failure) { report(failure); }
                     finally { restore.run(); }
                 }, 12);
@@ -667,7 +671,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 Object session = ((java.util.Map<?, ?>) sessions.get(ctx.inspect())).get(player.getUniqueId());
                 var field = session.getClass().getDeclaredField("lastAnchor"); field.setAccessible(true);
                 var anchor = (org.bukkit.Location) field.get(session);
-                require(anchor.getPitch() == 0 && Math.abs(anchor.getY() - player.getEyeLocation().getY() + .8) < .00001,
+                require(anchor.getPitch() == 0 && Math.abs(anchor.getY() - player.getEyeLocation().getY() + .48) < .00001,
                         "F5 inspect is not anchored to the physical hand / follows head pitch");
                 ctx.inspect().stop(player);
                 ctx.inspect().setBodyHandMode(player, false);
@@ -864,7 +868,23 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
     }
 
     private void openingAudit(CommandSender sender, Player player, CasesContext ctx) {
-        require(player.isOnline() && !ctx.openings().isOpening(player), "player unavailable for opening audit");
+        require(player.isOnline(), "player unavailable for opening audit");
+        // The command suite may leave non-persistent queued requests behind. This audit owns its
+        // inventory fixture, so discard those reservations before measuring its two openings.
+        ctx.openings().cancelQueued(player);
+        getLogger().info("Opening audit start: active=" + ctx.openings().activeCount(player) + ", queued=" + ctx.openings().queuedCount(player));
+        if (ctx.openings().activeCount(player) > 0) {
+            new org.bukkit.scheduler.BukkitRunnable() {
+                private int waited;
+                @Override public void run() {
+                    if (!player.isOnline()) { cancel(); report(new IllegalStateException("player disconnected before opening audit")); return; }
+                    ctx.openings().cancelQueued(player);
+                    if (ctx.openings().activeCount(player) == 0) { cancel(); openingAudit(sender, player, ctx); return; }
+                    if ((waited += 10) >= 600) { cancel(); report(new IllegalStateException("opening sessions did not release before audit")); }
+                }
+            }.runTaskTimer(this, 1, 10);
+            return;
+        }
         ctx.inspect().stop(player); ctx.gallery().close(player); player.closeInventory();
         ItemStack[] saved = snapshot(player);
         int held = player.getInventory().getHeldItemSlot();
@@ -880,6 +900,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
         player.getInventory().setItem(1, ctx.caseItems().keyItem(key, 2, true, ctx.messages(player)));
         ctx.openings().open(player, def, false, false);
         ctx.openings().open(player, def, false, false); // independent ordinary opening, while the first session is active
+        getLogger().info("Opening audit admitted: active=" + ctx.openings().activeCount(player) + ", queued=" + ctx.openings().queuedCount(player));
         new org.bukkit.scheduler.BukkitRunnable() {
             private int elapsed;
             @Override public void run() {
@@ -888,6 +909,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     require(player.isOnline(), "player disconnected during opening audit");
                     require(elapsed < 600, "opening did not finish within 30 seconds");
                     if (ctx.openings().isOpening(player)) return;
+                    getLogger().info("Opening audit sessions settled at " + elapsed + " ticks");
                     var added = ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id())).toList();
                     require(added.size() == 2 && added.getFirst().origin() == dev.plattnericus.cases.skin.SkinInstance.Origin.TEST,
                             "opening reward count/test-key origin");
@@ -902,7 +924,11 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                         return true;
                     }).whenComplete((ok, error) -> Bukkit.getScheduler().runTask(RuntimeChecksPlugin.this, () -> {
                         if (error != null) report(new IllegalStateException("opening durability failed", error));
-                        else sender.sendMessage("PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.");
+                        else {
+                            String result = "PASS FULL AUDIT: actual parallel case reels/reveals, independent requests, exact pair consumption, test-key origin, journal cleared and OWNED reward + audit saved. Original inventory restored.";
+                            sender.sendMessage(result);
+                            getLogger().info(result);
+                        }
                     }));
                 } catch (Exception failure) { cancel(); restore(); report(failure); }
             }

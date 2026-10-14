@@ -4,12 +4,12 @@
 
 Updated: October 11, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2.6 renders skin textures from the active catalog, bundles 22 attributed case images, adds two inspect variants for each weapon and knife, and enlarges the case-opening roulette. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.2.7 renders skin textures from the active catalog, bundles 22 attributed case images, adds two inspect variants for each weapon and knife, and enlarges the case-opening roulette. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.6** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.2.7** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 MCCases runs on the server as a Paper plugin. Players use a normal Minecraft client.
 The bundled resource pack adds skin sprites to items; maps, holograms and block models
@@ -46,13 +46,13 @@ the drop chance or the selected skin.
 ## Installation
 
 1. Prepare a **Paper 26.3 server running Java 25**.
-2. Download [MCCases 1.2.6](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) and copy its JAR into `plugins/`.
+2. Download the latest published build from the [GitHub releases page](https://github.com/Plattnericus/CS2CasesPlugin/releases) and copy its JAR into `plugins/`.
 3. Start the server. Configuration files are created in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info` to check the loaded catalog.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
 
 No other plugins are required. The build targets Paper 26.3 Build 159 beta with Java 25. Paper 26.3 is currently a beta release.
-See [the 1.2.6 verification report](RELEASE-1.2.6-VERIFICATION.md) for the checks actually performed.
+See [the 1.2.7 verification report](RELEASE-1.2.7-VERIFICATION.md) for the checks actually performed.
 Check your server configuration before using another Paper version.
 The development check plugin is separate and is not part of the release installation.
 
@@ -222,9 +222,9 @@ exactly one signed case and matching key. **Open 9 cases together** in the case 
 starts a queue. The quantity control also offers 18, 25, 50, 90 and 100. Use
 `/cases open kilowatt_case 100` for an arbitrary quantity from 1 to 1000.
 
-Up to nine world roulettes run simultaneously in centered rows. Version 1.2.6 uses
-1.5× the previous icon scale and spacing; every wheel is still fitted against the
-complete 3×3 grid and keeps the same size from one through nine openings. The larger
+Up to nine world roulettes run simultaneously in centered rows. Version 1.2.7 uses
+wider horizontal spacing and slightly larger icons; every wheel is still fitted against the
+complete 3×3 grid and keeps the same size from one through nine openings. The wider
 grid uses more of the tested 70° / 4:3 camera bounds. Glass, icons, text and click targets
 share this scale. `opening.world.scene-scale` is an upper
 size limit; camera fitting takes priority. Incomplete rows remain centered when a
@@ -496,7 +496,7 @@ unauthorized movement or use. Deleted skins are stored as removed; their opening
 
 The pack is bundled inside the plugin JAR and extracted to `plugins/MCCases/resourcepack/`.
 The standalone ZIP is available at
-[matching resource pack on the 1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6).
+[matching resource pack from the same release as the plugin](https://github.com/Plattnericus/CS2CasesPlugin/releases).
 
 ### Automatic distribution
 
@@ -684,10 +684,10 @@ They are not original Valve textures. Names and designs are inspired by Counter-
 float limits and pattern displays may differ from the original game.
 
 Inspects use display entities with Minecraft interpolation. Block models are animated without
-the pack; skin sprites are animated with it. Pack-based first-person inspections include a
-block-style Minecraft arm attached to the weapon grip and move it with the handle. This is not a
-complete CS2 character model or the player's actual skin texture. On bows and crossbows, the pack
-sprite replaces the visible vanilla drawing animation while retaining the weapon's actual behavior.
+the pack; skin sprites are animated with it. During first-person inspect, Minecraft renders the
+player's own arm and skin while the hand model is hidden; the signed item and icon remain in the
+hotbar. The resource pack adds no replacement arm model. On bows and crossbows, the pack sprite
+replaces the visible vanilla drawing animation while retaining the weapon's actual behavior.
 
 ## Troubleshooting
 

@@ -77,7 +77,7 @@ public final class PackExporter {
                     -----------------------------------
                     Models and textures live in assets/%1$s/.
                     Skin textures are rendered from the active MCCases catalog and bundled weapon maps.
-                    First-person weapon models include a compact pixel arm; third-person keeps the player's normal arm.
+                    First-person and inspect views use the Minecraft player's own arm and skin.
                     Case artwork source and hashes are included in case-art/SOURCE.md.
                     The two assets/minecraft/shaders/core/item.* programs add metal shading
                     for marked faces and require Vanilla Minecraft 26.3.
@@ -95,13 +95,7 @@ public final class PackExporter {
                 if (source == null) throw new IOException("Missing case artwork source record");
                 text(zip, "case-art/SOURCE.md", new String(source.readAllBytes(), StandardCharsets.UTF_8));
             }
-            png(zip, "assets/" + namespace + "/textures/item/held/arm-skin.png", armTexture(false));
-            png(zip, "assets/" + namespace + "/textures/item/held/arm-sleeve.png", armTexture(true));
             var heldSkins = catalog.skins();
-            heldArm(zip, namespace, heldSkins.stream().filter(s -> !s.isKnife()
-                    && s.weapon().category() != dev.plattnericus.cases.catalog.WeaponCategory.GLOVE).findFirst().orElseThrow(), "gun");
-            heldArm(zip, namespace, heldSkins.stream().filter(s -> s.isKnife() && !InspectRig.reverseGrip(s.weapon())).findFirst().orElseThrow(), "knife");
-            heldArm(zip, namespace, heldSkins.stream().filter(s -> s.isKnife() && InspectRig.reverseGrip(s.weapon())).findFirst().orElseThrow(), "knife-reverse");
             BufferedImage logo = null;
             for (SkinDefinition skin : catalog.skins().stream().sorted(Comparator.comparing(SkinDefinition::id)).toList()) {
                 BufferedImage sprite;
@@ -211,75 +205,18 @@ public final class PackExporter {
         }
     }
 
-    /** The same opaque geometry is used in hand and during inspection. */
+    /** Select the skin model by view so Minecraft renders the skin item in the native player hand. */
     private static void heldItem(ZipOutputStream zip, String ns, SkinDefinition skin) throws IOException {
         var parts = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct()
                 .map(layer -> metalModel(ns, "inspect/" + skin.id() + "/" + layer)).toList();
         String weapon = "{\"type\":\"minecraft:composite\",\"models\":[" + String.join(",", parts) + "]}";
-        String selection;
-        if (skin.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE) {
-            selection = "\"cases\":[{\"when\":[\"firstperson_righthand\",\"firstperson_lefthand\",\"thirdperson_righthand\",\"thirdperson_lefthand\"],\"model\":" + weapon + "}],";
-        } else {
-            String armPath = heldArmPath(skin);
-            String firstPerson = "{\"type\":\"minecraft:composite\",\"models\":[{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + armPath + "\"}," + String.join(",", parts) + "]}";
-            selection = "\"cases\":["
-                    + "{\"when\":[\"firstperson_righthand\",\"firstperson_lefthand\"],\"model\":" + firstPerson + "},"
-                    + "{\"when\":[\"thirdperson_righthand\",\"thirdperson_lefthand\"],\"model\":" + weapon + "}],";
-        }
+        String selection = "\"cases\":["
+                + "{\"when\":[\"fixed\"],\"model\":" + weapon + "},"
+                + "{\"when\":[\"firstperson_righthand\",\"firstperson_lefthand\"],\"model\":" + weapon + "},"
+                + "{\"when\":[\"thirdperson_righthand\",\"thirdperson_lefthand\"],\"model\":" + weapon + "}],";
         text(zip, "assets/" + ns + "/items/skin/" + skin.id() + ".json", "{\"model\":{\"type\":\"minecraft:select\",\"property\":\"minecraft:display_context\","
                 + selection
                 + "\"fallback\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/skin/" + skin.id() + "\"}}}");
-    }
-
-    /** A small pixel arm behind first-person weapon geometry; third-person uses the player's own arm. */
-    private static String heldArmPath(SkinDefinition skin) {
-        if (skin.isKnife()) return "held/arm/" + (InspectRig.reverseGrip(skin.weapon()) ? "knife-reverse" : "knife");
-        return "held/arm/gun";
-    }
-
-    private static void heldArm(ZipOutputStream zip, String ns, SkinDefinition skin, String style) throws IOException {
-        String id = "held/arm/" + style;
-        double gripX = skin.isKnife() ? (InspectRig.reverseGrip(skin.weapon()) ? .72 : .29) : .36;
-        double gripY = skin.isKnife() ? .50 : .57;
-        double x = 16 * gripX, y = 16 * gripY;
-        List<String> elements = List.of(
-                armCuboid(x - 2.1, y - 2.0, 7.5, x + 2.1, y + 2.0, 10, "#arm_skin"),
-                armCuboid(x - 2.2, y - 2.1, 10, x + 2.2, y + 2.1, 11.25, "#arm_sleeve"),
-                armCuboid(x - 2.0, y - 1.9, 11.25, x + 2.0, y + 1.9, 15, "#arm_sleeve"));
-        text(zip, "assets/" + ns + "/items/" + id + ".json", "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + id + "\"}}");
-        text(zip, "assets/" + ns + "/models/item/" + id + ".json", "{\"ambientocclusion\":false," + heldDisplay(skin)
-                + "\"textures\":{\"arm_skin\":\"" + ns + ":item/held/arm-skin\",\"arm_sleeve\":\"" + ns + ":item/held/arm-sleeve\",\"particle\":\"" + ns + ":item/held/arm-skin\"},"
-                + "\"elements\":[" + String.join(",", elements) + "]}");
-    }
-
-    private static String armCuboid(double x1, double y1, double z1, double x2, double y2, double z2, String texture) {
-        String faces = "\"north\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"},"
-                + "\"south\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"},"
-                + "\"east\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"},"
-                + "\"west\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"},"
-                + "\"up\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"},"
-                + "\"down\":{\"uv\":[0,0,16,16],\"texture\":\"" + texture + "\"}";
-        return "{\"from\":[" + x1 + "," + y1 + "," + z1 + "],\"to\":[" + x2 + "," + y2 + "," + z2 + "],\"faces\":{" + faces + "}}";
-    }
-
-    /** Hand-made 16px cloth/skin swatches: no downloaded or generated-by-AI artwork. */
-    private static BufferedImage armTexture(boolean sleeve) {
-        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-        int base = sleeve ? 0xff496789 : 0xffd2a081;
-        for (int y = 0; y < 16; y++) for (int x = 0; x < 16; x++) {
-            int color;
-            if (sleeve) {
-                color = x == 0 || x == 15 || y == 0 || y == 15 ? 0xff344e6e : base;
-                if (y == 3 || y == 12) color = 0xff58799d;
-                if ((x == 4 || x == 11) && y > 3 && y < 12) color = 0xff405d7e;
-            } else {
-                color = x == 0 || x == 15 || y == 0 || y == 15 ? 0xffb47f63 : base;
-                if (x == 3 || x == 12) color = 0xffdfb092;
-                if (y == 4 || y == 11) color = 0xffc79374;
-            }
-            image.setRGB(x, y, color);
-        }
-        return image;
     }
 
     private static String metalModel(String ns, String path) {
@@ -288,13 +225,12 @@ public final class PackExporter {
 
     private static String heldDisplay(SkinDefinition skin) {
         // ItemInHandLayer applies X=-90,Y=180 before these rotations. Compensating for that
-        // places the grip at the palm and presents the blade broadside, instead of through the arm.
+        // keeps the weapon's grip aligned with the player's palm and its blade broadside.
         boolean knife = skin.isKnife(), glove = skin.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE;
         boolean reverse = InspectRig.reverseGrip(skin.weapon());
         double gripX = knife ? (reverse ? .72 : .29) : .36;
         double gripY = knife ? .50 : .57;
-        // Leave the wrist and forearm visible in first person; the larger third-person mesh
-        // keeps long weapons readable beside the player's arm at normal camera distance.
+        // Keep the full silhouette readable while leaving the player's real arm to Minecraft.
         float firstScale = glove ? .80f : knife ? .62f : .58f;
         float thirdScale = glove ? .85f : knife ? 1.05f : 1.0f;
         StringBuilder display = new StringBuilder("\"display\":{\"fixed\":{\"rotation\":[0,0,0],\"scale\":[1,1,1]}");

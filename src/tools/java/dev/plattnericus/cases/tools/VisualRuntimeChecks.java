@@ -47,7 +47,7 @@ public final class VisualRuntimeChecks {
         if (!play) field(session, "task", BukkitTask.class).cancel();
         var apply = ctx.inspect().getClass().getDeclaredMethod("apply",session.getClass(),int.class,int.class); apply.setAccessible(true);
         apply.invoke(ctx.inspect(), session, tick, 0);
-        var hide = ctx.inspect().getClass().getDeclaredMethod("setHandVisible", Player.class,boolean.class,boolean.class); hide.setAccessible(true); hide.invoke(null,player,false,false);
+        var hide = ctx.inspect().getClass().getDeclaredMethod("setHandVisible", Player.class,boolean.class,boolean.class); hide.setAccessible(true); hide.invoke(ctx.inspect(),player,false,false);
         for (var entity : player.getWorld().getEntities()) if (entity instanceof org.bukkit.entity.Display && entity.getPersistentDataContainer().has(ctx.keys().displayEntity)) {
             if (player.canSee(entity) && observer.canSee(entity)) throw new IllegalStateException("owner scene leaked to observer");
         }

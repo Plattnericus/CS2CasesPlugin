@@ -159,6 +159,7 @@ public final class InspectService implements Listener {
         } catch (RuntimeException failure) {
             sessions.remove(player.getUniqueId());
             for (InspectSession.PartEntity part : spawned) part.entity().remove();
+            if (!reveal) ctx.knives().refreshHeld(player);
             ctx.plugin().getLogger().log(java.util.logging.Level.WARNING, "Cannot start inspect for " + def.weapon().id(), failure);
             if (!reveal) dev.plattnericus.cases.command.CommandFeedback.failure(ctx, player, "inspect", failure);
             return false;
@@ -304,13 +305,6 @@ public final class InspectService implements Listener {
                     if (base != null) meta.setItemModel(new org.bukkit.NamespacedKey(base.getNamespace(),
                             "inspect/" + base.getKey().replaceFirst("^skin/", "") + "/" + part.material().substring(5)));
                 });
-            } else if (part.material().startsWith("$arm:")) {
-                item = skinItem.clone();
-                item.editMeta(meta -> {
-                    org.bukkit.NamespacedKey base = meta.getItemModel();
-                    if (base != null) meta.setItemModel(new org.bukkit.NamespacedKey(base.getNamespace(),
-                            "held/arm/" + part.material().substring(5)));
-                });
             } else {
                 Material mat = material(part.material(), resolved, Material.IRON_SWORD);
                 item = new ItemStack(mat.isItem() ? mat : Material.IRON_SWORD);
@@ -383,6 +377,7 @@ public final class InspectService implements Listener {
                 setHandVisible(player, true, false);
             }
             player.updateInventory();
+            if (player.isOnline()) ctx.knives().refreshHeld(player);
         }
     }
 
@@ -390,7 +385,7 @@ public final class InspectService implements Listener {
      * Hides (or restores) the inspecting player's held item for the player and everyone who can see
      * them. Purely visual: equipment packets only, the server inventory is never touched.
      */
-    private static void setHandVisible(Player player, boolean visible, boolean keepOwnerVisible) {
+    private void setHandVisible(Player player, boolean visible, boolean keepOwnerVisible) {
         ItemStack shown = visible ? player.getInventory().getItemInMainHand() : ItemStack.empty();
         for (Player viewer : player.getWorld().getPlayers()) {
             if (viewer == player && keepOwnerVisible) continue;

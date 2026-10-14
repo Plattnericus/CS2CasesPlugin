@@ -32,18 +32,8 @@ public final class InspectRigChecks {
         for (WeaponType weapon : catalog.weapons()) {
             SkinDefinition sourceSkin = catalog.skins().stream().filter(s -> s.weapon().id().equals(weapon.id())).sorted(Comparator.comparing(SkinDefinition::id)).findFirst().orElseThrow();
             var packedParts = InspectRig.packParts(weapon, models.packModelScale());
-            var arms = packedParts.stream().filter(part -> part.material().startsWith("$arm:")).toList();
-            require(arms.size() == (weapon.category() == WeaponCategory.GLOVE ? 0 : 1), "animated first-person arm coverage " + weapon.id());
-            if (!arms.isEmpty()) {
-                String expectedStyle = weapon.isKnife() ? (InspectRig.reverseGrip(weapon) ? "knife-reverse" : "knife") : "gun";
-                String expectedGroup = switch (weapon.id()) {
-                    case "butterfly" -> "handle_a";
-                    case "shadow_daggers", "dual_berettas" -> "pair_a";
-                    default -> "body";
-                };
-                require(arms.get(0).material().equals("$arm:" + expectedStyle) && arms.get(0).group().equals(expectedGroup),
-                        "arm grip style/group " + weapon.id());
-            }
+            require(packedParts.stream().noneMatch(part -> part.material().startsWith("$arm:")),
+                    "inspect must use the Minecraft player skin arm, not a custom arm model: " + weapon.id());
             for (ModelPart part : packedParts) {
                 packVertices.put(weapon.id() + "/" + part.id(), vertices(renderer, weapon, part, sourceSkin));
             }
@@ -137,9 +127,10 @@ public final class InspectRigChecks {
         try {
             File invalid = java.nio.file.Files.createTempFile("inspect-settings", ".yml").toFile();
             try {
-                java.nio.file.Files.writeString(invalid.toPath(), "model-scale: .nan\npack-model-scale: -1\nview-range: .inf\nbrightness: 99\nanchor: {forward: .nan}\n");
+                java.nio.file.Files.writeString(invalid.toPath(), "model-scale: .nan\npack-model-scale: -1\nview-range: .inf\nbrightness: 99\nanchor: {forward: .nan}\nhand-anchor: {forward: .26, right: .34, up: -.8}\n");
                 var bad = new InspectModels(invalid, message -> { });
                 require(Float.isFinite(bad.modelScale()) && bad.packModelScale()>0 && Float.isFinite(bad.viewRange()) && bad.brightness()==15 && Double.isFinite(bad.anchor().forward()),"invalid scene settings");
+                require(bad.handAnchor().equals(new InspectModels.Anchor(.9, .8, -.48)), "stock first-person hand anchor was not upgraded");
             } finally { java.nio.file.Files.deleteIfExists(invalid.toPath()); }
         } catch (java.io.IOException failure) { throw new IllegalStateException(failure); }
         var guide = new CaseGuide(new File(root, "case-guide.yml"), warnings::add);
@@ -189,23 +180,6 @@ public final class InspectRigChecks {
         } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException error) { throw new IllegalStateException(error); }
     }
     private static List<Vector3f> vertices(SkinRenderer renderer, WeaponType weapon, ModelPart part, SkinDefinition skin) throws TextureException {
-        if (part.material().startsWith("$arm:")) {
-            double gripX = weapon.isKnife() ? (InspectRig.reverseGrip(weapon) ? .72 : .29) : .36;
-            double gripY = weapon.isKnife() ? .50 : .57;
-            double x = gripX * 16, y = gripY * 16;
-            double[][] boxes = {
-                    {x - 2.1, y - 2.0, 7.5, x + 2.1, y + 2.0, 10},
-                    {x - 2.2, y - 2.1, 10, x + 2.2, y + 2.1, 11.25},
-                    {x - 2.0, y - 1.9, 11.25, x + 2.0, y + 1.9, 15}
-            };
-            var points = new ArrayList<Vector3f>(boxes.length * 8);
-            for (double[] box : boxes) for (int bits = 0; bits < 8; bits++) {
-                points.add(new Vector3f((float)((box[(bits & 1) == 0 ? 0 : 3] / 16) - .5),
-                        (float)((box[(bits & 2) == 0 ? 1 : 4] / 16) - .5),
-                        (float)((box[(bits & 4) == 0 ? 2 : 5] / 16) - .5)));
-            }
-            return points;
-        }
         String layer = part.material().substring(5);
         double fl = Math.max(skin.minFloat(), Math.min(skin.maxFloat(), .02));
         var source = InspectRig.presentation(weapon, renderer.render(skin, 0, fl, 0).image()).scaledTo(120, 120);

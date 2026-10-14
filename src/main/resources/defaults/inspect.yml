@@ -5,11 +5,11 @@ anchor:
   right: 0.57
   up: -0.07
 model-scale: 1.24
-# /inspect hand: physical skin hand in F5; follows body yaw independently of head pitch.
+# /inspect hand: positions the animated weapon beside the real first-person skin arm and the F5 hand.
 hand-anchor:
-  forward: 0.26
-  right: 0.34
-  up: -0.8
+  forward: 0.9
+  right: 0.8
+  up: -0.48
 hand-model-scale: 1.3
 reveal-anchor:
   forward: 1.35

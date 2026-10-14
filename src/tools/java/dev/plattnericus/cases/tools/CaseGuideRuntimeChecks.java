@@ -47,7 +47,8 @@ public final class CaseGuideRuntimeChecks {
         steps.add(() -> { click(player,52);
         var click=new InventoryClickEvent(player.getOpenInventory(),InventoryType.SlotType.CONTAINER,9,ClickType.NUMBER_KEY,InventoryAction.HOTBAR_SWAP,0);
         Bukkit.getPluginManager().callEvent(click);require(click.isCancelled(),"case icon hotbar mutation");player.closeInventory();new CasesMenu(ctx,player).open();
-        sender.sendMessage("PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection.");
+        String message="PASS CASE GUIDE: all cases, correct value/full-price order, favorites and individual knife filters, preview/back state, zero budget, exact ID search, reset and hotbar protection.";
+        sender.sendMessage(message);ctx.plugin().getLogger().info(message);
         });
         next(steps.iterator(), ctx);
     }

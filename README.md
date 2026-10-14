@@ -6,11 +6,10 @@ A server-side Paper plugin with a virtual skin collection, public opening animat
 individual inspect motions and an economy built from Minecraft items. Inspired by
 Counter-Strike 2, it works with an ordinary Minecraft client and no client mod.
 
-**1.2.6** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
+**1.2.7 development build** · **Paper 26.3, API build 159 beta** · **Java 25** · **22 cases · 815 skins · 63 models**
 
-[Download plugin](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) ·
-[Download resource pack](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) ·
-[Checksums](release/SHA256SUMS-1.2.6) · [Full reference](docs/REFERENCE.md)
+[Latest published release](https://github.com/Plattnericus/CS2CasesPlugin/releases) ·
+[Checksums](release/SHA256SUMS-1.2.7) · [Full reference](docs/REFERENCE.md)
 
 > **NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.**
 > MCCases is also independent of Valve. Contact: **info@plattnericus.dev**.
@@ -41,10 +40,10 @@ collection/inspect objects; they do not replace worn armor.
 ## Quick start
 
 1. Prepare a **Paper 26.3 server with Java 25**. Read and accept the Minecraft EULA yourself.
-2. Download [MCCases 1.2.6](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6), then copy its JAR into `plugins/`. Install only one production MCCases JAR.
+2. Download the latest published build from the [GitHub releases page](https://github.com/Plattnericus/CS2CasesPlugin/releases), then copy its JAR into `plugins/`. Install only one production MCCases JAR.
 3. Start the server. Defaults appear in `plugins/MCCases/`.
 4. As an operator, run `/csadmin info`, then `/csadmin shop spawn` to create a dealer.
-5. Enable the matching resource pack from the [1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
+5. Enable the resource pack matching that JAR in the client and set `resource-pack.enabled: true`, or use automatic distribution below.
 
 Give a connected player their first nine signed pairs:
 
@@ -57,7 +56,8 @@ The player opens `/cases`, selects the case and chooses **Open 9 cases together*
 Alternatively, use `/cases open kilowatt_case 9`. Each opening consumes one signed
 case and its matching key. All nine world animations run concurrently.
 
-The roulette shows five skin models at 1.5× the previous size and spacing.
+The roulette shows five skin models with wider spacing and slightly larger artwork. Its complete
+nine-case layout retains a small margin at the default 70° camera view.
 The complete 3×3 grid remains centered and fits the tested 70° field of view.
 `opening.world.scene-scale` sets an upper size limit; camera fitting may reduce it.
 
@@ -101,9 +101,9 @@ when `mccases.view` is allowed.
 
 Minecraft does not report F5 camera mode to Paper, so choose the view with a command.
 The resource-pack models use separate first- and third-person hand transforms. Their grip point
-stays at the palm. First-person weapons and knives include a compact block-style arm; the inspect
-animation carries that arm with the handle so the item stays visibly in the hand. Third-person
-views use Minecraft's normal player arm.
+stays at the palm. During first-person inspect, the weapon mesh is replaced by its animated view
+beside Minecraft's own arm. The signed item and its icon stay in the hotbar, and the arm uses the
+player's real skin. The pack adds no generic sleeve or replacement arm model.
 Karambit and Talon use reversed presentation and animate around their finger rings.
 
 ### Opening multiple cases
@@ -184,12 +184,12 @@ See the [complete command and permission reference](docs/REFERENCE.md#commands).
 
 ## Resource pack
 
-The JAR and resource pack from the [1.2.6 release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6) are a matched pair.
+The 1.2.7 development JAR and resource pack are a matched pair. Rebuild them with `bash gradlew build` or use the verified local artifacts described in [release/README.md](release/README.md).
 The JAR embeds the generated pack and extracts it to
 `plugins/MCCases/resourcepack/MCCases-ResourcePack.zip`.
 Every skin sprite and inspect layer is rendered from the active catalog, bundled weapon maps,
-patterns and palettes. Held items use solid meshes with palm anchors in both hands. First-person
-composites include a compact block-style arm; third-person uses the player's normal arm. Menus use
+patterns and palettes. Held items use solid meshes with palm anchors in both hands. Inspect scenes
+use the player's real first-person arm and skin; the pack contributes no replacement arm mesh. Menus use
 the same renderer output. Case icons use the 22 detailed images from the supplied reference
 archive; their source and per-file checksums are included in the pack. The large reference pack,
 its skin archive and its custom font overlay are not bundled. Float and pattern remain stored
@@ -268,10 +268,11 @@ shows those chances.
 3. Replace the production JAR and update the matching resource pack.
 4. Start the server, check `/csadmin info` and compare existing settings.
 
-**1.2.6** adds two inspect motions to every weapon and knife, refines the first- and
-third-person grip transforms, and enlarges the five-item roulette while preserving the
-camera-fitted nine-opening layout. Replace the JAR and pack together and compare
-[checksums](release/SHA256SUMS-1.2.6).
+**1.2.7** removes the generic arm mesh, uses Minecraft's real first-person skin arm during
+knife inspections, and aligns the animated grip beside the hand. The roulette spacing and
+item artwork are wider and fuller while the nine-opening layout remains camera-fitted.
+Replace the JAR and pack together and compare
+[checksums](release/SHA256SUMS-1.2.7).
 
 ## Legal information
 
@@ -302,11 +303,11 @@ Use JDK 25 and the included Gradle wrapper:
 bash gradlew build
 ```
 
-This creates `build/libs/MCCases-1.2.6.jar` and
-`build/distributions/MCCases-ResourcePack-1.2.6.zip`, running feature, pack, installer,
+This creates `build/libs/MCCases-1.2.7.jar` and
+`build/distributions/MCCases-ResourcePack-1.2.7.zip`, running feature, pack, installer,
 animation and runtime checks. Copy verified artifacts to `release/` and update their checksums.
 
-The [1.2.6 verification report](docs/RELEASE-1.2.6-VERIFICATION.md) records the build,
+The [1.2.7 verification report](docs/RELEASE-1.2.7-VERIFICATION.md) records the build,
 pack checks, client captures and live Paper suites.
 
 [Development guide](docs/DEVELOPMENT.md) · [Full reference](docs/REFERENCE.md) ·

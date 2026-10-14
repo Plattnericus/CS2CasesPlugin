@@ -223,7 +223,12 @@ public final class CommandRuntimeChecks {
             .thenCompose(v->check("removeskin player id",target("id",knife.shortId()),true,()->says("reference")))
             .thenRun(()->{require(ctx.profiles().get(player).get(knife.id())==knife&&knife.status()==SkinInstance.Status.OWNED&&!says("Done."),"Failed deletion removed skin");pass("SQL deletion failure preserves skin");})
             .thenCompose(v->sql("DROP TRIGGER command_audit_update"));
-        flow=flow.thenCompose(v->sql("CREATE TRIGGER command_audit_equipped BEFORE INSERT ON "+equipped+" BEGIN SELECT RAISE(ABORT, 'EXPECTED command audit equipment'); END"))
+        // The disposable server database survives between audit runs. Clear any prior bow
+        // equipment before asserting that a failed cross-slot move restores an empty bow slot.
+        flow=flow.thenCompose(v->main(ctx.repository().setEquipped(player.getUniqueId(),EquipSlot.BOW.id(),null)))
+            .thenCompose(v->main(ctx.repository().equipOwned(player.getUniqueId(),EquipSlot.CROSSBOW.id(),gun.id())))
+            .thenRun(()->{ctx.profiles().get(player).setEquipped(EquipSlot.BOW,null);ctx.profiles().get(player).setEquipped(EquipSlot.CROSSBOW,gun.id());})
+            .thenCompose(v->sql("CREATE TRIGGER command_audit_equipped BEFORE INSERT ON "+equipped+" BEGIN SELECT RAISE(ABORT, 'EXPECTED command audit equipment'); END"))
             .thenCompose(v->{reset();admin("equipslot player id slot",target("id",gun.shortId(),"slot","bow"),false);require(!ctx.knives().equip(player,knife),"Concurrent equip was accepted");pass("concurrent equipment rejected");return until(()->says("could not be equipped")&&gun.id().equals(ctx.profiles().get(player).equipped(EquipSlot.CROSSBOW)));})
             .thenRun(()->{require(ctx.profiles().get(player).equipped(EquipSlot.BOW)==null&&gun.id().equals(ctx.profiles().get(player).equipped(EquipSlot.CROSSBOW))&&!says("Done."),"Equipment failure did not restore slots");pass("SQL equipment failure restores slots");})
             .thenCompose(v->main(database().run(c->{try(var s=c.prepareStatement("SELECT slot FROM "+equipped+" WHERE owner=? AND instance_id=?")){s.setString(1,player.getUniqueId().toString());s.setString(2,gun.id().toString());try(var rows=s.executeQuery()){require(rows.next()&&rows.getString(1).equals("crossbow")&&!rows.next(),"Equipment transaction lost previous SQL slot");}}return null;})))

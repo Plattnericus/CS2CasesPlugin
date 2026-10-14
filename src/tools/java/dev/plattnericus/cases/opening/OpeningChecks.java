@@ -93,7 +93,7 @@ public final class OpeningChecks {
     private static void layout(org.bukkit.configuration.file.FileConfiguration defaults) {
         double spacing = defaults.getDouble("opening.world.spacing", .62);
         double itemScale = defaults.getDouble("opening.world.item-scale", .5);
-        require(Math.abs(spacing - .93) < 1e-9 && Math.abs(itemScale - .75) < 1e-9,
+        require(Math.abs(spacing - .99) < 1e-9 && Math.abs(itemScale - .86) < 1e-9,
                 "opening roulette icon spacing and size defaults");
         double width = defaults.getInt("opening.world.visible-items", 5) * spacing + .2;
         double height = itemScale + .65;
@@ -105,7 +105,7 @@ public final class OpeningChecks {
             require(Math.abs(minY + maxY) < 1e-9, "partial reel rows not vertically centered: " + count);
             require(Math.abs(cells.stream().mapToDouble(OpeningLayout.Cell::right).sum()) < 1e-9, "partial reel row not horizontally centered");
             for (var cell : cells) {
-                require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + width / 2 * cell.scale() < distance * .85,
+                require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + width / 2 * cell.scale() < distance * .925,
                         "reel clipped horizontally: " + count);
                 require(Math.abs(cell.up()) + height / 2 * cell.scale() < distance * .52, "reel clipped vertically: " + count);
             }
@@ -113,7 +113,7 @@ public final class OpeningChecks {
                 var large = OpeningLayout.cell(i, count, width, height, distance, 3);
                 require(Math.abs(large.scale() - OpeningLayout.cell(0, 9, width, height, distance, 3).scale()) < 1e-9,
                         "wheel changed size when the grid changed: " + count);
-                require(Math.abs(large.right()) + width / 2 * large.scale() < distance * .85
+                require(Math.abs(large.right()) + width / 2 * large.scale() < distance * .925
                         && Math.abs(large.up()) + height / 2 * large.scale() < distance * .52,
                         "complete grid left the camera bounds: " + count);
                 for (int j = 0; j < i; j++) {

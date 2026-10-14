@@ -121,12 +121,14 @@ public final class CommerceRuntimeChecks {
                 ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName());
                 require(ctx.commerce().trade(first.getUniqueId()) != null, "ongoing openings blocked an independent trade");
                 ctx.commerce().cancel(first);
-            }).thenCompose(v -> until(plugin, () -> ctx.openings().activeCount(first) == 0 && ctx.openings().activeCount(second) == 0))
+            }).thenCompose(v -> openingsClosed(plugin, first, second, ctx))
             .thenRun(() -> {
                 require(ctx.profiles().get(first).all().size() == openingBaseline[0] + 3 && ctx.profiles().get(second).all().size() == openingBaseline[1] + 3, "six parallel case rewards lost/duplicated");
                 var caseDef = ctx.catalog().caseDefinition("kilowatt_case");
                 for (Player p : List.of(first, second)) require(ctx.caseItems().count(p, "case", caseDef.id()) == 0 && ctx.caseItems().count(p, "key", caseDef.keyId()) == 0 && ctx.profiles().journal().entries(p).isEmpty(), "case/key consumption or journal completion failed");
-                sender.sendMessage("PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.");
+                String message = "PASS TWO-CLIENT COMMERCE: 54-slot collection pages and protected icons, selections/reservations retained, synchronized offers, two confirmations, exact Emerald purchase, partial/full-inventory claims, six independent openings across two players and concurrent direct trading.";
+                sender.sendMessage(message);
+                plugin.getLogger().info(message);
             }).whenComplete((v, error) -> {
                 if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Two-client commerce audit failed", error);
                 cleanup.run();
@@ -241,6 +243,32 @@ public final class CommerceRuntimeChecks {
             try { if (condition.getAsBoolean()) { cancel(); future.complete(null); } else if ((elapsed += 2) > 600) { cancel(); future.completeExceptionally(new AssertionError("runtime operation timed out")); } }
             catch (Exception | AssertionError error) { cancel(); future.completeExceptionally(error); }
         } }.runTaskTimer(plugin, 2, 2); return future;
+    }
+    private static CompletableFuture<Void> openingsClosed(Plugin plugin, Player first, Player second, CasesContext ctx) {
+        var future = new CompletableFuture<Void>();
+        new org.bukkit.scheduler.BukkitRunnable() {
+            private int elapsed;
+            @Override public void run() {
+                try {
+                    int a = ctx.openings().activeCount(first), b = ctx.openings().activeCount(second);
+                    if (a == 0 && b == 0) { cancel(); future.complete(null); return; }
+                    elapsed += 2;
+                    if (elapsed == 100 || elapsed == 400 || elapsed == 800) {
+                        plugin.getLogger().info("Commerce opening drain at " + elapsed + " ticks: "
+                                + first.getName() + "=" + states(ctx, first) + "; " + second.getName() + "=" + states(ctx, second));
+                    }
+                    if (elapsed > 2400) {
+                        cancel(); future.completeExceptionally(new AssertionError("case reels did not drain: "
+                                + first.getName() + "=" + states(ctx, first) + "; " + second.getName() + "=" + states(ctx, second)));
+                    }
+                } catch (Exception | AssertionError error) { cancel(); future.completeExceptionally(error); }
+            }
+        }.runTaskTimer(plugin, 2, 2);
+        return future;
+    }
+    private static String states(CasesContext ctx, Player player) {
+        return ctx.openings().active(player).stream().map(s -> s.state().name())
+                .collect(java.util.stream.Collectors.joining(",", "[", "]"));
     }
     private static void require(boolean condition, String message) { if (!condition) throw new AssertionError(message); }
 }

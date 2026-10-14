@@ -1,11 +1,11 @@
-# MCCases verified downloads
+# MCCases 1.2.7 build artifacts
 
-Current build: **1.2.6**.
+The 1.2.7 JAR and resource pack were built and verified locally. Build artifacts are kept out of Git; the resource pack was copied to `~/Downloads/MCCases-ResourcePack-1.2.7.zip` for the live client test.
 
-Download the production plugin and matching resource pack from the
-[MCCases 1.2.6 GitHub release](https://github.com/Plattnericus/CS2CasesPlugin/releases/tag/v1.2.6).
-Verify the downloads with [SHA256SUMS-1.2.6](SHA256SUMS-1.2.6).
-- [1.2.6 verification report](../docs/RELEASE-1.2.6-VERIFICATION.md).
+Recreate them with `bash gradlew build`; outputs are `build/libs/MCCases-1.2.7.jar` and `build/distributions/MCCases-ResourcePack-1.2.7.zip`. Verify the local copies with [SHA256SUMS-1.2.7](SHA256SUMS-1.2.7).
+- [1.2.7 verification report](../docs/RELEASE-1.2.7-VERIFICATION.md).
+
+The latest public plugin release is listed on the [GitHub releases page](https://github.com/Plattnericus/CS2CasesPlugin/releases).
 
 The plugin embeds the same generated pack. It renders all catalog skins from bundled weapon
 maps and includes the 22 case PNGs documented in `src/main/resources/case-art/SOURCE.md`.

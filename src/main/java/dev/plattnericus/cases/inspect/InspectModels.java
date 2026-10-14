@@ -69,7 +69,11 @@ public final class InspectModels {
         anchor = profiles.getBoolean("enabled", true) && configuredAnchor.equals(new Anchor(1.25, .57, -.07))
                 ? anchor(profiles.getConfigurationSection("anchor"), new Anchor(1.75, .43, -.07)) : configuredAnchor;
         revealAnchor = anchor(y.getConfigurationSection("reveal-anchor"), new Anchor(1.35, 0, -0.05));
-        handAnchor = anchor(y.getConfigurationSection("hand-anchor"), new Anchor(0.26, 0.34, -0.8));
+        Anchor configuredHandAnchor = anchor(y.getConfigurationSection("hand-anchor"), new Anchor(0.9, 0.8, -0.48));
+        // Earlier stock values placed the animated model beneath the camera. Preserve explicit
+        // server tuning while bringing the stock body-hand view up beside the player's hand.
+        handAnchor = configuredHandAnchor.equals(new Anchor(0.26, 0.34, -0.8))
+                ? new Anchor(0.9, 0.8, -0.48) : configuredHandAnchor;
         handModelScale = number(y, "hand-model-scale", 1.3f, .1f, 4, warn);
         maxParts = Math.max(1, Math.min(32, y.getInt("max-parts", 16)));
         viewRange = number(y, "view-range", .5f, .1f, 16, warn);

@@ -7,6 +7,13 @@ from capture_inspect_audit import Rcon,client
 def main():
  p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
  root=a.root.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);rc=Rcon(root/'server')
+ deadline=time.monotonic()+60
+ while True:
+  online=rc.command('list')
+  if 'DevTester' in online and 'DevObserver' in online:break
+  if time.monotonic()>deadline:raise TimeoutError('Both visual test clients must finish connecting')
+  time.sleep(.25)
+ time.sleep(.5)  # The client player object is created just after the server lists a joining player.
  rc.command('mccasesdevcheck DevTester visual DevObserver stop')
  # Use a fresh location, away from dealer fixtures created by the runtime audits.
  rc.command('tp DevTester 100.5 -60 100.5 0 0');rc.command('tp DevObserver 100.5 -60 92.5 0 0')
@@ -26,10 +33,14 @@ def main():
   while rewards()!=baseline+amount:
    if time.monotonic()>deadline:raise TimeoutError('Opening '+str(amount)+' did not persist')
    time.sleep(.025)
-  time.sleep(.35)
-  transforms=out/f'grid-{amount}-displays.tsv';client(root,'client','displays|'+str(transforms))
-  rows=[line.split('\t') for line in transforms.read_text().splitlines()[1:]]
-  glass=[float(row[7]) for row in rows if row[1]=='BlockDisplay' and float(row[7])>1]
+  transforms=out/f'grid-{amount}-displays.tsv';deadline=time.monotonic()+5
+  while True:
+   client(root,'client','displays|'+str(transforms))
+   rows=[line.split('\t') for line in transforms.read_text().splitlines()[1:]]
+   glass=[float(row[7]) for row in rows if row[1]=='BlockDisplay' and float(row[7])>1]
+   if len(glass)>=amount:break
+   if time.monotonic()>deadline:raise TimeoutError(f'Grid {amount} displays did not reach the client')
+   time.sleep(.05)
   assert len(glass)==amount,('glass panel count',amount,len(glass))
   assert max(glass)-min(glass)<1e-5,('unequal wheel scales',amount,glass)
   if manifest:assert abs(glass[0]-manifest[0]['glassWidth'])<1e-5,('wheel resized',amount,glass)

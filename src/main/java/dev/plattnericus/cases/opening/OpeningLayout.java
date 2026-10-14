@@ -16,13 +16,13 @@ public final class OpeningLayout {
                 || width <= 0 || height <= 0 || distance <= 0) throw new IllegalArgumentException("invalid reel layout");
         int columns = (int) Math.ceil(Math.sqrt(count));
         int rows = (count + columns - 1) / columns;
-        double gapX = .24, gapY = .20;
+        double gapX = .27, gapY = .20;
         // Size against the largest supported grid, not the number currently visible.
         // This leaves camera margins at 70 degrees / 4:3 and prevents a single wheel
         // growing to three times its batch size. The configured size is an upper bound.
-        // The larger case icons use most of the 70-degree / 4:3 view while leaving a
-        // visible edge margin, including the full three-column batch.
-        double scale = Math.min(sceneScale, Math.min(distance * 1.70 / (3 * (width + gapX)),
+        // The larger case icons use nearly the full width of a 70-degree / 4:3 view while
+        // leaving a small edge margin, including the full three-column batch.
+        double scale = Math.min(sceneScale, Math.min(distance * 1.85 / (3 * (width + gapX)),
                 distance * 1.02 / (3 * (height + gapY))));
         int row = index / columns;
         int inRow = Math.min(columns, count - row * columns);

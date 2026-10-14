@@ -87,9 +87,9 @@ opening:
     distance: 3.0
     height: 0.35
     visible-items: 5
-    # Both values are 1.5× the earlier default; the 3x3 camera fit leaves screen margins.
-    spacing: 0.93
-    item-scale: 0.75
+    # Wider roulette spacing and fuller item silhouettes while keeping the 3x3 grid in frame.
+    spacing: 0.99
+    item-scale: 0.86
     # how long the result stays visible
     hold-ticks: 80
     # display view range multiplier (1.0 = about 64 blocks)
