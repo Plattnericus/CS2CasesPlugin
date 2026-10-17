@@ -24,7 +24,7 @@ bash gradlew build
 ```
 
 On Windows, use `gradlew.bat build`. Output is written to
-`build/libs/MCCases-1.2.7.jar` and `build/distributions/MCCases-ResourcePack-1.2.7.zip`.
+`build/libs/MCCases-1.3.0.jar` and `build/distributions/MCCases-ResourcePack-1.3.0.zip`.
 The generated pack is embedded in the plugin JAR. Skin and inspect images use the current
 renderer; only the 22 documented case images are supplied bitmaps. `PackDistribution` merges
 the generated catalog into an existing pack at runtime, preserves other server assets and
@@ -33,7 +33,8 @@ removes retired custom-font glyphs/providers from legacy installations.
 | Task | Purpose / output |
 | --- | --- |
 | `bash gradlew build` | Build the plugin and run feature checks |
-| `bash gradlew verifyPack` | Verify all rendered skins and inspect layers, 22 case images, rim UVs and both hand transforms |
+| `bash gradlew verifyPack` | Verify all rendered skins and inspect layers, 22 case images, rim UVs and the glove hand transforms |
+| `bash gradlew verifyHeld` | Verify the skin-arm view model of every weapon (grips, arm signatures, handedness, framing, use poses), all held-pose inspects (start/end in the hold, rig layers, clearance from the player model) and the pack's shaders, arms and scene layers |
 | `bash gradlew inspectRigPreview` | Software filmstrips of all 362 articulated variants |
 | `bash gradlew verifyFeatures` | Check catalog, reward selection, translations, inventory queries, journal and timelines |
 | `bash gradlew resourcePack` | Render every catalog skin and build the generated MCCases pack |
@@ -42,15 +43,25 @@ removes retired custom-font glyphs/providers from legacy installations.
 | `bash gradlew previewSheet` | Skin and map contact sheets, plus seed statistics in `build/preview/` |
 | `bash gradlew inspectFilmstrip` | Contact sheets and GIFs of inspect variations in `build/filmstrip/` |
 | `bash gradlew inspectFilmstrip -PfilmstripMovies=false` | Run the same framing checks and generate contact sheets without GIFs |
-| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.2.7.jar` |
+| `bash gradlew devChecks` | Build the separate integration check plugin at `build/libs/MCCases-DevChecks-1.3.0.jar` |
 | `bash gradlew dumpPalette` | Print Minecraft's map palette for the renderer |
 
 Override the API dependency with `-PpaperApi=<Maven-coordinate>`.
 Building against another API does not replace runtime checks on that Paper version.
 
-Version 1.2.7 renders the catalog sprites and inspect layers at 128px from bundled weapon maps.
-Exported coverage is opaque, mesh boundaries follow the source silhouette and held models use native palm
-anchors in both hands. First-person inspect uses the actual Minecraft player arm and skin; the resource pack contains no replacement forearm models. Karambit and Talon turn only at presentation time; pattern sampling
+The catalog sprites and inspect layers are rendered at 128px from bundled weapon maps.
+Exported coverage is opaque and mesh boundaries follow the source silhouette.
+
+**Held view model (1.3.0).** `HeldRig` composes the first-person hold of every weapon in view space:
+grip and support points come from `hold` in `weapons.yml` or the built-in table (canvas coordinates),
+templates per family set position, turn and scale, and the arms are player-head boxes in the arm
+proportions that `pack-shaders/mccases_arm.glsl` recognises (wide and slim). `SpriteFrame.rig` maps
+canvas points into the rig items, so the server and the pack agree on every grip. Bow and crossbow
+poses compensate Minecraft's own use transforms. `ViewInspect` samples a held-pose inspect: wrist turn
+about the grip, elbow and shoulder follow, forearm twist, support hand release and rig layer motions
+about `HeldRig.hinge`. `ModelPose` reproduces the player model's crossbow hold for the body-hand scene
+and keeps the weapon clear of head and torso. `scripts/generate_view_animations.py` writes the
+held-pose timelines into `inspect.yml`. Karambit and Talon turn only at presentation time; pattern sampling
 and saved classifications retain their original UV coordinates. Their pivots match the
 original finger-ring holes. `scripts/generate_inspect_profiles.py` reproduces all 362 stock
 timelines. The v1/v2/v3/v4 migration baselines recognize unchanged older stock profiles;
@@ -79,6 +90,32 @@ python3 scripts/capture_opening_layout.py --root <session> --output <wheels>
 These scripts require the local RCON/capture harness and two development clients. They operate
 on test fixtures and must not be pointed at a production world. Held-model captures wait for
 vanilla's re-equip animation before taking the screenshot.
+
+`scripts/visual_checks.py` drives the running dev session for the held view model and held-pose
+inspects (RCON, the capture harness and `mccasesdevcheck DevTester held|inspect`). Screenshots come from
+Minecraft's own framebuffer and land in `.dev/runtime/evidence/visual/<mode>/` with a manifest and a
+contact sheet.
+
+| Mode | Captures |
+| --- | --- |
+| `held` | Every weapon with a catalog skin in first person |
+| `use` | Bow drawn, crossbow charging and crossbow loaded |
+| `inspect` | Frames of an inspect; `--all-animations` plays every animation of the pool |
+| `transitions` | Back-to-back frames at the start and end: no dip, blink or double image |
+| `third` | F5 back and front of every held weapon |
+| `left` | Left-handed first person |
+| `others` | The second client's view and the owner's F5 views during an inspect (`--frames`, `--cameras`) |
+| `cases` | Case menu, a test opening's reel and the second client's view of it |
+
+```sh
+python3 scripts/visual_checks.py held
+python3 scripts/visual_checks.py inspect --only butterfly,glock18 --all-animations
+python3 scripts/dev.py observer && python3 scripts/visual_checks.py others --only ak47 --frames 6
+```
+
+The fixtures grant one admin skin per weapon to DevTester; they change the selected hotbar slot and the
+camera of both clients, so do not play in the clients while they run. `--output` must be an absolute
+path. The capture harness also records camera and scene heights frame by frame (`trace`).
 
 Feature checks cover the default catalog's 815 skins and 22 cases, 5,500 reward and reel checks,
 weighted drop chances, float limits, regional language fallbacks and 46 legacy animation timelines.
@@ -169,7 +206,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 ## Integration checks on Paper
 
-`MCCases-DevChecks-1.2.7.jar` belongs only on a local test server. It is not embedded in the release
+`MCCases-DevChecks-1.3.0.jar` belongs only on a local test server. It is not embedded in the release
 JAR and should not be included in `release/`. The check plugin requires MCCases and permission
 `mccases.admin`.
 
@@ -277,7 +314,7 @@ The actual client capture tools are `src/tools/client/ClientCaptureHarness.java`
 compiled test Java agent, a local RCON setup and the development check plugin. The agent
 uses Minecraft's framebuffer/camera APIs and is excluded from the production plugin.
 Pose captures pause the inspect task; motion captures leave the real scheduler running.
-Use [the 1.2.7 verification report](RELEASE-1.2.7-VERIFICATION.md) for the current results.
+Use [the 1.3.0 verification report](RELEASE-1.3.0-VERIFICATION.md) for the current results.
 
 Remove extra check JARs and test fixtures after validation; retain useful labeled test evidence.
 Keep source checks available for later development. The session's temporary world, database and

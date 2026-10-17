@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.3.0 — 2026-10-17
+
+- **Skin-arm view model.** Your own Minecraft skin arms (wide or slim) hold every knife and gun in
+  first person, with the 3D weapon rig and its metal finish: grip in the palm, support hand on the
+  handguard, reverse grip for Karambit and Talon, Shadow Daggers in both hands. Left-handed players get
+  a mirrored view. The arms come from each player's own skin; no skin is stored in the pack.
+- **Use poses.** Drawing a bow aims, charging a crossbow reloads and a loaded crossbow stays ready;
+  the arms keep holding the weapon. Third-person holds put the grip into the palm, blade or muzzle forward.
+- **Held-pose inspects.** 66 animations in eleven families plus weapon specials. They start and end in
+  the hold; the wrist turns the weapon, elbow and shoulder follow, the forearm twists and the support
+  hand lets go and grabs again. Slides rack, bolts pull, pumps cycle, butterfly handles swing around the
+  blade and folding blades flick closed and open. Every playback varies in energy and roll direction.
+- **Inspect in every view.** The scene rides the player and stays locked to the view, also while
+  crouching and standing up. Other players and your own F5 view see the player model raise both arms
+  into the crossbow hold and turn the weapon in its real hand, always clear of head and torso. The
+  pack's shaders pick the right scene for the camera, so F5 needs no command.
+- **Seamless controls.** The inspected item stays in its hotbar slot; the hand never dips when the
+  inspect starts or ends. Shift + right click starts the inspect once you stand up. Bows and crossbows
+  do not draw, charge or fire while they are inspected.
+- **Resource pack.** Vanilla 26.3 entity shaders for the skin arms; the item shaders combine the metal
+  sheen with the per-pixel split between first- and third-person scenes. Rig layers carry scene marks
+  on every face. Key icons have hard edges.
+- **Settings.** `inspect.held-pose` (default `true`). Gloves, inspects from menus and servers without the
+  pack keep the 362 profile inspects.
+- **Checks.** `verifyHeld` covers every weapon's grips, arm signatures, handedness and framing, all
+  held-pose inspects and rig layers, clearance from the player model in seven head poses and the pack's
+  shaders, arms and scene layers. `scripts/visual_checks.py` captures real-client screenshots in first
+  person, F5, left-handed and from a second player.
+
 ## 1.2.3 — 2026-10-10
 
 - Keep all 815 original Fusion skin sprites and 1,377 inspect layers as durable, hashed source artwork. Rebuild opaque geometry from the selected artwork so UVs and silhouette stay aligned.

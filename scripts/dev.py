@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Isolated macOS Paper + Minecraft development session with optional persistent supervision.
+"""Isolated macOS Paper 26.3 + Minecraft 26.3 development session with optional persistent supervision.
 No account tokens or global Minecraft settings are read or changed.
 """
 import argparse, concurrent.futures, hashlib, json, os, platform, plistlib, re, shutil, signal, socket, subprocess, sys, time, uuid, urllib.request
@@ -13,8 +13,17 @@ CONTROL=RUNTIME/'control.sock'
 LABEL='dev.mccases.cleanup-'+hashlib.sha256(str(ROOT).encode()).hexdigest()[:10]
 AGENT=Path.home()/'Library/LaunchAgents'/f'{LABEL}.plist'
 GAME=Path.home()/'Library/Application Support/minecraft'
+PAPER={
+ '26.3':('https://fill-data.papermc.io/v1/objects/2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0/paper-26.3-159.jar','2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0')}
+DEFAULT_MINECRAFT='26.3'
 JAVA=Path.home()/'Library/Java/JavaVirtualMachines/temurin-25.0.2/Contents/Home/bin/java'
 if not JAVA.exists():JAVA=Path(shutil.which('java') or 'java')
+
+def minecraft_version():
+ marker=RUNTIME/'minecraft-version'
+ version=marker.read_text().strip() if marker.exists() else DEFAULT_MINECRAFT
+ if version not in PAPER:raise RuntimeError(f'Unsupported Minecraft version {version}; choose one of {", ".join(PAPER)}')
+ return version
 
 def fingerprint(pid):
  r=subprocess.run(['ps','-p',str(pid),'-o','lstart=','-o','comm='],capture_output=True,text=True)
@@ -74,6 +83,7 @@ def build_artifacts():
  release=match.group(1)
  plugin=ROOT/f'build/libs/MCCases-{release}.jar'
  checks=ROOT/f'build/libs/MCCases-DevChecks-{release}.jar'
+ if not checks.exists() and (ROOT/'build/libs/MCCases-DevChecks.jar').exists():checks=ROOT/'build/libs/MCCases-DevChecks.jar'
  pack=ROOT/f'build/distributions/MCCases-ResourcePack-{release}.zip'
  for artifact in (plugin,pack):
   if not artifact.is_file():raise FileNotFoundError(f'Build the current release first: {artifact}')
@@ -82,8 +92,10 @@ def build_artifacts():
 def prepare():
  plugin_build,checks,pack_build=build_artifacts()
  SERVER.mkdir(parents=True,exist_ok=True);CLIENT.mkdir(parents=True,exist_ok=True)
- download('https://fill-data.papermc.io/v1/objects/2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0/paper-26.3-159.jar',SERVER/'paper.jar','2224a0b2b6b096ff4c429ad926e97977213e4f633e90cb3a49b5eeb82f94bab0')
- version=json.loads((GAME/'versions/26.3/26.3.json').read_text())
+ minecraft=minecraft_version();url,checksum=PAPER[minecraft]
+ download(url,SERVER/f'paper-{minecraft}.jar',checksum)
+ shutil.copy2(SERVER/f'paper-{minecraft}.jar',SERVER/'paper.jar')
+ version=json.loads((GAME/f'versions/{minecraft}/{minecraft}.json').read_text())
  prepare_assets(version)
  for lib in version['libraries']:
   artifact=lib.get('downloads',{}).get('artifact')
@@ -105,6 +117,10 @@ def prepare():
  rcon=[]
  if properties.exists():
   rcon=[line for line in properties.read_text().splitlines() if line.split('=',1)[0] in ('enable-rcon','rcon.port','rcon.password')]
+ # Local RCON drives the visual checks; the password stays inside this disposable runtime.
+ if not rcon:
+  import secrets
+  rcon=['enable-rcon=true','rcon.port=25575','rcon.password='+secrets.token_hex(12)]
  properties.write_text('''server-ip=127.0.0.1
 server-port=25565
 online-mode=false
@@ -127,7 +143,20 @@ allow-flight=true
  packs=CLIENT/'resourcepacks';packs.mkdir(exist_ok=True)
  shutil.copy2(pack_build,packs/'MCCases.zip')
  prepare_client_preferences(CLIENT)
- print('Prepared isolated server and client in',RUNTIME)
+ build_capture_harness()
+ print(f'Prepared isolated Paper {minecraft} server and client in',RUNTIME)
+
+def build_capture_harness():
+ # Test-only Java agent: camera settings and Minecraft's own framebuffer screenshots, no game assets.
+ source=ROOT/'src/tools/client/ClientCaptureHarness.java'
+ javac=JAVA.parent/'javac';jar=JAVA.parent/'jar'
+ if not source.exists() or not javac.exists() or not jar.exists():return
+ classes=RUNTIME/'harness-build'
+ if classes.exists():shutil.rmtree(classes)
+ classes.mkdir(parents=True)
+ subprocess.run([str(javac),'-d',str(classes),str(source)],check=True)
+ (classes/'manifest.txt').write_text('Premain-Class: ClientCaptureHarness\n')
+ subprocess.run([str(jar),'cfm',str(RUNTIME/'capture-harness.jar'),str(classes/'manifest.txt'),'-C',str(classes),'.'],check=True)
 
 def client_command(username='DevTester'):
  if username not in ('DevTester','DevObserver'):raise ValueError('Unknown isolated test profile')
@@ -138,7 +167,8 @@ def client_command(username='DevTester'):
   shutil.copy2(CLIENT/'resourcepacks/MCCases.zip',client/'resourcepacks/MCCases.zip')
   if not (client/'options.txt').exists():(client/'options.txt').write_text('renderDistance:4\nmaxFps:30\nonboardAccessibility:false\n')
  prepare_client_preferences(client)
- version=json.loads((GAME/'versions/26.3/26.3.json').read_text())
+ minecraft=minecraft_version()
+ version=json.loads((GAME/f'versions/{minecraft}/{minecraft}.json').read_text())
  libraries=[]
  for lib in version['libraries']:
   allow=not lib.get('rules')
@@ -152,8 +182,8 @@ def client_command(username='DevTester'):
    if not path.exists():path=RUNTIME/'libraries'/lib['downloads']['artifact']['path']
    if not path.exists():raise RuntimeError(f'Missing installed client library: {path.name}')
    libraries.append(str(path))
- jar=GAME/'versions/26.3/26.3.jar'
- if not jar.exists():raise RuntimeError('Minecraft 26.3 client jar is not installed')
+ jar=GAME/f'versions/{minecraft}/{minecraft}.jar'
+ if not jar.exists():raise RuntimeError(f'Minecraft {minecraft} client jar is not installed')
  libraries.append(str(jar));natives=client/'natives';natives.mkdir(exist_ok=True)
  ident=bytearray(hashlib.md5(('OfflinePlayer:'+username).encode()).digest());ident[6]=(ident[6]&15)|48;ident[8]=(ident[8]&63)|128
  capture=RUNTIME/'capture-harness.jar'
@@ -161,7 +191,7 @@ def client_command(username='DevTester'):
  return [str(JAVA),'-XstartOnFirstThread','-Xmx2G','--sun-misc-unsafe-memory-access=allow','--enable-native-access=ALL-UNNAMED',
   f'-Djava.library.path={natives}/java',f'-Djna.tmpdir={natives}/jna',f'-Dorg.lwjgl.system.SharedLibraryExtractPath={natives}/lwjgl',f'-Dio.netty.native.workdir={natives}/netty',
   '-Dminecraft.launcher.brand=MCCasesDev','-Dminecraft.launcher.version=1.0',*capture_args,'-cp',os.pathsep.join(libraries),version['mainClass'],
-  '--username',username,'--version','26.3','--gameDir',str(client),'--assetsDir',str(RUNTIME/'assets'),'--assetIndex',version['assetIndex']['id'],
+  '--username',username,'--version',minecraft,'--gameDir',str(client),'--assetsDir',str(RUNTIME/'assets'),'--assetIndex',version['assetIndex']['id'],
   '--uuid',str(uuid.UUID(bytes=bytes(ident))),'--accessToken','0','--clientId','MCCasesDev','--xuid','0','--versionType','release',
   '--width','1280','--height','720','--quickPlayMultiplayer','127.0.0.1:25565']
 
@@ -275,8 +305,11 @@ def supervise(app_pid,app_identity):
   AGENT.unlink(missing_ok=True)
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','start','status','console','restart','observer','stop','cleanup-stale','supervise']);p.add_argument('--persistent',action='store_true',help='Keep the server and client running independently of the desktop app; preserve the dev world.');p.add_argument('arguments',nargs='*');a=p.parse_args()
- if a.action=='prepare':prepare()
+ p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','start','status','console','restart','observer','stop','cleanup-stale','supervise']);p.add_argument('--persistent',action='store_true',help='Keep the server and client running independently of the desktop app; preserve the dev world.');p.add_argument('--minecraft',choices=sorted(PAPER),help='Paper and client version for prepare; default '+DEFAULT_MINECRAFT+'.');p.add_argument('arguments',nargs='*');a=p.parse_args()
+ if a.action=='prepare':
+  if a.minecraft:
+   RUNTIME.mkdir(parents=True,exist_ok=True);(RUNTIME/'minecraft-version').write_text(a.minecraft)
+  prepare()
  elif a.action=='start':
   if CONTROL.exists():
    try:print(request({'action':'status'}));return

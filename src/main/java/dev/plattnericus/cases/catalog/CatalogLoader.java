@@ -203,6 +203,28 @@ public final class CatalogLoader {
 
     // ------------------------------------------------------------------ weapons
 
+    /** Optional {@code hold: {grip: [x, y], support: [x, y] | none}}; absent keeps the built-in hold. */
+    private Hold hold(String id, ConfigurationSection weapon) {
+        ConfigurationSection hold = weapon.getConfigurationSection("hold");
+        if (hold == null) return null;
+        List<Double> grip = hold.getDoubleList("grip");
+        if (grip.size() != 2 || !inside(grip)) {
+            problems.add("weapons.yml: '" + id + "' hold.grip needs [x, y] between 0 and 1 - built-in hold used");
+            return null;
+        }
+        if (!hold.isList("support")) return Hold.oneHanded(grip.get(0), grip.get(1));
+        List<Double> support = hold.getDoubleList("support");
+        if (support.size() != 2 || !inside(support)) {
+            problems.add("weapons.yml: '" + id + "' hold.support needs [x, y] between 0 and 1 or 'none' - one-handed hold used");
+            return Hold.oneHanded(grip.get(0), grip.get(1));
+        }
+        return Hold.twoHanded(grip.get(0), grip.get(1), support.get(0), support.get(1));
+    }
+
+    private static boolean inside(List<Double> point) {
+        return point.stream().allMatch(v -> Double.isFinite(v) && v >= 0 && v <= 1);
+    }
+
     private Map<String, WeaponType> loadWeapons() {
         Map<String, WeaponType> out = new LinkedHashMap<>();
         ConfigurationSection sec = read("weapons.yml").getConfigurationSection("weapons");
@@ -243,7 +265,7 @@ public final class CatalogLoader {
             }
             boolean statTrak = w.getBoolean("stattrak", true);
             out.put(id, new WeaponType(id, w.getString("name", id), category, w.getString("icon", "IRON_SWORD"),
-                    folder, regions, statTrak, w.getString("inspect-model", category == WeaponCategory.KNIFE ? id : null)));
+                    folder, regions, statTrak, w.getString("inspect-model", category == WeaponCategory.KNIFE ? id : null), hold(id, w)));
         }
         return out;
     }

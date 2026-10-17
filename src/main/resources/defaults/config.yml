@@ -115,6 +115,7 @@ skin-inventory-item:
 knives:
   # Swords that show the equipped knife. Gameplay values of the sword never change.
   sword-materials: [WOODEN_SWORD, STONE_SWORD, COPPER_SWORD, IRON_SWORD, GOLDEN_SWORD, DIAMOND_SWORD, NETHERITE_SWORD]
+  # Enchantment glint on skinned weapons when the resource pack is off (the pack shows the skin itself).
   glint: true
   # Dropped swords lose the knife look (the knife itself stays in the skin inventory).
   strip-on-drop: true
@@ -127,11 +128,16 @@ inspect:
   sneak-right-click: true
   # Swap Hands action (default F, rebindable in Minecraft). Sneak + F still swaps hands.
   swap-hand-key: true
-  # Hides the real sword in first person while the 3D knife is shown (client side only).
+  # Hides the real item while the inspect plays (client side only). With the pack the hotbar keeps
+  # showing it; only the hand model is replaced by the inspect scene.
   hide-held-item: true
   actionbar: true
   # Allows the automatic showcase after a knife drop.
   reveal-preview: true
+  # With the resource pack, a skin in your hand is inspected in your own skin arms (first person) and
+  # in the player model's hands (F5, other players). false keeps the profile inspects in front of you.
+  # Gloves and inspects from menus always use the profile inspects.
+  held-pose: true
 
 preview:
   duration-seconds: 30

@@ -1,6 +1,8 @@
 # Weapon models. 'textures' defaults to weapons/<id> inside the textures folder.
 # Regions are analysis areas in normalised canvas coordinates [x1, y1, x2, y2] (0..1).
 # 'icon' is the vanilla item used in menus when no resource pack is active.
+# Optional 'hold: {grip: [x, y], support: [x, y]}' places the first-person hands in the same
+# canvas coordinates; stock weapons have built-in holds and 'support: none' holds one-handed.
 weapons:
   # ---------------------------------------------------------------- pistols
   glock18:       {name: "Glock-18",       category: pistol, icon: CROSSBOW, regions: {playside: [0.15, 0.34, 0.85, 0.52]}}

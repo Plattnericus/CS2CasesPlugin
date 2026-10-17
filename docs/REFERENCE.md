@@ -2,18 +2,25 @@
 
 [README](../README.md) · [Legal information](../LEGAL.md)
 
-Updated: October 11, 2026. Historical verification reports describe their respective builds.
+Updated: October 17, 2026. Historical verification reports describe their respective builds.
 
-Version 1.2.7 renders skin textures from the active catalog, bundles 22 attributed case images, adds two inspect variants for each weapon and knife, and enlarges the case-opening roulette. Version 1.2 includes individual inspect rigs for 20 knives, 35 weapons and eight glove types, plus case price/value/knife filters. See [the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for controls, scoring, camera modes and resource-pack updates.
+Version 1.3.0 puts every knife and gun into the holder's own Minecraft skin arms: a first-person
+view model with real grips, use poses for bows and crossbows, and held-pose inspects in which the
+wrist turns the 3D weapon rig while elbow, shoulder and second hand follow; slides, bolts, pumps,
+butterfly handles and folding blades move on their own. Other players and your own F5 view see the
+player model turn the weapon in its hands. Version 1.2 includes individual inspect rigs for 20 knives,
+35 weapons and eight glove types, plus case price/value/knife filters. See
+[the rig and case guide](INSPECT-AND-CASE-GUIDE-1.2.md) for scoring, camera modes and resource-pack updates.
 
 
 Cases, skins and knives for Minecraft, with a virtual collection, pattern analysis and animated inspects inspired by Counter-Strike 2.
 
-**Version 1.2.7** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
+**Version 1.3.0** · **Paper 26.3** · **Java 25** · [Plattnericus](https://plattnericus.dev)
 
 MCCases runs on the server as a Paper plugin. Players use a normal Minecraft client.
-The bundled resource pack adds skin sprites to items; maps, holograms and block models
-are available without it. Swords, bows and crossbows keep their normal gameplay values.
+The bundled resource pack adds skin sprites, 3D weapon rigs and the first-person view model held by
+the player's own skin arms; maps, holograms and block models are available without it. Swords, bows
+and crossbows keep their normal gameplay values.
 
 [Installation](#installation) · [Playing](#playing) · [Commands](#commands) · [Permissions](#permissions) · [Configuration](#configuration) · [Resource Pack](#resource-pack) · [Custom Content](#custom-content) · [Development](DEVELOPMENT.md)
 
@@ -28,7 +35,10 @@ are available without it. Swords, bows and crossbows keep their normal gameplay 
 | Marketplace | Real Emerald item payments, durable offline claims, search, sorting and filters |
 | Skin values | Float, exterior, pattern, StatTrak, origin and creation date |
 | Pattern analysis | Doppler phases, Fade percentage, Blue Gem classifications and Fire & Ice |
-| Inspects | 362 individual inspect profiles, articulated Butterfly handles and paired weapons |
+| First-person hold | Your own skin arms (wide or slim) hold every knife and gun: grip in the palm, support hand on the handguard, reverse grip for Karambit and Talon, Shadow Daggers in both hands |
+| Use poses | Drawing a bow aims, charging a crossbow reloads, a loaded crossbow stays ready |
+| Held-pose inspects | 66 animations in eleven families plus weapon specials; moving slides, bolts, pumps, butterfly handles and folding blades; F5 and other players see the model's hands turn the weapon |
+| Profile inspects | 362 individual inspect profiles for gloves, menus and servers without the pack |
 | Language | English for all players by default; 45 translation files available |
 | Dealer | Villager or mannequin with skin changes, player tracking and gestures |
 | Storage | SQLite or MySQL/MariaDB, opening history and recovery of interrupted openings |
@@ -52,7 +62,7 @@ the drop chance or the selected skin.
 5. Run `/csadmin shop spawn` to place a dealer at your position.
 
 No other plugins are required. The build targets Paper 26.3 Build 159 beta with Java 25. Paper 26.3 is currently a beta release.
-See [the 1.2.7 verification report](RELEASE-1.2.7-VERIFICATION.md) for the checks actually performed.
+See [the 1.3.0 verification report](RELEASE-1.3.0-VERIFICATION.md) for the checks actually performed.
 Check your server configuration before using another Paper version.
 The development check plugin is separate and is not part of the release installation.
 
@@ -117,22 +127,35 @@ after confirmation.
 | **Sneak + F** | Swap hands normally |
 | **Sneak + right-click** with a skin weapon | Start an inspect |
 | `/inspect` | Inspect the held skin, or the equipped knife if no skin is held |
-| `/inspect hand` | Select body-hand mode and start an inspect; suitable for F5 |
-| `/inspect view` | Select first-person mode and start an inspect |
+| `/inspect hand` | Show only the body-hand scene (no first-person scene) and start an inspect |
+| `/inspect view` | Return to the normal view and start an inspect |
 
 Minecraft lets players rebind F. Set `inspect.swap-hand-key: false` to disable inspect
 for the Swap Hands action.
 
-The first-person animation appears on the right side of the view. Observers see a separate scene
-at the player's body hand. Left-handed players get a mirrored display. Body-hand mode follows
-body orientation without moving upward as the player tilts their head.
+**Held-pose inspects** (skin in the hand, resource pack enabled, `inspect.held-pose: true`): the
+weapon starts and ends in your first-person hold. Your own skin arms keep holding it while the wrist
+turns it; elbow and shoulder follow, the forearm twists and the support hand lets go and grabs again.
+Slides, bolts, pumps, butterfly handles and folding blades move on their own. The scene rides the
+player, so it stays locked to the view while walking, crouching and standing up. The item keeps its
+hotbar slot. Bows and crossbows do not draw or fire while they are inspected.
 
-The selected mode also applies to F until the next login. Minecraft does not send its F5 camera
-setting to the server, so the command selects the mode. Weapon classes and knife families have
-regular, reverse, short and special variations, including a Desert Eagle twirl.
-When multiple variations are available, the same variation is not repeated consecutively.
+Other players, and your own F5 view, see the player model raise both arms into Minecraft's crossbow
+hold and turn the weapon in its real hand; it is kept clear of the head and torso in every head
+pose. The pack's shaders choose the scene for your camera, so F5 needs no command: the first-person
+scene only shows in first person and the body-hand scene only in third person. Shift + right click
+starts the inspect once you stand up (after two seconds if you keep crouching).
 
-Positions, sizes, models, timelines and random pools are configured in `inspect.yml`.
+Animations vary in energy and roll direction, full spins keep their exact turns, and the same
+animation is not repeated twice in a row. Families: knife, reverse grip, butterfly, push daggers,
+pistol, revolver, SMG, rifle, sniper and heavy, plus pump, rack, box magazine and blade fold specials.
+
+**Profile inspects** keep the articulated 3D weapon in front of the player. They play for gloves,
+for inspects started from menus, without the pack and with `inspect.held-pose: false`.
+
+Held-pose timelines live in `inspect.yml` (`view-animations`, `view-pools`, generated by
+`scripts/generate_view_animations.py`); profile positions, models, timelines and pools in
+`inspect.yml` and `inspect-profiles.yml`.
 
 ### Trading skins
 
@@ -299,8 +322,8 @@ All player commands are used in-game.
 | `/knife [Player]` | `/knives` | `mccases.use` | View your knife collection or another player's knives |
 | `/cases` | — | `mccases.use` | View owned cases, their contents and opening options |
 | `/inspect` | — | `mccases.inspect` | Inspect the held skin or equipped knife |
-| `/inspect hand` | — | `mccases.inspect` | Select body-hand mode for this login |
-| `/inspect view` | — | `mccases.inspect` | Select first-person mode for this login |
+| `/inspect hand` | — | `mccases.inspect` | Show only the body-hand scene for this login |
+| `/inspect view` | — | `mccases.inspect` | Return to the normal view for this login |
 | `/trade [Player]` | `/skintrade` | `mccases.trade` | Choose a trade partner or send a request |
 | `/trade accept [Player]` | — | `mccases.trade` | Accept a request or the current trade offer |
 | `/trade decline` | — | `mccases.trade` | Decline a request |
@@ -521,15 +544,16 @@ it on join. Active distribution also enables custom item models.
 
 ### Combining it with a server pack
 
-1. Copy `assets/mccases/` and the two `assets/minecraft/shaders/core/item.*` programs from the
-   current release ZIP into your own pack. Merge any of your own font providers if your pack
+1. Copy `assets/mccases/` and `assets/minecraft/shaders/` (the `core/entity.*` and `core/item.*`
+   programs and `include/mccases_arm.glsl`) from the current release ZIP into your own pack. Merge any of your own font providers if your pack
    also defines `assets/minecraft/font/default.json`.
 2. Deliver the combined pack through your existing server pack distribution.
 3. Set `resource-pack.enabled: true` and leave built-in distribution disabled.
 
-The two item shader programs use the Minecraft 26.3 pipeline to add simulated metallic sheen
-to marked weapon faces. This does not reflect nearby world geometry. Packs overriding those
-programs need a manual merge. When custom models are enabled, the client must have the matching
+The shader programs follow the Minecraft 26.3 pipeline. The item programs add a simulated metallic
+sheen to marked weapon faces (it does not reflect nearby world geometry) and separate the first- and
+third-person inspect scenes; the entity programs draw the holder's own skin arms. Packs overriding
+those programs need a manual merge. When custom models are enabled, the client must have the matching
 pack loaded; otherwise missing models may appear. Re-export with `/csadmin exportpack` after
 catalog changes and update any manually distributed pack.
 
@@ -684,10 +708,11 @@ They are not original Valve textures. Names and designs are inspired by Counter-
 float limits and pattern displays may differ from the original game.
 
 Inspects use display entities with Minecraft interpolation. Block models are animated without
-the pack; skin sprites are animated with it. During first-person inspect, Minecraft renders the
-player's own arm and skin while the hand model is hidden; the signed item and icon remain in the
-hotbar. The resource pack adds no replacement arm model. On bows and crossbows, the pack sprite
-replaces the visible vanilla drawing animation while retaining the weapon's actual behavior.
+the pack; the 3D skin rigs are animated with it. The skin arms are each player's own skin, loaded by
+their own client: the pack ships a player-head arm box that the entity shader recognises and maps to
+the arm and sleeve of the skin. No skin is stored in the pack. The signed item and icon remain in the
+hotbar during inspects. On bows and crossbows, the view model replaces the visible vanilla drawing
+animation with aiming and reloading poses while retaining the weapon's actual behavior.
 
 ## Troubleshooting
 
@@ -697,7 +722,8 @@ replaces the visible vanilla drawing animation while retaining the weapon's actu
 | Plugin language does not change | Check `language`, `client-language` and available `messages_<locale>.yml` files, then run `/csadmin reload` |
 | Opening does not start | Have a valid case and matching key; use `/cases` |
 | F does not start an inspect | Hold an equipped skin; check `mccases.inspect` and `inspect.swap-hand-key` |
-| F5 inspect appears in front of the camera | Use `/inspect hand`; return to first-person mode with `/inspect view` |
+| F5 shows no first-person inspect | Correct: in third person the pack shows the body-hand scene; load the matching pack if both or neither appear |
+| Arms look like a head or are missing | The matching pack (with its shaders) must be loaded on Minecraft 26.3; other shader packs that replace `entity.*` need a merge |
 | Skin does not fit an equipment slot | Knives require `knife`; weapon skins require `bow` or `crossbow` |
 | Shop does not sell a case | Check prices and `cases.exclude` in `shop.yml` |
 | No inventory shortcut item | This is the default; use `/inventory` or `/skins` |

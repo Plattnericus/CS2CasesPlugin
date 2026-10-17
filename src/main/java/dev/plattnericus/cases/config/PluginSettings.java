@@ -77,7 +77,7 @@ public record PluginSettings(
     }
 
     public record Inspect(int cooldownTicks, boolean sneakRightClick, boolean swapHandKey, boolean hideHeldItem, boolean actionBar,
-                          boolean revealPreview) {
+                          boolean revealPreview, boolean heldPose) {
     }
 
     public record Preview(int durationSeconds, double maxMove, int showcaseSeed, double showcaseFloat, String mode,
@@ -217,7 +217,8 @@ public record PluginSettings(
                 c.getBoolean("inspect.swap-hand-key", true),
                 c.getBoolean("inspect.hide-held-item", true),
                 c.getBoolean("inspect.actionbar", true),
-                c.getBoolean("inspect.reveal-preview", true));
+                c.getBoolean("inspect.reveal-preview", true),
+                c.getBoolean("inspect.held-pose", true));
 
         Preview preview = new Preview(
                 clamp(c.getInt("preview.duration-seconds", 30), 3, 300),

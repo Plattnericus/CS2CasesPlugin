@@ -90,6 +90,7 @@ UUIDs and player names are personal or identifiable data. The reviewed code stor
 | Proceeds and contracts | `emerald_claims`, `emerald_deliveries`, `trade_contracts` |
 | Previous Coin balances and offers after migration | `wallets`, `legacy_market_listings` |
 | Recovery receipts | Persistent data in Minecraft player files and their backups |
+| Holder profile (UUID, name and skin texture reference) | On the held skinned item while it shows the skin-arm view model, so the client can draw the player's own skin; also on the owner's inspect arm displays. Stored with the item in the Minecraft player file, never in the SQL database; removed when the skin is stripped |
 
 The default database is `plugins/MCCases/data.db`; alternatively, the configured
 MySQL/MariaDB instance is used. Removed skins remain stored with status `REMOVED`.

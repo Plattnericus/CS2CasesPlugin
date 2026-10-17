@@ -64,28 +64,35 @@ public final class PackChecks {
                 var display = model.getAsJsonObject("display");
                 require(display != null && vec(display.getAsJsonObject("fixed").getAsJsonArray("rotation")).lengthSquared() == 0,
                         "sprite inherits reversed FIXED transform " + skin.id());
-                var item = json(zip, base + "items/skin/" + skin.id() + ".json").getAsJsonObject("model");
-                require(item.get("type").getAsString().equals("minecraft:select"), "held geometry selector " + skin.id());
-                require(item.get("property").getAsString().equals("minecraft:display_context"), "held context " + skin.id());
-                var cases = item.getAsJsonArray("cases");
-                require(cases.size() == 3, "held display-context coverage " + skin.id());
-                var first = cases.get(0).getAsJsonObject();
-                var firstModels = first.getAsJsonObject("model").getAsJsonArray("models");
-                require(first.getAsJsonObject("model").get("type").getAsString().equals("minecraft:composite"), "missing held joints " + skin.id());
-                require(first.getAsJsonArray("when").toString().contains("fixed") && firstModels.size() == InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().count(),
-                        "fixed-display composite for the native skin-arm view " + skin.id());
-                long layerCount = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().count();
-                first = cases.get(1).getAsJsonObject();
-                firstModels = first.getAsJsonObject("model").getAsJsonArray("models");
-                require(first.getAsJsonArray("when").toString().contains("firstperson_") && firstModels.size() == layerCount,
-                        "first-person skin geometry missing " + skin.id());
-                var third = cases.get(2).getAsJsonObject();
-                require(third.getAsJsonArray("when").toString().contains("thirdperson_")
-                                && third.getAsJsonObject("model").getAsJsonArray("models").size() == layerCount,
-                        "third-person context missing " + skin.id());
-                require(firstModels.asList().stream().map(m -> m.getAsJsonObject().get("model").getAsString())
-                                .allMatch(layerModel -> layerModel.startsWith("mccases:item/inspect/" + skin.id() + "/")),
-                        "native first-person hand is missing one or more skin layers " + skin.id());
+                // Held weapons show their rig in the holder's own skin arms; HeldChecks verifies grips,
+                // arms, use poses and contexts. Gloves keep the rig's native hand displays.
+                if (dev.plattnericus.cases.inspect.HeldRig.held(skin.weapon())) {
+                    var cases = json(zip, base + "items/skin/" + skin.id() + ".json").getAsJsonObject("model").getAsJsonArray("cases");
+                    require(cases.size() == 5, "held display-context coverage " + skin.id());
+                } else {
+                    var item = json(zip, base + "items/skin/" + skin.id() + ".json").getAsJsonObject("model");
+                    require(item.get("type").getAsString().equals("minecraft:select"), "held geometry selector " + skin.id());
+                    require(item.get("property").getAsString().equals("minecraft:display_context"), "held context " + skin.id());
+                    var cases = item.getAsJsonArray("cases");
+                    require(cases.size() == 3, "held display-context coverage " + skin.id());
+                    var first = cases.get(0).getAsJsonObject();
+                    var firstModels = first.getAsJsonObject("model").getAsJsonArray("models");
+                    require(first.getAsJsonObject("model").get("type").getAsString().equals("minecraft:composite"), "missing held joints " + skin.id());
+                    require(first.getAsJsonArray("when").toString().contains("fixed") && firstModels.size() == InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().count(),
+                            "fixed-display composite for the native skin-arm view " + skin.id());
+                    long layerCount = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().count();
+                    first = cases.get(1).getAsJsonObject();
+                    firstModels = first.getAsJsonObject("model").getAsJsonArray("models");
+                    require(first.getAsJsonArray("when").toString().contains("firstperson_") && firstModels.size() == layerCount,
+                            "first-person skin geometry missing " + skin.id());
+                    var third = cases.get(2).getAsJsonObject();
+                    require(third.getAsJsonArray("when").toString().contains("thirdperson_")
+                                    && third.getAsJsonObject("model").getAsJsonArray("models").size() == layerCount,
+                            "third-person context missing " + skin.id());
+                    require(firstModels.asList().stream().map(m -> m.getAsJsonObject().get("model").getAsString())
+                                    .allMatch(layerModel -> layerModel.startsWith("mccases:item/inspect/" + skin.id() + "/")),
+                            "native first-person hand is missing one or more skin layers " + skin.id());
+                }
                 var selected = json(zip, base + "models/item/trade/selected/" + skin.id() + ".json");
                 require(vec(selected.getAsJsonObject("display").getAsJsonObject("fixed").getAsJsonArray("rotation")).lengthSquared() == 0, "selected icon reversed");
                 for (String layer : InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().toList()) {
@@ -101,7 +108,7 @@ public final class PackChecks {
                     require(layerPixels >= 8, "empty inspect texture " + path);
                     require(texture.getWidth() == 128 && texture.getHeight() == 128, "inspect edge resolution " + path);
                     var rig = json(zip, base + "models/item/" + path + ".json");
-                    checkGrip(skin, rig.getAsJsonObject("display"));
+                    if (!dev.plattnericus.cases.inspect.HeldRig.held(skin.weapon())) checkGrip(skin, rig.getAsJsonObject("display"));
                     require(rig.getAsJsonObject("textures").get("particle").getAsString().equals("#skin"), "missing particle texture " + path);
                     require(!rig.getAsJsonArray("elements").isEmpty(), "empty inspect layer " + path);
                     for (var entry : rig.getAsJsonArray("elements")) {

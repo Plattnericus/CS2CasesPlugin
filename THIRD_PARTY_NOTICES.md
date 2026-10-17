@@ -16,11 +16,16 @@ configuration, translations, rendered assets, resource pack and legal documentat
 It does not shade or bundle Paper, Bukkit, Adventure, JOML, Gson, SnakeYAML, SLF4J,
 SQLite JDBC, Minecraft client/server binaries or the development check plugin.
 References to vanilla model IDs and sounds are resolved by the installed game;
-Minecraft binaries are not copied into this build. The two item shader programs are
-adapted from the installed Minecraft 26.3 resource-pack shader baseline; their original
-lighting, fog and transparency logic remains present. These Minecraft-derived shader
-portions are subject to Mojang/Microsoft terms and are not asserted as independently
-owned or separately relicensed project code.
+Minecraft binaries are not copied into this build. The four shader programs
+`core/entity.vsh`, `core/entity.fsh`, `core/item.vsh` and `core/item.fsh` are adapted from the
+installed Minecraft 26.3 resource-pack shader baseline; their original lighting, fog and
+transparency logic remains present. The MCCases additions (metal sheen, skin-arm detection in
+`include/mccases_arm.glsl`, inspect scene split) are project code. The Minecraft-derived shader
+portions are subject to Mojang/Microsoft terms and are not asserted as independently owned or
+separately relicensed project code.
+
+The first-person skin arms use no bundled skin: the pack ships a player-head box, and each
+player's own client draws their own skin on it from the player's profile.
 
 | Component | Role in this repository | Redistribution status |
 | --- | --- | --- |

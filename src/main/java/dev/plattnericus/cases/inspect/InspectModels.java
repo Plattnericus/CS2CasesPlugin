@@ -39,6 +39,8 @@ public final class InspectModels {
     private final Map<String, KnifeModel> models = new LinkedHashMap<>();
     private final Map<String, InspectAnimation> animations = new LinkedHashMap<>();
     private final Map<String, List<String>> animationPools = new LinkedHashMap<>();
+    private final Map<String, InspectAnimation> viewAnimations = new LinkedHashMap<>();
+    private final Map<String, List<String>> viewPools = new LinkedHashMap<>();
 
     public InspectModels(File file, Consumer<String> warn) {
         YamlConfiguration y = YamlConfiguration.loadConfiguration(file);
@@ -83,7 +85,9 @@ public final class InspectModels {
         packModelScale = number(y, "pack-model-scale", .75f, .1f, 4, warn);
         modelScale = number(y, "model-scale", 1.24f, .1f, 4, warn);
 
-        ConfigurationSection al = y.getConfigurationSection("aliases");
+        // Offline tools have no material registry; they only read rigs and timelines.
+        boolean server = org.bukkit.Bukkit.getServer() != null;
+        ConfigurationSection al = server ? y.getConfigurationSection("aliases") : null;
         if (al != null) {
             for (String k : al.getKeys(false)) {
                 Material m = Material.matchMaterial(al.getString(k, ""));
@@ -94,7 +98,7 @@ public final class InspectModels {
                 }
             }
         }
-        ConfigurationSection bp = y.getConfigurationSection("block-palette");
+        ConfigurationSection bp = server ? y.getConfigurationSection("block-palette") : null;
         if (bp != null) {
             for (String k : bp.getKeys(false)) {
                 Material m = Material.matchMaterial(k);
@@ -109,7 +113,7 @@ public final class InspectModels {
                 }
             }
         }
-        if (palette.isEmpty()) {
+        if (palette.isEmpty() && server) {
             palette.add(new PaletteBlock(Material.IRON_BLOCK, 0xDCDCDC));
         }
 
@@ -153,6 +157,22 @@ public final class InspectModels {
             if (!animations.containsKey(m.animation())) {
                 warn.accept("inspect.yml: model '" + m.id() + "' uses unknown animation '" + m.animation() + "'");
             }
+        }
+        // Held-pose inspects: the weapon moves from the first-person hold and the skin arms follow.
+        ConfigurationSection va = y.getConfigurationSection("view-animations");
+        if (va != null) for (String id : va.getKeys(false)) {
+            InspectAnimation a = animation(id, va.getConfigurationSection(id), warn);
+            if (a == null) continue;
+            viewAnimations.put(id, a);
+        }
+        ConfigurationSection vp = y.getConfigurationSection("view-pools");
+        if (vp != null) for (String key : vp.getKeys(false)) {
+            List<String> valid = new ArrayList<>();
+            for (String id : vp.getStringList(key)) {
+                if (viewAnimations.containsKey(id)) valid.add(id);
+                else warn.accept("inspect.yml: view-pools." + key + " uses unknown view animation '" + id + "'");
+            }
+            if (!valid.isEmpty()) viewPools.put(key, List.copyOf(valid));
         }
         ConfigurationSection pools = y.getConfigurationSection("animation-pools");
         if (pools != null) for (String key : pools.getKeys(false)) {
@@ -294,6 +314,29 @@ public final class InspectModels {
         if (pool == null) pool = animationPools.get(skin.weapon().category().name().toLowerCase(Locale.ROOT));
         if (pool == null) return animation(model.animation());
         return animations.get(AnimationSelector.choose(pool, previous, java.util.concurrent.ThreadLocalRandom.current()));
+    }
+
+    /**
+     * A held-pose inspect for this weapon (its own pool, otherwise its family), never the previous one
+     * when the pool has a choice; null when the configuration has no held-pose inspects for it.
+     */
+    public InspectAnimation chooseViewAnimation(dev.plattnericus.cases.catalog.WeaponType weapon, String previous) {
+        List<String> pool = viewPools.get(weapon.id());
+        if (pool == null) pool = viewPools.get(HeldRig.family(weapon));
+        if (pool == null) return null;
+        return viewAnimations.get(AnimationSelector.choose(pool, previous, java.util.concurrent.ThreadLocalRandom.current()));
+    }
+
+    public InspectAnimation viewAnimation(String id) {
+        return viewAnimations.get(id);
+    }
+
+    public java.util.Collection<InspectAnimation> viewAnimations() {
+        return java.util.Collections.unmodifiableCollection(viewAnimations.values());
+    }
+
+    public Map<String, List<String>> viewPools() {
+        return java.util.Collections.unmodifiableMap(viewPools);
     }
 
     public Material alias(String name) {

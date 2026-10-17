@@ -175,7 +175,7 @@ public final class KnifeService implements Listener {
             return;
         }
         ItemStack applied = cosmetics.apply(hand, def, skin, ctx.formatter(player), ctx.messages(player), ctx.settings(),
-                ctx.catalog().version());
+                ctx.catalog().version(), player.getPlayerProfile());
         if (applied != hand || !applied.equals(inv.getItemInMainHand())) {
             inv.setItemInMainHand(applied);
         }

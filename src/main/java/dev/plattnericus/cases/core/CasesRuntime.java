@@ -218,6 +218,11 @@ public final class CasesRuntime implements CasesContext {
     }
 
     @Override
+    public TextureStore textures() {
+        return state.textures();
+    }
+
+    @Override
     public Catalog catalog() {
         return state.catalog();
     }

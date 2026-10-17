@@ -4,10 +4,10 @@ import java.util.Map;
 
 /**
  * A weapon model: display name, category, icon material for menus, the folder holding its
- * PNG layers and the analysis regions used by pattern classification.
+ * PNG layers, the analysis regions used by pattern classification and an optional hand hold.
  */
 public record WeaponType(String id, String name, WeaponCategory category, String icon, String textureFolder,
-                         Map<String, Region> regions, boolean statTrak, String inspectModel) {
+                         Map<String, Region> regions, boolean statTrak, String inspectModel, Hold hold) {
 
     public WeaponType {
         regions = Map.copyOf(regions);

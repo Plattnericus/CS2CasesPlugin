@@ -24,7 +24,11 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
             if (player == null) { sender.sendMessage("Player is not online."); return true; }
             try {
                 CasesContext ctx = context();
-                if (args.length == 2 && args[1].equals("commands")) {
+                if (args.length == 3 && args[1].equals("inspect")) {
+                    VisualChecks.inspect(sender, player, ctx, args[2]);
+                } else if ((args.length == 3 || args.length == 4) && args[1].equals("held")) {
+                    VisualChecks.hold(sender, player, ctx, args[2], args.length == 4 ? args[3] : "bow");
+                } else if (args.length == 2 && args[1].equals("commands")) {
                     CommandRuntimeChecks.run(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("guide")) {
                     CaseGuideRuntimeChecks.run(sender, player, ctx);
@@ -359,6 +363,11 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 ctx.inspect().setBodyHandMode(owner, false);
                 require(ctx.inspect().start(owner, ctx.profiles().get(owner).equippedKnifeInstance(), false), "owner inspect failed");
                 Object session = ((java.util.Map<?, ?>) field(ctx.inspect(), "sessions")).get(owner.getUniqueId());
+                Object view = field(session, "view");
+                if (view != null) {
+                    heldPoseObserverAudit(sender, owner, observer, ctx, view, restore);
+                    return;
+                }
                 var eyeAnchor = (org.bukkit.Location) field(session, "lastAnchor");
                 var handAnchor = (org.bukkit.Location) field(session, "lastHandAnchor");
                 require(eyeAnchor.distance(handAnchor) > .5, "observer is using the owner's eye view");
@@ -394,6 +403,52 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     finally { restore.run(); }
                 }, 12);
             } catch (Exception failure) { restore.run(); report(failure); }
+        }, 12);
+    }
+
+    /**
+     * Held-pose inspect seen by two clients: the owner sees the first-person riders and the owner's
+     * F5 copy, the observer only the body-hand scene at the owner's hands; everything is removed on stop.
+     */
+    private void heldPoseObserverAudit(CommandSender sender, Player owner, Player observer, CasesContext ctx, Object view, Runnable restore) throws Exception {
+        var displaysMethod = view.getClass().getDeclaredMethod("displays"); displaysMethod.setAccessible(true);
+        java.util.List<org.bukkit.entity.Display> displays = new java.util.ArrayList<>();
+        int riders = 0, owners = 0, publics = 0;
+        for (Object display : (java.util.List<?>) displaysMethod.invoke(view)) {
+            var entityMethod = display.getClass().getDeclaredMethod("entity"); entityMethod.setAccessible(true);
+            var observersMethod = display.getClass().getDeclaredMethod("observers"); observersMethod.setAccessible(true);
+            var copyMethod = display.getClass().getDeclaredMethod("ownerCopy"); copyMethod.setAccessible(true);
+            var entity = (org.bukkit.entity.Display) entityMethod.invoke(display);
+            boolean bodyHand = (Boolean) observersMethod.invoke(display), ownerCopy = (Boolean) copyMethod.invoke(display);
+            displays.add(entity);
+            if (!bodyHand) {
+                require(owner.canSee(entity) && !observer.canSee(entity) && owner.getPassengers().contains(entity),
+                        "first-person scene must ride the owner and stay private");
+                riders++;
+            } else if (ownerCopy) {
+                require(owner.canSee(entity) && !observer.canSee(entity), "owner F5 copy is visible to the observer");
+                owners++;
+            } else {
+                require(!owner.canSee(entity) && observer.canSee(entity), "observer scene is hidden from the observer or shown to the owner");
+                require(entity.getLocation().distance(owner.getLocation()) < 2.2, "observer scene is not at the owner's hands");
+                publics++;
+            }
+        }
+        require(riders > 0 && owners > 0 && owners == publics, "held-pose scenes missing");
+        getLogger().info("Two-client held-pose scenes ready: riders=" + riders + ", owner F5=" + owners + ", observers=" + publics);
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            try {
+                require(ctx.inspect().isInspecting(owner), "inspect stopped before interpolation check");
+                ctx.inspect().stop(owner);
+                require(displays.stream().noneMatch(org.bukkit.entity.Entity::isValid), "display scene leaked after stop");
+                String result = "PASS TWO CLIENTS: actual locales " + owner.locale() + " / " + observer.locale()
+                        + "; plugin language " + ctx.messages(owner).language() + " / " + ctx.messages(observer).language()
+                        + "; menu and signed key refresh; held-pose first-person riders private to the owner, owner F5 copy, body-hand scene"
+                        + " only for the observer at the owner's hands, and complete cleanup.";
+                sender.sendMessage(result);
+                getLogger().info(result);
+            } catch (Exception failure) { report(failure); }
+            finally { restore.run(); }
         }, 12);
     }
 
@@ -669,10 +724,27 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                 require(ctx.inspect().start(player, knife, false), "selected F5 body-hand inspect did not start");
                 var sessions = ctx.inspect().getClass().getDeclaredField("sessions"); sessions.setAccessible(true);
                 Object session = ((java.util.Map<?, ?>) sessions.get(ctx.inspect())).get(player.getUniqueId());
-                var field = session.getClass().getDeclaredField("lastAnchor"); field.setAccessible(true);
-                var anchor = (org.bukkit.Location) field.get(session);
-                require(anchor.getPitch() == 0 && Math.abs(anchor.getY() - player.getEyeLocation().getY() + .48) < .00001,
-                        "F5 inspect is not anchored to the physical hand / follows head pitch");
+                var viewField = session.getClass().getDeclaredField("view"); viewField.setAccessible(true);
+                Object view = viewField.get(session);
+                if (view != null) {
+                    // Held-pose inspect: body-hand mode shows only the scene at the player model's hands.
+                    var displaysMethod = view.getClass().getDeclaredMethod("displays"); displaysMethod.setAccessible(true);
+                    var displays = (java.util.List<?>) displaysMethod.invoke(view);
+                    require(!displays.isEmpty(), "body-hand held-pose inspect has no displays");
+                    for (Object display : displays) {
+                        var observers = display.getClass().getDeclaredMethod("observers"); observers.setAccessible(true);
+                        var entity = display.getClass().getDeclaredMethod("entity"); entity.setAccessible(true);
+                        require((boolean) observers.invoke(display), "body-hand mode spawned a first-person scene");
+                        var location = ((org.bukkit.entity.Entity) entity.invoke(display)).getLocation();
+                        require(location.distance(player.getLocation()) < 2.2 && !player.getPassengers().contains(entity.invoke(display)),
+                                "body-hand scene is not at the player model's hand");
+                    }
+                } else {
+                    var field = session.getClass().getDeclaredField("lastAnchor"); field.setAccessible(true);
+                    var anchor = (org.bukkit.Location) field.get(session);
+                    require(anchor.getPitch() == 0 && Math.abs(anchor.getY() - player.getEyeLocation().getY() + .48) < .00001,
+                            "F5 inspect is not anchored to the physical hand / follows head pitch");
+                }
                 ctx.inspect().stop(player);
                 ctx.inspect().setBodyHandMode(player, false);
                 Bukkit.getScheduler().runTaskLater(this, () -> {
@@ -687,7 +759,7 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                                 player.getInventory().getItemInOffHand(), player.getInventory().getItemInMainHand());
                         Bukkit.getPluginManager().callEvent(normalSwap);
                         require(!normalSwap.isCancelled(), "sneak + F no longer swaps normally");
-                        sender.sendMessage("PASS: F5 body-hand anchor, head-pitch independence, F inspect action and sneak + F normal swap.");
+                        sender.sendMessage("PASS: body-hand inspect at the player model's hand, F inspect action and sneak + F normal swap.");
                         passed = true;
                     } catch (Exception failure) { report(failure); }
                     finally { restore.run(); }

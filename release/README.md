@@ -1,17 +1,17 @@
-# MCCases 1.2.7 build artifacts
+# MCCases 1.3.0 build artifacts
 
-The 1.2.7 JAR and resource pack were built and verified locally. Build artifacts are kept out of Git; the resource pack was copied to `~/Downloads/MCCases-ResourcePack-1.2.7.zip` for the live client test.
+The 1.3.0 JAR and resource pack are a matched pair and were built and verified locally. Build
+artifacts are kept out of Git; published builds are on the
+[GitHub releases page](https://github.com/Plattnericus/CS2CasesPlugin/releases).
 
-Recreate them with `bash gradlew build`; outputs are `build/libs/MCCases-1.2.7.jar` and `build/distributions/MCCases-ResourcePack-1.2.7.zip`. Verify the local copies with [SHA256SUMS-1.2.7](SHA256SUMS-1.2.7).
-- [1.2.7 verification report](../docs/RELEASE-1.2.7-VERIFICATION.md).
+Recreate them with `bash gradlew build`; the outputs are `build/libs/MCCases-1.3.0.jar` and
+`build/distributions/MCCases-ResourcePack-1.3.0.zip`. Verify local copies with
+[SHA256SUMS-1.3.0](SHA256SUMS-1.3.0) and see the [1.3.0 verification report](../docs/RELEASE-1.3.0-VERIFICATION.md).
 
-The latest public plugin release is listed on the [GitHub releases page](https://github.com/Plattnericus/CS2CasesPlugin/releases).
+The plugin embeds the same generated pack: skin sprites, 3D weapon rigs and skin-arm view models
+rendered from the catalog and bundled weapon maps, the 22 case PNGs documented in
+`src/main/resources/case-art/SOURCE.md`, and the Minecraft 26.3 entity and item shader programs.
+Runtime export preserves server-owned assets.
 
-The plugin embeds the same generated pack. It renders all catalog skins from bundled weapon
-maps and includes the 22 case PNGs documented in `src/main/resources/case-art/SOURCE.md`.
-It does not bundle the old Fusion overlay, the separate skin archive or its custom fonts.
-Runtime export preserves server-owned assets while removing the three retired glyph images
-and their font providers from old installations.
-
-[Installation and controls](../README.md) · [Legal information](../LEGAL.md).
-Contact: **info@plattnericus.dev**.
+[Installation and controls](../README.md) · [Legal information](../LEGAL.md) ·
+Contact: **info@plattnericus.dev**

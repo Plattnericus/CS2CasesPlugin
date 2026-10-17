@@ -28,6 +28,13 @@ layout(location = 5) in vec2 texCoord0;
 layout(location = 6) in vec2 texCoordGlint;
 #endif
 
+layout(location = 10) flat in int mccasesScene;
+layout(location = 11) in vec3 mccasesScenePosition;
+
+// MCCases inspect scenes: the first-person scene shows only close to the camera, the owner's copy of
+// the body-hand scene only away from it.
+const float MCCASES_SPLIT = 2.4;
+
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
 #endif
@@ -76,6 +83,11 @@ vec3 metalSheen(vec3 base) {
 #endif
 
 void main() {
+    float mccasesDistance = dot(mccasesScenePosition, mccasesScenePosition);
+    if ((mccasesScene == 1 && mccasesDistance > MCCASES_SPLIT * MCCASES_SPLIT)
+            || (mccasesScene == 2 && mccasesDistance < MCCASES_SPLIT * MCCASES_SPLIT)) {
+        discard;
+    }
     vec4 color = texture(Sampler0, texCoord0);
     #ifdef ALPHA_CUTOUT
     if (color.a < ALPHA_CUTOUT) {

@@ -22,8 +22,10 @@ The generated resource pack renders skin/inspect textures from bundled weapon ma
 active catalog. Its 22 case PNGs are recorded with hashes in case-art/SOURCE.md and were
 extracted from a user-supplied reference pack whose README attributes them to ImageGen.
 No other textures, skins, fonts or pack icons from that archive are included.
-The two item shader programs adapt the Minecraft 26.3 baseline and remain subject to
+The entity and item shader programs adapt the Minecraft 26.3 baseline and remain subject to
 Mojang/Microsoft terms; the project does not assert independent rights to those portions.
+The first-person arms show each player's own skin, drawn by their own client from their
+profile; no skin is stored in the pack.
 
 The server operator is responsible for server rules, lawful asset use and player privacy.
 The plugin stores player UUIDs, names, skin collections and transaction/opening records.

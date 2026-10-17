@@ -77,6 +77,36 @@ public final class ClientCaptureHarness {
                             case "use" -> {
                                 var use = minecraftClass.getDeclaredMethod("startUseItem"); use.setAccessible(true); use.invoke(mc);
                             }
+                            case "press" -> {
+                                // One queued press of a vanilla key mapping, e.g. keySwapOffhand or keyAttack.
+                                Object key = options.getClass().getField(args[1]).get(options);
+                                var clicks = Class.forName("net.minecraft.client.KeyMapping").getDeclaredField("clickCount");
+                                clicks.setAccessible(true); clicks.setInt(key, clicks.getInt(key) + 1);
+                            }
+                            case "hold" -> {
+                                String[] key = args[1].split(",");
+                                Object mapping = options.getClass().getField(key[0]).get(options);
+                                mapping.getClass().getMethod("setDown", boolean.class).invoke(mapping, Boolean.parseBoolean(key[1]));
+                            }
+                            case "closescreen" -> {
+                                Object gui = minecraftClass.getField("gui").get(mc);
+                                gui.getClass().getMethod("setScreen", Class.forName("net.minecraft.client.gui.screens.Screen")).invoke(gui, (Object) null);
+                            }
+                            case "select" -> {
+                                Object player = minecraftClass.getField("player").get(mc);
+                                Object inventory = player.getClass().getMethod("getInventory").invoke(player);
+                                inventory.getClass().getMethod("setSelectedSlot", int.class).invoke(inventory, Integer.parseInt(args[1]));
+                            }
+                            case "reload" -> {
+                                var future = (java.util.concurrent.CompletableFuture<?>) minecraftClass.getMethod("reloadResourcePacks").invoke(mc);
+                                future.whenComplete((ignored, error) -> {
+                                    try {
+                                        if (error != null) Files.writeString(directory.resolve("error.txt"), error.toString());
+                                        else Files.writeString(directory.resolve("done.txt"), text);
+                                    } catch (Exception failure) { failure(directory, failure); }
+                                });
+                                return;
+                            }
                             case "state" -> {
                                 Object player = minecraftClass.getField("player").get(mc);
                                 Object inventory = player.getClass().getMethod("getInventory").invoke(player);
@@ -123,6 +153,29 @@ public final class ClientCaptureHarness {
                                 screenshot.getMethod("takeScreenshot", Class.forName("com.mojang.blaze3d.pipeline.RenderTarget"), int.class, Consumer.class).invoke(null, target, 2, consumer);
                                 return;
                             }
+                            case "trace" -> {
+                                // Samples, about every 10 ms for the given time, where the camera and the scenes
+                                // riding the player are: scene = rider (interpolated) + its translation - camera.
+                                String[] trace = args[1].split("\\|");
+                                Path output = Path.of(trace[0]); Files.createDirectories(output.getParent());
+                                long until = System.currentTimeMillis() + Long.parseLong(trace[1]);
+                                StringBuffer report = new StringBuffer("ms\tpose\tcameraY\tplayerY\trider\triderY\ttransY\tsceneY\n");
+                                Thread sampler = new Thread(() -> {
+                                    try {
+                                        while (System.currentTimeMillis() < until) {
+                                            execute.invoke(mc, (Runnable) () -> {
+                                                try { report.append(traceSample(minecraftClass, mc)); } catch (Exception error) { failure(directory, error); }
+                                            });
+                                            Thread.sleep(10);
+                                        }
+                                        Thread.sleep(50);
+                                        Files.writeString(output, report.toString());
+                                        Files.writeString(directory.resolve("done.txt"), text);
+                                    } catch (Exception error) { failure(directory, error); }
+                                }, "MCCases trace");
+                                sampler.setDaemon(true); sampler.start();
+                                return;
+                            }
                             default -> throw new IllegalArgumentException("Unknown capture command " + text);
                         }
                         Files.writeString(directory.resolve("done.txt"), text);
@@ -131,6 +184,39 @@ public final class ClientCaptureHarness {
             }
         } catch (Exception error) { failure(directory, error); }
     }
+    private static String traceSample(Class<?> minecraftClass, Object mc) throws Exception {
+        Object renderer = minecraftClass.getField("gameRenderer").get(mc);
+        Object camera = renderer.getClass().getMethod("mainCamera").invoke(renderer);
+        Object position = camera.getClass().getMethod("position").invoke(camera);
+        double cameraY = position.getClass().getField("y").getDouble(position);
+        Object player = minecraftClass.getField("player").get(mc);
+        Class<?> entity = Class.forName("net.minecraft.world.entity.Entity");
+        Object tracker = minecraftClass.getMethod("getDeltaTracker").invoke(mc);
+        float partial = (float) Class.forName("net.minecraft.client.DeltaTracker").getMethod("getGameTimeDeltaPartialTick", boolean.class)
+                .invoke(tracker, false);
+        Class<?> display = Class.forName("net.minecraft.world.entity.Display");
+        Class<?> interpolator = Class.forName("net.minecraft.world.entity.Display$GenericInterpolator");
+        var progressField = display.getDeclaredField("lastProgress"); progressField.setAccessible(true);
+        StringBuilder rows = new StringBuilder();
+        long ms = System.currentTimeMillis() % 100000;
+        Object pose = entity.getMethod("getPose").invoke(player);
+        double playerY = (double) entity.getMethod("getY").invoke(player);
+        int index = 0;
+        for (Object rider : (java.util.List<?>) entity.getMethod("getPassengers").invoke(player)) {
+            if (!display.isInstance(rider)) continue;
+            Object state = display.getMethod("renderState").invoke(rider); if (state == null) continue;
+            Object curve = state.getClass().getMethod("transformation").invoke(state);
+            Object transform = interpolator.getMethod("get", float.class).invoke(curve, progressField.getFloat(rider));
+            Object translation = transform.getClass().getMethod("translation").invoke(transform);
+            float transY = (float) Class.forName("org.joml.Vector3fc").getMethod("y").invoke(translation);
+            double y = (double) entity.getMethod("getY").invoke(rider), yo = entity.getField("yo").getDouble(rider);
+            double riderY = yo + (y - yo) * partial;
+            rows.append(ms).append('\t').append(pose).append('\t').append(cameraY).append('\t').append(playerY).append('\t').append(index++)
+                    .append('\t').append(riderY).append('\t').append(transY).append('\t').append(riderY + transY - cameraY).append('\n');
+        }
+        return rows.toString();
+    }
+
     private static void failure(Path directory, Exception error) {
         try { Files.writeString(directory.resolve("error.txt"), error.toString()+"\n"+java.util.Arrays.toString(error.getStackTrace())); } catch (Exception ignored) { }
         error.printStackTrace();

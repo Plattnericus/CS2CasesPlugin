@@ -26,22 +26,35 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import dev.plattnericus.cases.inspect.HeldRig;
 import dev.plattnericus.cases.inspect.InspectRig;
+import dev.plattnericus.cases.render.SpriteFrame;
 
 /**
- * Builds generated skin sprites, inspect meshes and Vanilla 26.3 item shading.
+ * Builds generated skin sprites, inspect meshes, the first-person view model held by the player's own
+ * skin arms, and the Vanilla 26.3 entity and item shaders (metal shading, skin arms, inspect scenes).
  */
 public final class PackExporter {
 
     public static final int MIN_FORMAT = 97;
     public static final int MAX_FORMAT = 99;
     private static final int SPRITE = 64;
-    private static final int SKIN_SPRITE = 128;
-    private static final int RIG_INSET = 4;
-    private static final int RIG_CONTENT = SKIN_SPRITE - 2 * RIG_INSET;
+    private static final int SKIN_SPRITE = SpriteFrame.SIZE;
+    private static final int RIG_CONTENT = SpriteFrame.RIG_CONTENT;
+    private static final int RIG_INSET = (SKIN_SPRITE - RIG_CONTENT) / 2;
     private static final double TEXELS_PER_UNIT = SKIN_SPRITE / 16.0;
+    /** Vanilla 26.3 shader programs with the MCCases additions, written over the vanilla ones. */
+    private static final List<String> SHADERS = List.of("core/entity.vsh", "core/entity.fsh", "core/item.vsh", "core/item.fsh",
+            "include/mccases_arm.glsl");
+    /**
+     * Reserved tints the item shader recognises by their colour ratios: metal faces get the metal
+     * sheen; the near and far variants also cut an inspect scene to the first- or third-person view.
+     */
+    static final int METAL_TINT = 0xFEFDFC, PLAIN_TINT = 0xFFFFFF;
+    static final int NEAR_METAL_TINT = 0xFCFDFE, FAR_METAL_TINT = 0xFDFCFE;
 
     public record Result(int skins, int cases, int keys, List<String> failures) {
     }
@@ -66,21 +79,25 @@ public final class PackExporter {
                       }
                     }
                     """.formatted(author, MIN_FORMAT, MAX_FORMAT));
-            for (String shader : List.of("item.vsh", "item.fsh")) {
-                try (var input = PackExporter.class.getResourceAsStream("/pack-shaders/" + shader)) {
-                    if (input == null) throw new IOException("Missing Vanilla 26.3 shader: " + shader);
-                    text(zip, "assets/minecraft/shaders/core/" + shader, new String(input.readAllBytes(), StandardCharsets.UTF_8));
+            for (String shader : SHADERS) {
+                String source = "/pack-shaders/" + shader.substring(shader.indexOf('/') + 1);
+                try (var input = PackExporter.class.getResourceAsStream(source)) {
+                    if (input == null) throw new IOException("Missing Vanilla 26.3 shader: " + source);
+                    text(zip, "assets/minecraft/shaders/" + shader, new String(input.readAllBytes(), StandardCharsets.UTF_8));
                 }
             }
+            armModels(zip, namespace);
             text(zip, "README.txt", """
                     MCCases resource pack (optional)
                     -----------------------------------
                     Models and textures live in assets/%1$s/.
                     Skin textures are rendered from the active MCCases catalog and bundled weapon maps.
-                    First-person and inspect views use the Minecraft player's own arm and skin.
+                    In first person and during inspects the holder's own Minecraft skin arms hold the
+                    weapon; the arms are drawn from each player's own skin by their own client.
                     Case artwork source and hashes are included in case-art/SOURCE.md.
-                    The two assets/minecraft/shaders/core/item.* programs add metal shading
-                    for marked faces and require Vanilla Minecraft 26.3.
+                    assets/minecraft/shaders/ holds the Vanilla 26.3 entity and item programs with
+                    MCCases additions: metal shading for marked faces, the skin arms and the split
+                    between the first- and third-person inspect scenes. They require Minecraft 26.3.
                     Merge both the namespace and these shader programs into another pack.
 
                     Enable it in plugins/MCCases/config.yml -> resource-pack.enabled: true
@@ -114,9 +131,14 @@ public final class PackExporter {
                 String selected = "trade/selected/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
                 model(zip, namespace, selected, "minecraft:item/generated", FIXED_DISPLAY);
-                try { rig(zip, namespace, skin, renderer); }
+                SpriteFrame frame;
+                try {
+                    rig(zip, namespace, skin, renderer);
+                    frame = HeldRig.rigFrame(skin.weapon(), renderer.textures().weapon(skin.weapon().id(), skin.weapon().textureFolder()));
+                }
                 catch (TextureException e) { throw new IOException("inspect rig " + skin.id(), e); }
-                heldItem(zip, namespace, skin);
+                if (HeldRig.held(skin.weapon())) text(zip, "assets/" + namespace + "/items/skin/" + skin.id() + ".json", skinDefinition(namespace, skin, frame));
+                else heldItem(zip, namespace, skin);
                 skins++;
             }
             for (CaseDefinition c : catalog.cases().stream().sorted(Comparator.comparing(CaseDefinition::id)).toList()) {
@@ -126,7 +148,7 @@ public final class PackExporter {
             }
             for (KeyDefinition k : catalog.keys().stream().sorted(Comparator.comparing(KeyDefinition::id)).toList()) {
                 String path = "key/" + k.id();
-                png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", keySprite(k.color()));
+                png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", hardEdges(keySprite(k.color())));
                 model(zip, namespace, path, "minecraft:item/generated");
             }
             if (logo != null) {
@@ -195,13 +217,16 @@ public final class PackExporter {
                     var blade = skin.weapon().region("blade");
                     boolean metal = skin.weapon().category() != dev.plattnericus.cases.catalog.WeaponCategory.GLOVE
                             && (!skin.isKnife() || centerX >= (blade == null ? .46 : blade.x1()));
+                    // Plain faces carry tint 1 so the inspect scene marks reach every face of the rig.
                     faces.append("\"").append(face).append("\":{\"uv\":[").append(u1).append(',').append(v1).append(',').append(u2).append(',').append(v2).append("],\"texture\":\"#skin\"")
-                            .append(metal ? ",\"tintindex\":0" : "").append('}');
+                            .append(metal ? ",\"tintindex\":0" : ",\"tintindex\":1").append('}');
                 }
                 elements.add("{\"from\":[" + x1 + ',' + (16-y2) + ',' + (8-thickness/2) + "],\"to\":[" + x2 + ',' + (16-y1) + ',' + (8+thickness/2) + "],\"faces\":{" + faces + "}}");
             }
-            text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":" + metalModel(ns, path) + "}");
-            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false," + heldDisplay(skin) + "\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\",\"particle\":\"#skin\"},\"elements\":[" + String.join(",", elements) + "]}");
+            text(zip, "assets/" + ns + "/items/" + path + ".json", "{\"model\":" + layerModel(ns, path) + "}");
+            // Held weapons get their hand placement from the item definition (see skinDefinition).
+            String display = HeldRig.held(skin.weapon()) ? NEUTRAL_DISPLAY : heldDisplay(skin);
+            text(zip, "assets/" + ns + "/models/item/" + path + ".json", "{\"ambientocclusion\":false," + display + "\"textures\":{\"skin\":\"" + ns + ":item/" + path + "\",\"particle\":\"#skin\"},\"elements\":[" + String.join(",", elements) + "]}");
         }
     }
 
@@ -220,7 +245,141 @@ public final class PackExporter {
     }
 
     private static String metalModel(String ns, String path) {
-        return "{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\",\"tints\":[{\"type\":\"minecraft:constant\",\"value\":16711164}]}";
+        return tinted(ns, path, METAL_TINT, PLAIN_TINT);
+    }
+
+    private static String tinted(String ns, String path, int metal, int plain) {
+        return "{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/" + path + "\",\"tints\":[{\"type\":\"minecraft:constant\",\"value\":"
+                + metal + "},{\"type\":\"minecraft:constant\",\"value\":" + plain + "}]}";
+    }
+
+    /**
+     * One rig layer as an item: inspect scenes mark it for the item shader's near-only or away-only
+     * scene through custom model data; everywhere else it is the plain layer.
+     */
+    private static String layerModel(String ns, String path) {
+        return "{\"type\":\"minecraft:select\",\"property\":\"minecraft:custom_model_data\",\"index\":0,\"cases\":["
+                + "{\"when\":\"" + HeldRig.NEAR_SCENE + "\",\"model\":" + tinted(ns, path, NEAR_METAL_TINT, HeldRig.NEAR_TINT) + "},"
+                + "{\"when\":\"" + HeldRig.FAR_SCENE + "\",\"model\":" + tinted(ns, path, FAR_METAL_TINT, HeldRig.FAR_TINT) + "}],"
+                + "\"fallback\":" + metalModel(ns, path) + "}";
+    }
+
+    /** All layers of a skin's rig, plain. */
+    private static String rigModel(String ns, SkinDefinition skin) {
+        var parts = InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct()
+                .map(layer -> metalModel(ns, "inspect/" + skin.id() + "/" + layer)).toList();
+        return parts.size() == 1 ? parts.getFirst() : "{\"type\":\"minecraft:composite\",\"models\":[" + String.join(",", parts) + "]}";
+    }
+
+    private static String transformed(String model, Matrix4f transformation) {
+        return "{\"type\":\"minecraft:composite\",\"transformation\":" + matrix(transformation) + ",\"models\":[" + model + "]}";
+    }
+
+    private static final String NEUTRAL_DISPLAY = "\"display\":{\"fixed\":{\"rotation\":[0,0,0],\"scale\":[1,1,1]},"
+            + "\"firstperson_righthand\":{\"rotation\":[0,0,0],\"translation\":[0,0,0],\"scale\":[1,1,1]},"
+            + "\"firstperson_lefthand\":{\"rotation\":[0,0,0],\"translation\":[0,0,0],\"scale\":[1,1,1]},"
+            + "\"thirdperson_righthand\":{\"rotation\":[0,0,0],\"translation\":[0,0,0],\"scale\":[1,1,1]},"
+            + "\"thirdperson_lefthand\":{\"rotation\":[0,0,0],\"translation\":[0,0,0],\"scale\":[1,1,1]}},";
+
+    /**
+     * Item definition of a held skin. Menus and the ground show the sprite, item frames and displays
+     * the 3D rig; third person holds the grip in the palm with the blade or muzzle forward; first person
+     * shows the view model held by the holder's own skin arms. The custom model data string selects
+     * their width, and the inspect state hides the hand model while a client-side scene plays, so the
+     * item keeps its hotbar icon.
+     */
+    static String skinDefinition(String ns, SkinDefinition skin, SpriteFrame frame) {
+        String rig = rigModel(ns, skin);
+        String third = "{\"type\":\"minecraft:select\",\"property\":\"minecraft:custom_model_data\",\"index\":0,\"cases\":["
+                + "{\"when\":\"" + HeldRig.INSPECT_STATE + "\",\"model\":{\"type\":\"minecraft:empty\"}}],"
+                + "\"fallback\":" + transformed(rig, HeldRig.thirdPerson(skin.weapon(), frame)) + "}";
+        String first = "{\"type\":\"minecraft:select\",\"property\":\"minecraft:custom_model_data\",\"index\":0,\"cases\":["
+                + "{\"when\":\"" + HeldRig.INSPECT_STATE + "\",\"model\":{\"type\":\"minecraft:empty\"}},"
+                + "{\"when\":\"" + HeldRig.SLIM_STATE + "\",\"model\":" + useStates(ns, skin, frame, rig, true) + "}],"
+                + "\"fallback\":" + useStates(ns, skin, frame, rig, false) + "}";
+        return "{\"model\":{\"type\":\"minecraft:select\",\"property\":\"minecraft:display_context\",\"cases\":["
+                + "{\"when\":\"fixed\",\"model\":" + rig + "},"
+                + "{\"when\":\"firstperson_righthand\",\"model\":" + first + "},"
+                + "{\"when\":\"firstperson_lefthand\",\"model\":{\"type\":\"minecraft:composite\",\"transformation\":" + MIRROR
+                + ",\"models\":[" + first + "]}},"
+                + "{\"when\":\"thirdperson_righthand\",\"model\":" + third + "},"
+                + "{\"when\":\"thirdperson_lefthand\",\"model\":{\"type\":\"minecraft:composite\",\"transformation\":" + MIRROR
+                + ",\"models\":[" + third + "]}}],"
+                + "\"fallback\":{\"type\":\"minecraft:model\",\"model\":\"" + ns + ":item/skin/" + skin.id() + "\"}},"
+                // Inspects swap the held item for its client-side copy (a loaded crossbow, for the crossbow
+                // hold) and back; neither the swap nor the item type change may dip the hand.
+                + "\"hand_animation_on_swap\":false,\"swap_animation_scale\":0}";
+    }
+
+    /** Mirrors item-local space for the left hand: arms swap sides and become the other arm. */
+    private static final String MIRROR = "[-1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1]";
+
+    /** Knives hold one pose; bows aim while drawn; crossbows reload while charging and stay ready when loaded. */
+    private static String useStates(String ns, SkinDefinition skin, SpriteFrame frame, String rig, boolean slim) {
+        if (skin.isKnife()) return view(ns, skin, frame, rig, HeldRig.Pose.IDLE, slim);
+        String bow = "{\"type\":\"minecraft:condition\",\"property\":\"minecraft:using_item\",\"on_true\":"
+                + view(ns, skin, frame, rig, HeldRig.Pose.BOW_DRAWN, slim) + ",\"on_false\":" + view(ns, skin, frame, rig, HeldRig.Pose.IDLE, slim) + "}";
+        String crossbow = "{\"type\":\"minecraft:condition\",\"property\":\"minecraft:using_item\",\"on_true\":"
+                + view(ns, skin, frame, rig, HeldRig.Pose.CROSSBOW_CHARGING, slim) + ",\"on_false\":{\"type\":\"minecraft:select\",\"property\":\"minecraft:charge_type\","
+                + "\"cases\":[{\"when\":\"none\",\"model\":" + view(ns, skin, frame, rig, HeldRig.Pose.IDLE, slim) + "}],\"fallback\":"
+                + view(ns, skin, frame, rig, HeldRig.Pose.CROSSBOW_LOADED, slim) + "}}";
+        // Only crossbows carry the charged projectiles component, so one definition serves both slots.
+        return "{\"type\":\"minecraft:condition\",\"property\":\"minecraft:has_component\",\"component\":\"minecraft:charged_projectiles\","
+                + "\"on_true\":" + crossbow + ",\"on_false\":" + bow + "}";
+    }
+
+    private static String view(String ns, SkinDefinition skin, SpriteFrame frame, String rig, HeldRig.Pose pose, boolean slim) {
+        List<String> models = new ArrayList<>();
+        for (HeldRig.Hand hand : HeldRig.firstPerson(skin.weapon(), frame, pose, slim)) {
+            models.add(transformed(rig, hand.weapon()));
+            for (HeldRig.Arm arm : hand.arms()) models.add(armModel(ns, arm.matrix()));
+        }
+        return "{\"type\":\"minecraft:composite\",\"models\":[" + String.join(",", models) + "]}";
+    }
+
+    private static String armModel(String ns, Matrix4f transformation) {
+        return "{\"type\":\"minecraft:special\",\"base\":\"" + ns + ":item/arm_base\",\"model\":{\"type\":\"minecraft:player_head\"},\"transformation\":"
+                + matrix(transformation) + "}";
+    }
+
+    /**
+     * Skin arms for the inspect scenes: the box of a player head, wearing the holder's own skin, in the
+     * proportions the entity shader recognises as an arm. The hand end sits at the item origin.
+     */
+    private static void armModels(ZipOutputStream zip, String ns) throws IOException {
+        text(zip, "assets/" + ns + "/models/item/arm_base.json", "{\"textures\":{\"particle\":\"minecraft:entity/player/wide/steve\"}}");
+        for (boolean left : List.of(false, true)) for (boolean slim : List.of(false, true)) {
+            var signature = slim ? HeldRig.SLIM : HeldRig.WIDE;
+            var matrix = new Matrix4f().translation(.5f, .5f, .5f).scale((left ? -1 : 1) * signature.x(), signature.y(), signature.z());
+            text(zip, "assets/" + ns + "/items/arm/" + (left ? "left" : "right") + "_" + (slim ? "slim" : "wide") + ".json",
+                    "{\"model\":" + armModel(ns, matrix) + "}");
+        }
+    }
+
+    /** Row-major 4x4 transformation accepted by item definitions. */
+    static String matrix(Matrix4f m) {
+        StringBuilder out = new StringBuilder("[");
+        for (int row = 0; row < 4; row++) for (int column = 0; column < 4; column++) {
+            if (out.length() > 1) out.append(',');
+            float value = m.getRowColumn(row, column);
+            out.append(Math.abs(value) < 5e-7f ? "0" : String.format(java.util.Locale.ROOT, "%.6f", value).replaceFirst("\\.?0+$", ""));
+        }
+        return out.append(']').toString();
+    }
+
+    /**
+     * Minecraft extrudes every texel with any coverage into a solid edge. Fractional alpha left those
+     * edges see-through, so edges looked missing from some angles. Coverage below one half becomes
+     * empty (without a colour fringe); the rest is opaque.
+     */
+    static BufferedImage hardEdges(BufferedImage image) {
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                int pixel = image.getRGB(x, y);
+                image.setRGB(x, y, (pixel >>> 24) >= 128 ? pixel | 0xFF000000 : 0);
+            }
+        }
+        return image;
     }
 
     private static String heldDisplay(SkinDefinition skin) {

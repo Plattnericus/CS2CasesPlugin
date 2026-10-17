@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.2.7"
+version = "1.3.0"
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
@@ -176,12 +176,25 @@ tasks.register<JavaExec>("inspectRigPreview") {
         layout.buildDirectory.dir("verification/animations").get().asFile.absolutePath)
 }
 
+// Held view model, held-pose inspects and the exported pack (hard sprite edges, definitions, overlays).
+val verifyHeld by tasks.registering(JavaExec::class) {
+    group = "verification"
+    dependsOn("resourcePack")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.HeldChecks")
+    args(file("src/main/resources/defaults").absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath)
+}
+
+tasks.check { dependsOn(verifyHeld) }
+
 tasks.register<Jar>("devChecks") {
     group = "verification"
     dependsOn(tasks.named("toolsClasses"))
     archiveFileName.set("MCCases-DevChecks-${project.version}.jar")
     from(sourceSets["tools"].output) {
-        include("dev/plattnericus/cases/tools/CommandRuntimeChecks*.class", "dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/RuntimeUiChecks*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class")
+        include("dev/plattnericus/cases/tools/CommandRuntimeChecks*.class", "dev/plattnericus/cases/tools/CaseGuideRuntimeChecks*.class", "dev/plattnericus/cases/tools/VisualRuntimeChecks*.class", "dev/plattnericus/cases/tools/RuntimeChecksPlugin*.class", "dev/plattnericus/cases/tools/RuntimeUiChecks*.class", "dev/plattnericus/cases/tools/CommerceRuntimeChecks*.class", "dev/plattnericus/cases/tools/ItemRuntimeChecks*.class",
+            "dev/plattnericus/cases/tools/VisualChecks*.class")
     }
     val metadata = layout.buildDirectory.file("generated/dev-checks/plugin.yml")
     doFirst {

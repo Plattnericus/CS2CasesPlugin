@@ -40,6 +40,8 @@ public interface CasesContext {
     Catalog catalog();
 
     dev.plattnericus.cases.catalog.CaseGuide caseGuide();
+    /** Weapon layers of the loaded catalog, for geometry that must match the exported pack. */
+    dev.plattnericus.cases.render.TextureStore textures();
 
     SkinFormatter formatter();
 

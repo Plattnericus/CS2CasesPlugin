@@ -18,6 +18,8 @@ public final class PluginKeys {
     public final NamespacedKey origGlint;
     public final NamespacedKey origModel;
     public final NamespacedKey knifeState;
+    public final NamespacedKey origModelData;
+    public final NamespacedKey addedProfile;
     public final NamespacedKey journal;
     public final NamespacedKey displayEntity;
     public final NamespacedKey shopVillager;
@@ -35,6 +37,8 @@ public final class PluginKeys {
         origGlint = new NamespacedKey(plugin, "orig_glint");
         origModel = new NamespacedKey(plugin, "orig_model");
         knifeState = new NamespacedKey(plugin, "knife_state");
+        origModelData = new NamespacedKey(plugin, "orig_model_data");
+        addedProfile = new NamespacedKey(plugin, "added_profile");
         journal = new NamespacedKey(plugin, "pending_rewards");
         displayEntity = new NamespacedKey(plugin, "display");
         shopVillager = new NamespacedKey(plugin, "shop_villager");
