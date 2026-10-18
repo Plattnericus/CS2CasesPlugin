@@ -189,6 +189,21 @@ tasks.register<JavaExec>("inspectRigPreview") {
         layout.buildDirectory.dir("verification/animations").get().asFile.absolutePath)
 }
 
+// Software previews of the held-pose inspects in the first-person view: build/preview/view/<weapon>_<animation>.png|gif.
+tasks.register<JavaExec>("viewInspectPreview") {
+    group = "verification"
+    dependsOn("resourcePack")
+    classpath = sourceSets["tools"].runtimeClasspath
+    mainClass.set("dev.plattnericus.cases.tools.ViewInspectPreview")
+    args(file("src/main/resources/defaults").absolutePath,
+        layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath,
+        layout.buildDirectory.dir("preview/view").get().asFile.absolutePath)
+    (project.findProperty("previewOnly") as String?)?.let { systemProperty("mccases.preview.only", it) }
+    (project.findProperty("previewMovies") as String?)?.let { systemProperty("mccases.preview.movies", it) }
+    (project.findProperty("previewSkins") as String?)?.let { systemProperty("mccases.preview.skins", it) }
+    (project.findProperty("previewTrace") as String?)?.let { systemProperty("mccases.preview.trace", it); systemProperty("mccases.preview.traceOnly", "true") }
+}
+
 // Held view model, held-pose inspects and the exported pack (hard sprite edges, definitions, overlays).
 val verifyHeld by tasks.registering(JavaExec::class) {
     group = "verification"

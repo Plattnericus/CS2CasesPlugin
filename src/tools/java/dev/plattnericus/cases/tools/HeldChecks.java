@@ -100,42 +100,63 @@ public final class HeldChecks {
     }
 
     /**
-     * A server that still has the 1.3.0 stock held-pose inspects in its inspect.yml gets the current natural
-     * motion on load; an entry the server edited stays as it is, and a second load changes nothing.
+     * A server that still has the 1.3.0 or the 10.17.2026 stock held-pose inspects in its inspect.yml gets the
+     * current motion on load; an entry the server edited stays as it is, and a second load changes nothing.
+     * Through the loader, the knives then play their own inspects, unless the server edited its knife pool.
      */
     private static int checkViewUpgrade(File defaults) throws Exception {
         var stock = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(defaults, "inspect.yml"));
-        String baseline;
-        try (var in = HeldChecks.class.getResourceAsStream("/migrations/inspect-view-v1.yml")) {
-            require(in != null, "missing 1.3.0 held-pose baseline");
-            baseline = new String(in.readAllBytes(), StandardCharsets.UTF_8);
-        }
-        var server = new org.bukkit.configuration.file.YamlConfiguration();
-        server.loadFromString(baseline);
-        server.set("view-animations.knife_admire.sounds.1", "inspect.metal");
-        require(dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), "1.3.0 held-pose inspects are not upgraded");
         int upgraded = 0;
-        for (String id : stock.getConfigurationSection("view-animations").getKeys(false)) {
-            if (id.equals("knife_admire")) continue;
-            require(leaves(server, "view-animations." + id).equals(leaves(stock, "view-animations." + id)), "stock held-pose inspect not upgraded " + id);
-            upgraded++;
-        }
-        require("inspect.metal".equals(server.getString("view-animations.knife_admire.sounds.1")), "edited held-pose inspect overwritten");
-        require(!dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), "held-pose upgrade is not idempotent");
-        // The same through the loader: a 1.3.0 inspect.yml plays natural motion only.
-        File file = File.createTempFile("mccases-inspect-", ".yml");
-        try {
-            java.nio.file.Files.writeString(file.toPath(), baseline);
-            List<String> warnings = new ArrayList<>();
-            InspectModels models = new InspectModels(file, warnings::add);
-            require(warnings.isEmpty(), "upgraded inspect.yml warnings " + warnings);
-            for (InspectAnimation animation : models.viewAnimations()) for (var variation : VARIATIONS) requireNatural(animation, animation.id(), variation);
-            require(naturalFailures.isEmpty(), "a 1.3.0 inspect.yml still plays unnatural motion " + naturalFailures.stream().limit(5).toList());
-        } finally {
-            java.nio.file.Files.deleteIfExists(file.toPath());
+        for (String release : List.of("v1", "v2")) {
+            String baseline;
+            try (var in = HeldChecks.class.getResourceAsStream("/migrations/inspect-view-" + release + ".yml")) {
+                require(in != null, "missing held-pose baseline " + release);
+                baseline = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+            }
+            var server = new org.bukkit.configuration.file.YamlConfiguration();
+            server.loadFromString(baseline);
+            String edited = "view-animations.rifle_tilt.sounds.2";
+            server.set(edited, "inspect.metal");
+            require(dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), release + " held-pose inspects are not upgraded");
+            for (String section : List.of("view-animations", "view-pools")) {
+                for (String id : server.getConfigurationSection(section).getKeys(false)) {
+                    if (id.equals("rifle_tilt") || !stock.contains(section + "." + id)) continue;
+                    String path = section + "." + id;
+                    require(section.equals("view-pools") ? server.getStringList(path).equals(stock.getStringList(path))
+                            : leaves(server, path).equals(leaves(stock, path)), "stock held-pose entry not upgraded " + release + " " + path);
+                    upgraded++;
+                }
+            }
+            require("inspect.metal".equals(server.getString(edited)), "edited held-pose inspect overwritten " + release);
+            require(!dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), "held-pose upgrade is not idempotent " + release);
+            // The same through the loader: an older inspect.yml plays the current motion and the knives' own pools.
+            File file = File.createTempFile("mccases-inspect-", ".yml");
+            try {
+                java.nio.file.Files.writeString(file.toPath(), baseline);
+                List<String> warnings = new ArrayList<>();
+                InspectModels models = new InspectModels(file, warnings::add);
+                require(warnings.isEmpty(), "upgraded inspect.yml warnings " + warnings);
+                for (InspectAnimation animation : models.viewAnimations()) for (var variation : VARIATIONS) {
+                    if (animation.varyRoll() || variation.roll() > 0) requireNatural(animation, animation.id(), variation);
+                }
+                require(naturalFailures.isEmpty(), "an upgraded inspect.yml still plays unnatural motion " + naturalFailures.stream().limit(5).toList());
+                require(models.viewPool(KARAMBIT).equals(stock.getStringList("view-pools.karambit")), "upgraded karambit does not play its own pool");
+                // A server that edited the knife family pool keeps it for the stock knives.
+                var custom = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(file);
+                custom.set("view-pools.knife", List.of("classic_toss"));
+                custom.set("view-pools.reverse", List.of("classic_admire"));
+                custom.save(file);
+                models = new InspectModels(file, warnings::add);
+                require(models.viewPool(KARAMBIT).equals(List.of("classic_admire")), "edited family pool bypassed by the karambit's bundled pool");
+            } finally {
+                java.nio.file.Files.deleteIfExists(file.toPath());
+            }
         }
         return upgraded;
     }
+
+    private static final WeaponType KARAMBIT = new WeaponType("karambit", "Karambit", WeaponCategory.KNIFE, "IRON_SWORD", "karambit",
+            java.util.Map.of(), true, null, null);
 
     private static java.util.Map<String, Object> leaves(org.bukkit.configuration.ConfigurationSection root, String path) {
         var section = root.getConfigurationSection(path);
@@ -159,16 +180,25 @@ public final class HeldChecks {
         require(!models.viewAnimations().isEmpty(), "no held-pose inspects");
         for (WeaponType weapon : catalog.weapons()) {
             if (catalog.skins().stream().noneMatch(s -> s.weapon() == weapon) || !HeldRig.held(weapon)) continue;
-            require(models.viewPools().containsKey(HeldRig.family(weapon)), "no held-pose pool for " + weapon.id());
+            require(models.viewPools().containsKey(HeldRig.family(weapon)), "no held-pose family pool for " + weapon.id());
+            // Every stock knife plays its own inspects.
+            if (weapon.category() == WeaponCategory.KNIFE) {
+                require(models.viewPools().containsKey(weapon.id()), "no own held-pose pool for knife " + weapon.id());
+                require(models.viewPool(weapon).stream().allMatch(id -> id.startsWith(weapon.id() + "_")),
+                        "knife " + weapon.id() + " borrows inspects of another knife " + models.viewPool(weapon));
+            }
             var assets = textures.weapon(weapon.id(), weapon.textureFolder());
             SpriteFrame frame = HeldRig.rigFrame(weapon, assets);
             HeldRig.Stance stance = HeldRig.stance(weapon, frame), bodyStance = HeldRig.bodyStance(weapon, frame);
             List<Vector3f> hull = ModelPose.hull(assets, frame);
             require(hull.size() > 20, "weapon hull " + weapon.id());
-            for (String id : models.viewPools().get(HeldRig.family(weapon))) {
+            List<String> pools = new ArrayList<>(models.viewPool(weapon));
+            for (String id : models.viewPools().get(HeldRig.family(weapon))) if (!pools.contains(id)) pools.add(id);
+            for (String id : pools) {
                 InspectAnimation animation = models.viewAnimation(id);
                 require(animation.duration() >= 30 && animation.duration() <= 120, "inspect length " + id);
                 for (var variation : VARIATIONS) {
+                    if (!animation.varyRoll() && variation.roll() < 0) continue;
                     var rest = ViewInspect.sample(weapon, frame, stance, emptyAnimation(), 0, variation);
                     var bodyRest = ViewInspect.sampleBody(weapon, frame, bodyStance, emptyAnimation(), 0, variation);
                     for (int t : List.of(0, animation.duration())) {
@@ -201,7 +231,7 @@ public final class HeldChecks {
                         }
                     }
                 }
-                for (var variation : VARIATIONS) requireNatural(animation, id, variation);
+                for (var variation : VARIATIONS) if (animation.varyRoll() || variation.roll() > 0) requireNatural(animation, id, variation);
                 for (int t = 0; t <= animation.duration(); t++) {
                     var sample = ViewInspect.sample(weapon, frame, stance, animation, t, new Vector3f());
                     require(sample.hand().isFinite() && sample.elbow().isFinite(), "non-finite inspect pose " + id);
