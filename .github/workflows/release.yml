@@ -1,0 +1,105 @@
+name: Release
+
+# Publishing a GitHub release builds the plugin JAR and the resource pack ZIP with the date version
+# (tag v10.17.2026 -> MCCases-10.17.2026.jar, plugin.yml version 10.17.2026), runs every check and
+# attaches both files to the release. Any other tag takes the release date (Europe/Rome).
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to build (MONTH.DAY.YEAR); empty uses today's date
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event.release.tag_name || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build plugin and resource pack
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - name: Check out the release
+        uses: actions/checkout@v7
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Resolve the version
+        id: version
+        env:
+          REQUESTED: ${{ inputs.version }}
+          PUBLISHED: ${{ github.event.release.published_at }}
+        run: |
+          set -euo pipefail
+          tag="${REQUESTED:-$TAG}"
+          # vMONTH.DAY.YEAR is used as written (leading zeros dropped, a suffix such as -2 kept).
+          if [[ "$tag" =~ ^v?([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4})(-[0-9A-Za-z][0-9A-Za-z.]*)?$ ]]; then
+            month=$((10#${BASH_REMATCH[1]})) day=$((10#${BASH_REMATCH[2]})) year=${BASH_REMATCH[3]}
+            if [ "$(date -d "$year-$month-$day" +%-m.%-d.%Y 2>/dev/null)" != "$month.$day.$year" ]; then
+              echo "::error::$tag is not a real date; name the tag vMONTH.DAY.YEAR, for example v10.17.2026"
+              exit 1
+            fi
+            version="$month.$day.$year${BASH_REMATCH[4]}"
+          else
+            version=$(TZ=Europe/Rome date -d "${PUBLISHED:-now}" +%-m.%-d.%Y)
+          fi
+          echo "version=$version" | tee -a "$GITHUB_OUTPUT"
+
+      - name: Build and run all checks
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: bash gradlew build --no-daemon --stacktrace -PpluginVersion="$VERSION"
+
+      - name: Collect and verify the release files
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          jar="MCCases-$VERSION.jar"
+          pack="MCCases-ResourcePack-$VERSION.zip"
+          mkdir -p dist
+          cp "build/libs/$jar" "build/distributions/$pack" dist/
+          # The JAR must carry the release version and embed exactly this pack.
+          unzip -p "dist/$jar" plugin.yml | grep -Fqx "version: '$VERSION'"
+          unzip -p "dist/$jar" pack/MCCases-ResourcePack.zip | cmp - "dist/$pack"
+          unzip -tq "dist/$pack"
+          if [ -n "$(git status --porcelain -- resourcepack/)" ]; then
+            echo "::warning::resourcepack/MCCases-ResourcePack.zip in this commit differs from the generated pack; run bash gradlew build and commit it"
+          fi
+          {
+            echo "### MCCases $VERSION"
+            echo
+            echo "| File | Size |"
+            echo "| --- | --- |"
+            echo "| \`$jar\` | $(du -h "dist/$jar" | cut -f1) |"
+            echo "| \`$pack\` | $(du -h "dist/$pack" | cut -f1) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Attach the files to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" dist/* --clobber --repo "$GITHUB_REPOSITORY"
+
+      - name: Keep the files with this run
+        uses: actions/upload-artifact@v7
+        with:
+          name: MCCases-${{ steps.version.outputs.version }}
+          path: dist/
+          if-no-files-found: error

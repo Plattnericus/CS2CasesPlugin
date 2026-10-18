@@ -12,15 +12,20 @@ public final class InspectProfileDefaults {
     private InspectProfileDefaults() { }
     public static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults) {
         boolean changed = false;
-        for (String baseline : java.util.List.of("v1", "v2", "v3", "v4")) changed |= upgrade(current, defaults, baseline);
+        for (String baseline : java.util.List.of("v1", "v2", "v3", "v4"))
+            changed |= upgrade(current, defaults, "/migrations/inspect-profiles-" + baseline + ".yml", java.util.List.of("animations", "animation-pools"));
         return changed;
     }
-    private static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults, String baseline) {
-        try (var in = InspectProfileDefaults.class.getResourceAsStream("/migrations/inspect-profiles-" + baseline + ".yml")) {
+    /** Held-pose inspects in inspect.yml: unchanged 1.3.0 stock timelines take the current natural motion. */
+    public static boolean upgradeViews(YamlConfiguration current, YamlConfiguration defaults) {
+        return upgrade(current, defaults, "/migrations/inspect-view-v1.yml", java.util.List.of("view-animations", "view-pools"));
+    }
+    private static boolean upgrade(YamlConfiguration current, YamlConfiguration defaults, String baseline, java.util.List<String> sections) {
+        try (var in = InspectProfileDefaults.class.getResourceAsStream(baseline)) {
             if (in == null) return false;
             var previous = YamlConfiguration.loadConfiguration(new InputStreamReader(in, StandardCharsets.UTF_8));
             boolean changed = false;
-            for (String section : java.util.List.of("animations", "animation-pools")) {
+            for (String section : sections) {
                 var old = previous.getConfigurationSection(section);
                 if (old == null) continue;
                 for (String id : old.getKeys(false)) {

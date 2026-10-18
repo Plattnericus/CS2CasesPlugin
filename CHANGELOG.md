@@ -1,5 +1,29 @@
 # Changelog
 
+## 10.17.2026 — 2026-10-17
+
+- **Date versions.** Releases are now versioned by date as `vMONTH.DAY.YEAR`. The version appears in
+  the file names (`MCCases-10.17.2026.jar`, `MCCases-ResourcePack-10.17.2026.zip`), in `plugin.yml`,
+  `/csadmin info` and the startup log.
+- **Natural inspects.** While the hand holds a weapon, the wrist now stays in its real range: no more
+  half or whole turns in a closed hand. Knives admire both faces of the blade, flick and chop; tosses
+  turn once and land in the palm; the karambit ring spin and the butterfly fan open the fingers; the
+  revolver flourish and the rifle and SMG turns stay within the forearm's reach. `verifyHeld` enforces
+  the range for all 66 animations, both hands, every variation and the third-person scene. Servers that
+  still have the unchanged 1.3.0 held-pose inspects in their `inspect.yml` get the new motion on load;
+  edited entries stay as they are.
+- **Automatic release builds.** Publishing a GitHub release runs `.github/workflows/release.yml`: it
+  builds the plugin and the resource pack, runs every check, verifies that the JAR carries the version
+  and embeds the same pack, and attaches the JAR and the ZIP to the release.
+- **Repository.** `resourcepack/MCCases-ResourcePack.zip` always holds the current resource pack
+  (`bash gradlew build` refreshes it). Development scripts, release notes, checksums and the extended
+  documentation are no longer part of the repository; the README covers installation and use, and the
+  Italian privacy template moved to `PRIVACY-IT.md`.
+- **License.** MCCases is published under the MCCases License: free use, also on public servers;
+  changes and free sharing allowed; copies and derived works must visibly credit MCCases by
+  Plattnericus; no selling. The JAR includes it under `META-INF/mccases/LICENSE`.
+- New README with real-client screenshots, catalog artwork and a release guide.
+
 ## 1.3.0 — 2026-10-17
 
 - **Skin-arm view model.** Your own Minecraft skin arms (wide or slim) hold every knife and gun in

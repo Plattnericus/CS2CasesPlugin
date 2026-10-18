@@ -1,6 +1,6 @@
 # Legal information and operation in Italy
 
-Updated: **October 10, 2026**. Project: **MCCases**, maintained by **Plattnericus**.
+Updated: **October 17, 2026**. Project: **MCCases**, maintained by **Plattnericus**.
 Project and rights inquiries: **info@plattnericus.dev**.
 
 This document describes the stated operation using exclusively free in-game currency.
@@ -49,11 +49,14 @@ a conclusive classification under Italian gambling law.
 
 ## Copyright and license status
 
-The repository has **no general open-source license**. This revision introduces no
-MIT, GPL or other general license. Public source is not blanket permission for reuse.
-Contributors retain rights to their contributions; statutory rights and separately
-granted permissions remain unaffected. For additional use or redistribution, contact
-**info@plattnericus.dev**.
+MCCases is published under the [MCCases License](LICENSE), a source-available,
+non-commercial license (not an OSI open-source license). Everyone may use the plugin
+for free, also on public servers, change it and share copies or improved versions free
+of charge. Copies and derived works must keep the license and visibly credit
+**MCCases by Plattnericus**; selling the plugin, derived works or the cases, keys and
+skins it provides is not allowed. The license covers only material the project has the
+right to license (see below and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)).
+For other uses, contact **info@plattnericus.dev**.
 
 Standard artwork is rendered by the project tools from masks, patterns and palettes.
 This describes its technical creation, not automatic legal clearance for every
@@ -109,7 +112,7 @@ are network functions. Minecraft/Paper, hosting, proxies, webshops and other plu
 have their own processing; their logs may also contain IP addresses and belong in
 the actual server privacy information.
 
-Complete the Italian [privacy template](docs/PRIVACY-IT.md) with operator identity,
+Complete the Italian [privacy template](PRIVACY-IT.md) with operator identity,
 legal basis, recipients and retention before use. Limit access, review hosting
 agreements and plan erasure/access requests. See the
 [GDPR, particularly Articles 5, 6, 12–22, 28 and 32](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)

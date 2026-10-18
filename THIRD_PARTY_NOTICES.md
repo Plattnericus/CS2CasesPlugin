@@ -1,6 +1,6 @@
 # Third-party and asset notices
 
-Maintainer: **Plattnericus** · **info@plattnericus.dev** · reviewed 2026-10-10.
+Maintainer: **Plattnericus** · **info@plattnericus.dev** · reviewed 2026-10-17.
 
 MCCases is independent of Mojang, Microsoft and Valve. Minecraft-related materials
 are subject to the [Minecraft EULA](https://www.minecraft.net/en-us/eula) and
@@ -32,7 +32,7 @@ player's own client draws their own skin on it from the player's profile.
 | Paper API `26.3.build.159-beta` and its API dependencies | `compileOnly`; types provided by the server | Not bundled in the production JAR |
 | Xerial SQLite JDBC `3.49.1.0` | `toolsRuntimeOnly`; local database checks | Not bundled; server drivers are supplied by the server installation |
 | Gradle Wrapper | Build tooling committed separately | Apache-2.0; [license shipped with the wrapper](gradle/LICENSE) |
-| Python / Pillow / PyYAML | Development, pack merge and screenshot scripts | Installed separately; not bundled |
+| Python / Pillow / PyYAML | Local development and screenshot tools, not part of the repository | Installed separately; not bundled |
 | Java runtime and Minecraft/Paper installations | Build/runtime or isolated local testing | Installed/downloaded separately; not release assets |
 
 Use the relevant upstream license and notices when separately distributing one of
@@ -54,5 +54,7 @@ The manifest records source and image hashes; it does not grant rights. The oper
 responsible for permission and any required attribution for case art, custom assets and
 configured NPC player skins.
 
-No project-wide open-source license is asserted. Existing third-party licenses,
-separate permissions and applicable statutory rights are unaffected.
+Project code and generated artwork are licensed under the [MCCases License](LICENSE).
+It does not extend to the third-party material above: the Minecraft-derived shader
+portions, the case images in the source manifest, the Gradle Wrapper and other
+dependencies keep their own terms. Separate permissions and statutory rights are unaffected.

@@ -14,9 +14,10 @@ cross-server currency conversion. Other plugins and external stores require sepa
 Random rewards and cosmetic values do not represent monetary value or guaranteed profit.
 Publish the actual configured drop probabilities. These rules alone are not legal clearance.
 
-No project-wide open-source license has been granted in this repository. Public source
-availability does not grant general reuse or redistribution rights. Contact the maintainer
-for permissions; third-party materials remain governed by their own rights and licenses.
+MCCases is licensed under the MCCases License (LICENSE): free use, also on public servers,
+changes and free sharing are allowed; copies and derived works must keep the license and
+visibly credit "MCCases by Plattnericus"; selling it or its cases, keys and skins is not.
+Third-party materials remain governed by their own rights and licenses.
 Custom textures, fonts, logos and player skins require appropriate permission.
 The generated resource pack renders skin/inspect textures from bundled weapon maps and the
 active catalog. Its 22 case PNGs are recorded with hashes in case-art/SOURCE.md and were
@@ -33,7 +34,7 @@ Collection viewing, public listings and rare-drop broadcasts may reveal gameplay
 Deleting an in-game skin does not erase its database history or backups.
 The Italian privacy template needs the operator's real identity, hosting and retention details.
 
-Full notices: LEGAL.md, THIRD_PARTY_NOTICES.md and docs/PRIVACY-IT.md in the project.
+Full notices: LICENSE, LEGAL.md, THIRD_PARTY_NOTICES.md and PRIVACY-IT.md in the project.
 The plugin JAR includes them under META-INF/mccases/.
 Minecraft rules: https://www.minecraft.net/en-us/usage-guidelines
 Minecraft EULA: https://www.minecraft.net/en-us/eula

@@ -89,6 +89,9 @@ public final class ClientCaptureHarness {
                                 mapping.getClass().getMethod("setDown", boolean.class).invoke(mapping, Boolean.parseBoolean(key[1]));
                             }
                             case "closescreen" -> {
+                                // Close a menu like Escape does, so the server also knows the container is closed.
+                                Object player = minecraftClass.getField("player").get(mc);
+                                if (player != null) player.getClass().getMethod("closeContainer").invoke(player);
                                 Object gui = minecraftClass.getField("gui").get(mc);
                                 gui.getClass().getMethod("setScreen", Class.forName("net.minecraft.client.gui.screens.Screen")).invoke(gui, (Object) null);
                             }

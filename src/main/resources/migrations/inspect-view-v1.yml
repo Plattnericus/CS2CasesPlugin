@@ -1,0 +1,1736 @@
+# Stock held-pose inspects of MCCases 1.3.0. Unchanged copies in a server inspect.yml are upgraded
+# to the current defaults on load; edited entries stay as they are.
+view-animations:
+  knife_admire:
+    sounds:
+      '1': inspect.swipe
+      '26': inspect.metal
+      '52': inspect.swipe
+      '64': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.1, 0.14], rotate: [0, -10, 20], ease: out}
+        - {ticks: 14, rotate: [-80, -10, 15], ease: inout}
+        - {ticks: 16, rotate: [-185, -5, 15], ease: inout}
+        - {ticks: 10, rotate: [-185, 5, 25], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [-360, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  knife_flip:
+    sounds:
+      '7': inspect.spin
+      '26': inspect.spin
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [-0.04, 0.06, 0.06], rotate: [0, 0, 12], ease: out}
+        - {ticks: 9, rotate: [360, 0, 12], ease: inout}
+        - {ticks: 10, rotate: [360, 6, 18], ease: inout}
+        - {ticks: 9, rotate: [0, 0, 12], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [0, 0.05, 0], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  knife_twirl:
+    sounds:
+      '8': inspect.spin
+      '20': inspect.spin
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 15], ease: out}
+        - {ticks: 12, move: [-0.03, 0.08, 0.08], rotate: [0, 0, 375], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 735], ease: inout}
+        - {ticks: 8, rotate: [0, 10, 730], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.03, 0.04, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  knife_toss:
+    sounds:
+      '7': inspect.swipe
+      '30': inspect.metal
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0.02], rotate: [0, 0, -10], ease: out}
+        - {ticks: 12, move: [-0.05, 0.42, 0.02], rotate: [0, 0, 380], ease: out}
+        - {ticks: 12, move: [-0.02, 0.02, 0.03], rotate: [0, 0, 720], ease: in}
+        - {ticks: 6, move: [0, -0.03, 0], rotate: [0, 0, 726], ease: out}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0], ease: out}
+        - {ticks: 8, move: [0, 0.08, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0, 0], ease: inout}
+        - {ticks: 3, move: [1, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        - {ticks: 3, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+  knife_point:
+    sounds:
+      '2': inspect.swipe
+      '30': inspect.metal
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.06, 0.1], rotate: [0, 55, 10], ease: out}
+        - {ticks: 14, rotate: [-25, 62, 10], ease: inout}
+        - {ticks: 12, rotate: [20, 48, 6], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  knife_backhand:
+    sounds:
+      '6': inspect.spin
+      '26': inspect.metal
+      '44': inspect.spin
+      '58': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.03, 0.05, 0.06], rotate: [0, 0, 15], ease: out}
+        - {ticks: 8, rotate: [0, 0, 195], ease: inout}
+        - {ticks: 12, move: [-0.05, 0.06, 0.08], rotate: [-35, 0, 190], ease: inout}
+        - {ticks: 10, rotate: [30, 0, 192], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 375], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 38, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  knife_edge:
+    sounds:
+      '2': inspect.swipe
+      '22': inspect.metal
+      '34': inspect.metal
+      '54': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.09, 0.09, 0.14], rotate: [0, 30, 12], ease: out}
+        - {ticks: 10, move: [-0.08, 0.08, 0.15], rotate: [-15, 38, 8], ease: inout}
+        - {ticks: 6, move: [-0.07, 0.09, 0.15], rotate: [-10, 34, 10], ease: inout}
+        - {ticks: 6, move: [-0.08, 0.08, 0.15], rotate: [-18, 40, 8], ease: inout}
+        - {ticks: 10, rotate: [10, 25, 15], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  knife_lunge:
+    sounds:
+      '8': inspect.swipe
+      '30': inspect.metal
+      '52': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0.02, -0.04, 0.1], rotate: [0, 0, -12], ease: out}
+        - {ticks: 4, move: [-0.06, 0.04, -0.22], rotate: [0, -6, 8], ease: out}
+        - {ticks: 8, move: [-0.04, 0.03, -0.16], rotate: [0, -4, 6], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.08, 0.1], rotate: [-60, 0, 14], ease: inout}
+        - {ticks: 10, rotate: [-120, 0, 16], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0.03, -0.04, 0.06], ease: out}
+        - {ticks: 4, move: [0, 0.04, -0.18], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  knife_catch:
+    sounds:
+      '7': inspect.swipe
+      '28': inspect.metal
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.05, 0.02], rotate: [0, 0, -8], ease: out}
+        - {ticks: 11, move: [-0.04, 0.36, 0.04], rotate: [270, 0, 190], ease: out}
+        - {ticks: 11, move: [-0.02, 0.02, 0.03], rotate: [540, 0, 360], ease: in}
+        - {ticks: 6, move: [0, -0.03, 0], rotate: [545, 0, 362], ease: out}
+        - {ticks: 12, move: [0, 0, 0], rotate: [720, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0], ease: out}
+        - {ticks: 8, move: [0, 0.08, 0], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0, 0], ease: inout}
+        - {ticks: 3, move: [1, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 3, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+  reverse_spin:
+    sounds:
+      '6': inspect.spin
+      '15': inspect.spin
+      '32': inspect.spin
+      '52': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.12, 0.1, 0.06], rotate: [0, 0, -10], ease: out}
+        - {ticks: 9, rotate: [0, 0, -370], ease: inout}
+        - {ticks: 9, rotate: [0, 0, -730], ease: inout}
+        - {ticks: 8, rotate: [10, 0, -720], ease: inout}
+        - {ticks: 9, rotate: [0, 0, -1080], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, -1080], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 35, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  reverse_admire:
+    sounds:
+      '1': inspect.swipe
+      '26': inspect.metal
+      '52': inspect.swipe
+      '64': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.1, 0.14], rotate: [0, -10, 20], ease: out}
+        - {ticks: 14, rotate: [-80, -10, 15], ease: inout}
+        - {ticks: 16, rotate: [-185, -5, 15], ease: inout}
+        - {ticks: 10, rotate: [-185, 5, 25], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [-360, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  reverse_twirl:
+    sounds:
+      '6': inspect.spin
+      '14': inspect.spin
+      '32': inspect.spin
+      '40': inspect.spin
+      '56': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.22, 0.09, 0.03], rotate: [0, 0, -8], ease: out}
+        - {ticks: 8, rotate: [180, 0, -190], ease: inout}
+        - {ticks: 8, rotate: [360, 0, -370], ease: inout}
+        - {ticks: 10, move: [-0.24, 0.11, 0.04], rotate: [360, 10, -365], ease: inout}
+        - {ticks: 8, rotate: [540, 0, -545], ease: inout}
+        - {ticks: 8, rotate: [720, 0, -720], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], rotate: [720, 0, -720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 42, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  reverse_toss:
+    sounds:
+      '7': inspect.swipe
+      '28': inspect.metal
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.05, 0.02], rotate: [0, 0, -8], ease: out}
+        - {ticks: 11, move: [-0.04, 0.36, 0.04], rotate: [270, 0, 190], ease: out}
+        - {ticks: 11, move: [-0.02, 0.02, 0.03], rotate: [540, 0, 360], ease: in}
+        - {ticks: 6, move: [0, -0.03, 0], rotate: [545, 0, 362], ease: out}
+        - {ticks: 12, move: [0, 0, 0], rotate: [720, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0], ease: out}
+        - {ticks: 8, move: [0, 0.08, 0], ease: inout}
+        - {ticks: 15, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0, 0], ease: inout}
+        - {ticks: 3, move: [1, 0, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 3, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+  reverse_flip:
+    sounds:
+      '8': inspect.spin
+      '32': inspect.metal
+      '42': inspect.spin
+      '60': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.26, 0.09, 0.02], rotate: [0, 0, 20], ease: out}
+        - {ticks: 10, rotate: [0, 0, 200], ease: inout}
+        - {ticks: 14, rotate: [-60, 0, 190], ease: inout}
+        - {ticks: 10, rotate: [0, 0, 200], ease: inout}
+        - {ticks: 10, rotate: [0, 0, 360], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], rotate: [0, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.1, 0.05, 0], ease: out}
+        - {ticks: 44, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  butterfly_flips:
+    sounds:
+      '6': inspect.spin
+      '13': inspect.metal
+      '20': inspect.spin
+      '27': inspect.metal
+      '34': inspect.spin
+      '41': inspect.metal
+      '56': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.03, 0.05, 0.05], rotate: [0, 0, 10], ease: out}
+        - {ticks: 7, rotate: [180, 0, 10], ease: inout}
+        - {ticks: 7, rotate: [360, 0, 10], ease: inout}
+        - {ticks: 7, rotate: [360, 0, 190], ease: inout}
+        - {ticks: 7, rotate: [540, 0, 190], ease: inout}
+        - {ticks: 7, rotate: [720, 0, 370], ease: inout}
+        - {ticks: 8, rotate: [720, 0, 360], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], rotate: [720, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 43, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+      handle_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 180], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 360], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 540], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 720], ease: inout}
+        - {ticks: 7, rotate: [0, 0, 900], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 1080], ease: inout}
+        - {ticks: 10, rotate: [0, 0, 1080], ease: inout}
+  butterfly_admire:
+    sounds:
+      '1': inspect.swipe
+      '26': inspect.metal
+      '52': inspect.swipe
+      '64': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.1, 0.14], rotate: [0, -10, 20], ease: out}
+        - {ticks: 14, rotate: [-80, -10, 15], ease: inout}
+        - {ticks: 16, rotate: [-185, -5, 15], ease: inout}
+        - {ticks: 10, rotate: [-185, 5, 25], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [-360, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  butterfly_twirl:
+    sounds:
+      '8': inspect.spin
+      '20': inspect.spin
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 15], ease: out}
+        - {ticks: 12, move: [-0.03, 0.08, 0.08], rotate: [0, 0, 375], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 735], ease: inout}
+        - {ticks: 8, rotate: [0, 10, 730], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.03, 0.04, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  butterfly_aerial:
+    sounds:
+      '7': inspect.spin
+      '19': inspect.spin
+      '31': inspect.metal
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0.02], rotate: [0, 0, -10], ease: out}
+        - {ticks: 12, move: [-0.04, 0.4, 0.03], rotate: [360, 0, 370], ease: out}
+        - {ticks: 12, move: [-0.02, 0.02, 0.03], rotate: [720, 0, 720], ease: in}
+        - {ticks: 6, move: [0, -0.03, 0], rotate: [722, 0, 724], ease: out}
+        - {ticks: 12, move: [0, 0, 0], rotate: [720, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, -0.04, 0], ease: out}
+        - {ticks: 8, move: [0, 0.08, 0], ease: inout}
+        - {ticks: 16, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0, 0], ease: inout}
+        - {ticks: 3, move: [1, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+        - {ticks: 3, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, ease: inout}
+      handle_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: [0, 0, 200], ease: out}
+        - {ticks: 12, rotate: [0, 0, 360], ease: in}
+        - {ticks: 18, rotate: [0, 0, 360], ease: inout}
+      handle_a:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, rotate: [0, 0, -150], ease: out}
+        - {ticks: 12, rotate: [0, 0, 0], ease: in}
+        - {ticks: 18, rotate: [0, 0, 0], ease: inout}
+  butterfly_fan:
+    sounds:
+      '5': inspect.spin
+      '11': inspect.spin
+      '17': inspect.spin
+      '33': inspect.metal
+      '49': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 5, move: [-0.02, 0.05, 0.04], rotate: [0, 0, 10], ease: out}
+        - {ticks: 6, rotate: [0, 0, 370], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 730], ease: inout}
+        - {ticks: 6, rotate: [0, 0, 1090], ease: inout}
+        - {ticks: 8, move: [-0.04, 0.07, 0.07], rotate: [-40, 0, 1085], ease: inout}
+        - {ticks: 10, rotate: [0, 0, 1080], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], rotate: [0, 0, 1080], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 5, move: [0, 0.05, 0], ease: out}
+        - {ticks: 36, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+      handle_b:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 5, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, rotate: [0, 0, -360], ease: inout}
+        - {ticks: 6, rotate: [0, 0, -720], ease: inout}
+        - {ticks: 6, rotate: [0, 0, -1080], ease: inout}
+        - {ticks: 28, rotate: [0, 0, -1080], ease: inout}
+  butterfly_backhand:
+    sounds:
+      '6': inspect.spin
+      '26': inspect.metal
+      '44': inspect.spin
+      '58': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.03, 0.05, 0.06], rotate: [0, 0, 15], ease: out}
+        - {ticks: 8, rotate: [0, 0, 195], ease: inout}
+        - {ticks: 12, move: [-0.05, 0.06, 0.08], rotate: [-35, 0, 190], ease: inout}
+        - {ticks: 10, rotate: [30, 0, 192], ease: inout}
+        - {ticks: 8, rotate: [0, 0, 375], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 360], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 38, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  daggers_admire:
+    sounds:
+      '1': inspect.swipe
+      '26': inspect.metal
+      '52': inspect.swipe
+      '64': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.1, 0.14], rotate: [0, -10, 20], ease: out}
+        - {ticks: 14, rotate: [-80, -10, 15], ease: inout}
+        - {ticks: 16, rotate: [-185, -5, 15], ease: inout}
+        - {ticks: 10, rotate: [-185, 5, 25], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [-360, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  daggers_twirl:
+    sounds:
+      '8': inspect.spin
+      '20': inspect.spin
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 15], ease: out}
+        - {ticks: 12, move: [-0.03, 0.08, 0.08], rotate: [0, 0, 375], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.05, 0.08], rotate: [0, 0, 735], ease: inout}
+        - {ticks: 8, rotate: [0, 10, 730], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.03, 0.04, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+  daggers_point:
+    sounds:
+      '2': inspect.swipe
+      '30': inspect.metal
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.06, 0.1], rotate: [0, 55, 10], ease: out}
+        - {ticks: 14, rotate: [-25, 62, 10], ease: inout}
+        - {ticks: 12, rotate: [20, 48, 6], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  daggers_lunge:
+    sounds:
+      '8': inspect.swipe
+      '30': inspect.metal
+      '52': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0.02, -0.04, 0.1], rotate: [0, 0, -12], ease: out}
+        - {ticks: 4, move: [-0.06, 0.04, -0.22], rotate: [0, -6, 8], ease: out}
+        - {ticks: 8, move: [-0.04, 0.03, -0.16], rotate: [0, -4, 6], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.08, 0.1], rotate: [-60, 0, 14], ease: inout}
+        - {ticks: 10, rotate: [-120, 0, 16], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0.03, -0.04, 0.06], ease: out}
+        - {ticks: 4, move: [0, 0.04, -0.18], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  daggers_edge:
+    sounds:
+      '2': inspect.swipe
+      '22': inspect.metal
+      '34': inspect.metal
+      '54': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.09, 0.09, 0.14], rotate: [0, 30, 12], ease: out}
+        - {ticks: 10, move: [-0.08, 0.08, 0.15], rotate: [-15, 38, 8], ease: inout}
+        - {ticks: 6, move: [-0.07, 0.09, 0.15], rotate: [-10, 34, 10], ease: inout}
+        - {ticks: 6, move: [-0.08, 0.08, 0.15], rotate: [-18, 40, 8], ease: inout}
+        - {ticks: 10, rotate: [10, 25, 15], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  pistol_turn:
+    sounds:
+      '2': inspect.swipe
+      '24': inspect.metal
+      '50': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.12, 0.1, 0.14], rotate: [0, -15, 10], ease: out}
+        - {ticks: 14, rotate: [-70, -15, 10], ease: inout}
+        - {ticks: 16, rotate: [55, -10, 10], ease: inout}
+        - {ticks: 10, rotate: [55, -4, 14], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 48, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  pistol_look:
+    sounds:
+      '2': inspect.swipe
+      '26': inspect.metal
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.08, 0.12], rotate: [0, 50, 8], ease: out}
+        - {ticks: 16, rotate: [-20, 58, 8], ease: inout}
+        - {ticks: 10, rotate: [10, 40, 4], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  pistol_slide:
+    sounds:
+      '2': inspect.swipe
+      '18': inspect.mech
+      '24': inspect.mech
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0.1], rotate: [-25, 10, 6], ease: out}
+        - {ticks: 8, rotate: [-28, 10, 4], ease: inout}
+        - {ticks: 6, rotate: [-30, 12, 3], ease: inout}
+        - {ticks: 10, rotate: [-25, 8, 6], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.04, 0.04, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0.06, 0.1, 0], ease: out}
+        - {ticks: 8, move: [-0.1, 0.12, 0], ease: in}
+        - {ticks: 6, move: [0.06, 0.12, 0], ease: out}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [-0.06, 0, 0], ease: in}
+        - {ticks: 3, move: [0, 0, 0], ease: out}
+        - {ticks: 27, ease: inout}
+  pistol_sight:
+    sounds:
+      '2': inspect.swipe
+      '30': inspect.mech
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.16, 0.1, 0.1], rotate: [0, -8, 4], ease: out}
+        - {ticks: 16, move: [-0.17, 0.11, 0.11], rotate: [0, -8, 6], ease: inout}
+        - {ticks: 8, move: [-0.15, 0.1, 0.1], rotate: [12, -6, 4], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.08, 0.06, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  pistol_press:
+    sounds:
+      '2': inspect.swipe
+      '16': inspect.mech
+      '21': inspect.mech
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.08, 0.1], rotate: [-60, 15, 8], ease: out}
+        - {ticks: 6, rotate: [-62, 15, 8], ease: inout}
+        - {ticks: 5, rotate: [-62, 16, 7], ease: inout}
+        - {ticks: 5, rotate: [-60, 15, 8], ease: inout}
+        - {ticks: 10, rotate: [-20, 10, 8], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0.04, 0.11, 0], ease: out}
+        - {ticks: 6, move: [-0.06, 0.12, 0], ease: in}
+        - {ticks: 5, move: [0.04, 0.12, 0], ease: out}
+        - {ticks: 15, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.03, 0, 0], ease: in}
+        - {ticks: 5, move: [0, 0, 0], ease: out}
+        - {ticks: 29, ease: inout}
+  pistol_mag:
+    sounds:
+      '2': inspect.swipe
+      '18': inspect.mech
+      '24': inspect.mech
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.06, 0.1], rotate: [-25, 10, 20], ease: out}
+        - {ticks: 8, rotate: [-28, 12, 24], ease: inout}
+        - {ticks: 6, rotate: [-28, 12, 26], ease: inout}
+        - {ticks: 8, rotate: [-25, 10, 20], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.04, 0.04, 0], ease: out}
+        - {ticks: 22, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.02, -0.1, 0], ease: out}
+        - {ticks: 8, move: [-0.02, -0.2, 0], ease: in}
+        - {ticks: 6, move: [-0.02, -0.12, 0], ease: out}
+        - {ticks: 8, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  revolver_spin:
+    sounds:
+      '6': inspect.spin
+      '15': inspect.spin
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.02, 0.06, 0.06], rotate: [0, 0, 8], ease: out}
+        - {ticks: 9, rotate: [0, 0, 368], ease: inout}
+        - {ticks: 9, rotate: [0, 0, 728], ease: inout}
+        - {ticks: 10, rotate: [8, 10, 725], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], rotate: [0, 0, 720], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [0, 0.05, 0], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 4, move: [0, 1, 0], ease: inout}
+        - {ticks: 38, ease: inout}
+        - {ticks: 4, move: [0, 0, 0], ease: inout}
+  revolver_turn:
+    sounds:
+      '2': inspect.swipe
+      '24': inspect.metal
+      '50': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.12, 0.1, 0.14], rotate: [0, -15, 10], ease: out}
+        - {ticks: 14, rotate: [-70, -15, 10], ease: inout}
+        - {ticks: 16, rotate: [55, -10, 10], ease: inout}
+        - {ticks: 10, rotate: [55, -4, 14], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 40, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 48, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  revolver_look:
+    sounds:
+      '2': inspect.swipe
+      '26': inspect.metal
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.1, 0.08, 0.12], rotate: [0, 50, 8], ease: out}
+        - {ticks: 16, rotate: [-20, 58, 8], ease: inout}
+        - {ticks: 10, rotate: [10, 40, 4], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 34, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  revolver_sight:
+    sounds:
+      '2': inspect.swipe
+      '30': inspect.mech
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.16, 0.1, 0.1], rotate: [0, -8, 4], ease: out}
+        - {ticks: 16, move: [-0.17, 0.11, 0.11], rotate: [0, -8, 6], ease: inout}
+        - {ticks: 8, move: [-0.15, 0.1, 0.1], rotate: [12, -6, 4], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.08, 0.06, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  revolver_cylinder:
+    sounds:
+      '2': inspect.swipe
+      '12': inspect.mech
+      '17': inspect.mech
+      '22': inspect.mech
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.08, 0.1], rotate: [-40, 8, 10], ease: out}
+        - {ticks: 5, rotate: [-44, 8, 12], ease: inout}
+        - {ticks: 5, rotate: [-40, 8, 10], ease: inout}
+        - {ticks: 5, rotate: [-44, 8, 12], ease: inout}
+        - {ticks: 10, rotate: [-30, 6, 10], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 25, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0.02, 0.06, 0], ease: out}
+        - {ticks: 5, move: [0.02, 0.12, 0], ease: inout}
+        - {ticks: 5, move: [0.02, 0.04, 0], ease: inout}
+        - {ticks: 5, move: [0.02, 0.12, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  smg_tilt:
+    sounds:
+      '2': inspect.swipe
+      '23': inspect.metal
+      '43': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.1, 0.1, 0.12], rotate: [0, -12, 8], ease: out}
+        - {ticks: 13, rotate: [55, -14, 8], ease: inout}
+        - {ticks: 11, rotate: [55, -6, 12], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 23, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [0, 1, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], ease: inout}
+  smg_mag:
+    sounds:
+      '2': inspect.swipe
+      '14': inspect.mech
+      '20': inspect.mech
+      '49': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.06, 0.06, 0.08], rotate: [-35, 18, 6], ease: out}
+        - {ticks: 11, rotate: [-40, 20, 4], ease: inout}
+        - {ticks: 7, rotate: [-38, 18, 8], ease: inout}
+        - {ticks: 9, rotate: [-35, 16, 6], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.04, 0.04, 0], ease: out}
+        - {ticks: 27, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.22, -0.06, 0], ease: out}
+        - {ticks: 5, move: [-0.24, -0.14, 0], ease: in}
+        - {ticks: 5, move: [-0.24, -0.07, 0], ease: out}
+        - {ticks: 7, move: [-0.22, -0.06, 0], ease: inout}
+        - {ticks: 9, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+  smg_turn:
+    sounds:
+      '2': inspect.swipe
+      '25': inspect.metal
+      '47': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.1, 0.1, 0.12], rotate: [0, -10, 10], ease: out}
+        - {ticks: 14, rotate: [-95, -12, 10], ease: inout}
+        - {ticks: 11, rotate: [-95, -4, 14], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 25, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [0, 1, 0], ease: inout}
+        - {ticks: 36, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], ease: inout}
+  smg_barrel:
+    sounds:
+      '2': inspect.swipe
+      '25': inspect.metal
+      '45': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.08, 0.12, 0.1], rotate: [10, 40, 12], ease: out}
+        - {ticks: 14, rotate: [-10, 48, 10], ease: inout}
+        - {ticks: 9, rotate: [5, 36, 8], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.06, 0.07, 0], ease: out}
+        - {ticks: 23, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [0, 1, 0], ease: inout}
+        - {ticks: 32, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], ease: inout}
+  smg_sight:
+    sounds:
+      '2': inspect.swipe
+      '29': inspect.mech
+      '45': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 13, move: [-0.2, 0.12, 0.12], rotate: [0, -18, 4], ease: out}
+        - {ticks: 14, move: [-0.21, 0.13, 0.13], rotate: [0, -18, 6], ease: inout}
+        - {ticks: 7, move: [-0.19, 0.12, 0.12], rotate: [8, -16, 4], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 13, move: [-0.08, 0.06, 0], ease: out}
+        - {ticks: 22, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+  smg_bolt:
+    sounds:
+      '2': inspect.swipe
+      '14': inspect.mech
+      '20': inspect.mech
+      '40': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.06, 0.08, 0.08], rotate: [-30, 10, 8], ease: out}
+        - {ticks: 5, rotate: [-32, 10, 6], ease: inout}
+        - {ticks: 5, rotate: [-30, 11, 8], ease: inout}
+        - {ticks: 7, rotate: [-26, 8, 8], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.04, 0.05, 0], ease: out}
+        - {ticks: 18, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 5, move: [-0.34, 0.1, 0], ease: in}
+        - {ticks: 5, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 7, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [0, 0, 0], ease: inout}
+        - {ticks: 5, move: [-0.07, 0, 0], ease: in}
+        - {ticks: 4, move: [0, 0, 0], ease: out}
+        - {ticks: 22, ease: inout}
+  smg_shoulder:
+    sounds:
+      '2': inspect.swipe
+      '27': inspect.metal
+      '45': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 13, move: [-0.02, 0.14, 0.1], rotate: [0, -10, 55], ease: out}
+        - {ticks: 16, rotate: [10, -12, 58], ease: inout}
+        - {ticks: 9, rotate: [0, -8, 52], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 13, move: [0, 0.1, 0], ease: out}
+        - {ticks: 25, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [0, 1, 0], ease: inout}
+        - {ticks: 36, ease: inout}
+        - {ticks: 7, move: [0, 0, 0], ease: inout}
+  rifle_tilt:
+    sounds:
+      '2': inspect.swipe
+      '26': inspect.metal
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.1, 0.1, 0.12], rotate: [0, -12, 8], ease: out}
+        - {ticks: 14, rotate: [55, -14, 8], ease: inout}
+        - {ticks: 12, rotate: [55, -6, 12], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 36, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  rifle_mag:
+    sounds:
+      '2': inspect.swipe
+      '16': inspect.mech
+      '22': inspect.mech
+      '54': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.06, 0.08], rotate: [-35, 18, 6], ease: out}
+        - {ticks: 12, rotate: [-40, 20, 4], ease: inout}
+        - {ticks: 8, rotate: [-38, 18, 8], ease: inout}
+        - {ticks: 10, rotate: [-35, 16, 6], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.04, 0.04, 0], ease: out}
+        - {ticks: 30, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.22, -0.06, 0], ease: out}
+        - {ticks: 6, move: [-0.24, -0.14, 0], ease: in}
+        - {ticks: 6, move: [-0.24, -0.07, 0], ease: out}
+        - {ticks: 8, move: [-0.22, -0.06, 0], ease: inout}
+        - {ticks: 10, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  rifle_turn:
+    sounds:
+      '2': inspect.swipe
+      '28': inspect.metal
+      '52': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.1, 0.1, 0.12], rotate: [0, -10, 10], ease: out}
+        - {ticks: 16, rotate: [-95, -12, 10], ease: inout}
+        - {ticks: 12, rotate: [-95, -4, 14], ease: inout}
+        - {ticks: 16, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.06, 0], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 16, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 40, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  rifle_barrel:
+    sounds:
+      '2': inspect.swipe
+      '28': inspect.metal
+      '50': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.08, 0.12, 0.1], rotate: [10, 40, 12], ease: out}
+        - {ticks: 16, rotate: [-10, 48, 10], ease: inout}
+        - {ticks: 10, rotate: [5, 36, 8], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.06, 0.07, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 36, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  rifle_sight:
+    sounds:
+      '2': inspect.swipe
+      '32': inspect.mech
+      '50': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.2, 0.12, 0.12], rotate: [0, -18, 4], ease: out}
+        - {ticks: 16, move: [-0.21, 0.13, 0.13], rotate: [0, -18, 6], ease: inout}
+        - {ticks: 8, move: [-0.19, 0.12, 0.12], rotate: [8, -16, 4], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.08, 0.06, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+  rifle_bolt:
+    sounds:
+      '2': inspect.swipe
+      '16': inspect.mech
+      '22': inspect.mech
+      '44': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.06, 0.08, 0.08], rotate: [-30, 10, 8], ease: out}
+        - {ticks: 6, rotate: [-32, 10, 6], ease: inout}
+        - {ticks: 6, rotate: [-30, 11, 8], ease: inout}
+        - {ticks: 8, rotate: [-26, 8, 8], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.04, 0.05, 0], ease: out}
+        - {ticks: 20, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 6, move: [-0.34, 0.1, 0], ease: in}
+        - {ticks: 6, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 8, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+        - {ticks: 6, move: [-0.07, 0, 0], ease: in}
+        - {ticks: 4, move: [0, 0, 0], ease: out}
+        - {ticks: 24, ease: inout}
+  rifle_shoulder:
+    sounds:
+      '2': inspect.swipe
+      '30': inspect.metal
+      '50': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.02, 0.14, 0.1], rotate: [0, -10, 55], ease: out}
+        - {ticks: 18, rotate: [10, -12, 58], ease: inout}
+        - {ticks: 10, rotate: [0, -8, 52], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [0, 0.1, 0], ease: out}
+        - {ticks: 28, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 8, move: [0, 1, 0], ease: inout}
+        - {ticks: 40, ease: inout}
+        - {ticks: 8, move: [0, 0, 0], ease: inout}
+  sniper_tilt:
+    sounds:
+      '2': inspect.swipe
+      '31': inspect.metal
+      '58': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.09, 0.09, 0.108], rotate: [0, -9, 6], ease: out}
+        - {ticks: 17, rotate: [41.25, -10.5, 6], ease: inout}
+        - {ticks: 14, rotate: [41.25, -4.5, 9], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.054, 0.054, 0], ease: out}
+        - {ticks: 31, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 43, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  sniper_turn:
+    sounds:
+      '2': inspect.swipe
+      '34': inspect.metal
+      '62': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.09, 0.09, 0.108], rotate: [0, -7.5, 7.5], ease: out}
+        - {ticks: 19, rotate: [-71.25, -9, 7.5], ease: inout}
+        - {ticks: 14, rotate: [-71.25, -3, 10.5], ease: inout}
+        - {ticks: 19, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.054, 0.054, 0], ease: out}
+        - {ticks: 34, ease: inout}
+        - {ticks: 19, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 48, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  sniper_barrel:
+    sounds:
+      '2': inspect.swipe
+      '34': inspect.metal
+      '60': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.072, 0.108, 0.09], rotate: [7.5, 30, 9], ease: out}
+        - {ticks: 19, rotate: [-7.5, 36, 7.5], ease: inout}
+        - {ticks: 12, rotate: [3.75, 27, 6], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.054, 0.063, 0], ease: out}
+        - {ticks: 31, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 43, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  sniper_sight:
+    sounds:
+      '2': inspect.swipe
+      '38': inspect.mech
+      '60': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, move: [-0.18, 0.108, 0.108], rotate: [0, -13.5, 3], ease: out}
+        - {ticks: 19, move: [-0.189, 0.117, 0.117], rotate: [0, -13.5, 4.5], ease: inout}
+        - {ticks: 10, move: [-0.171, 0.108, 0.108], rotate: [6, -12, 3], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 17, move: [-0.072, 0.054, 0], ease: out}
+        - {ticks: 29, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+  sniper_bolt:
+    sounds:
+      '2': inspect.swipe
+      '19': inspect.mech
+      '26': inspect.mech
+      '53': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.054, 0.072, 0.072], rotate: [-22.5, 7.5, 6], ease: out}
+        - {ticks: 7, rotate: [-24, 7.5, 4.5], ease: inout}
+        - {ticks: 7, rotate: [-22.5, 8.25, 6], ease: inout}
+        - {ticks: 10, rotate: [-19.5, 6, 6], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.036, 0.045, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [-0.216, 0.09, 0], ease: out}
+        - {ticks: 7, move: [-0.306, 0.09, 0], ease: in}
+        - {ticks: 7, move: [-0.216, 0.09, 0], ease: out}
+        - {ticks: 10, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 12, move: [0, 0, 0], ease: inout}
+        - {ticks: 7, move: [-0.07, 0, 0], ease: in}
+        - {ticks: 5, move: [0, 0, 0], ease: out}
+        - {ticks: 29, ease: inout}
+  sniper_shoulder:
+    sounds:
+      '2': inspect.swipe
+      '36': inspect.metal
+      '60': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 17, move: [-0.018, 0.126, 0.09], rotate: [0, -7.5, 41.25], ease: out}
+        - {ticks: 22, rotate: [7.5, -9, 43.5], ease: inout}
+        - {ticks: 12, rotate: [0, -6, 39], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 17, move: [0, 0.09, 0], ease: out}
+        - {ticks: 34, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 48, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  heavy_tilt:
+    sounds:
+      '2': inspect.swipe
+      '32': inspect.metal
+      '60': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.088, 0.088, 0.106], rotate: [0, -8.4, 5.6], ease: out}
+        - {ticks: 18, rotate: [38.5, -9.8, 5.6], ease: inout}
+        - {ticks: 15, rotate: [38.5, -4.2, 8.4], ease: inout}
+        - {ticks: 18, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.053, 0.053, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 45, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  heavy_turn:
+    sounds:
+      '2': inspect.swipe
+      '35': inspect.metal
+      '65': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.088, 0.088, 0.106], rotate: [0, -7, 7], ease: out}
+        - {ticks: 20, rotate: [-66.5, -8.4, 7], ease: inout}
+        - {ticks: 15, rotate: [-66.5, -2.8, 9.8], ease: inout}
+        - {ticks: 20, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.053, 0.053, 0], ease: out}
+        - {ticks: 35, ease: inout}
+        - {ticks: 20, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 50, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  heavy_barrel:
+    sounds:
+      '2': inspect.swipe
+      '35': inspect.metal
+      '62': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.07, 0.106, 0.088], rotate: [7, 28, 8.4], ease: out}
+        - {ticks: 20, rotate: [-7, 33.6, 7], ease: inout}
+        - {ticks: 12, rotate: [3.5, 25.2, 5.6], ease: inout}
+        - {ticks: 18, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 15, move: [-0.053, 0.062, 0], ease: out}
+        - {ticks: 32, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 45, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  heavy_sight:
+    sounds:
+      '2': inspect.swipe
+      '40': inspect.mech
+      '62': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, move: [-0.176, 0.106, 0.106], rotate: [0, -12.6, 2.8], ease: out}
+        - {ticks: 20, move: [-0.185, 0.114, 0.114], rotate: [0, -12.6, 4.2], ease: inout}
+        - {ticks: 10, move: [-0.167, 0.106, 0.106], rotate: [5.6, -11.2, 2.8], ease: inout}
+        - {ticks: 18, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, move: [-0.07, 0.053, 0], ease: out}
+        - {ticks: 30, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+  heavy_shoulder:
+    sounds:
+      '2': inspect.swipe
+      '38': inspect.metal
+      '62': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 18, move: [-0.018, 0.123, 0.088], rotate: [0, -7, 38.5], ease: out}
+        - {ticks: 22, rotate: [7, -8.4, 40.6], ease: inout}
+        - {ticks: 12, rotate: [0, -5.6, 36.4], ease: inout}
+        - {ticks: 18, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 18, move: [0, 0.088, 0], ease: out}
+        - {ticks: 35, ease: inout}
+        - {ticks: 18, move: [0, 0, 0], ease: inout}
+      grip:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [0, 1, 0], ease: inout}
+        - {ticks: 50, ease: inout}
+        - {ticks: 10, move: [0, 0, 0], ease: inout}
+  heavy_pump:
+    sounds:
+      '2': inspect.swipe
+      '15': inspect.mech
+      '21': inspect.mech
+      '26': inspect.mech
+      '32': inspect.mech
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.074, 0.074], rotate: [-20, 8, 6.4], ease: out}
+        - {ticks: 6, rotate: [-20.8, 8, 5.6], ease: inout}
+        - {ticks: 6, rotate: [-20, 8, 6.4], ease: inout}
+        - {ticks: 6, rotate: [-20.8, 8, 5.6], ease: inout}
+        - {ticks: 6, rotate: [-20, 8, 6.4], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.037, 0.037, 0], ease: out}
+        - {ticks: 22, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.11, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.11, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+      mechanism:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.12, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.12, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  heavy_rack:
+    sounds:
+      '2': inspect.swipe
+      '15': inspect.mech
+      '21': inspect.mech
+      '26': inspect.mech
+      '32': inspect.mech
+      '46': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.055, 0.074, 0.074], rotate: [-20, 8, 6.4], ease: out}
+        - {ticks: 6, rotate: [-20.8, 8, 5.6], ease: inout}
+        - {ticks: 6, rotate: [-20, 8, 6.4], ease: inout}
+        - {ticks: 6, rotate: [-20.8, 8, 5.6], ease: inout}
+        - {ticks: 6, rotate: [-20, 8, 6.4], ease: inout}
+        - {ticks: 15, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [-0.037, 0.037, 0], ease: out}
+        - {ticks: 22, ease: inout}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 11, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.11, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 6, move: [-0.11, 0, 0], ease: in}
+        - {ticks: 6, move: [0, 0, 0], ease: out}
+        - {ticks: 15, move: [0, 0, 0], ease: inout}
+  heavy_box:
+    sounds:
+      '2': inspect.swipe
+      '24': inspect.mech
+      '36': inspect.mech
+      '55': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.054, 0.054, 0.072], rotate: [-22.5, 9, 4.5], ease: out}
+        - {ticks: 12, rotate: [-25.5, 10.5, 4.5], ease: inout}
+        - {ticks: 12, rotate: [-22.5, 9, 4.5], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.036, 0.036, 0], ease: out}
+        - {ticks: 24, ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 14, move: [-0.144, -0.108, 0], ease: out}
+        - {ticks: 12, move: [-0.144, -0.162, 0], ease: inout}
+        - {ticks: 12, move: [-0.144, -0.108, 0], ease: inout}
+        - {ticks: 17, move: [0, 0, 0], ease: inout}
+  knife_fold:
+    sounds:
+      '2': inspect.swipe
+      '16': inspect.mech
+      '24': inspect.metal
+      '32': inspect.mech
+      '36': inspect.metal
+      '48': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.08, 0.08, 0.12], rotate: [0, 28, 10], ease: out}
+        - {ticks: 14, rotate: [-10, 34, 8], ease: inout}
+        - {ticks: 12, rotate: [8, 26, 10], ease: inout}
+        - {ticks: 14, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 10, move: [-0.05, 0.05, 0], ease: out}
+        - {ticks: 26, ease: inout}
+        - {ticks: 14, move: [0, 0, 0], ease: inout}
+      blade:
+        keyframes:
+        - {ticks: 0, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 12, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 5, rotate: [0, 0, -165], ease: in}
+        - {ticks: 4, rotate: [0, 0, -165], ease: inout}
+        - {ticks: 4, rotate: [0, 0, 0], ease: out}
+        - {ticks: 6, rotate: [0, 0, 0], ease: inout}
+        - {ticks: 4, rotate: [0, 0, -150], ease: in}
+        - {ticks: 4, rotate: [0, 0, 0], ease: out}
+        - {ticks: 7, rotate: [0, 0, 0], ease: inout}
+  smg_bolt_hand:
+    sounds:
+      '2': inspect.swipe
+      '14': inspect.mech
+      '20': inspect.mech
+      '40': inspect.end
+    groups:
+      weapon:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.06, 0.08, 0.08], rotate: [-30, 10, 8], ease: out}
+        - {ticks: 5, rotate: [-32, 10, 6], ease: inout}
+        - {ticks: 5, rotate: [-30, 11, 8], ease: inout}
+        - {ticks: 7, rotate: [-26, 8, 8], ease: inout}
+        - {ticks: 13, move: [0, 0, 0], rotate: [0, 0, 0], ease: inout}
+      elbow:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.04, 0.05, 0], ease: out}
+        - {ticks: 18, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+      support:
+        keyframes:
+        - {ticks: 0, move: [0, 0, 0], ease: inout}
+        - {ticks: 9, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 5, move: [-0.34, 0.1, 0], ease: in}
+        - {ticks: 5, move: [-0.24, 0.1, 0], ease: out}
+        - {ticks: 7, ease: inout}
+        - {ticks: 13, move: [0, 0, 0], ease: inout}
+view-pools:
+  knife: [knife_admire, knife_flip, knife_twirl, knife_toss, knife_point, knife_backhand, knife_edge, knife_lunge, knife_catch]
+  reverse: [reverse_spin, reverse_admire, reverse_twirl, reverse_toss, reverse_flip]
+  butterfly: [butterfly_flips, butterfly_admire, butterfly_twirl, butterfly_aerial, butterfly_fan, butterfly_backhand]
+  daggers: [daggers_admire, daggers_twirl, daggers_point, daggers_lunge, daggers_edge]
+  pistol: [pistol_turn, pistol_look, pistol_slide, pistol_sight, pistol_press, pistol_mag]
+  revolver: [revolver_spin, revolver_turn, revolver_look, revolver_sight, revolver_cylinder]
+  smg: [smg_tilt, smg_mag, smg_turn, smg_barrel, smg_sight, smg_bolt, smg_shoulder]
+  rifle: [rifle_tilt, rifle_mag, rifle_turn, rifle_barrel, rifle_sight, rifle_bolt, rifle_shoulder]
+  sniper: [sniper_tilt, sniper_turn, sniper_barrel, sniper_sight, sniper_bolt, sniper_shoulder]
+  heavy: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder]
+  nova: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder, heavy_pump]
+  sawedoff: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder, heavy_pump]
+  mag7: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder, heavy_rack]
+  m249: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder, heavy_box]
+  negev: [heavy_tilt, heavy_turn, heavy_barrel, heavy_sight, heavy_shoulder, heavy_box]
+  flip: [knife_admire, knife_flip, knife_twirl, knife_toss, knife_point, knife_backhand, knife_edge, knife_lunge, knife_catch, knife_fold]
+  navaja: [knife_admire, knife_flip, knife_twirl, knife_toss, knife_point, knife_backhand, knife_edge, knife_lunge, knife_catch, knife_fold]
+  stiletto: [knife_admire, knife_flip, knife_twirl, knife_toss, knife_point, knife_backhand, knife_edge, knife_lunge, knife_catch, knife_fold]
+  falchion: [knife_admire, knife_flip, knife_twirl, knife_toss, knife_point, knife_backhand, knife_edge, knife_lunge, knife_catch, knife_fold]
+  p90: [smg_tilt, smg_mag, smg_turn, smg_barrel, smg_sight, smg_bolt_hand, smg_shoulder]
+  ppbizon: [smg_tilt, smg_mag, smg_turn, smg_barrel, smg_sight, smg_bolt_hand, smg_shoulder]

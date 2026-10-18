@@ -98,8 +98,7 @@ public final class ViewInspect {
                                  Vector3fc origin, boolean body, Variation variation) {
         Pose w = animation.pose("weapon", t), elbowPose = animation.pose("elbow", t);
         Vector3fc end = animation.pose("weapon", animation.duration()).rotate();
-        Vector3f rotate = scale(w.rotate(), end, variation.roll() * variation.intensity(), variation.intensity(), variation.intensity());
-        w = new Pose(new Vector3f(w.move()).mul(.9f + .1f * variation.intensity()), rotate, w.scale());
+        w = new Pose(new Vector3f(w.move()).mul(.9f + .1f * variation.intensity()), wrist(animation, t, variation), w.scale());
         if (body) {
             Vector3f move = w.move();
             float toss = clamp(animation.pose("grip", t).move().x);
@@ -154,6 +153,13 @@ public final class ViewInspect {
     private static Vector3f scale(Vector3fc rotate, Vector3fc end, float x, float y, float z) {
         return new Vector3f(rotate.x() * (end.x() == 0 ? x : Math.signum(x)), rotate.y() * (end.y() == 0 ? y : Math.signum(y)),
                 rotate.z() * (end.z() == 0 ? z : Math.signum(z)));
+    }
+
+    /** The wrist turn of tick {@code t} in degrees (x roll about the blade or barrel, y, z), with the variation applied. */
+    public static Vector3f wrist(InspectAnimation animation, int t, Variation variation) {
+        Vector3fc end = animation.pose("weapon", animation.duration()).rotate();
+        return scale(animation.pose("weapon", t).rotate(), end, variation.roll() * variation.intensity(), variation.intensity(),
+                variation.intensity());
     }
 
     /** Whether the main hand holds the weapon at tick {@code t} (it lets go for tosses). */

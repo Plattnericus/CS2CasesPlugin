@@ -3,7 +3,9 @@ plugins {
 }
 
 group = "dev.plattnericus"
-version = "1.3.0"
+version = "10.17.2026"
+// Release builds set the date version (MONTH.DAY.YEAR) with -PpluginVersion; see .github/workflows/release.yml.
+providers.gradleProperty("pluginVersion").orNull?.takeIf { it.isNotBlank() }?.let { version = it }
 val releaseVersion = version.toString()
 description = "Server-side CS2-style case, skin, pattern and knife system for Paper"
 
@@ -74,7 +76,7 @@ tasks.processResources {
 
 tasks.jar {
     archiveFileName.set("MCCases-${project.version}.jar")
-    from(files("LEGAL.md", "THIRD_PARTY_NOTICES.md", "docs/PRIVACY-IT.md")) {
+    from(files("LICENSE", "LEGAL.md", "THIRD_PARTY_NOTICES.md", "PRIVACY-IT.md")) {
         into("META-INF/mccases")
     }
     // Ship the complete generated pack. Runtime upgrades merge server-owned assets separately.
@@ -113,6 +115,17 @@ tasks.register<JavaExec>("resourcePack") {
         layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip").get().asFile.absolutePath
     )
 }
+
+// Keeps resourcepack/MCCases-ResourcePack.zip in the repository identical to the generated pack.
+val syncResourcePack by tasks.registering(Copy::class) {
+    group = "mccases"
+    description = "Copy the generated resource pack to resourcepack/MCCases-ResourcePack.zip"
+    dependsOn("resourcePack")
+    from(layout.buildDirectory.file("distributions/MCCases-ResourcePack-${project.version}.zip"))
+    into(layout.projectDirectory.dir("resourcepack"))
+    rename { "MCCases-ResourcePack.zip" }
+}
+tasks.assemble { dependsOn(syncResourcePack) }
 
 // Snapshot of the map palette used when the server API no longer exposes it.
 tasks.register<JavaExec>("dumpPalette") {

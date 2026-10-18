@@ -90,11 +90,59 @@ public final class HeldChecks {
             weapons++;
         }
         int animations = checkViewAnimations(defaults, catalog, textures);
+        int upgraded = checkViewUpgrade(defaults);
         int skins = checkPack(new File(args[1]), catalog, renderer);
         System.out.println("PASS: held view model for " + weapons + " weapons / " + poses + " hand poses (grip in hand, arm signatures,"
-                + " handedness, 70 degree framing), " + animations + " held-pose inspects start and end in the hold and stay clear of the"
-                + " model for other players (furthest ahead of the fist looking ahead " + String.format(java.util.Locale.ROOT, "%.2f", maxBodyPush) + " blocks), " + skins
+                + " handedness, 70 degree framing), " + animations + " held-pose inspects start and end in the hold, keep the wrist in its"
+                + " natural range and stay clear of the model for other players (furthest ahead of the fist looking ahead "
+                + String.format(java.util.Locale.ROOT, "%.2f", maxBodyPush) + " blocks), " + upgraded + " unchanged 1.3.0 timelines upgrade, edits stay, " + skins
                 + " skins with hard-edged sprites and rigs, skin-arm view models and inspect scene layers.");
+    }
+
+    /**
+     * A server that still has the 1.3.0 stock held-pose inspects in its inspect.yml gets the current natural
+     * motion on load; an entry the server edited stays as it is, and a second load changes nothing.
+     */
+    private static int checkViewUpgrade(File defaults) throws Exception {
+        var stock = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(defaults, "inspect.yml"));
+        String baseline;
+        try (var in = HeldChecks.class.getResourceAsStream("/migrations/inspect-view-v1.yml")) {
+            require(in != null, "missing 1.3.0 held-pose baseline");
+            baseline = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        }
+        var server = new org.bukkit.configuration.file.YamlConfiguration();
+        server.loadFromString(baseline);
+        server.set("view-animations.knife_admire.sounds.1", "inspect.metal");
+        require(dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), "1.3.0 held-pose inspects are not upgraded");
+        int upgraded = 0;
+        for (String id : stock.getConfigurationSection("view-animations").getKeys(false)) {
+            if (id.equals("knife_admire")) continue;
+            require(leaves(server, "view-animations." + id).equals(leaves(stock, "view-animations." + id)), "stock held-pose inspect not upgraded " + id);
+            upgraded++;
+        }
+        require("inspect.metal".equals(server.getString("view-animations.knife_admire.sounds.1")), "edited held-pose inspect overwritten");
+        require(!dev.plattnericus.cases.inspect.InspectProfileDefaults.upgradeViews(server, stock), "held-pose upgrade is not idempotent");
+        // The same through the loader: a 1.3.0 inspect.yml plays natural motion only.
+        File file = File.createTempFile("mccases-inspect-", ".yml");
+        try {
+            java.nio.file.Files.writeString(file.toPath(), baseline);
+            List<String> warnings = new ArrayList<>();
+            InspectModels models = new InspectModels(file, warnings::add);
+            require(warnings.isEmpty(), "upgraded inspect.yml warnings " + warnings);
+            for (InspectAnimation animation : models.viewAnimations()) for (var variation : VARIATIONS) requireNatural(animation, animation.id(), variation);
+            require(naturalFailures.isEmpty(), "a 1.3.0 inspect.yml still plays unnatural motion " + naturalFailures.stream().limit(5).toList());
+        } finally {
+            java.nio.file.Files.deleteIfExists(file.toPath());
+        }
+        return upgraded;
+    }
+
+    private static java.util.Map<String, Object> leaves(org.bukkit.configuration.ConfigurationSection root, String path) {
+        var section = root.getConfigurationSection(path);
+        require(section != null, "missing " + path);
+        java.util.Map<String, Object> out = new java.util.TreeMap<>();
+        for (String key : section.getKeys(true)) if (!section.isConfigurationSection(key)) out.put(key, section.get(key));
+        return out;
     }
 
     private static boolean onScreen(Vector3f view, float margin) {
@@ -153,6 +201,7 @@ public final class HeldChecks {
                         }
                     }
                 }
+                for (var variation : VARIATIONS) requireNatural(animation, id, variation);
                 for (int t = 0; t <= animation.duration(); t++) {
                     var sample = ViewInspect.sample(weapon, frame, stance, animation, t, new Vector3f());
                     require(sample.hand().isFinite() && sample.elbow().isFinite(), "non-finite inspect pose " + id);
@@ -162,6 +211,13 @@ public final class HeldChecks {
                 }
             }
         }
+        if (!naturalFailures.isEmpty()) {
+            var byAnimation = new java.util.TreeMap<String, Long>();
+            naturalFailures.stream().distinct().forEach(f -> byAnimation.merge(f.substring(0, f.indexOf(' ')), 1L, Long::sum));
+            byAnimation.forEach((animation, ticks) -> System.out.println("unnatural: " + animation + " (" + ticks + " ticks)"));
+            naturalFailures.stream().distinct().limit(10).forEach(System.out::println);
+            require(false, naturalFailures.stream().distinct().count() + " held-pose inspect ticks turn the wrist beyond its natural range");
+        }
         if (!pushFailures.isEmpty()) {
             pushFailures.sort(java.util.Comparator.reverseOrder());
             pushFailures.stream().limit(40).forEach(System.out::println);
@@ -170,6 +226,42 @@ public final class HeldChecks {
         return models.viewAnimations().size();
     }
 
+    /**
+     * While the hand holds the weapon the wrist stays in a real range: roll about the blade or barrel
+     * (forearm and wrist together) up to WRIST_ROLL either way, the muzzle or tip up to WRIST_YAW to
+     * the side and between WRIST_DOWN and WRIST_UP up and down, turning at most WRIST_SPEED per tick.
+     * Angles count from the turn at which the hand took hold, so a slow turn in the closed hand cannot
+     * add up to a spin; whole turns only happen while the fingers let go (tosses, ring spins, the fan).
+     */
+    private static void requireNatural(InspectAnimation animation, String id, ViewInspect.Variation variation) {
+        Vector3f previous = null, grabbed = null;
+        for (int t = 0; t <= animation.duration(); t++) {
+            Vector3f wrist = ViewInspect.wrist(animation, t, variation);
+            boolean held = ViewInspect.held(animation, t);
+            if (!held) grabbed = null;
+            else {
+                if (grabbed == null) grabbed = new Vector3f(turns(wrist.x), turns(wrist.y), turns(wrist.z));
+                Vector3f turn = new Vector3f(wrist).sub(grabbed);
+                if (Math.abs(turn.x) > WRIST_ROLL || Math.abs(turn.y) > WRIST_YAW || turn.z < WRIST_DOWN || turn.z > WRIST_UP) {
+                    naturalFailures.add(String.format(java.util.Locale.ROOT, "%s t%d turn %.0f/%.0f/%.0f %s", id, t, turn.x, turn.y, turn.z, variation));
+                }
+                if (previous != null && ViewInspect.held(animation, t - 1)) {
+                    Vector3f step = new Vector3f(wrist).sub(previous).absolute();
+                    float speed = Math.max(step.x, Math.max(step.y, step.z));
+                    if (speed > WRIST_SPEED) naturalFailures.add(String.format(java.util.Locale.ROOT, "%s t%d %.0f degrees per tick", id, t, speed));
+                }
+            }
+            previous = wrist;
+        }
+    }
+
+    /** The whole turns in an angle (nearest multiple of 360). */
+    private static float turns(float degrees) {
+        return Math.round(degrees / 360f) * 360f;
+    }
+
+    private static final float WRIST_ROLL = 90, WRIST_YAW = 65, WRIST_DOWN = -50, WRIST_UP = 75, WRIST_SPEED = 45;
+    private static final List<String> naturalFailures = new ArrayList<>();
     private static final List<ViewInspect.Variation> VARIATIONS = List.of(ViewInspect.Variation.NONE, new ViewInspect.Variation(1.12f, 1),
             new ViewInspect.Variation(1.12f, -1), new ViewInspect.Variation(.88f, 1), new ViewInspect.Variation(.88f, -1));
     /** Standing and crouching, looking up, ahead and down, head turned to either side. */
