@@ -131,17 +131,45 @@ public final class HeldRig {
     }
 
     /**
-     * Joint of a movable rig layer in canvas coordinates: butterfly handles and folding blades turn
-     * about it. Slides, bolts and pumps only move, so they report the canvas centre.
+     * Joint of a movable rig layer in canvas coordinates: the pivot pins of folding blades and the two
+     * butterfly pins. The butterfly's safe handle (handle_a) stays in the hand; the blade turns about
+     * the safe-handle pin and the bite handle (handle_b) about its own pin on the blade. Slides, bolts
+     * and pumps only move, so they report the canvas centre.
      */
     public static double[] hinge(WeaponType weapon, String layer) {
         return switch (weapon.id() + "/" + layer) {
-            case "butterfly/handle_a", "butterfly/handle_b" -> new double[]{.507, .487};
-            case "flip/blade", "stiletto/blade" -> new double[]{.47, .5};
-            case "falchion/blade" -> new double[]{.44, .5};
-            case "navaja/blade" -> new double[]{.43, .5};
+            case "butterfly/blade", "butterfly/handle_a" -> new double[]{.505, .463};
+            case "butterfly/handle_b" -> new double[]{.505, .521};
+            case "flip/blade", "falchion/blade" -> new double[]{.44, .5};
+            case "stiletto/blade" -> new double[]{.465, .5};
+            case "navaja/blade" -> new double[]{.415, .505};
+            case "ursus/blade" -> new double[]{.41, .5};
             default -> new double[]{.5, .5};
         };
+    }
+
+    /**
+     * The rig layer a layer is pinned to, or null for layers pinned to the weapon in the hand: the
+     * butterfly's bite handle rides on the blade, so it swings around with it.
+     */
+    public static String parent(WeaponType weapon, String layer) {
+        return weapon.id().equals("butterfly") && layer.equals("handle_b") ? "blade" : null;
+    }
+
+    /**
+     * Where a released weapon turns, in canvas coordinates: ring knives about the ring on the index
+     * finger, other knives about their balance where the blade meets the handle (finger twirls and
+     * tosses), everything else about the canvas centre.
+     */
+    public static double[] spinPoint(WeaponType weapon) {
+        switch (weapon.id()) {
+            case "karambit": return new double[]{.146, .514};
+            case "talon": return new double[]{.100, .521};
+            default: break;
+        }
+        Region blade = weapon.category() == WeaponCategory.KNIFE ? weapon.region("blade") : null;
+        if (blade == null) return new double[]{.5, .5};
+        return new double[]{blade.x1(), (blade.y1() + blade.y2()) / 2};
     }
 
     /** The configured, built-in or category-default hold of a weapon, in canvas coordinates. */
@@ -334,13 +362,18 @@ public final class HeldRig {
                 .rotateY((float) (Math.PI / 2)).rotateX((float) Math.toRadians(roll));
     }
 
-    /** Knife flats turn towards the camera instead of showing only their spine. */
+    /**
+     * Knife flats turn towards the camera instead of showing only their spine, with the spine up and the
+     * edge down like a real hammer grip: of the two rolls that show a flat, the one with the artwork's top up.
+     */
     private static float cameraFacingRoll(float yaw, float pitch, Vector3fc grip) {
         Vector3f camera = new Vector3f(grip).negate().normalize();
         float best = 0;
         double score = -2;
         for (int roll = -180; roll < 180; roll += 2) {
-            double s = weaponRotation(yaw, pitch, roll).transformDirection(new Vector3f(0, 0, 1)).dot(camera);
+            Matrix4f rotation = weaponRotation(yaw, pitch, roll);
+            if (rotation.transformDirection(new Vector3f(0, 1, 0)).y < 0) continue;
+            double s = Math.abs(rotation.transformDirection(new Vector3f(0, 0, 1)).dot(camera));
             if (s > score) { score = s; best = roll; }
         }
         return best;
