@@ -35,11 +35,21 @@ public final class InspectAnimation {
     private final Map<Integer, String> sounds;
     private final int substeps;
     private final Map<String, List<Segment>> segments = new HashMap<>();
+    private final boolean varyRoll;
     private List<Integer> samples;
     private int duration;
 
     public InspectAnimation(String id, Map<String, Group> groups, Map<Integer, String> sounds, int substeps) {
+        this(id, groups, sounds, substeps, true);
+    }
+
+    /**
+     * {@code varyRoll} false keeps the wrist roll as written in every playback: tricks whose roll lines
+     * the knife up with the eyes (finger and ring spins) must not play mirrored.
+     */
+    public InspectAnimation(String id, Map<String, Group> groups, Map<Integer, String> sounds, int substeps, boolean varyRoll) {
         this.id = id;
+        this.varyRoll = varyRoll;
         this.groups = Map.copyOf(groups);
         this.sounds = Map.copyOf(sounds);
         this.substeps = Math.max(1, Math.min(20, substeps));
@@ -53,6 +63,11 @@ public final class InspectAnimation {
 
     public int duration() {
         return duration;
+    }
+
+    /** Whether a playback may roll the wrist the other way (see {@link ViewInspect.Variation}). */
+    public boolean varyRoll() {
+        return varyRoll;
     }
 
     public List<Integer> samples() {

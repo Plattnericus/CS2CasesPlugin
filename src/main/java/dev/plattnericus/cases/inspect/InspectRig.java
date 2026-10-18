@@ -8,7 +8,7 @@ import java.util.Set;
 
 /** The pack exporter and live scene share the same joints and texture partitions. */
 public final class InspectRig {
-    private static final Set<String> FOLDERS = Set.of("flip", "navaja", "stiletto", "falchion");
+    private static final Set<String> FOLDERS = Set.of("flip", "navaja", "stiletto", "falchion", "ursus");
     private InspectRig() { }
     public static boolean reverseGrip(WeaponType weapon) {
         return weapon.id().equals("karambit") || weapon.id().equals("talon");

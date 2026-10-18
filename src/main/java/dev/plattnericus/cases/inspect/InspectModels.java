@@ -41,6 +41,8 @@ public final class InspectModels {
     private final Map<String, List<String>> animationPools = new LinkedHashMap<>();
     private final Map<String, InspectAnimation> viewAnimations = new LinkedHashMap<>();
     private final Map<String, List<String>> viewPools = new LinkedHashMap<>();
+    /** Pools the server's inspect.yml changed, and pools it does not have (they come from the bundled defaults). */
+    private final java.util.Set<String> editedViewPools = new java.util.HashSet<>(), bundledViewPools = new java.util.HashSet<>();
 
     public InspectModels(File file, Consumer<String> warn) {
         YamlConfiguration y = YamlConfiguration.loadConfiguration(file);
@@ -48,6 +50,16 @@ public final class InspectModels {
             if (bundled != null) {
                 var defaults = YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(bundled, java.nio.charset.StandardCharsets.UTF_8));
                 InspectProfileDefaults.upgradeViews(y, defaults);
+                // A family pool the server edited keeps serving the stock weapons of that family until the
+                // server gives a weapon its own pool: bundled per-weapon pools must not bypass the edit.
+                ConfigurationSection ownPools = y.getConfigurationSection("view-pools");
+                ConfigurationSection stockPools = defaults.getConfigurationSection("view-pools");
+                if (ownPools != null && stockPools != null) for (String key : ownPools.getKeys(false)) {
+                    if (!stockPools.getStringList(key).equals(ownPools.getStringList(key))) editedViewPools.add(key);
+                }
+                if (stockPools != null) for (String key : stockPools.getKeys(false)) {
+                    if (ownPools == null || !ownPools.contains(key, true)) bundledViewPools.add(key);
+                }
                 y.setDefaults(defaults);
                 y.options().copyDefaults(true);
             }
@@ -284,7 +296,7 @@ public final class InspectModels {
             }
             groups.put(gid, new InspectAnimation.Group(gid, g.getString("parent"), vec(g, "pivot", 0), frames));
         }
-        try { return new InspectAnimation(id, groups, sounds, a.getInt("substeps", 3)); }
+        try { return new InspectAnimation(id, groups, sounds, a.getInt("substeps", 3), a.getBoolean("vary-roll", true)); }
         catch (IllegalArgumentException invalid) { warn.accept("inspect animation '" + id + "': " + invalid.getMessage()); return null; }
     }
 
@@ -323,10 +335,17 @@ public final class InspectModels {
      * when the pool has a choice; null when the configuration has no held-pose inspects for it.
      */
     public InspectAnimation chooseViewAnimation(dev.plattnericus.cases.catalog.WeaponType weapon, String previous) {
-        List<String> pool = viewPools.get(weapon.id());
-        if (pool == null) pool = viewPools.get(HeldRig.family(weapon));
+        List<String> pool = viewPool(weapon);
         if (pool == null) return null;
         return viewAnimations.get(AnimationSelector.choose(pool, previous, java.util.concurrent.ThreadLocalRandom.current()));
+    }
+
+    /** The held-pose pool a weapon plays from: its own, otherwise its family's; null when there is none. */
+    public List<String> viewPool(dev.plattnericus.cases.catalog.WeaponType weapon) {
+        String family = HeldRig.family(weapon);
+        List<String> own = viewPools.get(weapon.id());
+        boolean bypassesEdit = bundledViewPools.contains(weapon.id()) && editedViewPools.contains(family);
+        return own != null && !bypassesEdit ? own : viewPools.get(family);
     }
 
     public InspectAnimation viewAnimation(String id) {

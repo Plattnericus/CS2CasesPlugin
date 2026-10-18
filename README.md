@@ -59,11 +59,14 @@ get a mirrored view.
 
 Press **F** and you look at your weapon the way you would in real life: the wrist turns it to show
 one side and then the other, the elbow and shoulder follow and the second hand lets go and grabs
-again. Slides rack, bolts pull, pumps cycle, butterfly handles swing around the blade and folding
-blades flick closed and open. While the hand holds the weapon, the wrist always stays in its real
-range; whole turns only happen in real tricks where the fingers let go, like a knife toss, the
-karambit ring spin or the butterfly fan. 66 animations in eleven families; every playback varies a
-little and never repeats twice in a row.
+again. Slides rack, bolts pull and pumps cycle. Every knife has its own inspects: the Butterfly Knife
+really flips open and shut (the blade and the bite handle swing round the safe handle on their own
+pins), the Karambit and Talon spin on the index finger in the ring, the Flip, Navaja, Stiletto,
+Falchion and Ursus flick their blades shut and open, heavy blades chop and the rest are tossed end
+over end, twirled at the guard or rolled like a coin. Knives sit in the hand edge down, spine up.
+While the hand holds the weapon, the wrist always stays in its real range; whole turns only happen
+in real tricks where the fingers let go. 102 animations; every playback varies a little and never
+repeats twice in a row.
 
 ![Inspects in the real client: Butterfly Knife flips, AWP bolt, Karambit ring spin and Desert Eagle slide](.github/readme/inspects.jpg)
 
@@ -107,7 +110,7 @@ the catalog.
 | **Case openings** | 22 cases, up to nine public reels at once per player; 1–1000 cases per request, the rest wait in line. |
 | **Real skin values** | Float, exterior, pattern, StatTrak, origin and date; Doppler phases, Fade percentage, Blue Gem tiers and Fire & Ice. |
 | **View model** | Your skin arms hold every knife and gun; drawing a bow aims, charging a crossbow reloads, a loaded crossbow stays ready. |
-| **Inspects** | 66 natural held-pose animations with moving parts, plus 362 articulated profile inspects for gloves, menus and servers without the pack. |
+| **Inspects** | 102 natural held-pose animations with moving parts (63 of them for the 20 knives, each knife its own set), plus 362 articulated profile inspects for gloves, menus and servers without the pack. |
 | **Trading and economy** | Direct trades confirmed by both players, an Emerald marketplace with offline proceeds and trade-in contracts. |
 | **Built to last** | SQLite or MySQL/MariaDB, signed case and key items, journals that recover interrupted openings and payments. |
 | **45 languages** | English for everyone by default; optional per-client translations. |

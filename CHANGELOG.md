@@ -1,5 +1,26 @@
 # Changelog
 
+## Unreleased
+
+- **Inspects no longer flip the weapon.** Item displays turn their item half a revolution before drawing
+  it, and the inspect scene did not turn the weapon back: as soon as an inspect started, every weapon was
+  shown end for end and the hand held the blade or the handguard. The first-person scene and the scene
+  other players see now show the rig exactly like the held view model.
+- **Knives edge down.** Forward-grip knives were held with the spine down; they now sit in the hand like a
+  real hammer grip, edge down and spine up, with the flat still facing you.
+- **Every knife its own inspects.** 63 knife inspects, a set for each of the 20 knives instead of one shared
+  pool: the Classic Knife and Huntsman toss end over end about the balance point, the M9 Bayonet, Paracord,
+  Skeleton and Stiletto twirl at the guard in front of the fingers, the Gut and Survival knives roll like
+  a coin, Bowie and Kukri chop, the Karambit and Talon spin on the index finger in the ring, and the Flip,
+  Navaja, Stiletto, Falchion and Ursus flick their blades shut and open (the Ursus now folds as well).
+- **A real Butterfly Knife.** Each handle turns on its own pin: closing swings the blade round the safe
+  handle and the bite handle follows and folds back against it; flips, rollovers, an aerial with the handles
+  splaying in the air, a fan at the pivot and a look at both faces.
+- **Animation system.** New groups `spin` (a released weapon turns about its ring or balance point) and
+  `hand` (where a released hand waits), rig layers pinned to other layers, `vary-roll: false` for tricks whose
+  roll must not be mirrored. Servers with the unchanged 10.17.2026 or 1.3.0 held-pose inspects get the new ones
+  on load; unused unchanged stock entries are removed, edited entries and edited pools stay.
+
 ## 10.17.2026 — 2026-10-17
 
 - **Date versions.** Releases are now versioned by date as `vMONTH.DAY.YEAR`. The version appears in

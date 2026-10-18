@@ -21,11 +21,17 @@ import java.util.Map;
  *   <li>{@code elbow}: {@code move} shifts the main elbow; the shoulder also follows the hand.</li>
  *   <li>{@code grip}: {@code move} x releases the main hand (0 holds, 1 lets go for tosses),
  *   y releases the support hand.</li>
+ *   <li>{@code hand}: {@code move} is where the released main hand waits, relative to the hold (view
+ *   space, blocks); without it the hand drops a little below the hold.</li>
  *   <li>{@code support}: {@code move} slides the support hand along the weapon (canvas units), for
  *   example from the handguard to the magazine.</li>
+ *   <li>{@code spin}: {@code rotate} turns the whole weapon about its ring or balance point
+ *   ({@link HeldRig#spinPoint}) while the hand has let go: tosses turn end over end about the middle of the
+ *   knife and finger twirls about the index finger at the guard, ring spins about the ring, never the grip.</li>
  *   <li>Rig layers ({@code mechanism}, {@code blade}, {@code handle_a}, {@code handle_b}): {@code move}
  *   shifts the layer along the weapon (canvas units), {@code rotate} turns it about its joint
- *   ({@link HeldRig#hinge}); the rest of the rig stays in the hand.</li>
+ *   ({@link HeldRig#hinge}); the rest of the rig stays in the hand. A layer pinned to another
+ *   ({@link HeldRig#parent}, the butterfly's bite handle on the blade) also follows that layer.</li>
  * </ul>
  * The forearm twists with the wrist roll, so turning the weapon over also turns the arm.
  */
@@ -64,6 +70,12 @@ public final class ViewInspect {
 
         public static Variation random(java.util.random.RandomGenerator random) {
             return new Variation(.88f + random.nextFloat() * .24f, random.nextBoolean() ? 1 : -1);
+        }
+
+        /** A random variation this animation allows: tricks that must keep their roll always roll as written. */
+        public static Variation random(java.util.random.RandomGenerator random, InspectAnimation animation) {
+            Variation variation = random(random);
+            return animation.varyRoll() ? variation : new Variation(variation.intensity(), 1);
         }
     }
 
@@ -113,22 +125,28 @@ public final class ViewInspect {
         Matrix4f placement = new Matrix4f().translation(gripView).mul(stance.rotation()).mul(wrist)
                 .scale(stance.scale() * Math.max(.05f, w.scale().x));
         Matrix4f gripFrame = HeldRig.gripFrame(weapon, frame);
+        if (animation.hasGroup("spin")) {
+            // A released weapon turns about its ring or balance point; the hand has let go meanwhile.
+            Vector3fc spin = animation.pose("spin", t).rotate();
+            double[] point = HeldRig.spinPoint(weapon);
+            Vector3f balance = HeldRig.inGripFrame(weapon, frame, point[0], point[1]);
+            placement.translate(balance).rotateXYZ(rad(spin.x()), rad(spin.y()), rad(spin.z())).translate(balance.negate());
+        }
         Matrix4f weaponMatrix = new Matrix4f(placement).mul(gripFrame);
+        Map<String, Matrix4f> articulations = new java.util.HashMap<>();
         Map<String, Matrix4f> layers = new java.util.HashMap<>();
         for (String layer : LAYERS) {
-            if (!animation.hasGroup(layer)) continue;
-            Pose motion = animation.pose(layer, t);
-            double[] joint = HeldRig.hinge(weapon, layer);
-            Vector3f hinge = HeldRig.inGripFrame(weapon, frame, joint[0], joint[1]);
-            Matrix4f articulation = new Matrix4f().translate(motion.move()).translate(hinge)
-                    .rotateXYZ(rad(motion.rotate().x), rad(motion.rotate().y), rad(motion.rotate().z)).translate(hinge.negate());
-            layers.put(layer, new Matrix4f(placement).mul(articulation).mul(gripFrame));
+            Matrix4f articulation = articulation(weapon, frame, animation, t, layer, articulations);
+            if (articulation != null) layers.put(layer, new Matrix4f(placement).mul(articulation).mul(gripFrame));
         }
 
         Vector3f restHand = new Vector3f(stance.grip()).add(origin);
         float releaseMain = clamp(grip.move().x), releaseSupport = clamp(grip.move().y);
-        // A released hand stays a little below where it held the weapon, ready to catch it again.
-        Vector3f hand = new Vector3f(gripView).lerp(new Vector3f(restHand).add(.02f, -.07f, .05f), releaseMain);
+        // A released hand stays a little below where it held the weapon, ready to catch it again; the
+        // hand group places it exactly (relative to the hold), so it waits where it let go.
+        Vector3f released = animation.hasGroup("hand") ? new Vector3f(restHand).add(animation.pose("hand", t).move())
+                : new Vector3f(restHand).add(.02f, -.07f, .05f);
+        Vector3f hand = new Vector3f(gripView).lerp(released, releaseMain);
         Vector3f elbow = new Vector3f(restHand).add(stance.elbow()).add(elbowPose.move())
                 .add(new Vector3f(hand).sub(restHand).mul(SHOULDER_FOLLOW));
         Vector3f forearm = new Vector3f(hand).sub(elbow).normalize();
@@ -144,6 +162,31 @@ public final class ViewInspect {
                     .add(new Vector3f(supportHand).sub(restSupport).mul(SHOULDER_FOLLOW));
         }
         return new Sample(weaponMatrix, Map.copyOf(layers), hand, elbow, reference, supportHand, supportElbow);
+    }
+
+    /**
+     * How a rig layer has moved against the weapon in the hand (grip frame), or null when neither the
+     * layer nor a layer it is pinned to moves in this animation. A pinned layer carries its parent's
+     * motion and turns about its own joint on top of it.
+     */
+    private static Matrix4f articulation(WeaponType weapon, SpriteFrame frame, InspectAnimation animation, int t, String layer,
+                                         Map<String, Matrix4f> done) {
+        if (done.containsKey(layer)) return done.get(layer);
+        String parent = HeldRig.parent(weapon, layer);
+        Matrix4f inherited = parent == null ? null : articulation(weapon, frame, animation, t, parent, done);
+        Matrix4f result = null;
+        if (animation.hasGroup(layer) || inherited != null) {
+            result = inherited == null ? new Matrix4f() : new Matrix4f(inherited);
+            if (animation.hasGroup(layer)) {
+                Pose motion = animation.pose(layer, t);
+                double[] joint = HeldRig.hinge(weapon, layer);
+                Vector3f hinge = HeldRig.inGripFrame(weapon, frame, joint[0], joint[1]);
+                result.translate(motion.move()).translate(hinge)
+                        .rotateXYZ(rad(motion.rotate().x), rad(motion.rotate().y), rad(motion.rotate().z)).translate(hinge.negate());
+            }
+        }
+        done.put(layer, result);
+        return result;
     }
 
     /**

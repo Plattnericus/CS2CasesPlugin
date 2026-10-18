@@ -370,6 +370,8 @@ public final class InspectService implements Listener {
     private static final long MOUNT_TICKS = 3L;
     private static final int MOUNT_TICKS_INT = (int) MOUNT_TICKS;
     private static final Matrix4f MIRROR = new Matrix4f().scaling(-1, 1, 1);
+    /** From item model space to an item display's transformation: the item centre, turned back half a revolution. */
+    public static final Matrix4f DISPLAY_TURN = new Matrix4f().translation(.5f, .5f, .5f).rotateY((float) Math.PI);
 
     /**
      * Held-pose inspect: the weapon starts and ends in the first-person hold and the owner's skin arms
@@ -427,7 +429,7 @@ public final class InspectService implements Listener {
         InspectSession session = new InspectSession(player.getUniqueId(), animation, List.of(), false, leftHand, bodyHand,
                 1f, m.anchor(), m.handAnchor(), m.handModelScale(), !bodyHand);
         session.view = new InspectSession.ViewSetup(def.weapon(), frame, stance, HeldRig.bodyStance(def.weapon(), frame), dual,
-                OBSERVER_SCALE, List.copyOf(displays), ViewInspect.Variation.random(java.util.concurrent.ThreadLocalRandom.current()), hull);
+                OBSERVER_SCALE, List.copyOf(displays), ViewInspect.Variation.random(java.util.concurrent.ThreadLocalRandom.current(), animation), hull);
         session.lastHandAnchor = hand;
         session.standWait = player.isSneaking() && !bodyHand ? STAND_WAIT_TICKS : 0;
         blockUse(player, session);
@@ -456,11 +458,13 @@ public final class InspectService implements Listener {
             if (!vd.entity().isValid()) continue;
             Matrix4f side = s.leftHand != vd.mirrored() ? MIRROR : new Matrix4f();
             Matrix4f target;
+            // Item displays turn their item half a revolution about its centre before drawing it; the
+            // weapon layers turn back so the rig shows exactly like the held view model.
             if (vd.observers()) {
                 target = new Matrix4f(BASIS).translate(0, 0, -push[vd.mirrored() ? 1 : 0]).mul(side).scale(v.observerScale())
-                        .mul(body.weapon(vd.layer())).translate(.5f, .5f, .5f);
+                        .mul(body.weapon(vd.layer())).mul(DISPLAY_TURN);
             } else if (vd.role() == InspectSession.Role.WEAPON) {
-                target = new Matrix4f().translation(new Vector3f(ride).negate()).mul(side).mul(own.weapon(vd.layer())).translate(.5f, .5f, .5f);
+                target = new Matrix4f().translation(new Vector3f(ride).negate()).mul(side).mul(own.weapon(vd.layer())).mul(DISPLAY_TURN);
             } else {
                 boolean support = vd.role() == InspectSession.Role.SUPPORT_ARM;
                 Vector3f hand = side.transformPosition(new Vector3f(support ? own.supportHand() : own.hand())).sub(ride);
