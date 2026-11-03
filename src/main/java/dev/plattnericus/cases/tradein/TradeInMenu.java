@@ -1,14 +1,27 @@
 package dev.plattnericus.cases.tradein;
 
+import dev.plattnericus.cases.catalog.WeaponType;
 import dev.plattnericus.cases.core.CasesContext;
+import dev.plattnericus.cases.gui.ChoiceMenu;
 import dev.plattnericus.cases.gui.GuiItems;
 import dev.plattnericus.cases.gui.Menu;
+import dev.plattnericus.cases.gui.menu.SkinInventoryMenu;
 import dev.plattnericus.cases.items.SkinIcons;
 import dev.plattnericus.cases.skin.SkinInstance;
 import dev.plattnericus.cases.util.Text;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /** Contract selection with a separate, explicit final confirmation. */
 public final class TradeInMenu extends Menu {
@@ -24,7 +37,7 @@ public final class TradeInMenu extends Menu {
     @Override protected void build() {
         var profile = ctx.profiles().get(viewer); if (profile == null) return;
         var selected = ctx.tradeIns().selected(viewer);
-        var inputs = selected.stream().map(profile::get).filter(java.util.Objects::nonNull).toList();
+        var inputs = selected.stream().map(profile::get).filter(Objects::nonNull).toList();
         var first = inputs.isEmpty() ? null : inputs.getFirst();
         var target = first == null ? null : TradeInRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId()));
         int required = TradeInRules.required(target);
@@ -38,10 +51,10 @@ public final class TradeInMenu extends Menu {
         if (skins.isEmpty()) set(31, GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradein.empty"));
         for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < skins.size(); i++) {
             var skin = skins.get(page * GuiItems.CONTENT.length + i); var def = ctx.catalog().skin(skin.skinId());
-            boolean chosen = selected.contains(skin.id()); var lore = new java.util.ArrayList<>(ctx.formatter(viewer).lore(def, skin, true));
+            boolean chosen = selected.contains(skin.id()); var lore = new ArrayList<>(ctx.formatter(viewer).lore(def, skin, true));
             lore.add(ctx.messages(viewer).item(chosen ? "trade.selected" : "trade.add"));
             var name = ctx.formatter(viewer).fullName(def, skin);
-            if (chosen) name = Component.text("✓ ", net.kyori.adventure.text.format.NamedTextColor.GREEN).append(name);
+            if (chosen) name = Component.text("✓ ", NamedTextColor.GREEN).append(name);
             set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen), c -> { ctx.tradeIns().toggle(viewer, skin.id()); playClick(); render(); });
         }
         String all = ctx.messages(viewer).raw("tradein.all");
@@ -51,13 +64,13 @@ public final class TradeInMenu extends Menu {
         });
         set(2, GuiItems.icon(ctx.messages(viewer), Material.PRISMARINE_CRYSTALS, "tradein.rarity", Text.unparsed("value",
                 rarityFilter == null ? all : ctx.catalog().rarity(rarityFilter).name())), c -> {
-            var choices = new java.util.ArrayList<String>(); choices.add(null);
+            var choices = new ArrayList<String>(); choices.add(null);
             ctx.catalog().raritiesOrdered().stream().filter(r -> !r.rareSpecial()).forEach(r -> choices.add(r.id()));
             filterChoice(choices, rarityFilter, value -> value == null ? all : ctx.catalog().rarity(value).name(), value -> rarityFilter = value);
         });
         set(3, GuiItems.icon(ctx.messages(viewer), Material.REDSTONE, "tradein.stattrak", Text.unparsed("value",
                 statTrakFilter == 0 ? all : statTrakFilter == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak")), c -> {
-            filterChoice(java.util.List.of(0, 1, 2), statTrakFilter,
+            filterChoice(List.of(0, 1, 2), statTrakFilter,
                     value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak", value -> statTrakFilter = value);
         });
         if (weaponFilter != null || rarityFilter != null || statTrakFilter != 0) {
@@ -66,10 +79,10 @@ public final class TradeInMenu extends Menu {
             });
         }
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradein.sort", Text.unparsed("sort",
-                ctx.messages(viewer).raw("tradein.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
+                ctx.messages(viewer).raw("tradein.sorts." + sort.name().toLowerCase(Locale.ROOT)))), c -> {
             confirming = true;
-            new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.sort-title", java.util.List.of(TradeInSelection.Sort.values()), sort,
-                    value -> ctx.messages(viewer).raw("tradein.sorts." + value.name().toLowerCase(java.util.Locale.ROOT)),
+            new ChoiceMenu<>(ctx, viewer, "menus.sort-title", List.of(TradeInSelection.Sort.values()), sort,
+                    value -> ctx.messages(viewer).raw("tradein.sorts." + value.name().toLowerCase(Locale.ROOT)),
                     value -> { sort = value; page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).icons(value -> GuiItems.sortIcon(value.name())).open();
         });
         var chances = TradeInRules.chances(ctx.catalog(), inputs, target);
@@ -85,7 +98,7 @@ public final class TradeInMenu extends Menu {
             playClick(); render();
         });
         set(8, GuiItems.icon(ctx.messages(viewer), Material.MILK_BUCKET, "tradein.clear"), c -> { ctx.tradeIns().cancel(viewer); page = 0; playClick(); render(); });
-        set(45, GuiItems.back(ctx.messages(viewer)), c -> { ctx.tradeIns().cancel(viewer); new dev.plattnericus.cases.gui.menu.SkinInventoryMenu(ctx, viewer).open(); });
+        set(45, GuiItems.back(ctx.messages(viewer)), c -> { ctx.tradeIns().cancel(viewer); new SkinInventoryMenu(ctx, viewer).open(); });
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
         boolean ready = target != null && selected.size() == required;
@@ -105,28 +118,28 @@ public final class TradeInMenu extends Menu {
     }
     @Override protected void onClose() { if (!confirming) ctx.tradeIns().cancel(viewer); }
     private void returnToSelection() { confirming = false; open(); }
-    private <T> void filterChoice(java.util.List<T> values, T current, java.util.function.Function<T, String> label, java.util.function.Consumer<T> apply) {
+    private <T> void filterChoice(List<T> values, T current, Function<T, String> label, Consumer<T> apply) {
         confirming = true;
-        new dev.plattnericus.cases.gui.ChoiceMenu<>(ctx, viewer, "menus.filter-title", values, current, label,
+        new ChoiceMenu<>(ctx, viewer, "menus.filter-title", values, current, label,
                 value -> { apply.accept(value); page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).open();
     }
 
     private static final class RewardsMenu extends Menu {
         private final TradeInMenu source;
-        private final java.util.List<TradeInRules.Chance> chances;
+        private final List<TradeInRules.Chance> chances;
         private int page;
         private boolean navigating;
-        RewardsMenu(CasesContext ctx, Player p, TradeInMenu source, java.util.List<TradeInRules.Chance> chances) {
+        RewardsMenu(CasesContext ctx, Player p, TradeInMenu source, List<TradeInRules.Chance> chances) {
             super(ctx, p); this.source = source; this.chances = chances;
         }
         @Override protected int rows() { return 6; }
-        @Override protected Component title() { return ctx.messages(viewer).get("menus.rewards-title").colorIfAbsent(net.kyori.adventure.text.format.NamedTextColor.DARK_GRAY); }
+        @Override protected Component title() { return ctx.messages(viewer).get("menus.rewards-title").colorIfAbsent(NamedTextColor.DARK_GRAY); }
         @Override protected void build() {
             int pages = GuiItems.pages(chances.size(), GuiItems.CONTENT.length);
             for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < chances.size(); i++) {
                 var chance = chances.get(page * GuiItems.CONTENT.length + i);
                 set(GuiItems.CONTENT[i], SkinIcons.icon(chance.skin(), Component.text(chance.skin().displayName()),
-                        ctx.messages(viewer).itemList("menus.reward-chance", Text.unparsed("chance", String.format(java.util.Locale.ROOT, "%.2f", chance.probability() * 100))), ctx.settings(), false));
+                        ctx.messages(viewer).itemList("menus.reward-chance", Text.unparsed("chance", String.format(Locale.ROOT, "%.2f", chance.probability() * 100))), ctx.settings(), false));
             }
             set(45, GuiItems.back(ctx.messages(viewer)), c -> { navigating = true; source.returnToSelection(); });
             set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
@@ -139,19 +152,19 @@ public final class TradeInMenu extends Menu {
     /** A direct weapon choice avoids cycling through dozens of models to find an AK or AWP. */
     private static final class WeaponChooser extends Menu {
         private final TradeInMenu source;
-        private final java.util.List<SkinInstance> candidates;
+        private final List<SkinInstance> candidates;
         private int page;
         private boolean navigating;
-        WeaponChooser(CasesContext ctx, Player p, TradeInMenu source, java.util.List<SkinInstance> candidates) {
+        WeaponChooser(CasesContext ctx, Player p, TradeInMenu source, List<SkinInstance> candidates) {
             super(ctx, p); this.source = source; this.candidates = candidates;
         }
         @Override protected int rows() { return 6; }
         @Override protected Component title() { return ctx.messages(viewer).get("tradein.weapon-title"); }
         @Override protected void build() {
-            var counts = candidates.stream().collect(java.util.stream.Collectors.groupingBy(
-                    s -> ctx.catalog().skin(s.skinId()).weapon().id(), java.util.stream.Collectors.counting()));
+            var counts = candidates.stream().collect(Collectors.groupingBy(
+                    s -> ctx.catalog().skin(s.skinId()).weapon().id(), Collectors.counting()));
             var weapons = ctx.catalog().weapons().stream().filter(w -> counts.containsKey(w.id()))
-                    .sorted(java.util.Comparator.comparing(dev.plattnericus.cases.catalog.WeaponType::name)).toList();
+                    .sorted(Comparator.comparing(WeaponType::name)).toList();
             int pages = GuiItems.pages(weapons.size(), GuiItems.CONTENT.length); page = Math.min(page, pages - 1);
             for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < weapons.size(); i++) {
                 var weapon = weapons.get(page * GuiItems.CONTENT.length + i);
@@ -173,10 +186,10 @@ public final class TradeInMenu extends Menu {
         @Override protected void onClose() { if (!navigating) ctx.tradeIns().cancel(viewer); }
     }
     private static final class ContractConfirmation extends Menu {
-        private final org.bukkit.inventory.ItemStack subject;
+        private final ItemStack subject;
         private final TradeInMenu source;
         private boolean navigating;
-        ContractConfirmation(CasesContext ctx, Player p, org.bukkit.inventory.ItemStack subject, TradeInMenu source) { super(ctx, p); this.subject = subject; this.source = source; }
+        ContractConfirmation(CasesContext ctx, Player p, ItemStack subject, TradeInMenu source) { super(ctx, p); this.subject = subject; this.source = source; }
         @Override protected int rows() { return 3; }
         @Override protected Component title() { return ctx.messages(viewer).get("gui.confirm.title"); }
         @Override protected void build() {

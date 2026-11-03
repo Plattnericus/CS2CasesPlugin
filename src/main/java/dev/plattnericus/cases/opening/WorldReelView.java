@@ -155,10 +155,7 @@ final class WorldReelView implements OpeningView {
         appear = target;
     }
 
-    /**
-     * Interaction hitboxes along the visible strip. Hitboxes are axis aligned, so the strip is
-     * covered by one small box per item slot instead of one big box.
-     */
+    /** One small hitbox per visible item, because hitboxes are axis aligned. */
     private void clickTargets(double half) {
         Vector forward = anchor.getDirection().multiply(-1).setY(0).normalize();
         Vector right = forward.clone().crossProduct(new Vector(0, 1, 0)).normalize();
@@ -216,11 +213,7 @@ final class WorldReelView implements OpeningView {
         });
     }
 
-    /**
-     * Called every tick with the exact reel position. A keyframe is sent every {@link #STEP} ticks,
-     * aimed at where the reel will be {@link #STEP} ticks later, so the client interpolation stays
-     * on the curve. The final frame is always sent and lands exactly on the winner.
-     */
+    /** Sends a keyframe every {@link #STEP} ticks, aimed where the reel will be then; the last one lands on the winner. */
     @Override
     public void frame(double center) {
         if (closed || session.tick < INTRO_TICKS) {
@@ -249,7 +242,7 @@ final class WorldReelView implements OpeningView {
         return Math.max(center, Math.min(session.winnerIndex, 4 + easing.apply(t) * distance));
     }
 
-    /** Keep the current and next window. A slot's reel identity never changes in the client. */
+    /** Keeps the current and the next window of reel slots alive. */
     private void place(double current, double target, int duration) {
         int padding = cfg.visibleItems() / 2 + 2;
         int first = Math.max(0, (int) Math.floor(current) - padding);
@@ -281,10 +274,7 @@ final class WorldReelView implements OpeningView {
                 });
                 slot = new Slot(item, bar, session.tick); slots.put(index, slot); all.add(item); all.add(bar);
             }
-            // A newly tracked display has no previous client render state. Interpolating its
-            // first metadata packet can blend from the default unit-scale pose. Preload far
-            // enough along the curve to initialize invisible entries before they reach the
-            // strip, then update every entry on the same keyframe schedule.
+            // New displays skip interpolation so they do not blend in from the default pose.
             int interpolation = session.tick - slot.spawnedAt() < WARMUP ? 0 : duration;
             keyframe(slot.item(), itemPose(index, target), interpolation);
             keyframe(slot.bar(), barPose(index, target), interpolation);
@@ -292,8 +282,7 @@ final class WorldReelView implements OpeningView {
     }
 
     private void keyframe(Display display, Transformation pose, int duration) {
-        // Resetting start_interpolation without changing the pose restarts the previous client
-        // tween. At the edge that makes an already hidden item jump back into view forever.
+        // Re-sending an unchanged pose would restart the client tween and make hidden items reappear.
         if (display.getTransformation().equals(pose)) return;
         display.setInterpolationDelay(0);
         display.setInterpolationDuration(duration);
@@ -339,7 +328,7 @@ final class WorldReelView implements OpeningView {
                 Transformation pose = slot.item().getTransformation(); pose.getScale().zero(); keyframe(slot.item(), pose, 8);
             }
         }
-        // the same entity that scrolled in: only the gold mystery icon is replaced by the real item
+        // only the gold mystery icon is swapped for the real item
         if (reward.rarity().rareSpecial()) {
             winner.setItemStack(icon(reward, true));
         }
