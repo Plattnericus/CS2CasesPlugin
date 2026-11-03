@@ -70,8 +70,7 @@ public final class ResourcePackInstaller {
                                 + "Load this ZIP in Minecraft or enable automatic resource-pack distribution.\n"
                                 + "Use /cases open <case> 9 for nine simultaneous case openings.\n"
                                 + "The MCCases namespace and Vanilla 26.3 item shaders are managed together.\n"
-                                + "MCCASES-MANIFEST.json records preserved files and build provenance.\n"
-                                + "See LEGAL-NOTICE.txt for project and asset-use information.\n").getBytes(StandardCharsets.UTF_8);
+                                + "MCCASES-MANIFEST.json records preserved files and build provenance.\n").getBytes(StandardCharsets.UTF_8);
                     }
                     write(out, name, data);
                 }
@@ -232,7 +231,7 @@ public final class ResourcePackInstaller {
 
     private static boolean managedRoot(String name) {
         return name.equals("pack.mcmeta") || name.equals("README.txt") || name.equals("BASE-PACK-README.txt")
-                || name.equals("LEGAL-NOTICE.txt") || name.equals(MANIFEST)
+                || name.equals(MANIFEST)
                 || name.equals("assets/minecraft/shaders/core/item.vsh") || name.equals("assets/minecraft/shaders/core/item.fsh");
     }
     private static JsonObject parse(byte[] data, String name) throws IOException {

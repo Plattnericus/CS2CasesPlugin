@@ -60,7 +60,7 @@ public final class TradeInService implements Listener {
         var outcome = TradeInRules.roll(catalog, inputs, target, rng);
         var def = outcome.skin();
         int pattern = catalog.patterns().seedMin() + rng.nextInt(catalog.patterns().seedMax() - catalog.patterns().seedMin() + 1);
-        double fl = TradeInRules.outputFloat(inputs, def); long seed = rng.nextLong();
+        double fl = TradeInRules.outputFloat(ctx.catalog(), inputs, def); long seed = rng.nextLong();
         boolean admin = inputs.stream().anyMatch(s -> s.origin().admin());
         ctx.render().report(def, pattern).thenCompose(report -> {
             var result = new SkinInstance(UUID.randomUUID(), owner, def.id(), fl, pattern, seed,

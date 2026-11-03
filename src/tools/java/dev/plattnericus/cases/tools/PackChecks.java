@@ -93,8 +93,7 @@ public final class PackChecks {
                                     .allMatch(layerModel -> layerModel.startsWith("mccases:item/inspect/" + skin.id() + "/")),
                             "native first-person hand is missing one or more skin layers " + skin.id());
                 }
-                var selected = json(zip, base + "models/item/trade/selected/" + skin.id() + ".json");
-                require(vec(selected.getAsJsonObject("display").getAsJsonObject("fixed").getAsJsonArray("rotation")).lengthSquared() == 0, "selected icon reversed");
+                require(zip.getEntry(base + "models/item/trade/selected/" + skin.id() + ".json") == null, "obsolete trade selection model " + skin.id());
                 for (String layer : InspectRig.layers(skin.weapon()).stream().map(InspectRig.Layer::id).distinct().toList()) {
                     String path = "inspect/" + skin.id() + "/" + layer;
                     var texture = png(zip, base + "textures/item/" + path + ".png");

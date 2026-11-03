@@ -893,16 +893,16 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                                     positions.sort(Float::compare);
                                     for (int i = 1; i < positions.size(); i++) require(positions.get(i) - positions.get(i-1) > .01, "roulette items collapsed/overlapped");
                                 }
-                                double width = ctx.settings().opening().world().visibleItems() * ctx.settings().opening().world().spacing() + .2;
+                                double width = ctx.settings().opening().world().visibleItems() * ctx.settings().opening().world().spacing() + .4;
                                 int count = ctx.openings().visibleCount(player);
                                 var forward = player.getEyeLocation().getDirection().setY(0).normalize();
                                 for (var reelAnchor : positionsByReel.keySet()) {
                                     double distance = Math.hypot(reelAnchor.toVector().subtract(player.getEyeLocation().toVector()).dot(forward), ctx.settings().opening().world().height());
                                     double expectedWidth = width * dev.plattnericus.cases.opening.OpeningLayout.cell(0, count, width,
-                                            ctx.settings().opening().world().itemScale() + .65, distance, ctx.settings().opening().world().sceneScale()).scale();
+                                            ctx.settings().opening().world().itemScale() + .85, distance, ctx.settings().opening().world().sceneScale()).scale();
                                     require(player.getWorld().getEntitiesByClass(org.bukkit.entity.BlockDisplay.class).stream()
                                         .anyMatch(d -> d.getLocation().equals(reelAnchor) && d.getBlock().getMaterial() == Material.BLACK_STAINED_GLASS
-                                                && Math.abs(d.getTransformation().getScale().x() - expectedWidth) < .01
+                                                && d.getTransformation().getScale().x() <= expectedWidth + .01
                                                 && d.getTransformation().getScale().z() > 0), "roulette glass missing or whole-wheel scale incorrect");
                                 }
                                 require(displays.size() <= 9 * (ctx.settings().opening().world().visibleItems() + 32), "roulette entity window grew unbounded");

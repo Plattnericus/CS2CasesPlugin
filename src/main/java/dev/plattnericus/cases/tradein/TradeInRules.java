@@ -49,6 +49,10 @@ public final class TradeInRules {
         }
         return tier;
     }
+    private static double normalized(SkinDefinition def, double value) {
+        double range = def.maxFloat() - def.minFloat();
+        return range <= 0 ? 0 : Math.clamp((value - def.minFloat()) / range, 0, 1);
+    }
     public record Outcome(SkinDefinition skin, String sourceCase) { }
     public static Outcome roll(Catalog catalog, List<SkinInstance> inputs, Rarity target, RandomGenerator random) {
         var input = inputs.get(random.nextInt(inputs.size()));
@@ -75,8 +79,9 @@ public final class TradeInRules {
         return probabilities.entrySet().stream().map(e -> new Chance(e.getKey(), e.getValue()))
                 .sorted(java.util.Comparator.comparing(c -> c.skin().displayName(), String.CASE_INSENSITIVE_ORDER)).toList();
     }
-    public static double outputFloat(List<SkinInstance> inputs, SkinDefinition output) {
-        double average = inputs.stream().mapToDouble(SkinInstance::floatValue).average().orElseThrow();
+    /** Each input float is scaled to its own skin's range, averaged, then mapped onto the result's range. */
+    public static double outputFloat(Catalog catalog, List<SkinInstance> inputs, SkinDefinition output) {
+        double average = inputs.stream().mapToDouble(input -> normalized(catalog.skin(input.skinId()), input.floatValue())).average().orElseThrow();
         return Math.clamp(output.minFloat() + average * (output.maxFloat() - output.minFloat()), output.minFloat(), output.maxFloat());
     }
 }

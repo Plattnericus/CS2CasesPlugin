@@ -669,7 +669,8 @@ tradein:
   button: {"name": "<gold>Trade-up", "lore": ["<gray>Exchange skins for one from the next tier."]}
   rules: {"name": "<gold>Contract rules", "lore": ["<gray>10 same-tier weapons → next rarity.", "<gold>5 Covert weapons → gold special item.", "<gray>All inputs must have matching StatTrak status.", "<gray>One random reward from the input cases.", "<red>Confirmed inputs are consumed permanently."]}
   confirm: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Confirm to exchange these skins for one random reward."]}
-  review: {name: "<gold>Review contract: <count>/<required>", lore: ["<gray>Target: <white><target>", "<gray>Average input float: <white><float>", "<red>Confirm to exchange these skins for one random reward."]}
+  review: {name: "<green>Trade up: <count>/<required>", lore: ["<gray>Result: <white><target>", "<gray>Average input float: <white><float>", "<red>The selected skins are consumed."]}
+  pending: {name: "<gray>Select skins: <count>/<required>", lore: ["<gray>10 skins of the same rarity make one skin", "<gray>of the next rarity. All must be normal or all", "<gray>StatTrak. 5 Covert skins make a rare special item."]}
   invalid: "<prefix><red>Use available same-tier skins with matching StatTrak from valid source cases."
   count: "<prefix><yellow>Use 10 matching weapons, or 5 Covert skins for gold."
   unavailable: "<prefix><yellow>Trade-in is currently unavailable."

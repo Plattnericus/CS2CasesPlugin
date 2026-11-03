@@ -1,12 +1,7 @@
 # ---------------------------------------------------------------------------------------------
 #  MCCases - by Plattnericus (plattnericus.dev)
-#  Server-side CS2-style cases. No client mods, no required resource pack.
+#  Server-side CS2-style cases. No client mods. The MCCases resource pack gives skins and cases their icons.
 # ---------------------------------------------------------------------------------------------
-
-# Plugin menus, chat and console language (files: messages_<language>.yml).
-language: en
-# Keep the plugin in English even when Minecraft uses another language.
-client-language: false
 
 # Extra log output (catalog notes, timings).
 debug: false
@@ -81,13 +76,12 @@ opening:
   # gui   = CS2-style roulette in an inventory (only the opener sees it)
   display: world
   world:
-    # Maximum whole-wheel size. Camera fitting caps this for a complete 3x3 grid.
-    # Individual wheels keep the same size for every batch from one to nine.
+    # Upper limit for the wheel size. The wheels shrink automatically to fit the view when
+    # several cases open together (up to nine).
     scene-scale: 3.0
     distance: 3.0
     height: 0.35
     visible-items: 5
-    # Wider roulette spacing and fuller item silhouettes while keeping the 3x3 grid in frame.
     spacing: 0.99
     item-scale: 0.86
     # how long the result stays visible

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **Cleaner case openings.** The reels no longer tilt. The frame is larger, the scene scales in when an
+  opening starts and out when it ends, and a single opening is drawn larger than a full batch of nine.
+  `opening.max-active-per-player` is capped at 9.
+- **Trade-up and inventory.** The trade-up button shows what is missing until the contract is complete and
+  then turns green. Selected skins use a vanilla glint instead of extra pack models, so the resource pack is
+  only needed for skin icons. In the inventory the market and trade-up buttons no longer share a slot.
+- **English only.** The other language files, `language` and `client-language` are gone.
+- **Documentation.** New README with install steps and a quick start. The legal and privacy documents were removed.
+
 - **Inspects no longer flip the weapon.** Item displays turn their item half a revolution before drawing
   it, and the inspect scene did not turn the weapon back: as soon as an inspect started, every weapon was
   shown end for end and the hand held the blade or the handguard. The first-person scene and the scene
@@ -38,8 +47,7 @@
   and embeds the same pack, and attaches the JAR and the ZIP to the release.
 - **Repository.** `resourcepack/MCCases-ResourcePack.zip` always holds the current resource pack
   (`bash gradlew build` refreshes it). Development scripts, release notes, checksums and the extended
-  documentation are no longer part of the repository; the README covers installation and use, and the
-  Italian privacy template moved to `PRIVACY-IT.md`.
+  documentation are no longer part of the repository; the README covers installation and use.
 - **License.** MCCases is published under the MCCases License: free use, also on public servers;
   changes and free sharing allowed; copies and derived works must visibly credit MCCases by
   Plattnericus; no selling. The JAR includes it under `META-INF/mccases/LICENSE`.

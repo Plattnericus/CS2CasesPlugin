@@ -44,7 +44,6 @@ public final class TradeInMenu extends Menu {
             if (chosen) name = Component.text("✓ ", net.kyori.adventure.text.format.NamedTextColor.GREEN).append(name);
             set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen), c -> { ctx.tradeIns().toggle(viewer, skin.id()); playClick(); render(); });
         }
-        set(4, GuiItems.icon(ctx.messages(viewer), Material.WRITABLE_BOOK, "tradein.rules"));
         String all = ctx.messages(viewer).raw("tradein.all");
         set(1, GuiItems.icon(ctx.messages(viewer), Material.CROSSBOW, "tradein.weapon", Text.unparsed("value",
                 weaponFilter == null ? all : ctx.catalog().weapon(weaponFilter).name())), c -> {
@@ -61,9 +60,11 @@ public final class TradeInMenu extends Menu {
             filterChoice(java.util.List.of(0, 1, 2), statTrakFilter,
                     value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak", value -> statTrakFilter = value);
         });
-        set(5, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradein.reset-filters"), c -> {
-            weaponFilter = null; rarityFilter = null; statTrakFilter = 0; page = 0; playClick(); render();
-        });
+        if (weaponFilter != null || rarityFilter != null || statTrakFilter != 0) {
+            set(4, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradein.reset-filters"), c -> {
+                weaponFilter = null; rarityFilter = null; statTrakFilter = 0; page = 0; playClick(); render();
+            });
+        }
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradein.sort", Text.unparsed("sort",
                 ctx.messages(viewer).raw("tradein.sorts." + sort.name().toLowerCase(java.util.Locale.ROOT)))), c -> {
             confirming = true;
@@ -88,10 +89,13 @@ public final class TradeInMenu extends Menu {
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
         boolean ready = target != null && selected.size() == required;
-        var subject = GuiItems.icon(ctx.messages(viewer), ready ? Material.LIME_CONCRETE : Material.GRAY_DYE, "tradein.review",
-                Text.unparsed("count", selected.size()), Text.unparsed("required", required),
-                Text.unparsed("target", target == null ? ctx.messages(viewer).raw("tradein.choose-tier") : target.name()),
-                Text.unparsed("float", Text.formatFloat(inputs.stream().mapToDouble(SkinInstance::floatValue).average().orElse(0), 6)));
+        var subject = ready
+                ? GuiItems.icon(ctx.messages(viewer), Material.LIME_CONCRETE, "tradein.review",
+                        Text.unparsed("count", selected.size()), Text.unparsed("required", required),
+                        Text.unparsed("target", target.name()),
+                        Text.unparsed("float", Text.formatFloat(inputs.stream().mapToDouble(SkinInstance::floatValue).average().orElse(0), 6)))
+                : GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradein.pending",
+                        Text.unparsed("count", selected.size()), Text.unparsed("required", required));
         set(49, subject, c -> {
             if (!ready) { ctx.messages(viewer).send(viewer, "tradein.count"); playError(); return; }
             confirming = true;

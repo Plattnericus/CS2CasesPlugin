@@ -45,7 +45,7 @@ public final class SkinPresentationChecks {
                     require(listing.skin().traded() && commerce.cancel(second, listing.id()).join().traded(), "listing/cancel lost trade provenance");
                     var back = commerce.trade(first, second, List.of(new CommerceRepository.Transfer(moved.id(), second, first))).join().getFirst();
                     require(back.traded() && back.origin() == original.origin(), "repeat trade nested or lost provenance");
-                    for (String language : List.of("en", "de", "it")) {
+                    for (String language : List.of("en")) {
                         var path = new File(root, "messages_" + language + ".yml");
                         var messages = new Messages(path, Files.newInputStream(path.toPath()), Files.newInputStream(new File(root, "messages_en.yml").toPath()));
                         var formatter = new SkinFormatter(messages, catalog, 4, 8, "dd.MM.yyyy");

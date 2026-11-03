@@ -27,63 +27,31 @@ public final class FeatureChecks {
         checkCatalogAndJournal(root);
         var english = new YamlConfiguration();
         english.load(new File(root, "messages_en.yml"));
-        int languages = 0;
-        for (File file : root.listFiles((dir, name) -> name.startsWith("messages_") && name.endsWith(".yml"))) {
-            var language = new YamlConfiguration();
-            language.load(file); // Unlike loadConfiguration, this fails on invalid YAML.
-            for (String key : english.getKeys(true)) {
-                if (english.isConfigurationSection(key)) continue;
-                boolean commerceFallback = ((key.startsWith("gui.skins.tab.gloves.") || key.startsWith("gui.preview.open-nine.") || key.startsWith("gui.preview.queue-") || key.startsWith("opening.queue-") || key.equals("opening.missing-amount") || key.equals("opening.missing-nine") || key.startsWith("case-guide.") || key.startsWith("trade.") || key.startsWith("market.") || key.startsWith("commerce.") || key.startsWith("browser.") || key.startsWith("input.") || key.startsWith("tradein.") || key.startsWith("opening.active-") || key.startsWith("opening.states.") || key.equals("opening.limit"))
-                        && !file.getName().equals("messages_de.yml")) || key.equals("inventory.usage");
-                require(language.contains(key) || commerceFallback, file.getName() + " missing " + key);
-                var source = language.contains(key) ? language : english;
-                require(source.isList(key) == english.isList(key), file.getName() + " wrong type " + key);
-                List<String> values = source.isList(key) ? source.getStringList(key) : List.of(source.getString(key));
-                for (String value : values) {
-                    require(!value.contains("__PH"), file.getName() + " contains translation marker at " + key);
-                    dev.plattnericus.cases.util.Text.mm(value); // Checks MiniMessage syntax.
-                }
+        for (String key : english.getKeys(true)) {
+            if (english.isConfigurationSection(key)) continue;
+            List<String> values = english.isList(key) ? english.getStringList(key) : List.of(english.getString(key));
+            for (String value : values) {
+                require(!value.contains("__PH"), "messages_en.yml contains a translation marker at " + key);
+                dev.plattnericus.cases.util.Text.mm(value); // Checks MiniMessage syntax.
             }
-            languages++;
         }
+        File[] extra = root.listFiles((dir, name) -> name.startsWith("messages_") && !name.equals("messages_en.yml"));
+        require(extra != null && extra.length == 0, "only the English message file may ship");
         var config = new YamlConfiguration();
-        config.set("language", "de");
-        config.set("client-language", true);
         List<String> warnings = new ArrayList<>();
         Messages messages = Messages.load(root, path -> {
             try { return Files.newInputStream(new File(root, path.substring("defaults/".length())).toPath()); }
             catch (java.io.IOException ignored) { return null; }
         }, config, warnings::add);
-        require(warnings.isEmpty(), "unexpected locale warnings " + warnings);
-        require(messages.forLocale("de_DE").language().equals("de"), "German region fallback");
-        require(messages.forLocale("ES-mx").language().equals("es"), "case/hyphen normalization");
-        require(messages.forLocale("zh_TW").language().equals("zh_tw"), "Traditional Chinese locale");
-        require(messages.forLocale("pt_BR").language().equals("pt_br"), "Brazilian Portuguese locale");
-        require(messages.forLocale("unknown_foo") == messages, "configured fallback");
-        require(messages.forLocale("../../en") == messages, "locale must never access paths");
-        require(messages.forLocale("fr_FR").raw("gui.close.name").contains("Fermer"), "French lookup");
-        require(messages.forLocale("fr_FR").raw("market.title").equals("Skin marketplace"), "new commerce keys use English fallback");
-        require(messages.forLocale("fr_FR").raw("gui.skins.tab.gloves.name").equals("<white>Gloves"), "new glove tab uses English fallback");
-        var received = new java.util.concurrent.atomic.AtomicReference<net.kyori.adventure.text.Component>();
-        org.bukkit.entity.Player french = (org.bukkit.entity.Player) java.lang.reflect.Proxy.newProxyInstance(
-                FeatureChecks.class.getClassLoader(), new Class<?>[]{org.bukkit.entity.Player.class}, (proxy, method, parameters) -> {
-                    if (method.getName().equals("locale")) return java.util.Locale.FRANCE;
-                    if (method.getName().equals("sendMessage") && parameters != null)
-                        for (Object parameter : parameters) if (parameter instanceof net.kyori.adventure.text.Component component) received.set(component);
-                    return null;
-                });
-        messages.send(french, "gui.close.name");
-        require(dev.plattnericus.cases.util.Text.plain(received.get()).equals("Fermer"), "send must use recipient locale");
-        config.set("client-language", false);
-        Messages fixed = Messages.load(root, path -> null, config, warnings::add);
-        require(fixed.forAudience(french) == fixed, "server language override");
+        require(warnings.isEmpty() && messages.language().equals("en"), "unexpected locale warnings " + warnings);
+        require(messages.raw("gui.close.name").length() > 0 && messages.raw("market.title").equals("Skin marketplace"), "English lookup");
         File edited = Files.createTempFile("mccases-locale-check", ".yml").toFile();
         try {
             Files.writeString(edited.toPath(), "gui:\n  close:\n    name: Custom close\n");
-            Messages partial = new Messages(edited, Files.newInputStream(new File(root, "messages_fr.yml").toPath()),
+            Messages partial = new Messages(edited, Files.newInputStream(new File(root, "messages_en.yml").toPath()),
                     Files.newInputStream(new File(root, "messages_en.yml").toPath()));
             require(partial.raw("gui.close.name").equals("Custom close"), "admin edits must survive");
-            require(partial.raw("gui.back.name").equals(messages.forLocale("fr").raw("gui.back.name")), "new keys must use bundled locale fallback");
+            require(partial.raw("gui.back.name").equals(messages.raw("gui.back.name")), "new keys must use the bundled fallback");
         } finally { Files.deleteIfExists(edited.toPath()); }
 
         var inspect = new YamlConfiguration();
@@ -137,7 +105,7 @@ public final class FeatureChecks {
             require(position >= previous - 1e-12 && position <= 1, "reel reverses or overshoots");
             previous = position;
         }
-        System.out.println("Verified " + languages + " language schemas, German/English commerce texts and English fallbacks, regional fallbacks, " + animations + " animation timelines and reel easing.");
+        System.out.println("Verified English messages and fallbacks, " + animations + " animation timelines and reel easing.");
     }
 
     private static void require(boolean condition, String message) {

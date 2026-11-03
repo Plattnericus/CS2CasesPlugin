@@ -1,11 +1,6 @@
-# Case artwork source record
+# Case artwork
 
-Source file supplied for this task: `MCCases-ResourcePack-Fusion-HD.zip`.
-Source archive SHA-256: `1e5c50dc51e413ab2f8cc7a71a2278465489d94053285381670ca1fe09b5f6b3`.
-
-Only the 22 files listed below were extracted. The source archive's own README describes its case artwork as ImageGen-created; those user-supplied images are copied as-is. No new case or skin artwork was generated for this project. No skin art, inspect textures, pack icons, fonts, shaders or other files were copied from the archive.
-
-The source archive is a user-provided reference. These hashes record the exact PNG bytes used by the resource pack; they do not make any claim about third-party rights or grant a license.
+The 22 case textures in this folder are used by the resource pack as-is. The hashes record the exact PNG bytes.
 
 | Case texture | SHA-256 |
 | --- | --- |

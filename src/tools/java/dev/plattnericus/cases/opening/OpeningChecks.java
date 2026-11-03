@@ -17,7 +17,7 @@ public final class OpeningChecks {
     private OpeningChecks() { }
     public static void run(File root) throws Exception {
         var config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "config.yml"));
-        require(config.getString("language").equals("en") && !config.getBoolean("client-language"), "default interface must stay English for all clients");
+        require(!config.contains("language") && !config.contains("client-language"), "the interface is English only");
         require(config.getInt("opening.max-active-per-player") == 9, "default nine-opening capacity");
         require(config.getDouble("opening.world.scene-scale") == 3, "default whole-wheel size");
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
@@ -95,8 +95,8 @@ public final class OpeningChecks {
         double itemScale = defaults.getDouble("opening.world.item-scale", .5);
         require(Math.abs(spacing - .99) < 1e-9 && Math.abs(itemScale - .86) < 1e-9,
                 "opening roulette icon spacing and size defaults");
-        double width = defaults.getInt("opening.world.visible-items", 5) * spacing + .2;
-        double height = itemScale + .65;
+        double width = defaults.getInt("opening.world.visible-items", 5) * spacing + .4;
+        double height = itemScale + .85;
         for (double distance : new double[]{1.2, 3, 6}) for (int count = 1; count <= 9; count++) {
             int size = count;
             var cells = java.util.stream.IntStream.range(0, count).mapToObj(i -> OpeningLayout.cell(i, size, width, height, distance)).toList();
@@ -111,8 +111,10 @@ public final class OpeningChecks {
             }
             for (int i = 0; i < count; i++) {
                 var large = OpeningLayout.cell(i, count, width, height, distance, 3);
-                require(Math.abs(large.scale() - OpeningLayout.cell(0, 9, width, height, distance, 3).scale()) < 1e-9,
-                        "wheel changed size when the grid changed: " + count);
+                require(large.scale() >= OpeningLayout.cell(0, 9, width, height, distance, 3).scale() - 1e-9,
+                        "fewer reels must never be smaller than the full grid: " + count);
+                require(Math.abs(large.scale() - OpeningLayout.cell(0, count, width, height, distance, 3).scale()) < 1e-9,
+                        "reels of one batch differ in size: " + count);
                 require(Math.abs(large.right()) + width / 2 * large.scale() < distance * .925
                         && Math.abs(large.up()) + height / 2 * large.scale() < distance * .52,
                         "complete grid left the camera bounds: " + count);
@@ -180,7 +182,8 @@ public final class OpeningChecks {
         var inputs = java.util.stream.IntStream.range(0, 5).mapToObj(i -> new SkinInstance(UUID.randomUUID(), owner, inputDef.id(), 0.2, i, i, false, 0, PatternInfo.NONE, source.id(), SkinInstance.Origin.CASE, 1000+i, false, SkinInstance.Status.OWNED)).toList();
         require(TradeInRules.validate(catalog, inputs, true).rareSpecial(), "five Covert inputs did not target gold");
         var winner = TradeInRules.choose(catalog, inputs, special, new java.util.Random(7)); require(winner.rarity().rareSpecial(), "gold picked by name instead of classification");
-        require(Math.abs(TradeInRules.outputFloat(inputs, winner) - (winner.minFloat() + 0.2 * (winner.maxFloat() - winner.minFloat()))) < 1e-9, "output float incorrect");
+        double normalizedInput = Math.clamp((0.2 - inputDef.minFloat()) / (inputDef.maxFloat() - inputDef.minFloat()), 0, 1);
+        require(Math.abs(TradeInRules.outputFloat(catalog, inputs, winner) - (winner.minFloat() + normalizedInput * (winner.maxFloat() - winner.minFloat()))) < 1e-9, "output float incorrect");
         expectInvalid(() -> TradeInRules.validate(catalog, inputs.subList(0, 4), true));
         var duplicate = new java.util.ArrayList<>(inputs); duplicate.set(1, inputs.getFirst()); expectInvalid(() -> TradeInRules.validate(catalog, duplicate, true));
         inputs.forEach(s -> repo.insert(s).join());

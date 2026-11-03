@@ -1,7 +1,9 @@
 package dev.plattnericus.cases.opening;
 
-/** Centered rows with one fixed wheel size that also fits the complete nine-wheel grid. */
+/** Places up to nine reels in a centered grid, sized for the number of reels currently shown. */
 public final class OpeningLayout {
+    private static final double GAP_X = .27, GAP_Y = .20;
+
     private OpeningLayout() { }
     public record Cell(double right, double up, double scale) { }
 
@@ -16,17 +18,14 @@ public final class OpeningLayout {
                 || width <= 0 || height <= 0 || distance <= 0) throw new IllegalArgumentException("invalid reel layout");
         int columns = (int) Math.ceil(Math.sqrt(count));
         int rows = (count + columns - 1) / columns;
-        double gapX = .27, gapY = .20;
-        // Size against the largest supported grid, not the number currently visible.
-        // This leaves camera margins at 70 degrees / 4:3 and prevents a single wheel
-        // growing to three times its batch size. The configured size is an upper bound.
-        // The larger case icons use nearly the full width of a 70-degree / 4:3 view while
-        // leaving a small edge margin, including the full three-column batch.
-        double scale = Math.min(sceneScale, Math.min(distance * 1.85 / (3 * (width + gapX)),
-                distance * 1.02 / (3 * (height + gapY))));
+        // Fraction of the view the grid may fill: few reels stay moderate, nine fill the view.
+        double widthBudget = Math.min(1.85, 1.1 + .375 * (columns - 1));
+        double heightBudget = Math.min(1.02, .6 + .21 * (rows - 1));
+        double scale = Math.min(sceneScale, Math.min(distance * widthBudget / (columns * (width + GAP_X)),
+                distance * heightBudget / (rows * (height + GAP_Y))));
         int row = index / columns;
         int inRow = Math.min(columns, count - row * columns);
-        return new Cell((index % columns - (inRow - 1) / 2.0) * (width + gapX) * scale,
-                ((rows - 1) / 2.0 - row) * (height + gapY) * scale, scale);
+        return new Cell((index % columns - (inRow - 1) / 2.0) * (width + GAP_X) * scale,
+                ((rows - 1) / 2.0 - row) * (height + GAP_Y) * scale, scale);
     }
 }

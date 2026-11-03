@@ -76,7 +76,7 @@ tasks.processResources {
 
 tasks.jar {
     archiveFileName.set("MCCases-${project.version}.jar")
-    from(files("LICENSE", "LEGAL.md", "THIRD_PARTY_NOTICES.md", "PRIVACY-IT.md")) {
+    from(files("LICENSE", "THIRD_PARTY_NOTICES.md")) {
         into("META-INF/mccases")
     }
     // Ship the complete generated pack. Runtime upgrades merge server-owned assets separately.

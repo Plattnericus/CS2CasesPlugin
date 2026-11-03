@@ -41,6 +41,13 @@ final class WorldReelView implements OpeningView {
     /** Ticks between keyframes; the client interpolates linearly in between. */
     private static final int STEP = 2;
     private static final int WARMUP = 1;
+    /** Scene scale factor while hidden; never zero so the tween can scale back up. */
+    private static final double HIDDEN = 0.02;
+    private static final int FADE_TICKS = 8;
+    private static final double FRAME_WIDTH_PAD = 0.4;
+    private static final double FRAME_HEIGHT_PAD = 0.85;
+    /** The reel waits for the scene to finish appearing before it starts moving. */
+    private static final int INTRO_TICKS = FADE_TICKS + 2;
 
     private final CasesContext ctx;
     private final OpeningService service;
@@ -57,6 +64,7 @@ final class WorldReelView implements OpeningView {
     private Location anchor;
     private Location baseAnchor;
     private double sceneScale = 1;
+    private double appear = HIDDEN;
     private int layoutIndex = -1, layoutCount;
     private double lastKeyframe = Double.NaN;
     private int ticksSinceKeyframe = STEP;
@@ -77,12 +85,12 @@ final class WorldReelView implements OpeningView {
     public void open() {
         baseAnchor = anchor();
         anchor = baseAnchor.clone();
-        double width = cfg.visibleItems() * cfg.spacing() + 0.2;
+        double width = cfg.visibleItems() * cfg.spacing() + FRAME_WIDTH_PAD;
         double half = cfg.itemScale() / 2;
-        all.add(block(Material.BLACK_STAINED_GLASS, new Vector3f((float) -width / 2, (float) (-half - 0.17), -0.06f),
-                new Vector3f((float) width, (float) (cfg.itemScale() + 0.36), 0.02f)));
-        all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (half + 0.04), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
-        all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.012f, (float) (-half - 0.14), -0.02f), new Vector3f(0.024f, 0.1f, 0.02f)));
+        all.add(block(Material.BLACK_STAINED_GLASS, new Vector3f((float) -width / 2, (float) (-half - 0.25), -0.06f),
+                new Vector3f((float) width, (float) (cfg.itemScale() + 0.5), 0.02f)));
+        all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.02f, (float) (half + 0.06), -0.02f), new Vector3f(0.04f, 0.14f, 0.02f)));
+        all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.02f, (float) (-half - 0.2), -0.02f), new Vector3f(0.04f, 0.14f, 0.02f)));
         title = anchor.getWorld().spawn(anchor, TextDisplay.class, d -> {
             common(d);
             d.text(ctx.messages(player).get("opening.world.title", Text.unparsed("player", player.getName()),
@@ -90,12 +98,15 @@ final class WorldReelView implements OpeningView {
             d.setBackgroundColor(Color.fromARGB(150, 10, 12, 16));
             d.setLineWidth(280);
             float textScale = .6f;
-            d.setTransformation(new Transformation(new Vector3f(0, (float) (half + 0.2), 0), NO_ROTATION,
+            d.setTransformation(new Transformation(new Vector3f(0, (float) (half + 0.36), 0), NO_ROTATION,
                     new Vector3f(textScale), NO_ROTATION));
         });
         all.add(title);
         clickTargets(half);
         place(4, 4, 0);
+        Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> {
+            if (!closed) tween(1, FADE_TICKS);
+        }, 2L);
     }
 
     /** Recenter every live scene, including held rewards, whenever one is added or removed. */
@@ -103,8 +114,8 @@ final class WorldReelView implements OpeningView {
         if (closed || layoutIndex == index && layoutCount == count) return;
         layoutIndex = index; layoutCount = count;
         double distance = baseAnchor.toVector().distance(session.origin.toVector());
-        var cell = OpeningLayout.cell(index, count, cfg.visibleItems() * cfg.spacing() + .2,
-                cfg.itemScale() + .65, distance, cfg.sceneScale());
+        var cell = OpeningLayout.cell(index, count, cfg.visibleItems() * cfg.spacing() + FRAME_WIDTH_PAD,
+                cfg.itemScale() + FRAME_HEIGHT_PAD, distance, cfg.sceneScale());
         Vector right = baseAnchor.getDirection().multiply(-1).crossProduct(new Vector(0, 1, 0)).normalize();
         Location next = baseAnchor.clone().add(right.multiply(cell.right())).add(0, cell.up(), 0);
         double ratio = cell.scale() / sceneScale;
@@ -125,8 +136,23 @@ final class WorldReelView implements OpeningView {
     }
 
     private Transformation scaled(Transformation pose) {
-        pose.getTranslation().mul((float) sceneScale); pose.getScale().mul((float) sceneScale);
+        float factor = (float) (sceneScale * appear);
+        pose.getTranslation().mul(factor); pose.getScale().mul(factor);
         return pose;
+    }
+
+    /** Scales every display of the scene towards {@code target} over {@code ticks}. */
+    private void tween(double target, int ticks) {
+        float ratio = (float) (target / appear);
+        for (Entity entity : all) {
+            if (!(entity instanceof Display display)) continue;
+            Transformation pose = display.getTransformation();
+            pose.getTranslation().mul(ratio); pose.getScale().mul(ratio);
+            display.setInterpolationDelay(0);
+            display.setInterpolationDuration(ticks);
+            display.setTransformation(pose);
+        }
+        appear = target;
     }
 
     /**
@@ -197,7 +223,7 @@ final class WorldReelView implements OpeningView {
      */
     @Override
     public void frame(double center) {
-        if (closed) {
+        if (closed || session.tick < INTRO_TICKS) {
             return;
         }
         boolean last = center >= session.winnerIndex - 1e-9;
@@ -284,13 +310,8 @@ final class WorldReelView implements OpeningView {
     private Transformation itemPose(int index, double center) {
         float x = (float) ((index - center) * cfg.spacing());
         float scale = (float) cfg.itemScale() * falloff(x);
-        // Both endpoints stay inside the strip, including when a fast keyframe crosses its
-        // boundary. Client interpolation must never carry a still-visible sprite beyond it.
         float boundedX = (float) Math.clamp(x, -window, window);
-        double edge = Math.min(1, Math.abs(x) / window);
-        float lift = (float) (0.075 * Math.sin(Math.PI * (1 - edge)) * visibility(x));
-        float angle = (float) Math.toRadians(7 * Math.sin(x / cfg.spacing() * .65) * visibility(x));
-        return scaled(new Transformation(new Vector3f(boundedX, lift, 0), new AxisAngle4f(angle, 0, 0, 1),
+        return scaled(new Transformation(new Vector3f(boundedX, 0, 0), NO_ROTATION,
                 new Vector3f(scale), NO_ROTATION));
     }
     private Transformation barPose(int index, double center) {
@@ -373,8 +394,15 @@ final class WorldReelView implements OpeningView {
             service.unregisterReelHitbox(box.getUniqueId());
         }
         hitboxes.clear();
-        for (Entity e : all) {
-            e.remove();
+        List<Entity> leaving = List.copyOf(all);
+        for (Entity e : leaving) {
+            if (e instanceof org.bukkit.entity.Interaction) e.remove();
+        }
+        if (ctx.plugin().isEnabled()) {
+            tween(HIDDEN, FADE_TICKS);
+            Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> leaving.forEach(Entity::remove), FADE_TICKS + 2L);
+        } else {
+            leaving.forEach(Entity::remove);
         }
         all.clear(); slots.clear();
         service.viewClosed(session);

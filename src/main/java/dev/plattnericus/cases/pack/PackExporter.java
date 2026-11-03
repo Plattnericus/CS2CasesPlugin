@@ -104,10 +104,6 @@ public final class PackExporter {
                     only when every player has this pack loaded; otherwise the items show
                     the missing-model texture.
                     """.formatted(namespace));
-            try (var notice = PackExporter.class.getResourceAsStream("/defaults/LEGAL-NOTICE.txt")) {
-                if (notice == null) throw new IOException("Missing bundled legal notice");
-                text(zip, "LEGAL-NOTICE.txt", new String(notice.readAllBytes(), StandardCharsets.UTF_8));
-            }
             try (var source = PackExporter.class.getResourceAsStream("/case-art/SOURCE.md")) {
                 if (source == null) throw new IOException("Missing case artwork source record");
                 text(zip, "case-art/SOURCE.md", new String(source.readAllBytes(), StandardCharsets.UTF_8));
@@ -128,9 +124,6 @@ public final class PackExporter {
                 String path = "skin/" + skin.id();
                 png(zip, "assets/" + namespace + "/textures/item/" + path + ".png", sprite);
                 model(zip, namespace, path, "minecraft:item/generated", FIXED_DISPLAY);
-                String selected = "trade/selected/" + skin.id();
-                png(zip, "assets/" + namespace + "/textures/item/" + selected + ".png", selectedSprite(sprite));
-                model(zip, namespace, selected, "minecraft:item/generated", FIXED_DISPLAY);
                 SpriteFrame frame;
                 try {
                     rig(zip, namespace, skin, renderer);
@@ -472,24 +465,6 @@ public final class PackExporter {
             System.arraycopy(img.pixels(), (minY + y) * img.width() + minX, px, y * w, w);
         }
         return new ArgbImage(w, h, px);
-    }
-
-    /** GUI-only selection tile; the normal equipment sprite stays transparent. */
-    static BufferedImage selectedSprite(BufferedImage sprite) {
-        BufferedImage out = new BufferedImage(sprite.getWidth(), sprite.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = out.createGraphics();
-        g.scale(sprite.getWidth() / (double) SPRITE, sprite.getHeight() / (double) SPRITE);
-        g.setColor(new Color(0x286b2b));
-        g.fillRect(0, 0, SPRITE, SPRITE);
-        g.setColor(new Color(0x72c64a));
-        g.fillRect(0, 0, SPRITE, 3);
-        g.fillRect(0, 0, 3, SPRITE);
-        g.setColor(new Color(0x184b1b));
-        g.fillRect(0, SPRITE - 3, SPRITE, 3);
-        g.fillRect(SPRITE - 3, 0, 3, SPRITE);
-        g.drawImage(sprite, 0, 0, SPRITE, SPRITE, null);
-        g.dispose();
-        return out;
     }
 
     private static byte[] caseTexture(String id) throws IOException {

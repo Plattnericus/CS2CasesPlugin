@@ -1,7 +1,5 @@
 # Third-party and asset notices
 
-Maintainer: **Plattnericus** · **info@plattnericus.dev** · reviewed 2026-10-17.
-
 MCCases is independent of Mojang, Microsoft and Valve. Minecraft-related materials
 are subject to the [Minecraft EULA](https://www.minecraft.net/en-us/eula) and
 [Usage Guidelines](https://www.minecraft.net/en-us/usage-guidelines).
@@ -12,7 +10,7 @@ No endorsement or trademark license is granted by this project.
 ## What the production JAR contains
 
 The Gradle `jar` task packages this project's compiled classes, default catalog,
-configuration, translations, rendered assets, resource pack and legal documentation.
+configuration, translations, rendered assets and resource pack.
 It does not shade or bundle Paper, Bukkit, Adventure, JOML, Gson, SnakeYAML, SLF4J,
 SQLite JDBC, Minecraft client/server binaries or the development check plugin.
 References to vanilla model IDs and sounds are resolved by the installed game;
@@ -38,23 +36,8 @@ player's own client draws their own skin on it from the player's profile.
 Use the relevant upstream license and notices when separately distributing one of
 these dependencies. This inventory is not a replacement for their license texts.
 
-## Project artwork and additional packs
+## Artwork
 
-`AssetGenerator`, `SkinRenderer`, `PackExporter` and the inspect-rig code generate
-the standard artwork and geometry from this project's default textures and catalog.
-That describes provenance within the build; it does not establish ownership or
-permission for every underlying design. CS-inspired names and designs require their
-own assessment. See [LEGAL.md](LEGAL.md).
-
-The resource pack includes only the 22 case PNGs listed in
-[the source manifest](src/main/resources/case-art/SOURCE.md), taken from a user-provided
-reference archive. That archive README says the case and key art were generated with
-ImageGen. No skin images, inspect layers, fonts or pack icon from that archive are bundled.
-The manifest records source and image hashes; it does not grant rights. The operator remains
-responsible for permission and any required attribution for case art, custom assets and
-configured NPC player skins.
-
-Project code and generated artwork are licensed under the [MCCases License](LICENSE).
-It does not extend to the third-party material above: the Minecraft-derived shader
-portions, the case images in the source manifest, the Gradle Wrapper and other
-dependencies keep their own terms. Separate permissions and statutory rights are unaffected.
+`AssetGenerator`, `SkinRenderer`, `PackExporter` and the inspect-rig code generate the skin
+artwork and geometry from this project's default textures and catalog. The 22 case textures are
+listed with their hashes in [the source manifest](src/main/resources/case-art/SOURCE.md).

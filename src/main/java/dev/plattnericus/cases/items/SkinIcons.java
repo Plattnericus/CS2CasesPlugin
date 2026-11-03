@@ -39,13 +39,9 @@ public final class SkinIcons {
         return item;
     }
 
-    /** Selection is a menu model, never an equipped weapon or transferable inventory item. */
+    /** Menu icon for a skin that can be picked; a selected skin glows. Uses vanilla effects only. */
     public static ItemStack tradeIcon(SkinDefinition def, Component name, List<Component> lore, PluginSettings settings, boolean selected) {
-        ItemStack item = icon(def, name, lore, settings, selected && !settings.resourcePack().enabled());
-        if (selected && settings.resourcePack().enabled()) {
-            item.editMeta(meta -> meta.setItemModel(new NamespacedKey(settings.resourcePack().namespace(), "trade/selected/" + def.id())));
-        }
-        return item;
+        return icon(def, name, lore, settings, selected);
     }
 
     /** Hides attribute, enchantment and similar vanilla tooltip lines on menu icons. */

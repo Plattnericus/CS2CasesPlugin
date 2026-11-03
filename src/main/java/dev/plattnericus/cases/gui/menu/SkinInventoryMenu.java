@@ -148,7 +148,7 @@ public final class SkinInventoryMenu extends Menu {
             }
         });
         set(GuiItems.SLOT_CENTER, GuiItems.icon(ctx.messages(viewer), Material.BOOK, "gui.skins.info",
-                Text.unparsed("count", entries.size()), Text.unparsed("total", profile.owned().size())), c -> viewer.closeInventory());
+                Text.unparsed("count", entries.size()), Text.unparsed("total", profile.owned().size())));
         set(GuiItems.SLOT_NEXT, GuiItems.next(ctx.messages(viewer), state.page, pages), c -> {
             if (state.page + 1 < pages) {
                 state.page++;
@@ -202,8 +202,8 @@ public final class SkinInventoryMenu extends Menu {
         }
         if (!readOnly && !admin) {
             if (viewer.hasPermission("mccases.market")) set(46, GuiItems.icon(ctx.messages(viewer), Material.EMERALD, "market.browse"), c -> new dev.plattnericus.cases.commerce.MarketMenu(ctx, viewer).open());
-            if (viewer.hasPermission("mccases.tradein")) set(46, GuiItems.icon(ctx.messages(viewer), Material.GOLD_INGOT, "tradein.button"), c -> new dev.plattnericus.cases.tradein.TradeInMenu(ctx, viewer).open());
-            if (viewer.hasPermission("mccases.trade")) set(52, GuiItems.icon(ctx.messages(viewer), Material.WRITABLE_BOOK, "trade.choose-partner"), c -> new dev.plattnericus.cases.commerce.TradePlayersMenu(ctx, viewer).open());
+            if (viewer.hasPermission("mccases.tradein")) set(52, GuiItems.icon(ctx.messages(viewer), Material.GOLD_INGOT, "tradein.button"), c -> new dev.plattnericus.cases.tradein.TradeInMenu(ctx, viewer).open());
+            if (viewer.hasPermission("mccases.trade")) set(8, GuiItems.icon(ctx.messages(viewer), Material.WRITABLE_BOOK, "trade.choose-partner"), c -> new dev.plattnericus.cases.commerce.TradePlayersMenu(ctx, viewer).open());
         }
     }
 

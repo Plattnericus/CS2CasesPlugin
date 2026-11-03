@@ -173,7 +173,7 @@ public record PluginSettings(
                         sceneScale(c.getDouble("opening.world.scene-scale", 3.0), warn)),
                 c.getBoolean("opening.speech-bubble.enabled", true),
                 clamp(c.getInt("opening.speech-bubble.duration-ticks", 60), 10, 400),
-                clamp(c.getInt("opening.max-active-per-player", 9), 1, 32),
+                clamp(c.getInt("opening.max-active-per-player", 9), 1, 9),
                 clamp(c.getInt("opening.max-active-global", 64), 1, 256));
         if (!opening.display().equals("gui") && !opening.display().equals("world")) {
             warn.accept("config.yml: opening.display must be gui or world - using gui");
