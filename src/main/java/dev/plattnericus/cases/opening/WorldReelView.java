@@ -66,8 +66,6 @@ final class WorldReelView implements OpeningView {
     private double sceneScale = 1;
     private double appear = HIDDEN;
     private int layoutIndex = -1, layoutCount;
-    private double fitDistance;
-    private BukkitTask fitter;
     private double lastKeyframe = Double.NaN;
     private int ticksSinceKeyframe = STEP;
     private BukkitTask cleanup;
@@ -109,35 +107,13 @@ final class WorldReelView implements OpeningView {
         Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> {
             if (!closed) tween(1, FADE_TICKS);
         }, 2L);
-        fitter = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), this::followViewer, 10L, 5L);
     }
 
     /** Recenter every live scene, including held rewards, whenever one is added or removed. */
     void layout(int index, int count) {
-        refit(index, count, 0);
-    }
-
-    /** Distance from the viewer's eyes to the scene; the scene is sized for this. */
-    private double viewDistance() {
-        Location eye = player.getEyeLocation();
-        if (eye.getWorld() != baseAnchor.getWorld()) return fitDistance > 0 ? fitDistance : cfg.distance();
-        return Math.max(1.5, eye.toVector().distance(baseAnchor.toVector()));
-    }
-
-    /** Resizes the scene when the viewer walks closer or further away. */
-    private void followViewer() {
-        if (closed || layoutIndex < 0) return;
-        double distance = viewDistance();
-        if (Math.abs(distance - fitDistance) > Math.max(0.2, fitDistance * 0.06)) {
-            refit(layoutIndex, layoutCount, 4);
-        }
-    }
-
-    private void refit(int index, int count, int smooth) {
-        if (closed || smooth == 0 && layoutIndex == index && layoutCount == count) return;
+        if (closed || layoutIndex == index && layoutCount == count) return;
         layoutIndex = index; layoutCount = count;
-        double distance = viewDistance();
-        fitDistance = distance;
+        double distance = baseAnchor.toVector().distance(session.origin.toVector());
         var cell = OpeningLayout.cell(index, count, cfg.visibleItems() * cfg.spacing() + FRAME_WIDTH_PAD,
                 cfg.itemScale() + FRAME_HEIGHT_PAD, distance, cfg.sceneScale());
         Vector right = baseAnchor.getDirection().multiply(-1).crossProduct(new Vector(0, 1, 0)).normalize();
@@ -148,7 +124,7 @@ final class WorldReelView implements OpeningView {
                 Transformation pose = display.getTransformation();
                 pose.getTranslation().mul((float) ratio); pose.getScale().mul((float) ratio);
                 display.setInterpolationDelay(0);
-                display.setInterpolationDuration(smooth); display.setTransformation(pose);
+                display.setInterpolationDuration(0); display.setTransformation(pose);
                 display.setTeleportDuration(4); display.teleport(next);
             } else if (entity instanceof org.bukkit.entity.Interaction box) {
                 Vector offset = box.getLocation().toVector().subtract(anchor.toVector()).multiply(ratio);
@@ -399,9 +375,6 @@ final class WorldReelView implements OpeningView {
         closed = true;
         if (cleanup != null) {
             cleanup.cancel();
-        }
-        if (fitter != null) {
-            fitter.cancel();
         }
         if (flourish != null) {
             flourish.cancel();

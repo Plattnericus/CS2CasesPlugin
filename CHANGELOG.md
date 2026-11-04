@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- **Reels fit the view.** The wheel is sized for a 70 degree, 16:9 view and resizes when the player moves closer or further away.
+- **Reels fit the view.** The wheel is sized for a 70 degree, 16:9 view.
 - **Dealer pays in emeralds.** `shop.yml` now defaults to `currency: EMERALD`.
 - **`/casesplugin`** lists the commands the sender may use.
 - **Cleaner case openings.** The reels no longer tilt. The frame is larger, the scene scales in when an
