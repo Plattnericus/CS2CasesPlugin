@@ -100,8 +100,8 @@ final class WorldReelView implements OpeningView {
             d.setBackgroundColor(Color.fromARGB(150, 10, 12, 16));
             d.setLineWidth(280);
             float textScale = .6f;
-            d.setTransformation(new Transformation(new Vector3f(0, (float) (half + 0.36), 0), NO_ROTATION,
-                    new Vector3f(textScale), NO_ROTATION));
+            d.setTransformation(scaled(new Transformation(new Vector3f(0, (float) (half + 0.36), 0), NO_ROTATION,
+                    new Vector3f(textScale), NO_ROTATION)));
         });
         all.add(title);
         clickTargets(half);
@@ -234,7 +234,7 @@ final class WorldReelView implements OpeningView {
         return anchor.getWorld().spawn(anchor, BlockDisplay.class, d -> {
             common(d);
             d.setBlock(material.createBlockData());
-            d.setTransformation(new Transformation(translation, NO_ROTATION, scale, NO_ROTATION));
+            d.setTransformation(scaled(new Transformation(translation, NO_ROTATION, scale, NO_ROTATION)));
         });
     }
 
