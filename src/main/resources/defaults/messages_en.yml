@@ -403,6 +403,20 @@ slot:
   - '<gray>Right click: skins, knives and cases'
   - <dark_gray>This item is locked to this slot.
   blocked: <prefix><gray>Free an inventory slot so the skin inventory item can appear.
+help:
+  header: <prefix><white>Commands
+  entry: <white><usage> <dark_gray>- <gray><description>
+  commands:
+    skins: Open your skin inventory
+    knife: Open your knife collection
+    cases: Browse and open cases
+    openings: Active openings and recent results
+    tradein: Trade up skins to a higher rarity
+    inspect: Inspect your held weapon or knife
+    trade: Trade skins with another player
+    market: Buy and sell skins for emeralds
+    admin: Administration (operators)
+    help: Show this list
 admin:
   help:
   - <#e4ae39>MCCases <dark_gray>» <gray>Admin

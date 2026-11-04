@@ -78,7 +78,7 @@ opening:
   world:
     # Upper limit for the wheel size. The wheels shrink automatically to fit the view when
     # several cases open together (up to nine).
-    scene-scale: 3.0
+    scene-scale: 2.0
     distance: 3.0
     height: 0.35
     visible-items: 5

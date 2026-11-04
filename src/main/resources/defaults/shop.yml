@@ -1,5 +1,5 @@
 # Case dealer. Spawn one with /csadmin shop spawn, remove with /csadmin shop remove.
-currency: DIAMOND
+currency: EMERALD
 
 villager:
   # empty = name from the language file (shop.npc-name)

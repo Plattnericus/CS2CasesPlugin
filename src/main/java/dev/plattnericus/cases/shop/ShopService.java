@@ -40,7 +40,7 @@ public final class ShopService {
     public enum Result { OK, NOT_ENOUGH, INVENTORY_FULL, UNAVAILABLE }
 
     private final CasesContext ctx;
-    private Material currency = Material.DIAMOND;
+    private Material currency = Material.EMERALD;
     private String villagerName = "Case Dealer";
     private String profession = "cartographer";
     private NpcSettings npc = NpcSettings.defaults();
@@ -72,10 +72,10 @@ public final class ShopService {
 
     public void load(File file, Consumer<String> warn) {
         YamlConfiguration y = YamlConfiguration.loadConfiguration(file);
-        Material m = Material.matchMaterial(y.getString("currency", "DIAMOND"));
+        Material m = Material.matchMaterial(y.getString("currency", "EMERALD"));
         if (m == null || !m.isItem()) {
-            warn.accept("shop.yml: currency is not an item - using DIAMOND");
-            m = Material.DIAMOND;
+            warn.accept("shop.yml: currency is not an item - using EMERALD");
+            m = Material.EMERALD;
         }
         currency = m;
         // empty = take the name from the language file

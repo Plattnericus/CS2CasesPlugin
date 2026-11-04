@@ -19,7 +19,7 @@ public final class OpeningChecks {
         var config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(root, "config.yml"));
         require(!config.contains("language") && !config.contains("client-language"), "the interface is English only");
         require(config.getInt("opening.max-active-per-player") == 9, "default nine-opening capacity");
-        require(config.getDouble("opening.world.scene-scale") == 3, "default whole-wheel size");
+        require(config.getDouble("opening.world.scene-scale") == 2, "default whole-wheel size");
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var def = catalog.caseDefinition("kilowatt_case");
         presentation(catalog, def);
@@ -104,7 +104,12 @@ public final class OpeningChecks {
             double maxY = cells.stream().mapToDouble(c -> c.up() + height / 2 * c.scale()).max().orElseThrow();
             require(Math.abs(minY + maxY) < 1e-9, "partial reel rows not vertically centered: " + count);
             require(Math.abs(cells.stream().mapToDouble(OpeningLayout.Cell::right).sum()) < 1e-9, "partial reel row not horizontally centered");
+            double halfHeight = Math.tan(Math.toRadians(35)) * distance, halfWidth = halfHeight * 16 / 9;
             for (var cell : cells) {
+                require(Math.abs(cell.right()) + width / 2 * cell.scale() <= halfWidth * .9
+                                && Math.abs(cell.up()) + height / 2 * cell.scale() <= halfHeight * .9,
+                        "reel outside a 70 degree 16:9 view at distance " + distance + ": " + count);
+                if (count == 1) require(width * cell.scale() <= halfWidth * 2 * .4, "single reel too large for the view at distance " + distance);
                 require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + width / 2 * cell.scale() < distance * .925,
                         "reel clipped horizontally: " + count);
                 require(Math.abs(cell.up()) + height / 2 * cell.scale() < distance * .52, "reel clipped vertically: " + count);

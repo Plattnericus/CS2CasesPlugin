@@ -35,7 +35,7 @@ No other plugins and no client mods are needed.
 
    Open port 8165 (TCP) on your firewall. See [Resource pack](#resource-pack) for other options.
 4. Run `/csadmin reload` or restart the server, then check `/csadmin info`.
-5. Optional: place a dealer with `/csadmin shop spawn` so players can buy cases and keys for diamonds.
+5. Optional: place a dealer with `/csadmin shop spawn` so players can buy cases and keys for emeralds.
 
 ## Quick start
 
@@ -108,7 +108,7 @@ is complete. Favorites are left out of **Auto select**.
 
 ### Dealer
 
-A villager or mannequin placed with `/csadmin shop spawn` sells cases and keys for diamonds. Prices are
+A villager or mannequin placed with `/csadmin shop spawn` sells cases and keys for emeralds. Prices are
 in `shop.yml`.
 
 ## Features
@@ -138,6 +138,7 @@ in `shop.yml`.
 | `/trade [Player]`, `/trade accept\|decline\|cancel` | `mccases.trade` | Trading |
 | `/market`, `/market sell <Skin-ID> <Price>`, `/market own`, `/market search <Name>` | `mccases.market` | Market |
 | `/market balance`, `/market claims`, `/market recover` | `mccases.market` | Emeralds and proceeds |
+| `/casesplugin [help]` | none | Lists the commands you may use |
 
 | Permission | Default | Access |
 | --- | --- | --- |

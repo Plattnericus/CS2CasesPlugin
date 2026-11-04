@@ -124,6 +124,7 @@ public final class CasesBootstrap {
 
         plugin.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             PlayerCommands.register(event.registrar(), runtime);
+            dev.plattnericus.cases.command.HelpCommand.register(event.registrar(), runtime);
             new AdminCommand(runtime).register(event.registrar());
         });
 

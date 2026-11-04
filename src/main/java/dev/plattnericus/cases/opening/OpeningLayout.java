@@ -18,9 +18,9 @@ public final class OpeningLayout {
                 || width <= 0 || height <= 0 || distance <= 0) throw new IllegalArgumentException("invalid reel layout");
         int columns = (int) Math.ceil(Math.sqrt(count));
         int rows = (count + columns - 1) / columns;
-        // Fraction of the view the grid may fill: few reels stay moderate, nine fill the view.
-        double widthBudget = Math.min(1.85, 1.1 + .375 * (columns - 1));
-        double heightBudget = Math.min(1.02, .6 + .21 * (rows - 1));
+        // Share of the view (70 degrees, 16:9) the grid may fill: a single reel stays compact, nine fill most of it.
+        double widthBudget = Math.min(1.7, .8 + .45 * (columns - 1));
+        double heightBudget = Math.min(.95, .45 + .25 * (rows - 1));
         double scale = Math.min(sceneScale, Math.min(distance * widthBudget / (columns * (width + GAP_X)),
                 distance * heightBudget / (rows * (height + GAP_Y))));
         int row = index / columns;
