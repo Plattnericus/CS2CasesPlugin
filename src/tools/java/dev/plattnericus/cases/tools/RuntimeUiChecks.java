@@ -4,7 +4,7 @@ import dev.plattnericus.cases.core.CasesContext;
 import dev.plattnericus.cases.gui.GuiItems;
 import dev.plattnericus.cases.gui.menu.CasePreviewMenu;
 import dev.plattnericus.cases.skin.*;
-import dev.plattnericus.cases.tradein.*;
+import dev.plattnericus.cases.tradeup.*;
 import dev.plattnericus.cases.util.Text;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
@@ -99,9 +99,9 @@ public final class RuntimeUiChecks {
         });
     }
 
-    public static void tradeIn(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) {
-        require(ctx.tradeIns().allowAdmin(), "admin fixtures must be enabled on isolated server");
-        ctx.gallery().close(player); ctx.inspect().stop(player); player.closeInventory(); ctx.tradeIns().cancel(player);
+    public static void tradeUp(Plugin plugin, CommandSender sender, Player player, CasesContext ctx) {
+        require(ctx.tradeUps().allowAdmin(), "admin fixtures must be enabled on isolated server");
+        ctx.gallery().close(player); ctx.inspect().stop(player); player.closeInventory(); ctx.tradeUps().cancel(player);
         var source = ctx.catalog().caseDefinition("kilowatt_case");
         var defs = source.pool().values().stream().flatMap(List::stream).filter(s -> s.rarity().id().equals("mil_spec"))
                 .sorted(Comparator.comparing(s -> s.weapon().name())).toList();
@@ -123,7 +123,7 @@ public final class RuntimeUiChecks {
                 .thenRun(() -> {
                     fixtures.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
                     require(Bukkit.dispatchCommand(player, "tradeup"), "tradeup command unavailable");
-                    require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeInMenu, "selection menu missing");
+                    require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeUpMenu, "selection menu missing");
                 });
         work = work.thenCompose(v -> clicks(plugin, player, 3, 13))
                 .thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
@@ -139,13 +139,13 @@ public final class RuntimeUiChecks {
                             && player.getOpenInventory().getTopInventory().getItem(9).getType() == ctx.settings().opening().filler(), "rarity filter showed wrong-tier inputs");
                     click(player, 5);
                 });
-        for (int i = 0; i < TradeInSelection.Sort.values().length; i++) {
-            final var expected = TradeInSelection.Sort.values()[(i + 1) % TradeInSelection.Sort.values().length];
+        for (int i = 0; i < TradeUpSelection.Sort.values().length; i++) {
+            final var expected = TradeUpSelection.Sort.values()[(i + 1) % TradeUpSelection.Sort.values().length];
             work = work.thenCompose(v -> clicks(plugin, player, 0, 11 + expected.ordinal())).thenRun(() -> {
                 var menu = player.getOpenInventory().getTopInventory().getHolder(false);
-                try { var field = TradeInMenu.class.getDeclaredField("sort"); field.setAccessible(true); require(field.get(menu) == expected, "sort choice did not apply"); }
+                try { var field = TradeUpMenu.class.getDeclaredField("sort"); field.setAccessible(true); require(field.get(menu) == expected, "sort choice did not apply"); }
                 catch (ReflectiveOperationException e) { throw new IllegalStateException(e); }
-                var first = TradeInSelection.sorted(ctx.catalog(), fixtures, expected).getFirst();
+                var first = TradeUpSelection.sorted(ctx.catalog(), fixtures, expected).getFirst();
                 var name = Text.plain(player.getOpenInventory().getTopInventory().getItem(9).getItemMeta().displayName());
                 require(name.equals(Text.plain(ctx.formatter(player).fullName(ctx.catalog().skin(first.skinId()), first))), "displayed order does not follow sorting");
             });
@@ -159,13 +159,13 @@ public final class RuntimeUiChecks {
             }).findFirst().orElseThrow(() -> new AssertionError("direct weapon choice missing"));
             click(player, slot);
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeInMenu, "weapon choice did not return to selection");
+            require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof TradeUpMenu, "weapon choice did not return to selection");
             for (int slot : GuiItems.CONTENT) {
                 var item = player.getOpenInventory().getTopInventory().getItem(slot);
                 if (!item.getItemMeta().isHideTooltip()) require(Text.plain(item.getItemMeta().displayName()).contains(weapon.name()), "weapon filter leaked another weapon");
             }
             click(player, 7);
-            var selected = ctx.tradeIns().selected(player);
+            var selected = ctx.tradeUps().selected(player);
             require(selected.size() == 10, "matching inputs did not auto-fill");
             for (UUID id : selected) {
                 var skin = ctx.profiles().get(player).get(id);
@@ -174,40 +174,40 @@ public final class RuntimeUiChecks {
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
             click(player, 6);
             require(player.getOpenInventory().getTopInventory().getHolder(false).getClass().getSimpleName().equals("RewardsMenu")
-                    && ctx.tradeIns().selected(player).size() == 10, "reward preview lost selected inputs");
+                    && ctx.tradeUps().selected(player).size() == 10, "reward preview lost selected inputs");
             require(player.getOpenInventory().getTopInventory().getItem(9).getItemMeta().lore().stream().map(Text::plain)
                     .anyMatch(line -> line.startsWith("Chance: ")), "reward preview missing exact odds");
         }).thenCompose(v -> clicks(plugin, player, 45)).thenRun(() -> {
-            require(ctx.tradeIns().selected(player).size() == 10, "back from reward preview cleared inputs");
+            require(ctx.tradeUps().selected(player).size() == 10, "back from reward preview cleared inputs");
         }).thenCompose(v -> clicks(plugin, player, 0, 22)).thenRun(() -> {
-            require(ctx.tradeIns().selected(player).size() == 10, "back from sort choices cleared inputs");
+            require(ctx.tradeUps().selected(player).size() == 10, "back from sort choices cleared inputs");
             var held = new PlayerItemHeldEvent(player, player.getInventory().getHeldItemSlot(), (player.getInventory().getHeldItemSlot() + 1) % 9);
-            Bukkit.getPluginManager().callEvent(held); require(held.isCancelled(), "tradein menu permitted scroll");
+            Bukkit.getPluginManager().callEvent(held); require(held.isCancelled(), "tradeup menu permitted scroll");
         }).thenCompose(v -> clicks(plugin, player, 49)).thenRun(() -> {
-            require(player.getOpenInventory().getTopInventory().getSize() == 27 && ctx.tradeIns().selected(player).size() == 10, "review lost inputs");
+            require(player.getOpenInventory().getTopInventory().getSize() == 27 && ctx.tradeUps().selected(player).size() == 10, "review lost inputs");
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            click(player, 15); require(ctx.tradeIns().selected(player).size() == 10, "back from review cleared inputs");
+            click(player, 15); require(ctx.tradeUps().selected(player).size() == 10, "back from review cleared inputs");
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            click(player, 1); require(ctx.tradeIns().selected(player).size() == 10, "weapon chooser cleared selection");
+            click(player, 1); require(ctx.tradeUps().selected(player).size() == 10, "weapon chooser cleared selection");
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> click(player, 4)).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            click(player, 5); require(ctx.tradeIns().selected(player).size() == 10, "reset filters cleared selection");
+            click(player, 5); require(ctx.tradeUps().selected(player).size() == 10, "reset filters cleared selection");
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            click(player, 8); require(ctx.tradeIns().selected(player).isEmpty(), "clear selection failed");
+            click(player, 8); require(ctx.tradeUps().selected(player).isEmpty(), "clear selection failed");
         }).thenCompose(v -> clicks(plugin, player, 7)).thenRun(() -> {
-            require(ctx.tradeIns().selected(player).size() == 10, "refill failed");
+            require(ctx.tradeUps().selected(player).size() == 10, "refill failed");
         }).thenCompose(v -> clicks(plugin, player, 0)).thenRun(() -> {
-            player.closeInventory(); require(ctx.tradeIns().selected(player).isEmpty(), "closing sort choices leaked reservations");
+            player.closeInventory(); require(ctx.tradeUps().selected(player).isEmpty(), "closing sort choices leaked reservations");
             Bukkit.dispatchCommand(player, "tradeup");
         }).thenCompose(v -> clicks(plugin, player, 7, 6)).thenRun(() -> {
             player.closeInventory();
-            require(ctx.tradeIns().selected(player).isEmpty(), "closing reward preview leaked reservations");
-            pass(plugin, sender, "PASS TRADEIN UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.");
+            require(ctx.tradeUps().selected(player).isEmpty(), "closing reward preview leaked reservations");
+            pass(plugin, sender, "PASS TRADEUP UI: 48 direct-admin grants, five direct sorts, pagination, weapon/rarity/StatTrak filters, matching auto selection, exact reward odds, safe back navigation, closing submenus releases reservations, review and scroll protection.");
         }).whenComplete((v, error) -> {
-            player.closeInventory(); ctx.tradeIns().cancel(player);
+            player.closeInventory(); ctx.tradeUps().cancel(player);
             fixtures.forEach(s -> { ctx.profiles().removeLoaded(player.getUniqueId(), s.id()); ctx.repository().removeOwned(player.getUniqueId(), s.id()); });
             originalSkins.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
             originalEquipment.forEach((slot, id) -> ctx.profiles().get(player).setEquipped(slot, id));
-            if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Trade-in UI audit failed", error);
+            if (error != null) plugin.getLogger().log(java.util.logging.Level.SEVERE, "Trade-up UI audit failed", error);
         });
     }
 

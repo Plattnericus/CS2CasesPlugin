@@ -50,7 +50,7 @@ Give yourself a case and a key (you need operator rights):
 2. Watch the reel. Each opening uses one case and one key.
 3. Type `/skins` to see what you own.
 4. Hold a skin and press **F** to inspect it.
-5. Type `/tradein`, pick ten skins of the same rarity and trade them up for one of the next rarity.
+5. Type `/tradeup`, pick ten skins of the same rarity and trade them up for one of the next rarity.
 
 ## How to play
 
@@ -87,7 +87,7 @@ never change damage or durability.
 
 ### Trade-up
 
-`/tradein` follows the CS2 contract rules:
+`/tradeup` follows the CS2 contract rules:
 
 - Ten skins of the same rarity make one skin of the next rarity.
 - All ten must be normal, or all ten StatTrak.
@@ -134,7 +134,7 @@ in `shop.yml`.
 | `/cases`, `/cases open <Case> <1-1000>`, `/cases cancel` | `mccases.use` | Cases and openings |
 | `/openings` | `mccases.use` | Active openings and recent results |
 | `/inspect [hand\|view]` | `mccases.inspect` | Inspect and choose the view |
-| `/tradein`, `/tradeup` | `mccases.tradein` | Trade-up contracts |
+| `/tradeup` | `mccases.tradeup` | Trade-up contracts |
 | `/trade [Player]`, `/trade accept\|decline\|cancel` | `mccases.trade` | Trading |
 | `/market`, `/market sell <Skin-ID> <Price>`, `/market own`, `/market search <Name>` | `mccases.market` | Market |
 | `/market balance`, `/market claims`, `/market recover` | `mccases.market` | Emeralds and proceeds |
@@ -143,7 +143,7 @@ in `shop.yml`.
 | Permission | Default | Access |
 | --- | --- | --- |
 | `mccases.use`, `mccases.inspect`, `mccases.view`, `mccases.shop` | Everyone | Collection, cases, inspects, dealer |
-| `mccases.trade`, `mccases.market`, `mccases.tradein` | Everyone | Trading, market, trade-up |
+| `mccases.trade`, `mccases.market`, `mccases.tradeup` | Everyone | Trading, market, trade-up |
 | `mccases.admin` | Operators | All admin commands |
 
 <details>
@@ -182,7 +182,7 @@ Files live in `plugins/MCCases/`. Missing defaults are added on startup and your
 | `opening.max-active-per-player` | `9` | Openings at the same time (maximum 9) |
 | `opening.duration-ticks` | `120` | Length of the reel |
 | `opening.broadcast-rare` | `true` | Announce rare drops |
-| `trade-in.broadcast-gold` | `true` | Announce gold contracts |
+| `trade-up.broadcast-gold` | `true` | Announce gold contracts |
 | `inspect.held-pose` | `true` | Inspect held skins in your own arms |
 | `stattrak.count-mobs` | `false` | Count mob kills too |
 | `resource-pack.enabled` | `false` | Use the pack's models; set to `true` once players have the pack |

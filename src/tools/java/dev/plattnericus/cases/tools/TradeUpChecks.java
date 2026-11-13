@@ -5,14 +5,14 @@ import dev.plattnericus.cases.config.Messages;
 import dev.plattnericus.cases.items.SkinFormatter;
 import dev.plattnericus.cases.render.TextureStore;
 import dev.plattnericus.cases.skin.*;
-import dev.plattnericus.cases.tradein.*;
+import dev.plattnericus.cases.tradeup.*;
 import dev.plattnericus.cases.util.Text;
 import java.io.File;
 import java.util.*;
 
 /** Contract browsing uses the real catalog, filters, selection planner and lore formatter. */
-public final class TradeInChecks {
-    private TradeInChecks() { }
+public final class TradeUpChecks {
+    private TradeUpChecks() { }
     public static void run(File root) {
         var catalog = new CatalogLoader(new File(root, "catalog"), new TextureStore(new File(root, "textures"))).load(1).catalog();
         var source = catalog.caseDefinition("kilowatt_case");
@@ -22,37 +22,37 @@ public final class TradeInChecks {
         UUID owner = UUID.randomUUID(); var skins = new ArrayList<SkinInstance>();
         for (int i = 0; i < 48; i++) skins.add(instance(owner, i % 2 == 0 ? a : b, source.id(), i / 50.0, i, false, SkinInstance.Origin.CASE));
         skins.getFirst().setFavorite(true);
-        for (var sort : TradeInSelection.Sort.values()) {
-            var ordered = TradeInSelection.sorted(catalog, skins, sort);
+        for (var sort : TradeUpSelection.Sort.values()) {
+            var ordered = TradeUpSelection.sorted(catalog, skins, sort);
             require(new HashSet<>(ordered).equals(new HashSet<>(skins)), "sort lost skin identities");
-            require(ordered.equals(TradeInSelection.sorted(catalog, skins.reversed(), sort)), "unstable sorting " + sort);
+            require(ordered.equals(TradeUpSelection.sorted(catalog, skins.reversed(), sort)), "unstable sorting " + sort);
         }
-        var ascending = TradeInSelection.sorted(catalog, skins, TradeInSelection.Sort.FLOAT_ASC);
-        var descending = TradeInSelection.sorted(catalog, skins, TradeInSelection.Sort.FLOAT_DESC);
+        var ascending = TradeUpSelection.sorted(catalog, skins, TradeUpSelection.Sort.FLOAT_ASC);
+        var descending = TradeUpSelection.sorted(catalog, skins, TradeUpSelection.Sort.FLOAT_DESC);
         require(ascending.getFirst().floatValue() == 0 && descending.getFirst().floatValue() == .94, "float order wrong");
-        require(TradeInSelection.sorted(catalog, skins, TradeInSelection.Sort.NEWEST).getFirst() == skins.getLast(), "newest order wrong");
-        var onlyA = TradeInSelection.filter(catalog, descending, a.weapon().id(), tier.id(), 1);
+        require(TradeUpSelection.sorted(catalog, skins, TradeUpSelection.Sort.NEWEST).getFirst() == skins.getLast(), "newest order wrong");
+        var onlyA = TradeUpSelection.filter(catalog, descending, a.weapon().id(), tier.id(), 1);
         require(onlyA.size() == 24 && onlyA.stream().allMatch(s -> s.skinId().equals(a.id())), "weapon/rarity filter leaked another weapon");
-        require(TradeInSelection.filter(catalog, skins, null, null, 2).isEmpty(), "StatTrak filter leaked normal skins");
-        var filled = TradeInSelection.fill(catalog, onlyA, List.of(), true);
+        require(TradeUpSelection.filter(catalog, skins, null, null, 2).isEmpty(), "StatTrak filter leaked normal skins");
+        var filled = TradeUpSelection.fill(catalog, onlyA, List.of(), true);
         require(filled.size() == 10 && filled.getFirst() == onlyA.getFirst() && filled.stream().noneMatch(SkinInstance::favorite), "fill ignored filter/order/favorites");
-        require(!TradeInRules.validate(catalog, filled, true).rareSpecial(), "filtered weapon contract failed");
+        require(!TradeUpRules.validate(catalog, filled, true).rareSpecial(), "filtered weapon contract failed");
         var chosen = filled.subList(0, 3);
-        var remaining = TradeInSelection.fill(catalog, onlyA, chosen, true);
+        var remaining = TradeUpSelection.fill(catalog, onlyA, chosen, true);
         require(remaining.size() == 7 && remaining.stream().noneMatch(chosen::contains), "fill duplicated selections or crossed pages incorrectly");
-        require(TradeInSelection.fill(catalog, onlyA.subList(0, 4), List.of(), true).isEmpty(), "incomplete automatic contract selected");
+        require(TradeUpSelection.fill(catalog, onlyA.subList(0, 4), List.of(), true).isEmpty(), "incomplete automatic contract selected");
         var stat = instance(owner, a, source.id(), .3, 90, true, SkinInstance.Origin.CASE);
         var higher = instance(owner, source.skins(catalog.raritiesOrdered().get(1)).getFirst(), source.id(), .3, 91, false, SkinInstance.Origin.CASE);
-        require(!TradeInRules.compatible(catalog, skins.getFirst(), stat, true)
-                && !TradeInRules.compatible(catalog, skins.getFirst(), higher, true), "incompatible input selectable");
-        require(!TradeInRules.eligible(catalog, instance(owner, a, null, .3, 92, false, SkinInstance.Origin.CASE), true), "unknown real case provenance eligible");
+        require(!TradeUpRules.compatible(catalog, skins.getFirst(), stat, true)
+                && !TradeUpRules.compatible(catalog, skins.getFirst(), higher, true), "incompatible input selectable");
+        require(!TradeUpRules.eligible(catalog, instance(owner, a, null, .3, 92, false, SkinInstance.Origin.CASE), true), "unknown real case provenance eligible");
         var directAdmin = instance(owner, a, "admin", .3, 92, false, SkinInstance.Origin.ADMIN);
-        require(TradeInRules.eligible(catalog, directAdmin, true) && !TradeInRules.eligible(catalog, directAdmin, false), "configured direct admin weapon cannot be selected");
-        require(TradeInRules.sources(catalog, directAdmin, TradeInRules.target(catalog,a)).stream()
+        require(TradeUpRules.eligible(catalog, directAdmin, true) && !TradeUpRules.eligible(catalog, directAdmin, false), "configured direct admin weapon cannot be selected");
+        require(TradeUpRules.sources(catalog, directAdmin, TradeUpRules.target(catalog,a)).stream()
                 .allMatch(c -> c.pool().values().stream().flatMap(List::stream).anyMatch(def -> def.id().equals(a.id()))), "admin case inference used an unrelated skin");
         var adminTrade = instance(owner, a, source.id(), .3, 93, false, SkinInstance.Origin.ADMIN_TRADE_IN);
-        require(adminTrade.origin().admin() && adminTrade.origin().tradeIn()
-                && !TradeInRules.eligible(catalog, adminTrade, false) && TradeInRules.eligible(catalog, adminTrade, true), "admin lineage lost after trade-in");
+        require(adminTrade.origin().admin() && adminTrade.origin().tradeUp()
+                && !TradeUpRules.eligible(catalog, adminTrade, false) && TradeUpRules.eligible(catalog, adminTrade, true), "admin lineage lost after trade-up");
         require(InstanceCodec.decode(InstanceCodec.encode(adminTrade)).origin() == adminTrade.origin(), "journal dropped contract provenance");
         randomRewards(catalog, owner);
         var messages = new Messages(new File(root, "messages_en.yml"), null, null);
@@ -65,7 +65,7 @@ public final class TradeInChecks {
                 require(reward.sourceCase().equals(source.id()), "display source destroyed the case used for the next contract");
             }
         }
-        System.out.println("PASS: five stable trade-in sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE UP with retained admin lineage.");
+        System.out.println("PASS: five stable trade-up sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE UP with retained admin lineage.");
     }
     private static void randomRewards(Catalog catalog, UUID owner) {
         var first = catalog.caseDefinition("kilowatt_case");
@@ -78,15 +78,15 @@ public final class TradeInChecks {
                 var source = i < 7 ? first : second;
                 inputs.add(instance(owner, source.skins(inputTier).getFirst(), source.id(), .2, i, stat, SkinInstance.Origin.CASE));
             }
-            TradeInRules.validate(catalog, inputs, false);
-            var chances = TradeInRules.chances(catalog, inputs, target);
-            require(chances.size() > 1 && Math.abs(chances.stream().mapToDouble(TradeInRules.Chance::probability).sum() - 1) < 1e-12,
+            TradeUpRules.validate(catalog, inputs, false);
+            var chances = TradeUpRules.chances(catalog, inputs, target);
+            require(chances.size() > 1 && Math.abs(chances.stream().mapToDouble(TradeUpRules.Chance::probability).sum() - 1) < 1e-12,
                     "random reward preview missing outcomes or not totaling 100%");
             var firstPool = first.skins(target).stream().filter(s -> !stat || s.statTrakEligible()).toList();
             var secondPool = second.skins(target).stream().filter(s -> !stat || s.statTrakEligible()).toList();
             var counts = new HashMap<SkinDefinition, Integer>(); var random = new Random(124);
             for (int i = 0; i < 6000; i++) {
-                var outcome = TradeInRules.roll(catalog, inputs, target, random);
+                var outcome = TradeUpRules.roll(catalog, inputs, target, random);
                 var source = catalog.caseDefinition(outcome.sourceCase());
                 require(source.skins(target).contains(outcome.skin()) && (!stat || outcome.skin().statTrakEligible()), "random reward outside its legal source/tier/StatTrak pool");
                 counts.merge(outcome.skin(), 1, Integer::sum);
@@ -99,7 +99,7 @@ public final class TradeInChecks {
                         "repeated random draws omit an eligible reward or disagree with preview odds");
             }
         }
-        require(TradeInRules.chances(catalog, List.of(), target).isEmpty(), "empty selection has reward odds");
+        require(TradeUpRules.chances(catalog, List.of(), target).isEmpty(), "empty selection has reward odds");
         System.out.println("PASS: 12,000 independent trade-up draws cover every eligible normal/StatTrak outcome; exact mixed-case odds total 100% and match observed frequencies.");
     }
     private static SkinInstance instance(UUID owner, SkinDefinition def, String source, double fl, long time, boolean stat, SkinInstance.Origin origin) {

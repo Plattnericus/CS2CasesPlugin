@@ -67,7 +67,7 @@ public interface CasesContext {
 
     dev.plattnericus.cases.commerce.CommerceService commerce();
 
-    dev.plattnericus.cases.tradein.TradeInService tradeIns();
+    dev.plattnericus.cases.tradeup.TradeUpService tradeUps();
 
     SkinRepository repository();
 

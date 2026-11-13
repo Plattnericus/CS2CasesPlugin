@@ -55,10 +55,10 @@ public final class PlayerCommands {
                 CommandFeedback.usage(ctx, p, "/cases open <Case-ID> <1–1000> | /cases cancel");
             }
         }));
-        commands.register("tradein", "CS2-inspired skin contracts", List.of("tradeup"), command(ctx, "tradein", "mccases.tradein", p -> {
+        commands.register("tradeup", "CS2-inspired skin contracts", List.of(), command(ctx, "tradeup", "mccases.tradeup", p -> {
             if (ctx.profiles().get(p) == null) { ctx.messages(p).send(p, "profile.loading"); return; }
-            if (ctx.tradeIns().enabled() && ctx.profiles().get(p) != null && ctx.commerce().trade(p.getUniqueId()) == null) new dev.plattnericus.cases.tradein.TradeInMenu(ctx, p).open();
-            else ctx.messages(p).send(p, "tradein.unavailable");
+            if (ctx.tradeUps().enabled() && ctx.profiles().get(p) != null && ctx.commerce().trade(p.getUniqueId()) == null) new dev.plattnericus.cases.tradeup.TradeUpMenu(ctx, p).open();
+            else ctx.messages(p).send(p, "tradeup.unavailable");
         }));
         commands.register("openings", "Active openings and recent results", List.of(), command(ctx, "openings", "mccases.use", p -> new dev.plattnericus.cases.opening.ActiveOpeningsMenu(ctx, p).open()));
         commands.register("inspect", "Inspects your held weapon or equipped knife; hand places it at the skin hand in F5", List.of(), CommandFeedback.guard(ctx, "inspect", new BasicCommand() {

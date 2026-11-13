@@ -1,4 +1,4 @@
-package dev.plattnericus.cases.tradein;
+package dev.plattnericus.cases.tradeup;
 
 import dev.plattnericus.cases.catalog.Catalog;
 import dev.plattnericus.cases.catalog.Rarity;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 
 /** CS2-inspired: ten same-tier weapons; five Covert weapons for a rare special item. */
-public final class TradeInRules {
-    private TradeInRules() { }
+public final class TradeUpRules {
+    private TradeUpRules() { }
     public static Rarity target(Catalog catalog, SkinDefinition input) {
         if (input == null || input.rarity().rareSpecial()) return null;
         return catalog.raritiesOrdered().stream().filter(r -> r.order() > input.rarity().order()).findFirst().orElse(null);
@@ -41,11 +41,11 @@ public final class TradeInRules {
                 && catalog.skin(first.skinId()).rarity().id().equals(catalog.skin(candidate.skinId()).rarity().id());
     }
     public static Rarity validate(Catalog catalog, List<SkinInstance> inputs, boolean allowAdmin) {
-        if (inputs.isEmpty() || inputs.stream().map(SkinInstance::id).distinct().count() != inputs.size()) throw new IllegalArgumentException("tradein.invalid");
+        if (inputs.isEmpty() || inputs.stream().map(SkinInstance::id).distinct().count() != inputs.size()) throw new IllegalArgumentException("tradeup.invalid");
         var first = catalog.skin(inputs.getFirst().skinId()); var tier = target(catalog, first);
-        if (tier == null || inputs.size() != required(tier)) throw new IllegalArgumentException("tradein.count");
+        if (tier == null || inputs.size() != required(tier)) throw new IllegalArgumentException("tradeup.count");
         for (var s : inputs) {
-            if (!compatible(catalog, inputs.getFirst(), s, allowAdmin)) throw new IllegalArgumentException("tradein.invalid");
+            if (!compatible(catalog, inputs.getFirst(), s, allowAdmin)) throw new IllegalArgumentException("tradeup.invalid");
         }
         return tier;
     }

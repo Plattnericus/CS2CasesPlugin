@@ -78,11 +78,11 @@ public final class CommerceRuntimeChecks {
             }).thenCompose(v -> until(plugin, () -> ctx.commerce().trade(first.getUniqueId()) == null))
             .thenRun(() -> {
                 require(ctx.profiles().get(second).get(a.id()) != null && ctx.profiles().get(first).get(b.id()) != null, "atomic exchange failed");
-                var caseSkin = ctx.profiles().get(second).get(a.id()); var tradeInSkin = ctx.profiles().get(first).get(b.id());
-                require(caseSkin.traded() && tradeInSkin.traded() && tradeInSkin.origin().admin(), "trade provenance/admin lineage lost");
+                var caseSkin = ctx.profiles().get(second).get(a.id()); var tradeUpSkin = ctx.profiles().get(first).get(b.id());
+                require(caseSkin.traded() && tradeUpSkin.traded() && tradeUpSkin.origin().admin(), "trade provenance/admin lineage lost");
                 String caseSource = ctx.catalog().caseDefinition(a.sourceCase()).name();
                 require(ctx.formatter(second).lore(def, caseSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (" + caseSource + ")")), "case source not visible after live trade");
-                require(ctx.formatter(first).lore(def, tradeInSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (TRADE UP)")), "trade-in source not visible after live trade");
+                require(ctx.formatter(first).lore(def, tradeUpSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (TRADE UP)")), "trade-up source not visible after live trade");
                 ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName());
                 ctx.commerce().toggle(first, b.id());
             }).thenCompose(v -> RuntimeUiChecks.clicks(plugin, first, 46, 5)).thenRun(() -> {
@@ -172,29 +172,29 @@ public final class CommerceRuntimeChecks {
     private static CompletableFuture<Void> contract(Plugin plugin, Player player, CasesContext ctx, dev.plattnericus.cases.storage.Database db, SkinInstance.Origin origin, String caseId, boolean gold, java.util.function.Consumer<SkinInstance> observe) {
         player.closeInventory(); var source = ctx.catalog().caseDefinition(caseId);
         var input = source.pool().values().stream().flatMap(List::stream).filter(def -> {
-            var tier = dev.plattnericus.cases.tradein.TradeInRules.target(ctx.catalog(), def);
+            var tier = dev.plattnericus.cases.tradeup.TradeUpRules.target(ctx.catalog(), def);
             return tier != null && tier.rareSpecial() == gold;
         }).findFirst().orElseThrow();
-        var tier = dev.plattnericus.cases.tradein.TradeInRules.target(ctx.catalog(), input);
-        int amount = dev.plattnericus.cases.tradein.TradeInRules.required(tier);
+        var tier = dev.plattnericus.cases.tradeup.TradeUpRules.target(ctx.catalog(), input);
+        int amount = dev.plattnericus.cases.tradeup.TradeUpRules.required(tier);
         var before = ctx.profiles().get(player).all().stream().map(SkinInstance::id).collect(java.util.stream.Collectors.toSet());
         var inputs = java.util.stream.IntStream.range(0, amount).mapToObj(i -> new SkinInstance(UUID.randomUUID(), player.getUniqueId(), input.id(), 0.2, 100 + i, i, false, 0, PatternInfo.NONE, source.id(), origin, System.currentTimeMillis() + i, false, SkinInstance.Status.OWNED)).toList();
         java.util.function.Supplier<SkinInstance> result = () -> ctx.profiles().get(player).owned().stream().filter(s -> !before.contains(s.id()) && !inputs.stream().anyMatch(i -> i.id().equals(s.id())) && ctx.catalog().skin(s.skinId()).rarity().id().equals(tier.id())).findFirst().orElse(null);
         var work = main(plugin, CompletableFuture.allOf(inputs.stream().map(ctx.repository()::insert).toArray(CompletableFuture[]::new))).thenRun(() -> {
             inputs.forEach(s -> ctx.profiles().addLoaded(player.getUniqueId(), s));
             require(Bukkit.dispatchCommand(player, "tradeup"), "/tradeup alias failed");
-            require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof dev.plattnericus.cases.tradein.TradeInMenu, "/tradeup did not open selection menu");
+            require(player.getOpenInventory().getTopInventory().getHolder(false) instanceof dev.plattnericus.cases.tradeup.TradeUpMenu, "/tradeup did not open selection menu");
         });
         for (int i = 0; i < amount; i++) {
             final int slot = GuiItems.CONTENT[i];
             work = work.thenCompose(v -> delay(plugin, 2)).thenRun(() -> click(player, slot));
         }
         return work.thenCompose(v -> delay(plugin, 2)).thenRun(() -> {
-            require(ctx.tradeIns().selected(player).size() == amount, "GUI selection count wrong");
+            require(ctx.tradeUps().selected(player).size() == amount, "GUI selection count wrong");
             click(player, 49); require(player.getOpenInventory().getTopInventory().getSize() == 27, "confirmation missing");
             require(result.get() == null && inputs.stream().allMatch(s -> ctx.profiles().get(player).get(s.id()) != null), "contract consumed before final confirmation");
         }).thenCompose(v -> delay(plugin, 2)).thenRun(() -> click(player, 11))
-          .thenCompose(v -> until(plugin, () -> !ctx.tradeIns().busy(player) && result.get() != null)).thenCompose(v -> delay(plugin, 10))
+          .thenCompose(v -> until(plugin, () -> !ctx.tradeUps().busy(player) && result.get() != null)).thenCompose(v -> delay(plugin, 10))
           .thenCompose(v -> { UUID rewardId = result.get().id(); return main(plugin, db.run(c -> {
               try (var ps = c.prepareStatement("SELECT announced FROM " + db.table("trade_contracts") + " WHERE instance_id=?")) {
                   ps.setString(1, rewardId.toString()); try (var rows = ps.executeQuery()) { require(rows.next(), "contract not persisted"); return rows.getInt(1); }
@@ -205,7 +205,7 @@ public final class CommerceRuntimeChecks {
               var reward = result.get(); require(reward.origin() == (origin.admin() ? SkinInstance.Origin.ADMIN_TRADE_IN : SkinInstance.Origin.TRADE_IN), "output origin wrong");
               require(source.skins(tier).contains(ctx.catalog().skin(reward.skinId())) && source.id().equals(reward.sourceCase()), "output outside legal random pool");
               for (boolean precise : new boolean[]{false, true}) require(ctx.formatter(player).lore(ctx.catalog().skin(reward.skinId()), reward, precise).stream()
-                      .map(Text::plain).anyMatch(line -> line.contains("TRADE UP")), "trade-in output missing inventory provenance");
+                      .map(Text::plain).anyMatch(line -> line.contains("TRADE UP")), "trade-up output missing inventory provenance");
               if (caseId.equals("glove_case")) require(ctx.catalog().skin(reward.skinId()).weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !reward.statTrak(), "glove contract output wrong");
               observe.accept(reward);
               ctx.profiles().removeLoaded(player.getUniqueId(), reward.id()); ctx.repository().removeOwned(player.getUniqueId(), reward.id()); player.closeInventory();

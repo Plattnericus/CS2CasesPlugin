@@ -20,7 +20,7 @@ public final class HelpCommand {
             new Entry("mccases.use", "/knife", "knife"),
             new Entry("mccases.use", "/cases [open <case> <amount> | cancel]", "cases"),
             new Entry("mccases.use", "/openings", "openings"),
-            new Entry("mccases.tradein", "/tradein", "tradein"),
+            new Entry("mccases.tradeup", "/tradeup", "tradeup"),
             new Entry("mccases.inspect", "/inspect [hand | view]", "inspect"),
             new Entry("mccases.trade", "/trade <player>", "trade"),
             new Entry("mccases.market", "/market", "market"),

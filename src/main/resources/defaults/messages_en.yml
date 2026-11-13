@@ -411,7 +411,7 @@ help:
     knife: Open your knife collection
     cases: Browse and open cases
     openings: Active openings and recent results
-    tradein: Trade up skins to a higher rarity
+    tradeup: Trade up skins to a higher rarity
     inspect: Inspect your held weapon or knife
     trade: Trade skins with another player
     market: Buy and sell skins for emeralds
@@ -657,7 +657,7 @@ browser:
   sorts: {"0": "Highest rarity first", "1": "Name A–Z", "2": "Lowest float first", "3": "Newest first"}
   categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Gloves"}
 
-tradein:
+tradeup:
   result-title: "Trade-up result"
   received: {name: "<green>You received", lore: ["<gray>Traded up from <white><count></white> skins."]}
   again: {name: "<yellow>Trade up again", lore: ["<gray>Open the contract menu."]}
@@ -771,7 +771,7 @@ command:
 skin-source:
   traded: "Traded (<source>)"
   knife-traded: "Knife traded (<source>)"
-  trade-in: "TRADE UP"
+  trade-up: "TRADE UP"
 
 # Direct menu choices and transparent trade-up rewards.
 menus:

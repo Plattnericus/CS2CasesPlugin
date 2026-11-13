@@ -21,7 +21,7 @@ public final class CommandAccessListener implements Listener {
             case "csadmin", "mccases" -> "mccases.admin";
             case "skins", "inventory", "knife", "knives", "cases", "openings" -> "mccases.use";
             case "inspect" -> "mccases.inspect";
-            case "tradein", "tradeup" -> "mccases.tradein";
+            case "tradeup" -> "mccases.tradeup";
             case "trade", "skintrade" -> "mccases.trade";
             case "market", "marketplace", "skinmarket" -> "mccases.market";
             default -> null;

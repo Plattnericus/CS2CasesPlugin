@@ -1,4 +1,4 @@
-package dev.plattnericus.cases.tradein;
+package dev.plattnericus.cases.tradeup;
 
 import dev.plattnericus.cases.catalog.WeaponType;
 import dev.plattnericus.cases.core.CasesContext;
@@ -24,111 +24,111 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /** Contract selection with a separate, explicit final confirmation. */
-public final class TradeInMenu extends Menu {
+public final class TradeUpMenu extends Menu {
     private int page;
     private boolean confirming;
-    private TradeInSelection.Sort sort = TradeInSelection.Sort.NEWEST;
+    private TradeUpSelection.Sort sort = TradeUpSelection.Sort.NEWEST;
     private String weaponFilter, rarityFilter;
     private int statTrakFilter; // 0 = all, 1 = normal, 2 = StatTrak
-    public TradeInMenu(CasesContext ctx, Player p) { super(ctx, p); }
+    public TradeUpMenu(CasesContext ctx, Player p) { super(ctx, p); }
     @Override protected int rows() { return 6; }
-    @Override protected Component title() { return ctx.messages(viewer).get("tradein.title"); }
-    @Override protected boolean canClick(int slot) { return !ctx.tradeIns().busy(viewer); }
+    @Override protected Component title() { return ctx.messages(viewer).get("tradeup.title"); }
+    @Override protected boolean canClick(int slot) { return !ctx.tradeUps().busy(viewer); }
     @Override protected void build() {
         var profile = ctx.profiles().get(viewer); if (profile == null) return;
-        var selected = ctx.tradeIns().selected(viewer);
+        var selected = ctx.tradeUps().selected(viewer);
         var inputs = selected.stream().map(profile::get).filter(Objects::nonNull).toList();
         var first = inputs.isEmpty() ? null : inputs.getFirst();
-        var target = first == null ? null : TradeInRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId()));
-        int required = TradeInRules.required(target);
+        var target = first == null ? null : TradeUpRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId()));
+        int required = TradeUpRules.required(target);
         var candidates = profile.owned().stream().filter(s ->
-                TradeInRules.eligible(ctx.catalog(), s, ctx.tradeIns().allowAdmin())
+                TradeUpRules.eligible(ctx.catalog(), s, ctx.tradeUps().allowAdmin())
                 && (!ctx.commerce().locked(s.id()) || selected.contains(s.id()))
-                && (first == null || TradeInRules.compatible(ctx.catalog(), first, s, ctx.tradeIns().allowAdmin()))).toList();
-        var skins = TradeInSelection.sorted(ctx.catalog(), TradeInSelection.filter(ctx.catalog(), candidates,
+                && (first == null || TradeUpRules.compatible(ctx.catalog(), first, s, ctx.tradeUps().allowAdmin()))).toList();
+        var skins = TradeUpSelection.sorted(ctx.catalog(), TradeUpSelection.filter(ctx.catalog(), candidates,
                 weaponFilter, rarityFilter, statTrakFilter), sort);
         int pages = GuiItems.pages(skins.size(), GuiItems.CONTENT.length); page = Math.min(page, pages - 1);
-        if (skins.isEmpty()) set(31, GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradein.empty"));
+        if (skins.isEmpty()) set(31, GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradeup.empty"));
         for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < skins.size(); i++) {
             var skin = skins.get(page * GuiItems.CONTENT.length + i); var def = ctx.catalog().skin(skin.skinId());
             boolean chosen = selected.contains(skin.id()); var lore = new ArrayList<>(ctx.formatter(viewer).lore(def, skin, true));
             lore.add(ctx.messages(viewer).item(chosen ? "trade.selected" : "trade.add"));
             var name = ctx.formatter(viewer).fullName(def, skin);
-            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen, selected.indexOf(skin.id()) + 1), c -> { ctx.tradeIns().toggle(viewer, skin.id()); playClick(); render(); });
+            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen, selected.indexOf(skin.id()) + 1), c -> { ctx.tradeUps().toggle(viewer, skin.id()); playClick(); render(); });
         }
-        String all = ctx.messages(viewer).raw("tradein.all");
-        set(1, GuiItems.icon(ctx.messages(viewer), Material.CROSSBOW, "tradein.weapon", Text.unparsed("value",
+        String all = ctx.messages(viewer).raw("tradeup.all");
+        set(1, GuiItems.icon(ctx.messages(viewer), Material.CROSSBOW, "tradeup.weapon", Text.unparsed("value",
                 weaponFilter == null ? all : ctx.catalog().weapon(weaponFilter).name())), c -> {
             confirming = true; new WeaponChooser(ctx, viewer, this, candidates).open();
         });
-        set(2, GuiItems.icon(ctx.messages(viewer), Material.PRISMARINE_CRYSTALS, "tradein.rarity", Text.unparsed("value",
+        set(2, GuiItems.icon(ctx.messages(viewer), Material.PRISMARINE_CRYSTALS, "tradeup.rarity", Text.unparsed("value",
                 rarityFilter == null ? all : ctx.catalog().rarity(rarityFilter).name())), c -> {
             var choices = new ArrayList<String>(); choices.add(null);
             ctx.catalog().raritiesOrdered().stream().filter(r -> !r.rareSpecial()).forEach(r -> choices.add(r.id()));
             filterChoice(choices, rarityFilter, value -> value == null ? all : ctx.catalog().rarity(value).name(), value -> rarityFilter = value);
         });
-        set(3, GuiItems.icon(ctx.messages(viewer), Material.REDSTONE, "tradein.stattrak", Text.unparsed("value",
-                statTrakFilter == 0 ? all : statTrakFilter == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak")), c -> {
+        set(3, GuiItems.icon(ctx.messages(viewer), Material.REDSTONE, "tradeup.stattrak", Text.unparsed("value",
+                statTrakFilter == 0 ? all : statTrakFilter == 1 ? ctx.messages(viewer).raw("tradeup.normal") : "StatTrak")), c -> {
             filterChoice(List.of(0, 1, 2), statTrakFilter,
-                    value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradein.normal") : "StatTrak", value -> statTrakFilter = value);
+                    value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradeup.normal") : "StatTrak", value -> statTrakFilter = value);
         });
         if (weaponFilter != null || rarityFilter != null || statTrakFilter != 0) {
-            set(4, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradein.reset-filters"), c -> {
+            set(4, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradeup.reset-filters"), c -> {
                 weaponFilter = null; rarityFilter = null; statTrakFilter = 0; page = 0; playClick(); render();
             });
         }
-        set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradein.sort", Text.unparsed("sort",
-                ctx.messages(viewer).raw("tradein.sorts." + sort.name().toLowerCase(Locale.ROOT)))), c -> {
+        set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradeup.sort", Text.unparsed("sort",
+                ctx.messages(viewer).raw("tradeup.sorts." + sort.name().toLowerCase(Locale.ROOT)))), c -> {
             confirming = true;
-            new ChoiceMenu<>(ctx, viewer, "menus.sort-title", List.of(TradeInSelection.Sort.values()), sort,
-                    value -> ctx.messages(viewer).raw("tradein.sorts." + value.name().toLowerCase(Locale.ROOT)),
-                    value -> { sort = value; page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).icons(value -> GuiItems.sortIcon(value.name())).open();
+            new ChoiceMenu<>(ctx, viewer, "menus.sort-title", List.of(TradeUpSelection.Sort.values()), sort,
+                    value -> ctx.messages(viewer).raw("tradeup.sorts." + value.name().toLowerCase(Locale.ROOT)),
+                    value -> { sort = value; page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeUps().cancel(viewer)).icons(value -> GuiItems.sortIcon(value.name())).open();
         });
-        var chances = TradeInRules.chances(ctx.catalog(), inputs, target);
+        var chances = TradeUpRules.chances(ctx.catalog(), inputs, target);
         set(6, GuiItems.icon(ctx.messages(viewer), chances.isEmpty() ? Material.GRAY_DYE : Material.ENDER_EYE, "menus.rewards",
                 Text.unparsed("count", chances.size())), c -> {
             if (chances.isEmpty()) { playError(); return; }
             confirming = true; new RewardsMenu(ctx, viewer, this, chances).open();
         });
-        set(7, GuiItems.icon(ctx.messages(viewer), Material.BUNDLE, "tradein.fill"), c -> {
-            var fill = TradeInSelection.fill(ctx.catalog(), skins, inputs, ctx.tradeIns().allowAdmin());
-            fill.forEach(s -> ctx.tradeIns().toggle(viewer, s.id()));
-            if (fill.isEmpty()) ctx.messages(viewer).send(viewer, "tradein.no-fill");
+        set(7, GuiItems.icon(ctx.messages(viewer), Material.BUNDLE, "tradeup.fill"), c -> {
+            var fill = TradeUpSelection.fill(ctx.catalog(), skins, inputs, ctx.tradeUps().allowAdmin());
+            fill.forEach(s -> ctx.tradeUps().toggle(viewer, s.id()));
+            if (fill.isEmpty()) ctx.messages(viewer).send(viewer, "tradeup.no-fill");
             playClick(); render();
         });
-        set(8, GuiItems.icon(ctx.messages(viewer), Material.MILK_BUCKET, "tradein.clear"), c -> { ctx.tradeIns().cancel(viewer); page = 0; playClick(); render(); });
-        set(45, GuiItems.back(ctx.messages(viewer)), c -> { ctx.tradeIns().cancel(viewer); new SkinInventoryMenu(ctx, viewer).open(); });
+        set(8, GuiItems.icon(ctx.messages(viewer), Material.MILK_BUCKET, "tradeup.clear"), c -> { ctx.tradeUps().cancel(viewer); page = 0; playClick(); render(); });
+        set(45, GuiItems.back(ctx.messages(viewer)), c -> { ctx.tradeUps().cancel(viewer); new SkinInventoryMenu(ctx, viewer).open(); });
         set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
         set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
         boolean ready = target != null && selected.size() == required;
         var subject = ready
-                ? GuiItems.icon(ctx.messages(viewer), Material.LIME_CONCRETE, "tradein.review",
+                ? GuiItems.icon(ctx.messages(viewer), Material.LIME_CONCRETE, "tradeup.review",
                         Text.unparsed("count", selected.size()), Text.unparsed("required", required),
                         Text.unparsed("target", target.name()),
                         Text.unparsed("float", Text.formatFloat(inputs.stream().mapToDouble(SkinInstance::floatValue).average().orElse(0), 6)))
-                : GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradein.pending",
+                : GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradeup.pending",
                         Text.unparsed("count", selected.size()), Text.unparsed("required", required));
         set(49, subject, c -> {
-            if (!ready) { ctx.messages(viewer).send(viewer, "tradein.count"); playError(); return; }
+            if (!ready) { ctx.messages(viewer).send(viewer, "tradeup.count"); playError(); return; }
             confirming = true;
             new ContractConfirmation(ctx, viewer, subject, this).open();
         });
         set(53, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
     }
-    @Override protected void onClose() { if (!confirming) ctx.tradeIns().cancel(viewer); }
+    @Override protected void onClose() { if (!confirming) ctx.tradeUps().cancel(viewer); }
     private void returnToSelection() { confirming = false; open(); }
     private <T> void filterChoice(List<T> values, T current, Function<T, String> label, Consumer<T> apply) {
         confirming = true;
         new ChoiceMenu<>(ctx, viewer, "menus.filter-title", values, current, label,
-                value -> { apply.accept(value); page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeIns().cancel(viewer)).open();
+                value -> { apply.accept(value); page = 0; returnToSelection(); }, this::returnToSelection, () -> ctx.tradeUps().cancel(viewer)).open();
     }
 
     private static final class RewardsMenu extends Menu {
-        private final TradeInMenu source;
-        private final List<TradeInRules.Chance> chances;
+        private final TradeUpMenu source;
+        private final List<TradeUpRules.Chance> chances;
         private int page;
         private boolean navigating;
-        RewardsMenu(CasesContext ctx, Player p, TradeInMenu source, List<TradeInRules.Chance> chances) {
+        RewardsMenu(CasesContext ctx, Player p, TradeUpMenu source, List<TradeUpRules.Chance> chances) {
             super(ctx, p); this.source = source; this.chances = chances;
         }
         @Override protected int rows() { return 6; }
@@ -145,20 +145,20 @@ public final class TradeInMenu extends Menu {
             set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
             set(53, GuiItems.close(ctx.messages(viewer)), c -> viewer.closeInventory());
         }
-        @Override protected void onClose() { if (!navigating) ctx.tradeIns().cancel(viewer); }
+        @Override protected void onClose() { if (!navigating) ctx.tradeUps().cancel(viewer); }
     }
 
     /** A direct weapon choice avoids cycling through dozens of models to find an AK or AWP. */
     private static final class WeaponChooser extends Menu {
-        private final TradeInMenu source;
+        private final TradeUpMenu source;
         private final List<SkinInstance> candidates;
         private int page;
         private boolean navigating;
-        WeaponChooser(CasesContext ctx, Player p, TradeInMenu source, List<SkinInstance> candidates) {
+        WeaponChooser(CasesContext ctx, Player p, TradeUpMenu source, List<SkinInstance> candidates) {
             super(ctx, p); this.source = source; this.candidates = candidates;
         }
         @Override protected int rows() { return 6; }
-        @Override protected Component title() { return ctx.messages(viewer).get("tradein.weapon-title"); }
+        @Override protected Component title() { return ctx.messages(viewer).get("tradeup.weapon-title"); }
         @Override protected void build() {
             var counts = candidates.stream().collect(Collectors.groupingBy(
                     s -> ctx.catalog().skin(s.skinId()).weapon().id(), Collectors.counting()));
@@ -170,10 +170,10 @@ public final class TradeInMenu extends Menu {
                 var def = candidates.stream().map(s -> ctx.catalog().skin(s.skinId()))
                         .filter(s -> s.weapon().id().equals(weapon.id())).findFirst().orElseThrow();
                 set(GuiItems.CONTENT[i], SkinIcons.icon(def, Component.text(weapon.name()),
-                        ctx.messages(viewer).itemList("tradein.weapon-choice.lore", Text.unparsed("count", counts.get(weapon.id()))),
+                        ctx.messages(viewer).itemList("tradeup.weapon-choice.lore", Text.unparsed("count", counts.get(weapon.id()))),
                         ctx.settings(), weapon.id().equals(source.weaponFilter)), c -> choose(weapon.id()));
             }
-            set(4, GuiItems.icon(ctx.messages(viewer), Material.CHEST, "tradein.all-weapons"), c -> choose(null));
+            set(4, GuiItems.icon(ctx.messages(viewer), Material.CHEST, "tradeup.all-weapons"), c -> choose(null));
             set(45, GuiItems.back(ctx.messages(viewer)), c -> choose(source.weaponFilter));
             set(48, GuiItems.previous(ctx.messages(viewer), page, pages), c -> { if (page > 0) { page--; render(); } });
             set(50, GuiItems.next(ctx.messages(viewer), page, pages), c -> { if (page + 1 < pages) { page++; render(); } });
@@ -182,24 +182,24 @@ public final class TradeInMenu extends Menu {
         private void choose(String weapon) {
             navigating = true; source.weaponFilter = weapon; source.page = 0; source.confirming = false; source.open();
         }
-        @Override protected void onClose() { if (!navigating) ctx.tradeIns().cancel(viewer); }
+        @Override protected void onClose() { if (!navigating) ctx.tradeUps().cancel(viewer); }
     }
     private static final class ContractConfirmation extends Menu {
         private final ItemStack subject;
-        private final TradeInMenu source;
+        private final TradeUpMenu source;
         private boolean navigating;
-        ContractConfirmation(CasesContext ctx, Player p, ItemStack subject, TradeInMenu source) { super(ctx, p); this.subject = subject; this.source = source; }
+        ContractConfirmation(CasesContext ctx, Player p, ItemStack subject, TradeUpMenu source) { super(ctx, p); this.subject = subject; this.source = source; }
         @Override protected int rows() { return 3; }
         @Override protected Component title() { return ctx.messages(viewer).get("gui.confirm.title"); }
         @Override protected void build() {
             set(13, subject);
             set(11, GuiItems.icon(ctx.messages(viewer), Material.LIME_CONCRETE, "gui.confirm.yes"), c -> {
-                if (ctx.tradeIns().busy(viewer)) return;
-                ctx.tradeIns().confirm(viewer);
-                if (ctx.tradeIns().busy(viewer)) { navigating = true; viewer.closeInventory(); }
+                if (ctx.tradeUps().busy(viewer)) return;
+                ctx.tradeUps().confirm(viewer);
+                if (ctx.tradeUps().busy(viewer)) { navigating = true; viewer.closeInventory(); }
             });
             set(15, GuiItems.back(ctx.messages(viewer)), c -> { navigating = true; source.confirming = false; source.open(); });
         }
-        @Override protected void onClose() { if (!navigating) ctx.tradeIns().cancel(viewer); }
+        @Override protected void onClose() { if (!navigating) ctx.tradeUps().cancel(viewer); }
     }
 }

@@ -303,7 +303,7 @@ public final class CommerceService implements Listener {
         if (old != null) { ctx.inspect().stop(old); ctx.gallery().close(old); ctx.knives().refreshHeld(old); }
         Player next = Bukkit.getPlayer(skin.owner()); if (next != null) ctx.gallery().close(next);
     }
-    private boolean canUse(Player player) { return available() && player.isOnline() && ctx.profiles().get(player) != null && !payments.busy(player.getUniqueId()) && (ctx.tradeIns() == null || !ctx.tradeIns().busy(player)); }
+    private boolean canUse(Player player) { return available() && player.isOnline() && ctx.profiles().get(player) != null && !payments.busy(player.getUniqueId()) && (ctx.tradeUps() == null || !ctx.tradeUps().busy(player)); }
     private void refreshMarketViews() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.getOpenInventory().getTopInventory().getHolder(false) instanceof MarketMenu menu) menu.render();

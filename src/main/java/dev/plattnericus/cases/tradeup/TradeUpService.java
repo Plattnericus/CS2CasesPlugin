@@ -1,4 +1,4 @@
-package dev.plattnericus.cases.tradein;
+package dev.plattnericus.cases.tradeup;
 
 import dev.plattnericus.cases.core.CasesContext;
 import dev.plattnericus.cases.skin.SkinInstance;
@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /** Contracts are independent of direct player trades and never use case-drop broadcasts. */
-public final class TradeInService implements Listener {
+public final class TradeUpService implements Listener {
     private final CasesContext ctx;
     private final ContractRepository repository;
     private final Map<UUID, Set<UUID>> selected = new HashMap<>();
@@ -26,9 +26,9 @@ public final class TradeInService implements Listener {
     private boolean stopped;
     private org.bukkit.configuration.file.YamlConfiguration config;
     public void load() { config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.File(ctx.plugin().getDataFolder(), "config.yml")); }
-    public TradeInService(CasesContext ctx, ContractRepository repository) { this.ctx = ctx; this.repository = repository; load(); }
-    public boolean enabled() { return config.getBoolean("trade-in.enabled", true); }
-    public boolean allowAdmin() { return config.getBoolean("trade-in.allow-admin-inputs", true); }
+    public TradeUpService(CasesContext ctx, ContractRepository repository) { this.ctx = ctx; this.repository = repository; load(); }
+    public boolean enabled() { return config.getBoolean("trade-up.enabled", true); }
+    public boolean allowAdmin() { return config.getBoolean("trade-up.allow-admin-inputs", true); }
     public List<UUID> selected(Player p) { return List.copyOf(selected.getOrDefault(p.getUniqueId(), Set.of())); }
     public boolean busy(Player p) { return committing.contains(p.getUniqueId()); }
     public void toggle(Player p, UUID id) {
@@ -38,29 +38,29 @@ public final class TradeInService implements Listener {
         var profile = ctx.profiles().get(p); var skin = profile == null ? null : profile.get(id);
         if (skin == null || !ctx.commerce().mutable(profile, skin)) { ctx.messages(p).send(p, "commerce.locked"); return; }
         var first = offer.isEmpty() ? skin : profile.get(offer.iterator().next());
-        if (!TradeInRules.compatible(ctx.catalog(), first, skin, allowAdmin())) { ctx.messages(p).send(p, "tradein.invalid"); return; }
-        if (offer.size() >= TradeInRules.required(TradeInRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId())))) {
-            ctx.messages(p).send(p, "tradein.count"); return;
+        if (!TradeUpRules.compatible(ctx.catalog(), first, skin, allowAdmin())) { ctx.messages(p).send(p, "tradeup.invalid"); return; }
+        if (offer.size() >= TradeUpRules.required(TradeUpRules.target(ctx.catalog(), ctx.catalog().skin(first.skinId())))) {
+            ctx.messages(p).send(p, "tradeup.count"); return;
         }
         if (!ctx.commerce().reserveMutation(id)) return;
         offer.add(id); var slot = profile.slotOf(id); if (slot != null) ctx.knives().unequip(p, slot); ctx.inspect().stop(p);
     }
     private void main(Runnable run) { if (!stopped && ctx.plugin().isEnabled()) Bukkit.getScheduler().runTask(ctx.plugin(), run); }
     public void confirm(Player p) {
-        if (!enabled() || !p.hasPermission("mccases.tradein") || busy(p) || ctx.commerce().trade(p.getUniqueId()) != null) return;
+        if (!enabled() || !p.hasPermission("mccases.tradeup") || busy(p) || ctx.commerce().trade(p.getUniqueId()) != null) return;
         var profile = ctx.profiles().get(p); if (profile == null) return;
         var ids = selected(p); var inputs = ids.stream().map(profile::get).map(s -> s == null ? null : s.copyWithStatus(s.status())).toList();
-        if (inputs.stream().anyMatch(java.util.Objects::isNull)) { cancel(p); ctx.messages(p).send(p, "tradein.invalid"); return; }
+        if (inputs.stream().anyMatch(java.util.Objects::isNull)) { cancel(p); ctx.messages(p).send(p, "tradeup.invalid"); return; }
         var catalog = ctx.catalog();
         dev.plattnericus.cases.catalog.Rarity target;
-        try { target = TradeInRules.validate(catalog, inputs, config.getBoolean("trade-in.allow-admin-inputs", true)); }
+        try { target = TradeUpRules.validate(catalog, inputs, config.getBoolean("trade-up.allow-admin-inputs", true)); }
         catch (IllegalArgumentException invalid) { ctx.messages(p).send(p, invalid.getMessage()); return; }
         committing.add(p.getUniqueId());
         UUID owner = p.getUniqueId(); UUID contract = UUID.randomUUID(); var rng = ctx.openings().roller().random();
-        var outcome = TradeInRules.roll(catalog, inputs, target, rng);
+        var outcome = TradeUpRules.roll(catalog, inputs, target, rng);
         var def = outcome.skin();
         int pattern = catalog.patterns().seedMin() + rng.nextInt(catalog.patterns().seedMax() - catalog.patterns().seedMin() + 1);
-        double fl = TradeInRules.outputFloat(ctx.catalog(), inputs, def); long seed = rng.nextLong();
+        double fl = TradeUpRules.outputFloat(ctx.catalog(), inputs, def); long seed = rng.nextLong();
         boolean admin = inputs.stream().anyMatch(s -> s.origin().admin());
         ctx.render().report(def, pattern).thenCompose(report -> {
             var result = new SkinInstance(UUID.randomUUID(), owner, def.id(), fl, pattern, seed,
@@ -70,25 +70,25 @@ public final class TradeInService implements Listener {
         }).whenComplete((result, error) -> main(() -> {
             committing.remove(p.getUniqueId()); release(p.getUniqueId());
             if (error != null) {
-                ctx.plugin().getLogger().log(java.util.logging.Level.SEVERE, "Trade-in outcome needs reconciliation: " + contract, error);
+                ctx.plugin().getLogger().log(java.util.logging.Level.SEVERE, "Trade-up outcome needs reconciliation: " + contract, error);
                 // Reload instead of retrying with another reward: commit acknowledgement can be ambiguous.
                 if (p.isOnline()) { ctx.messages(p).send(p, "commerce.storage-error"); ctx.profiles().load(p); }
                 return;
             }
             for (var input : inputs) ctx.profiles().removeLoaded(p.getUniqueId(), input.id());
             ctx.profiles().addLoaded(p.getUniqueId(), result);
-            if (p.isOnline()) { ctx.messages(p).send(p, "tradein.result", Text.component("skin", ctx.formatter(p).fullName(def, result))); ctx.sounds().play(p, def.rarity().revealSound()); new TradeInResultMenu(ctx, p, def, result, inputs.size()).open(); }
-            if (def.rarity().rareSpecial() && config.getBoolean("trade-in.broadcast-gold", true)
-                    && (!admin || config.getBoolean("trade-in.broadcast-admin", false))) {
+            if (p.isOnline()) { ctx.messages(p).send(p, "tradeup.result", Text.component("skin", ctx.formatter(p).fullName(def, result))); ctx.sounds().play(p, def.rarity().revealSound()); new TradeUpResultMenu(ctx, p, def, result, inputs.size()).open(); }
+            if (def.rarity().rareSpecial() && config.getBoolean("trade-up.broadcast-gold", true)
+                    && (!admin || config.getBoolean("trade-up.broadcast-admin", false))) {
                 String playerName = p.getName();
                 repository.claimAnnouncement(contract).whenComplete((claimed, broadcastError) -> main(() -> {
                     if (broadcastError != null) { ctx.plugin().getLogger().log(java.util.logging.Level.WARNING, "Gold broadcast claim failed " + contract, broadcastError); return; }
                     if (!claimed) return;
                     for (Player online : Bukkit.getOnlinePlayers()) {
-                        var message = ctx.messages(online).get("tradein.gold", Text.unparsed("player", playerName), Text.component("skin", ctx.formatter(online).fullName(def, result)))
+                        var message = ctx.messages(online).get("tradeup.gold", Text.unparsed("player", playerName), Text.component("skin", ctx.formatter(online).fullName(def, result)))
                                 .hoverEvent(net.kyori.adventure.text.event.HoverEvent.showText(ComponentDetails.details(ctx, online, def, result)));
                         online.sendMessage(message);
-                        if (config.getBoolean("trade-in.broadcast-sound", true)) ctx.sounds().play(online, "tradein.gold");
+                        if (config.getBoolean("trade-up.broadcast-sound", true)) ctx.sounds().play(online, "tradeup.gold");
                     }
                 }));
             }

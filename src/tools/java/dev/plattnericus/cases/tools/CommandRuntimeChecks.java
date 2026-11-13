@@ -122,7 +122,7 @@ public final class CommandRuntimeChecks {
         String[][]invalid={
             {"inspect","Invalid command","wrong"},{"inspect","Invalid command","hand","extra"},
             {"inventory","Invalid command","vanilla","extra"},{"knife","Invalid command","vanilla","extra"},
-            {"tradein","Invalid command","extra"},{"tradeup","Invalid command","extra"},{"openings","Invalid command","extra"},
+            {"tradeup","Invalid command","extra"},{"tradeup","Invalid command","extra"},{"openings","Invalid command","extra"},
             {"cases","Invalid command","open","kilowatt_case","0"},{"cases","Invalid command","open","kilowatt_case","1001"},
             {"cases","Invalid command","open","kilowatt_case","nope"},{"cases","Unknown case","open","bad_case","1"},
             {"cases","Invalid command","cancel","extra"},{"trade","Invalid command","cancel","extra"},{"trade","Invalid command","decline","extra"},
@@ -182,7 +182,7 @@ public final class CommandRuntimeChecks {
             .thenCompose(v->menu("trade",dev.plattnericus.cases.commerce.TradePlayersMenu.class))
             .thenCompose(v->menu("cases",dev.plattnericus.cases.gui.menu.CasesMenu.class))
             .thenCompose(v->menu("openings",dev.plattnericus.cases.opening.ActiveOpeningsMenu.class))
-            .thenCompose(v->menu("tradein",dev.plattnericus.cases.tradein.TradeInMenu.class));
+            .thenCompose(v->menu("tradeup",dev.plattnericus.cases.tradeup.TradeUpMenu.class));
         flow=flow.thenCompose(v->check("scan skin",Map.of("skin","ak47_case_hardened"),true,()->says("playside.blue")));
         flow=flow.thenCompose(v->check("scan skin metric count",Map.of("skin","ak47_case_hardened","metric","playside.blue","count",2),true,()->says("1.")));
         for(String type:List.of("","villager","mannequin"))flow=flow.thenCompose(v->check("shop spawn"+(type.isEmpty()?"":" "+type),Map.of(),false,()->!messages.isEmpty()))

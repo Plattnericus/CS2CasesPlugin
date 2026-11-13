@@ -6,7 +6,7 @@ import dev.plattnericus.cases.render.TextureStore;
 import dev.plattnericus.cases.reward.RewardRoller;
 import dev.plattnericus.cases.skin.*;
 import dev.plattnericus.cases.storage.*;
-import dev.plattnericus.cases.tradein.TradeInRules;
+import dev.plattnericus.cases.tradeup.TradeUpRules;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
@@ -39,7 +39,7 @@ public final class OpeningChecks {
                 require(gloves.size() == 24 && gloves.stream().allMatch(s -> s.weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !s.statTrakEligible()), "glove gold pool incomplete or StatTrak eligible");
                 var covert = caseDef.skins(catalog.raritiesOrdered().get(3)).getFirst();
                 var input = new SkinInstance(UUID.randomUUID(), UUID.randomUUID(), covert.id(), .2, 0, 0, true, 0, PatternInfo.NONE, caseDef.id(), SkinInstance.Origin.CASE, 0, false, SkinInstance.Status.OWNED);
-                require(TradeInRules.pool(catalog, input, catalog.raritiesOrdered().getLast()).isEmpty(), "StatTrak contract could output gloves");
+                require(TradeUpRules.pool(catalog, input, catalog.raritiesOrdered().getLast()).isEmpty(), "StatTrak contract could output gloves");
             }
         }
         UUID a = UUID.randomUUID(), b = UUID.randomUUID();
@@ -185,12 +185,12 @@ public final class OpeningChecks {
         var covert = catalog.raritiesOrdered().stream().filter(r -> r.order() < special.order()).reduce((a,b) -> b).orElseThrow();
         var inputDef = source.skins(covert).getFirst();
         var inputs = java.util.stream.IntStream.range(0, 5).mapToObj(i -> new SkinInstance(UUID.randomUUID(), owner, inputDef.id(), 0.2, i, i, false, 0, PatternInfo.NONE, source.id(), SkinInstance.Origin.CASE, 1000+i, false, SkinInstance.Status.OWNED)).toList();
-        require(TradeInRules.validate(catalog, inputs, true).rareSpecial(), "five Covert inputs did not target gold");
-        var winner = TradeInRules.choose(catalog, inputs, special, new java.util.Random(7)); require(winner.rarity().rareSpecial(), "gold picked by name instead of classification");
+        require(TradeUpRules.validate(catalog, inputs, true).rareSpecial(), "five Covert inputs did not target gold");
+        var winner = TradeUpRules.choose(catalog, inputs, special, new java.util.Random(7)); require(winner.rarity().rareSpecial(), "gold picked by name instead of classification");
         double normalizedInput = Math.clamp((0.2 - inputDef.minFloat()) / (inputDef.maxFloat() - inputDef.minFloat()), 0, 1);
-        require(Math.abs(TradeInRules.outputFloat(catalog, inputs, winner) - (winner.minFloat() + normalizedInput * (winner.maxFloat() - winner.minFloat()))) < 1e-9, "output float incorrect");
-        expectInvalid(() -> TradeInRules.validate(catalog, inputs.subList(0, 4), true));
-        var duplicate = new java.util.ArrayList<>(inputs); duplicate.set(1, inputs.getFirst()); expectInvalid(() -> TradeInRules.validate(catalog, duplicate, true));
+        require(Math.abs(TradeUpRules.outputFloat(catalog, inputs, winner) - (winner.minFloat() + normalizedInput * (winner.maxFloat() - winner.minFloat()))) < 1e-9, "output float incorrect");
+        expectInvalid(() -> TradeUpRules.validate(catalog, inputs.subList(0, 4), true));
+        var duplicate = new java.util.ArrayList<>(inputs); duplicate.set(1, inputs.getFirst()); expectInvalid(() -> TradeUpRules.validate(catalog, duplicate, true));
         inputs.forEach(s -> repo.insert(s).join());
         var reward = new SkinInstance(UUID.randomUUID(), owner, winner.id(), 0.2, 77, 77, false, 0, PatternInfo.NONE, source.id(), SkinInstance.Origin.TRADE_IN, 9999, false, SkinInstance.Status.OWNED);
         var contracts = new ContractRepository(db); UUID contract = UUID.randomUUID();
@@ -202,12 +202,12 @@ public final class OpeningChecks {
         var active = repo.loadActive(owner).join(); require(inputs.stream().noneMatch(input -> active.stream().anyMatch(s -> s.id().equals(input.id()))) && active.stream().filter(s -> s.id().equals(reward.id())).count() == 1, "contract duplicated inputs or output");
         require(contracts.claimAnnouncement(contract).join() && !contracts.claimAnnouncement(contract).join(), "gold announced twice");
         var admin = inputs.stream().map(s -> new SkinInstance(s.id(), owner, s.skinId(), s.floatValue(), s.pattern(), s.wearSeed(), s.statTrak(), 0, s.patternInfo(), s.sourceCase(), SkinInstance.Origin.ADMIN, s.createdAt(), false, SkinInstance.Status.OWNED)).toList();
-        expectInvalid(() -> TradeInRules.validate(catalog, admin, false));
-        require(TradeInRules.validate(catalog, admin, true).rareSpecial(), "configured admin input rejected");
+        expectInvalid(() -> TradeUpRules.validate(catalog, admin, false));
+        require(TradeUpRules.validate(catalog, admin, true).rareSpecial(), "configured admin input rejected");
         var lower = catalog.raritiesOrdered().stream().filter(r -> r.order() < covert.order() && !source.skins(r).isEmpty()).findFirst().orElseThrow();
         var normalDef = source.skins(lower).getFirst();
         var normal = java.util.stream.IntStream.range(0, 10).mapToObj(i -> new SkinInstance(UUID.randomUUID(), owner, normalDef.id(), 0.5, i, i, false, 0, PatternInfo.NONE, source.id(), SkinInstance.Origin.CASE, i, false, SkinInstance.Status.OWNED)).toList();
-        require(!TradeInRules.validate(catalog, normal, true).rareSpecial(), "ordinary contract targeted gold");
+        require(!TradeUpRules.validate(catalog, normal, true).rareSpecial(), "ordinary contract targeted gold");
     }
     private static void expectInvalid(Runnable work) { try { work.run(); throw new AssertionError("invalid contract accepted"); } catch (IllegalArgumentException expected) { } }
     private static void require(boolean condition, String message) { if (!condition) throw new AssertionError(message); }

@@ -13,7 +13,7 @@ public final class SkinInstance {
     public enum Origin {
         CASE, ADMIN, TEST, TRADE_IN, ADMIN_TRADE_IN;
         public boolean admin() { return this == ADMIN || this == ADMIN_TRADE_IN; }
-        public boolean tradeIn() { return this == TRADE_IN || this == ADMIN_TRADE_IN; }
+        public boolean tradeUp() { return this == TRADE_IN || this == ADMIN_TRADE_IN; }
     }
 
     private final UUID id;

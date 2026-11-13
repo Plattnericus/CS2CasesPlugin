@@ -200,7 +200,7 @@ resource-pack:
     prompt: "<gray>MCCases skin textures"
 
 # Independent CS2-inspired contracts; not direct player trading.
-trade-in:
+trade-up:
   enabled: true
   allow-admin-inputs: true
   broadcast-gold: true

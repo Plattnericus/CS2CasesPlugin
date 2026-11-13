@@ -36,8 +36,8 @@ public final class RuntimeChecksPlugin extends JavaPlugin {
                     queueAudit(sender, player, ctx, 9);
                 } else if (args.length == 2 && args[1].equals("spam")) {
                     RuntimeUiChecks.spam(this, sender, player, ctx);
-                } else if (args.length == 2 && args[1].equals("tradein-ui")) {
-                    RuntimeUiChecks.tradeIn(this, sender, player, ctx);
+                } else if (args.length == 2 && args[1].equals("tradeup-ui")) {
+                    RuntimeUiChecks.tradeUp(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("choices")) {
                     RuntimeUiChecks.choices(this, sender, player, ctx);
                 } else if (args.length == 2 && args[1].equals("queue-controls")) {

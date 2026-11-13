@@ -22,7 +22,7 @@ public final class FeatureChecks {
         CommerceChecks.run();
         SkinPresentationChecks.run(root);
         dev.plattnericus.cases.opening.OpeningChecks.run(root);
-        TradeInChecks.run(root);
+        TradeUpChecks.run(root);
         InventoryInputChecks.run();
         checkCatalogAndJournal(root);
         var english = new YamlConfiguration();

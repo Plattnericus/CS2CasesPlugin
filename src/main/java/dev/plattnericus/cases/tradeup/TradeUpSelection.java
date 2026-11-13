@@ -1,4 +1,4 @@
-package dev.plattnericus.cases.tradein;
+package dev.plattnericus.cases.tradeup;
 
 import dev.plattnericus.cases.catalog.Catalog;
 import dev.plattnericus.cases.skin.SkinInstance;
@@ -6,8 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /** Stable ordering and a compatible fill plan, independent of menu pages. */
-public final class TradeInSelection {
-    private TradeInSelection() { }
+public final class TradeUpSelection {
+    private TradeUpSelection() { }
     public enum Sort { NEWEST, NAME, RARITY, FLOAT_ASC, FLOAT_DESC }
     public static List<SkinInstance> filter(Catalog catalog, List<SkinInstance> skins, String weapon, String rarity, int statTrak) {
         return skins.stream().filter(s -> (weapon == null || catalog.skin(s.skinId()).weapon().id().equals(weapon))
@@ -26,16 +26,16 @@ public final class TradeInSelection {
     }
     public static List<SkinInstance> fill(Catalog catalog, List<SkinInstance> candidates,
                                           List<SkinInstance> selected, boolean allowAdmin) {
-        var safe = candidates.stream().filter(s -> TradeInRules.eligible(catalog, s, allowAdmin)
+        var safe = candidates.stream().filter(s -> TradeUpRules.eligible(catalog, s, allowAdmin)
                 && !s.favorite() && selected.stream().noneMatch(chosen -> chosen.id().equals(s.id()))).toList();
         record Group(java.util.UUID owner, String rarity, boolean statTrak) { }
         java.util.function.Function<SkinInstance, Group> key = s -> new Group(s.owner(), catalog.skin(s.skinId()).rarity().id(), s.statTrak());
         var counts = safe.stream().collect(java.util.stream.Collectors.groupingBy(key, java.util.stream.Collectors.counting()));
         SkinInstance first = selected.isEmpty() ? safe.stream().filter(s -> counts.get(key.apply(s))
-                >= TradeInRules.required(TradeInRules.target(catalog, catalog.skin(s.skinId())))).findFirst().orElse(null)
+                >= TradeUpRules.required(TradeUpRules.target(catalog, catalog.skin(s.skinId())))).findFirst().orElse(null)
                 : selected.getFirst();
         if (first == null) return List.of();
-        int remaining = Math.max(0, TradeInRules.required(TradeInRules.target(catalog, catalog.skin(first.skinId()))) - selected.size());
-        return safe.stream().filter(s -> TradeInRules.compatible(catalog, first, s, allowAdmin)).limit(remaining).toList();
+        int remaining = Math.max(0, TradeUpRules.required(TradeUpRules.target(catalog, catalog.skin(first.skinId()))) - selected.size());
+        return safe.stream().filter(s -> TradeUpRules.compatible(catalog, first, s, allowAdmin)).limit(remaining).toList();
     }
 }

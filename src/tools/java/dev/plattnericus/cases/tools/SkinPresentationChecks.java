@@ -49,7 +49,7 @@ public final class SkinPresentationChecks {
                         var path = new File(root, "messages_" + language + ".yml");
                         var messages = new Messages(path, Files.newInputStream(path.toPath()), Files.newInputStream(new File(root, "messages_en.yml").toPath()));
                         var formatter = new SkinFormatter(messages, catalog, 4, 8, "dd.MM.yyyy");
-                        String source = original.origin().tradeIn() ? "TRADE UP" : catalog.caseDefinition("chroma_case").name();
+                        String source = original.origin().tradeUp() ? "TRADE UP" : catalog.caseDefinition("chroma_case").name();
                         require(formatter.lore(def, back, false).stream().map(Text::plain).anyMatch(line -> line.contains("(" + source + ")")), "normal lore hides original source after trade " + language);
                         require(Text.plain(formatter.line("skin.lore.source", def, back)).contains("(" + source + ")"), "precise source missing " + language);
                     }

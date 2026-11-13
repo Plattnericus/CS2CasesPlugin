@@ -92,7 +92,7 @@ public final class SkinFormatter {
     private TagResolver[] resolvers(SkinDefinition def, SkinInstance inst, boolean precise) {
         PatternInfo p = inst == null ? PatternInfo.NONE : inst.patternInfo();
         CaseDefinition source = inst == null || inst.sourceCase() == null ? null : catalog.caseDefinition(inst.sourceCase());
-        String sourceText = inst != null && inst.origin().tradeIn() ? m.label("skin-source.trade-in", "TRADE IN")
+        String sourceText = inst != null && inst.origin().tradeUp() ? m.label("skin-source.trade-up", "TRADE IN")
                 : source == null ? (inst == null || inst.sourceCase() == null ? "-" : inst.sourceCase()) : source.name();
         if (inst != null && inst.traded()) sourceText = Text.plain(m.get(def.isKnife() ? "skin-source.knife-traded" : "skin-source.traded",
                 Text.unparsed("source", sourceText)));
@@ -145,7 +145,7 @@ public final class SkinFormatter {
         if (inst.statTrak()) {
             lore.add(m.item("skin.lore.stattrak", r));
         }
-        if (precise || inst.origin().tradeIn() || inst.traded()) {
+        if (precise || inst.origin().tradeUp() || inst.traded()) {
             lore.add(m.item("skin.lore.source", r));
         }
         if (precise) {
