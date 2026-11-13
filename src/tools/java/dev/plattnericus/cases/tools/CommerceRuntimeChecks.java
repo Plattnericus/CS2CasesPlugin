@@ -82,7 +82,7 @@ public final class CommerceRuntimeChecks {
                 require(caseSkin.traded() && tradeInSkin.traded() && tradeInSkin.origin().admin(), "trade provenance/admin lineage lost");
                 String caseSource = ctx.catalog().caseDefinition(a.sourceCase()).name();
                 require(ctx.formatter(second).lore(def, caseSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (" + caseSource + ")")), "case source not visible after live trade");
-                require(ctx.formatter(first).lore(def, tradeInSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (TRADE IN)")), "trade-in source not visible after live trade");
+                require(ctx.formatter(first).lore(def, tradeInSkin, false).stream().map(Text::plain).anyMatch(line -> line.contains("Knife traded (TRADE UP)")), "trade-in source not visible after live trade");
                 ctx.commerce().request(first, second); ctx.commerce().accept(second, first.getName());
                 ctx.commerce().toggle(first, b.id());
             }).thenCompose(v -> RuntimeUiChecks.clicks(plugin, first, 46, 5)).thenRun(() -> {
@@ -205,7 +205,7 @@ public final class CommerceRuntimeChecks {
               var reward = result.get(); require(reward.origin() == (origin.admin() ? SkinInstance.Origin.ADMIN_TRADE_IN : SkinInstance.Origin.TRADE_IN), "output origin wrong");
               require(source.skins(tier).contains(ctx.catalog().skin(reward.skinId())) && source.id().equals(reward.sourceCase()), "output outside legal random pool");
               for (boolean precise : new boolean[]{false, true}) require(ctx.formatter(player).lore(ctx.catalog().skin(reward.skinId()), reward, precise).stream()
-                      .map(Text::plain).anyMatch(line -> line.contains("TRADE IN")), "trade-in output missing inventory provenance");
+                      .map(Text::plain).anyMatch(line -> line.contains("TRADE UP")), "trade-in output missing inventory provenance");
               if (caseId.equals("glove_case")) require(ctx.catalog().skin(reward.skinId()).weapon().category() == dev.plattnericus.cases.catalog.WeaponCategory.GLOVE && !reward.statTrak(), "glove contract output wrong");
               observe.accept(reward);
               ctx.profiles().removeLoaded(player.getUniqueId(), reward.id()); ctx.repository().removeOwned(player.getUniqueId(), reward.id()); player.closeInventory();

@@ -77,7 +77,7 @@ public final class TradeInService implements Listener {
             }
             for (var input : inputs) ctx.profiles().removeLoaded(p.getUniqueId(), input.id());
             ctx.profiles().addLoaded(p.getUniqueId(), result);
-            if (p.isOnline()) { ctx.messages(p).send(p, "tradein.result", Text.component("skin", ctx.formatter(p).fullName(def, result))); ctx.sounds().play(p, def.rarity().revealSound()); if (p.getOpenInventory().getTopInventory().getType() == org.bukkit.event.inventory.InventoryType.CRAFTING) new TradeInMenu(ctx, p).open(); }
+            if (p.isOnline()) { ctx.messages(p).send(p, "tradein.result", Text.component("skin", ctx.formatter(p).fullName(def, result))); ctx.sounds().play(p, def.rarity().revealSound()); new TradeInResultMenu(ctx, p, def, result, inputs.size()).open(); }
             if (def.rarity().rareSpecial() && config.getBoolean("trade-in.broadcast-gold", true)
                     && (!admin || config.getBoolean("trade-in.broadcast-admin", false))) {
                 String playerName = p.getName();

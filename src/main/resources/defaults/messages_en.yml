@@ -658,9 +658,12 @@ browser:
   categories: {"ALL": "All", "PISTOL": "Pistols", "SMG": "SMGs", "RIFLE": "Rifles", "SNIPER": "Sniper", "HEAVY": "Heavy", "EQUIPMENT": "Equipment", "KNIFE": "Knives", "GLOVE": "Gloves"}
 
 tradein:
+  result-title: "Trade-up result"
+  received: {name: "<green>You received", lore: ["<gray>Traded up from <white><count></white> skins."]}
+  again: {name: "<yellow>Trade up again", lore: ["<gray>Open the contract menu."]}
   all: "All"
   normal: "Normal"
-  weapon-title: "Choose trade-in weapons"
+  weapon-title: "Choose trade-up weapons"
   weapon: {name: "<aqua>Weapon: <value>", lore: ["<gray>Click to choose a weapon directly.", "<gray>Already selected inputs stay in your contract."]}
   weapon-choice: {lore: ["<gray><count> matching available skins", "<yellow>Click to show this weapon."]}
   all-weapons: {name: "<white>All weapons", lore: ["<gray>Show every compatible weapon type."]}
@@ -687,9 +690,9 @@ tradein:
   pending: {name: "<gray>Select skins: <count>/<required>", lore: ["<gray>10 skins of the same rarity make one skin", "<gray>of the next rarity. All must be normal or all", "<gray>StatTrak. 5 Covert skins make a rare special item."]}
   invalid: "<prefix><red>Use available same-tier skins with matching StatTrak from valid source cases."
   count: "<prefix><yellow>Use 10 matching weapons, or 5 Covert skins for gold."
-  unavailable: "<prefix><yellow>Trade-in is currently unavailable."
-  result: "<prefix><green>Trade-in completed: <skin>"
-  gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>won <skin> through a <bold>TRADE-IN</bold>!"
+  unavailable: "<prefix><yellow>Trade-up is currently unavailable."
+  result: "<prefix><green>Trade-up completed: <skin>"
+  gold: "<gold><bold>✦ GOLD DROP ✦</bold> <yellow><player> <gold>won <skin> through a <bold>TRADE-UP</bold>!"
 
 # Case recommendations and filters
 case-guide:
@@ -768,7 +771,7 @@ command:
 skin-source:
   traded: "Traded (<source>)"
   knife-traded: "Knife traded (<source>)"
-  trade-in: "TRADE IN"
+  trade-in: "TRADE UP"
 
 # Direct menu choices and transparent trade-up rewards.
 menus:

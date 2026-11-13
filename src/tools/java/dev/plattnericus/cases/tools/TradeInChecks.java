@@ -61,11 +61,11 @@ public final class TradeInChecks {
             for (var origin : List.of(SkinInstance.Origin.TRADE_IN, SkinInstance.Origin.ADMIN_TRADE_IN)) {
                 var reward = instance(owner, output, source.id(), .3, 94, false, origin);
                 for (boolean precise : List.of(false, true)) require(formatter.lore(output, reward, precise).stream()
-                        .map(Text::plain).anyMatch(line -> line.equals("Source: TRADE IN")), "weapon/knife inventory source incorrect");
+                        .map(Text::plain).anyMatch(line -> line.equals("Source: TRADE UP")), "weapon/knife inventory source incorrect");
                 require(reward.sourceCase().equals(source.id()), "display source destroyed the case used for the next contract");
             }
         }
-        System.out.println("PASS: five stable trade-in sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE IN with retained admin lineage.");
+        System.out.println("PASS: five stable trade-in sorts, exact weapon/rarity/StatTrak filters, 48-item cross-page filling, favorite protection, 10/5 input validation and weapon/knife Source: TRADE UP with retained admin lineage.");
     }
     private static void randomRewards(Catalog catalog, UUID owner) {
         var first = catalog.caseDefinition("kilowatt_case");
