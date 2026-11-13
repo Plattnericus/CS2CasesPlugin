@@ -81,7 +81,7 @@ opening:
     scene-scale: 2.0
     distance: 3.0
     height: 0.35
-    visible-items: 5
+    visible-items: 7
     spacing: 0.99
     item-scale: 0.86
     # how long the result stays visible

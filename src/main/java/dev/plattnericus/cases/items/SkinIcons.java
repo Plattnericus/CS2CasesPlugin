@@ -41,7 +41,22 @@ public final class SkinIcons {
 
     /** Menu icon for a skin that can be picked; a selected skin glows. Uses vanilla effects only. */
     public static ItemStack tradeIcon(SkinDefinition def, Component name, List<Component> lore, PluginSettings settings, boolean selected) {
-        return icon(def, name, lore, settings, selected);
+        return tradeIcon(def, name, lore, settings, selected, 0);
+    }
+
+    /** Same, and a selected skin shows its position in the offer as the stack count (from 2 up). */
+    public static ItemStack tradeIcon(SkinDefinition def, Component name, List<Component> lore, PluginSettings settings, boolean selected, int order) {
+        if (selected) {
+            name = Component.text("✔ ", net.kyori.adventure.text.format.NamedTextColor.GREEN,
+                    net.kyori.adventure.text.format.TextDecoration.BOLD).append(name);
+        }
+        ItemStack item = icon(def, name, lore, settings, selected);
+        if (selected && order > 1) {
+            int count = Math.min(99, order);
+            item.setData(DataComponentTypes.MAX_STACK_SIZE, count);
+            item.setAmount(count);
+        }
+        return item;
     }
 
     /** Hides attribute, enchantment and similar vanilla tooltip lines on menu icons. */

@@ -88,17 +88,17 @@ public final class TradeMenu extends Menu {
         List<UUID> items = trade.items(owner);
         for (int i = 0; i < items.size(); i++) {
             SkinInstance skin = profile.get(items.get(i)); if (skin == null) continue;
-            if (own) set(slots[i], icon(skin, "trade.remove", true), c -> ctx.commerce().toggle(viewer, skin.id()));
-            else set(slots[i], icon(skin, "trade.offered", false));
+            if (own) set(slots[i], icon(skin, "trade.remove", i + 1), c -> ctx.commerce().toggle(viewer, skin.id()));
+            else set(slots[i], icon(skin, "trade.offered", 0));
         }
     }
-    private ItemStack icon(SkinInstance skin, String hint, boolean selected) {
+    private ItemStack icon(SkinInstance skin, String hint, int order) {
+        boolean selected = order > 0;
         var def = ctx.catalog().skin(skin.skinId());
         if (def == null) return GuiItems.icon(ctx.messages(viewer), Material.BARRIER, "gui.inspect.missing");
         var lore = new ArrayList<>(ctx.formatter(viewer).lore(def, skin, true)); lore.add(ctx.messages(viewer).item(hint));
         Component name = ctx.formatter(viewer).fullName(def, skin);
-        if (selected) name = Component.text("✓ ", net.kyori.adventure.text.format.NamedTextColor.GREEN).append(name);
-        return SkinIcons.tradeIcon(def, name, lore, ctx.settings(), selected);
+        return SkinIcons.tradeIcon(def, name, lore, ctx.settings(), selected, order);
     }
     @Override protected void onClose() { if (!navigating) ctx.commerce().cancel(trade, "trade.cancelled"); }
 }

@@ -4,6 +4,8 @@ import dev.plattnericus.cases.core.CasesContext;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.entity.Villager;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
@@ -34,6 +36,17 @@ public final class ShopListener implements Listener {
             return;
         }
         new ShopMenu(ctx, event.getPlayer()).open();
+    }
+
+    /** Some villagers that generate with a village become dealers, at most one per village area. */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onNaturalSpawn(CreatureSpawnEvent event) {
+        if (!(event.getEntity() instanceof Villager villager) || !ctx.shop().naturalEnabled()) return;
+        var reason = event.getSpawnReason();
+        if (reason != CreatureSpawnEvent.SpawnReason.NATURAL && reason != CreatureSpawnEvent.SpawnReason.CHUNK_GEN) return;
+        if (java.util.concurrent.ThreadLocalRandom.current().nextDouble() >= ctx.shop().naturalChance()) return;
+        if (ctx.shop().dealerNear(villager.getLocation(), 96)) return;
+        ctx.shop().makeDealer(villager);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

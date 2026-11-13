@@ -19,8 +19,8 @@ public final class OpeningLayout {
         int columns = (int) Math.ceil(Math.sqrt(count));
         int rows = (count + columns - 1) / columns;
         // Share of the view (70 degrees, 16:9) the grid may fill: a single reel stays compact, nine fill most of it.
-        double widthBudget = Math.min(1.7, .8 + .45 * (columns - 1));
-        double heightBudget = Math.min(.95, .45 + .25 * (rows - 1));
+        double widthBudget = Math.min(1.7, 1.6 + .45 * (columns - 1));
+        double heightBudget = Math.min(.95, .8 + .25 * (rows - 1));
         double scale = Math.min(sceneScale, Math.min(distance * widthBudget / (columns * (width + GAP_X)),
                 distance * heightBudget / (rows * (height + GAP_Y))));
         int row = index / columns;

@@ -54,8 +54,7 @@ public final class TradeInMenu extends Menu {
             boolean chosen = selected.contains(skin.id()); var lore = new ArrayList<>(ctx.formatter(viewer).lore(def, skin, true));
             lore.add(ctx.messages(viewer).item(chosen ? "trade.selected" : "trade.add"));
             var name = ctx.formatter(viewer).fullName(def, skin);
-            if (chosen) name = Component.text("✓ ", NamedTextColor.GREEN).append(name);
-            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen), c -> { ctx.tradeIns().toggle(viewer, skin.id()); playClick(); render(); });
+            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), chosen, selected.indexOf(skin.id()) + 1), c -> { ctx.tradeIns().toggle(viewer, skin.id()); playClick(); render(); });
         }
         String all = ctx.messages(viewer).raw("tradein.all");
         set(1, GuiItems.icon(ctx.messages(viewer), Material.CROSSBOW, "tradein.weapon", Text.unparsed("value",

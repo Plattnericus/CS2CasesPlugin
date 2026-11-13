@@ -95,7 +95,7 @@ public final class OpeningChecks {
         double itemScale = defaults.getDouble("opening.world.item-scale", .5);
         require(Math.abs(spacing - .99) < 1e-9 && Math.abs(itemScale - .86) < 1e-9,
                 "opening roulette icon spacing and size defaults");
-        double width = defaults.getInt("opening.world.visible-items", 5) * spacing + .4;
+        double width = defaults.getInt("opening.world.visible-items", 5) * spacing + 1.4;
         double height = itemScale + .85;
         for (double distance : new double[]{1.2, 3, 6}) for (int count = 1; count <= 9; count++) {
             int size = count;
@@ -109,7 +109,7 @@ public final class OpeningChecks {
                 require(Math.abs(cell.right()) + width / 2 * cell.scale() <= halfWidth * .9
                                 && Math.abs(cell.up()) + height / 2 * cell.scale() <= halfHeight * .9,
                         "reel outside a 70 degree 16:9 view at distance " + distance + ": " + count);
-                if (count == 1) require(width * cell.scale() <= halfWidth * 2 * .4, "single reel too large for the view at distance " + distance);
+                if (count == 1) require(width * cell.scale() <= halfWidth * 2 * .68, "single reel too large for the view at distance " + distance);
                 require(cell.scale() > 0 && cell.scale() <= 1 && Math.abs(cell.right()) + width / 2 * cell.scale() < distance * .925,
                         "reel clipped horizontally: " + count);
                 require(Math.abs(cell.up()) + height / 2 * cell.scale() < distance * .52, "reel clipped vertically: " + count);

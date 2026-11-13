@@ -37,8 +37,7 @@ public final class SkinPickerMenu extends Menu {
             boolean offered = selected.contains(skin.id());
             var lore = new java.util.ArrayList<>(ctx.formatter(viewer).lore(def, skin, true)); lore.add(ctx.messages(viewer).item(trade == null ? "market.select-skin" : offered ? "trade.selected" : "trade.add"));
             Component name = ctx.formatter(viewer).fullName(def, skin);
-            if (offered) name = Component.text("✓ ", net.kyori.adventure.text.format.NamedTextColor.GREEN).append(name);
-            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), offered), c -> {
+            set(GuiItems.CONTENT[i], SkinIcons.tradeIcon(def, name, lore, ctx.settings(), offered, selected.indexOf(skin.id()) + 1), c -> {
                 if (trade != null) { ctx.commerce().toggle(viewer, skin.id()); render(); }
                 else new SellMenu(ctx, viewer, skin, Math.max(100, ctx.commerce().minPrice())).open();
             });

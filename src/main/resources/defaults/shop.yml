@@ -28,6 +28,12 @@ npc:
   # holds a case in its hand
   hold-case: true
 
+# Villagers that generate with a village can become the dealer (a villager with the profession above).
+# Chance is per generated villager; there is at most one dealer within 96 blocks.
+natural-spawn:
+  enabled: true
+  chance: 0.2
+
 cases:
   default-price: 3
   prices:

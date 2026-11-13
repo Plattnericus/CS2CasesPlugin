@@ -44,6 +44,8 @@ public final class ShopService {
     private String villagerName = "Case Dealer";
     private String profession = "cartographer";
     private NpcSettings npc = NpcSettings.defaults();
+    private boolean naturalEnabled = true;
+    private double naturalChance = 0.2;
 
     /**
      * Dealer appearance. {@code type} is villager or mannequin (a player model with a skin).
@@ -82,6 +84,8 @@ public final class ShopService {
         villagerName = y.getString("villager.name", "");
         profession = y.getString("villager.profession", "cartographer").toLowerCase(Locale.ROOT);
         npc = loadNpc(y, warn);
+        naturalEnabled = y.getBoolean("natural-spawn.enabled", true);
+        naturalChance = Math.max(0, Math.min(1, y.getDouble("natural-spawn.chance", 0.2)));
         defaultCasePrice = Math.max(1, y.getInt("cases.default-price", 3));
         casePrices.clear();
         ConfigurationSection prices = y.getConfigurationSection("cases.prices");
@@ -283,8 +287,29 @@ public final class ShopService {
         }
     }
 
+    public boolean naturalEnabled() {
+        return naturalEnabled;
+    }
+
+    public double naturalChance() {
+        return naturalChance;
+    }
+
+    /** True when a dealer stands within the given distance (blocks). */
+    public boolean dealerNear(Location location, double radius) {
+        for (Entity e : location.getWorld().getNearbyEntities(location, radius, radius, radius)) {
+            if (isShop(e)) return true;
+        }
+        return false;
+    }
+
     public Villager spawnVillager(Location location) {
-        return location.getWorld().spawn(location, Villager.class, v -> {
+        return location.getWorld().spawn(location, Villager.class, this::makeDealer);
+    }
+
+    /** Turns a villager into the case dealer. */
+    public void makeDealer(Villager v) {
+        {
             v.setAI(false);
             v.setInvulnerable(true);
             v.setSilent(true);
@@ -298,7 +323,7 @@ public final class ShopService {
             }
             v.getPersistentDataContainer().set(ctx.keys().shopVillager, PersistentDataType.BYTE, (byte) 1);
             refreshDealerLabels(v);
-        });
+        }
     }
 
     public boolean isShop(Entity entity) {

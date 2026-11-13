@@ -44,7 +44,7 @@ final class WorldReelView implements OpeningView {
     /** Scene scale factor while hidden; never zero so the tween can scale back up. */
     private static final double HIDDEN = 0.02;
     private static final int FADE_TICKS = 8;
-    private static final double FRAME_WIDTH_PAD = 0.4;
+    private static final double FRAME_WIDTH_PAD = 1.4;
     private static final double FRAME_HEIGHT_PAD = 0.85;
     /** The reel waits for the scene to finish appearing before it starts moving. */
     private static final int INTRO_TICKS = FADE_TICKS + 2;
@@ -87,8 +87,15 @@ final class WorldReelView implements OpeningView {
         anchor = baseAnchor.clone();
         double width = cfg.visibleItems() * cfg.spacing() + FRAME_WIDTH_PAD;
         double half = cfg.itemScale() / 2;
-        all.add(block(Material.BLACK_STAINED_GLASS, new Vector3f((float) -width / 2, (float) (-half - 0.25), -0.06f),
+        // Neutral gray panel like the CS2 roulette, dark rim, light edge lines.
+        all.add(block(Material.BLACK_CONCRETE, new Vector3f((float) -(width + 0.12) / 2, (float) (-half - 0.31), -0.07f),
+                new Vector3f((float) width + 0.12f, (float) (cfg.itemScale() + 0.62), 0.02f)));
+        all.add(block(Material.GRAY_CONCRETE, new Vector3f((float) -width / 2, (float) (-half - 0.25), -0.06f),
                 new Vector3f((float) width, (float) (cfg.itemScale() + 0.5), 0.02f)));
+        all.add(block(Material.LIGHT_GRAY_CONCRETE, new Vector3f((float) -width / 2, (float) (half + 0.21), -0.05f),
+                new Vector3f((float) width, 0.04f, 0.02f)));
+        all.add(block(Material.LIGHT_GRAY_CONCRETE, new Vector3f((float) -width / 2, (float) (-half - 0.25), -0.05f),
+                new Vector3f((float) width, 0.04f, 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.02f, (float) (half + 0.06), -0.02f), new Vector3f(0.04f, 0.14f, 0.02f)));
         all.add(block(Material.GOLD_BLOCK, new Vector3f(-0.02f, (float) (-half - 0.2), -0.02f), new Vector3f(0.04f, 0.14f, 0.02f)));
         title = anchor.getWorld().spawn(anchor, TextDisplay.class, d -> {
