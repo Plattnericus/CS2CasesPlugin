@@ -28,7 +28,7 @@ public final class TradeUpMenu extends Menu {
     private int page;
     private boolean confirming;
     private TradeUpSelection.Sort sort = TradeUpSelection.Sort.NEWEST;
-    private String weaponFilter, rarityFilter;
+    private String weaponFilter, rarityFilter, query = "";
     private int statTrakFilter; // 0 = all, 1 = normal, 2 = StatTrak
     public TradeUpMenu(CasesContext ctx, Player p) { super(ctx, p); }
     @Override protected int rows() { return 6; }
@@ -46,7 +46,9 @@ public final class TradeUpMenu extends Menu {
                 && (!ctx.commerce().locked(s.id()) || selected.contains(s.id()))
                 && (first == null || TradeUpRules.compatible(ctx.catalog(), first, s, ctx.tradeUps().allowAdmin()))).toList();
         var skins = TradeUpSelection.sorted(ctx.catalog(), TradeUpSelection.filter(ctx.catalog(), candidates,
-                weaponFilter, rarityFilter, statTrakFilter), sort);
+                weaponFilter, rarityFilter, statTrakFilter).stream().filter(s -> query.isBlank()
+                || (s.skinId() + " " + Text.plain(ctx.formatter(viewer).fullName(ctx.catalog().skin(s.skinId()), s)))
+                        .toLowerCase(java.util.Locale.ROOT).contains(query)).toList(), sort);
         int pages = GuiItems.pages(skins.size(), GuiItems.CONTENT.length); page = Math.min(page, pages - 1);
         if (skins.isEmpty()) set(31, GuiItems.icon(ctx.messages(viewer), Material.GRAY_DYE, "tradeup.empty"));
         for (int i = 0; i < GuiItems.CONTENT.length && page * GuiItems.CONTENT.length + i < skins.size(); i++) {
@@ -72,9 +74,16 @@ public final class TradeUpMenu extends Menu {
             filterChoice(List.of(0, 1, 2), statTrakFilter,
                     value -> value == 0 ? all : value == 1 ? ctx.messages(viewer).raw("tradeup.normal") : "StatTrak", value -> statTrakFilter = value);
         });
-        if (weaponFilter != null || rarityFilter != null || statTrakFilter != 0) {
+        set(5, GuiItems.icon(ctx.messages(viewer), Material.OAK_SIGN, "browser.search", Text.unparsed("query", query)), c -> {
+            if (c.isRightClick()) { query = ""; page = 0; render(); return; }
+            confirming = true;
+            ctx.commerce().input().ask(viewer, "input.search", text -> {
+                query = text.toLowerCase(java.util.Locale.ROOT); page = 0; returnToSelection();
+            }, this::returnToSelection);
+        });
+        if (weaponFilter != null || rarityFilter != null || statTrakFilter != 0 || !query.isBlank()) {
             set(4, GuiItems.icon(ctx.messages(viewer), Material.COMPASS, "tradeup.reset-filters"), c -> {
-                weaponFilter = null; rarityFilter = null; statTrakFilter = 0; page = 0; playClick(); render();
+                weaponFilter = null; rarityFilter = null; statTrakFilter = 0; query = ""; page = 0; playClick(); render();
             });
         }
         set(0, GuiItems.icon(ctx.messages(viewer), Material.HOPPER, "tradeup.sort", Text.unparsed("sort",

@@ -23,6 +23,11 @@ public final class PluginKeys {
     public final NamespacedKey journal;
     public final NamespacedKey displayEntity;
     public final NamespacedKey shopVillager;
+    public final NamespacedKey shopLink;
+    public final NamespacedKey shopWander;
+    public final NamespacedKey shopChunk;
+    public final NamespacedKey shopVillages;
+    public final NamespacedKey shopVillageCount;
 
     public PluginKeys(Plugin plugin) {
         itemType = new NamespacedKey(plugin, "item_type");
@@ -42,5 +47,10 @@ public final class PluginKeys {
         journal = new NamespacedKey(plugin, "pending_rewards");
         displayEntity = new NamespacedKey(plugin, "display");
         shopVillager = new NamespacedKey(plugin, "shop_villager");
+        shopLink = new NamespacedKey(plugin, "shop_link");
+        shopWander = new NamespacedKey(plugin, "shop_wander");
+        shopChunk = new NamespacedKey(plugin, "shop_chunk_checked");
+        shopVillages = new NamespacedKey(plugin, "shop_villages_seen");
+        shopVillageCount = new NamespacedKey(plugin, "shop_village_count");
     }
 }

@@ -6,14 +6,16 @@ villager:
   name: ""
   profession: cartographer
 
-# Look of the dealer spawned with /csadmin shop spawn.
+# Look of the dealer, both for /csadmin shop spawn and for dealers in villages.
 npc:
   # mannequin (a real player model with a skin) or villager
   type: mannequin
   # second line under the name of a mannequin
   # empty = text from the language file (shop.npc-description)
   description: ""
-  # Skins: player names, or {texture: "...", signature: "..."} for skins without an account.
+  # Skins: player names, or {texture: "...", signature: "..."} for a fixed skin.
+  # A player name is looked up once and the skin is saved in dealer-skins.yml; after that the
+  # saved skin is used, even when the account changes its skin. Delete the entry there to refresh it.
   # The mannequin switches to the next skin every skin-interval-seconds.
   skins:
     - Notch
@@ -28,11 +30,16 @@ npc:
   # holds a case in its hand
   hold-case: true
 
-# Villagers that generate with a village can become the dealer (a villager with the profession above).
-# Chance is per generated villager; there is at most one dealer within 96 blocks.
+# Dealers in villages. In every third newly generated village one villager becomes the dealer
+# above (same type, name and skins). Dealers placed with /csadmin shop spawn always stand still.
 natural-spawn:
   enabled: true
-  chance: 0.2
+  # one dealer in every n-th village, counted per world (1 = every village)
+  every: 3
+  # never next to another dealer: no second one within this many blocks
+  min-distance: 96
+  # true = the village dealer walks around like a villager and stops while a player is close
+  wander: true
 
 cases:
   default-price: 3

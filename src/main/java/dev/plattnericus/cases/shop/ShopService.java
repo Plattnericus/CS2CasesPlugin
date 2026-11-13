@@ -45,7 +45,11 @@ public final class ShopService {
     private String profession = "cartographer";
     private NpcSettings npc = NpcSettings.defaults();
     private boolean naturalEnabled = true;
-    private double naturalChance = 0.2;
+    private int naturalEvery = 3;
+    private double naturalDistance = 96;
+    private boolean naturalWander = true;
+    private DealerSkins dealerSkins;
+    private List<?> skinEntries = List.of();
 
     /**
      * Dealer appearance. {@code type} is villager or mannequin (a player model with a skin).
@@ -85,7 +89,9 @@ public final class ShopService {
         profession = y.getString("villager.profession", "cartographer").toLowerCase(Locale.ROOT);
         npc = loadNpc(y, warn);
         naturalEnabled = y.getBoolean("natural-spawn.enabled", true);
-        naturalChance = Math.max(0, Math.min(1, y.getDouble("natural-spawn.chance", 0.2)));
+        naturalEvery = Math.max(1, y.getInt("natural-spawn.every", 3));
+        naturalDistance = Math.max(0, y.getDouble("natural-spawn.min-distance", 96));
+        naturalWander = y.getBoolean("natural-spawn.wander", true);
         defaultCasePrice = Math.max(1, y.getInt("cases.default-price", 3));
         casePrices.clear();
         ConfigurationSection prices = y.getConfigurationSection("cases.prices");
@@ -201,35 +207,53 @@ public final class ShopService {
         return Result.OK;
     }
 
-    private static NpcSettings loadNpc(YamlConfiguration y, Consumer<String> warn) {
+    private NpcSettings loadNpc(YamlConfiguration y, Consumer<String> warn) {
         String type = y.getString("npc.type", "mannequin").toLowerCase(Locale.ROOT);
         if (!type.equals("villager") && !type.equals("mannequin")) {
             warn.accept("shop.yml: npc.type must be villager or mannequin - using villager");
             type = "villager";
         }
+        skinEntries = y.getList("npc.skins", List.of());
+        List<ResolvableProfile> skins = skins(warn);
+        int min = Math.max(20, y.getInt("npc.gesture-interval-ticks.min", 100));
+        int max = Math.max(min, y.getInt("npc.gesture-interval-ticks.max", 240));
+        return new NpcSettings(type, y.getString("npc.description", ""), skins,
+                Math.max(10, y.getInt("npc.skin-interval-seconds", 300)), y.getBoolean("npc.animations", true),
+                y.getDouble("npc.look-range", 8), min, max, y.getBoolean("npc.hold-case", true));
+    }
+
+    /** Builds the skin list; player names use the stored skin and are looked up once when it is missing. */
+    private List<ResolvableProfile> skins(Consumer<String> warn) {
+        if (dealerSkins == null) dealerSkins = new DealerSkins(ctx.plugin());
         List<ResolvableProfile> skins = new ArrayList<>();
-        for (Object entry : y.getList("npc.skins", List.of())) {
+        for (Object entry : skinEntries) {
             if (entry instanceof String name) {
                 if (!name.matches("[A-Za-z0-9_]{1,16}")) {
-                    warn.accept("shop.yml: npc.skins entry '" + name + "' is not a valid player name");
+                    warn.accept("shop.yml: npc.skins entry " + name + " is not a valid player name");
                     continue;
                 }
-                skins.add(ResolvableProfile.resolvableProfile().name(name).build());
+                ResolvableProfile stored = dealerSkins.stored(name);
+                if (stored != null) {
+                    skins.add(stored);
+                } else {
+                    skins.add(ResolvableProfile.resolvableProfile().name(name).build());
+                    dealerSkins.fetch(name, this::skinStored);
+                }
             } else if (entry instanceof Map<?, ?> map && map.get("texture") != null) {
                 Object signature = map.get("signature");
-                skins.add(ResolvableProfile.resolvableProfile()
-                        .addProperty(new ProfileProperty("textures", String.valueOf(map.get("texture")),
-                                signature == null ? null : String.valueOf(signature)))
-                        .build());
+                skins.add(DealerSkins.textured(String.valueOf(map.get("texture")), signature == null ? null : String.valueOf(signature)));
             } else {
                 warn.accept("shop.yml: npc.skins entries must be a player name or {texture, signature}");
             }
         }
-        int min = Math.max(20, y.getInt("npc.gesture-interval-ticks.min", 100));
-        int max = Math.max(min, y.getInt("npc.gesture-interval-ticks.max", 240));
-        return new NpcSettings(type, y.getString("npc.description", ""), List.copyOf(skins),
-                Math.max(10, y.getInt("npc.skin-interval-seconds", 300)), y.getBoolean("npc.animations", true),
-                y.getDouble("npc.look-range", 8), min, max, y.getBoolean("npc.hold-case", true));
+        return List.copyOf(skins);
+    }
+
+    /** A looked-up skin was saved: switch the dealers to the stored copy. */
+    private void skinStored() {
+        npc = new NpcSettings(npc.type(), npc.description(), skins(w -> { }), npc.skinInterval(), npc.animations(),
+                npc.lookRange(), npc.gestureMinTicks(), npc.gestureMaxTicks(), npc.holdCase());
+        if (ctx.npcAnimator() != null) ctx.npcAnimator().refreshAll();
     }
 
     private String dealerName() {
@@ -250,6 +274,10 @@ public final class ShopService {
     /** Updates stored dealer labels, keeping explicit shop.yml names and descriptions. */
     public void refreshDealerLabels(Entity entity) {
         if (!isShop(entity) || !(entity instanceof Mannequin || entity instanceof Villager)) return;
+        if (isDriver(entity)) {
+            entity.setCustomNameVisible(false);
+            return;
+        }
         entity.customName(Text.mm(dealerName()));
         entity.setCustomNameVisible(true);
         if (entity instanceof Mannequin mannequin) {
@@ -291,8 +319,39 @@ public final class ShopService {
         return naturalEnabled;
     }
 
-    public double naturalChance() {
-        return naturalChance;
+    /** Identity of the village a chunk belongs to, or null when no village reaches into it. */
+    public Long villageId(org.bukkit.Chunk chunk) {
+        var structures = io.papermc.paper.registry.RegistryAccess.registryAccess()
+                .getRegistry(io.papermc.paper.registry.RegistryKey.STRUCTURE);
+        for (var generated : chunk.getStructures()) {
+            var key = structures.getKey(generated.getStructure());
+            if (key == null || !key.value().contains("village")) continue;
+            var box = generated.getBoundingBox();
+            return ((long) Math.floor(box.getCenterX()) << 32) ^ ((long) Math.floor(box.getCenterZ()) & 0xffffffffL);
+        }
+        return null;
+    }
+
+    /**
+     * Counts a village the first time it is seen and tells whether it is one that gets a dealer:
+     * every {@code natural-spawn.every}-th village of a world. The count is stored in the world.
+     */
+    public boolean claimVillage(org.bukkit.World world, long village) {
+        var data = world.getPersistentDataContainer();
+        long[] seen = data.getOrDefault(ctx.keys().shopVillages, PersistentDataType.LONG_ARRAY, new long[0]);
+        for (long id : seen) {
+            if (id == village) return false;
+        }
+        long[] grown = java.util.Arrays.copyOf(seen, seen.length + 1);
+        grown[seen.length] = village;
+        int count = data.getOrDefault(ctx.keys().shopVillageCount, PersistentDataType.INTEGER, 0) + 1;
+        data.set(ctx.keys().shopVillages, PersistentDataType.LONG_ARRAY, grown);
+        data.set(ctx.keys().shopVillageCount, PersistentDataType.INTEGER, count);
+        return count % naturalEvery == 0;
+    }
+
+    public double naturalDistance() {
+        return naturalDistance;
     }
 
     /** True when a dealer stands within the given distance (blocks). */
@@ -303,26 +362,78 @@ public final class ShopService {
         return false;
     }
 
+    /** Dealer placed by command: stands still. */
     public Villager spawnVillager(Location location) {
-        return location.getWorld().spawn(location, Villager.class, this::makeDealer);
+        return location.getWorld().spawn(location, Villager.class, v -> makeDealer(v, false));
     }
 
-    /** Turns a villager into the case dealer. */
-    public void makeDealer(Villager v) {
-        {
-            v.setAI(false);
-            v.setInvulnerable(true);
-            v.setSilent(true);
-            v.setCollidable(false);
-            v.setPersistent(true);
-            v.setRemoveWhenFarAway(false);
-            v.setVillagerLevel(5);
-            Villager.Profession p = Registry.VILLAGER_PROFESSION.get(NamespacedKey.minecraft(profession));
-            if (p != null) {
-                v.setProfession(p);
-            }
-            v.getPersistentDataContainer().set(ctx.keys().shopVillager, PersistentDataType.BYTE, (byte) 1);
-            refreshDealerLabels(v);
+    /** Turns a villager into the visible villager dealer; a wandering one keeps its AI. */
+    public void makeDealer(Villager v, boolean wander) {
+        v.setAI(wander);
+        protect(v);
+        v.setVillagerLevel(5);
+        Villager.Profession p = Registry.VILLAGER_PROFESSION.get(NamespacedKey.minecraft(profession));
+        if (p != null) {
+            v.setProfession(p);
+        }
+        if (wander) v.getPersistentDataContainer().set(ctx.keys().shopWander, PersistentDataType.BYTE, (byte) 1);
+        v.getPersistentDataContainer().set(ctx.keys().shopVillager, PersistentDataType.BYTE, (byte) 1);
+        refreshDealerLabels(v);
+    }
+
+    private static void protect(Villager v) {
+        v.setInvulnerable(true);
+        v.setSilent(true);
+        v.setCollidable(false);
+        v.setPersistent(true);
+        v.setRemoveWhenFarAway(false);
+        v.setBreed(false);
+        v.setAgeLock(true);
+    }
+
+    /**
+     * Turns a village villager into the dealer from shop.yml. A mannequin cannot walk, so the
+     * villager stays as its hidden body and the mannequin follows it; with wandering off the
+     * villager is replaced. Returns the entities to track.
+     */
+    public List<Entity> makeNatural(Villager v) {
+        if (!npc.mannequin()) {
+            makeDealer(v, naturalWander);
+            return List.of(v);
+        }
+        Mannequin m = spawnMannequin(v.getLocation());
+        if (!naturalWander) {
+            v.remove();
+            return List.of(m);
+        }
+        protect(v);
+        v.setInvisible(true);
+        v.setProfession(Villager.Profession.NITWIT);
+        v.customName(null);
+        v.setCustomNameVisible(false);
+        v.getPersistentDataContainer().set(ctx.keys().shopVillager, PersistentDataType.BYTE, (byte) 1);
+        v.getPersistentDataContainer().set(ctx.keys().shopWander, PersistentDataType.BYTE, (byte) 1);
+        v.getPersistentDataContainer().set(ctx.keys().shopLink, PersistentDataType.STRING, m.getUniqueId().toString());
+        m.getPersistentDataContainer().set(ctx.keys().shopLink, PersistentDataType.STRING, v.getUniqueId().toString());
+        return List.of(v, m);
+    }
+
+    /** The hidden villager that carries a walking mannequin dealer. */
+    public boolean isDriver(Entity entity) {
+        return entity instanceof Villager && entity.getPersistentDataContainer().has(ctx.keys().shopLink, PersistentDataType.STRING);
+    }
+
+    public boolean wanders(Entity entity) {
+        return entity.getPersistentDataContainer().has(ctx.keys().shopWander, PersistentDataType.BYTE);
+    }
+
+    /** The other half of a walking mannequin dealer, or null. */
+    public java.util.UUID linked(Entity entity) {
+        String id = entity.getPersistentDataContainer().get(ctx.keys().shopLink, PersistentDataType.STRING);
+        try {
+            return id == null ? null : java.util.UUID.fromString(id);
+        } catch (IllegalArgumentException e) {
+            return null;
         }
     }
 
@@ -346,6 +457,8 @@ public final class ShopService {
         if (best == null) {
             return false;
         }
+        java.util.UUID other = linked(best);
+        if (other != null && org.bukkit.Bukkit.getEntity(other) instanceof Entity partner) partner.remove();
         best.remove();
         return true;
     }

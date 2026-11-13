@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mannequin;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.EntitiesLoadEvent;
@@ -33,11 +34,16 @@ public final class ShopNpcAnimator implements Listener {
 
     private final CasesContext ctx;
     private final Set<UUID> tracked = new HashSet<>();
+    /** Villagers that walk: visible villager dealers and the hidden bodies of walking mannequins. */
+    private final Set<UUID> walkers = new HashSet<>();
+    /** Walking mannequin -> the hidden villager it follows. */
+    private final Map<UUID, UUID> follows = new HashMap<>();
     private final Map<UUID, UUID> lastTarget = new HashMap<>();
     private final Map<UUID, Integer> nextGesture = new HashMap<>();
     private final Map<UUID, Integer> unsneakAt = new HashMap<>();
     private final SplittableRandom random = new SplittableRandom();
     private BukkitTask task;
+    private BukkitTask followTask;
     private int ticks;
     private int skinIndex;
 
@@ -48,13 +54,19 @@ public final class ShopNpcAnimator implements Listener {
     public void start() {
         refreshAll();
         task = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), this::tick, PERIOD, PERIOD);
+        followTask = Bukkit.getScheduler().runTaskTimer(ctx.plugin(), this::follow, 1L, 1L);
     }
 
     public void stop() {
         if (task != null) {
             task.cancel();
         }
+        if (followTask != null) {
+            followTask.cancel();
+        }
         tracked.clear();
+        walkers.clear();
+        follows.clear();
     }
 
     public void track(Entity entity) {
@@ -62,6 +74,10 @@ public final class ShopNpcAnimator implements Listener {
         ctx.shop().refreshDealerLabels(entity);
         if (entity instanceof Mannequin) {
             tracked.add(entity.getUniqueId());
+            UUID body = ctx.shop().linked(entity);
+            if (body != null) follows.put(entity.getUniqueId(), body);
+        } else if (entity instanceof Villager && ctx.shop().wanders(entity)) {
+            walkers.add(entity.getUniqueId());
         }
     }
 
@@ -86,6 +102,15 @@ public final class ShopNpcAnimator implements Listener {
             skinIndex = (skinIndex + 1) % cfg.skins().size();
         }
         tracked.removeIf(id -> !(Bukkit.getEntity(id) instanceof Mannequin m) || !m.isValid());
+        follows.keySet().retainAll(tracked);
+        walkers.removeIf(id -> !(Bukkit.getEntity(id) instanceof Villager v) || !v.isValid());
+        for (UUID id : walkers) {
+            // a walking dealer stops while a player stands close, so it can be clicked
+            Villager v = (Villager) Bukkit.getEntity(id);
+            Player near = nearest(v, cfg.lookRange());
+            v.setAware(near == null);
+            if (near != null && !ctx.shop().isDriver(v)) v.lookAt(near.getEyeLocation(), LookAnchor.EYES);
+        }
         for (UUID id : tracked) {
             Mannequin m = (Mannequin) Bukkit.getEntity(id);
             if (m == null) {
@@ -97,6 +122,18 @@ public final class ShopNpcAnimator implements Listener {
             if (cfg.animations()) {
                 animate(m, cfg);
             }
+        }
+    }
+
+    /** Keeps walking mannequins on their hidden villager every tick. */
+    private void follow() {
+        for (var entry : follows.entrySet()) {
+            if (!(Bukkit.getEntity(entry.getKey()) instanceof Mannequin m) || !(Bukkit.getEntity(entry.getValue()) instanceof Villager body)
+                    || !body.isValid() || body.getWorld() != m.getWorld()) continue;
+            var at = body.getLocation();
+            // standing still: keep the head turned towards the player
+            if (at.distanceSquared(m.getLocation()) < 1.0e-4) continue;
+            m.teleport(at);
         }
     }
 
@@ -145,7 +182,7 @@ public final class ShopNpcAnimator implements Listener {
         nextGesture.put(id, ticks + cfg.gestureMinTicks() + random.nextInt(cfg.gestureMaxTicks() - cfg.gestureMinTicks() + 1));
     }
 
-    private static Player nearest(Mannequin m, double range) {
+    private static Player nearest(Entity m, double range) {
         Player best = null;
         double bestD = range * range;
         for (Player p : m.getWorld().getPlayers()) {
@@ -169,6 +206,8 @@ public final class ShopNpcAnimator implements Listener {
     public void onUnload(EntitiesUnloadEvent event) {
         for (Entity e : event.getEntities()) {
             UUID id = e.getUniqueId();
+            walkers.remove(id);
+            follows.remove(id);
             if (tracked.remove(id)) {
                 lastTarget.remove(id);
                 nextGesture.remove(id);

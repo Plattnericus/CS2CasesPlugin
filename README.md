@@ -1,10 +1,45 @@
+<div align="center">
+
 # MCCases
 
-CS2-style cases, skins, inspects and trade-ups for Paper servers.
+**CS2-style cases, skins, inspects and trade-ups for Paper servers.**
 
-[Install](#install) · [Quick start](#quick-start) · [How to play](#how-to-play) · [Features](#features) · [Commands](#commands-and-permissions) · [Configuration](#configuration) · [Resource pack](#resource-pack) · [Troubleshooting](#troubleshooting) · [Building](#building-from-source) · [License](#license)
+Server-side only. No client mods. One plugin and one resource pack.
 
-MCCases is not an official Minecraft or Valve product.
+![Paper 26.3](https://img.shields.io/badge/Paper-26.3-2b6cb0?style=flat-square)
+![Java 25](https://img.shields.io/badge/Java-25-c05621?style=flat-square)
+![22 cases](https://img.shields.io/badge/Cases-22-6b46c1?style=flat-square)
+![815 skins](https://img.shields.io/badge/Skins-815-b83280?style=flat-square)
+![License](https://img.shields.io/badge/License-MCCases%20(non--commercial)-4a5568?style=flat-square)
+
+[Install](#install) · [Quick start](#quick-start) · [How to play](#how-to-play) · [Commands](#commands-and-permissions) · [Configuration](#configuration) · [Resource pack](#resource-pack) · [Checks](#how-the-plugin-is-checked) · [Building](#building-from-source)
+
+</div>
+
+> MCCases is not an official Minecraft or Valve product.
+
+## Contents
+
+| For server owners | For players | For developers |
+| --- | --- | --- |
+| [Requirements](#requirements) | [Quick start](#quick-start) | [Building from source](#building-from-source) |
+| [Install](#install) | [Opening cases](#opening-cases) | [How the plugin is checked](#how-the-plugin-is-checked) |
+| [Configuration](#configuration) | [Your collection](#your-collection) | [Project layout](#project-layout) |
+| [Resource pack](#resource-pack) | [Trade-up](#trade-up) | [License](#license) |
+| [Updating](#updating) · [Troubleshooting](#troubleshooting) | [Trading and market](#trading-and-market) | |
+
+## Features
+
+| | |
+| --- | --- |
+| **Cases** | 22 cases and 815 skins across 35 weapons, 20 knives and 5 glove types |
+| **Real skin values** | Float, wear, pattern seed, StatTrak, Doppler phases, Fade percentage and Blue Gem tiers |
+| **Openings** | A CS2-style reel in the world that nearby players can watch, up to nine at once per player |
+| **Inspects** | Your own skin arms hold every weapon; 102 natural held inspects |
+| **Collection** | Favorites, sorting, filters and search |
+| **Trade-up** | Contracts with published odds and a result window |
+| **Economy** | Player trading, an emerald market and a case dealer that also lives in villages |
+| **Storage** | SQLite or MySQL/MariaDB, with recovery of interrupted openings and payments |
 
 ## Requirements
 
@@ -14,8 +49,8 @@ MCCases is not an official Minecraft or Valve product.
 | Java | 25 |
 | Players | The MCCases resource pack (see [Resource pack](#resource-pack)) |
 
-The resource pack is required. It draws the skins and cases; without it items show vanilla icons.
-No other plugins and no client mods are needed.
+The resource pack draws the skins and cases; without it items show vanilla icons. Menus work without
+it. No other plugins and no client mods are needed.
 
 ## Install
 
@@ -96,32 +131,47 @@ never change damage or durability.
 - **Possible outcomes** shows every result with its exact chance before you confirm.
 - The result's float is the average of your inputs' floats, each scaled to its own skin's float range.
 
-Pick skins in the list; selected skins glow. The button at the bottom turns green when the contract
-is complete. Favorites are left out of **Auto select**.
+Pick skins in the list. A selected skin glows, gets a green check in its name and shows its position
+in the contract as a number. Filter by weapon, rarity and StatTrak, or use **Search** to type a name.
+Favorites are left out of **Auto select**. After you confirm, the menu closes and a window shows the
+skin you received.
 
 ### Trading and market
 
 - `/trade <Player>` opens a trade. Both players must accept the same offer. Any change resets both
   confirmations and starts a two-second review. A trade holds up to twelve skins.
-- `/market` sells skins for Emerald items from your inventory. Sellers are paid even when offline and
+- `/market` sells skins for emerald items from your inventory. Sellers are paid even when offline and
   collect with `/market claims`.
+- The market has a search: click the compass in the bottom right corner and type a skin or seller
+  name, or use `/market search <Name>`. Right-click the compass to clear it. The skin picker for
+  trades and sales has the same search.
 
 ### Dealer
 
-A villager or mannequin placed with `/csadmin shop spawn` sells cases and keys for emeralds. Prices are
-in `shop.yml`.
+The dealer sells cases and keys for emeralds. Prices are in `shop.yml`.
 
-## Features
+| Dealer | How it appears | Behavior |
+| --- | --- | --- |
+| Placed | `/csadmin shop spawn` | Stands still where you placed it |
+| Village | In every third newly generated village one villager becomes the dealer | Walks around like a villager and stops while a player is close |
 
-- 22 cases and 815 skins across 35 weapons, 20 knives and 5 glove types
-- Float, wear, pattern seed, StatTrak, Doppler phases, Fade percentage and Blue Gem tiers
-- Reels in the world, up to nine at once per player
-- Your own skin arms hold every weapon; 102 natural held inspects
-- Skin collection, favorites, sorting and filters
-- Trade-up contracts with published odds
-- Player trading and an Emerald market
-- SQLite or MySQL/MariaDB storage, with recovery of interrupted openings and payments
-- English interface
+Both look the same: a villager, or a mannequin with a player skin that changes on a timer. Skins
+given as player names are looked up once and saved in `dealer-skins.yml`, so the dealer keeps its
+look and no lookup is repeated. Village dealers only appear in chunks nobody has visited yet;
+villagers that players moved or bred are never taken. Everything is set in `shop.yml`:
+
+```yaml
+npc:
+  type: mannequin              # mannequin or villager
+  skins: [Notch, jeb_]         # player names, or {texture: "...", signature: "..."}
+  skin-interval-seconds: 300
+
+natural-spawn:
+  enabled: true
+  every: 3                     # one dealer in every third village (1 = every village)
+  min-distance: 96             # never within this many blocks of another dealer
+  wander: true                 # false = village dealers stand still too
+```
 
 ## Commands and permissions
 
@@ -179,6 +229,8 @@ Files live in `plugins/MCCases/`. Missing defaults are added on startup and your
 | --- | --- | --- |
 | `storage.type` | `sqlite` | `sqlite`, `mysql` or `mariadb` |
 | `opening.display` | `world` | `world` for reels in the world, `gui` for an inventory roulette |
+| `opening.world.visible-items` | `7` | Skins visible in the reel at once |
+| `opening.world.scene-scale` | `2.0` | Upper limit for the reel size; reels shrink to fit when several open |
 | `opening.max-active-per-player` | `9` | Openings at the same time (maximum 9) |
 | `opening.duration-ticks` | `120` | Length of the reel |
 | `opening.broadcast-rare` | `true` | Announce rare drops |
@@ -190,7 +242,8 @@ Files live in `plugins/MCCases/`. Missing defaults are added on startup and your
 ```text
 plugins/MCCases/
 ├── config.yml            Main options
-├── shop.yml              Dealer currency and prices
+├── shop.yml              Dealer look, village dealers, currency and prices
+├── dealer-skins.yml      Saved dealer skins (written by the plugin)
 ├── market.yml            Market and trade limits
 ├── inspect.yml           Inspect animations
 ├── sounds.yml            Sounds
@@ -291,6 +344,9 @@ catalog changes. Packs that replace the same core shaders need a manual merge.
 
 Versions are dates: `MONTH.DAY.YEAR`. See the [changelog](CHANGELOG.md).
 
+Coming from a version that called the feature trade-in: the config section is now `trade-up:` and the
+permission is `mccases.tradeup`. Rename both in your files; `/tradein` no longer exists.
+
 ## Troubleshooting
 
 | Problem | Fix |
@@ -302,7 +358,37 @@ Versions are dates: `MONTH.DAY.YEAR`. See the [changelog](CHANGELOG.md).
 | A skin does not fit a slot | Knives use `knife`; weapon skins use `bow` or `crossbow` |
 | An opening does not start | You need a case and its matching key; see `/cases` |
 | The dealer does not sell a case | Check prices and `cases.exclude` in `shop.yml` |
+| The dealer has the default skin | The name lookup failed (see the console); it is tried again on the next start |
+| No dealer in a village | Only every third newly generated village gets one; lower `natural-spawn.every` |
 | New content is missing | Check IDs and PNG files, then look at the console after `/csadmin reload` |
+
+## How the plugin is checked
+
+MCCases has no unit-test framework. Instead it ships small check programs in `src/tools` that run the
+real plugin code against the real default files and stop the build on the first wrong result. Each one
+prints a `PASS` or `Verified` line that says what it covered.
+
+**Run on every build** (`bash gradlew build` runs all four):
+
+| Task | What it checks |
+| --- | --- |
+| `verifyFeatures` | The catalog (815 skins, 22 cases), thousands of simulated drops against the published odds, wear boundaries, every message key and its fallback, the reel layout for one to nine openings, opening recovery after a crash, trade-up rules and odds (12,000 simulated contracts), market payments and trades |
+| `verifyPack` | The generated resource pack: every skin has its model, texture and inspect layers, and nothing is missing or left over |
+| `verifyResourcePackInstaller` | Merging the pack into an existing server pack: same result every time, other packs' files untouched, a failed write changes nothing |
+| `verifyHeld` | The first-person held view: grip and arm positions for every weapon and hand pose |
+
+**Run on a live server** (`bash gradlew devChecks` builds `MCCases-DevChecks-<version>.jar`):
+
+Put that JAR next to MCCases on a test server and run `/mccasesdevcheck`. It drives the plugin the way
+a player would: real commands, real menus and clicks, real trades, market purchases and trade-ups with
+online players. Use it before a release; never install it on a production server.
+
+**What the checks do not cover:** how things look. Colors, sizes and animations are judged by eye on a
+test server. The preview tasks (`previewSheet`, `inspectFilmstrip`, `viewInspectPreview`) render
+images to `build/` to make that faster.
+
+If you change behavior on purpose, a check may fail because it still expects the old behavior. Update
+the expectation in the check together with the change, in the same commit.
 
 ## Building from source
 
@@ -313,9 +399,31 @@ bash gradlew build
 ```
 
 This writes `build/libs/MCCases-<version>.jar` and `build/distributions/MCCases-ResourcePack-<version>.zip`,
-refreshes `resourcepack/MCCases-ResourcePack.zip` and runs all checks. Releases are built by the
-[release workflow](.github/workflows/release.yml) when a GitHub release is published; tag it
-`vMONTH.DAY.YEAR`.
+refreshes `resourcepack/MCCases-ResourcePack.zip` and runs the checks above.
+
+| Task | Result |
+| --- | --- |
+| `bash gradlew build` | Plugin JAR, resource pack and all build checks |
+| `bash gradlew resourcePack syncResourcePack` | Regenerates the pack only |
+| `bash gradlew devChecks` | The live-server check plugin |
+
+Releases are built by the [release workflow](.github/workflows/release.yml) when a GitHub release is
+published; tag it `vMONTH.DAY.YEAR`.
+
+### Project layout
+
+```text
+src/main/java/dev/plattnericus/cases/
+├── opening/      Case openings: world reel, GUI reel, layout
+├── tradeup/      Trade-up rules, service and menus
+├── commerce/     Trading, market, payments
+├── shop/         Dealer, village dealers, dealer skins
+├── gui/          Menus, filters, skin collection
+├── inspect/      Inspect animations and held view
+└── storage/      SQLite and MySQL/MariaDB
+src/main/resources/defaults/   Config, catalog, messages (English)
+src/tools/                     Check programs and the pack generator
+```
 
 ## License
 
@@ -326,4 +434,8 @@ material is listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Counter-Strike, CS2 and StatTrak are trademarks of Valve; Minecraft is a trademark of Mojang/Microsoft.
 
-Contact: [info@plattnericus.dev](mailto:info@plattnericus.dev) · [plattnericus.dev](https://plattnericus.dev) · [Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues)
+<div align="center">
+
+[info@plattnericus.dev](mailto:info@plattnericus.dev) · [plattnericus.dev](https://plattnericus.dev) · [Issues](https://github.com/Plattnericus/CS2CasesPlugin/issues)
+
+</div>

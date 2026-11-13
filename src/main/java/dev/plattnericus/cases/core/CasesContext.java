@@ -53,6 +53,8 @@ public interface CasesContext {
 
     CaseItems caseItems();
 
+    dev.plattnericus.cases.shop.ShopNpcAnimator npcAnimator();
+
     ProfileService profiles();
 
     OpeningService openings();
